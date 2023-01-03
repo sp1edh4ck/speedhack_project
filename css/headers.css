@@ -1,0 +1,114 @@
+.header {
+	background: #1e2025;
+	padding: 10px 0px;
+}
+
+.header_con {
+	display: flex;
+	align-items: center;
+}
+
+.brandLogo img {
+	width: 35px;
+}
+
+.header_menu {
+	flex: 1 1 auto;
+}
+
+.menu_list {
+	list-style-type: none;
+	display: flex;
+}
+
+.menu_item {
+	font-family: 'Acrom', sans-serif;
+	font-size: 14px;
+	color: #ff506f;
+	padding-right: 30px;
+}
+
+.menu_link {
+	text-decoration: none;
+	color: #ffffff;
+	transition: color 0.5s ease 0s;
+}
+
+.menu_link:hover {
+	color: #ff506f;
+	color: #ddd;
+}
+
+.button {
+	cursor: pointer;
+	font-size: 14px;
+    font-family: "Acrom", sans-serif;
+	padding: 5px 10px;
+	color: #ff506f;
+	background: #1e2025;
+	border: 1px solid;
+	border-color: #ff506f;
+	border-radius: 4px;
+	transition: background 0.5s ease 0s;
+}
+
+.button:hover {
+	color: white;
+	background: #ff506f;
+}
+
+.user-icon {
+	cursor: pointer;
+	font-size: 14px;
+    font-family: "Acrom", sans-serif;
+	padding: 5px 25px;
+	min-width: 130px;
+	color: #ff506f;
+	background: #1e2025;
+	border: 1px solid;
+	border-color: #ff506f;
+	border-radius: 5px;
+	transition: background 0.5s ease 0s;
+}
+
+.user-button {
+	position: relative;
+	display: inline-block;
+}
+
+.user-button-content {
+	padding-top: 10px;
+	display: none;
+	position: absolute;
+	min-width: 130px;
+	z-index: 1;
+	transition: background 0.5s ease 0s;
+}
+
+.user-button-content a {
+	color: #ff506f;
+	background: #1e2025;
+	border-left: 1px solid;
+	border-right: 1px solid;
+	border-bottom: 1px solid;
+	border-color: #ff506f;
+	font-size: 14px;
+	padding: 5px 9px;
+	text-decoration: none;
+	display: block;
+	transition: background 0.5s ease 0s;
+}
+
+.user-button-content a:hover {
+	color: #ffffff;
+	background: #ff506f;
+}
+
+.user-button:hover .user-button-content {
+	display: block;
+}
+
+.user-button:hover .user-icon {
+	color: #ffffff;
+	background: #ff506f;
+}

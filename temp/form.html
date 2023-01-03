@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru-RU">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>speedhack sing up</title>
+    <link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/headers.css">
+    <link rel="stylesheet" href="../css/signup.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="main">
+            <div class="text-field">
+                <form action="check.php" method="post">
+                    <a href="https://sp11dh4ck.github.io/sp1edh4ck_site/" class="imageSign"><img src="../images/Logo-pink.png"></a>
+                    <label class="text-field__label">Регистрация</label>
+                    <input class="text-field__input" type="text" name="login" id="login" placeholder="Логин" required>
+                    <input class="text-field__input" type="email" name="email" id="email" placeholder="Почта" required>
+                    <input class="text-field__input" type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{12,}" title="Пароль должен содержать заглавную и маленькую латинскую букву, цифру и быть более 12 символов" placeholder="Пароль" required>
+                    <input class="text-field__input" type="password" name="confirmPassword" id="confirmPassword" placeholder="Повторите пароль" required>
+
+                    <div class="help">
+                        <a class="help-a" href="https://sp11dh4ck.github.io/sp1edh4ck_site/sing/sing-in">Есть аккаунт? Войти</a>
+                    </div>
+
+                    <!-- <form style="transform:scale(0.91); transform-origin:0 0; margin-top: 10px;" action="?" method="POST">
+                    <div class="g-recaptcha" data-sitekey="6LfyOP8gAAAAAC1YN5zW-Uxt-LKhKoXNFSO4_1LI"></div>
+                    </form> -->
+                    <button class="button" name="submit" type="submit" id="submit">Зарегистрироваться</button>
+
+                    <input checked type="checkbox" class="checkbox" id="happy" name="happy" value="yes" required>
+                    <label for="happy"></label>
+                    <span style="color: #ffffff; font-size: 15px;">Я согласен с <a class="help-a" style="text-decoration: underline; font-size: 15px;" href="https://sp11dh4ck.github.io/sp1edh4ck_site/service-rules/politic" target="_blank">пользовательским
+                    соглашением</a> и <a class="help-a" style="text-decoration: underline; font-size: 15px;" href="https://sp11dh4ck.github.io/sp1edh4ck_site/service-rules/rules" target="_blank">правилами сайта</a></span>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../js/register.js"></script>
+</body>
+</html>

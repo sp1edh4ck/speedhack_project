@@ -1,0 +1,25 @@
+.preasent-cheat {
+    background: #ffffff;
+    padding: 0px 20px 20px 20px;
+}
+
+.about-cheat {
+    color: #ffffff;
+    font-size: 20px;
+    padding: 0 20px 20px 20px;
+    margin: 0;
+}
+
+.text-about-link {
+    text-decoration: none;
+    color: gray;
+    transition: color 0.5s ease 0s;
+}
+
+.text-about-link:hover {
+    color: #ff506f;
+}
+
+.frame {
+    width: 1200px;
+}

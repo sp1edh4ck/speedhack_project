@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>speedhack forum</title>
+	<link rel="stylesheet" href="css/forum.css">
+    <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/headers.css">
+	<link rel="stylesheet" href="css/footer.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<header class="header">
+			<div class="header_con">
+				<img class="brandLogo" src="images/Logo-pink.png" alt="speedhack">
+
+				<div class="navbar">
+					<div class="container">
+						<div class="navbar_wrap">
+							<div class="hamb">
+								<div class="hamb_field" id="hamb">
+									<span class="bar"></span>
+									<span class="bar"></span>
+									<span class="bar"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="popup" id="popup"></div>
+
+				<nav class="header_menu">
+					<ul class="menu_list" id="menu">
+						<li class="menu_item"><a href="https://sp11dh4ck.github.io/sp1edh4ck_site/" class="menu_link">ГЛАВНАЯ</a></li>
+						<li class="menu_item"><a href="https://sp11dh4ck.github.io/sp1edh4ck_site/forum" class="menu_link">ФОРУМ</a></li>
+						<li class="menu_item"><a href="https://sp11dh4ck.github.io/sp1edh4ck_site/market" class="menu_link">МАРКЕТ</a></li>
+						<li class="menu_item"><a href="https://sp11dh4ck.github.io/sp1edh4ck_site/users" class="menu_link">КОМАНДА</a></li>
+						<li class="menu_item"><a href="https://sp11dh4ck.github.io/sp1edh4ck_site/faq/faq-tech" class="menu_link">FAQ</a></li>
+					</ul>
+				</nav>
+				<div class="header_logreg">
+					<button onclick="login()" type="button" class="button">Логин</button>
+					<script>
+						function login(){
+							window.location="https://sp11dh4ck.github.io/sp1edh4ck_site/sing/sing-in";
+						}
+					</script>
+				  	<button onclick="register()" type="button" class="button">Регистрация</button>
+					<script>
+						function register(){
+							window.location="https://sp11dh4ck.github.io/sp1edh4ck_site/sing/sing-up";
+						}
+					</script>
+				</div>
+			</div>
+		</header>
+
+		<div class="main">
+			<div class="about-forum_con">
+				<div class="text-about">
+					<h4>Форум <span class="brandColor">speedhack</span></h4>
+					Здесь вы найдёте всё, что вам нужно!
+				</div>
+			</div>
+			<div id="vk_community_messages">
+				<script type="text/javascript">
+					VK.Widgets.CommunityMessages("vk_community_messages", 207447269, {tooltipButtonText: "Поддержка", disableExpandChatSound: 1, disableNewMessagesSound: 1});
+				</script>
+			</div>
+		</div>
+
+		<footer class="footer">
+			<ul>
+				<a href="https://t.me/sp1edh4ck_project" class="footer-link" target="_blank" style="padding-right: 10px;">Телеграм</a>
+				<a href="https://vk.com/sp1edh4ck_project" class="footer-link" target="_blank">ВКонтакте</a>
+			</ul>
+		  	<hr>
+			<p style="color: white;">&copy; 2022 Company, Inc</p>
+	  	</footer>
+	</div>
+	<script type="text/javascript" src="js/barMenu.js"></script>
+</body>
+</html>
