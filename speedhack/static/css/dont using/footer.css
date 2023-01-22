@@ -1,0 +1,33 @@
+.footer {
+	justify-content: center;
+	text-align: center;
+	background: #1e2025;
+}
+
+/* Прибит снизу, но хавает часть content */
+.footer {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 80px;
+}
+
+.footer ul {
+	padding: 0;
+}
+
+.footer hr {
+	width: 201px;
+	margin: 0 auto 10px auto;
+}
+
+.footer-link {
+	text-decoration: none;
+	color: rgb(255, 255, 255);
+	transition: color 0.5s ease 0s;
+}
+
+.footer-link:hover {
+	color: #ff506f;
+}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}speedhack / вход{% endblock %}
+{% load static %}
+{% load user_filters %}
+{% block content %}
+	<div class="frame-login">
+		<p style="text-align: center;"><img class="logo" src="{% static 'images/speedhack_logo.png' %}" alt="img"></p>
+		<div class="preview">
+			<span class="login-text">Вход на сайт</span>
+		</div>
+		{% if form.errors %}
+			{% for field in form %}
+				{% for error in field.errors %}            
+					<div class="alert alert-danger">
+						{{ error|escape }}
+					</div>
+				{% endfor %}
+			{% endfor %}
+			{% for error in form.non_field_errors %}
+				<div class="alert alert-danger">
+					{{ error|escape }}
+				</div>
+			{% endfor %}
+		{% endif %}
+		<form method="post"{% if action_url %} action="{% url action_url %}" {% endif %}>
+			{% csrf_token %}
+			{% for field in form %}
+				<div class="form"
+					{% if field.field.required %} 
+						aria-required="true"
+					{% else %}
+						aria-required="false"
+					{% endif %}
+				>
+					{% comment %} <label class="field-label" for="{{ field.id_for_label }}">
+						{{ field.label }}
+					</label> {% endcomment %}
+					{% if field.label == "Имя пользователя" %}
+						{{ field|addclass:'field-input' }}
+						{% comment %} |addclass:'field-input' {% endcomment %}
+					{% else %}
+						{{ field|addclass:'field-input' }}
+					{% endif %}
+				</div>
+			{% endfor %}
+			<button type="submit" class="button-form">Войти</button>
+		</form>
+	</div>
+{% endblock %}

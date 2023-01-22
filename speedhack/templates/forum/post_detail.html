@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load static %}
+{% block title %}speedhack / пост: {{ post.text|truncatechars:15 }}{% endblock %}
+{% block content %}
+{% load user_filters %}
+	<div class="frame-post_con">
+		<div class="frame-title">
+			<label class="text-up-title">{{ post.title }}</label><br>
+			<label class="text-up-author">Тема создана пользователем <a href="{% url 'forum:profile' post.author.username %}" class="text-up-nick">{{ post.author.username }}</a> / <img class="heart" src="{% static 'images/heart_pink.png' %}"> <label style="color: #ff506f;">{{ user.likes }}</label> | {{ post.pub_date }}</label>
+		</div>
+		<div class="frame-main">
+			<div class="frame-main-avatars">
+				<img style="width: 25px;" src="{% static 'images/save.png' %}">
+				{% include '../includes/paginator.html' %}
+				<hr>
+			</div>
+			<div class="frame-main-posts">
+				<div>
+					<img class="frame-main-avatar" src="{% static 'images/avatars/speedhack.png' %}">
+				</div>
+				<div>
+					<div>
+						<a href="{% url 'forum:profile' post.author.username %}" style="text-decoration: none; cursor: pointer;"><label class="frame-main-username {% if post.author.username == 'sp1edh4ck' %}admin-username{% endif %}">{{ post.author.username }}</label></a><br>
+					</div>
+					<div class="frame-main-post">
+						<label>{{ post.text }}</label>
+					</div>
+				</div>
+			</div>
+			{% for comment in comments %}
+				<div class="">
+					<div class="">
+						<h5 class="">
+							<a href="{% url 'forum:profile' comment.author.username %}">
+								{{ comment.author.username }}
+							</a>
+						</h5>
+						<p>
+							{{ comment.text }}
+						</p>
+					</div>
+				</div>
+			{% endfor %}
+			<div class="frame-main-posts">
+				<img class="frame-main-avatar" style="width: 40px; height: 40px;" src="{% static 'images/avatars/speedhack.png' %}">
+				<div class="">
+					{% if user.is_authenticated %}
+						<form method="post" enctype="multipart/form-data" action="{% url 'forum:add_comment' post.id %}">
+							{% csrf_token %}  
+							{% comment %} <div> {% endcomment %}
+								{{ form.text }}
+							{% comment %} </div> {% endcomment %}
+							<button type="submit" style="background: #1f2024; border: none; cursor: pointer;"><img style="width: 40px;" src="{% static 'images/send.png' %}"></button>
+						</form>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

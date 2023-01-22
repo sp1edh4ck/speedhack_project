@@ -1,35 +1,77 @@
-.main {
-    display: flex;
-    margin: 0 auto;
-    margin-top: 26.6px;
-    align-items: flex-start;
+.frame-edit {
+	display: block;
+	background: #1f2024;
+	padding: 20px 20px 20px 20px;
+	max-width: 200px;
+	border-radius: 10px;
+	margin-right: 20px;
+	max-height: 230px;
 }
 
-.frame-profile-avatar_con {
-    display: block;
-    background: #17181b;
-    padding: 20px 20px 20px 20px;
-    width: 200px;
-    border-radius: 10px;
-    margin-right: 20px;
+.button-edit {
+	background: #ff506f;
+	color: #ffffff;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 7px;
+	border: 0px;
+	text-decoration: none;
+	transition: background 0.5s ease 0s;
 }
 
-.frame-profile-avatar_con button {
-    background: #17181b;
-    margin-top: 15px;
-    font-size: 16px;
-    width: 200px;
-    padding: 5px 35px;
+.button-edit:hover {
+	background: #ff6b86;
 }
 
 .profile-avatar {
-    width: 200px;
+	width: 200px;
 }
 
-.frame-profile-info {
-    background: #17181b;
-    padding: 20px 20px 20px 20px;
-    border-radius: 10px;
-    font-size: 18px;
-    width: 900px;
+.frame-right-first {
+	background: #1f2024;
+	padding: 20px 20px 20px 20px;
+	border-radius: 10px;
+	font-size: 18px;
+	width: 900px;
+	min-height: 0px;
+	max-height: 190px;
+}
+
+.frame-right-second {
+	margin-top: 20px;
+	background: #1f2024;
+	padding: 20px 20px 20px 20px;
+	border-radius: 10px;
+	font-size: 18px;
+	width: 900px;
+	min-height: 0px;
+	max-height: 190px;
+}
+
+.button-tools {
+	color: #ffffff;
+	text-decoration: none;
+	margin-right: 30px;
+	background-image: linear-gradient(#ff506f, #ff506f);
+	background-position: 0% 100%;
+	background-repeat: no-repeat;
+	background-size: 0% 2px;
+	transition: background-size 0.3s;
+}
+
+.button-tools:hover {
+	background-size: 100% 2px;
+}
+
+.frame-right-third {
+	background: #1f2024;
+	margin-top: 20px;
+	padding: 20px 20px 20px 20px;
+	border-radius: 10px;
+	font-size: 18px;
+	width: 900px;
+}
+
+.button-tools-active {
+	background-size: 100% 2px;
 }

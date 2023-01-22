@@ -1,0 +1,35 @@
+.main {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 26.6px;
+    align-items: flex-start;
+}
+
+.frame-profile-avatar_con {
+    display: block;
+    background: #17181b;
+    padding: 20px 20px 20px 20px;
+    width: 200px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.frame-profile-avatar_con button {
+    background: #17181b;
+    margin-top: 15px;
+    font-size: 16px;
+    width: 200px;
+    padding: 5px 35px;
+}
+
+.profile-avatar {
+    width: 200px;
+}
+
+.frame-profile-info {
+    background: #17181b;
+    padding: 20px 20px 20px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    width: 900px;
+}

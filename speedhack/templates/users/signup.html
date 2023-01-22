@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}speedhack / регистрация{% endblock %}
+{% block content %}
+{% load user_filters %}
+	<div class="frame-registration">
+		<p style="text-align: center;"><img class="logo" src="{% static 'images/speedhack_logo.png' %}" alt="img"></p>
+		<div class="preview">
+			<span class="login-text">Зарегистрироваться</span>
+		</div>
+		{% if form.errors %}
+			{% for field in form %}
+				{% for error in field.errors %}            
+					<div class="alert alert-danger">
+						{{ error|escape }}
+					</div>
+				{% endfor %}
+			{% endfor %}
+			{% for error in form.non_field_errors %}
+				<div class="alert alert-danger">
+					{{ error|escape }}
+				</div>
+			{% endfor %}
+		{% endif %}
+		<form method="post" action="{% url 'users:signup' %}">
+			{% csrf_token %}
+			{% for field in form %}
+				<div class="">
+					<label for="{{ field.id_for_label }}">
+						{% comment %} {{ field.label }} {% endcomment %}
+					</label>
+					{{ field|addclass:'field-input' }}
+					{% comment %} {% if field.help_text %}
+						<small id="{{ field.id_for_label }}-help" class="form-text text-muted">
+							{{ field.help_text|safe }}
+						</small>
+					{% endif %} {% endcomment %}
+				</div>
+			{% endfor %}
+			<button type="submit" class="button-form btn-reg">Зарегистрироваться</button>
+		</form>
+	</div>
+{% endblock %} 

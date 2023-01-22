@@ -1,0 +1,91 @@
+.frame-login {
+	max-width: 400px;
+	background: #17181b;
+	padding: 20px;
+	border-radius: 10px;
+	margin: 0 auto;
+}
+
+.frame-registration {
+	max-width: 400px;
+	background: #17181b;
+	padding: 20px;
+	border-radius: 10px;
+	margin: 0 auto;
+}
+
+.preview {
+	display: block;
+	text-align: center;
+}
+
+.logo {
+	width: 50px;
+}
+
+.login-text {
+	margin-bottom: 30px;
+	font-size: 22px;
+	color: #ffffff;
+}
+
+.form {
+	font-size: 18px;
+	color: #ffffff;
+}
+
+.field-input {
+	width: 380px;
+	height: 40px;
+	margin-top: 10px;
+	font-size: 18px;
+	padding-left: 15px;
+	background: #17181b;
+	border: 2px solid #242424;
+	color: #ffffff;
+	outline: none;
+	border-radius: 10px;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.field-input:focus {
+	border-color: #ff506f;
+	outline: 0;
+	box-shadow: 0 0 0 1px #ff506f;
+}
+
+.button-form {
+	border: #ffffff;
+	border-radius: 10px;
+	width: 150px;
+	font-size: 16px;
+	height: 35px;
+	margin: 15px 125px 0px 125px;
+	color: #ffffff;
+	background: #ff506f;
+	transition: background 0.5s ease 0s;
+}
+
+.button-form:hover {
+	background: #ff6b86;
+}
+
+.btn-reg  {
+	width: 200px;
+	margin: 15px 100px 0px 100px;
+}
+
+.frame-logout_con {
+	width: 300px;
+	background: #17181b;
+	border-radius: 10px;
+	padding: 20px;
+}
+
+.logout-text {
+	color: #ffffff;
+	font-size: 24px;
+	display: inline-block;
+	margin: 0 auto;
+	text-align: center;
+}

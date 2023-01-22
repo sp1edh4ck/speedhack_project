@@ -1,25 +1,101 @@
-.preasent-cheat {
-    background: #ffffff;
-    padding: 0px 20px 20px 20px;
+.post {
+	max-height: 100px;
+	border-radius: 10px;
+	padding: 10px;
+	transition: background 0.5s ease 0s;
 }
 
-.about-cheat {
-    color: #ffffff;
-    font-size: 20px;
-    padding: 0 20px 20px 20px;
-    margin: 0;
+.post:hover {
+	background: #292a2e;
 }
 
 .text-about-link {
-    text-decoration: none;
-    color: gray;
-    transition: color 0.5s ease 0s;
+	text-decoration: none;
+	color: gray;
+	transition: color 0.5s ease 0s;
 }
 
 .text-about-link:hover {
-    color: #ff506f;
+	color: #ff506f;
 }
 
-.frame {
-    width: 1200px;
+.frames_con {
+	max-width: 1200px;
+	display: flex;
+}
+
+.frame-left {
+	min-width: 250px;
+	background: #1f2024;
+	border-radius: 10px;
+	padding: 20px 0px 0px 10px;
+	margin: 0 20px 0 0;
+}
+
+.button-frame {
+	cursor: pointer;
+	font-size: 18px;
+  font-family: "Acrom", sans-serif;
+	padding: 7px 64px;
+	margin: 0 auto 0 auto;
+	color: #ffffff;
+	background: #ff506f;
+	text-decoration: none;
+	border-radius: 10px;
+	transition: background 0.5s ease 0s;
+}
+
+.button-frame:hover {
+	background-color: #ff6b86;
+}
+
+.frame-rigth-first {
+	width: 920px;
+	min-height: 150px;
+	background: #1f2024;
+	border-radius: 10px;
+	padding: 20px 20px 20px 20px;
+}
+
+.text-frame {
+	display: flex;
+}
+
+.text-frame-title {
+	color: #ffffff;
+	font-size: 22px;
+}
+
+.text-frame-text {
+	color: #777777;
+	font-size: 16px;
+	display: inline-block;
+	margin-top: 15px;
+}
+
+.avatar-username {
+	display: flex;
+}
+
+.user-avatar {
+	width: 70px;
+	height: 70px;
+	border-radius: 10px;
+	margin-right: 10px;
+	right: 0px;
+}
+
+.text-frame-username {
+	color: #ffffff;
+	font-size: 22px;
+}
+
+.admin-username {
+	color: #ffffff;
+	text-shadow: 0px 0px 3px rgb(214,210,210),
+	0px 0px 4px rgb(214,210,210),
+	0px 0px 5px rgb(214,210,210),
+	0px 0px 5px rgb(214,210,210),
+	0px 0px 5px rgb(214,210,210);
+	border-radius: 5px;
 }

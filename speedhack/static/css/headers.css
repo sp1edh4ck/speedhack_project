@@ -1,5 +1,5 @@
 .header {
-	background: #1e2025;
+	background: #2b2e35;
 	padding: 10px 0px;
 }
 
@@ -42,13 +42,14 @@
 .button {
 	cursor: pointer;
 	font-size: 14px;
-    font-family: "Acrom", sans-serif;
+  font-family: "Acrom", sans-serif;
 	padding: 5px 10px;
 	color: #ff506f;
-	background: #1e2025;
+	background: #2b2e35;
 	border: 1px solid;
+	text-decoration: none;
 	border-color: #ff506f;
-	border-radius: 4px;
+	border-radius: 6px;
 	transition: background 0.5s ease 0s;
 }
 
@@ -60,11 +61,11 @@
 .user-icon {
 	cursor: pointer;
 	font-size: 14px;
-    font-family: "Acrom", sans-serif;
+	font-family: "Acrom", sans-serif;
 	padding: 5px 25px;
 	min-width: 130px;
 	color: #ff506f;
-	background: #1e2025;
+	background: #2b2e35;
 	border: 1px solid;
 	border-color: #ff506f;
 	border-radius: 5px;
@@ -87,7 +88,7 @@
 
 .user-button-content a {
 	color: #ff506f;
-	background: #1e2025;
+	background: #2b2e35;
 	border-left: 1px solid;
 	border-right: 1px solid;
 	border-bottom: 1px solid;

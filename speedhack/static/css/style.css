@@ -1,116 +1,118 @@
 body, html {
-    background: #1e2025;
-    font-family: 'Acrom', sans-serif;
-    margin: 0;
-    line-height: 1.5;
-    height: 100%;
+	/* background: #1e2025; */
+	background: #2b2e35;
+	font-family: 'Acrom', sans-serif;
+	margin: 0;
+	line-height: 1.5;
+	height: 100%;
 }
 
 body::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
+	width: 7px;
+	height: 7px;
 }
 
 body::-webkit-scrollbar-track {
-    background: #ffffff;
+	background: #ffffff;
 }
 
 body::-webkit-scrollbar-thumb {
-    background: #ff506f;
+	background: #ff506f;
 }
 
 .wrapper {
-    background: #1e2025;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+	background: #2b2e35;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	min-height: 100vh;
 }
 
 .main {
-    flex: 1;
+	flex: 1;
+	margin-bottom: 20px;
 }
 
 [class*="_con"] {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
 }
 
 .text-about {
-    color: #ffffff;
-    font-size: 20px;
-    padding: 0 0 80px 0;
+	color: #ffffff;
+	font-size: 20px;
+	padding: 0 0 80px 0;
 }
 
 .frame {
-    background: #17181b;
-    border-radius: 10px;
+	background: #17181b;
+	border-radius: 10px;
 }
 
 .brandColor {
-    color: #ff506f;
-    /* color: #00e1ff;  */
+	color: #ff506f;
+	/* color: #00e1ff;  */
 }
 
 .brandLogo {
-    width: 35px;
+	width: 35px;
 }
 
 .imageSing img {
-    width: 120px;
-    display: block;
-    margin: 0 auto;
+	width: 120px;
+	display: block;
+	margin: 0 auto;
 }
 
 .user-agreement_con,
 .faq-answer {
-    background: #1e2025;
-    padding: 30px 0px 30px 0px;
+	background: #1e2025;
+	padding: 30px 0px 30px 0px;
 }
 
 .frame-rules,
 .faq-frame {
-    color: #ffffff;
-    background: #17181b;
-    width: 1285px;
-    padding-bottom: 15px;
-    border-radius: 10px;
-    line-height: 1.5;
+	color: #ffffff;
+	background: #17181b;
+	width: 1285px;
+	padding-bottom: 15px;
+	border-radius: 10px;
+	line-height: 1.5;
 }
 
 .rules {
-    color: #ffffff;
-    padding: 15px 20px 0 20px;
+	color: #ffffff;
+	padding: 15px 20px 0 20px;
 }
 
 .rules ul {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 .user-agreement hr,
 .faq-answer hr {
 	background-color: gray;
 	height: 7px;
-    margin-bottom: 30px;
+	margin-bottom: 30px;
 }
 
 .sign-btn label {
-    margin-left: 74px;
+	margin-left: 74px;
 }
 
 .sign-btn button {
-    margin-left: 74px;
+	margin-left: 74px;
 }
 
 .sign-btn div {
-    margin-left: 44px;
+	margin-left: 44px;
 }
 
 .row {
-    padding-top: 130px;
-    padding-left: 20px;
-    z-index: 50px;
+	padding-top: 130px;
+	padding-left: 20px;
+	z-index: 50px;
 }
 
 @media (max-width: 1250px) {
