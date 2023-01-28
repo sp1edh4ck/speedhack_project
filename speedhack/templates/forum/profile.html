@@ -1,23 +1,24 @@
 {% extends 'base.html' %}
 {% block title %}speedhack / профиль{% endblock  %}
 {% load static %}
+{% load thumbnail %}
 {% block content %}
 {% load user_filters %}
 	<div class="frame_con">
-		<div class="frame-edit" style="{% if user == author %}max-height: 240px; {% elif user != author and user.is_authenticated %}max-height: 340px;{% endif %}">
-			<img class="profile-avatar" src="{% static 'images/avatars/speedhack.png' %}" alt="speedhack">
+		<div class="frame-edit" style="{% if user == author %}max-height: 235px; {% elif user != author and user.is_authenticated %}max-height: 320px;{% endif %}">
+			<img class="profile-avatar" src="{{ author.avatar.url }}">
 			{% if user == author %}
-				<a href="" class="button-edit" style="display: inline-block; padding: 3px 45px; margin-top: 5px;">Редактировать</a>
+				<a href="" class="button-edit" style="margin-top: 5px;">Редактировать</a>
 			{% else %}
 				{% if user.is_authenticated %}
 					{% if following %}
-						<a class="button-edit" style="display: inline-block; padding: 3px 57px;" href="{% url 'forum:profile_unfollow' author.username %}">Отписаться</a>
+						<a class="button-edit" href="{% url 'forum:profile_unfollow' author.username %}">Отписаться</a>
 					{% else %}
-						<a class="button-edit" style="display: inline-block; padding: 3px 52px;" href="{% url 'forum:profile_follow' author.username %}">Подписаться</a>
+						<a class="button-edit" href="{% url 'forum:profile_follow' author.username %}">Подписаться</a>
 					{% endif %}
-					<label style="max-width: 200px; margin-top: 20px;"><a class="button-edit" style="display: inline-block; padding: 3px 65px; margin-top: 5px">Написать</a></label>
-					<label><a class="button-edit" style="display: inline-block; padding: 3px 46px 3px 57px; margin-top: 5px;">Подписаться</a>
-					<a class="button-edit" style="display: inline-block; padding: 3px 46px 3px 47px; margin-top: 5px;">Пожаловаться</a>
+					<label style="max-width: 200px; margin-top: 20px;"><a class="button-edit" style="margin-top: 5px">Написать</a></label>
+					<label><a class="button-edit" style="margin-top: 5px;">Подписаться</a>
+					<a class="button-edit" style="margin-top: 5px;">Пожаловаться</a>
 				{% else %}
 					<a href="{% url 'users:login' %}" class="button-edit" style="padding: 5px 40px 5px 41px;">Войти в аккаунт</a>
 				{% endif %}
@@ -32,6 +33,11 @@
 					<div>
 						<label style="color: gray; display: flex;">В сети 10 мин. назад</label>
 					</div>
+					<div>
+						{% if user != author %}
+							<img src="{% static 'images/other.png' %}" class="other-img">
+						{% endif %}
+					</div>
 				</div>
 				<hr style="margin-top: 20px; margin-bottom: 20px;">
 				<div>
@@ -41,7 +47,8 @@
 				<hr style="margin: 20px 0 20px 0;">
 				<div style="display: flex;">
 					<label style="color: gray; margin: 0 30px 0 0;">Подписчики: <label style="color: #ff506f;">{{ author.subscriber }}</label></label><br>
-					<label style="color: gray;">Лайки: <label style="color: #ff506f;">{{ author.likes }}</label></label><br>
+					<label style="color: gray; margin: 0 30px 0 0;">Лайки: <label style="color: #ff506f;">{{ author.likes }}</label></label><br>
+					<label style="color: gray;">Сообщения: <label style="color: #ff506f;">{{ author.messages }}</label></label><br>
 				</div>
 			</div>
 			<div class="frame-right-second">
@@ -56,10 +63,10 @@
 							<div class="text-frame post">
 								<div style="margin: 0 auto 0 0;">
 									<label class="text-frame-title">{{ post.title }}</label><br>
-									<label class="text-frame-text">{{ post.pub_date|date:"H:i d E Y" }}</label>
+									<label class="text-frame-text">{{ post.pub_date|date:"d E Y / H:i" }}</label>
 								</div>
 								<div class="avatar-username">
-									<img class="user-avatar" src="{% static 'images/avatars/speedhack.png' %}" alt="img">
+									<img class="user-avatar" src="{{ post.author.avatar.url }}">
 									<label class="text-frame-username admin-username">{{ post.author.username }}</label>
 								</div>
 							</div>

@@ -1,32 +1,44 @@
 from django import forms
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm, AuthenticationForm
 
 from .models import CustomUser
 
 
 class CustomUserCreationForm(UserCreationForm):
+    username = forms.CharField(max_length=15, widget=forms.TextInput(attrs={
+				'class': 'field-input',
+				'placeholder': 'Логин',
+		}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={
+				'class': 'field-input',
+				'placeholder': 'Почта',
+		}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={
+				'class': 'field-input',
+				'placeholder': 'Пароль',
+		}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={
+				'class': 'field-input',
+				'placeholder': 'Повтор пароля',
+		}))
+    
     class Meta:
         model = CustomUser
         fields = ('username', 'email',)
+
+
+class CustomUserLogin(AuthenticationForm):
+    username = forms.CharField(max_length=15, widget=forms.TextInput(attrs={
+				'class': 'field-input',
+				'placeholder': 'Логин',
+		}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={
+				'class': 'field-input',
+				'placeholder': 'Пароль',
+		}))
 
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ('username', 'email', 'likes', 'subscriber', 'rank', 'avatar',)
-
-
-
-
-
-
-# from django.contrib.auth import get_user_model
-# from django.contrib.auth.forms import UserCreationForm
-
-# User = get_user_model()
-
-
-# class CreationForm(UserCreationForm):
-#     class Meta(UserCreationForm.Meta):
-#         model = User
-#         fields = ('username', 'email',)

@@ -8,14 +8,25 @@
 	max-height: 230px;
 }
 
+.other-img {
+	width: 25px;
+	color: gray;
+	display: flex;
+	margin-left: 20px;
+}
+
 .button-edit {
 	background: #ff506f;
 	color: #ffffff;
+	display: block;
 	cursor: pointer;
 	font-size: 16px;
 	border-radius: 7px;
 	border: 0px;
+	width: 200px;
+	text-align: center;
 	text-decoration: none;
+	margin: 0 auto 0 auto;
 	transition: background 0.5s ease 0s;
 }
 
@@ -65,7 +76,7 @@
 
 .frame-right-third {
 	background: #1f2024;
-	margin-top: 20px;
+	margin: 20px 0 20px 0;
 	padding: 20px 20px 20px 20px;
 	border-radius: 10px;
 	font-size: 18px;

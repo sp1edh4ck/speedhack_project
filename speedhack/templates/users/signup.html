@@ -11,13 +11,13 @@
 		{% if form.errors %}
 			{% for field in form %}
 				{% for error in field.errors %}            
-					<div class="alert alert-danger">
+					<div style="color: #ff506f; margin: 5px 0 0 0; font-size: 14px;">
 						{{ error|escape }}
 					</div>
 				{% endfor %}
 			{% endfor %}
 			{% for error in form.non_field_errors %}
-				<div class="alert alert-danger">
+				<div style="color: #ff506f; margin: 5px 0 0 0; font-size: 14px;">
 					{{ error|escape }}
 				</div>
 			{% endfor %}
@@ -27,14 +27,8 @@
 			{% for field in form %}
 				<div class="">
 					<label for="{{ field.id_for_label }}">
-						{% comment %} {{ field.label }} {% endcomment %}
 					</label>
-					{{ field|addclass:'field-input' }}
-					{% comment %} {% if field.help_text %}
-						<small id="{{ field.id_for_label }}-help" class="form-text text-muted">
-							{{ field.help_text|safe }}
-						</small>
-					{% endif %} {% endcomment %}
+					{{ field }}
 				</div>
 			{% endfor %}
 			<button type="submit" class="button-form btn-reg">Зарегистрироваться</button>

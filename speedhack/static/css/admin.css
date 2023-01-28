@@ -1,0 +1,12 @@
+.frame-users {
+	background: #1f2024;
+	padding: 20px;
+	border-radius: 10px;
+	width: 1200px;
+}
+
+.users-username {
+	display: block;
+	font-size: 20px;
+	color: #ffffff;
+}

@@ -6,6 +6,7 @@ from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordResetDoneView,
                                        PasswordResetView)
 from django.urls import path, reverse_lazy
+from .forms import CustomUserLogin
 
 from . import views
 
@@ -24,7 +25,8 @@ urlpatterns = [
     ),
     path(
         'login/',
-        LoginView.as_view(template_name='users/login.html'),
+        LoginView.as_view(template_name='users/login.html',
+                          authentication_form=CustomUserLogin),
         name='login'
     ),
     # path(

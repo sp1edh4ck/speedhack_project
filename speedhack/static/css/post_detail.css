@@ -2,12 +2,30 @@
 	display: block;
 }
 
+.link-title {
+	color: #ffffff;
+	font-size: 22px;
+	margin-bottom: 10px;
+}
+
+.link-title-main {
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 22px;
+	transition: color 0.5s ease 0s;
+}
+
+.link-title-main:hover {
+	color: #ff6b86;
+}
+
 .frame-title {
 	padding: 20px;
 	max-width: 1200px;
 	min-width: 1160px;
 	background: #1f2024;
 	border-radius: 10px;
+	margin-top: 20px;
 }
 
 .text-up-title {
@@ -15,7 +33,7 @@
 	font-size: 24px;
 }
 
-.text-up-author {
+.text-up-all {
 	color: #555555;
 	font-size: 18px;
 }
@@ -23,6 +41,11 @@
 .text-up-nick {
 	text-decoration: none;
 	color: #ff506f;
+	transition: color 0.5s ease 0s;
+}
+
+.text-up-nick:hover {
+	color: #ff6b86;
 }
 
 .heart {
@@ -31,7 +54,7 @@
 
 .frame-main {
 	max-width: 1200px;
-	margin-top: 20px;
+	margin: 20px 0 20px 0;
 	/* background: #17181b; */
 	background: #1f2024;
 	border-radius: 10px;
@@ -39,8 +62,8 @@
 }
 
 .frame-main-avatar {
-	width: 100px;
-	height: 100px;
+	width: 80px;
+	height: 80px;
 	border-radius: 50px;
 	margin-right: 20px;
 }
@@ -53,6 +76,7 @@
 .frame-main-posts {
 	display: flex;
 	margin-top: 20px;
+	max-width: 1100px;
 }
 
 .frame-main-post {
@@ -60,15 +84,40 @@
 	margin-top: 20px;
 }
 
-.field-detail {
+.comment-text {
+	color: #ffffff;
+	margin-top: 20px;
+	max-width: 1040px;
+	word-wrap: break-word;
+}
+
+.comment-date {
+	color: #555555;
 	display: flex;
-	width: 800px;
-	height: 40px;
+}
+
+.hr-post-detail {
+	margin: 30px 0 30px 0;
+	border: none;
+	background: #555555;
+	height: 1px;
+}
+
+.field-detail {
+	display: block;
 	font-size: 18px;
+	margin: 0 5px 0 20px;
 	background: rgb(27, 27, 27);
-	border: 2px solid #242424;
+	border: 3px solid #242424;
 	color: #ffffff;
 	outline: none;
+	padding: 7px 10px 10px 10px;
+	width: 1030px;
+	height: 18px;
+	max-width: 1030px;
+	/* height: auto; */
+	overflow: hidden;
+	resize: none;
 	border-radius: 10px;
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }

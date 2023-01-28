@@ -11,13 +11,13 @@
 		{% if form.errors %}
 			{% for field in form %}
 				{% for error in field.errors %}            
-					<div class="alert alert-danger">
+					<div style="color: #ff506f; margin: 5px 0 0 0; font-size: 14px;">
 						{{ error|escape }}
 					</div>
 				{% endfor %}
 			{% endfor %}
 			{% for error in form.non_field_errors %}
-				<div class="alert alert-danger">
+				<div style="color: #ff506f; margin: 5px 0 0 0; font-size: 14px;">
 					{{ error|escape }}
 				</div>
 			{% endfor %}
@@ -32,15 +32,7 @@
 						aria-required="false"
 					{% endif %}
 				>
-					{% comment %} <label class="field-label" for="{{ field.id_for_label }}">
-						{{ field.label }}
-					</label> {% endcomment %}
-					{% if field.label == "Имя пользователя" %}
-						{{ field|addclass:'field-input' }}
-						{% comment %} |addclass:'field-input' {% endcomment %}
-					{% else %}
-						{{ field|addclass:'field-input' }}
-					{% endif %}
+					{{ field }}
 				</div>
 			{% endfor %}
 			<button type="submit" class="button-form">Войти</button>

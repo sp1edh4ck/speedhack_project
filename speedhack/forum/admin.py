@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Forum
+from .models import Comment, Forum, Ip
 
 
 class ForumAdmin(admin.ModelAdmin):
@@ -16,3 +16,5 @@ class ForumAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Forum, ForumAdmin)
+admin.site.register(Comment)
+admin.site.register(Ip)
