@@ -12,7 +12,6 @@
 					<a href="{% url 'users:login' %}" class="button-frame">Войти и создать тему</a>
 				{% endif %}
 			</div>
-
 			<div class="frame-rigth-first">
 				{% for post in objects %}
 					<a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">
@@ -32,15 +31,6 @@
 				{% include '../includes/paginator.html' %}
 			</div>
 		</div>
-
-		{% comment %} <div class="preasent-cheat_con">
-			<div class="frame">
-				<div class="about-cheat">
-					<h5 style="text-align: center;">Тут должен быть текст, но мне лень его придумывать(</h5>
-				</div>
-			</div>
-		</div> {% endcomment %}
-
 		<div id="vk_community_messages">
 			<script type="text/javascript">
 				VK.Widgets.CommunityMessages("vk_community_messages", 207447269, {tooltipButtonText: "Поддержка", disableExpandChatSound: 1, disableNewMessagesSound: 1});

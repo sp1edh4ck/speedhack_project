@@ -26,10 +26,10 @@
 
 .frame-left {
 	min-width: 250px;
-	background: #1f2024;
+	background: #242527;
 	border-radius: 10px;
 	padding: 20px 10px 0px 10px;
-	margin: 0 20px 0 0;
+	margin: 0 20px 20px 0;
 }
 
 .button-frame {
@@ -54,9 +54,10 @@
 .frame-rigth-first {
 	width: 920px;
 	min-height: 150px;
-	background: #1f2024;
+	background: #242527;
 	border-radius: 10px;
 	padding: 20px 20px 20px 20px;
+	margin: 0 0 20px 0;
 }
 
 .text-frame {

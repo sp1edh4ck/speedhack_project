@@ -20,7 +20,7 @@
 					<label><a class="button-edit" style="margin-top: 5px;">Подписаться</a>
 					<a class="button-edit" style="margin-top: 5px;">Пожаловаться</a>
 				{% else %}
-					<a href="{% url 'users:login' %}" class="button-edit" style="padding: 5px 40px 5px 41px;">Войти в аккаунт</a>
+					<a href="{% url 'users:login' %}" class="button-edit">Войти в аккаунт</a>
 				{% endif %}
 			{% endif %}
 		</div>
@@ -33,11 +33,19 @@
 					<div>
 						<label style="color: gray; display: flex;">В сети 10 мин. назад</label>
 					</div>
-					<div>
-						{% if user != author %}
-							<img src="{% static 'images/other.png' %}" class="other-img">
-						{% endif %}
-					</div>
+					{% if request.user.is_authenticated %}
+						<div>
+							<div class="user-button">
+								<img src="{% static 'images/other.png' %}" class="other-img">
+								<div class="user-button-content">
+									<a href="#" style="border-top: 1px solid; border-color: #ff506f; border-top-left-radius: 5px; border-top-right-radius: 5px;">Замьютить</a>
+									<a href="#">Заблокировать</a>
+									<a href="#">Выдать администратора</a>
+									<a href="#" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">Выдать хуй</a>
+								</div>
+							</div>
+						</div>
+					{% endif %}
 				</div>
 				<hr style="margin-top: 20px; margin-bottom: 20px;">
 				<div>
@@ -46,7 +54,7 @@
 				</div>
 				<hr style="margin: 20px 0 20px 0;">
 				<div style="display: flex;">
-					<label style="color: gray; margin: 0 30px 0 0;">Подписчики: <label style="color: #ff506f;">{{ author.subscriber }}</label></label><br>
+					<label style="color: gray; margin: 0 30px 0 0;">Подписчики: <label style="color: #ff506f;">{{ author. }}</label></label><br>
 					<label style="color: gray; margin: 0 30px 0 0;">Лайки: <label style="color: #ff506f;">{{ author.likes }}</label></label><br>
 					<label style="color: gray;">Сообщения: <label style="color: #ff506f;">{{ author.messages }}</label></label><br>
 				</div>
@@ -67,7 +75,7 @@
 								</div>
 								<div class="avatar-username">
 									<img class="user-avatar" src="{{ post.author.avatar.url }}">
-									<label class="text-frame-username admin-username">{{ post.author.username }}</label>
+									<label class="text-frame-username {% if post.author.username == 'sp1edh4ck' %}admin-username{% endif %}">{{ post.author.username }}</label>
 								</div>
 							</div>
 							{% if not forloop.last %}<br>{% endif %}

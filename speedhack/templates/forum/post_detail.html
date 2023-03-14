@@ -8,7 +8,7 @@
 		<label class="link-title"><a href="{% url 'forum:index' %}" class="link-title-main">Форум</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:post_detail' post.id %}" class="link-title-main">Пост</a></label>
 		<div class="frame-title">
 			<label class="text-up-title">{{ post.title }}</label><br>
-			<label class="text-up-all">Тема создана пользователем <a href="{% url 'forum:profile' post.author.username %}" class="text-up-nick">{{ post.author.username }}</a> / <img class="heart" src="{% static 'images/heart_pink.png' %}"> <label style="color: #ff506f;">{{ post.author.likes }} / {{ post.total_views }}</label> | {{ post.pub_date }}</label>
+			<label class="text-up-all">Тема создана пользователем <a href="{% url 'forum:profile' post.author.username %}" class="text-up-nick">{{ post.author.username }}</a> / <img class="heart" src="{% static 'images/heart_gray.png' %}"> <label style="color: #ff506f;">{{ post.author.likes }} / <img src="{% static 'images/views.png' %}" style="width: 25px;"> {{ post.total_views }}</label> | {{ post.pub_date }}</label>
 		</div>
 		<div class="frame-main">
 			<div class="frame-main-avatars">
@@ -69,7 +69,7 @@
 								{{ form.text|addclass:"field-detail" }}
 							</div>
 							<div>
-								<button type="submit" style="background: #1f2024; border: none; cursor: pointer;"><img style="width: 40px;" src="{% static 'images/send.png' %}"></button>
+								<button type="submit" style="background: #242527; border: none; cursor: pointer;"><img style="width: 40px;" src="{% static 'images/send.png' %}"></button>
 							</div>
 						</div>
 					</form>

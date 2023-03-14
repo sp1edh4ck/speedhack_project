@@ -52,6 +52,7 @@ def index(request):
 
 def profile(request, username):
     author = get_object_or_404(User, username=username)
+    group = ...
     posts = author.posts.all()
     following = (
 				author.following.filter(user_id=request.user.id).exists()
@@ -134,12 +135,9 @@ def follow_index(request):
 @login_required
 def profile_follow(request, username):
 		author = get_object_or_404(User, username=username)
-		sub = request.user.subscriber
 		if author != request.user:
 				if not Follow.objects.filter(author=author, user=request.user).exists():
 						Follow.objects.create(author=author, user=request.user)
-						sub += 1
-				sub -= 1
 		return redirect('forum:profile', username=username)
 
 
@@ -153,6 +151,22 @@ def profile_unfollow(request, username):
 @login_required
 def admin_panel(request):
 		template = 'forum/admin.html'
+		author = Forum.objects.select_related('author').all()
+		users_list = CustomUser.objects.all()
+		context = {
+				'author': author,
+				'users': users_list,
+		}
+		return render(request, template, context)
+
+
+def faq(request):
+		template = 'forum/faq.html'
+		return render(request, template)
+
+
+def users(request):
+		template = 'forum/users.html'
 		author = Forum.objects.select_related('author').all()
 		users_list = CustomUser.objects.all()
 		context = {

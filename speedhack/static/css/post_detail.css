@@ -23,7 +23,7 @@
 	padding: 20px;
 	max-width: 1200px;
 	min-width: 1160px;
-	background: #1f2024;
+	background: #242527;
 	border-radius: 10px;
 	margin-top: 20px;
 }
@@ -45,6 +45,7 @@
 }
 
 .text-up-nick:hover {
+	text-decoration:underline;
 	color: #ff6b86;
 }
 
@@ -56,7 +57,7 @@
 	max-width: 1200px;
 	margin: 20px 0 20px 0;
 	/* background: #17181b; */
-	background: #1f2024;
+	background: #242527;
 	border-radius: 10px;
 	padding: 20px;
 }
@@ -97,7 +98,7 @@
 }
 
 .hr-post-detail {
-	margin: 30px 0 30px 0;
+	margin: 20px 0 20px 0;
 	border: none;
 	background: #555555;
 	height: 1px;
@@ -107,15 +108,14 @@
 	display: block;
 	font-size: 18px;
 	margin: 0 5px 0 20px;
-	background: rgb(27, 27, 27);
-	border: 3px solid #242424;
+	background: #333333;
+	border: 3px solid #666666;
 	color: #ffffff;
 	outline: none;
 	padding: 7px 10px 10px 10px;
 	width: 1030px;
 	height: 18px;
 	max-width: 1030px;
-	/* height: auto; */
 	overflow: hidden;
 	resize: none;
 	border-radius: 10px;

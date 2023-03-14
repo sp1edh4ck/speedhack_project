@@ -1,0 +1,37 @@
+.frame-left-users {
+	width: 250px;
+	margin-right: 20px;
+	border-radius: 10px;
+	padding: 20px;
+	max-height: 120px;
+	background: #242527;
+}
+
+/* .input-filter-users {
+	margin-top: 20px;
+	min-width: 250px;
+	max-width: 250px;
+} */
+
+.frame-right-users {
+	width: 850px;
+	padding: 20px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	background: #242527;
+}
+
+.users-div {
+	max-height: 100px;
+	border-radius: 10px;
+	padding: 10px;
+	transition: background 0.5s ease 0s;
+}
+
+.users-div:hover {
+	background: #292a2e;
+}
+
+.heart-users {
+    width: 13px;
+}

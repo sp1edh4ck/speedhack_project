@@ -12,6 +12,18 @@ class Ip(models.Model):
         return self.ip
 
 
+class Group(models.Model):
+    title = models.CharField(unique=True, max_length=50, verbose_name='Название')
+    slug = models.SlugField(unique=True, verbose_name='Уникальный адрес')
+
+    class Meta:
+        verbose_name = 'Ранг'
+        verbose_name_plural = 'Ранги'
+
+    def __str__(self):
+        return self.title
+
+
 class Forum(models.Model):
     title = models.CharField(verbose_name='Заголовок', max_length=55)
     text = models.TextField(verbose_name='Текст', max_length=10000)
