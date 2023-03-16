@@ -21,8 +21,8 @@
 
 .frame-title {
 	padding: 20px;
-	max-width: 1200px;
-	min-width: 1160px;
+	max-width: 1300px;
+	min-width: 1260px;
 	background: #242527;
 	border-radius: 10px;
 	margin-top: 20px;
@@ -54,7 +54,7 @@
 }
 
 .frame-main {
-	max-width: 1200px;
+	max-width: 1300px;
 	margin: 20px 0 20px 0;
 	/* background: #17181b; */
 	background: #242527;
@@ -67,6 +67,7 @@
 	height: 80px;
 	border-radius: 50px;
 	margin-right: 20px;
+	cursor: pointer;
 }
 
 .frame-main-username {
@@ -77,7 +78,7 @@
 .frame-main-posts {
 	display: flex;
 	margin-top: 20px;
-	max-width: 1100px;
+	max-width: 1200px;
 }
 
 .frame-main-post {
@@ -88,7 +89,7 @@
 .comment-text {
 	color: #ffffff;
 	margin-top: 20px;
-	max-width: 1040px;
+	max-width: 1140px;
 	word-wrap: break-word;
 }
 
@@ -113,9 +114,9 @@
 	color: #ffffff;
 	outline: none;
 	padding: 7px 10px 10px 10px;
-	width: 1030px;
+	width: 1130px;
 	height: 18px;
-	max-width: 1030px;
+	max-width: 1130px;
 	overflow: hidden;
 	resize: none;
 	border-radius: 10px;

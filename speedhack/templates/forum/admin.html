@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 {% block title %}speedhack / админка{% endblock %}
 {% block content %}
-	<div class="frame_con">
-		<div class="frame-users">
-			{% for users in users %}
-				<div style="display: flex;">
-					<div>
-						<img style="width: 40px; border-radius: 10px;" src="{{ users.avatar.url }}">
+	<div class="main">
+		<div class="frame_con">
+			<div class="frame-users">
+				{% for users in users %}
+					<div style="display: flex;">
+						<div>
+							<img style="width: 40px; border-radius: 10px;" src="{{ users.avatar.url }}">
+						</div>
+						<div>
+							<label class="users-username">{{ users.username }}</label>
+						</div>
 					</div>
-					<div>
-						<label class="users-username">{{ users.username }}</label>
-					</div>
-				</div>
-			{% endfor %}
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 {% endblock %}

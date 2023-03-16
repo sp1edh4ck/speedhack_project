@@ -1,5 +1,5 @@
 .frame {
-	max-width: 1200px;
+	max-width: 1300px;
 	background: #242527;
 	border-radius: 10px;
 	padding: 20px 20px 20px 20px;
@@ -16,7 +16,7 @@
 }
 
 .field {
-	width: 1139px;
+	width: 1239px;
 	margin-bottom: 30px;
 	font-size: 18px;
 	background: #333333;
@@ -34,7 +34,7 @@
 
 textarea {
 	padding: 10px 10px 10px 10px;
-	max-width: 1136px;
+	max-width: 1236px;
 	resize: none;
 	border-radius: 15px;
 	border: 0;

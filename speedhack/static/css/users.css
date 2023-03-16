@@ -14,7 +14,7 @@
 } */
 
 .frame-right-users {
-	width: 850px;
+	width: 950px;
 	padding: 20px;
 	border-radius: 10px;
 	margin-bottom: 20px;
@@ -32,6 +32,11 @@
 	background: #292a2e;
 }
 
+.a-users {
+	text-decoration: none;
+	cursor: pointer;
+}
+
 .heart-users {
-    width: 13px;
+	width: 13px;
 }

@@ -35,7 +35,7 @@
 .button-frame {
 	cursor: pointer;
 	font-size: 18px;
-  font-family: "Acrom", sans-serif;
+    font-family: 'Ubuntu', "Acrom", sans-serif;
 	padding: 7px 64px;
 	margin: 0 auto 0 auto;
 	color: #ffffff;

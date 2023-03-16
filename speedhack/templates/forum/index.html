@@ -21,7 +21,7 @@
 								<label class="text-frame-text">{{ post.pub_date|date:"d E Y / H:i" }}</label>
 							</div>
 							<div class="avatar-username">
-								<img class="user-avatar" src="{{ post.author.avatar.url }}" alt="img">
+								<img class="user-avatar" src="{{ post.author.avatar.url }}" >
 								<label class="text-frame-username {% if post.author.rank == 'владелец' %}admin-username{% endif %}">{{ post.author.username }}</label>
 							</div>
 						</div>

@@ -20,7 +20,7 @@
 }
 
 .frames_con {
-	max-width: 1200px;
+	max-width: 1300px;
 	display: flex;
 }
 
@@ -35,7 +35,7 @@
 .button-frame {
 	cursor: pointer;
 	font-size: 16px;
-  font-family: "Acrom", sans-serif;
+	font-family: 'Ubuntu', 'Acrom', sans-serif;
 	margin: 0 auto 0 auto;
 	color: #ffffff;
 	background: #ff506f;
@@ -52,7 +52,7 @@
 }
 
 .frame-rigth-first {
-	width: 920px;
+	width: 1020px;
 	min-height: 150px;
 	background: #242527;
 	border-radius: 10px;
@@ -93,14 +93,4 @@
 	color: #ffffff;
 	font-size: 16px;
 	width: 170px;
-}
-
-.admin-username {
-	color: #ffffff;
-	text-shadow: 0px 0px 3px rgb(214,210,210),
-	0px 0px 4px rgb(214,210,210),
-	0px 0px 5px rgb(214,210,210),
-	0px 0px 5px rgb(214,210,210),
-	0px 0px 5px rgb(214,210,210);
-	border-radius: 5px;
 }

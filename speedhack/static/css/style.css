@@ -1,7 +1,7 @@
 body, html {
 	/* background: #1e2025; */
 	background: #2b2e35;
-	font-family: 'Acrom', sans-serif;
+	font-family: 'Ubuntu', 'Acrom', sans-serif;
 	margin: 0;
 	line-height: 1.5;
 	height: 100%;
@@ -28,21 +28,26 @@ body::-webkit-scrollbar-thumb {
 	min-height: 100vh;
 }
 
+.admin-username {
+	color: #ffffff;
+	text-shadow: 0px 0px 3px rgb(214,210,210),
+	0px 0px 4px rgb(214,210,210),
+	0px 0px 5px rgb(214,210,210),
+	0px 0px 5px rgb(214,210,210),
+	0px 0px 5px rgb(214,210,210);
+	border-radius: 5px;
+}
+
 .main {
 	flex: 1;
+	margin-top: 100px;
 	margin-bottom: 20px;
 }
 
 [class*="_con"] {
-	max-width: 1200px;
+	max-width: 1300px;
 	margin: 0 auto;
 	display: flex;
-}
-
-.text-about {
-	color: #ffffff;
-	font-size: 20px;
-	padding: 0 0 80px 0;
 }
 
 .frame {

@@ -43,9 +43,8 @@
 	padding: 20px 20px 20px 20px;
 	border-radius: 10px;
 	font-size: 18px;
-	width: 900px;
+	width: 1000px;
 	min-height: 0px;
-	max-height: 190px;
 }
 
 .frame-right-second {
@@ -54,19 +53,32 @@
 	padding: 20px 20px 20px 20px;
 	border-radius: 10px;
 	font-size: 18px;
-	width: 900px;
+	width: 1000px;
 	min-height: 0px;
 	max-height: 190px;
 }
 
-.button-tools {
+.button-tools__active {
 	color: #ffffff;
 	text-decoration: none;
 	margin-right: 30px;
 	background-image: linear-gradient(#ff506f, #ff506f);
 	background-position: 0% 100%;
 	background-repeat: no-repeat;
+	background-size: 100% 2px;
+	padding-bottom: 8px;
+}
+
+.button-tools {
+	color: #ffffff;
+	cursor: pointer;
+	text-decoration: none;
+	margin-right: 30px;
+	background-image: linear-gradient(#ff506f, #ff506f);
+	background-position: 0% 100%;
+	background-repeat: no-repeat;
 	background-size: 0% 2px;
+	padding-bottom: 8px;
 	transition: background-size 0.3s;
 }
 
@@ -74,15 +86,20 @@
 	background-size: 100% 2px;
 }
 
+.active-tab {
+	background-size: 100% 2px;
+}
+
 .frame-right-third {
+	display: none;
 	background: #242527;
 	margin: 20px 0 20px 0;
 	padding: 20px 20px 20px 20px;
 	border-radius: 10px;
 	font-size: 18px;
-	width: 900px;
+	width: 1000px;
 }
 
-.button-tools-active {
-	background-size: 100% 2px;
+.frame-right-third.active-tab {
+	display: block;
 }

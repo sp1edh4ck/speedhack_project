@@ -2,29 +2,36 @@
 {% load static %}
 {% block title %}speedhack / пользователи{% endblock %}
 {% block content %}
-    <div class="frame_con">
-        <div class="frame-left-users">
-            <span style="color: gray; font-size: 18px;">Найти пользователя</span>
-            <input class="input-filter-users">
-        </div>
-        <div class="frame-right-users">
-            {% for users in users %}
-                <a style="test-decoration: none;">
-                    <div style="display: flex;" class="users-div">
-                        <div>
-                            <img style="width: 70px; border-radius: 50px;" src="{{ users.avatar.url }}">
-                        </div>
-                        <div style="margin-left: 20px;">
-                            <div>
-                                <label class="users-username {% if users.rank == 'владелец' %}admin-username{% endif %}">{{ users.username }}</label>
-                            </div>
-                            <div style="margin-top: 10px; color: #ff506f;">
-                                <img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label style="">{{ users.likes }}</label>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
-    </div>
+	<div class="main">
+		<div class="frame_con">
+			<div class="frame-left-users">
+				<span style="color: gray; font-size: 18px;">Найти пользователя</span>
+				<input class="input-filter-users">
+			</div>
+			<div class="frame-right-users">
+				{% for users in users %}
+					<a class="a-users" href="{% url 'forum:profile' users.username %}">
+						<div style="display: flex;" class="users-div">
+							<div>
+								<img style="width: 70px; border-radius: 50px;" src="{{ users.avatar.url }}">
+							</div>
+							<div style="margin-left: 20px;">
+								<div style="display: flex;">
+									<div style="margin: 0 0 0 auto;">
+										<label class="users-username {% if users.rank == 'владелец' %}admin-username{% endif %}">{{ users.username }}</label>
+									</div>
+									<div style="display: flex;">
+										<label style="color: #ff506f; font-size: 21px; width: 100px;">{{ users.likes }}</label>
+									</div>
+								</div>
+								<div style="margin-top: 10px; color: #ff506f;">
+									<img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label>{{ users.likes }}</label>
+								</div>
+							</div>
+						</div>
+					</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
 {% endblock %}

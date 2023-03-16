@@ -1,6 +1,11 @@
 .header {
-	background: #2b2e35;
+	/* background: #2b2e35; */
+	background: #25262b;
 	padding: 10px 0px;
+	position: fixed;
+	top: 0;
+	z-index: 100;
+	width: 100%;
 }
 
 .header_con {
@@ -22,8 +27,8 @@
 }
 
 .menu_item {
-	font-family: 'Acrom', sans-serif;
-	font-size: 14px;
+	font-family: 'Ubuntu', 'Acrom', sans-serif;
+	font-size: 16px;
 	color: #ff506f;
 	padding-right: 30px;
 }
@@ -41,11 +46,11 @@
 
 .button {
 	cursor: pointer;
-	font-size: 14px;
-  font-family: "Acrom", sans-serif;
+	font-size: 16px;
+	font-family: 'Ubuntu', 'Acrom', sans-serif;
 	padding: 5px 10px;
 	color: #ff506f;
-	background: #2b2e35;
+	background: #25262b;
 	border: 1px solid;
 	text-decoration: none;
 	border-color: #ff506f;
@@ -61,11 +66,11 @@
 .user-icon {
 	cursor: pointer;
 	font-size: 14px;
-	font-family: "Acrom", sans-serif;
+	font-family: 'Ubuntu', 'Acrom', sans-serif;
 	padding: 5px 25px;
 	min-width: 100px;
 	color: #ff506f;
-	background: #2b2e35;
+	background: #25262b;
 	border: 1px solid;
 	border-color: #ff506f;
 	border-radius: 5px;
@@ -101,7 +106,7 @@
 
 .user-button-content a {
 	color: #ff506f;
-	background: #2b2e35;
+	background: #25262b;
 	border-left: 1px solid;
 	border-right: 1px solid;
 	border-bottom: 1px solid;

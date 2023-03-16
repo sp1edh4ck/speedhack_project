@@ -1,54 +1,48 @@
 {% load static %}
 <header class="header">
-  <div class="header_con">
-    <a href="/"><img class="brandLogo" src="{% static 'images/speedhack_logo.png' %}" alt="speedhack"></a>
-    <div class="navbar">
-      <div class="container">
-        <div class="navbar_wrap">
-          <div class="hamb">
-            <div class="hamb_field" id="hamb">
-              <span class="bar"></span>
-              <span class="bar"></span>
-              <span class="bar"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="popup" id="popup"></div>
-    <nav class="header_menu">
-      <ul class="menu_list" id="menu">
-        <li class="menu_item"><a href="{% url 'forum:index' %}" class="menu_link">{% if request.user.language != "en" %}ФОРУМ{% else %}FORUM{% endif %}</a></li>
-        <li class="menu_item"><a href="/market" class="menu_link">МАРКЕТ</a></li>
-        <li class="menu_item"><a href="{% url 'forum:users' %}" class="menu_link">ПОЛЬЗОВАТЕЛИ</a></li>
-        <li class="menu_item"><a href="{% url 'forum:faq' %}" class="menu_link">FAQ</a></li>
-        {% if request.user.rank == 'владелец' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' %}
-		  <li class="menu_item"><a href="{% url 'forum:admin_panel' %}" class="menu_link">АДМИНКА</a></li>
+	<div class="header_con">
+		<a href="/"><img class="brandLogo" src="{% static 'images/speedhack_logo.png' %}" alt="speedhack"></a>
+		<div class="navbar">
+			<div class="container">
+				<div class="navbar_wrap">
+					<div class="hamb">
+						<div class="hamb_field" id="hamb">
+							<span class="bar"></span>
+							<span class="bar"></span>
+							<span class="bar"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="popup" id="popup"></div>
+		<nav class="header_menu">
+			<ul class="menu_list" id="menu">
+				<li class="menu_item"><a href="{% url 'forum:index' %}" class="menu_link">ФОРУМ</a></li>
+				<li class="menu_item"><a href="/market" class="menu_link">МАРКЕТ</a></li>
+				<li class="menu_item"><a href="{% url 'forum:users' %}" class="menu_link">ПОЛЬЗОВАТЕЛИ</a></li>
+				<li class="menu_item"><a href="{% url 'forum:faq' %}" class="menu_link">FAQ</a></li>
+				{% if request.user.rank == 'владелец' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' %}
+					<li class="menu_item"><a href="{% url 'forum:admin_panel' %}" class="menu_link">АДМИНКА</a></li>
+				{% endif %}
+			</ul>
+		</nav>
+		{% if request.user.is_authenticated %}
+			<img class="notification" src="{% static 'images/notifications.png' %}">
+			<div class="user-button">
+				<button class="user-icon">{{ request.user }}</button>
+				<div class="user-button-content">
+					<a href="{% url 'forum:profile' user.username %}" style="border-top: 1px solid; border-color: #ff506f; border-top-left-radius: 5px; border-top-right-radius: 5px;">Профиль</a>
+					<a href="#">Мои аккаунты</a>
+					<a href="#">Мои покупки</a>
+					<a href="{% url 'users:logout' %}" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">Выйти</a>
+				</div>
+			</div>
+		{% else %}
+			<div class="header_logreg">
+				<a href="{% url 'users:login' %}" class="button">Логин</a>
+				<a href="{% url 'users:signup' %}" class="button">Регистрация</a>
+			</div>
 		{% endif %}
-	  </ul>
-    </nav>
-    {% if request.user.is_authenticated %}
-      <div>
-        <form method="POST" {% if action_url %}action="{% url 'posts:index' %}"{% endif %}>
-          {% csrf_token %}
-          <button type="submit" class="user-icon">Change language</button>
-        </form>
-      </div>
-      <img class="notification" src="{% static 'images/notifications.png' %}">
-      <div class="user-button">
-        <button class="user-icon">{{ request.user }}</button>
-        <div class="user-button-content">
-          <a href="{% url 'forum:profile' user.username %}" style="border-top: 1px solid; border-color: #ff506f; border-top-left-radius: 5px; border-top-right-radius: 5px;">Профиль</a>
-          <a href="#">Мои аккаунты</a>
-          <a href="#">Мои покупки</a>
-          <a href="{% url 'users:logout' %}" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">Выйти</a>
-        </div>
-      </div>
-    {% else %}
-      <div class="header_logreg">
-        <a href="{% url 'users:login' %}" class="button">Логин</a>
-        <a href="{% url 'users:signup' %}" class="button">Регистрация</a>
-      </div>
-    {% endif %}
-  </div>
+	</div>
 </header>
