@@ -1,6 +1,7 @@
 body, html {
 	/* background: #1e2025; */
-	background: #2b2e35;
+	/* background: #2b2e35; */
+	background: #242729;
 	font-family: 'Ubuntu', 'Acrom', sans-serif;
 	margin: 0;
 	line-height: 1.5;
@@ -21,7 +22,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .wrapper {
-	background: #2b2e35;
+	/* background: #2b2e35; */
+	background: #242729;
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -68,31 +70,6 @@ body::-webkit-scrollbar-thumb {
 	width: 120px;
 	display: block;
 	margin: 0 auto;
-}
-
-.user-agreement_con,
-.faq-answer {
-	background: #1e2025;
-	padding: 30px 0px 30px 0px;
-}
-
-.frame-rules,
-.faq-frame {
-	color: #ffffff;
-	background: #17181b;
-	width: 1285px;
-	padding-bottom: 15px;
-	border-radius: 10px;
-	line-height: 1.5;
-}
-
-.rules {
-	color: #ffffff;
-	padding: 15px 20px 0 20px;
-}
-
-.rules ul {
-	margin-top: 0;
 }
 
 .user-agreement hr,

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load thumbnail %}
-{% load static %}
 {% block title %}speedhack / пост / {{ post.text|truncatechars:15 }}{% endblock %}
+{% load static %}
+{% load thumbnail %}
 {% block content %}
 {% load user_filters %}
 	<div class="main">
@@ -78,17 +78,6 @@
 				{% endif %}
 			</div>
 		</div>
-		<script>
-			var tx = document.getElementsByTagName('textarea');
-			for (var i = 0; i < tx.length; i++) {
-				tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
-				tx[i].addEventListener("input", OnInput, false);
-			}
-		
-			function OnInput() {
-				this.style.height = 'auto';
-				this.style.height = (this.scrollHeight) + 'px';
-			}
-		</script>
 	</div>
+	<script type="text/javascript", src="{% static 'js/post_detail.js' %}"></script>
 {% endblock %}

@@ -68,6 +68,25 @@
 					<a data-tab="#" class="button-tools">Жалобы</a>
 				</div>
 				<div id="userPosts" class="tabItem frame-right-third active-tab">
+					{% if user.is_authenticated %}
+						<div class="frame-main-posts">
+							<a href="{% url 'forum:profile' request.user %}"><img class="frame-main-avatar" style="width: 40px; height: 40px; margin: 0;" src="{{ user.avatar.url }}"></a>
+							<form method="post" enctype="multipart/form-data" action="{% url 'forum:profile_comment' author.username %}">
+								{% csrf_token %}
+								<div style="display: flex;">
+									<div>
+										{{ form.text }}
+										{% comment %} |addclass:"field-detail" {% endcomment %}
+									</div>
+									<div>
+										<button type="submit" style="background: #242527; border: none; cursor: pointer;"><img style="width: 40px;" src="{% static 'images/send.png' %}"></button>
+									</div>
+								</div>
+							</form>
+						</div>
+					{% endif %}
+				</div>
+				<div id="userPosts" class="tabItem frame-right-third active-tab">
 					<label style="color: #ffffff;">На стене пока ничего нет</label>
 				</div>
 				<div id="authorPosts" class="tabItem frame-right-third">

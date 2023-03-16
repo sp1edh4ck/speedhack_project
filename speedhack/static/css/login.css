@@ -1,6 +1,6 @@
 .frame-login {
 	max-width: 400px;
-	background: #1f2024;
+	background: #1c1f20;
 	padding: 20px;
 	border-radius: 10px;
 	margin: 0 auto;
@@ -8,7 +8,7 @@
 
 .frame-registration {
 	max-width: 400px;
-	background: #1f2024;
+	background: #1c1f20;
 	padding: 20px;
 	border-radius: 10px;
 	margin: 0 auto;
@@ -40,7 +40,7 @@
 	margin-top: 10px;
 	font-size: 18px;
 	padding-left: 15px;
-	background: #1f2024;
+	background: #1c1f20;
 	border: 2px solid #242424;
 	color: #ffffff;
 	outline: none;
@@ -72,12 +72,12 @@
 
 .btn-reg  {
 	width: 200px;
-	margin: 15px 100px 0px 100px;
+	margin: 15px 100px 5px 100px;
 }
 
 .frame-logout_con {
 	width: 300px;
-	background: #242527;
+	background: #1c1f20;
 	border-radius: 10px;
 	padding: 20px;
 }
@@ -88,4 +88,19 @@
 	display: inline-block;
 	margin: 0 auto;
 	text-align: center;
+}
+
+.rules-reg {
+	color: white;
+	font-size: 16px;
+}
+
+.link-rules {
+	text-decoration: underline;
+	color: #ffffff;
+	transition: color 0.5s ease 0s;
+}
+
+.link-rules:hover {
+	color: #ff506f;
 }

@@ -32,7 +32,18 @@
 						{{ field }}
 					</div>
 				{% endfor %}
-				<button type="submit" class="button-form btn-reg">Зарегистрироваться</button>
+				<button type="submit" name="submit" disabled="" class="button-form btn-reg">Зарегистрироваться</button>
+				<input type="checkbox"  id="politics" onclick="check();" value="" autocomplete="off"/>
+				<span class="rules-reg">Я согласен с <a class="link-rules" href="{% url 'forum:rules' %}" target="_blank">правилами сайта</a></span>
+				<script>
+					function check() {
+					var submit = document.getElementsByName('submit')[0];
+					if (document.getElementById('politics').checked)
+					submit.disabled = '';
+					else
+					submit.disabled = 'disabled';
+					}
+					</script>
 			</form>
 		</div>
 	</div>

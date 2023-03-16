@@ -14,7 +14,7 @@ def pagination_post(request, post_list):
 
 
 def pagination_sub(request, sub_list):
-	paginator = Paginator(sub_list, 10)
+	paginator = Paginator(sub_list, 12)
 	return paginator.get_page(request.GET.get('page'))
 
 
@@ -54,6 +54,7 @@ def profile(request, username):
 	author = get_object_or_404(User, username=username)
 	posts = author.posts.all()
 	subs = author.follower.all()
+	comments = author.comments.all()
 	following = (
 		author.following.filter(user_id=request.user.id).exists()
 		if request.user.is_authenticated
@@ -69,6 +70,7 @@ def profile(request, username):
 		'count_subs': count_subs,
 		'objects': pagination_post(request, posts),
 		'subs': pagination_sub(request, subs),
+		'comments': pagination_sub(request, comments),
 	}
 	return render(request, template, context)
 
@@ -152,6 +154,20 @@ def profile_unfollow(request, username):
 
 
 @login_required
+def profile_comment(request, username):
+	author = get_object_or_404(User, username=username)
+	if request.method == 'POST':
+		form = CommentForm(request.POST or None)
+		if form.is_valid():
+			comment = form.save(commit=False)
+			comment.author = request.user
+			comment.save()
+	else:
+		form = CommentForm()
+	return render(request, 'register_user.html', {'form': form})
+
+
+@login_required
 def admin_panel(request):
 	template = 'forum/admin.html'
 	author = Forum.objects.select_related('author').all()
@@ -165,6 +181,16 @@ def admin_panel(request):
 
 def faq(request):
 	template = 'forum/faq.html'
+	return render(request, template)
+
+
+def politic(request):
+	template = 'forum/politic.html'
+	return render(request, template)
+
+
+def rules(request):
+	template = 'forum/rules.html'
 	return render(request, template)
 
 

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block title %}speedhack / правила{% endblock %}
+{% load static %}
+{% block content %}
+	<div class="main">
+		<div class="user-agreement_con">
+			<div class="frame-rules">
+				<div class="tabItem rules active-tab" id ="rules">
+					<strong style="font-size:18px;">1. Основные правила (распространяются на всё).</strong><br>
+					<span style="list-style-type: none;"><span class="brandColor">1.1.</span> Запрещены любые мошеннические действия (пирамиды, хайпы, дропы, airdrop, NFT, ICO, Bounty, крипто-краны, поднятие или умножение чужих денег), кроме случаев, когда вас об этом попросил человек со статусом гл. администратор или владелец, в качестве проверки чего-либо, или если вы хотите опубликовать контент с какими-либо абузами не касающихся сервиса <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">1.2.</span> Запрещены публикации откровенного 18+ контента, убийств, насилия, оружия, наркотических средств, шокирующего контента.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">1.3.</span> Запрещены разжигание ссор на форуме, оскорбления чувств верующих, оскорбления людей другой рассы.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">1.4.</span> Запрещён слив любого контента, который является собственностью сайта.</li><br>
+					<span style="list-style-type: none;"><span class="brandColor">1.5.</span> Запрещена передача личного аккаунта пользователя сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">1.6.</span> На форуме запрещены любые темы, нарушающие <a href="http://pravo.gov.ru/codex/" target="_blank" class="link-decor">законодательство РФ</a>.</span><br>
+					
+					<br><strong style="font-size:18px;">2. Правила форума.</strong><br>
+					<span style="list-style-type: none;"><span class="brandColor">2.1.</span> Запрещён контент, касающийся личной информации человека, его фотографий и т.д., кроме случаев, когда есть подтверждение на показ данного контента лично от человека.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">2.2.</span> Запрещены посты с подозрительными ссылками, вредоносными файлами, которые могут причинить какой-либо вред пользователям форума.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">2.3.</span> Запрещён спам, реклама (кроме случаев, когда реклама оплачена пользователем, или не несёт в себе рекламного смысла, например: ссылка на сайт с ответом на вопорос пользователя).</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">2.4.</span> Запрещены темы, не несущие какой-либо пользы, посты ориентированные на общение и т.д.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">2.5.</span> При копировании тем с других сайтов, вы обязаны указать источник в форме ссылки, ответственность за неправильно указанную ссылку вы берёте на себя.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">2.6.</span> Запрещён контент со ставками/азартными играми.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">2.7.</span> Всё, что является платным контентом, который принадлежит сайту <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>, запрещено раздавать, дарить, давать в долг и т.д., это можно сделать только в случае, когда вы заранее всё обговорили с администрацией сайта со статусами администратор или гл. администратор.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">2.8.</span> Запрещена любая информация по абузу на сайте (абуз баланса, накрутка статистики и т.д.). В случае нахождения какого-либо бага на сайте, вы можете рассказать о нём гл. администратору или владельцу сайта и получить вознаграждение.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">2.9.</span> Если вы столкнулись с мошенничеством на форуме, то обратитесь в поддержку с пометкой "Мошенническая деятельность на сайте".</span><br>
+					
+					<br><strong style="font-size:18px;">3. Правила маркета.</strong><br>
+					<span style="list-style-type: none;"><span class="brandColor">3.1.</span> На маркете запрещена продажа личной информации о пользователе, оружия, наркотических средств, 18+ контента.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">3.2.</span> Запрещена многократная продажа одного аккаунта от одного пользователя (данное действие будет рассматриваться, как мошенническая деятельность).</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">3.3.</span> Если при покупке чего-либо, вы будете вести общение вне сайта, то вы не получите каких-либо гарантий от сервиса <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>, а администрация не будет обязана вам помогать.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">3.4.</span> Если вы ведёте мошенническую деятельность вне сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>, но зарегестрированы на нём, то вы будете заблокированы до момента, пока средства/аккаунт(-ы) не будут возвращены их законному владельцу, а личная информация не будет удалена из общего доступа. В случае, если вы доставите сервису <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> проблемы связанные с законодательством РФ, то мы можем передать всю личную информацию о вас правоохранительным органам.<br></li>
+					
+					<br><strong style="font-size:18px;">4. Администрация сайта в праве без объяснения причины:</strong><br>
+					<span><span class="brandColor">4.1.</span> Удалить пост на форуме/маркете.</span><br>
+					<span><span class="brandColor">4.2.</span> Заблокировать ваш аккаунт.</span><br>
+					<span><span class="brandColor">4.3.</span> Удалить ваш аккаунт и всю информацию о вас безвозвратно.</span><br>
+					<span><span class="brandColor">4.4.</span> Заблокировать баланс сайта, до выяснения обстоятельств.</span><br><br>
+
+					<span style="color: gray;">О любых нарушения, вы можете написать гл. администратору в лс, или в тех. поддержку сайта!</span>
+				</div>
+				<div class="tabItem rules" id="politic">
+					<strong>1. Общие положения</strong><br>
+					<span style="list-style-type: none;"><span class="brandColor">1.1.</span> Просматривая, используя контент и регистрируя учетную запись на сайте <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>, вы автоматически соглашаетесь с Пользовательским соглашением.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">1.2.</span> <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> предлагает персонализированные подписки, которые позволяют подписчикам получать доступ к специальным материалам, функциям и т.д.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">1.3.</span> Использование нашего сайта регулируется настоящим Пользовательским соглашением. В соответствии с настоящим Пользовательским соглашением термины, "speedhack", "сайт <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>" относятся к персонализированному сайту, предоставляемым <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> для обнаружения и просмотра содержимого <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>, включая все функции, функциональные возможности, рекомендации, обзоры, сайт и интерфейсы. Пользователь, а также весь контент и программное обеспечение, связанные с нашим сайтом.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">1.4.</span> На основании вышеизложенного внимательно ознакомьтесь с Пользовательским соглашением, и, если вы не согласны с каким-либо пунктом Пользовательского соглашения, Вам предлагается отказаться от использования услуг, предоставляемых <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>.</span><br>
+					
+					<br><strong>2. Сервис <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a></strong><br>
+					<span style="list-style-type: none;"><span class="brandColor">2.1.</span> Сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> и любой контент, полученный от сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>, предназначены только для вашего личного и некоммерческого использования и не могут передаваться и продаваться другим лицам (кроме контента, опубликованного пользователями сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>). Во время вашего участия в <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> мы предоставляем только вам право на доступ к сервису <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> и просмотру содержимого <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>. За исключением вышесказанного, вам не будут переданы никакие права, права собственности или доля.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">2.2.</span> Чтобы стать подписчиком сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>, вам должно быть не меньше 18 лет.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">2.3.</span> Вы соглашаетесь не публиковать, предлагать для продажи, передавать, обменивать, коммерчески использовать контент и информацию, содержащуюся или полученную из или через сайт <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>. Вы также соглашаетесь не обходить, удалять, изменять, деактивировать, ухудшать или нарушать любую защиту контента в сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>; использовать любой робот или другие автоматизированные средства для доступа к услуге <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>; декомпилировать, осуществлять обратный инжиниринг или дизассемблирование любого программного обеспечения или других продуктов или процессов, доступных через сервис <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>; вставлять любой код или манипулировать контентом сервиса <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> любым способом; или использовать любой интеллектуальный анализ данных, метод сбора или извлечения данных. Кроме того, вы соглашаетесь не загружать, не публиковать, не отправлять по электронной почте и не отправлять иным образом и не передавать любые материалы, предназначенные для прерывания,  уничтожения или ограничения функциональности любого компьютерного программного или аппаратного  оборудования, связанного с сервисом <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>, включая любые программные вирусы или любой другой компьютерный код, файлы или программы. Мы можем прекратить или ограничить использование вами нашего сервиса, если вы нарушаете настоящее Пользовательское соглашение или участвуете в незаконном или мошенническом использовании сервиса. Всё вышеперечисленное не относится к контенту, опубликованному пользователями на сервисе <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">2.4.</span> Вы признаете, что для использования сайта может потребоваться программное обеспечение сторонних производителей, на которое распространяются лицензии третьих сторон. Вы соглашаетесь с тем, что вы можете автоматически получать обновленные версии сайта, программного обеспечения <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>.</span><br>
+					
+					<br><strong>3. Совершение платежей на сайте <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a></strong><br>
+					<span style="list-style-type: none;"><span class="brandColor">3.1.</span> Совершение платежей на сайте является пожертвованием, кроме ситуация, когда вы получили на свой баланс n-ную сумму от пользователя сайта, во время розыгрыша и т.д. Перед совершением платежа на сайте, вы признаете, на сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>, пожертвовав ваши средства нам на развитие сайта.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">3.2.</span> Все информационные материалы, представленные на сайте <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>, носят справочный характер и не могут в полной мере передавать достоверную информацию об определенных свойствах и характеристиках Услуги. В случае возникновения у Участника вопросов, касающихся Услуги, перед оформлением Заказа ему необходимо обратиться за консультацией в техническую поддержку сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">3.3.</span> Срок зачисления денег на баланс после оплаты зависит от времени необходимого на обработку платежа платежной системой.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">3.4.</span> В случае предоставления Участником недостоверной информации его контактных данных, администрация сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> в праве отказать в помощи.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">3.5.</span> Подписки с возможностью выбора времени «Навсегда» будет действовать пока сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> продолжает свою работу.</span><br>
+					
+					<br><strong>4. Возврат денежных средств</strong><br>
+					<span style="list-style-type: none;"><span class="brandColor">4.1.</span> Сервис <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> осуществляет возврата денежных средств только в следующих ситуациях - ошибка со стороны сайта, проведение профилактических работ, вы получили ущерб из-за ошибки лица с дожностью агент или выше, в случае обмана вас лицом имеющего статус доверенного продавца или выше.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">4.2.</span> Мы в праве не возвращять средства согласно пункту <span class="link-decor">3.1.</span></span><br>
+					
+					<br><strong>5. Доступ к учетной записи</strong><br>
+					<span style="list-style-type: none;"><span class="brandColor">5.1.</span> Участник, создавший учетную запись <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> имеет доступ и контроль над учетной записью <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">5.2.</span> Вы несете ответственность за обновление и поддержание точности информации, которую вы предоставляете нам в отношении вашей учетной записи.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">5.3.</span> Сайт в праве собирать о вас необходимую ему информацию.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">5.4.</span> Мы можем закрыть доступ к вашей учетной записи или приостановить ее действие, чтобы защитить вас, <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> или наших партнеров от кражи личных данных или других мошеннических действий.</span><br>
+					
+					<br><strong>6. Услуги гаранта</strong><br>
+					<span style="list-style-type: none;"><span class="brandColor">6.1.</span> Сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> предоставляет возможность получения услуги "Гарант".</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">6.2.</span> Администрация сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> обязуется оказывать помощь пользователям воспользовавшихся услугой "Гарант".</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">6.3.</span> В случае, если человек, предоставлявший вам услугу "Гарант", по каким-либо, личным или иным причинам, обманул вас и на то есть доказательства (скрины, видео), то вы можете обратиться к гл. администратору или владельцу сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>, для решения данной ситуации, или возмещения ущерба.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">6.4.</span> В случае, когда вы пытались каким-либо способом обмануть, причинить ущерб пользователю сайта, с которым собирались заключить сделку пользуясь услугой "Гарант", то ваша учётная запись будет заблокирована.</span><br>
+					
+					<br><strong>7. Права, обязанности и ответственность</strong><br>
+					<span style="list-style-type: none;"><span class="brandColor">7.1.</span> Администрация сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> не несет ответственности за ненадлежащее использование Услуг Участником, полученных на сайте <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">7.4.</span> Все претензии по ненадлежащему исполнению заказа Покупатель вправе направить в техническую поддержку на сайте, в группе ВКонтакте, в телеграме. Вся поступившая информация обрабатывается в кратчайшие сроки.</span><br>
+					<span style="list-style-type: none;"><span class="brandColor">7.5.</span> Администрация сайта <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a> в праве заблокировать любую учетную запись без объяснения причин. Посетителям сайта также может быть закрыт доступ на сайт без объяснения причин. Если ваша учетная запись заблокирована, вы имеете право обратиться в техническую поддержку <a href="{% url 'forum:index' %}" target="_blank" class="link-decor">speedhack</a>.</span><br>
+				</div>
+				<div class="tabItem rules" id="keys">
+					<strong style="font-size:18px;">Тут пока пусто :)</strong><br>
+				</div>
+				<div class="switch-info">
+					<a data-tab="#rules" class="switch-button active-tab">Условия и правила</a>
+					<a data-tab="#politic" class="switch-button">Пользовательское соглашение</a>
+					<a data-tab="#keys" class="switch-button">Ключевые слова</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="{% static 'js/rules.js' %}"></script>
+{% endblock %}
