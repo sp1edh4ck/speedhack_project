@@ -21,7 +21,29 @@
 				<li class="menu_item"><a href="{% url 'forum:index' %}" class="menu_link">ФОРУМ</a></li>
 				<li class="menu_item"><a href="/market" class="menu_link">МАРКЕТ</a></li>
 				<li class="menu_item"><a href="{% url 'forum:users' %}" class="menu_link">ПОЛЬЗОВАТЕЛИ</a></li>
-				<li class="menu_item"><a href="{% url 'forum:faq' %}" class="menu_link">FAQ</a></li>
+				<li class="menu_item" style="margin-rigth: 100px;">
+					<div id="sweeties" class="menu">
+						<div class="arrow-4">
+							<span class="menu_item">ДРУГОЕ</span>
+							<span class="arrow-4-left"></span>
+							<span class="arrow-4-right"></span>
+						</div>
+						<ul>
+							<ul>Пирожное</ul>
+							<ul>Пончик</ul>
+							<ul>Мёд</ul>
+						</ul>
+					</div>
+				</li>
+				<script>
+					let menuElem = document.getElementById('sweeties');
+					let titleElem = menuElem.querySelector('.title');
+					
+					titleElem.onclick = function() {
+						menuElem.classList.toggle('open');
+					};
+				</script>
+				{% comment %} <li class="menu_item"><a href="{% url 'forum:faq' %}" class="menu_link">FAQ</a></li> {% endcomment %}
 				{% if request.user.rank == 'владелец' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' %}
 					<li class="menu_item"><a href="{% url 'forum:admin_panel' %}" class="menu_link">АДМИНКА</a></li>
 				{% endif %}

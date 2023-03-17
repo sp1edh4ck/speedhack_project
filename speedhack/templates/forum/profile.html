@@ -6,23 +6,65 @@
 {% load user_filters %}
 	<div class="main">
 		<div class="frame_con">
-			<div class="frame-edit" style="{% if user == author %}max-height: 235px; {% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 290px;{% else %} max-height:260px;{% endif %}">
-				<img class="profile-avatar" src="{{ author.avatar.url }}">
-				{% if user == author %}
-					<a href="" class="button-edit" style="margin-top: 5px;">Редактировать</a>
-				{% else %}
-					{% if user.is_authenticated %}
-						{% if following %}
-							<a class="button-edit" href="{% url 'forum:profile_unfollow' author.username %}">Отписаться</a>
-						{% else %}
-							<a class="button-edit" href="{% url 'forum:profile_follow' author.username %}">Подписаться</a>
-						{% endif %}
-						{% if author.username != 'root' %}<label style="max-width: 200px; margin-top: 20px;"><a class="button-edit" style="margin-top: 5px">Написать</a></label>{% endif %}
-						<a class="button-edit" style="margin-top: 5px;">Пожаловаться</a>
+			<div style="display: block;">
+				<div class="frame-edit" style="{% if user.is_authenticated == False %}max-height: 230px;{% elif user == author %} max-height: 235px; {% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 290px;{% else %} max-height:260px;{% endif %}">
+					<img class="profile-avatar" src="{{ author.avatar.url }}">
+					{% if user == author %}
+						<a id="myBtn" class="button-edit" style="margin-top: 5px;">Редактировать</a>
+						<div id="myModal" class="modal">
+							<div class="modal-content">
+								<span class="close">&times;</span>
+								<div class="text-tr" style="font-size: 18px;">Загрузка фото</div><br>
+							</div>
+						</div>
+						{% comment %} <div id="zatemnenie">
+							<div class="change-foto">
+								<div class="text-tr" style="font-size: 18px;">Загрузка фото</div><br>
+								<a href="#"><div class="button-close"></div></a>
+							</div>
+						</div> {% endcomment %}
+						{% comment %} <a id="myBtn" class="button-edit" style="margin-top: 5px;">Редактировать</a> {% endcomment %}
 					{% else %}
-						<a href="{% url 'users:login' %}" class="button-edit">Войти в аккаунт</a>
+						{% if user.is_authenticated %}
+							{% if following %}
+								<a class="button-edit" href="{% url 'forum:profile_unfollow' author.username %}">Отписаться</a>
+							{% else %}
+								<a class="button-edit" href="{% url 'forum:profile_follow' author.username %}">Подписаться</a>
+							{% endif %}
+							{% if author.username != 'root' %}<label style="max-width: 200px; margin-top: 20px;"><a class="button-edit" style="margin-top: 5px">Написать</a></label>{% endif %}
+							<a class="button-edit" style="margin-top: 5px;">Пожаловаться</a>
+						{% else %}
+							<a href="{% url 'users:login' %}" class="button-edit">Войти в аккаунт</a>
+						{% endif %}
 					{% endif %}
-				{% endif %}
+				</div>
+				<div class="frame-left-second">
+					<a style="margin-bottom: 10px;">100 подписок</a>
+					<div class="subs-left">
+						{% for post in subs %}
+							<a class="a-users" href="{% url 'forum:profile' post.author.username %}">
+								<div style="display: flex;" class="users-div">
+									<div>
+										<img class="sub-avatar" src="{{ post.author.avatar.url }}">
+									</div>
+									<div style="margin-left: 20px;">
+										<div style="display: flex;">
+											<div style="margin: 0 0 0 auto; word-wrap: break-word;">
+												<label class="sub-username {% if users.rank == 'владелец' %}admin-username{% endif %}">{{ post.author.username }}</label>
+											</div>
+											<div style="display: flex;">
+												<label style="color: #ff506f; font-size: 21px; width: 100px;">{{ users.likes }}</label>
+											</div>
+										</div>
+										<div style="margin-top: 10px; color: #ff506f;">
+											<img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label>{{ post.author.likes }}</label>
+										</div>
+									</div>
+								</div>
+							</a>
+						{% endfor %}
+					</div>
+				</div>
 			</div>
 			<div style="display: block;">
 				<div class="frame-right-first">
@@ -50,12 +92,12 @@
 					<hr style="margin-top: 20px; margin-bottom: 20px;">
 					<div>
 						<label style="color: gray;">Регистрация: </label><label style="color: #ffffff;">{{ author.date_joined|date:'d E Y' }}</label><br>
-						<label style="color: gray;">Ранг: <label style="color: #ffffff;">{{ author.rank }}</label></label><br>
+						<label style="color: gray;">Ранг: </label><label style="color: #ffffff;">{{ author.rank }}</label><br>
 						{% if author.username == 'root' %}<label style="color: red;">Данный профиль является системным и работает под управлением бота!{% endif %}</label>
 					</div>
 					<hr style="margin: 20px 0 20px 0;">
 					<div style="display: flex;">
-						<label style="color: gray; margin: 0 30px 0 0;">Подписчики: <label style="color: #ff506f;">{{ author. }}</label></label><br>
+						<label style="color: gray; margin: 0 30px 0 0;">Подписчики: <label style="color: #ff506f;">{{ author.su }}</label></label><br>
 						<label style="color: gray; margin: 0 30px 0 0;">Лайки: <label style="color: #ff506f;">{{ author.likes }}</label></label><br>
 						<label style="color: gray;">Сообщения: <label style="color: #ff506f;">{{ author.messages }}</label></label><br>
 					</div>

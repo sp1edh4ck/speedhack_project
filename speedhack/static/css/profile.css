@@ -9,6 +9,31 @@
 	max-height: 230px;
 }
 
+.frame-left-second {
+	color: #ffffff;
+	display: block;
+	margin-top: 20px;
+	width: 200px;
+	padding: 20px;
+	background: #1c1f20;
+	border-radius: 10px;
+}
+
+.subs-left {
+
+}
+
+.sub-avatar {
+	width: 40px;
+	border-radius: 45px;
+}
+
+.sub-username {
+	font-size: 14px;
+	color: #ffffff;
+	word-wrap: break-word;
+}
+
 .other-img {
 	width: 25px;
 	color: gray;
@@ -103,4 +128,49 @@
 
 .frame-right-third.active-tab {
 	display: block;
+}
+
+
+
+
+
+
+
+
+
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(59, 59, 59, 0.473);
+}
+
+.modal-content {
+	color: #ffffff;
+	background-color: #1c1f20;
+	margin: 100px auto auto auto;
+	padding: 20px;
+	border-radius: 10px;
+	width: 400px;
+	height: 150px;
+}
+
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
 }
