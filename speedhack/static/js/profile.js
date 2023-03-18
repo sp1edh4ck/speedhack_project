@@ -45,3 +45,21 @@ window.onclick = function(event) {
 $(".arrow-4").click(function() {
 	$(this).toggleClass("open");
 });
+
+
+let fields = document.querySelectorAll('.field-load');
+Array.prototype.forEach.call(fields, function (input) {
+	let label = input.nextElementSibling,
+	labelVal = label.querySelector('.file-load').innerText;
+
+input.addEventListener('change', function (e) {
+	let countFiles = '';
+	if (this.files && this.files.length >= 1)
+		countFiles = this.files.length;
+
+if (countFiles)
+	label.querySelector('.file-load').innerText = 'Выбрано файлов: ' + countFiles;
+else
+	label.querySelector('.file-load').innerText = labelVal;
+	});
+});

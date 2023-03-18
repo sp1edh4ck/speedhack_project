@@ -12,18 +12,23 @@
 					{% if user == author %}
 						<a id="myBtn" class="button-edit" style="margin-top: 5px;">Редактировать</a>
 						<div id="myModal" class="modal">
-							<div class="modal-content">
+							<div class="modal-content" style="padding: 0px;">
 								<span class="close">&times;</span>
-								<div class="text-tr" style="font-size: 18px;">Загрузка фото</div><br>
+								<div class="modal-content">
+									<div class="text-modal" style="font-size: 18px;">
+										Загрузка фото
+									</div>
+									<div>
+										<input type="file" name="file" id="field-load" class="field field-load">
+										<label for="field-load" style="margin-top: 20px;">
+											<div class="file-load">Файл не выбран</div>
+											<div class="file-save">Выбрать</div>
+										</label>
+									</div>
+									<a class="button-edit" style="margin-top: 20px; width: 400px;">Сохранить</a>
+								</div>
 							</div>
 						</div>
-						{% comment %} <div id="zatemnenie">
-							<div class="change-foto">
-								<div class="text-tr" style="font-size: 18px;">Загрузка фото</div><br>
-								<a href="#"><div class="button-close"></div></a>
-							</div>
-						</div> {% endcomment %}
-						{% comment %} <a id="myBtn" class="button-edit" style="margin-top: 5px;">Редактировать</a> {% endcomment %}
 					{% else %}
 						{% if user.is_authenticated %}
 							{% if following %}
@@ -38,33 +43,30 @@
 						{% endif %}
 					{% endif %}
 				</div>
-				<div class="frame-left-second">
-					<a style="margin-bottom: 10px;">100 подписок</a>
-					<div class="subs-left">
-						{% for post in subs %}
-							<a class="a-users" href="{% url 'forum:profile' post.author.username %}">
-								<div style="display: flex;" class="users-div">
+				{% if count_subs != 0 %}
+					<div class="frame-left-second">
+						<a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ count_subs }}</label> подписок</a>
+						<div class="subs-left">
+							{% for post in subs %}
+								<div style="display: flex;" class="sub-users-div">
 									<div>
 										<img class="sub-avatar" src="{{ post.author.avatar.url }}">
 									</div>
-									<div style="margin-left: 20px;">
-										<div style="display: flex;">
+									<div style="display: block; margin-left: 20px;">
+										<a class="sub-users" href="{% url 'forum:profile' post.author.username %}">
 											<div style="margin: 0 0 0 auto; word-wrap: break-word;">
 												<label class="sub-username {% if users.rank == 'владелец' %}admin-username{% endif %}">{{ post.author.username }}</label>
 											</div>
-											<div style="display: flex;">
-												<label style="color: #ff506f; font-size: 21px; width: 100px;">{{ users.likes }}</label>
-											</div>
-										</div>
-										<div style="margin-top: 10px; color: #ff506f;">
-											<img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label>{{ post.author.likes }}</label>
+										</a>
+										<div style="color: #ffffff; font-size: 14px;">
+											<label>{{ post.author.rank }}</label>
 										</div>
 									</div>
 								</div>
-							</a>
-						{% endfor %}
+							{% endfor %}
+						</div>
 					</div>
-				</div>
+				{% endif %}
 			</div>
 			<div style="display: block;">
 				<div class="frame-right-first">
@@ -105,8 +107,6 @@
 				<div class="frame-right-second">
 					<a data-tab="#userPosts" class="button-tools active-tab">Стена</a>
 					<a data-tab="#authorPosts" class="button-tools">Посты</a>
-					<a data-tab="#subscriptions" class="button-tools">Подписки</a>
-					<a data-tab="#" class="button-tools">Подписчики</a>
 					<a data-tab="#" class="button-tools">Жалобы</a>
 				</div>
 				<div id="userPosts" class="tabItem frame-right-third active-tab">
@@ -131,8 +131,8 @@
 				<div id="userPosts" class="tabItem frame-right-third active-tab">
 					<label style="color: #ffffff;">На стене пока ничего нет</label>
 				</div>
-				<div id="authorPosts" class="tabItem frame-right-third">
-					{% if count_posts != 0 %}
+				{% if count_posts != 0 %}
+					<div id="authorPosts" class="tabItem frame-right-third">
 						{% for post in objects %}
 							<a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">
 								<div class="text-frame post">
@@ -149,38 +149,10 @@
 							</a>
 						{% endfor %}
 						{% include '../includes/paginator.html' %}
-					{% else %}
-						<label style="color: #ffffff;">У пользователя нет постов!</label>
-					{% endif %}
-				</div>
-				<div id="subscriptions" class="tabItem frame-right-third">
-					{% if count_subs != 0 %}
-						{% for post in subs %}
-							<a class="a-users" href="{% url 'forum:profile' post.author.username %}">
-								<div style="display: flex;" class="users-div">
-									<div>
-										<img style="width: 70px; border-radius: 50px;" src="{{ post.author.avatar.url }}">
-									</div>
-									<div style="margin-left: 20px;">
-										<div style="display: flex;">
-											<div style="margin: 0 0 0 auto;">
-												<label class="users-username {% if users.rank == 'владелец' %}admin-username{% endif %}">{{ post.author.username }}</label>
-											</div>
-											<div style="display: flex;">
-												<label style="color: #ff506f; font-size: 21px; width: 100px;">{{ users.likes }}</label>
-											</div>
-										</div>
-										<div style="margin-top: 10px; color: #ff506f;">
-											<img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label>{{ post.author.likes }}</label>
-										</div>
-									</div>
-								</div>
-							</a>
-						{% endfor %}
-					{% else %}
-						<label style="color: #ffffff;">Пользователь ни на кого не подписан!</label>
-					{% endif %}
-				</div>
+					</div>
+				{% else %}
+					<label style="color: #ffffff;">У пользователя нет постов!</label>
+				{% endif %}
 			</div>
 		</div>
 	</div>
