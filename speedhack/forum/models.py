@@ -4,13 +4,6 @@ from django.db import models
 User = get_user_model()
 
 
-class Ip(models.Model):
-	ip = models.CharField(max_length=100)
-
-	def __str__(self):
-		return self.ip
-
-
 class Group(models.Model):
 	title = models.CharField(unique=True, max_length=50, verbose_name='Название')
 	slug = models.SlugField(unique=True, verbose_name='Уникальный адрес')
@@ -38,10 +31,6 @@ class Forum(models.Model):
 		upload_to='posts/',
 		blank=True
 	)
-	views = models.ManyToManyField(Ip, related_name='views', verbose_name='Просмотры', default=0)
-	
-	def total_views(self):
-		return self.views.count()
 	
 	class Meta:
 		verbose_name = 'Пост'
@@ -83,6 +72,35 @@ class Comment(models.Model):
 	class Meta:
 		verbose_name = 'Комментарий'
 		verbose_name_plural = 'Комментарии'
+
+
+class ProfileComment(models.Model):
+	author = models.ForeignKey(
+		User,
+		on_delete=models.CASCADE,
+		related_name='profile_comments',
+		verbose_name='Автор',
+	)
+	profile = models.TextField(
+		author,
+	)
+	text = models.TextField(
+		verbose_name='Текст комментария',
+		max_length=2000,
+	)
+	image = models.ImageField(
+		'Картинка',
+		upload_to='posts/images/',
+		blank=True
+	)
+	created = models.DateTimeField(
+		auto_now_add=True,
+		verbose_name='Дата публикации',
+	)
+
+	class Meta:
+		verbose_name = 'Комментарий на стене пользователя'
+		verbose_name_plural = 'Комментарии на стене пользователя'
 
 
 class Follow(models.Model):

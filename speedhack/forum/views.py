@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from users.models import CustomUser
 
-from .forms import CommentForm, PostForm
-from .models import Follow, Forum, Ip, User
+from .forms import ProfileCommentForm, CommentForm, PostForm
+from .models import Follow, Forum, User
 
 
 def pagination_post(request, post_list):
@@ -14,31 +14,13 @@ def pagination_post(request, post_list):
 
 
 def pagination_sub(request, sub_list):
-	paginator = Paginator(sub_list, 12)
+	paginator = Paginator(sub_list, 5)
 	return paginator.get_page(request.GET.get('page'))
 
 
-def get_client_ip(request):
-	x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-	if x_forwarded_for:
-		ip = x_forwarded_for.split(',')[0]
-	else:
-		ip = request.META.get('REMOTE_ADDR')
-	return ip
-
-
-def post_view(request, slug):
-	post = Forum.objects.get(slug=slug)
-	ip = get_client_ip(request)
-	if Ip.objects.filter(ip=ip).exists():
-		post.views.add(Ip.objects.get(ip=ip))
-	else:
-		Ip.objects.create(ip=ip)
-		post.views.add(Ip.objects.get(ip=ip))
-	context = {
-		'post' : post,
-	}
-	return render(request, 'main/post.html', context)
+def pagination_comments(request, comment_list):
+	paginator = Paginator(comment_list, 5)
+	return paginator.get_page(request.GET.get('page'))
 
 
 def index(request):
@@ -52,39 +34,54 @@ def index(request):
 
 def profile(request, username):
 	author = get_object_or_404(User, username=username)
+	if request.method == 'POST':
+		form = ProfileCommentForm(request.POST or None)
+	else:
+		form = ProfileCommentForm()
 	posts = author.posts.all()
-	subs = author.follower.all()
-	comments = author.comments.all()
+	subscriptions = author.follower.all()
+	profile_comments = author.profile_comments.all()
+	subscribers = author.following.all()
 	following = (
 		author.following.filter(user_id=request.user.id).exists()
 		if request.user.is_authenticated
 		else False
 		)
 	count_posts = posts.count()
-	count_subs = subs.count()
+	count_profile_comments = profile_comments.count()
+	count_subscriptions = subscriptions.count()
+	count_subscribers = subscribers.count()
 	template = 'forum/profile.html'
 	context = {
 		'author': author,
+		'form': form,
 		'following': following,
 		'count_posts': count_posts,
-		'count_subs': count_subs,
+		'count_profile_comments': count_profile_comments,
+		'count_subscriptions': count_subscriptions,
+		'count_subscribers': count_subscribers,
 		'objects': pagination_post(request, posts),
-		'subs': pagination_sub(request, subs),
-		'comments': pagination_sub(request, comments),
+		'subscriptions': pagination_sub(request, subscriptions),
+		'subscribers': pagination_sub(request, subscribers),
+		'profile_comments': pagination_comments(request, profile_comments),
 	}
 	return render(request, template, context)
+
+
+@login_required
+def add_comment_profile(request, username):
+	form = ProfileCommentForm(request.POST or None)
+	if form.is_valid():
+		comment = form.save(commit=False)
+		comment.author = request.user
+		comment.save()
+	return redirect('forum:profile', username=username)
 
 
 def post_detail(request, post_id):
 	post = get_object_or_404(Forum, id=post_id)
 	form = CommentForm(request.POST or None)
 	comments = post.comments.all()
-	ip = get_client_ip(request)
-	if Ip.objects.filter(ip=ip).exists():
-		post.views.add(Ip.objects.get(ip=ip))
-	else:
-		Ip.objects.create(ip=ip)
-		post.views.add(Ip.objects.get(ip=ip))
 	template = 'forum/post_detail.html'
 	context = {
 		'form': form,
@@ -125,18 +122,6 @@ def add_comment(request, post_id):
 	return redirect('forum:post_detail', post_id=post_id)
 
 
-"""
-@login_required
-def follow_index(request):
-	template = 'forum/follow.html'
- 	post_list = Forum.objects.filter(author__following__user=request.user).all()
- 	context = {
- 		'objects': pagination(request, post_list)
- 	}
- 	return render(request, template, context)
-"""
-
-
 @login_required
 def profile_follow(request, username):
 	author = get_object_or_404(User, username=username)
@@ -151,20 +136,6 @@ def profile_unfollow(request, username):
 	author = get_object_or_404(User, username=username)
 	author.following.filter(user=request.user).delete()
 	return redirect('forum:profile', username=username)
-
-
-@login_required
-def profile_comment(request, username):
-	author = get_object_or_404(User, username=username)
-	if request.method == 'POST':
-		form = CommentForm(request.POST or None)
-		if form.is_valid():
-			comment = form.save(commit=False)
-			comment.author = request.user
-			comment.save()
-	else:
-		form = CommentForm()
-	return render(request, 'register_user.html', {'form': form})
 
 
 @login_required

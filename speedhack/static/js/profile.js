@@ -42,11 +42,6 @@ window.onclick = function(event) {
 }
 
 
-$(".arrow-4").click(function() {
-	$(this).toggleClass("open");
-});
-
-
 let fields = document.querySelectorAll('.field-load');
 Array.prototype.forEach.call(fields, function (input) {
 	let label = input.nextElementSibling,

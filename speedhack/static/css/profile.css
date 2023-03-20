@@ -36,6 +36,7 @@
 	max-height: 100px;
 	border-radius: 10px;
 	padding: 5px 0px;
+	word-wrap: break-word;
 }
 
 .sub-avatar {
@@ -54,9 +55,8 @@
 }
 
 .sub-username {
-	font-size: 14px;
+	font-size: 13px;
 	cursor: pointer;
-	word-wrap: break-word;
 }
 
 .other-img {
@@ -87,6 +87,16 @@
 
 .profile-avatar {
 	width: 200px;
+}
+
+.frame-left-third {
+	color: #ffffff;
+	display: block;
+	margin-top: 20px;
+	width: 200px;
+	padding: 20px;
+	background: #1c1f20;
+	border-radius: 10px;
 }
 
 .frame-right-first {
@@ -142,6 +152,10 @@
 
 .frame-right-third.active-tab {
 	display: block;
+}
+
+.frame-right-third-posts {
+	display: flex;
 }
 
 .modal {
@@ -220,4 +234,28 @@
 
 .file-save:hover {
 	background: #ff6b86;
+}
+
+.field-comment {
+	display: block;
+	font-size: 18px;
+	margin: 0 5px 0 20px;
+	background: #222222;
+	border: 3px solid #444444;
+	color: #ffffff;
+	outline: none;
+	padding: 7px 10px 10px 10px;
+	width: 850px;
+	height: 18px;
+	max-width: 1130px;
+	overflow: hidden;
+	resize: none;
+	border-radius: 10px;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.field-comment:focus {
+	border-color: #ff506f;
+	outline: 0;
+	box-shadow: 0 0 0 1px #ff506f;
 }

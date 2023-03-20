@@ -6,7 +6,7 @@
 }
 
 .post:hover {
-	background: #292a2e;
+	background: #34353b;
 }
 
 .text-about-link {
@@ -51,7 +51,7 @@
 	background-color: #ff6b86;
 }
 
-.frame-rigth-first {
+.frame-right-first {
 	width: 1020px;
 	min-height: 150px;
 	background: #1c1f20;

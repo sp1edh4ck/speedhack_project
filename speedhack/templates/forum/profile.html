@@ -1,16 +1,15 @@
 {% extends 'base.html' %}
-{% block title %}speedhack / профиль{% endblock  %}
 {% load static %}
+{% block title %}speedhack / профиль{% endblock  %}
 {% load thumbnail %}
-{% block content %}
 {% load user_filters %}
+{% block content %}
 	<div class="main">
 		<div class="frame_con">
 			<div style="display: block;">
 				<div class="frame-edit" style="{% if user.is_authenticated == False %}max-height: 230px;{% elif user == author %} max-height: 235px; {% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 290px;{% else %} max-height:260px;{% endif %}">
-					<img class="profile-avatar" src="{{ author.avatar.url }}">
+					<a id="myBtn" ><img class="profile-avatar" src="{{ author.avatar.url }}"></a>
 					{% if user == author %}
-						<a id="myBtn" class="button-edit" style="margin-top: 5px;">Редактировать</a>
 						<div id="myModal" class="modal">
 							<div class="modal-content" style="padding: 0px;">
 								<span class="close">&times;</span>
@@ -29,6 +28,7 @@
 								</div>
 							</div>
 						</div>
+						<a class="button-edit" style="margin-top: 5px;">Редактировать</a>
 					{% else %}
 						{% if user.is_authenticated %}
 							{% if following %}
@@ -43,23 +43,47 @@
 						{% endif %}
 					{% endif %}
 				</div>
-				{% if count_subs != 0 %}
+				{% if count_subscriptions != 0 %}
 					<div class="frame-left-second">
-						<a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ count_subs }}</label> подписок</a>
+						<a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ count_subscriptions }}</label> подписок</a>
 						<div class="subs-left">
-							{% for post in subs %}
+							{% for post in subscriptions %}
 								<div style="display: flex;" class="sub-users-div">
 									<div>
 										<img class="sub-avatar" src="{{ post.author.avatar.url }}">
 									</div>
-									<div style="display: block; margin-left: 20px;">
+									<div style="display: block; margin-left: 20px; max-width: 130px;">
 										<a class="sub-users" href="{% url 'forum:profile' post.author.username %}">
-											<div style="margin: 0 0 0 auto; word-wrap: break-word;">
+											<div style="margin: 0 0 0 auto;">
 												<label class="sub-username {% if users.rank == 'владелец' %}admin-username{% endif %}">{{ post.author.username }}</label>
 											</div>
 										</a>
-										<div style="color: #ffffff; font-size: 14px;">
+										<div style="color: #888888; font-size: 14px;">
 											<label>{{ post.author.rank }}</label>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+				{% if count_subscribers != 0 %}
+					<div class="frame-left-third">
+						<a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ count_subscribers }}</label> {%if count_subscribers == 1 %}подписчик{% elif count_subscribers > 1 and count_subscribers < 5%}подписчика{% elif count_subscribers > 4 %}подписчиков{% endif%}</a>
+						<div class="subs-left">
+							{% for post in subscribers %}
+								<div style="display: flex;" class="sub-users-div">
+									<div>
+										<img class="sub-avatar" src="{{ post.user.avatar.url }}">
+									</div>
+									<div style="display: block; margin-left: 20px; max-width: 130px;">
+										<a class="sub-users" href="{% url 'forum:profile' post.user.username %}">
+											<div style="margin: 0 0 0 auto;">
+												<label class="sub-username {% if users.rank == 'владелец' %}admin-username{% endif %}">{{ post.user.username }}</label>
+											</div>
+										</a>
+										<div style="color: #888888; font-size: 13px;">
+											<label>{{ post.user.rank }}</label>
 										</div>
 									</div>
 								</div>
@@ -99,7 +123,7 @@
 					</div>
 					<hr style="margin: 20px 0 20px 0;">
 					<div style="display: flex;">
-						<label style="color: gray; margin: 0 30px 0 0;">Подписчики: <label style="color: #ff506f;">{{ author.su }}</label></label><br>
+						<label style="color: gray; margin: 0 30px 0 0;">Подписчики: <label style="color: #ff506f;">{{ count_subscribers }}</label></label><br>
 						<label style="color: gray; margin: 0 30px 0 0;">Лайки: <label style="color: #ff506f;">{{ author.likes }}</label></label><br>
 						<label style="color: gray;">Сообщения: <label style="color: #ff506f;">{{ author.messages }}</label></label><br>
 					</div>
@@ -109,28 +133,35 @@
 					<a data-tab="#authorPosts" class="button-tools">Посты</a>
 					<a data-tab="#" class="button-tools">Жалобы</a>
 				</div>
-				<div id="userPosts" class="tabItem frame-right-third active-tab">
-					{% if user.is_authenticated %}
-						<div class="frame-main-posts">
-							<a href="{% url 'forum:profile' request.user %}"><img class="frame-main-avatar" style="width: 40px; height: 40px; margin: 0;" src="{{ user.avatar.url }}"></a>
-							<form method="post" enctype="multipart/form-data" action="{% url 'forum:profile_comment' author.username %}">
-								{% csrf_token %}
-								<div style="display: flex;">
-									<div>
-										{{ form.text }}
-										{% comment %} |addclass:"field-detail" {% endcomment %}
+				{% if count_comments != 0 %}
+					<div id="userPosts" class="tabItem frame-right-third active-tab">
+						{% if user.is_authenticated %}
+							<div class="frame-right-third-posts">
+								<a href="{% url 'forum:profile' request.user %}"><img class="frame-main-avatar" style="width: 40px; height: 40px; margin: 0;" src="{{ user.avatar.url }}"></a>
+								<form method="post" enctype="multipart/form-data" action="{% url 'forum:add_comment_profile' author.username %}">
+									{% csrf_token %}
+									<div style="display: flex;">
+										<div>
+											{{ form.text|addclass:"field-comment" }}
+										</div>
+										<div>
+											<button type="submit" style="background: #242527; border: none; cursor: pointer;"><img style="width: 40px;" src="{% static 'images/send.png' %}"></button>
+										</div>
 									</div>
-									<div>
-										<button type="submit" style="background: #242527; border: none; cursor: pointer;"><img style="width: 40px;" src="{% static 'images/send.png' %}"></button>
-									</div>
-								</div>
-							</form>
-						</div>
-					{% endif %}
-				</div>
-				<div id="userPosts" class="tabItem frame-right-third active-tab">
-					<label style="color: #ffffff;">На стене пока ничего нет</label>
-				</div>
+								</form>
+							</div>
+							<div>
+								{% for comments in profile_comments %}
+									{{ comments.text }}
+								{% endfor %}
+							</div>
+						{% endif %}
+					</div>
+				{% else %}
+					<div id="userPosts" class="tabItem frame-right-third active-tab">
+						<label style="color: #ffffff;">На стене пока ничего нет</label>
+					</div>
+				{% endif %}
 				{% if count_posts != 0 %}
 					<div id="authorPosts" class="tabItem frame-right-third">
 						{% for post in objects %}
@@ -151,7 +182,9 @@
 						{% include '../includes/paginator.html' %}
 					</div>
 				{% else %}
-					<label style="color: #ffffff;">У пользователя нет постов!</label>
+					<div id="authorPosts" class="tabItem frame-right-third">
+						<label style="color: #ffffff;">У пользователя нет постов!</label>
+					</div>
 				{% endif %}
 			</div>
 		</div>

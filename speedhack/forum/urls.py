@@ -15,7 +15,7 @@ urlpatterns = [
 	path('forum/rules/', views.rules, name='rules'),
 	path('forum/admin-panel/', views.admin_panel, name='admin_panel'),
 	path('users/', views.users, name='users'),
-	path('profile/<str:username>/comment', views.profile_comment, name='profile_comment'),
+	path('profile/<str:username>/comment', views.add_comment_profile, name='add_comment_profile'),
 	path('profile/<str:username>/follow', views.profile_follow, name='profile_follow'),
 	path('profile/<str:username>/unfollow', views.profile_unfollow, name='profile_unfollow'),
 ]

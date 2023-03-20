@@ -20,33 +20,32 @@
 			<ul class="menu_list" id="menu">
 				<li class="menu_item"><a href="{% url 'forum:index' %}" class="menu_link">ФОРУМ</a></li>
 				<li class="menu_item"><a href="/market" class="menu_link">МАРКЕТ</a></li>
-				<li class="menu_item"><a href="{% url 'forum:users' %}" class="menu_link">ПОЛЬЗОВАТЕЛИ</a></li>
-				<li class="menu_item" style="margin-rigth: 100px;">
-					<div id="sweeties" class="menu">
-						<div class="arrow-4">
-							<span class="menu_item">ДРУГОЕ</span>
-							<span class="arrow-4-left"></span>
-							<span class="arrow-4-right"></span>
+				<li class="menu_item">
+					<div class="window-main">
+						<a class="window-button">СОЦ. СЕТИ <i class="fa fa-angle-down arrow"></i></a>
+						<div style="padding-top: 10px;">
+							<div class="window-other">
+								<a href="https://t.me/speedhack_telegram" target="_blank" class="window-button-second">Канал в Telegram</a>
+								<a href="https://vk.com/sp1edh4ck_project" target="_blank" class="window-button-second">Группа ВКонтакте</a>
+								<a href="https://discord.gg/HH8bCVsyTf" target="_blank" class="window-button-second">Discord сервер</a>
+							</div>
 						</div>
-						<ul>
-							<ul>Пирожное</ul>
-							<ul>Пончик</ul>
-							<ul>Мёд</ul>
-						</ul>
 					</div>
 				</li>
-				<script>
-					let menuElem = document.getElementById('sweeties');
-					let titleElem = menuElem.querySelector('.title');
-					
-					titleElem.onclick = function() {
-						menuElem.classList.toggle('open');
-					};
-				</script>
-				{% comment %} <li class="menu_item"><a href="{% url 'forum:faq' %}" class="menu_link">FAQ</a></li> {% endcomment %}
-				{% if request.user.rank == 'владелец' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' %}
-					<li class="menu_item"><a href="{% url 'forum:admin_panel' %}" class="menu_link">АДМИНКА</a></li>
-				{% endif %}
+				<li class="menu_item" style="padding-right: 45px;">
+					<div class="window-main">
+						<a class="window-button">ДРУГОЕ <i class="fa fa-angle-down arrow"></i></a>
+						<div style="padding-top: 10px;">
+							<div class="window-other">
+								<a href="{% url 'forum:faq' %}" class="window-button-second">FAQ</a>
+								<a href="{% url 'forum:rules' %}" class="window-button-second">Правила сайта</a>
+								{% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' %}
+								<a href="{% url 'forum:admin_panel' %}" class="window-button-second">Админка</a>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				</li>
 			</ul>
 		</nav>
 		{% if request.user.is_authenticated %}
@@ -67,4 +66,5 @@
 			</div>
 		{% endif %}
 	</div>
+	<script type="text/javascript" src="{% static 'js/header.js' %}"></script>
 </header>
