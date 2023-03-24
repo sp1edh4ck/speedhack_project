@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from users.models import CustomUser
 
 from .forms import ProfileCommentForm, CommentForm, PostForm
-from .models import Follow, Forum, User
+from .models import Follow, Forum, User, ProfileComment
 
 
 def pagination_post(request, post_list):
@@ -34,19 +34,20 @@ def index(request):
 
 def profile(request, username):
 	author = get_object_or_404(User, username=username)
+	co = get_object_or_404(ProfileComment, author=author)
 	if request.method == 'POST':
 		form = ProfileCommentForm(request.POST or None)
 	else:
 		form = ProfileCommentForm()
 	posts = author.posts.all()
 	subscriptions = author.follower.all()
-	profile_comments = author.profile_comments.all()
+	profile_comments = author.co.all()
 	subscribers = author.following.all()
 	following = (
 		author.following.filter(user_id=request.user.id).exists()
 		if request.user.is_authenticated
 		else False
-		)
+	)
 	count_posts = posts.count()
 	count_profile_comments = profile_comments.count()
 	count_subscriptions = subscriptions.count()

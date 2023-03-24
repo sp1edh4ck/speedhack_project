@@ -81,8 +81,10 @@ class ProfileComment(models.Model):
 		related_name='profile_comments',
 		verbose_name='Автор',
 	)
-	profile = models.TextField(
-		author,
+	profile = models.ForeignKey(
+		User,
+		on_delete=models.CASCADE,
+		related_name='profile_with_comments',
 	)
 	text = models.TextField(
 		verbose_name='Текст комментария',

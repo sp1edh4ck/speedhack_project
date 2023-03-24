@@ -14,7 +14,6 @@ class CustomUserAdmin(admin.ModelAdmin):
                     'subscriber',
                     'tg_link',
                     'avatar',
-                    'rank',
-                    'language',)
+                    'rank',)
 
 admin.site.register(CustomUser, CustomUserAdmin)
