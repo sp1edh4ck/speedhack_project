@@ -1,3 +1,8 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
 .header {
 	background: #1e2122;
 	padding: 10px 0px;
@@ -14,34 +19,39 @@
 
 .brandLogo {
 	width: 35px;
+	margin: 0;
+	padding: 0;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-.header_menu {
+.header-menu {
 	flex: 1 1 auto;
 }
 
-.menu_list {
+.menu-list {
+	margin-left: 30px;
 	list-style-type: none;
 	display: flex;
 	position: absolute;
-	top: 10%;
+	top: 30%;
 }
 
-.menu_item {
+.menu-item {
 	font-family: 'Ubuntu', 'Acrom', sans-serif;
 	font-size: 16px;
-
 	color: #ff506f;
 	padding-right: 30px;
 }
 
-.menu_link {
+.menu-link {
 	text-decoration: none;
 	color: #ffffff;
 	transition: color 0.5s ease 0s;
 }
 
-.menu_link:hover {
+.menu-link:hover {
 	color: #ff506f;
 	color: #cacaca;
 }
@@ -65,6 +75,18 @@
 	background: #ff506f;
 }
 
+.notification {
+	width: 25px;
+	margin-right: 20px;
+	cursor: pointer;
+	border-radius: 10px;
+	transition: all 0.5s ease 0s;
+}
+
+.notification:hover {
+	color: #d13232;
+}
+
 .user-icon {
 	cursor: pointer;
 	font-size: 14px;
@@ -76,21 +98,29 @@
 	border: 1px solid;
 	border-color: #ff506f;
 	border-radius: 5px;
-	color: #ff4545;
 	transition: all 0.5s ease 0s;
 }
 
-.notification {
-	width: 35px;
-	margin-right: 10px;
-	cursor: pointer;
-	border-radius: 10px;
-	transition: all 0.5s ease 0s;
+.user-avatar-header {
+	max-width: 34px;
+	border: 3px solid;
+	border-color: #474747;
+	border-radius: 50px;
 }
 
-.notification:hover {
-	background: #7d7d7d;
+.user-avatar-header-first {
+	max-height: 40px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
+
+
+
+
+
+
+
 
 .user-button {
 	position: relative;
@@ -136,6 +166,7 @@
 }
 
 .window-main {
+	max-height: 40px;
 	position: relative;
 	display: block;
 }
@@ -145,6 +176,7 @@
 	font-size: 16px;
 	display: flex;
 	text-decoration: none;
+	align-items: center;
 	cursor: pointer;
 	transition: all 0.5s ease 0s;
 }

@@ -75,16 +75,16 @@ class Comment(models.Model):
 
 
 class ProfileComment(models.Model):
+	profile = models.ForeignKey(
+		User,
+		on_delete=models.CASCADE,
+		related_name='profile_with_comments',
+	)
 	author = models.ForeignKey(
 		User,
 		on_delete=models.CASCADE,
 		related_name='profile_comments',
 		verbose_name='Автор',
-	)
-	profile = models.ForeignKey(
-		User,
-		on_delete=models.CASCADE,
-		related_name='profile_with_comments',
 	)
 	text = models.TextField(
 		verbose_name='Текст комментария',
@@ -103,6 +103,12 @@ class ProfileComment(models.Model):
 	class Meta:
 		verbose_name = 'Комментарий на стене пользователя'
 		verbose_name_plural = 'Комментарии на стене пользователя'
+		constraints = [
+			models.UniqueConstraint(
+				fields=('profile', 'author'),
+				name='unique_name_in_comment',
+			)
+		]
 
 
 class Follow(models.Model):

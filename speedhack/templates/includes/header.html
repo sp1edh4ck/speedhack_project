@@ -16,13 +16,13 @@
 			</div>
 		</div>
 		<div class="popup" id="popup"></div>
-		<nav class="header_menu">
-			<ul class="menu_list" id="menu">
-				<li class="menu_item"><a href="{% url 'forum:index' %}" class="menu_link">ФОРУМ</a></li>
-				<li class="menu_item"><a href="/market" class="menu_link">МАРКЕТ</a></li>
-				<li class="menu_item">
+		<div class="header-menu">
+			<ul class="menu-list">
+				<li class="menu-item"><a href="{% url 'forum:index' %}" class="menu-link">Форум</a></li>
+				<li class="menu-item"><a href="/market" class="menu-link">Маркет</a></li>
+				<li class="menu-item">
 					<div class="window-main">
-						<a class="window-button">СОЦ. СЕТИ <i class="fa fa-angle-down arrow"></i></a>
+						<a class="window-button">Соц. сети <i class="fa fa-angle-down arrow"></i></a>
 						<div style="padding-top: 10px;">
 							<div class="window-other">
 								<a href="https://t.me/speedhack_telegram" target="_blank" class="window-button-second">Канал в Telegram</a>
@@ -32,9 +32,9 @@
 						</div>
 					</div>
 				</li>
-				<li class="menu_item" style="padding-right: 45px;">
+				<li class="menu-item">
 					<div class="window-main">
-						<a class="window-button">ДРУГОЕ <i class="fa fa-angle-down arrow"></i></a>
+						<a class="window-button">Другое <i class="fa fa-angle-down arrow"></i></a>
 						<div style="padding-top: 10px;">
 							<div class="window-other">
 								<a href="{% url 'forum:faq' %}" class="window-button-second">FAQ</a>
@@ -47,16 +47,25 @@
 					</div>
 				</li>
 			</ul>
-		</nav>
+		</div>
 		{% if request.user.is_authenticated %}
 			<img class="notification" src="{% static 'images/notifications.png' %}">
-			<div class="user-button">
-				<button class="user-icon">{{ request.user }}</button>
-				<div class="user-button-content">
-					<a href="{% url 'forum:profile' user.username %}" style="border-top: 1px solid; border-color: #ff506f; border-top-left-radius: 5px; border-top-right-radius: 5px;">Профиль</a>
-					<a href="#">Мои аккаунты</a>
-					<a href="#">Мои покупки</a>
-					<a href="{% url 'users:logout' %}" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">Выйти</a>
+			<div class="window-main">
+				<div class="window-button" style="display: flex;">
+					<div style="margin-right: 10px;">
+						<a>{{ request.user }}</a>
+					</div>
+					<div class="user-avatar-header-first">
+						<img class="user-avatar-header" src="{{ request.user.avatar.url }}" >
+					</div>
+				</div>
+				<div style="padding-top: 10px;">
+					<div class="window-other" style="min-height: 180px;">
+						<a class="window-button-second" href="{% url 'forum:profile' user.username %}">Профиль</a>
+						<a class="window-button-second" href="#">Мои аккаунты</a>
+						<a class="window-button-second" href="#">Мои покупки</a>
+						<a class="window-button-second" href="{% url 'users:logout' %}">Выйти</a>
+					</div>
 				</div>
 			</div>
 		{% else %}

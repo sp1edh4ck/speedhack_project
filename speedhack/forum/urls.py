@@ -11,7 +11,6 @@ urlpatterns = [
 	path('forum/<int:post_id>/', views.post_detail, name='post_detail'),
 	path('forum/<int:post_id>/comment/', views.add_comment, name='add_comment'),
 	path('forum/faq/', views.faq, name='faq'),
-	path('forum/politic/', views.politic, name='politic'),
 	path('forum/rules/', views.rules, name='rules'),
 	path('forum/admin-panel/', views.admin_panel, name='admin_panel'),
 	path('users/', views.users, name='users'),

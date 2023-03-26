@@ -8,7 +8,13 @@ class CustomUser(AbstractUser):
 	messages = models.IntegerField(verbose_name='Сообщения', default=0)
 	tg_link = models.TextField(verbose_name='Ссылка на телеграм', default='')
 	subscriber = models.IntegerField(verbose_name='Подписчики', default=0)
-	avatar = models.ImageField(verbose_name='Аватарка', default='default.png')
+	avatar = models.ImageField(
+		verbose_name='Аватарка',
+		upload_to=f'avatars/',
+		default='default.png',
+		null=True,
+		blank=True,
+	)
 
 	def __str__(self):
 		return self.username

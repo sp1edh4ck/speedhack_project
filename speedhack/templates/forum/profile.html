@@ -17,14 +17,18 @@
 									<div class="text-modal" style="font-size: 18px;">
 										Загрузка фото
 									</div>
-									<div>
-										<input type="file" name="file" id="field-load" class="field field-load">
-										<label for="field-load" style="margin-top: 20px;">
-											<div class="file-load">Файл не выбран</div>
-											<div class="file-save">Выбрать</div>
-										</label>
-									</div>
-									<a class="button-edit" style="margin-top: 20px; width: 400px;">Сохранить</a>
+									<form method="post" action="" enctype="multipart/form-data">
+										{% csrf_token %}
+										{{ form.avatar }}
+										{% comment %} <div>
+											<input type="file" name="file" id="field-load" class="field field-load">
+											<label for="field-load" style="margin-top: 20px;">
+												<div class="file-load">Файл не выбран</div>
+												<div class="file-save">Выбрать</div>
+											</label>
+										</div> {% endcomment %}
+										<button type="submit" class="button-edit" style="margin-top: 20px; width: 400px; padding: 5px 0px;">Сохранить</button>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -101,7 +105,7 @@
 						<div>
 							<label style="color: gray; display: flex;">В сети 10 мин. назад</label>
 						</div>
-						{% if request.user.is_authenticated %}
+						{% comment %} {% if request.user.is_authenticated %}
 							<div>
 								<div class="user-button">
 									<img src="{% static 'images/other.png' %}" class="other-img">
@@ -113,7 +117,7 @@
 									</div>
 								</div>
 							</div>
-						{% endif %}
+						{% endif %} {% endcomment %}
 					</div>
 					<hr style="margin-top: 20px; margin-bottom: 20px;">
 					<div>
@@ -129,11 +133,11 @@
 					</div>
 				</div>
 				<div class="frame-right-second">
-					<a data-tab="#userPosts" class="button-tools active-tab">Стена</a>
-					<a data-tab="#authorPosts" class="button-tools">Посты</a>
+					{% comment %} <a data-tab="#userPosts" class="button-tools active-tab">Стена</a> {% endcomment %}
+					<a data-tab="#authorPosts" class="button-tools active-tab">Посты</a>
 					<a data-tab="#" class="button-tools">Жалобы</a>
 				</div>
-				{% if count_comments != 0 %}
+				{% comment %} {% if count_comments != 0 %}
 					<div id="userPosts" class="tabItem frame-right-third active-tab">
 						{% if user.is_authenticated %}
 							<div class="frame-right-third-posts">
@@ -152,7 +156,7 @@
 							</div>
 							<div>
 								{% for comments in profile_with_comments %}
-									{{ comments.author }}
+									{{ comments.text }}
 								{% endfor %}
 							</div>
 						{% endif %}
@@ -161,9 +165,9 @@
 					<div id="userPosts" class="tabItem frame-right-third active-tab">
 						<label style="color: #ffffff;">На стене пока ничего нет</label>
 					</div>
-				{% endif %}
+				{% endif %} {% endcomment %}
 				{% if count_posts != 0 %}
-					<div id="authorPosts" class="tabItem frame-right-third">
+					<div id="authorPosts" class="tabItem frame-right-third active-tab">
 						{% for post in objects %}
 							<a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">
 								<div class="text-frame post">
@@ -182,7 +186,7 @@
 						{% include '../includes/paginator.html' %}
 					</div>
 				{% else %}
-					<div id="authorPosts" class="tabItem frame-right-third">
+					<div id="authorPosts" class="tabItem frame-right-third active-tab">
 						<label style="color: #ffffff;">У пользователя нет постов!</label>
 					</div>
 				{% endif %}

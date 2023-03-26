@@ -2,10 +2,11 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 
+from users.forms import CustomUserChangeForm
 from users.models import CustomUser
 
 from .forms import ProfileCommentForm, CommentForm, PostForm
-from .models import Follow, Forum, User, ProfileComment
+from .models import Follow, Forum, User
 
 
 def pagination_post(request, post_list):
@@ -25,23 +26,32 @@ def pagination_comments(request, comment_list):
 
 def index(request):
 	posts = Forum.objects.select_related('author').all()
-	template = 'forum/index.html'
 	context = {
 		'objects': pagination_post(request, posts)
 	}
-	return render(request, template, context)
+	return render(request, 'forum/index.html', context)
 
 
 def profile(request, username):
 	author = get_object_or_404(User, username=username)
-	co = get_object_or_404(ProfileComment, author=author)
+
+
+
+	form = CustomUserChangeForm(
+		request.POST or None,
+		files=request.FILES or None
+	)
 	if request.method == 'POST':
-		form = ProfileCommentForm(request.POST or None)
-	else:
-		form = ProfileCommentForm()
+		if form.is_valid():
+			new_post = form.save(commit=False)
+			new_post.author = request.user
+			new_post.save()
+			return redirect('posts:profile', username=request.user)
+
+
+
 	posts = author.posts.all()
 	subscriptions = author.follower.all()
-	profile_comments = author.co.all()
 	subscribers = author.following.all()
 	following = (
 		author.following.filter(user_id=request.user.id).exists()
@@ -49,24 +59,20 @@ def profile(request, username):
 		else False
 	)
 	count_posts = posts.count()
-	count_profile_comments = profile_comments.count()
 	count_subscriptions = subscriptions.count()
 	count_subscribers = subscribers.count()
-	template = 'forum/profile.html'
 	context = {
 		'author': author,
 		'form': form,
 		'following': following,
 		'count_posts': count_posts,
-		'count_profile_comments': count_profile_comments,
 		'count_subscriptions': count_subscriptions,
 		'count_subscribers': count_subscribers,
 		'objects': pagination_post(request, posts),
 		'subscriptions': pagination_sub(request, subscriptions),
 		'subscribers': pagination_sub(request, subscribers),
-		'profile_comments': pagination_comments(request, profile_comments),
 	}
-	return render(request, template, context)
+	return render(request, 'forum/profile.html', context)
 
 
 @login_required
@@ -83,13 +89,12 @@ def post_detail(request, post_id):
 	post = get_object_or_404(Forum, id=post_id)
 	form = CommentForm(request.POST or None)
 	comments = post.comments.all()
-	template = 'forum/post_detail.html'
 	context = {
 		'form': form,
 		'post': post,
 		'comments': comments
 	}
-	return render(request, template, context)
+	return render(request, 'forum/post_detail.html', context)
 
 
 @login_required
@@ -104,11 +109,10 @@ def post_create(request):
 			new_post.author = request.user
 			new_post.save()
 			return redirect('forum:index')
-	template = 'forum/post_create.html'
 	context = {
 		'form': form
 	}
-	return render(request, template, context)
+	return render(request, 'forum/post_create.html', context)
 
 
 @login_required
@@ -141,37 +145,28 @@ def profile_unfollow(request, username):
 
 @login_required
 def admin_panel(request):
-	template = 'forum/admin.html'
 	author = Forum.objects.select_related('author').all()
 	users_list = CustomUser.objects.all()
 	context = {
 		'author': author,
 		'users': users_list,
 	}
-	return render(request, template, context)
+	return render(request, 'forum/admin.html', context)
 
 
 def faq(request):
-	template = 'forum/faq.html'
-	return render(request, template)
-
-
-def politic(request):
-	template = 'forum/politic.html'
-	return render(request, template)
+	return render(request, 'forum/faq.html')
 
 
 def rules(request):
-	template = 'forum/rules.html'
-	return render(request, template)
+	return render(request, 'forum/rules.html')
 
 
 def users(request):
-	template = 'forum/users.html'
 	author = Forum.objects.select_related('author').all()
 	users_list = CustomUser.objects.all()
 	context = {
 		'author': author,
 		'users': users_list,
 	}
-	return render(request, template, context)
+	return render(request, 'forum/users.html', context)
