@@ -26,11 +26,11 @@
 
 .frame-left {
 	min-width: 250px;
-	min-height: 55px;
+	min-height: 410px;
 	background: #1c1f20;
 	border-radius: 10px;
-	padding: 20px 10px 0px 10px;
-	margin: 0 20px 20px 0;
+	padding: 20px 10px 15px 10px;
+	margin: 0px 20px 20px 0px;
 }
 
 .button-frame {
@@ -51,6 +51,132 @@
 
 .button-frame:hover {
 	background-color: #ff6b86;
+}
+
+.div-ul-up {
+	margin-top: 20px;
+}
+
+.text-section {
+	color: #777777;
+	font-size: 18px;
+	font-weight: 500;
+	padding: 0px 10px;
+}
+
+.li-label-ts {
+	cursor: pointer;
+	border-radius: 5px;
+	padding: 5px 10px;
+	transition: all 0.5s ease 0s;
+}
+
+.li-label-ts:hover {
+	background: #3f3f3f;
+}
+
+.li-label-ts.active-menu {
+	background: #3f3f3f;
+}
+
+.li-label-ts.active-menu .icons-index {
+	color: #ff506f;
+}
+
+.li-label-ts.active-menu .text-section-li {
+	color: #ff506f;
+}
+
+.li-label-ts.active-menu .icons-index-arrow {
+	transform: rotate(180deg);
+}
+
+.li-label-down {
+	margin-left: 45px;
+	max-height: 0px;
+	overflow: hidden;
+	color: #ececec;
+	font-size: 14px;
+	list-style-type: none;
+	transition: all 0.5s ease 0s;
+}
+
+.li-label-ts-down {
+	margin-bottom: 10px;
+}
+
+.li-label-ts-a {
+	cursor: pointer;
+	text-decoration: none;
+	transition: all 0.5s ease 0s;
+}
+
+.li-label-ts-a:hover {
+	color: #ff506f;
+}
+
+.first-first-li-label.active-menu {
+	margin-top: 10px;
+	max-height: 220px;
+}
+
+.first-second-li-label.active-menu {
+	margin-top: 10px;
+	max-height: 310px;
+}
+
+.first-third-li-label.active-menu {
+	margin-top: 10px;
+	max-height: 340px;
+}
+
+.first-fourth-li-label.active-menu {
+	margin-top: 10px;
+	max-height: 50px;
+}
+
+.second-first-li-label.active-menu {
+	margin-top: 10px;
+	max-height: 430px;
+}
+
+.icons-index {
+	color: #505050;
+	min-width: 20px;
+	max-width: 20px;
+	margin-right: 10px;
+	transition: all 0.5s ease 0s;
+}
+
+.icons-index-arrow {
+	color: #686868;
+	opacity: 0;
+	text-align: center;
+	height: 20px;
+	transition: all 0.5s ease 0s;
+}
+
+.icons-index-arrow:hover {
+	color: #ffffff;
+}
+
+.text-section-li {
+	cursor: pointer;
+	font-size: 16px;
+	color: #ececec;
+	transition: all 0.5s ease 0s;
+}
+
+.li-label-ts:hover .icons-index {
+	color: #ff506f;
+}
+
+.li-label-ts:hover .text-section-li {
+	color: #ff506f;
+}
+
+.li-label-ts:hover .icons-index-arrow {
+	opacity: 1;
 }
 
 .frame-right-first {

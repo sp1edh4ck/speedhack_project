@@ -56,7 +56,6 @@
 .frame-main {
 	max-width: 1300px;
 	margin: 20px 0 20px 0;
-	/* background: #17181b; */
 	background: #1c1f20;
 	border-radius: 10px;
 	padding: 20px;
@@ -70,7 +69,22 @@
 	cursor: pointer;
 }
 
+.icons-post-detail {
+	color: #505050;
+	transition: all 0.5s ease 0s;
+}
+
+.fa-telegram {
+	cursor: pointer;
+	height: 3em;
+}
+
+.icons-post-detail:hover {
+	color: #ff506f;
+}
+
 .frame-main-username {
+	cursor: pointer;
 	color: #ffffff;
 	font-size: 20px;
 }

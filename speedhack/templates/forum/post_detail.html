@@ -13,7 +13,7 @@
 			</div>
 			<div class="frame-main">
 				<div class="frame-main-avatars">
-					<img style="width: 25px;" src="{% static 'images/save.png' %}">
+					<i class="fas fa-star fa-lg icons-post-detail"></i>
 					{% include '../includes/paginator.html' %}
 					<hr class="hr-post-detail" style="margin: 5px 0;">
 				</div>
@@ -75,7 +75,9 @@
 									{{ form.text|addclass:"field-detail" }}
 								</div>
 								<div>
-									<button type="submit" style="background: #242527; border: none; cursor: pointer;"><img style="width: 40px;" src="{% static 'images/send.png' %}"></button>
+									{% comment %} <button type="submit" style="height: 70px; background: #1c1f20; border: none; cursor: pointer;"><i class="fab fa-telegram-plane fa-lg icons-post-detail"></i></button> {% endcomment %}
+									<button type="submit" style="background: #1c1f20; border: none; cursor: pointer;"><i class="fab fa-telegram-plane icons-post-detail"></i></button>
+									{% comment %} <img style="width: 40px;" src="{% static 'images/send.png' %}"> {% endcomment %}
 								</div>
 							</div>
 						</form>

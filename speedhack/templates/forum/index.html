@@ -6,11 +6,247 @@
 	<div class="main">
 		<div class="frames_con">
 			<div class="frame-left">
-				{% if request.user.is_authenticated %}
+				<div style="margin-bottom: 20px;">
+					{% if request.user.is_authenticated %}
 					<a href="{% url 'forum:post_create' %}" class="button-frame">Создать тему</a>
-				{% else %}
+					{% else %}
 					<a href="{% url 'users:login' %}" class="button-frame">Войти и создать тему</a>
-				{% endif %}
+					{% endif %}
+				</div>
+				<div>
+					<div>
+						<label class="text-section">Основной раздел</label>
+						<ul style="list-style-type: none; margin-top: 10px;">
+							<li class="li-label-ts" id="menu_1_1">
+								<i class="fas fa-gift fa-lg icons-index"></i>
+								<label class="text-section-li">Халява</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<ul class="li-label-down first-first-li-label">
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Розыгрыши</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Раздачи баз</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Раздачи аккаунтов / ключей</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Раздачи вещей steam</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Раздачи прокси / логов</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Бесплатная накрутка</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Промокоды</a></li>
+							</ul>
+							<li class="li-label-ts" id="menu_1_2">
+								<i class="fas fa-store fa-lg icons-index"></i>
+								<label class="text-section-li">Торговля</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<ul class="li-label-down first-second-li-label">
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Игры</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Соц. сети</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">YouTube / Twitch / Discord</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Кошельки</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Акки с баликом / бонусами</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Прокси / VPN</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Базы / логи</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Вещи</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Другое</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Оценка товара</a></li>
+							</ul>
+							<li class="li-label-ts" id="menu_1_3">
+								<i class="fas fa-credit-card fa-lg icons-index"></i>
+								<label class="text-section-li">Работа и услуги</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<ul class="li-label-down first-third-li-label">
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Фишинг</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Трафферы</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Накрутка</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Чек крипты</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Чек логов</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Дизайн</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Буст аккаунтов</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Озвучка</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Обмен средств</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Реклама</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Поиск работы</a></li>
+							</ul>
+							<li class="li-label-ts" id="menu_1_4">
+								<i class="fas fa-user fa-lg icons-index"></i>
+								<label class="text-section-li">Арбитраж</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<ul class="li-label-down first-fourth-li-label">
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Решённые вопросы</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Нерешённые вопросы</a></li>
+							</ul>
+						</ul>
+					</div>
+					<div class="div-ul-up">
+						<label class="text-section">Тематический раздел</label>
+						<ul style="list-style-type: none; margin-top: 10px;">
+							<li class="li-label-ts">
+								<i class="fas fa-comments fa-lg icons-index"></i>
+								<label class="text-section-li">Тематические вопросы</label>
+							</li>
+							<li class="li-label-ts" id="menu_2_1">
+								<i class="fas fa-book fa-lg icons-index"></i>
+								<label class="text-section-li">Статьи</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<ul class="li-label-down second-first-li-label">
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Способы заработка</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Авторские курсы</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Криптовалюты</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Социальная инженерия</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Безопасность</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">SMM</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">WI-FI</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Вирусология</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Психология</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Работа с хэшами</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Анонимность</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Kali Linux</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Веб уязвимости</a></li>
+								<li class="li-label-ts-down"><a class="li-label-ts-a">Соц. сети</a></li>
+							</ul>
+							<li class="li-label-ts">
+								<i class="fas fa-tools fa-lg icons-index"></i>
+								<label class="text-section-li">Софт</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="div-ul-up">
+						<label class="text-section">Игры и читы</label>
+						<ul style="list-style-type: none; margin-top: 10px;">
+							<li class="li-label-ts">
+								<i class="fas fa-user-injured fa-lg icons-index"></i>
+								<label class="text-section-li">CS:GO</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<li class="li-label-ts">
+								<i class="fas fa-dragon fa-lg icons-index"></i>
+								<label class="text-section-li">Dota 2</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<li class="li-label-ts">
+								<i class="fas fa-ship fa-lg icons-index"></i>
+								<label class="text-section-li">Rust</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<li class="li-label-ts">
+								<i class="fas fa-umbrella fa-lg icons-index"></i>
+								<label class="text-section-li">Fortnite</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<li class="li-label-ts">
+								<i class="fas fa-meteor fa-lg icons-index"></i>
+								<label class="text-section-li">Valorant</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<li class="li-label-ts">
+								<i class="fas fa-user-md fa-lg icons-index"></i>
+								<label class="text-section-li">GTA Samp</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<li class="li-label-ts">
+								<i class="fas fa-plane fa-lg icons-index"></i>
+								<label class="text-section-li">PUBG</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<li class="li-label-ts">
+								<i class="fas fa-grip-horizontal fa-lg icons-index"></i>
+								<label class="text-section-li">Остальные игры</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="div-ul-up">
+						<label class="text-section">Остальное</label>
+						<ul style="list-style-type: none; margin-top: 10px;">
+							<li class="li-label-ts">
+								<i class="fas fa-list-alt fa-lg icons-index"></i>
+								<label class="text-section-li">Оффтопик</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<li class="li-label-ts">
+								<i class="fas fa-desktop fa-lg icons-index"></i>
+								<label class="text-section-li">Компьютеры</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<li class="li-label-ts">
+								<i class="fas fa-mobile-alt fa-lg icons-index"></i>
+								<label class="text-section-li">Телефоны</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<li class="li-label-ts">
+								<i class="fas fa-microchip fa-lg icons-index"></i>
+								<label class="text-section-li">Веб-разработка</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<li class="li-label-ts">
+								<i class="fas fa-laptop-code fa-lg icons-index"></i>
+								<label class="text-section-li">Программирование</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<li class="li-label-ts">
+								<i class="fas fa-spray-can fa-lg icons-index"></i>
+								<label class="text-section-li">Графика</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<li class="li-label-ts">
+								<i class="fas fa-heart fa-lg icons-index"></i>
+								<label class="text-section-li">Жизнь форума</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+							<li class="li-label-ts">
+								<i class="fas fa-wrench fa-lg icons-index"></i>
+								<label class="text-section-li">Тестовый раздел</label>
+								<div style="float: right;">
+									<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 			<div class="frame-right-first">
 				{% for post in objects %}
@@ -40,4 +276,5 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
 {% endblock %}

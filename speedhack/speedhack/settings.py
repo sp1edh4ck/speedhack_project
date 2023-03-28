@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'tools.apps.ToolsConfig',
     'sorl.thumbnail',
+    'fontawesomefree',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'

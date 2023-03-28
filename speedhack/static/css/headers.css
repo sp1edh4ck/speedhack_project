@@ -104,7 +104,7 @@
 .user-avatar-header {
 	max-width: 34px;
 	border: 3px solid;
-	border-color: #474747;
+	border-color: #ff506f;
 	border-radius: 50px;
 }
 
@@ -115,49 +115,9 @@
 	margin-right: auto;
 }
 
-
-
-
-
-
-
-
 .user-button {
 	position: relative;
 	display: inline-block;
-}
-
-.user-button-content {
-	padding-top: 10px;
-	display: none;
-	position: absolute;
-	min-width: 130px;
-	z-index: 1;
-	transition: all 0.5s ease 0s;
-}
-
-.user-button-content a {
-	color: #ff506f;
-	background: #1e2122;
-	border-left: 1px solid;
-	border-right: 1px solid;
-	border-bottom: 1px solid;
-	border-color: #ff506f;
-	font-size: 14px;
-	padding: 5px 0px 5px 9px;
-	width: 110px;
-	text-decoration: none;
-	display: block;
-	transition: all 0.5s ease 0s;
-}
-
-.user-button-content a:hover {
-	color: #ffffff;
-	background: #ff506f;
-}
-
-.user-button:hover .user-button-content {
-	display: block;
 }
 
 .user-button:hover .user-icon {
@@ -187,16 +147,6 @@
 
 a.window-button {
 	display: block;
-}
-
-.fa {
-	font-size: 20px;
-	color: #7d7d7d;
-	transition: all 0.5s ease 0s;
-}
-
-.window-main:hover .arrow {
-	transform: rotate(180deg);
 }
 
 .window-button-second {
@@ -238,4 +188,13 @@ a.window-button {
 	min-width: 200px;
 	max-height: 150px;
 	border-radius: 10px;
+}
+
+.icons-header {
+	color: #cacaca;
+	transition: all 0.5s ease 0s;
+}
+
+.window-main:hover .icons-header {
+	transform: rotate(180deg);
 }

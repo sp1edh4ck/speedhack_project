@@ -46,7 +46,7 @@ def profile(request, username):
 			new_post = form.save(commit=False)
 			new_post.author = request.user
 			new_post.save()
-			return redirect('posts:profile', username=request.user)
+			return redirect('forum:profile', username=username)
 
 
 
