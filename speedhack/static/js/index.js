@@ -46,4 +46,13 @@ sandwichmenu_2_1.addEventListener('click', function(e2) {
 	js_menu_2_1.classList.toggle('active-menu');
 });
 
+const sandwichmenu_2_2 = document.querySelector('#menu_2_2');
+const js_menu_2_2 = document.querySelector('.second-second-li-label');
+
+sandwichmenu_2_2.addEventListener('click', function(e2) {
+	e2.preventDefault();
+	sandwichmenu_2_2.classList.toggle('active-menu');
+	js_menu_2_2.classList.toggle('active-menu');
+});
+
 // -----------------------------

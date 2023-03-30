@@ -9,14 +9,21 @@ class Group(models.Model):
 	slug = models.SlugField(unique=True, verbose_name='Уникальный адрес')
 
 	class Meta:
-		verbose_name = 'Ранг'
-		verbose_name_plural = 'Ранги'
+		verbose_name = 'Группа'
+		verbose_name_plural = 'Группы'
 
 	def __str__(self):
 		return self.title
 
 
 class Forum(models.Model):
+	group = models.ForeignKey(
+		Group,
+		on_delete=models.SET_NULL,
+		null=True,
+		related_name='posts',
+		verbose_name='Группа',
+	)
 	title = models.CharField(verbose_name='Заголовок', max_length=55)
 	text = models.TextField(verbose_name='Текст', max_length=10000)
 	pub_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
@@ -24,12 +31,12 @@ class Forum(models.Model):
 		User,
 		on_delete=models.CASCADE,
 		verbose_name='Автор',
-		related_name='posts'
+		related_name='posts',
 	)
 	image = models.ImageField(
 		'Картинка',
 		upload_to='posts/',
-		blank=True
+		blank=True,
 	)
 	
 	class Meta:

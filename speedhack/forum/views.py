@@ -1,12 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, get_list_or_404, redirect, render
 
 from users.forms import CustomUserChangeForm
 from users.models import CustomUser
 
 from .forms import ProfileCommentForm, CommentForm, PostForm
-from .models import Follow, Forum, User
+from .models import Follow, Forum, User, Group
 
 
 def pagination_post(request, post_list):
@@ -26,10 +26,25 @@ def pagination_comments(request, comment_list):
 
 def index(request):
 	posts = Forum.objects.select_related('author').all()
+	count_posts = posts.count()
 	context = {
+		'count_posts': count_posts,
 		'objects': pagination_post(request, posts)
 	}
 	return render(request, 'forum/index.html', context)
+
+
+def group_free(request, slug):
+	group = get_object_or_404(Group, slug=slug)
+	posts = group.posts.all()
+	count_posts = posts.count()
+	template = 'forum/template_groups.html'
+	context = {
+		'count_posts': count_posts,
+		'group': group,
+		'objects': pagination_post(request, posts),
+	}
+	return render(request, template, context)
 
 
 def profile(request, username):
@@ -43,9 +58,7 @@ def profile(request, username):
 	)
 	if request.method == 'POST':
 		if form.is_valid():
-			new_post = form.save(commit=False)
-			new_post.author = request.user
-			new_post.save()
+			form.save()
 			return redirect('forum:profile', username=username)
 
 

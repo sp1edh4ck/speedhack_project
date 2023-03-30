@@ -20,7 +20,7 @@ urlpatterns = [
     ),
     path(
         'logout/',
-        LogoutView.as_view(template_name='users/logout.html'),
+        LogoutView.as_view(next_page='forum:index'),
         name='logout'
     ),
     path(

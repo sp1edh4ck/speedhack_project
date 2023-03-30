@@ -25,16 +25,22 @@
 				<form method="post" enctype="multipart/form-data" {% if action_url %}action="{% url 'posts:index' %}"{% endif %}>
 					{% csrf_token %}
 					{% for field in form %}
-						{% if field.label == "Заголовок" %}
+						{% if field.label == "Группа" %}
 							<div style="display: flex;">
 								<label class="field-label">{{ field.label }}</label>
-								<label style="color: #444444; font-size: 20px; height: 40px;">(опишите суть вашей темы)</label>
+								<label style="color: #444444; font-size: 20px; height: 40px;">(выберете тему поста)</label>
+							</div>
+							{{ field|addclass:"field field-height" }}
+						{% elif field.label == "Заголовок" %}
+							<div style="display: flex;">
+								<label class="field-label">{{ field.label }}</label>
+								<label style="color: #444444; font-size: 20px; height: 40px;">(опишите суть вашего поста)</label>
 							</div>
 							{{ field|addclass:"field field-height" }}
 						{% elif field.label == "Текст" %}
 							<div style="display: flex;">
 								<label class="field-label">{{ field.label }}</label>
-								<label style="color: #444444; font-size: 20px; height: 40px;">(напишите вашу тему)</label>
+								<label style="color: #444444; font-size: 20px; height: 40px;">(напишите ваш пост)</label>
 							</div>
 							{{ field|addclass:"field" }}
 						{% else %}

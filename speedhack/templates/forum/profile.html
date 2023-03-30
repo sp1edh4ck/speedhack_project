@@ -8,7 +8,7 @@
 		<div class="frame_con">
 			<div style="display: block;">
 				<div class="frame-edit" style="{% if user.is_authenticated == False %}max-height: 230px;{% elif user == author %} max-height: 235px; {% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 290px;{% else %} max-height:260px;{% endif %}">
-					<a id="myBtn" ><img class="profile-avatar" src="{{ author.avatar.url }}"></a>
+					<a id="myBtn" style="cursor: pointer;"><img class="profile-avatar" src="{{ author.avatar.url }}"></a>
 					{% if user == author %}
 						<div id="myModal" class="modal">
 							<div class="modal-content" style="padding: 0px;">

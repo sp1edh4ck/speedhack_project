@@ -3,18 +3,17 @@
 }
 
 .button-list {
-	font-family: 'Acrom', sans-serif;
+	font-family: 'Ubuntu', 'Acrom', sans-serif;
 	font-size: 16px;
 	border: 1px solid;
 	border-color: #ff506f;
 	display: block;
 	margin: 0 auto 0 auto;
 	width: 230px;
-	padding: 5px 0;
 	text-align: center;
 	color: #ff506f;
 	background: #242729;
-	transition: background 0.5s ease 0s;
+	transition: all 0.5s ease 0s;
 }
 
 .button-list:hover {
@@ -33,7 +32,7 @@
 
 .faq-link {
 	color: gray;
-	transition: color 0.5s ease 0s;
+	transition: all 0.5s ease 0s;
 }
 
 .faq-link:hover {
@@ -41,13 +40,9 @@
 }
 
 .button-list {
-	padding: 0.5rem 0.75rem;
-	text-decoration: none;
-	text-align: center;
-	flex-shrink: 0;
-	flex-grow: 1;
-	border: 1px solid #ff506f;
+	padding: 7px 10px;
 	cursor: pointer;
+	transition: all 0.5s ease 0s;
 }
 
 .button-list__active {

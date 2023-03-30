@@ -17,7 +17,7 @@
 					<div>
 						<div>
 							<ul style="list-style-type: none; margin-top: 10px;">
-								<li class="li-label-ts active-menu">
+								<li class="li-label-ts">
 									<i class="fas fa-globe-americas fa-lg icons-index"></i>
 									<a class="li-label-ts-a" href="{% url 'forum:index' %}"><label class="text-section-li">Все обсуждения</label></a>
 								</li>
@@ -42,9 +42,9 @@
 									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/6/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 6 %}">Бесплатная накрутка</a></li>
 									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/7/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 7 %}">Промокоды</a></li>
 								</ul>
-								<li class="li-label-ts" id="menu_1_2">
+								<li class="li-label-ts {% if request.path == '/group/8/' or request.path == '/group/9/' or request.path == '/group/10/' or request.path == '/group/11/' or request.path == '/group/12/' or request.path == '/group/13/' or request.path == '/group/14/' or request.path == '/group/15/' or request.path == '/group/16/' or request.path == '/group/17/'%}active-menu{% endif %}" id="menu_1_2">
 									<i class="fas fa-store fa-lg icons-index"></i>
-									<label class="text-section-li {% if request.path == '/group/8/' or request.path == '/group/9/' or request.path == '/group/10/' or request.path == '/group/11/' or request.path == '/group/12/' or request.path == '/group/13/' or request.path == '/group/14/' or request.path == '/group/15/' or request.path == '/group/16/' or request.path == '/group/17/'%}active-menu{% endif %}">Торговля</label>
+									<label class="text-section-li">Торговля</label>
 									<div style="float: right;">
 										<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
 									</div>
@@ -58,8 +58,8 @@
 									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/13/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 13 %}">Прокси / VPN</a></li>
 									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/14/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 14 %}">Базы / логи</a></li>
 									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/15/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 15 %}">Вещи</a></li>
-									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/16/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 16 %}">Оценка товара</a></li>
-									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/17/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 17 %}">Другое</a></li>
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/16/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 16 %}">Другое</a></li>
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/17/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 17 %}">Оценка товара</a></li>
 								</ul>
 								<li class="li-label-ts {% if request.path == '/group/18/' or request.path == '/group/19/' or request.path == '/group/20/' or request.path == '/group/59/' or request.path == '/group/21/' or request.path == '/group/22/' or request.path == '/group/23/' or request.path == '/group/24/' or request.path == '/group/25/' or request.path == '/group/26/' or request.path == '/group/27/' or request.path == '/group/28/'%}active-menu{% endif %}" id="menu_1_3">
 									<i class="fas fa-credit-card fa-lg icons-index"></i>
@@ -277,9 +277,6 @@
 			<div style="display: block;">
 				<div class="frame-right-first-index">
 					{% if count_posts != 0 %}
-						<div style="margin: 0 0 30px 10px;">
-							<label class="posts-group-title">{% if request.path != '/group/' %}Все обсуждения{% endif %}</label>
-						</div>
 						{% for post in objects %}
 							<a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">
 								<div class="text-frame post">
