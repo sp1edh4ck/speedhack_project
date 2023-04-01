@@ -87,20 +87,6 @@
 	color: #d13232;
 }
 
-.user-icon {
-	cursor: pointer;
-	font-size: 14px;
-	font-family: 'Ubuntu', 'Acrom', sans-serif;
-	padding: 5px 25px;
-	min-width: 100px;
-	color: #ff506f;
-	background: #1e2122;
-	border: 1px solid;
-	border-color: #ff506f;
-	border-radius: 5px;
-	transition: all 0.5s ease 0s;
-}
-
 .user-avatar-header {
 	max-width: 34px;
 	border: 3px solid;
@@ -113,16 +99,6 @@
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-}
-
-.user-button {
-	position: relative;
-	display: inline-block;
-}
-
-.user-button:hover .user-icon {
-	color: #ffffff;
-	background: #ff506f;
 }
 
 .window-main {

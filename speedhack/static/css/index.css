@@ -9,16 +9,6 @@
 	background: #2e2e2e;
 }
 
-.text-about-link {
-	text-decoration: none;
-	color: gray;
-	transition: color 0.5s ease 0s;
-}
-
-.text-about-link:hover {
-	color: #ff506f;
-}
-
 .frames_con {
 	max-width: 1300px;
 	display: flex;
@@ -30,7 +20,7 @@
 	background: #1c1f20;
 	border-radius: 10px;
 	padding: 20px 10px 15px 10px;
-	margin: 0px 20px 20px 0px;
+	margin: 0px 20px 10px 0px;
 }
 
 .button-frame {
