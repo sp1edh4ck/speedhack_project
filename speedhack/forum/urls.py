@@ -8,6 +8,7 @@ urlpatterns = [
 	path('', views.index, name='index'),
 	path('group/<slug:slug>/', views.group_free, name='group_filter_posts'),
 	path('profile/<str:username>/', views.profile, name='profile'),
+	path('profile/<str:username>/edit/', views.profile_edit, name='profile_edit'),
 	path('forum/create_post/', views.post_create, name='post_create'),
 	path('forum/<int:post_id>/', views.post_detail, name='post_detail'),
 	path('forum/<int:post_id>/comment/', views.add_comment, name='add_comment'),

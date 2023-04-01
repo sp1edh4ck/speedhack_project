@@ -6,21 +6,21 @@
 		<div class="frame_con">
 			<div class="frame-left-users">
 				<span style="color: gray; font-size: 18px;">Найти пользователя</span>
-				<input class="input-filter-users">
+				<input class="input-filter-users" placeholder="Имя...">
 			</div>
 			<div class="frame-right-users">
 				{% for users in users %}
 					<a class="a-users" href="{% url 'forum:profile' users.username %}">
-						<div style="display: flex;" class="users-div">
+						<div class="users-div">
 							<div>
 								<img style="width: 70px; border-radius: 50px;" src="{{ users.avatar.url }}">
 							</div>
 							<div style="margin-left: 20px;">
 								<div style="display: flex;">
-									<div style="margin: 0 0 0 auto;">
+									<div style="margin: 0 auto 0 0;">
 										<label class="users-username {% if users.rank == 'владелец' %}admin-username{% endif %}">{{ users.username }}</label>
 									</div>
-									<div style="display: flex;">
+									<div style="float: right; width: 100px;">
 										<label style="color: #ff506f; font-size: 21px; width: 100px;">{{ users.likes }}</label>
 									</div>
 								</div>

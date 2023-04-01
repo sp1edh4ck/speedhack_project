@@ -3,15 +3,31 @@
 	margin-right: 20px;
 	border-radius: 10px;
 	padding: 20px;
-	max-height: 120px;
+	max-height: 70px;
 	background: #1c1f20;
 }
 
-/* .input-filter-users {
-	margin-top: 20px;
-	min-width: 250px;
-	max-width: 250px;
-} */
+.input-filter-users {
+	margin-top: 10px;
+	min-width: 235px;
+	max-width: 235px;
+	margin-bottom: 30px;
+	font-size: 16px;
+	background: #2e2e2e;
+	border: 0px solid #444444;
+	color: #ffffff;
+	outline: none;
+	border-radius: 10px;
+	height: 30px;
+	padding-left: 15px;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.input-filter-users:focus {
+	border-color: #ff506f;
+	outline: 0;
+	box-shadow: 0 0 0 2px #ff506f;
+}
 
 .frame-right-users {
 	width: 950px;
@@ -22,6 +38,7 @@
 }
 
 .users-div {
+	display: flex;
 	max-height: 100px;
 	border-radius: 10px;
 	padding: 10px;
@@ -29,7 +46,7 @@
 }
 
 .users-div:hover {
-	background: #292a2e;
+	background: #2e2e2e;
 }
 
 .a-users {

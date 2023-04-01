@@ -123,7 +123,7 @@
 									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/42/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 42 %}">Анонимность</a></li>
 									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/43/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 43 %}">Kali Linux</a></li>
 									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/44/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 44 %}">Веб уязвимости</a></li>
-									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/45/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 45 %}">Соц. сети</a></li>
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/45/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 45 %}">Социальные сети</a></li>
 								</ul>
 								<li class="li-label-ts {% if request.path == '/group/46/' or request.path == '/group/47/' or request.path == '/group/48/' or request.path == '/group/49/' or request.path == '/group/50/' or request.path == '/group/51/' or request.path == '/group/52/' or request.path == '/group/53/' or request.path == '/group/54/' or request.path == '/group/55/' or request.path == '/group/56/' or request.path == '/group/57/' or request.path == '/group/58/'%}active-menu{% endif %}" id="menu_2_2">
 									<i class="fas fa-tools fa-lg icons-index"></i>
@@ -144,7 +144,7 @@
 									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/54/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 54 %}">Артореггеры</a></li>
 									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/55/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 55 %}">Malware</a></li>
 									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/56/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 56 %}">Крипторы</a></li>
-									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/57/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 57 %}">SQLi / dork парсеры</a></li>
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/57/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 57 %}">SQLi / Dork parsers</a></li>
 									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/58/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 58 %}">Hash</a></li>
 								</ul>
 							</ul>
@@ -152,55 +152,84 @@
 						<div class="div-ul-up">
 							<label class="text-section">Игры и читы</label>
 							<ul style="list-style-type: none; margin-top: 10px;">
-								<li class="li-label-ts">
+								<li class="li-label-ts {% if request.path == '/group/60/' or request.path == '/group/61/' %}active-menu{% endif %}" id="menu_3_1">
 									<i class="fas fa-user-injured fa-lg icons-index"></i>
 									<label class="text-section-li">CS:GO</label>
 									<div style="float: right;">
 										<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
 									</div>
 								</li>
-								<li class="li-label-ts">
+								<ul class="li-label-down third-first-li-label {% if request.path == '/group/60/' or request.path == '/group/61/'%}active-menu{% endif %}">
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/60/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 60 %}">Читы CS:GO</a></li>
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/61/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 61 %}">Гайды CS:GO</a></li>
+								</ul>
+								<li class="li-label-ts {% if request.path == '/group/62/' or request.path == '/group/63/' %}active-menu{% endif %}" id="menu_3_2">
 									<i class="fas fa-dragon fa-lg icons-index"></i>
 									<label class="text-section-li">Dota 2</label>
 									<div style="float: right;">
 										<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
 									</div>
 								</li>
-								<li class="li-label-ts">
+								<ul class="li-label-down third-second-li-label {% if request.path == '/group/62/' or request.path == '/group/63/'%}active-menu{% endif %}">
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/62/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 62 %}">Читы Dota 2</a></li>
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/63/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 63 %}">Гайды, тактики по Dota 2</a></li>
+								</ul>
+								<li class="li-label-ts {% if request.path == '/group/64/' or request.path == '/group/65/'%}active-menu{% endif %}" id="menu_3_3">
 									<i class="fas fa-ship fa-lg icons-index"></i>
 									<label class="text-section-li">Rust</label>
 									<div style="float: right;">
 										<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
 									</div>
 								</li>
-								<li class="li-label-ts">
+								<ul class="li-label-down third-third-li-label {% if request.path == '/group/64/' or request.path == '/group/65/'%}active-menu{% endif %}">
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/64/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 64 %}">Читы Rust</a></li>
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/65/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 65 %}">Гайды по Rust</a></li>
+								</ul>
+								<li class="li-label-ts {% if request.path == '/group/66/' or request.path == '/group/67/'%}active-menu{% endif %}" id="menu_3_4">
 									<i class="fas fa-umbrella fa-lg icons-index"></i>
 									<label class="text-section-li">Fortnite</label>
 									<div style="float: right;">
 										<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
 									</div>
 								</li>
-								<li class="li-label-ts">
+								<ul class="li-label-down third-fourth-li-label {% if request.path == '/group/66/' or request.path == '/group/67/'%}active-menu{% endif %}">
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/66/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 66 %}">Читы Fortnite</a></li>
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/67/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 67 %}">Гайды Fortnite</a></li>
+								</ul>
+								<li class="li-label-ts {% if request.path == '/group/68/' or request.path == '/group/69/'%}active-menu{% endif %}" id="menu_3_5">
 									<i class="fas fa-meteor fa-lg icons-index"></i>
 									<label class="text-section-li">Valorant</label>
 									<div style="float: right;">
 										<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
 									</div>
 								</li>
-								<li class="li-label-ts">
+								<ul class="li-label-down third-fifth-li-label {% if request.path == '/group/68/' or request.path == '/group/69/'%}active-menu{% endif %}">
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/68/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 68 %}">Читы Valorant</a></li>
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/69/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 69 %}">Гайды Valorant</a></li>
+								</ul>
+								<li class="li-label-ts {% if request.path == '/group/70/' or request.path == '/group/71/'%}active-menu{% endif %}" id="menu_3_6">
 									<i class="fas fa-user-md fa-lg icons-index"></i>
 									<label class="text-section-li">GTA Samp</label>
 									<div style="float: right;">
 										<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
 									</div>
 								</li>
-								<li class="li-label-ts">
+								<ul class="li-label-down third-sixth-li-label {% if request.path == '/group/70/' or request.path == '/group/71/' or request.path == '/group/72/'%}active-menu{% endif %}">
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/70/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 70 %}">Читы GTA Samp</a></li>
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/71/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 71 %}">Моды GTA Samp</a></li>
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/72/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 72 %}">Гайды GTA Samp</a></li>
+								</ul>
+								<li class="li-label-ts {% if request.path == '/group/73/' or request.path == '/group/74/'%}active-menu{% endif %}" id="menu_3_7">
 									<i class="fas fa-plane fa-lg icons-index"></i>
 									<label class="text-section-li">PUBG</label>
 									<div style="float: right;">
 										<i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
 									</div>
 								</li>
+								<ul class="li-label-down third-seventh-li-label {% if request.path == '/group/73/' or request.path == '/group/74/'%}active-menu{% endif %}">
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/73/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 73 %}">Читы PUBG</a></li>
+									<li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/74/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 74 %}">Гайды PUBG</a></li>
+								</ul>
 								<li class="li-label-ts">
 									<i class="fas fa-grip-horizontal fa-lg icons-index"></i>
 									<label class="text-section-li">Остальные игры</label>
@@ -277,6 +306,9 @@
 			<div style="display: block;">
 				<div class="frame-right-first-index">
 					{% if count_posts != 0 %}
+						<div style="margin: 0 0 30px 10px;">
+							<label class="posts-group-title">{{ group.title }}</label>
+						</div>
 						{% for post in objects %}
 							<a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">
 								<div class="text-frame post">
@@ -294,6 +326,9 @@
 							{% include '../includes/paginator.html' %}
 						{% endfor %}
 					{% else %}
+						<div style="margin: 0 0 30px 10px;">
+							<label class="posts-group-title">{{ group.title }}</label>
+						</div>
 						<div class="text-frame post">
 							<label style="color: #ffffff; font-size: 18px;">На данную тему не было созданно ещё ни одного поста :/</label>
 						</div>

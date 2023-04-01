@@ -88,6 +88,25 @@ def profile(request, username):
 	return render(request, 'forum/profile.html', context)
 
 
+def profile_edit(request, username):
+	author = get_object_or_404(User, username=username)
+
+	form = CustomUserChangeForm(
+		request.POST or None,
+		files=request.FILES or None
+	)
+	if request.method == 'POST':
+		if form.is_valid():
+			form.save()
+			return redirect('forum:profile', username=username)
+
+	context = {
+		'author': author,
+		'form': form,
+	}
+	return render(request, 'forum/profile_edit.html', context)
+
+
 @login_required
 def add_comment_profile(request, username):
 	form = ProfileCommentForm(request.POST or None)
