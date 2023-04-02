@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'forum.apps.ForumConfig',
     'users.apps.UsersConfig',
+    'userForm.apps.UserformConfig',
     'tools.apps.ToolsConfig',
     'sorl.thumbnail',
     'fontawesomefree',

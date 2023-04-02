@@ -49,20 +49,6 @@ def group_free(request, slug):
 
 def profile(request, username):
 	author = get_object_or_404(User, username=username)
-
-
-
-	form = CustomUserChangeForm(
-		request.POST or None,
-		files=request.FILES or None
-	)
-	if request.method == 'POST':
-		if form.is_valid():
-			form.save()
-			return redirect('forum:profile', username=username)
-
-
-
 	posts = author.posts.all()
 	subscriptions = author.follower.all()
 	subscribers = author.following.all()
@@ -76,7 +62,6 @@ def profile(request, username):
 	count_subscribers = subscribers.count()
 	context = {
 		'author': author,
-		'form': form,
 		'following': following,
 		'count_posts': count_posts,
 		'count_subscriptions': count_subscriptions,
@@ -90,6 +75,7 @@ def profile(request, username):
 
 def profile_edit(request, username):
 	author = get_object_or_404(User, username=username)
+	
 
 	form = CustomUserChangeForm(
 		request.POST or None,
@@ -99,6 +85,15 @@ def profile_edit(request, username):
 		if form.is_valid():
 			form.save()
 			return redirect('forum:profile', username=username)
+
+	if request.POST:
+		form = CustomUserChangeForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.user = request.user
+			form.save()
+			return redirect('forum:profile', username=username)
+		else:
+			form = CustomUserChangeForm()
 
 	context = {
 		'author': author,

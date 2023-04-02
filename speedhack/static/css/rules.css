@@ -53,3 +53,13 @@
 .link-decor:hover {
 	color: #ff506f;
 }
+
+.link-decor-a {
+	color: gray;
+	text-decoration: underline;
+	transition: color 0.5s ease 0s;
+}
+
+.link-decor-a:hover {
+	color: #ff506f;
+}

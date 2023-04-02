@@ -41,4 +41,4 @@ class CustomUserLogin(AuthenticationForm):
 class CustomUserChangeForm(UserChangeForm):
 	class Meta:
 		model = CustomUser
-		fields = ('username', 'email', 'likes', 'subscriber', 'rank', 'avatar',)
+		fields = ('avatar',)
