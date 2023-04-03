@@ -8,14 +8,14 @@ from django.contrib.auth.views import (LoginView, LogoutView,
 from django.urls import path, reverse_lazy
 from .forms import CustomUserLogin
 
-from . import views
+from users.views import SignUp
 
 app_name = 'users'
 
 urlpatterns = [
     path(
         'signup/',
-        views.SignUp.as_view(),
+        SignUp.as_view(),
         name='signup'
     ),
     path(

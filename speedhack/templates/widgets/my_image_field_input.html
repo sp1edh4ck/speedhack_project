@@ -1,0 +1,14 @@
+{% if widget.is_initial %}
+	<div style="display: flex; flex-direction: row;">
+		<div>
+			<img src="{{ widget.value.url }}" alt="{{ widget.value }}">
+		</div>
+		<div>
+			{{ widget.input_text }}
+			<br>
+			<input type="{{ widget.type }}" name="{{ widget.name }}" {% include "widgets/my_attrs.html" %}>
+		</div>
+	</div>
+{% else %}
+	<input type="{{ widget.type }}" name="{{ widget.name }}" {% include "widgets/my_attrs.html" %}>
+{% endif %}

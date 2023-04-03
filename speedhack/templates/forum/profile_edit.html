@@ -5,7 +5,21 @@
 	<div class="main">
 		<div class="frame-profile_edit_con">
 			<div class="tabItem profile-edit active-tab" id ="person_info">
-				
+				{% if form.errors %}
+					{% for field in form %}
+						{% for error in field.errors %}
+							{{ error|escape }}
+						{% endfor %}
+					{% endfor %}
+					{% for error in form.non_field_errors %}
+						{{ error|escape }}
+					{% endfor %}
+				{% endif %}
+				<form method="post" action="{{ request.path }}" enctype="multipart/form-data">
+					{% csrf_token %}
+					{{ form }}
+					<button type="submit" class="btn btn-primary">Сохранить</button>
+				</form>
 			</div>
 			<div class="tabItem profile-edit" id="contacts_info">
 				

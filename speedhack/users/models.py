@@ -6,11 +6,11 @@ class CustomUser(AbstractUser):
 	likes = models.IntegerField(verbose_name='Лайки', default=0)
 	rank = models.TextField(verbose_name='Ранг', default='пользователь')
 	messages = models.IntegerField(verbose_name='Сообщения', default=0)
-	tg_link = models.TextField(verbose_name='Ссылка на телеграм', default='')
+	tg_link = models.TextField(verbose_name='Ссылка на телеграм', default='', blank=True,)
 	subscriber = models.IntegerField(verbose_name='Подписчики', default=0)
 	avatar = models.ImageField(
-		verbose_name='Аватарка',
-		upload_to=f'avatars/',
+		verbose_name='Аватар',
+		upload_to='avatars/',
 		default='default.png',
 		null=True,
 		blank=True,

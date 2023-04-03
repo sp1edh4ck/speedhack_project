@@ -16,12 +16,14 @@
 					</div>
 					<div>
 						<div>
-							<ul style="list-style-type: none; margin-top: 10px;">
-								<li class="li-label-ts">
-									<i class="fas fa-globe-americas fa-lg icons-index"></i>
-									<a class="li-label-ts-a" href="{% url 'forum:index' %}"><label class="text-section-li">Все обсуждения</label></a>
-								</li>
-							</ul>
+							<a class="li-label-ts-a" href="{% url 'forum:index' %}">
+								<ul style="list-style-type: none; margin-top: 10px;">
+									<li class="li-label-ts">
+										<i class="fas fa-globe-americas fa-lg icons-index"></i>
+										<label class="text-section-li">Все обсуждения</label>
+									</li>
+								</ul>
+							</a>
 						</div>
 						<div class="div-ul-up">
 							<label class="text-section">Основной раздел</label>
@@ -306,8 +308,13 @@
 			<div style="display: block;">
 				<div class="frame-right-first-index">
 					{% if count_posts != 0 %}
-						<div style="margin: 0 0 20px 10px;">
+						<div style="margin: 0 0 5px 10px;">
 							<label class="posts-group-title">{{ group.title }}</label>
+						</div>
+						<div class="search-header">
+							<form action="{% url 'forum:group_filter_posts' group.slug %}">
+								<input class="input-search" type="search" name="search" placeholder="Поиск" aria-label="Search">
+							</form>
 						</div>
 						<hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;">
 						{% for post in objects %}

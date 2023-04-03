@@ -13,7 +13,7 @@
 			</div>
 			<div class="frame-main">
 				<div class="frame-main-avatars">
-					<i class="fas fa-star fa-lg icons-post-detail"></i>
+					<i class="fas fa-star fa-lg icons-post-detail" style="cursor: pointer;"></i>
 					{% include '../includes/paginator.html' %}
 					<hr class="hr-post-detail" style="margin: 5px 0;">
 				</div>
@@ -58,7 +58,7 @@
 							<div class="comment-text">
 								<label>{{ comment.text }}</label>
 							</div>
-							<div class="comment-date">
+							<div class="comment-date" style="margin-top: 10px;">
 								<label>{{ comment.created|date:"d E Y / H:i" }}</label>
 							</div>
 						</div>

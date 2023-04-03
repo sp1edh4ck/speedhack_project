@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.shortcuts import get_object_or_404, get_list_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
-from users.forms import CustomUserChangeForm
+from users.forms import UserProfileForm
 from users.models import CustomUser
 
 from .forms import ProfileCommentForm, CommentForm, PostForm
@@ -25,7 +25,11 @@ def pagination_comments(request, comment_list):
 
 
 def index(request):
-	posts = Forum.objects.select_related('author').all()
+	search_query = request.GET.get('search', '')
+	if search_query:
+		posts = Forum.objects.filter(title__icontains=search_query)
+	else:
+		posts = Forum.objects.select_related('author').all()
 	count_posts = posts.count()
 	context = {
 		'count_posts': count_posts,
@@ -36,6 +40,11 @@ def index(request):
 
 def group_free(request, slug):
 	group = get_object_or_404(Group, slug=slug)
+	search_query = request.GET.get('search', '')
+	if search_query:
+		posts = group.posts.filter(title__icontains=search_query)
+	else:
+		posts = group.posts.all()
 	posts = group.posts.all()
 	count_posts = posts.count()
 	template = 'forum/template_groups.html'
@@ -73,31 +82,18 @@ def profile(request, username):
 	return render(request, 'forum/profile.html', context)
 
 
+@login_required
 def profile_edit(request, username):
-	author = get_object_or_404(User, username=username)
-	
-
-	form = CustomUserChangeForm(
+	profile_form = UserProfileForm(
 		request.POST or None,
-		files=request.FILES or None
+		files=request.FILES or None,
+		instance=request.user
 	)
-	if request.method == 'POST':
-		if form.is_valid():
-			form.save()
-			return redirect('forum:profile', username=username)
-
-	if request.POST:
-		form = CustomUserChangeForm(request.POST, request.FILES)
-		if form.is_valid():
-			form.user = request.user
-			form.save()
-			return redirect('forum:profile', username=username)
-		else:
-			form = CustomUserChangeForm()
-
+	if profile_form.is_valid():
+		profile_form.save()
+		return redirect('forum:profile', username=username)
 	context = {
-		'author': author,
-		'form': form,
+		'form': profile_form,
 	}
 	return render(request, 'forum/profile_edit.html', context)
 

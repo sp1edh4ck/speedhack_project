@@ -23,17 +23,10 @@
 					</div>
 				{% endfor %}
 			{% endif %}
-			<form method="post"{% if action_url %} action="{% url action_url %}" {% endif %}>
+			<form method="post" {% if action_url %}action="{% url action_url %}" {% endif %}>
 				{% csrf_token %}
 				{% for field in form %}
-					<div class="form"
-						{% if field.field.required %} 
-							aria-required="true"
-						{% else %}
-							aria-required="false"
-						{% endif %}>
-						{{ field }}
-					</div>
+					<div class="form" {% if field.field.required %} aria-required="true"{% else %}aria-required="false"{% endif %}>{{ field }}</div>
 				{% endfor %}
 				<button type="submit" class="button-form">Войти</button>
 			</form>

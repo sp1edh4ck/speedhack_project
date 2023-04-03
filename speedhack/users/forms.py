@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm, AuthenticationForm
+from users.widgets import AvatarWidget
 
 from .models import CustomUser
 
@@ -40,5 +41,15 @@ class CustomUserLogin(AuthenticationForm):
 
 class CustomUserChangeForm(UserChangeForm):
 	class Meta:
+		widgets = {
+			"avatar": AvatarWidget,
+		}
+
+
+class UserProfileForm(forms.ModelForm):
+	class Meta:
 		model = CustomUser
 		fields = ('avatar',)
+		widgets = {
+			"avatar": AvatarWidget,
+		}
