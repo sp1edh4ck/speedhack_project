@@ -170,3 +170,8 @@ a.window-button {
 .window-main:hover .icons-header {
 	transform: rotate(180deg);
 }
+
+.icon-rub {
+	width: 9px;
+	height: 19px;
+}

@@ -38,14 +38,29 @@ def index(request):
 	return render(request, 'forum/index.html', context)
 
 
+def my_topics(request):
+	user = request.user
+	search_query = request.GET.get('search', '')
+	if search_query:
+		posts = user.posts.filter(title__icontains=search_query)
+	else:
+		posts = user.posts.all()
+	count_posts = posts.count()
+	context = {
+		'count_posts': count_posts,
+		'objects': pagination_post(request, posts)
+	}
+	return render(request, 'forum/index.html', context)
+
+
 def group_free(request, slug):
 	group = get_object_or_404(Group, slug=slug)
 	search_query = request.GET.get('search', '')
+	posts = group.posts.all()
 	if search_query:
 		posts = group.posts.filter(title__icontains=search_query)
 	else:
 		posts = group.posts.all()
-	posts = group.posts.all()
 	count_posts = posts.count()
 	template = 'forum/template_groups.html'
 	context = {
@@ -186,10 +201,20 @@ def rules(request):
 
 
 def users(request):
-	author = Forum.objects.select_related('author').all()
+	posts = Forum.objects.select_related('author').all()
+	count_posts = posts.count()
 	users_list = CustomUser.objects.all()
+	count_users = users_list.count()
+	search_query = request.GET.get('search', '')
+	if search_query:
+		users_list = CustomUser.objects.filter(username__icontains=search_query)
+	count_search = users_list.count()
+	author = Forum.objects.select_related('author').all()
 	context = {
 		'author': author,
 		'users': users_list,
+		'count_posts': count_posts,
+		'count_users': count_users,
+		'count_search': count_search,
 	}
 	return render(request, 'forum/users.html', context)

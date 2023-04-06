@@ -63,6 +63,8 @@
 				<div style="padding-top: 10px;">
 					<div class="window-other">
 						<a class="window-button-second" href="{% url 'forum:profile' user.username %}">Профиль</a>
+						<hr style="margin: 5px 0px; border: 1px solid #444444;">
+						<a class="window-button-second">Баланс: {{ user.balance }} <i class="fas fa-ruble-sign fa-lg icon-rub"></i></a>
 						<a class="window-button-second" href="#">Мои аккаунты</a>
 						<a class="window-button-second" href="#">Мои покупки</a>
 						<a class="window-button-second" href="{% url 'users:logout' %}">Выйти</a>

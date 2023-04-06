@@ -18,9 +18,17 @@
 						<div>
 							<a class="li-label-ts-a" href="{% url 'forum:index' %}">
 								<ul style="list-style-type: none; margin-top: 10px;">
-									<li class="li-label-ts">
+									<li class="li-label-ts {% if request.path == '/' %}active-menu{% endif %}">
 										<i class="fas fa-globe-americas fa-lg icons-index"></i>
 										<label class="text-section-li">Все обсуждения</label>
+									</li>
+								</ul>
+							</a>
+							<a class="li-label-ts-a" href="{% url 'forum:my_topics' %}">
+								<ul style="list-style-type: none;">
+									<li class="li-label-ts {% if request.path == '/forum/my_topics/' %}active-menu{% endif %}">
+										<i class="fas fa-user-alt fa-lg icons-index"></i>
+										<label class="text-section-li">Мои темы</label>
 									</li>
 								</ul>
 							</a>
@@ -306,12 +314,17 @@
 				<div class="frame-right-first-index">
 					{% if count_posts != 0 %}
 						<div style="margin: 0 0 5px 10px;">
-							<label class="posts-group-title">{% if request.path != '/group/' %}Все обсуждения{% endif %}</label>
+							<label class="posts-group-title">{% if request.path == '/' %}Все обсуждения{% elif request.path == '/forum/my_topics/'%}Мои темы{% endif %}</label>
 						</div>
-						<div class="search-header">
-							<form action="{% url 'forum:index' %}">
-								<input class="input-search" type="search" name="search" placeholder="Поиск" aria-label="Search">
-							</form>
+						<div class="search-header search-header-else">
+							<div>
+								<form action="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}">
+									<input class="input-search" type="search" name="search" placeholder="Поиск" aria-label="Search">
+								</form>
+							</div>
+							<div>
+								<a class="search-clear" href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}">Очистить поиск</a>
+							</div>
 						</div>
 						<hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;">
 						{% for post in objects %}
@@ -333,7 +346,21 @@
 							{% include '../includes/paginator.html' %}
 						{% endfor %}
 					{% else %}
-						<div class="text-frame post">
+						<div style="margin: 0 0 5px 10px;">
+							<label class="posts-group-title">{% if request.path == '/' %}Все обсуждения{% elif request.path == '/forum/my_topics/' %}Мои темы{% endif %}</label>
+						</div>
+						<div class="search-header search-header-else">
+							<div>
+								<form action="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}">
+									<input class="input-search" type="search" name="search" placeholder="Поиск" aria-label="Search">
+								</form>
+							</div>
+							<div>
+								<a class="search-clear" href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}">Очистить поиск</a>
+							</div>
+						</div>
+						<hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;">
+						<div style="margin-left: 10px;">
 							<label style="color: #ffffff; font-size: 18px;">На данную тему не было созданно ещё ни одного поста :/</label>
 						</div>
 					{% endif %}

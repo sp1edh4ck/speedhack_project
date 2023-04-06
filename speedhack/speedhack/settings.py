@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'tools.apps.ToolsConfig',
     'sorl.thumbnail',
     'fontawesomefree',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'

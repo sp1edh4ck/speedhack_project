@@ -6,6 +6,7 @@ app_name = 'forum'
 
 urlpatterns = [
 	path('', views.index, name='index'),
+	path('forum/my_topics/', views.my_topics, name='my_topics'),
 	path('group/<slug:slug>/', views.group_free, name='group_filter_posts'),
 	path('profile/<str:username>/', views.profile, name='profile'),
 	path('profile/<str:username>/edit/', views.profile_edit, name='profile_edit'),

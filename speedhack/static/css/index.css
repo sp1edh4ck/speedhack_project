@@ -188,6 +188,10 @@
 	transition: all 0.5s ease 0s;
 }
 
+.icons-index.active-menu {
+	color: #ff506f;
+}
+
 .icons-index-arrow {
 	color: #686868;
 	opacity: 0;
@@ -269,6 +273,31 @@
 
 .search-header {
 	margin: 0 0 20px 10px;
+}
+
+.search-header-else {
+	display: flex;
+}
+
+.search-clear {
+	cursor: pointer;
+	font-size: 16px;
+	font-family: 'Ubuntu', 'Acrom', sans-serif;
+	margin: 10px 0 0 5px;
+	color: #ffffff;
+	background: #ff506f;
+	text-decoration: none;
+	border: none;
+	border-radius: 10px;
+	display: block;
+	padding: 3px 0px;
+	width: 140px;
+	text-align: center;
+	transition: all 0.5s ease 0s;
+}
+
+.search-clear:hover {
+	background: #ff6b86;
 }
 
 .input-search {

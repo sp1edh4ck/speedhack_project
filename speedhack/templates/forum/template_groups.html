@@ -9,9 +9,9 @@
 				<div class="frame-left">
 					<div style="margin-bottom: 20px;">
 						{% if request.user.is_authenticated %}
-						<a href="{% url 'forum:post_create' %}" class="button-frame">Создать тему</a>
+							<a href="{% url 'forum:post_create' %}" class="button-frame">Создать тему</a>
 						{% else %}
-						<a href="{% url 'users:login' %}" class="button-frame">Войти и создать тему</a>
+							<a href="{% url 'users:login' %}" class="button-frame">Войти и создать тему</a>
 						{% endif %}
 					</div>
 					<div>
@@ -21,6 +21,14 @@
 									<li class="li-label-ts">
 										<i class="fas fa-globe-americas fa-lg icons-index"></i>
 										<label class="text-section-li">Все обсуждения</label>
+									</li>
+								</ul>
+							</a>
+							<a class="li-label-ts-a" href="{% url 'forum:my_topics' %}">
+								<ul style="list-style-type: none;">
+									<li class="li-label-ts">
+										<i class="fas fa-user-alt fa-lg icons-index"></i>
+										<label class="text-section-li">Мои темы</label>
 									</li>
 								</ul>
 							</a>
@@ -311,10 +319,15 @@
 						<div style="margin: 0 0 5px 10px;">
 							<label class="posts-group-title">{{ group.title }}</label>
 						</div>
-						<div class="search-header">
-							<form action="{% url 'forum:group_filter_posts' group.slug %}">
-								<input class="input-search" type="search" name="search" placeholder="Поиск" aria-label="Search">
-							</form>
+						<div class="search-header search-header-else">
+							<div>
+								<form action="{% url 'forum:group_filter_posts' group.slug %}">
+									<input class="input-search" type="search" name="search" placeholder="Поиск" aria-label="Search">
+								</form>
+							</div>
+							<div>
+								<a class="search-clear" href="{% url 'forum:group_filter_posts' group.slug %}">Очистить поиск</a>
+							</div>
 						</div>
 						<hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;">
 						{% for post in objects %}
@@ -334,8 +347,18 @@
 							{% include '../includes/paginator.html' %}
 						{% endfor %}
 					{% else %}
-						<div style="margin: 0 0 20px 10px;">
+						<div style="margin: 0 0 5px 10px;">
 							<label class="posts-group-title">{{ group.title }}</label>
+						</div>
+						<div class="search-header search-header-else">
+							<div>
+								<form action="{% url 'forum:group_filter_posts' group.slug %}">
+									<input class="input-search" type="search" name="search" placeholder="Поиск" aria-label="Search">
+								</form>
+							</div>
+							<div>
+								<a class="search-clear" href="{% url 'forum:group_filter_posts' group.slug %}">Очистить поиск</a>
+							</div>
 						</div>
 						<hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;">
 						<div style="margin-left: 10px;">

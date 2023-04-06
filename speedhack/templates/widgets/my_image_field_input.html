@@ -1,12 +1,12 @@
+{% load static %}
 {% if widget.is_initial %}
 	<div style="display: flex; flex-direction: row;">
 		<div>
-			<img src="{{ widget.value.url }}" alt="{{ widget.value }}">
+			<img class="profile-edit-avatar" src="{{ widget.value.url }}" width='200' height='200' alt="{{ widget.value }}">
 		</div>
 		<div>
-			{{ widget.input_text }}
-			<br>
 			<input type="{{ widget.type }}" name="{{ widget.name }}" {% include "widgets/my_attrs.html" %}>
+			<label for="{{ widget.type }}" class="profile-edit-label">Выберите файл</label>
 		</div>
 	</div>
 {% else %}

@@ -1,24 +1,99 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}speedhack / редактирование профиля{% endblock %}
+{% load user_filters %}
 {% block content %}
 	<div class="main">
 		<div class="frame-profile_edit_con">
 			<div class="tabItem profile-edit active-tab" id ="person_info">
-				{% if form.errors %}
-					{% for field in form %}
-						{% for error in field.errors %}
-							{{ error|escape }}
-						{% endfor %}
-					{% endfor %}
-					{% for error in form.non_field_errors %}
-						{{ error|escape }}
-					{% endfor %}
-				{% endif %}
 				<form method="post" action="{{ request.path }}" enctype="multipart/form-data">
 					{% csrf_token %}
-					{{ form }}
-					<button type="submit" class="btn btn-primary">Сохранить</button>
+					<div style="display: flex; margin-top: 20px;">
+						<div class="profile-edit-div">
+							<label>Описание:</label>
+						</div>
+						<div>
+							{{ form.description|addclass:"profile-edit-field profile-edit-field-height" }}
+						</div>
+					</div>
+					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+					<div style="display: flex;">
+						<div class="profile-edit-div">
+							<label>Telegram:</label>
+						</div>
+						<div>
+							{{ form.tg_link|addclass:"profile-edit-field profile-edit-field-height" }}
+						</div>
+					</div>
+					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+					<div style="display: flex;">
+						<div class="profile-edit-div">
+							<label>Аватар:</label>
+						</div>
+						<div>
+							{{ form.avatar|addclass:"field-load" }}
+						</div>
+					</div>
+					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+					<div style="display: flex;">
+						<div class="profile-edit-div">
+							<label>Пол:</label>
+						</div>
+						<div>
+							{{ form.gender }}
+						</div>
+					</div>
+					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+					<div style="display: flex;">
+						<div class="profile-edit-div">
+							<label>День рождения:</label>
+						</div>
+						<div>
+							{{ form.birthday|addclass:"profile-edit-field profile-edit-field-height" }}
+						</div>
+					</div>
+					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+					<div style="display: flex;">
+						<div class="profile-edit-div">
+							<label>Род занятий:</label>
+						</div>
+						<div>
+							{{ form.occupation|addclass:"profile-edit-field profile-edit-field-height" }}
+						</div>
+					</div>
+					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+					<div style="display: flex;">
+						<div class="profile-edit-div">
+							<label>Интересы:</label>
+						</div>
+						<div>
+							{{ form.interests|addclass:"profile-edit-field profile-edit-field-height" }}
+						</div>
+					</div>
+					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+					<div style="display: flex;">
+						<div class="profile-edit-div">
+							<label></label>
+						</div>
+						<div style="display: block;">
+							<div>
+								<button type="submit" class="button-save">Сохранить</button>
+							</div>
+							<div style="margin-top: 20px; color: red;">
+								{% if form.errors %}
+									{% for field in form %}
+										{% for error in field.errors %}
+											{{ form.error.field }}
+											{{ error|escape }}
+										{% endfor %}
+									{% endfor %}
+									{% for error in form.non_field_errors %}
+										{{ error|escape }}
+									{% endfor %}
+								{% endif %}
+							</div>
+						</div>
+					</div>
 				</form>
 			</div>
 			<div class="tabItem profile-edit" id="contacts_info">

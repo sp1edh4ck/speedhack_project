@@ -42,3 +42,78 @@
 	box-shadow: inset 4px 0px 0px 0px #ff506f;
 	background: #333333;
 }
+
+.profile-edit-div {
+	margin-right: 20px;
+	text-align: right;
+	width: 160px;
+}
+
+.profile-edit-avatar {
+	width: 90px;
+	height: 90px;
+	border-radius: 10px;
+}
+
+.button-save {
+	background: #ff506f;
+	color: #ffffff;
+	display: block;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 10px;
+	border: 0px;
+	width: 200px;
+	padding: 5px 0;
+	text-align: center;
+	text-decoration: none;
+	transition: all 0.5s ease 0s;
+}
+
+.button-save:hover {
+	background: #ff6b86;
+}
+
+.field-load {
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	width: 200px;
+	margin-left: 10px;
+	border-radius: 10px;
+	height: 56px;
+}
+
+.profile-edit-label {
+	text-align: center;
+	width: 194px;
+	height: 30px;
+	padding: 10px 0;
+	margin: 0 0 6px 10px;
+	color: #ffffff;
+	border: 3px solid #ff506f;
+	display: inline-block;
+	border-radius: 10px;
+}
+
+.profile-edit-field {
+	width: 700px;
+	font-size: 16px;
+	background: #222222;
+	border: 2px solid #444444;
+	color: #ffffff;
+	outline: none;
+	border-radius: 10px;
+	transition: all 0.15s ease 0s;
+}
+
+.profile-edit-field:focus {
+	border-color: #ff506f;
+	outline: 0;
+	box-shadow: 0 0 0 1px #ff506f;
+}
+
+.profile-edit-field-height {
+	height: 30px;
+	padding-left: 15px;
+}

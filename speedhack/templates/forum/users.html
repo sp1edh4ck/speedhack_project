@@ -4,33 +4,66 @@
 {% block content %}
 	<div class="main">
 		<div class="frame_con">
-			<div class="frame-left-users">
-				<span style="color: gray; font-size: 18px;">Найти пользователя</span>
-				<input class="input-filter-users" placeholder="Имя...">
+			<div style="display: block;">
+				<div class="frame-left-first-users">
+					<span style="color: gray; font-size: 18px;">Найти пользователя</span>
+					<div style="display: flex;">
+						<div>
+							<form action="{% url 'forum:users' %}">
+								<input class="input-search-users" type="search" name="search" placeholder="Имя..." aria-label="Search">
+							</form>
+						</div>
+						<div>
+							<a href="{% url 'forum:users' %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="frame-left-second-users">
+					<span style="color: gray; font-size: 18px;">Статистика форума</span>
+					<div style="display: block;">
+						<div style="margin-top: 15px; color: gray;">
+							<label>Пользователей:</label>
+							<label style="color: #ffffff;">{{ count_users }}</label>
+						</div>
+						<div style="margin-top: 3px; color: gray;">
+							<label>Тем:</label>
+							<label style="color: #ffffff;">{{ count_posts }}</label>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="frame-right-users">
-				{% for users in users %}
-					<a class="a-users" href="{% url 'forum:profile' users.username %}">
+			<div class="frame-right-users" style="{% if count_search == 0 %}max-height: 40px;{% elif count_search == 1 %}max-height: 100px;{% elif count_search == 2 %}max-height: 210px;{% endif %}">
+				{% if count_search != 0 %}
+					{% for users in users %}
 						<div class="users-div">
-							<div>
-								<img style="width: 70px; border-radius: 50px;" src="{{ users.avatar.url }}">
+							<div style="padding: 10px 0 10px 10px;">
+								<a class="a-users" href="{% url 'forum:profile' users.username %}">
+									<img style="width: 60px; border-radius: 50px;" src="{{ users.avatar.url }}">
+								</a>
 							</div>
-							<div style="margin-left: 20px;">
+							<div style="margin-left: 20px; padding: 10px 0 10px 0;">
 								<div style="display: flex;">
 									<div style="margin: 0 auto 0 0;">
-										<label class="users-username {% if users.rank == 'владелец' %}admin-username{% endif %}">{{ users.username }}</label>
+										<a class="a-users" href="{% url 'forum:profile' users.username %}">
+											<label class="users-un {% if users.rank == 'владелец' %}admin-username{% endif %}">{{ users.username }}</label>
+										</a>
 									</div>
 									<div style="float: right; width: 100px;">
 										<label style="color: #ff506f; font-size: 21px; width: 100px;">{{ users.likes }}</label>
 									</div>
 								</div>
-								<div style="margin-top: 10px; color: #ff506f;">
+								<div style="margin-top: 7px; color: #ff506f;">
 									<img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label>{{ users.likes }}</label>
 								</div>
 							</div>
 						</div>
-					</a>
-				{% endfor %}
+						{% if not forloop.last %}<hr style="border: 1px solid #444444; padding: 0;">{% endif %}
+					{% endfor %}
+				{% else %}
+					<div style="margin: 20px 0 0 20px;">
+						<label style="color: #ffffff; font-size: 18px;">Нет пользователя с данным именем :/</label>
+					</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>

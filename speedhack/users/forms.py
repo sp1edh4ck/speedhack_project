@@ -47,9 +47,12 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class UserProfileForm(forms.ModelForm):
+	description = forms.CharField(required=False)
+	# birthday = forms.DateField(label='Дата рождения', required=False)
+
 	class Meta:
 		model = CustomUser
-		fields = ('avatar',)
+		fields = ('description', 'tg_link', 'avatar', 'gender', 'birthday', 'occupation', 'interests',)
 		widgets = {
 			"avatar": AvatarWidget,
 		}

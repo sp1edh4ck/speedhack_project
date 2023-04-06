@@ -100,25 +100,66 @@
 				<div class="frame-right-first">
 					<div style="display: flex; ">
 						<div style="margin: 0 auto 0 0;">
-							<label {% if author.rank == 'владелец' %}class="admin-username"{% else %}style="color: gray;"{% endif %}>{{ author.username }}</label>
+							<label {% if author.rank == 'владелец' %}class="admin-username"{% else %}style="color: gray;"{% endif %}>{{ author.username }}</label><br>
+							<label style="color: gray;">{{ author.description }}</label>
 						</div>
 						<div>
 							<label style="color: gray; display: flex;">В сети 10 мин. назад</label>
 						</div>
 					</div>
-					<hr style="margin-top: 20px; margin-bottom: 20px;">
+					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
 					<div>
 						<div style="display: flex;">
-							<div style="min-width: 150px; max-width: 150px;">
+							<div style="min-width: 165px; max-width: 165px;">
 								<label style="color: gray;">Регистрация: </label>
 							</div>
 							<div>
 								<label style="color: #ffffff;">{{ author.date_joined|date:'d E Y' }}</label><br>
 							</div>
 						</div>
+						{% if author.gender != 'Не выбранно' %}
+							<div style="display: flex;">
+								<div style="min-width: 165px; max-width: 165px;">
+									<label style="color: gray;">Пол: </label>
+								</div>
+								<div>
+									<label style="color: #ffffff;">{{ author.gender }}</label><br>
+								</div>
+							</div>
+						{% endif %}
+						{% if author.birthday != None %}
+							<div style="display: flex;">
+								<div style="min-width: 165px; max-width: 165px;">
+									<label style="color: gray;">День рождения: </label>
+								</div>
+								<div>
+									<label style="color: #ffffff;">{{ author.birthday }}</label><br>
+								</div>
+							</div>
+						{% endif %}
+						{% if author.occupation != '' %}
+							<div style="display: flex;">
+								<div style="min-width: 165px; max-width: 165px;">
+									<label style="color: gray;">Род занятий: </label>
+								</div>
+								<div>
+									<label style="color: #ffffff;">{{ author.occupation }}</label><br>
+								</div>
+							</div>
+						{% endif %}
+						{% if author.interests != '' %}
+							<div style="display: flex;">
+								<div style="min-width: 165px; max-width: 165px;">
+									<label style="color: gray;">Интересы: </label>
+								</div>
+								<div>
+									<label style="color: #ffffff;">{{ author.interests }}</label><br>
+								</div>
+							</div>
+						{% endif %}
 						{% if author.tg_link != '' %}
 							<div style="display: flex;">
-								<div style="min-width: 150px; max-width: 150px;">
+								<div style="min-width: 165px; max-width: 165px;">
 									<label style="color: gray;">Telegram: </label>
 								</div>
 								<div>
@@ -127,7 +168,7 @@
 							</div>
 						{% endif %}
 						<div style="display: flex;">
-							<div style="min-width: 150px; max-width: 150px;">
+							<div style="min-width: 165px; max-width: 165px;">
 								<label style="color: gray;">Ранг: </label>
 							</div>
 							<div>
@@ -136,7 +177,7 @@
 						</div>
 						{% if author.username == 'root' %}<label style="color: red;">Данный профиль является системным и работает под управлением бота!{% endif %}</label>
 					</div>
-					<hr style="margin: 20px 0 20px 0;">
+					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
 					<div style="display: flex;">
 						<label style="color: gray; margin: 0 30px 0 0;">Подписчики: <label style="color: #ff506f;">{{ count_subscribers }}</label></label><br>
 						<label style="color: gray; margin: 0 30px 0 0;">Подписок: <label style="color: #ff506f;">{{ count_subscriptions }}</label></label><br>
