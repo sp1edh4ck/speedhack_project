@@ -3,21 +3,69 @@ from django.db import models
 
 
 GENDER = [
-	("Не выбранно", 'Не выбранно'),
+	("Не выбрано", 'Не выбрано'),
 	("Мужской", 'Мужской'),
 	("Женский", 'Женский'),
+]
+
+MAIN_RANK = [
+	("владелец", "владелец"),
+	("гл. администратор", "гл. администратор"),
+	("администратор", "администратор"),
+	("бот", "бот"),
+	("арбитр", "арбитр"),
+	("куратор", "куратор"),
+	("пользователь", "пользователь"),
+]
+
+SECOND_RANK = [
+	("нет привилегий", "нет привилегий"),
+	("продавец", "продавец"),
+	("доверенный продавец", "доверенный продавец"),
+	("партнёр", "партнёр"),
+	("наставник", "наставник"),
+	("исскуственный интелект", "исскуственный интелект"),
+]
+
+USERNAME_STYLE = [
+	("gray-un", ".gray-un"),
+	("white-shadow-un", ".white-shadow-un"),
+	("grad-wb-un", ".grad-wb-un"),
+	("red-shadow-un", ".red-shadow-un"),
+	("grad-pwv-un", ".grad-pwv-un"),
+	("grad-bvr-un", ".grad-bvr-un"),
+	("grad-p-double-un", ".grad-p-double-un"),
+	("pink-shadow-un", ".pink-shadow-un"),
+	("purple-shadow-un", ".purple-shadow-un"),
+	("light-green-shadow-un", ".light-green-shadow-un"),
+	("grad-wp-un", ".grad-wp-un"),
+	("grad-wy-un", ".grad-wy-un"),
+	("grad-pp-un", ".grad-pp-un"),
+	("light-red-shadow-un", ".light-red-shadow-un"),
+	("blue-shadow-un", ".blue-shadow-un"),
+	("white-double-shadow-un", ".white-double-shadow-un"),
+	("blue-light-shadow-un", ".blue-light-shadow-un"),
+	("dark-green-shadow-un", ".dark-green-shadow-un"),
+	("blue-p-shadow-un", ".blue-p-shadow-un"),
+	("black-shadow-un", ".black-shadow-un"),
+	("red-orange-shadow-un", ".red-orange-shadow-un"),
+	("light-blue-double-shadow-un", ".light-blue-double-shadow-un"),
+	("aquamarine-shadow-un", ".aquamarine-shadow-un"),
 ]
 
 
 class CustomUser(AbstractUser):
 	likes = models.IntegerField(verbose_name='Лайки', default=0)
 	balance = models.IntegerField(verbose_name='Баланс', default=0)
-	gender = models.TextField(verbose_name='Пол', default='Не выбранно', choices=GENDER)
-	birthday = models.DateField(verbose_name='День рождения', default=0, null=True)
+	gender = models.TextField(verbose_name='Пол', choices=GENDER, default=GENDER[0])
+	username_style = models.TextField(verbose_name='Стиль имени', choices=USERNAME_STYLE, default=USERNAME_STYLE[0])
+	birthday = models.DateField(verbose_name='День рождения', blank=True, null=True)
 	occupation = models.CharField(verbose_name='Род занятий', max_length=200, default='')
 	interests = models.CharField(verbose_name='Интересы', max_length=200, default='')
 	description = models.CharField(verbose_name='Описание', max_length=200, default='')
-	rank = models.TextField(verbose_name='Ранг', default='пользователь')
+	rank = models.TextField(verbose_name='Ранг', choices=MAIN_RANK, default=MAIN_RANK[5])
+	privilege = models.TextField(verbose_name='Привилегия', choices=SECOND_RANK, default=SECOND_RANK[0])
+	profile_sub = models.BooleanField(verbose_name='Доступ к фону профиля', default=False)
 	messages = models.IntegerField(verbose_name='Сообщения', default=0)
 	tg_link = models.CharField(verbose_name='Ссылка на телеграм', max_length=70, default='', blank=True)
 	subscriber = models.IntegerField(verbose_name='Подписчики', default=0)
@@ -25,6 +73,12 @@ class CustomUser(AbstractUser):
 		verbose_name='Аватар',
 		upload_to='avatars/',
 		default='default.png',
+		null=True,
+		blank=True,
+	)
+	profile_background = models.ImageField(
+		verbose_name='Фон профиля',
+		upload_to='backgrounds/',
 		null=True,
 		blank=True,
 	)

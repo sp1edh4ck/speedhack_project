@@ -23,7 +23,7 @@
 	padding: 20px;
 	max-width: 1300px;
 	min-width: 1260px;
-	background: #1c1f20;
+	background: #1c1f20b6;
 	border-radius: 10px;
 	margin-top: 20px;
 }
@@ -58,7 +58,7 @@
 .frame-main {
 	max-width: 1300px;
 	margin: 20px 0 20px 0;
-	background: #1c1f20;
+	background: #1c1f20b6;
 	border-radius: 10px;
 	padding: 20px;
 }

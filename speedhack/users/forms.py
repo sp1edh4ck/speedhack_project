@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm, AuthenticationForm
-from users.widgets import AvatarWidget
+from users.widgets import AvatarWidget, BirthdayWidget
 
 from .models import CustomUser
 
@@ -48,11 +48,14 @@ class CustomUserChangeForm(UserChangeForm):
 
 class UserProfileForm(forms.ModelForm):
 	description = forms.CharField(required=False)
-	# birthday = forms.DateField(label='Дата рождения', required=False)
+	birthday = forms.DateField(label='Дата рождения', required=False)
+	occupation = forms.CharField(required=False)
+	interests = forms.CharField(required=False)
 
 	class Meta:
 		model = CustomUser
-		fields = ('description', 'tg_link', 'avatar', 'gender', 'birthday', 'occupation', 'interests',)
+		fields = ('description', 'tg_link', 'avatar', 'profile_background', 'username_style', 'gender', 'birthday', 'occupation', 'interests',)
 		widgets = {
 			"avatar": AvatarWidget,
+			"birthday": BirthdayWidget,
 		}

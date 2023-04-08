@@ -23,7 +23,7 @@
 					</div>
 					<div>
 						<div>
-							<a href="{% url 'forum:profile' post.author.username %}" style="text-decoration: none; cursor: pointer;"><label class="frame-main-username {% if post.author.rank == 'владелец' %}admin-username{% endif %}">{{ post.author.username }}</label></a><br>
+							<a href="{% url 'forum:profile' post.author.username %}" style="text-decoration: none; cursor: pointer;"><label class="frame-main-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}">{{ post.author.username }}</label></a><br>
 						</div>
 						<div class="frame-main-post">
 							<label>{{ post.text }}</label>
@@ -53,7 +53,7 @@
 						</div>
 						<div style="display: block;">
 							<div>
-								<a href="{% url 'forum:profile'	 comment.author.username %}" class="frame-main-username {% if comment.author.rank == 'владелец' %}admin-username{% endif %}" style="text-decoration: none;">{{ comment.author.username }}</a>
+								<a href="{% url 'forum:profile'	 comment.author.username %}" class="frame-main-username {% if comment.author.username_style != 'gray-un' %}{{ comment.author.username_style }}{% endif %}" style="text-decoration: none;">{{ comment.author.username }}</a>
 							</div>
 							<div class="comment-text">
 								<label>{{ comment.text }}</label>

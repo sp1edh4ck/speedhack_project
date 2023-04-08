@@ -37,7 +37,6 @@
 						<a class="window-button">Другое <i class="fa fa-angle-down fa-sm icons-header"></i></a>
 						<div style="padding-top: 10px;">
 							<div class="window-other">
-								<a href="{% url 'forum:faq' %}" class="window-button-second">FAQ</a>
 								<a href="{% url 'forum:users' %}" class="window-button-second">Пользователи</a>
 								<a href="{% url 'forum:rules' %}" class="window-button-second">Правила сайта</a>
 								{% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' %}
@@ -54,7 +53,7 @@
 			<div class="window-main">
 				<div class="window-button" style="display: flex;">
 					<div style="margin-right: 10px;">
-						<a>{{ request.user }}</a>
+						<a class="{% if request.user.username_style != 'gray-un' %}{{ request.user.username_style }}{% endif %}">{{ request.user }}</a>
 					</div>
 					<div class="user-avatar-header-first">
 						<img class="user-avatar-header" src="{{ request.user.avatar.url }}" >

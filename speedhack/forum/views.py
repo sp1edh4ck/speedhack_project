@@ -192,10 +192,6 @@ def admin_panel(request):
 	return render(request, 'forum/admin.html', context)
 
 
-def faq(request):
-	return render(request, 'forum/faq.html')
-
-
 def rules(request):
 	return render(request, 'forum/rules.html')
 

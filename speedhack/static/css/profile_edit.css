@@ -10,7 +10,7 @@
 	padding: 20px;
 	border-radius: 10px;
 	width: 1100px;
-	background: #1c1f20;
+	background: #1c1f20b6;
 }
 
 .profile-edit.active-tab {
@@ -21,7 +21,7 @@
 	display: grid;
 	align-content: center;
 	margin-left: 20px;
-	background: #1c1f20;
+	background: #1c1f20b6;
 	padding: 20px 0px;
 	min-width: 200px;
 	max-height: 500px;
@@ -117,3 +117,26 @@
 	height: 30px;
 	padding-left: 15px;
 }
+
+/* #id_birthday {
+	background: #ff506f;
+} */
+/* 
+select {
+	border: 1px solid #ff506f;
+	color: #ffffff;
+	background: #ff506f;
+}
+
+select:hover {
+	border: none;
+}
+
+option {
+	color: #ff506f;
+}
+
+option:hover {
+	border: none;
+} */
+

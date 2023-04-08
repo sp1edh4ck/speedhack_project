@@ -42,14 +42,14 @@
 								</a>
 							</div>
 							<div style="margin-left: 20px; padding: 10px 0 10px 0;">
-								<div style="display: flex;">
-									<div style="margin: 0 auto 0 0;">
+								<div style="display: inline-flex;">
+									<div>
 										<a class="a-users" href="{% url 'forum:profile' users.username %}">
-											<label class="users-un {% if users.rank == 'владелец' %}admin-username{% endif %}">{{ users.username }}</label>
+											<label class="users-un {% if users.username_style != 'gray-un' %}{{ user.username_style }}{% endif %}">{{ users.username }}</label>
 										</a>
 									</div>
-									<div style="float: right; width: 100px;">
-										<label style="color: #ff506f; font-size: 21px; width: 100px;">{{ users.likes }}</label>
+									<div>
+										<label style="color: #ff506f; font-size: 21px;">{{ users.likes }}</label>
 									</div>
 								</div>
 								<div style="margin-top: 7px; color: #ff506f;">

@@ -6,7 +6,7 @@
 }
 
 .post:hover {
-	background: #2e2e2e;
+	background: #353535b6;
 }
 
 .frames_con {
@@ -17,7 +17,7 @@
 .frame-left {
 	min-width: 250px;
 	min-height: 410px;
-	background: #1c1f20;
+	background: #1c1f20b6;
 	border-radius: 10px;
 	padding: 20px 10px 15px 10px;
 	margin: 0px 20px 10px 0px;
@@ -26,7 +26,7 @@
 .button-frame {
 	cursor: pointer;
 	font-size: 16px;
-	font-family: 'Ubuntu', 'Acrom', sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
 	margin: 0 auto 0 auto;
 	color: #ffffff;
 	background: #ff506f;
@@ -67,11 +67,11 @@
 }
 
 .li-label-ts:hover {
-	background: #2e2e2e;
+	background: #2e2e2eb6;
 }
 
 .li-label-ts.active-menu {
-	background: #2e2e2e;
+	background: #2e2e2eb6;
 }
 
 .li-label-ts.active-menu .icons-index {
@@ -180,6 +180,41 @@
 	max-height: 60px;
 }
 
+.fourth-first-li-label.active-menu {
+	margin-top: 10px;
+	max-height: 310px;
+}
+
+.fourth-second-li-label.active-menu {
+	margin-top: 10px;
+	max-height: 120px;
+}
+
+.fourth-third-li-label.active-menu {
+	margin-top: 10px;
+	max-height: 60px;
+}
+
+.fourth-fourth-li-label.active-menu {
+	margin-top: 10px;
+	max-height: 150px;
+}
+
+.fourth-fifth-li-label.active-menu {
+	margin-top: 10px;
+	max-height: 150px;
+}
+
+.fourth-sixth-li-label.active-menu {
+	margin-top: 10px;
+	max-height: 180px;
+}
+
+.fourth-seventh-li-label.active-menu {
+	margin-top: 10px;
+	max-height: 210px;
+}
+
 .icons-index {
 	color: #505050;
 	min-width: 20px;
@@ -225,7 +260,7 @@
 
 .frame-right-first-index {
 	width: 970px;
-	background: #1c1f20;
+	background: #1c1f20b6;
 	border-radius: 10px;
 	padding: 20px;
 	margin: 0 0 20px 0;
@@ -282,7 +317,7 @@
 .search-clear {
 	cursor: pointer;
 	font-size: 16px;
-	font-family: 'Ubuntu', 'Acrom', sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
 	margin: 10px 0 0 5px;
 	color: #ffffff;
 	background: #ff506f;
@@ -305,7 +340,7 @@
 	min-width: 235px;
 	max-width: 235px;
 	font-size: 16px;
-	background: #2e2e2e;
+	background: #2e2e2eb6;
 	border: 0px solid #444444;
 	color: #ffffff;
 	outline: none;

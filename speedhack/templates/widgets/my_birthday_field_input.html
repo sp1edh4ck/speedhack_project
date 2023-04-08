@@ -1,0 +1,16 @@
+{% if widget.is_initial %}
+	<div style="display: block; flex-direction: row;">
+		<div>
+			<input type="radio" id="male" name="{{ widget.name }}" value="male" {% include "widgets/my_attrs.html" %}>
+			<label for="male">Мужчина</label><br>
+		</div>
+		<div>
+			<input type="radio" id="female" name="{{ widget.name }}" value="female" {% include "widgets/my_attrs.html" %}>
+			<label for="female">Женщина</label><br>
+		</div>
+		<div>
+			<input type="radio" id="other" name="{{ widget.name }}" value="other" {% include "widgets/my_attrs.html" %}>
+			<label for="other">Не выбрано</label>
+		</div>
+	</div>
+{% endif %}

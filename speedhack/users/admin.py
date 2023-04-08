@@ -9,7 +9,7 @@ class CustomUserAdmin(UserAdmin):
 	readonly_fields = ["avatar_tag"]
 	fieldsets = (
 		(None, {'fields': ('username', 'password', 'email',)}),
-		('About user', {'fields': ('likes', 'subscriber', 'tg_link', 'rank', 'gender', 'birthday', 'occupation', 'interests', 'description',)}),
+		('About user', {'fields': ('likes', 'subscriber', 'tg_link', 'rank', 'privilege', 'profile_sub', 'username_style', 'gender', 'birthday', 'occupation', 'interests', 'description',)}),
 		(
 			'Permissions',
 			{
@@ -21,7 +21,7 @@ class CustomUserAdmin(UserAdmin):
 			},
 		),
 		('Important dates', {'fields': ('last_login', 'date_joined',)}),
-		('Additional fields', {'fields': ('avatar',)})
+		('Additional fields', {'fields': ('avatar', 'profile_background',)})
 	)
 
 	list_display = (
@@ -44,6 +44,5 @@ class CustomUserAdmin(UserAdmin):
 
 	def avatar_tag(self, obj):
 		return obj.avatar_tag()
-
 
 admin.site.register(CustomUser, CustomUserAdmin)

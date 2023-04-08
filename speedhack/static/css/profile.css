@@ -1,6 +1,13 @@
+.main-profile {
+	flex: 1;
+	padding-top: 90px;
+	margin-bottom: 20px;
+}
+
 .frame-edit {
 	display: block;
-	background: #1c1f20;
+	/* background: #1c1f20; */
+	background: #1c1f20b6;
 	padding: 20px 20px 20px 20px;
 	max-width: 200px;
 	border-radius: 10px;
@@ -14,7 +21,7 @@
 	margin-top: 20px;
 	width: 200px;
 	padding: 20px;
-	background: #1c1f20;
+	background: #1c1f20b6;
 	border-radius: 10px;
 }
 
@@ -108,12 +115,12 @@
 	margin-top: 20px;
 	width: 200px;
 	padding: 20px;
-	background: #1c1f20;
+	background: #1c1f20b6;
 	border-radius: 10px;
 }
 
 .frame-right-first {
-	background: #1c1f20;
+	background: #1c1f20b6;
 	padding: 20px 20px 20px 20px;
 	border-radius: 10px;
 	font-size: 18px;
@@ -123,7 +130,7 @@
 
 .frame-right-second {
 	margin-top: 20px;
-	background: #1c1f20;
+	background: #1c1f20b6;
 	padding: 20px 20px 20px 20px;
 	border-radius: 10px;
 	font-size: 18px;
@@ -155,7 +162,7 @@
 
 .frame-right-third {
 	display: none;
-	background: #1c1f20;
+	background: #1c1f20b6;
 	margin: 20px 0 20px 0;
 	padding: 20px 20px 20px 20px;
 	border-radius: 10px;
@@ -184,7 +191,7 @@
 
 .modal-content {
 	color: #ffffff;
-	background-color: #1c1f20;
+	background: #1c1f20b6;
 	margin: 100px auto auto auto;
 	padding: 20px;
 	border-radius: 10px;

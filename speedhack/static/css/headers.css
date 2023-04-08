@@ -39,7 +39,7 @@
 }
 
 .menu-item {
-	font-family: 'Ubuntu', 'Acrom', sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
 	font-size: 16px;
 	color: #ff506f;
 	padding-right: 30px;
@@ -59,7 +59,7 @@
 .button {
 	cursor: pointer;
 	font-size: 16px;
-	font-family: 'Ubuntu', 'Acrom', sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
 	padding: 5px 10px;
 	color: #ff506f;
 	background: #1e2122;
