@@ -9,13 +9,13 @@ GENDER = [
 ]
 
 MAIN_RANK = [
-	("владелец", "владелец"),
-	("гл. администратор", "гл. администратор"),
+	("пользователь", "пользователь"),
+	("куратор", "куратор"),
+	("арбитр", "арбитр"),
 	("администратор", "администратор"),
 	("бот", "бот"),
-	("арбитр", "арбитр"),
-	("куратор", "куратор"),
-	("пользователь", "пользователь"),
+	("гл. администр атор", "гл. администратор"),
+	("владелец", "владелец"),
 ]
 
 SECOND_RANK = [
@@ -53,18 +53,28 @@ USERNAME_STYLE = [
 	("aquamarine-shadow-un", ".aquamarine-shadow-un"),
 ]
 
+RANK_STYLE = [
+	("green-yellow-role", ".green-yellow-role"),
+	("milk-pink-role", ".milk-pink-role"),
+	("purple-aquamarine-role", ".purple-aquamarine-role"),
+	("red-purple-role", ".red-purple-role"),
+	("yellow-green-role", ".yellow-green-role"),
+	("blue-pink-role", ".blue-pink-role"),
+]
+
 
 class CustomUser(AbstractUser):
 	likes = models.IntegerField(verbose_name='Лайки', default=0)
 	balance = models.IntegerField(verbose_name='Баланс', default=0)
-	gender = models.TextField(verbose_name='Пол', choices=GENDER, default=GENDER[0])
-	username_style = models.TextField(verbose_name='Стиль имени', choices=USERNAME_STYLE, default=USERNAME_STYLE[0])
+	gender = models.TextField(verbose_name='Пол', choices=GENDER, default=GENDER[0][0])
+	username_style = models.TextField(verbose_name='Стиль имени', choices=USERNAME_STYLE, default=USERNAME_STYLE[0][0])
+	banner = models.TextField(verbose_name='', choices=RANK_STYLE, default=RANK_STYLE[0][0])
 	birthday = models.DateField(verbose_name='День рождения', blank=True, null=True)
 	occupation = models.CharField(verbose_name='Род занятий', max_length=200, default='')
 	interests = models.CharField(verbose_name='Интересы', max_length=200, default='')
 	description = models.CharField(verbose_name='Описание', max_length=200, default='')
-	rank = models.TextField(verbose_name='Ранг', choices=MAIN_RANK, default=MAIN_RANK[5])
-	privilege = models.TextField(verbose_name='Привилегия', choices=SECOND_RANK, default=SECOND_RANK[0])
+	rank = models.TextField(verbose_name='Ранг', choices=MAIN_RANK, default=MAIN_RANK[0][0])
+	privilege = models.TextField(verbose_name='Привилегия', choices=SECOND_RANK, default=SECOND_RANK[0][0])
 	profile_sub = models.BooleanField(verbose_name='Доступ к фону профиля', default=False)
 	messages = models.IntegerField(verbose_name='Сообщения', default=0)
 	tg_link = models.CharField(verbose_name='Ссылка на телеграм', max_length=70, default='', blank=True)

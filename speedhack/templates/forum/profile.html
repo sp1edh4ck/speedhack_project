@@ -8,8 +8,11 @@
 	<div class="main-profile">
 		<div class="frame_con">
 			<div style="display: block;">
-				<div class="frame-edit" style="{% if user.is_authenticated == False %}max-height: 230px;{% elif user == author %} max-height: 235px; {% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 290px;{% else %} max-height:260px;{% endif %}">
+				<div class="frame-edit" style="{% if user.is_authenticated == False %}max-height: 230px;{% elif user == author %}max-height: 275px;{% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 355px;{% else %}max-height: 315px;{% endif %}">
 					<img class="profile-avatar" src="{{ author.avatar.url }}">
+					<div class="{{ author.banner }}">
+						<label style="font-weight: 600;">{{ author.rank }}</label>
+					</div>
 					{% if user == author %}
 						{% comment %} <div id="myModal" class="modal">
 							<div class="modal-content" style="padding: 0px;">
@@ -168,14 +171,6 @@
 								</div>
 							</div>
 						{% endif %}
-						<div style="display: flex;">
-							<div style="min-width: 165px; max-width: 165px;">
-								<label style="color: gray;">Ранг: </label>
-							</div>
-							<div>
-								<label style="color: #ffffff;">{{ author.rank }}</label><br>
-							</div>
-						</div>
 						{% if author.rank == 'бот' %}<label style="color: red;">Данный профиль является системным и работает под управлением бота!{% endif %}</label>
 					</div>
 					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">

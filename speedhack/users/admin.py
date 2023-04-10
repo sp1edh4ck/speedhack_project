@@ -9,7 +9,23 @@ class CustomUserAdmin(UserAdmin):
 	readonly_fields = ["avatar_tag"]
 	fieldsets = (
 		(None, {'fields': ('username', 'password', 'email',)}),
-		('About user', {'fields': ('likes', 'subscriber', 'tg_link', 'rank', 'privilege', 'profile_sub', 'username_style', 'gender', 'birthday', 'occupation', 'interests', 'description',)}),
+		('About user',
+			{'fields': (
+				'likes',
+				'balance',
+				'subscriber',
+				'tg_link',
+				'rank',
+				'privilege',
+				'profile_sub',
+				'username_style',
+				'banner',
+				'gender',
+				'birthday',
+				'occupation',
+				'interests',
+				'description',
+			)}),
 		(
 			'Permissions',
 			{

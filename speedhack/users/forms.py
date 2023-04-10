@@ -40,6 +40,10 @@ class CustomUserLogin(AuthenticationForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
+	description = forms.CharField(required=False)
+	occupation = forms.CharField(required=False)
+	interests = forms.CharField(required=False)
+
 	class Meta:
 		widgets = {
 			"avatar": AvatarWidget,
@@ -54,7 +58,7 @@ class UserProfileForm(forms.ModelForm):
 
 	class Meta:
 		model = CustomUser
-		fields = ('description', 'tg_link', 'avatar', 'profile_background', 'username_style', 'gender', 'birthday', 'occupation', 'interests',)
+		fields = ('description', 'tg_link', 'avatar', 'profile_background', 'username_style', 'banner', 'gender', 'birthday', 'occupation', 'interests',)
 		widgets = {
 			"avatar": AvatarWidget,
 			"birthday": BirthdayWidget,

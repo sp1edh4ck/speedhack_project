@@ -37,6 +37,7 @@
 						<a class="window-button">Другое <i class="fa fa-angle-down fa-sm icons-header"></i></a>
 						<div style="padding-top: 10px;">
 							<div class="window-other">
+								<a href="https://t.me/sp1edh4ck_lite" target="_blank" class="window-button-second">Нужна помощь?</a>
 								<a href="{% url 'forum:users' %}" class="window-button-second">Пользователи</a>
 								<a href="{% url 'forum:rules' %}" class="window-button-second">Правила сайта</a>
 								{% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' %}
@@ -66,6 +67,11 @@
 						<a class="window-button-second">Баланс: {{ user.balance }} <i class="fas fa-ruble-sign fa-lg icon-rub"></i></a>
 						<a class="window-button-second" href="#">Мои аккаунты</a>
 						<a class="window-button-second" href="#">Мои покупки</a>
+						<hr style="margin: 5px 0px; border: 1px solid #444444;">
+						<a class="window-button-second" href="{% url 'forum:my_topics' %}">Мои темы</a>
+						<a class="window-button-second" href="{% url 'forum:profile_edit' user.username %}">Настройки профиля</a>
+						<a class="window-button-second" href="#">Switch to English</a>
+						<hr style="margin: 5px 0px; border: 1px solid #444444;">
 						<a class="window-button-second" href="{% url 'users:logout' %}">Выйти</a>
 					</div>
 				</div>

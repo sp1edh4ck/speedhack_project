@@ -79,6 +79,7 @@
 	display: block;
 	cursor: pointer;
 	font-size: 16px;
+	padding: 5px 0;
 	border-radius: 7px;
 	border: 0px;
 	width: 200px;

@@ -31,7 +31,8 @@
 }
 
 .red-shadow-un {
-	color: black;
+	color: #ffffff;
+	/* color: black; */
 	text-shadow: 0px 0px 3px rgb(238, 11, 53),
 	0px 0px 4px rgb(238, 11, 53),
 	0px 0px 5px rgb(238, 11, 53),
@@ -262,4 +263,83 @@
 	0 0 4px #40E0D0,
 	0 0 5px #40E0D0,
 	0 0 5px #40E0D0;
+}
+
+
+
+
+.milk-pink-role {
+	background: rgb(255,227,248);
+	background: linear-gradient(90deg, rgba(255,227,248,1) 0%, rgba(255,174,246,1) 100%);
+	margin-bottom: 5px;
+	color: #800080;
+	width: 200px;
+	padding: 5px 0;
+	text-align: center;
+	border-radius: 7px;
+}
+
+.purple-aquamarine-role {
+	background: rgb(234,227,255);
+	background: linear-gradient(90deg, rgba(234,227,255,1) 0%, rgba(174,246,255,1) 100%);
+	margin-bottom: 5px;
+	color: #00CED1;
+	width: 200px;
+	padding: 5px 0;
+	text-align: center;
+	border-radius: 7px;
+}
+
+.green-yellow-role {
+	background: rgb(228,255,227);
+	background: linear-gradient(90deg, rgba(228,255,227,1) 0%, rgba(253,255,174,1) 100%);
+	margin-bottom: 5px;
+	color: #FEBE10;
+	width: 200px;
+	padding: 5px 0;
+	text-align: center;
+	border-radius: 7px;
+}
+
+.red-purple-role {
+	background: rgb(254,122,122);
+	background: linear-gradient(90deg, rgba(254,122,122,1) 0%, rgba(175,174,255,1) 100%);
+	margin-bottom: 5px;
+	color: #E44D2E;
+	width: 200px;
+	padding: 5px 0;
+	text-align: center;
+	border-radius: 7px;
+}
+
+.yellow-green-role {
+	background: rgb(255,238,110);
+	background: linear-gradient(90deg, rgba(255,238,110,1) 0%, rgba(111,255,171,1) 100%);
+	margin-bottom: 5px;
+	color: #006A4E;
+	width: 200px;
+	padding: 5px 0;
+	text-align: center;
+	border-radius: 7px;
+}
+
+.blue-pink-role {
+	background: rgb(238,174,202);
+	background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+	margin-bottom: 5px;
+	color: #034694;
+	width: 200px;
+	padding: 5px 0;
+	text-align: center;
+	border-radius: 7px;
+}
+
+.gray-role {
+	background: gray;
+	margin-bottom: 5px;
+	color: #ffffff;
+	width: 200px;
+	padding: 5px 0;
+	text-align: center;
+	border-radius: 7px;
 }

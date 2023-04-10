@@ -147,6 +147,7 @@ a.window-button {
 .window-main:hover .window-other {
 	display: grid;
 	align-content: center;
+	border: 1px solid #444444;
 	background: #292a2e;
 	min-width: 200px;
 	border-radius: 10px;
