@@ -36,7 +36,7 @@
 								</div>
 							</div>
 						</div> {% endcomment %}
-						<a class="button-edit" style="margin-top: 5px;" href="{% url 'forum:profile_edit' user.username %}">Редактировать</a>
+						<a class="button-edit" style="margin-top: 5px;" href="{% url 'forum:profile_info_edit' user.username %}">Редактировать</a>
 					{% else %}
 						{% if user.is_authenticated %}
 							{% if following %}

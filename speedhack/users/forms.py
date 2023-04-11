@@ -63,3 +63,13 @@ class UserProfileForm(forms.ModelForm):
 			"avatar": AvatarWidget,
 			"birthday": BirthdayWidget,
 		}
+
+
+class UserPrivilegeForm(forms.ModelForm):
+	class Meta:
+		model = CustomUser
+		fields = ('privilege',)
+		widgets = {
+			"avatar": AvatarWidget,
+			"birthday": BirthdayWidget,
+		}

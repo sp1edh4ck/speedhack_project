@@ -21,9 +21,8 @@
 	color: #ffffff;
 }
 
-.faq-tech-ques__none {
+.faq-tech-ques {
 	color: #ffffff;
-	margin: 0 0 0 30px;
 }
 
 .faq-tech-answer {
@@ -49,12 +48,4 @@
 	cursor: default;
 	color: #ffffff;
 	background: #ff506f;
-}
-
-.faq-tech-ques__none {
-	display: none;
-}
-
-.faq-tech-ques__none__show {
-	display: block;
 }

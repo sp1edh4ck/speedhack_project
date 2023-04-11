@@ -5,7 +5,7 @@
 {% block content %}
 	<div class="main">
 		<div class="frame-profile_edit_con">
-			<div class="tabItem profile-edit active-tab" id ="person_info">
+			<div class="tabItem profile-edit">
 				<form method="post" action="{{ request.path }}" enctype="multipart/form-data">
 					{% csrf_token %}
 					<div style="display: flex; margin-top: 20px;">
@@ -127,50 +127,19 @@
 					</div>
 				</form>
 			</div>
-			<div class="tabItem profile-edit" id="contacts_info">
-				
-			</div>
-			<div class="tabItem profile-edit" id="preferences">
-				
-			</div>
-			<div class="tabItem profile-edit" id="privacy">
-				
-			</div>
-			<div class="tabItem profile-edit" id="alerts">
-				
-			</div>
-			<div class="tabItem profile-edit" id="black_list">
-				
-			</div>
-			<div class="tabItem profile-edit" id="status_upgrade">
-				
-			</div>
-			<div class="tabItem profile-edit" id="accounts">
-				
-			</div>
-			<div class="tabItem profile-edit" id="safety">
-				
-			</div>
-			<div class="tabItem profile-edit" id="api_for_developer">
-				
-			</div>
-			<div class="tabItem profile-edit" id="market_settings">
-				
-			</div>
 			<div class="switch-profile-edit">
-				<a data-tab="#person_info" class="switch-button-profile-edit active-tab">Персональная информация</a>
-				<a data-tab="#contacts_info" class="switch-button-profile-edit">Контактная информация</a>
-				<a data-tab="#preferences" class="switch-button-profile-edit">Предпочтения</a>
-				<a data-tab="#privacy" class="switch-button-profile-edit">Приватность</a>
-				<a data-tab="#alerts" class="switch-button-profile-edit">Настройка оповещений</a>
-				<a data-tab="#black_list" class="switch-button-profile-edit">Чёрный список</a>
-				<a data-tab="#status_upgrade" class="switch-button-profile-edit">Повышение статуса</a>
-				<a data-tab="#accounts" class="switch-button-profile-edit">Учётные записи</a>
-				<a data-tab="#safety" class="switch-button-profile-edit">Безопасность</a>
-				<a data-tab="#api_for_developer" class="switch-button-profile-edit">API для разработчика</a>
-				<a data-tab="#market_settings" class="switch-button-profile-edit">Настройки маркета</a>
+				<a href="{% url 'forum:profile_info_edit' user.username %}" class="switch-button-profile-edit active-tab">Персональная информация</a>
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Контактная информация</a> {% endcomment %}
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Предпочтения</a> {% endcomment %}
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Приватность</a> {% endcomment %}
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройка оповещений</a> {% endcomment %}
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Чёрный список</a> {% endcomment %}
+				<a href="{% url 'forum:profile_upgrade' user.username %}" class="switch-button-profile-edit">Повышение статуса</a>
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Учётные записи</a> {% endcomment %}
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Безопасность</a> {% endcomment %}
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">API для разработчика</a> {% endcomment %}
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройки маркета</a> {% endcomment %}
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="{% static 'js/profile_edit.js' %}"></script>
 {% endblock %}

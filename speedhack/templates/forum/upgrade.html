@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}speedhack / редактирование профиля{% endblock %}
+{% load user_filters %}
+{% block content %}
+	<div class="main">
+		<div class="frame-profile_edit_con">
+			<div class="tabItem profile-edit" id="status_upgrade">
+				<form method="post" action="{{ request.path }}">
+					{% csrf_token %}
+					<div style="display: block;">
+						<div style="margin-bottom: 10px;">
+							<label style="font-size: 18px; margin-right: 10px;">Уник</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">7500 <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ навсегда</label>
+						</div>
+						<div style="color: #c5c5c5; line-height: 1.75;">
+							<label>Выделись перед всеми уникальным цветом ника, который ты выберешь сам</label><br>
+							<label>Размещение темы о вашем магазине на форуме</label><br>
+							<label>Поднятие тем в ленте раз в 12 часов</label><br>
+							<label>Смена ника один раз в 3 месяца</label><br>
+							<label>Скрытие счётчика симпатий в темах</label><br>
+							<label>Анимированная аватарка в темах</label><br>
+						</div>
+						<div>
+							{% if user.balance >= 7500 %}
+								<button type="submit" class="button-save">Купить</button>
+							{% else %}
+								<button type="submit" class="button-save">Продать почку</button>
+							{% endif %}
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="switch-profile-edit">
+				<a href="{% url 'forum:profile_info_edit' user.username %}" class="switch-button-profile-edit">Персональная информация</a>
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Контактная информация</a> {% endcomment %}
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Предпочтения</a> {% endcomment %}
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Приватность</a> {% endcomment %}
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройка оповещений</a> {% endcomment %}
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Чёрный список</a> {% endcomment %}
+				<a href="{% url 'forum:profile_upgrade' user.username %}" class="switch-button-profile-edit active-tab">Повышение статуса</a>
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Учётные записи</a> {% endcomment %}
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Безопасность</a> {% endcomment %}
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">API для разработчика</a> {% endcomment %}
+				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройки маркета</a> {% endcomment %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

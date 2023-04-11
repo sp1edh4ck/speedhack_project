@@ -5,16 +5,11 @@
 }
 
 .profile-edit {
-	display: none;
 	color: #ffffff;
 	padding: 20px;
 	border-radius: 10px;
 	width: 1100px;
 	background: #1c1f20b6;
-}
-
-.profile-edit.active-tab {
-	display: block;
 }
 
 .switch-profile-edit {
@@ -140,3 +135,31 @@ option:hover {
 	border: none;
 } */
 
+.icon-rub-upgrade {
+	height: 14px;
+}
+
+.sum-upgrade .icon-rub-upgrade {
+	position:relative;
+	top: -3px;
+}
+
+.button-save {
+	background: #ff506f;
+	color: #ffffff;
+	display: block;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 7px;
+	margin-top: 10px;
+	border: 0px;
+	width: 120px;
+	padding: 5px 0;
+	text-align: center;
+	text-decoration: none;
+	transition: all 0.5s ease 0s;
+}
+
+.button-save:hover {
+	background: #ff6b86;
+}

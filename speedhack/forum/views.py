@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 
-from users.forms import UserProfileForm
+from users.forms import UserProfileForm, UserPrivilegeForm
 from users.models import CustomUser
 
 from .forms import ProfileCommentForm, CommentForm, PostForm
@@ -98,19 +98,34 @@ def profile(request, username):
 
 
 @login_required
-def profile_edit(request, username):
-	profile_form = UserProfileForm(
+def info_edit(request, username):
+	form = UserProfileForm(
 		request.POST or None,
 		files=request.FILES or None,
 		instance=request.user
 	)
-	if profile_form.is_valid():
-		profile_form.save()
+	if form.is_valid():
+		form.save()
 		return redirect('forum:profile', username=username)
 	context = {
-		'form': profile_form,
+		'form': form,
 	}
-	return render(request, 'forum/profile_edit.html', context)
+	return render(request, 'forum/info_edit.html', context)
+
+
+@login_required
+def upgrade(request, username):
+	form = UserPrivilegeForm(
+		request.POST or None,
+		instance=request.user
+	)
+	if form.is_valid():
+		form.save()
+		return redirect('forum:profile', username=username)
+	context = {
+		'form': form,
+	}
+	return render(request, 'forum/upgrade.html', context)
 
 
 @login_required
