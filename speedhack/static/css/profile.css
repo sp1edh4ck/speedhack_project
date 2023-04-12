@@ -122,7 +122,7 @@
 
 .frame-right-first {
 	background: #1c1f20b6;
-	padding: 20px 20px 20px 20px;
+	padding: 20px;
 	border-radius: 10px;
 	font-size: 18px;
 	width: 1000px;
@@ -132,7 +132,7 @@
 .frame-right-second {
 	margin-top: 20px;
 	background: #1c1f20b6;
-	padding: 20px 20px 20px 20px;
+	padding: 20px;
 	border-radius: 10px;
 	font-size: 18px;
 	width: 1000px;

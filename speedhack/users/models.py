@@ -1,6 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from django.contrib.humanize.templatetags.humanize import naturaltime
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 GENDER = [
 	("Не выбрано", 'Не выбрано'),
@@ -93,6 +96,20 @@ class CustomUser(AbstractUser):
 		null=True,
 		blank=True,
 	)
+
+	last_online = models.DateTimeField(default=timezone.now(), blank=True, null=True)
+
+	def is_online(self):
+		if self.last_online:
+			return (timezone.now() - self.last_online) < timezone.timedelta(minutes=1)
+		return False
+
+	def get_online_info(self):
+		if self.is_online():
+			return _('В сети')
+		if self.last_online:
+			return _('В сети {}').format(naturaltime(self.last_online))
+		return _('Неизвестно')
 
 	def __str__(self):
 		return self.username

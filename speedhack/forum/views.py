@@ -169,6 +169,29 @@ def post_create(request):
 
 
 @login_required
+def post_edit(request, post_id):
+	post = get_object_or_404(Forum, pk=post_id)
+	form = PostForm(
+		request.POST or None,
+		files=request.FILES or None,
+		instance=post
+	)
+	if request.user == post.author:
+		if request.method == 'POST':
+			if form.is_valid():
+				form.save()
+				return redirect('forum:post_detail', post_id=post_id)
+		template = 'forum/post_create.html'
+		context = {
+			'post': post,
+			'form': form,
+			'is_edit': True,
+		}
+		return render(request, template, context)
+	return redirect('forum:post_detail', post_id=post_id)
+
+
+@login_required
 def add_comment(request, post_id):
 	post = get_object_or_404(Forum, pk=post_id)
 	form = CommentForm(request.POST or None)

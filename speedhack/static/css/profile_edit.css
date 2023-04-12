@@ -19,11 +19,13 @@
 	background: #1c1f20b6;
 	padding: 20px 0px;
 	min-width: 200px;
-	max-height: 500px;
+	max-height: 100px;
 	border-radius: 10px;
 }
 
 .switch-button-profile-edit {
+	color: #ffffff;
+	text-decoration: none;
 	padding: 10px 20px;
 	transition: background 0.5s ease 0s;
 }

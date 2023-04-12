@@ -13,6 +13,7 @@ urlpatterns = [
 	path('profile/<str:username>/upgrade/', views.upgrade, name='profile_upgrade'),
 	path('forum/create_post/', views.post_create, name='post_create'),
 	path('forum/<int:post_id>/', views.post_detail, name='post_detail'),
+	path('forum/<int:post_id>/edit/', views.post_edit, name='post_edit'),
 	path('forum/<int:post_id>/comment/', views.add_comment, name='add_comment'),
 	path('forum/rules/', views.rules, name='rules'),
 	path('forum/admin-panel/', views.admin_panel, name='admin_panel'),

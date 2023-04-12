@@ -37,13 +37,13 @@
 				<span class="rules-reg">Я согласен с <a class="link-rules" href="{% url 'forum:rules' %}" target="_blank">правилами сайта</a></span>
 				<script>
 					function check() {
-					var submit = document.getElementsByName('submit')[0];
-					if (document.getElementById('politics').checked)
-					submit.disabled = '';
-					else
-					submit.disabled = 'disabled';
+						var submit = document.getElementsByName('submit')[0];
+						if (document.getElementById('politics').checked)
+							submit.disabled = '';
+						else
+							submit.disabled = 'disabled';
 					}
-					</script>
+				</script>
 			</form>
 		</div>
 	</div>

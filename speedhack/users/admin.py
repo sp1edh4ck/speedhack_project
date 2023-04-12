@@ -36,7 +36,7 @@ class CustomUserAdmin(UserAdmin):
 				),
 			},
 		),
-		('Important dates', {'fields': ('last_login', 'date_joined',)}),
+		('Important dates', {'fields': ('last_online', 'last_login', 'date_joined',)}),
 		('Additional fields', {'fields': ('avatar', 'profile_background',)})
 	)
 

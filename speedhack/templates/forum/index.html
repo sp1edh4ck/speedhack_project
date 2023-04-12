@@ -387,7 +387,7 @@
 						{% for post in objects %}
 							<a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">
 								<div class="text-frame post">
-									<div style="margin: 0 auto 0 0;">
+									<div class="text-frame-div" style="margin: 0 auto 0 0;">
 										<label class="text-frame-title">{{ post.title }}</label><br>
 										<label class="text-frame-text">
 											{{ post.pub_date|date:"d E Y / H:i" }}
@@ -400,8 +400,8 @@
 								</div>
 								{% if not forloop.last %}<br>{% endif %}
 							</a>
-							{% include '../includes/paginator.html' %}
-						{% endfor %}
+							{% endfor %}
+						{% include '../includes/paginator.html' %}
 					{% else %}
 						<div style="margin: 0 0 5px 10px;">
 							<label class="posts-group-title">{% if request.path == '/' %}Все обсуждения{% elif request.path == '/forum/my_topics/' %}Мои темы{% endif %}</label>

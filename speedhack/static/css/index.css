@@ -360,3 +360,10 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 	outline: 0;
 	box-shadow: 0 0 0 2px #ff506f;
 }
+
+.text-frame-div {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 20px;
+	color: #ffffff;
+}

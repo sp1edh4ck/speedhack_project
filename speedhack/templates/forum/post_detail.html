@@ -22,16 +22,28 @@
 						<a href="{% url 'forum:profile' post.author.username %}"><img class="frame-main-avatar" src="{{ post.author.avatar.url }}"></a>
 					</div>
 					<div>
+						<div style="display: flex;">
+							<div style="margin: 0 auto 0 0;">
+								<a href="{% url 'forum:profile' post.author.username %}" style="text-decoration: none; cursor: pointer;">
+									<label class="frame-main-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}">{{ post.author.username }}</label>
+								</a>
+							</div>
+							<div style="height: 30px;">
+								{% if request.user == post.author %}
+									<a class="button-edit-post" style="margin-left: -170px;" href="{% url 'forum:post_edit' post.pk %}">Редактировать запись</a>
+								{% endif %}
+								<br>
+							</div>
+						</div>
 						<div>
-							<a href="{% url 'forum:profile' post.author.username %}" style="text-decoration: none; cursor: pointer;"><label class="frame-main-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}">{{ post.author.username }}</label></a><br>
-						</div>
-						<div class="frame-main-post">
-							<label>{{ post.text }}</label>
-						</div>
-						<div class="frame-main-post">
-							{% thumbnail post.image "1150" crop="center" upscale=True as im %}
-								<img src="{{ im.url }}">
-							{% endthumbnail %}
+							<div class="frame-main-post-text">
+								<label>{{ post.text }}</label>
+							</div>
+							<div class="frame-main-post-heart">
+								{% thumbnail post.image "1150" crop="center" upscale=True as im %}
+									<img src="{{ im.url }}">
+								{% endthumbnail %}
+							</div>
 						</div>
 						<div style="display: flex;">
 							<div class="comment-date" style="margin: 10px auto 0 0;">

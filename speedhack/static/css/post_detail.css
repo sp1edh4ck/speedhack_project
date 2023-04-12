@@ -94,11 +94,19 @@
 .frame-main-posts {
 	display: flex;
 	margin-top: 20px;
-	max-width: 1200px;
 }
 
-.frame-main-post {
+.frame-main-post-text {
+	max-width: 1140px;
 	color: #ffffff;
+	word-wrap: break-word;
+	margin-top: 20px;
+}
+
+.frame-main-post-heart {
+	min-width: 1150px;
+	color: #ffffff;
+	word-wrap: break-word;
 	margin-top: 20px;
 }
 
@@ -143,4 +151,24 @@
 	border-color: #ff506f;
 	outline: 0;
 	box-shadow: 0 0 0 1px #ff506f;
+}
+
+.button-edit-post {
+	position: absolute;
+	background: #ff506f;
+	color: #ffffff;
+	cursor: pointer;
+	display: block;
+	font-size: 14px;
+	padding: 5px 0;
+	border-radius: 7px;
+	border: 0px;
+	min-width: 180px;
+	text-align: center;
+	text-decoration: none;
+	transition: all 0.5s ease 0s;
+}
+
+.button-edit-post:hover {
+	background: #ff6b86;
 }
