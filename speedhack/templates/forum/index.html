@@ -45,6 +45,9 @@
                                     </div>
                                     <div class="avatar-username">
                                         <img class="user-avatar" src="{{ post.author.avatar.url }}" >
+                                        {% if post.author.is_online == True %}
+                                            <div class="online online-avatar" style="margin: 60px 0 0 62px;"></div>
+                                        {% endif %}
                                         <label class="text-frame-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}">{{ post.author.username }}</label>
                                     </div>
                                 </div>

@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 
-from users.forms import UserProfileForm, UserPrivilegeForm
+from users.forms import UserProfileForm, UserUniquiForm
 from users.models import CustomUser
 
 from .forms import ProfileCommentForm, CommentForm, PostForm
@@ -115,15 +115,12 @@ def info_edit(request, username):
 
 @login_required
 def upgrade(request, username):
-    form = UserPrivilegeForm(
+    form = UserUniquiForm(
         request.POST or None,
         instance=request.user
     )
     if form.is_valid():
-        re = form.save(commit=False)
-        re.author = request.user
-        re = CustomUser.objects.all(username=username).update(unique=True)
-        re.save()
+        form.save()
         return redirect('forum:profile', username=username)
     context = {
         'form': form,

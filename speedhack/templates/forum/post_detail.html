@@ -20,6 +20,9 @@
                 <div class="frame-main-posts">
                     <div>
                         <a href="{% url 'forum:profile' post.author.username %}"><img class="frame-main-avatar" src="{{ post.author.avatar.url }}"></a>
+                        {% if post.author.is_online == True %}
+                            <div class="online online-avatar" style="margin: -20px 0 0 60px;"></div>
+                        {% endif %}
                     </div>
                     <div>
                         <div style="display: flex;">

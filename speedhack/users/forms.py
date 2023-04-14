@@ -65,11 +65,7 @@ class UserProfileForm(forms.ModelForm):
         }
 
 
-class UserPrivilegeForm(forms.ModelForm):
+class UserUniquiForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ('privilege',)
-        widgets = {
-            "avatar": AvatarWidget,
-            "birthday": BirthdayWidget,
-        }
+        fields = ('unique', 'balance',)
