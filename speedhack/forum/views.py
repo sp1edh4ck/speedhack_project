@@ -120,7 +120,10 @@ def upgrade(request, username):
         instance=request.user
     )
     if form.is_valid():
-        form.save()
+        re = form.save(commit=False)
+        re.author = request.user
+        re = CustomUser.objects.all(username=username).update(unique=True)
+        re.save()
         return redirect('forum:profile', username=username)
     context = {
         'form': form,
