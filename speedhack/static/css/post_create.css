@@ -1,150 +1,150 @@
 .frame {
-	max-width: 1300px;
-	background: #1c1f20b6;
-	border-radius: 10px;
-	padding: 20px 20px 20px 20px;
+    max-width: 1300px;
+    background: #1c1f20b6;
+    border-radius: 10px;
+    padding: 20px 20px 20px 20px;
 }
 
 .title {
-	color: #ffffff;
-	font-size: 22px;
+    color: #ffffff;
+    font-size: 22px;
 }
 
 .field {
-	width: 1239px;
-	margin-bottom: 30px;
-	font-size: 18px;
-	background: #222222;
-	border: 2px solid #444444;
-	color: #ffffff;
-	outline: none;
-	border-radius: 10px;
-	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    width: 1239px;
+    margin-bottom: 30px;
+    font-size: 18px;
+    background: #222222;
+    border: 2px solid #444444;
+    color: #ffffff;
+    outline: none;
+    border-radius: 10px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .field-height {
-	height: 40px;
-	padding-left: 15px;
+    height: 40px;
+    padding-left: 15px;
 }
 
 textarea {
-	padding: 10px 10px 10px 10px;
-	max-width: 1236px;
-	resize: none;
-	border-radius: 15px;
-	border: 0;
-	box-shadow: 4px 4px 10px rgba(0,0,0,0.06);
-	height: 240px;
+    padding: 10px 10px 10px 10px;
+    max-width: 1236px;
+    resize: none;
+    border-radius: 15px;
+    border: 0;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.06);
+    height: 240px;
 }
 
 .field::-webkit-scrollbar {
-	width: 7px;
+    width: 7px;
 }
  
 .field::-webkit-scrollbar-track {
-	padding: 10px;
-	background-color: #3b3b3b;
-	border-radius: 15px;
+    padding: 10px;
+    background-color: #3b3b3b;
+    border-radius: 15px;
 }
  
 .field::-webkit-scrollbar-thumb {
-	border-radius: 15px;
-	background-color:#9a9a9a;
+    border-radius: 15px;
+    background-color:#9a9a9a;
 }
 
 .field:focus {
-	border-color: #ff506f;
-	outline: 0;
-	box-shadow: 0 0 0 1px #ff506f;
+    border-color: #ff506f;
+    outline: 0;
+    box-shadow: 0 0 0 1px #ff506f;
 }
 
 .field-label {
-	font-size: 20px;
-	margin-bottom: 5px;
-	margin: 0 15px 0 0;
-	color: #ffffff;
-	display: block;
+    font-size: 20px;
+    margin-bottom: 5px;
+    margin: 0 15px 0 0;
+    color: #ffffff;
+    display: block;
 }
 
 .input-file {
-	position: relative;
-	display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 
 .input-file-text {
-	color: #ffffff;
-	background: #222222;
-	padding: 0 10px;
-	line-height: 40px;
-	text-align: left;
-	height: 40px;
-	display: block;
-	float: left;
-	box-sizing: border-box;
-	width: 350px;
-	border-radius: 10px 0px 0 10px;
-	border: 2px solid #444444;
+    color: #ffffff;
+    background: #222222;
+    padding: 0 10px;
+    line-height: 40px;
+    text-align: left;
+    height: 40px;
+    display: block;
+    float: left;
+    box-sizing: border-box;
+    width: 350px;
+    border-radius: 10px 0px 0 10px;
+    border: 2px solid #444444;
 }
 
 .input-file-btn {
-	position: relative;
-	display: inline-block;
-	cursor: pointer;
-	outline: none;
-	text-decoration: none;
-	font-size: 14px;
-	vertical-align: middle;
-	color: #ffffff;
-	text-align: center;
-	border-radius: 0 10px 10px 0;
-	background-color: #ff506f;
-	line-height: 22px;
-	height: 40px;
-	padding: 10px 20px;
-	box-sizing: border-box;
-	border: none;
-	margin-bottom: 30px;
-	transition: background-color 0.2s;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    font-size: 14px;
+    vertical-align: middle;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 0 10px 10px 0;
+    background-color: #ff506f;
+    line-height: 22px;
+    height: 40px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border: none;
+    margin-bottom: 30px;
+    transition: background-color 0.2s;
 }
 
 .input-file input[type=file] {
-	position: absolute;
-	z-index: -1;
-	opacity: 0;
-	display: block;
-	width: 0;
-	height: 0;
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    display: block;
+    width: 0;
+    height: 0;
 }
 
 .input-file input[type=file]:focus + .input-file-btn {
-	box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
 .input-file:hover .input-file-btn {
-	background-color: #ff506f;
+    background-color: #ff506f;
 }
 
 .input-file:active .input-file-btn {
-	background-color: #ff6b86;
+    background-color: #ff6b86;
 }
 
 .input-file input[type=file]:disabled + .input-file-btn {
-	background-color: #242424;
+    background-color: #242424;
 }
 
 .button-level {
-	display: block;
-	padding: 5px 10px;
-	font-size: 18px;
-	border-radius: 10px;
-	border: 1px solid;
-	border-color: #ff506f;
-	background: #ff506f;
-	color: #ffffff;
-	cursor: pointer;
-	transition: background 0.5s ease 0s;
+    display: block;
+    padding: 5px 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #ff506f;
+    background: #ff506f;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background 0.5s ease 0s;
 }
 
 .button-level:hover {
-	background: #ff6b86;
+    background: #ff6b86;
 }

@@ -4,27 +4,27 @@ from .models import ProfileComment, Comment, Forum, Group
 
 
 class ForumAdmin(admin.ModelAdmin):
-	list_display = (
-		'pk',
-		'group',
-		'text',
-		'pub_date',
-		'author',
-	)
-	list_editable = ('group',)
-	search_fields = ('group',)
-	list_filter = ('pub_date',)
-	empty_value_display = '-пусто-'
+    list_display = (
+        'pk',
+        'group',
+        'text',
+        'pub_date',
+        'author',
+    )
+    list_editable = ('group',)
+    search_fields = ('group',)
+    list_filter = ('pub_date',)
+    empty_value_display = '-пусто-'
 
 
 class GroupAdmin(admin.ModelAdmin):
-	list_display = (
-		'slug',
-		'title',
-	)
-	search_fields = ('slug',)
-	list_filter = ('slug',)
-	empty_value_display = '-пусто-'
+    list_display = (
+        'slug',
+        'title',
+    )
+    search_fields = ('slug',)
+    list_filter = ('slug',)
+    empty_value_display = '-пусто-'
 
 
 admin.site.register(Forum, ForumAdmin)

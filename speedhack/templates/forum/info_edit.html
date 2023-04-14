@@ -3,143 +3,143 @@
 {% block title %}speedhack / редактирование профиля{% endblock %}
 {% load user_filters %}
 {% block content %}
-	<div class="main">
-		<div class="frame-profile_edit_con">
-			<div class="tabItem profile-edit">
-				<form method="post" action="{{ request.path }}" enctype="multipart/form-data">
-					{% csrf_token %}
-					<div style="display: flex; margin-top: 20px;">
-						<div class="profile-edit-div">
-							<label>Описание:</label>
-						</div>
-						<div>
-							{{ form.description|addclass:"profile-edit-field profile-edit-field-height" }}
-						</div>
-					</div>
-					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-					<div style="display: flex;">
-						<div class="profile-edit-div">
-							<label>Telegram:</label>
-						</div>
-						<div>
-							{{ form.tg_link|addclass:"profile-edit-field profile-edit-field-height" }}
-						</div>
-					</div>
-					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-					<div style="display: flex;">
-						<div class="profile-edit-div">
-							<label>Аватар:</label>
-						</div>
-						<div>
-							{{ form.avatar|addclass:"field-load" }}
-						</div>
-					</div>
-					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-					{% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.rank == 'исскуственный интелект' or request.user.profile_sub == True %}
-						<div style="display: flex;">
-							<div class="profile-edit-div">
-								<label>Фон профиля:</label>
-							</div>
-							<div>
-								{{ form.profile_background }}
-							</div>
-						</div>
-						<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-					{% endif %}
-					{% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.rank == 'исскуственный интелект' %}
-						<div style="display: flex;">
-							<div class="profile-edit-div">
-								<label>Стиль имени:</label>
-							</div>
-							<div>
-								{{ form.username_style }}
-							</div>
-						</div>
-						<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-						<div style="display: flex;">
-							<div class="profile-edit-div">
-								<label>Стиль банера:</label>
-							</div>
-							<div>
-								{{ form.banner }}
-							</div>
-						</div>
-						<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-					{% endif %}
-					<div style="display: flex;">
-						<div class="profile-edit-div">
-							<label>Пол:</label>
-						</div>
-						<div>
-							{{ form.gender }}
-						</div>
-					</div>
-					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-					<div style="display: flex;">
-						<div class="profile-edit-div">
-							<label>День рождения:</label>
-						</div>
-						<div>
-							{{ form.birthday }}
-						</div>
-					</div>
-					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-					<div style="display: flex;">
-						<div class="profile-edit-div">
-							<label>Род занятий:</label>
-						</div>
-						<div>
-							{{ form.occupation|addclass:"profile-edit-field profile-edit-field-height" }}
-						</div>
-					</div>
-					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-					<div style="display: flex;">
-						<div class="profile-edit-div">
-							<label>Интересы:</label>
-						</div>
-						<div>
-							{{ form.interests|addclass:"profile-edit-field profile-edit-field-height" }}
-						</div>
-					</div>
-					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-					<div style="display: flex;">
-						<div class="profile-edit-div">
-							<label></label>
-						</div>
-						<div style="display: block;">
-							<div>
-								<button type="submit" class="button-save">Сохранить</button>
-							</div>
-							<div style="margin-top: 20px; color: red;">
-								{% if form.errors %}
-									{% for field in form %}
-										{% for error in field.errors %}
-											{{ form.error.field }}
-											{{ error|escape }}
-										{% endfor %}
-									{% endfor %}
-									{% for error in form.non_field_errors %}
-										{{ error|escape }}
-									{% endfor %}
-								{% endif %}
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-			<div class="switch-profile-edit">
-				<a href="{% url 'forum:profile_info_edit' user.username %}" class="switch-button-profile-edit active-tab">Персональная информация</a>
-				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Контактная информация</a> {% endcomment %}
-				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Предпочтения</a> {% endcomment %}
-				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Приватность</a> {% endcomment %}
-				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройка оповещений</a> {% endcomment %}
-				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Чёрный список</a> {% endcomment %}
-				<a href="{% url 'forum:profile_upgrade' user.username %}" class="switch-button-profile-edit">Повышение статуса</a>
-				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Учётные записи</a> {% endcomment %}
-				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Безопасность</a> {% endcomment %}
-				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">API для разработчика</a> {% endcomment %}
-				{% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройки маркета</a> {% endcomment %}
-			</div>
-		</div>
-	</div>
+    <div class="main">
+        <div class="frame-profile_edit_con">
+            <div class="tabItem profile-edit">
+                <form method="post" action="{{ request.path }}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div style="display: flex; margin-top: 20px;">
+                        <div class="profile-edit-div">
+                            <label>Описание:</label>
+                        </div>
+                        <div>
+                            {{ form.description|addclass:"profile-edit-field profile-edit-field-height" }}
+                        </div>
+                    </div>
+                    <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+                    <div style="display: flex;">
+                        <div class="profile-edit-div">
+                            <label>Telegram:</label>
+                        </div>
+                        <div>
+                            {{ form.tg_link|addclass:"profile-edit-field profile-edit-field-height" }}
+                        </div>
+                    </div>
+                    <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+                    <div style="display: flex;">
+                        <div class="profile-edit-div">
+                            <label>Аватар:</label>
+                        </div>
+                        <div>
+                            {{ form.avatar|addclass:"field-load" }}
+                        </div>
+                    </div>
+                    <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+                    {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.rank == 'исскуственный интелект' or request.user.profile_sub == True %}
+                        <div style="display: flex;">
+                            <div class="profile-edit-div">
+                                <label>Фон профиля:</label>
+                            </div>
+                            <div>
+                                {{ form.profile_background }}
+                            </div>
+                        </div>
+                        <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+                    {% endif %}
+                    {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.rank == 'исскуственный интелект' %}
+                        <div style="display: flex;">
+                            <div class="profile-edit-div">
+                                <label>Стиль имени:</label>
+                            </div>
+                            <div>
+                                {{ form.username_style }}
+                            </div>
+                        </div>
+                        <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+                        <div style="display: flex;">
+                            <div class="profile-edit-div">
+                                <label>Стиль банера:</label>
+                            </div>
+                            <div>
+                                {{ form.banner }}
+                            </div>
+                        </div>
+                        <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+                    {% endif %}
+                    <div style="display: flex;">
+                        <div class="profile-edit-div">
+                            <label>Пол:</label>
+                        </div>
+                        <div>
+                            {{ form.gender }}
+                        </div>
+                    </div>
+                    <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+                    <div style="display: flex;">
+                        <div class="profile-edit-div">
+                            <label>День рождения:</label>
+                        </div>
+                        <div>
+                            {{ form.birthday }}
+                        </div>
+                    </div>
+                    <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+                    <div style="display: flex;">
+                        <div class="profile-edit-div">
+                            <label>Род занятий:</label>
+                        </div>
+                        <div>
+                            {{ form.occupation|addclass:"profile-edit-field profile-edit-field-height" }}
+                        </div>
+                    </div>
+                    <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+                    <div style="display: flex;">
+                        <div class="profile-edit-div">
+                            <label>Интересы:</label>
+                        </div>
+                        <div>
+                            {{ form.interests|addclass:"profile-edit-field profile-edit-field-height" }}
+                        </div>
+                    </div>
+                    <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+                    <div style="display: flex;">
+                        <div class="profile-edit-div">
+                            <label></label>
+                        </div>
+                        <div style="display: block;">
+                            <div>
+                                <button type="submit" class="button-save">Сохранить</button>
+                            </div>
+                            <div style="margin-top: 20px; color: red;">
+                                {% if form.errors %}
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            {{ form.error.field }}
+                                            {{ error|escape }}
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        {{ error|escape }}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="switch-profile-edit">
+                <a href="{% url 'forum:profile_info_edit' user.username %}" class="switch-button-profile-edit active-tab">Персональная информация</a>
+                {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Контактная информация</a> {% endcomment %}
+                {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Предпочтения</a> {% endcomment %}
+                {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Приватность</a> {% endcomment %}
+                {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройка оповещений</a> {% endcomment %}
+                {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Чёрный список</a> {% endcomment %}
+                <a href="{% url 'forum:profile_upgrade' user.username %}" class="switch-button-profile-edit">Повышение статуса</a>
+                {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Учётные записи</a> {% endcomment %}
+                {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Безопасность</a> {% endcomment %}
+                {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">API для разработчика</a> {% endcomment %}
+                {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройки маркета</a> {% endcomment %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

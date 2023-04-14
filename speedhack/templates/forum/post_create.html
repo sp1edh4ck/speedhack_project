@@ -9,67 +9,96 @@
 {%endblock%}
 {% load user_filters %}
 {% block content %}
-	<div class="main">
-		<div class="frame_con">
-			<div class="frame">
-				{% if form.errors %}
-					{% for field in form %}
-						{% for error in field.errors %}
-							{{ error|escape }}
-						{% endfor %}
-					{% endfor %}
-					{% for error in form.non_field_errors %}
-						{{ error|escape }}
-					{% endfor %}
-				{% endif %}
-				<form method="post" enctype="multipart/form-data" {% if action_url %}action="{% url 'posts:index' %}"{% endif %}>
-					{% csrf_token %}
-					{% for field in form %}
-						{% if field.label == "Группа" %}
-							<div style="display: flex;">
-								<label class="field-label">{{ field.label }}</label>
-								<label style="color: #444444; font-size: 20px; height: 40px;">(выберете тему поста)</label>
-							</div>
-							{{ field|addclass:"field field-height" }}
-						{% elif field.label == "Заголовок" %}
-							<div style="display: flex;">
-								<label class="field-label">{{ field.label }}</label>
-								<label style="color: #444444; font-size: 20px; height: 40px;">(опишите суть вашего поста)</label>
-							</div>
-							{{ field|addclass:"field field-height" }}
-						{% elif field.label == "Текст" %}
-							<div style="display: flex;">
-								<label class="field-label">{{ field.label }}</label>
-								<label style="color: #444444; font-size: 20px; height: 40px;">(напишите ваш пост)</label>
-							</div>
-							{{ field|addclass:"field" }}
-						{% else %}
-							<div style="display: flex;">
-								<label class="field-label">{{ field.label }}</label>
-								<label style="color: #444444; font-size: 20px; height: 40px;">(вставьте картинку по желанию)</label>
-							</div>
-							<label class="input-file">
-								<span class="input-file-text" type="text"></span>
-								{{ field }}
-								<span class="input-file-btn">Выберите файл</span>
-							</label>
-							<script>
-								$('.input-file input[type=file]').on('change', function(){
-									let file = this.files[0];
-									$(this).closest('.input-file').find('.input-file-text').html(file.name);
-								});
-							</script>
-						{% endif %}
-					{% endfor %}
-					<button type="submit" class="button-level">
-						{% if is_edit %}
-							Изменить тему
-						{% else %}
-							Создать тему
-						{% endif %}
-					</button>
-				</form>
-			</div>
-		</div>
-	</div>
+    <div class="main">
+        <div class="frame_con">
+            <div class="frame">
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            {{ error|escape }}
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        {{ error|escape }}
+                    {% endfor %}
+                {% endif %}
+                <form method="post" enctype="multipart/form-data" {% if action_url %}action="{% url 'posts:index' %}"{% endif %}>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% if field.label == "Группа" %}
+                            <div style="display: flex;">
+                                <label class="field-label">{{ field.label }}</label>
+                                <label style="color: #444444; font-size: 20px; height: 40px;">(выберете тему поста)</label>
+                            </div>
+                            {{ field|addclass:"field field-height" }}
+                        {% elif field.label == "Заголовок" %}
+                            <div style="display: flex;">
+                                <label class="field-label">{{ field.label }}</label>
+                                <label style="color: #444444; font-size: 20px; height: 40px;">(опишите суть вашего поста)</label>
+                            </div>
+                            {{ field|addclass:"field field-height" }}
+                        {% elif field.label == "Текст" %}
+                            <div style="display: flex;">
+                                <label class="field-label">{{ field.label }}</label>
+                                <label style="color: #444444; font-size: 20px; height: 40px;">(напишите ваш пост)</label>
+                            </div>
+                            {{ field|addclass:"field" }}
+                        {% else %}
+                            <div style="display: flex;">
+                                <label class="field-label">{{ field.label }}</label>
+                                <label style="color: #444444; font-size: 20px; height: 40px;">(вставьте картинку по желанию)</label>
+                            </div>
+                            <label class="input-file">
+                                <span class="input-file-text" type="text"></span>
+                                {{ field }}
+                                <span class="input-file-btn">Выберите файл</span>
+                            </label>
+                            <script>
+                                $('.input-file input[type=file]').on('change', function(){
+                                    let file = this.files[0];
+                                    $(this).closest('.input-file').find('.input-file-text').html(file.name);
+                                });
+                            </script>
+                        {% endif %}
+                    {% endfor %}
+                    <button type="submit" class="button-level">
+                        {% if is_edit %}
+                            Изменить тему
+                        {% else %}
+                            Создать тему
+                        {% endif %}
+                    </button>
+                </form>
+
+                <table width="600px" cellpadding="0" cellspacing="0" border="0" align="center">
+                    <tr>
+                        <td valign="top" align="center">
+                        <!--ПАНЕЛЬ ББ КОДОВ-->
+                        <span style="cursor:pointer;">[b][/b]</span>
+                        &nbsp;
+                        <span style="cursor:pointer;">[a][/a]</span>
+                        &nbsp;
+                        <span style="cursor:pointer;">[img]</span>
+                        &nbsp;
+                        <span style="cursor:pointer;">[end]</span>
+                        <!--ПАНЕЛЬ ББ КОДОВ-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top" align="center">		
+                        <form action="index.php?page=add_content" method="post" name="form">
+                            <br>
+                            <input style="width:600px;" name="name_post" type="text" value="Название статьи">
+                            <br>
+                            <textarea style="width:600px;height:600px;" name="txt_post" id="txt_post" rows="10">Введите текст*</textarea>
+                            <input style="width:600px;" name="author_post" type="text" value="Автор*">
+                            <br>
+                            <br><br><input type="submit" value="Добавить пост">
+                        </form>		
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

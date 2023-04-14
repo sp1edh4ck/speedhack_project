@@ -4,11 +4,11 @@ from django.contrib.auth.backends import BaseBackend
 
 
 class MyBackend(BaseBackend):
-	def get_user(self, user_id):
-		try:
-			user = get_user_model().objects.get(pk=user_id)
-			user.last_online = timezone.now()
-			user.save(update_fields=['last_online'])
-			return user
-		except get_user_model().DoesNotExist:
-			return None
+    def get_user(self, user_id):
+        try:
+            user = get_user_model().objects.get(pk=user_id)
+            user.last_online = timezone.now()
+            user.save(update_fields=['last_online'])
+            return user
+        except get_user_model().DoesNotExist:
+            return None

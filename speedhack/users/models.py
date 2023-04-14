@@ -58,7 +58,7 @@ USERNAME_STYLE = [
 ]
 
 RANK_STYLE = [
-    ("gray-un", ".gray-un"),
+    ("gray-role", ".gray-role"),
     ("green-yellow-role", ".green-yellow-role"),
     ("milk-pink-role", ".milk-pink-role"),
     ("purple-aquamarine-role", ".purple-aquamarine-role"),

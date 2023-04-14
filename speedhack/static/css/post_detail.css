@@ -1,174 +1,174 @@
 .frame-post_con {
-	display: block;
+    display: block;
 }
 
 .link-title {
-	color: #ffffff;
-	font-size: 22px;
-	margin-bottom: 10px;
+    color: #ffffff;
+    font-size: 22px;
+    margin-bottom: 10px;
 }
 
 .link-title-main {
-	color: #ffffff;
-	text-decoration: none;
-	font-size: 22px;
-	transition: color 0.5s ease 0s;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 22px;
+    transition: color 0.5s ease 0s;
 }
 
 .link-title-main:hover {
-	color: #ff6b86;
+    color: #ff6b86;
 }
 
 .frame-title {
-	padding: 20px;
-	max-width: 1300px;
-	min-width: 1260px;
-	background: #1c1f20b6;
-	border-radius: 10px;
-	margin-top: 20px;
+    padding: 20px;
+    max-width: 1300px;
+    min-width: 1260px;
+    background: #1c1f20b6;
+    border-radius: 10px;
+    margin-top: 20px;
 }
 
 .text-up-title {
-	color: #ffffff;
-	font-size: 24px;
+    color: #ffffff;
+    font-size: 24px;
 }
 
 .text-up-all {
-	color: #555555;
-	font-size: 18px;
+    color: #555555;
+    font-size: 18px;
 }
 
 .text-up-nick {
-	text-decoration: none;
-	color: #ff506f;
-	transition: color 0.5s ease 0s;
+    text-decoration: none;
+    color: #ff506f;
+    transition: color 0.5s ease 0s;
 }
 
 .text-up-nick:hover {
-	text-decoration:underline;
-	color: #ff6b86;
+    text-decoration:underline;
+    color: #ff6b86;
 }
 
 .heart {
-	width: 16px;
-	margin-bottom: 2px;
-	vertical-align: middle;
+    width: 16px;
+    margin-bottom: 2px;
+    vertical-align: middle;
 }
 
 .frame-main {
-	max-width: 1300px;
-	margin: 20px 0 20px 0;
-	background: #1c1f20b6;
-	border-radius: 10px;
-	padding: 20px;
+    max-width: 1300px;
+    margin: 20px 0 20px 0;
+    background: #1c1f20b6;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 .frame-main-avatar {
-	width: 80px;
-	height: 80px;
-	border-radius: 50px;
-	margin-right: 20px;
-	cursor: pointer;
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+    margin-right: 20px;
+    cursor: pointer;
 }
 
 .icons-post-detail {
-	color: #505050;
-	transition: all 0.5s ease 0s;
+    color: #505050;
+    transition: all 0.5s ease 0s;
 }
 
 .fa-telegram {
-	cursor: pointer;
-	height: 3em;
+    cursor: pointer;
+    height: 3em;
 }
 
 .icons-post-detail:hover {
-	color: #ff506f;
+    color: #ff506f;
 }
 
 .frame-main-username {
-	cursor: pointer;
-	color: #ffffff;
-	font-size: 20px;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 20px;
 }
 
 .frame-main-posts {
-	display: flex;
-	margin-top: 20px;
+    display: flex;
+    margin-top: 20px;
 }
 
 .frame-main-post-text {
-	max-width: 1140px;
-	color: #ffffff;
-	word-wrap: break-word;
-	margin-top: 20px;
+    max-width: 1140px;
+    color: #ffffff;
+    word-wrap: break-word;
+    margin-top: 20px;
 }
 
 .frame-main-post-heart {
-	min-width: 1150px;
-	color: #ffffff;
-	word-wrap: break-word;
-	margin-top: 20px;
+    min-width: 1150px;
+    color: #ffffff;
+    word-wrap: break-word;
+    margin-top: 20px;
 }
 
 .comment-text {
-	color: #ffffff;
-	margin-top: 20px;
-	max-width: 1140px;
-	word-wrap: break-word;
+    color: #ffffff;
+    margin-top: 20px;
+    max-width: 1140px;
+    word-wrap: break-word;
 }
 
 .comment-date {
-	color: #555555;
-	display: flex;
+    color: #555555;
+    display: flex;
 }
 
 .hr-post-detail {
-	margin: 20px 0 20px 0;
-	border: none;
-	background: #555555;
-	height: 1px;
+    margin: 20px 0 20px 0;
+    border: none;
+    background: #555555;
+    height: 1px;
 }
 
 .field-detail {
-	display: block;
-	font-size: 18px;
-	margin: 0 5px 0 20px;
-	background: #222222;
-	border: 3px solid #444444;
-	color: #ffffff;
-	outline: none;
-	padding: 7px 10px 10px 10px;
-	width: 1130px;
-	height: 18px;
-	max-width: 1130px;
-	overflow: hidden;
-	resize: none;
-	border-radius: 10px;
-	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    display: block;
+    font-size: 18px;
+    margin: 0 5px 0 20px;
+    background: #222222;
+    border: 3px solid #444444;
+    color: #ffffff;
+    outline: none;
+    padding: 7px 10px 10px 10px;
+    width: 1130px;
+    height: 18px;
+    max-width: 1130px;
+    overflow: hidden;
+    resize: none;
+    border-radius: 10px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .field-detail:focus {
-	border-color: #ff506f;
-	outline: 0;
-	box-shadow: 0 0 0 1px #ff506f;
+    border-color: #ff506f;
+    outline: 0;
+    box-shadow: 0 0 0 1px #ff506f;
 }
 
 .button-edit-post {
-	position: absolute;
-	background: #ff506f;
-	color: #ffffff;
-	cursor: pointer;
-	display: block;
-	font-size: 14px;
-	padding: 5px 0;
-	border-radius: 7px;
-	border: 0px;
-	min-width: 180px;
-	text-align: center;
-	text-decoration: none;
-	transition: all 0.5s ease 0s;
+    position: absolute;
+    background: #ff506f;
+    color: #ffffff;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    padding: 5px 0;
+    border-radius: 7px;
+    border: 0px;
+    min-width: 180px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.5s ease 0s;
 }
 
 .button-edit-post:hover {
-	background: #ff6b86;
+    background: #ff6b86;
 }

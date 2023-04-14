@@ -3,48 +3,48 @@
 {% block title %}speedhack / регистрация{% endblock %}
 {% block content %}
 {% load user_filters %}
-	<div class="main">
-		<div class="frame-registration">
-			<p style="text-align: center;"><img class="logo" src="{% static 'images/speedhack_logo.png' %}" alt="img"></p>
-			<div class="preview">
-				<span class="login-text">Зарегистрироваться</span>
-			</div>
-			{% if form.errors %}
-				{% for field in form %}
-					{% for error in field.errors %}
-						<div style="color: #ff506f; margin: 5px 0 0 0; font-size: 14px;">
-							{{ error|escape }}
-						</div>
-					{% endfor %}
-				{% endfor %}
-				{% for error in form.non_field_errors %}
-					<div style="color: #ff506f; margin: 5px 0 0 0; font-size: 14px;">
-						{{ error|escape }}
-					</div>
-				{% endfor %}
-			{% endif %}
-			<form method="post" action="{% url 'users:signup' %}">
-				{% csrf_token %}
-				{% for field in form %}
-					<div class="">
-						<label for="{{ field.id_for_label }}">
-						</label>
-						{{ field }}
-					</div>
-				{% endfor %}
-				<button type="submit" name="submit" disabled="" class="button-form btn-reg">Зарегистрироваться</button>
-				<input type="checkbox"  id="politics" onclick="check();" value="" autocomplete="off"/>
-				<span class="rules-reg">Я согласен с <a class="link-rules" href="{% url 'forum:rules' %}" target="_blank">правилами сайта</a></span>
-				<script>
-					function check() {
-						var submit = document.getElementsByName('submit')[0];
-						if (document.getElementById('politics').checked)
-							submit.disabled = '';
-						else
-							submit.disabled = 'disabled';
-					}
-				</script>
-			</form>
-		</div>
-	</div>
+    <div class="main">
+        <div class="frame-registration">
+            <p style="text-align: center;"><img class="logo" src="{% static 'images/speedhack_logo.png' %}" alt="img"></p>
+            <div class="preview">
+                <span class="login-text">Зарегистрироваться</span>
+            </div>
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div style="color: #ff506f; margin: 5px 0 0 0; font-size: 14px;">
+                            {{ error|escape }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div style="color: #ff506f; margin: 5px 0 0 0; font-size: 14px;">
+                        {{ error|escape }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form method="post" action="{% url 'users:signup' %}">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="">
+                        <label for="{{ field.id_for_label }}">
+                        </label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <button type="submit" name="submit" disabled="" class="button-form btn-reg">Зарегистрироваться</button>
+                <input type="checkbox"  id="politics" onclick="check();" value="" autocomplete="off"/>
+                <span class="rules-reg">Я согласен с <a class="link-rules" href="{% url 'forum:rules' %}" target="_blank">правилами сайта</a></span>
+                <script>
+                    function check() {
+                        var submit = document.getElementsByName('submit')[0];
+                        if (document.getElementById('politics').checked)
+                            submit.disabled = '';
+                        else
+                            submit.disabled = 'disabled';
+                    }
+                </script>
+            </form>
+        </div>
+    </div>
 {% endblock %}
