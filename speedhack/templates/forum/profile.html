@@ -108,7 +108,9 @@
 							<label style="color: gray;">{{ author.description }}</label>
 						</div>
 						<div>
-							<label style="color: gray; display: flex;">{{ author.get_online_info }}</label>
+							{% comment %} <label style="color: gray; display: flex;">Последнй онлайн {{ author.last_login }}</label> {% endcomment %}
+							<label style="color: gray; display: flex;">{% if author.is_online == True %}В сети{% elif author.is_online == False %}Не в сети{% endif %}</label>
+                            {% comment %} |date:"d E / H:i" {% endcomment %}
 						</div>
 					</div>
 					<hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">

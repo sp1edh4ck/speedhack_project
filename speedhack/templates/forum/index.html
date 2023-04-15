@@ -380,7 +380,7 @@
 								</form>
 							</div>
 							<div>
-								<a class="search-clear" href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}">Очистить поиск</a>
+								<a href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
 							</div>
 						</div>
 						<hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;">
@@ -413,7 +413,7 @@
 								</form>
 							</div>
 							<div>
-								<a class="search-clear" href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}">Очистить поиск</a>
+								<a href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
 							</div>
 						</div>
 						<hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;">
