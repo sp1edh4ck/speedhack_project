@@ -58,9 +58,9 @@
 
 .button {
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
-    padding: 5px 10px;
+    padding: 2px 8px;
     color: #ff506f;
     background: #1e2122;
     border: 1px solid;
@@ -108,7 +108,7 @@
 }
 
 .window-button {
-    color: #ffffff;
+    color: gray;
     font-size: 16px;
     display: flex;
     text-decoration: none;

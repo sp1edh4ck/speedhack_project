@@ -28,7 +28,7 @@
                         <div style="display: flex;">
                             <div style="margin: 0 auto 0 0;">
                                 <a href="{% url 'forum:profile' post.author.username %}" style="text-decoration: none; cursor: pointer;">
-                                    <label class="frame-main-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}">{{ post.author.username }}</label>
+                                    <label class="frame-main-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
                                 </a>
                             </div>
                             {% if request.user == post.author %}

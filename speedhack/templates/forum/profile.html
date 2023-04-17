@@ -8,7 +8,7 @@
     <div class="main-profile">
         <div class="frame_con">
             <div style="display: block;">
-                <div class="frame-edit" style="{% if user.is_authenticated == False %}max-height: 230px;{% elif user == author %}max-height: 275px;{% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 355px;{% else %}max-height: 315px;{% endif %}">
+                <div class="frame-edit" style="{% if user.is_authenticated == False %}max-height: 230px;{% elif user.is_authenticated == False and user.rank == 'заблокирован' %}max-height: 270px;{% elif user == author %}max-height: 275px;{% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 355px;{% else %}max-height: 315px;{% endif %}">
                     <img class="profile-avatar" src="{{ author.avatar.url }}">
                     <div class="{{ author.banner }}">
                         <label style="font-weight: 600;">{{ author.rank }}</label>
@@ -36,16 +36,20 @@
                                 </div>
                             </div>
                         </div> {% endcomment %}
-                        <a class="button-edit" style="margin-top: 5px;" href="{% url 'forum:profile_info_edit' user.username %}">Редактировать</a>
+                        {% if user.rank != 'заблокирован' %}
+                            <a class="button-edit" style="margin-top: 5px;" href="{% url 'forum:profile_info_edit' user.username %}">Редактировать</a>
+                        {% endif %}
                     {% else %}
                         {% if user.is_authenticated %}
-                            {% if following %}
-                                <a class="button-edit" href="{% url 'forum:profile_unfollow' author.username %}">Отписаться</a>
-                            {% else %}
-                                <a class="button-edit" href="{% url 'forum:profile_follow' author.username %}">Подписаться</a>
+                            {% if user.rank != 'заблокирован' %}
+                                {% if following %}
+                                    <a class="button-edit" href="{% url 'forum:profile_unfollow' author.username %}">Отписаться</a>
+                                {% else %}
+                                    <a class="button-edit" href="{% url 'forum:profile_follow' author.username %}">Подписаться</a>
+                                {% endif %}
+                                {% if author.username != 'root' %}<label style="max-width: 200px; margin-top: 20px;"><a class="button-edit" style="margin-top: 5px">Написать</a></label>{% endif %}
+                                <a class="button-edit" style="margin-top: 5px;">Пожаловаться</a>
                             {% endif %}
-                            {% if author.username != 'root' %}<label style="max-width: 200px; margin-top: 20px;"><a class="button-edit" style="margin-top: 5px">Написать</a></label>{% endif %}
-                            <a class="button-edit" style="margin-top: 5px;">Пожаловаться</a>
                         {% else %}
                             <a href="{% url 'users:login' %}" class="button-edit">Войти в аккаунт</a>
                         {% endif %}
@@ -63,7 +67,7 @@
                                     <div style="display: block; margin-left: 20px; max-width: 130px;">
                                         <a class="sub-users" href="{% url 'forum:profile' post.author.username %}">
                                             <div style="margin: 0 0 0 auto;">
-                                                <label class="sub-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}">{{ post.author.username }}</label>
+                                                <label class="sub-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
                                             </div>
                                         </a>
                                         <div style="color: #888888; font-size: 14px;">
@@ -87,7 +91,7 @@
                                     <div style="display: block; margin-left: 20px; max-width: 130px;">
                                         <a class="sub-users" href="{% url 'forum:profile' post.user.username %}">
                                             <div style="margin: 0 0 0 auto;">
-                                                <label class="sub-username {% if post.user.username_style != 'gray-un' %}{{ post.user.username_style }}{% endif %}">{{ post.user.username }}</label>
+                                                <label class="sub-username {% if post.user.username_style != 'gray-un' %}{{ post.user.username_style }}{% endif %}" {% if post.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.user.username }}</label>
                                             </div>
                                         </a>
                                         <div style="color: #888888; font-size: 13px;">
@@ -104,7 +108,7 @@
                 <div class="frame-right-first">
                     <div style="display: flex; ">
                         <div style="margin: 0 auto 0 0;">
-                            <label class="{% if author.username_style != 'gray-un' %}{{ author.username_style }}{% elif author.username_style == 'gray-un' %}gray-un{% endif %}">{{ author.username }}</label><br>
+                            <label class="{% if author.username_style != 'gray-un' %}{{ author.username_style }}{% elif author.username_style == 'gray-un' %}gray-un{% endif %}" {% if author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ author.username }}</label><br>
                             <label style="color: gray;">{{ author.description }}</label>
                         </div>
                         <div>
@@ -228,7 +232,7 @@
                                     </div>
                                     <div class="avatar-username">
                                         <img class="user-avatar" src="{{ post.author.avatar.url }}">
-                                        <label class="text-frame-username {% if author.username_style != 'gray-un' %}{{ author.username_style }}{% endif %}">{{ post.author.username }}</label>
+                                        <label class="text-frame-username {% if author.username_style != 'gray-un' %}{{ author.username_style }}{% endif %}" {% if author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
                                     </div>
                                 </div>
                                 {% if not forloop.last %}<br>{% endif %}

@@ -22,7 +22,7 @@
                 <li class="menu-item"><a href="/market" class="menu-link">Маркет</a></li>
                 <li class="menu-item">
                     <div class="window-main">
-                        <a class="window-button">Соц. сети <i class="fas fa-angle-down fa-sm icons-header"></i></a>
+                        <a class="window-button" style="color: #ffffff;">Соц. сети <i class="fas fa-angle-down fa-sm icons-header"></i></a>
                         <div style="padding-top: 10px;">
                             <div class="window-other">
                                 <a href="https://t.me/speedhack_project" target="_blank" class="window-button-second">Канал в Telegram</a>
@@ -34,7 +34,7 @@
                 </li>
                 <li class="menu-item">
                     <div class="window-main">
-                        <a class="window-button">Другое <i class="fa fa-angle-down fa-sm icons-header"></i></a>
+                        <a class="window-button" style="color: #ffffff;">Другое <i class="fa fa-angle-down fa-sm icons-header"></i></a>
                         <div style="padding-top: 10px;">
                             <div class="window-other">
                                 <a href="https://t.me/sp1edh4ck_lite" target="_blank" class="window-button-second">Нужна помощь?</a>
@@ -54,7 +54,7 @@
             <div class="window-main">
                 <div class="window-button" style="display: flex;">
                     <div style="margin-right: 10px;">
-                        <a class="{% if request.user.username_style != 'gray-un' %}{{ request.user.username_style }}{% endif %}">{{ request.user }}</a>
+                        <a class="{% if request.user.username_style != 'gray-un' %}{{ request.user.username_style }}{% endif %}" {% if request.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ request.user }}</a>
                     </div>
                     <div class="user-avatar-header-first">
                         <img class="user-avatar-header" src="{{ request.user.avatar.url }}" >

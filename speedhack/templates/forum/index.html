@@ -9,7 +9,11 @@
                 <div class="frame-left">
                     <div style="margin-bottom: 20px;">
                         {% if request.user.is_authenticated %}
-                            <a href="{% url 'forum:post_create' %}" class="button-frame">Создать тему</a>
+                            {% if request.user.rank == "заблокирован" %}
+                                <label href="" class="button-frame" style="background: gray; cursor: default;">Создать тему</label>
+                            {% else %}
+                                <a href="{% url 'forum:post_create' %}" class="button-frame">Создать тему</a>
+                            {% endif %}
                         {% else %}
                             <a href="{% url 'users:login' %}" class="button-frame">Войти и создать тему</a>
                         {% endif %}
@@ -46,9 +50,9 @@
                                     <div class="avatar-username">
                                         <img class="user-avatar" src="{{ post.author.avatar.url }}" >
                                         {% if post.author.is_online == True %}
-                                            <div class="online online-avatar" style="margin: 60px 0 0 62px;"></div>
+                                            <div class="online online-avatar" style="margin: 54px 0 0 56px;"></div>
                                         {% endif %}
-                                        <label class="text-frame-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}">{{ post.author.username }}</label>
+                                        <label class="text-frame-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
                                     </div>
                                 </div>
                                 {% if not forloop.last %}<br>{% endif %}

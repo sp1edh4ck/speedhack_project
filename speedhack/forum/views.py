@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -22,6 +22,10 @@ def pagination_sub(request, sub_list):
 def pagination_comments(request, comment_list):
     paginator = Paginator(comment_list, 5)
     return paginator.get_page(request.GET.get('page'))
+
+
+def banned(request):
+    return render(request, 'users/banned.html')
 
 
 def index(request):

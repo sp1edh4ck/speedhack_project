@@ -114,7 +114,7 @@
 }
 
 .users-un {
-    color: #ffffff;
+    color: gray;
     font-size: 20px;
     cursor: pointer;
     transition: all 0.5s ease 0s;
