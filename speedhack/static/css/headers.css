@@ -177,3 +177,9 @@ a.window-button {
     width: 9px;
     height: 19px;
 }
+
+.icon-burger {
+    display: none;
+    color: #ffffff;
+    margin-left: 20px;
+}

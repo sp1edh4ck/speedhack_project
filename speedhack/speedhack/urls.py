@@ -6,6 +6,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('', include('forum.urls', namespace='forum')),
+    path('market/', include('market.urls', namespace='market')),
     path('admin/', admin.site.urls),
     path('auth/', include('users.urls', namespace='users')),
     path('auth/', include('django.contrib.auth.urls')),

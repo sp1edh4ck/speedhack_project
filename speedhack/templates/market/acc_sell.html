@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}
+  {% if is_edit %}
+    speedhack / редактирование акка
+  {% else %}
+    speedhack / продажа аккаунта
+  {% endif %}
+{%endblock%}
+{% load user_filters %}
+{% block content %}
+    <div class="main">
+        <div class="frame_con">
+            <div class="frame">
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            {{ error|escape }}
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        {{ error|escape }}
+                    {% endfor %}
+                {% endif %}
+                <form method="post" {% if action_url %}action="{% url 'market:index' %}"{% endif %}>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% if field.label == "Платформа" %}
+                            <div style="display: flex;">
+                                <label class="field-label">{{ field.label }}</label>
+                                <label style="color: #444444; font-size: 20px; height: 40px;">(выберете платформу продажи)</label>
+                            </div>
+                            {{ field|addclass:"field field-height" }}
+                        {% elif field.label == "Заголовок" %}
+                            <div style="display: flex;">
+                                <label class="field-label">{{ field.label }}</label>
+                                <label style="color: #444444; font-size: 20px; height: 40px;">(опишите в аккаунт)</label>
+                            </div>
+                            {{ field|addclass:"field field-height" }}
+                        {% elif field.label == "Данные от аккаунта" %}
+                            <div style="display: flex;">
+                                <label class="field-label">{{ field.label }}</label>
+                                <label style="color: #444444; font-size: 20px; height: 40px;">(Введите данные от аккаунта вида <label style="color: gray;">email:password</label>)</label>
+                            </div>
+                            {{ field|addclass:"field field-height" }}
+                        {% elif field.label == "Цена" %}
+                            <div style="display: flex;">
+                                <label class="field-label">{{ field.label }}</label>
+                                <label style="color: #444444; font-size: 20px; height: 40px;">(напишите ваш пост)</label>
+                            </div>
+                            {{ field|addclass:"field field-height" }}
+                        {% elif field.label == "Описание" %}
+                            <div style="display: flex;">
+                                <label class="field-label">{{ field.label }}</label>
+                                <label style="color: #444444; font-size: 20px; height: 40px;">(напишите ваш пост)</label>
+                            </div>
+                            {{ field|addclass:"field" }}
+                        {% endif %}
+                    {% endfor %}
+                    <button type="submit" class="button-level">
+                        {% if is_edit %}
+                            Изменить тему
+                        {% else %}
+                            Загрузить аккаунт
+                        {% endif %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

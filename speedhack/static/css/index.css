@@ -16,7 +16,6 @@
 
 .frame-left {
     min-width: 250px;
-    min-height: 410px;
     background: #1c1f20b6;
     border-radius: 10px;
     padding: 20px 10px 15px 10px;
@@ -366,4 +365,41 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     text-overflow: ellipsis;
     font-size: 20px;
     color: #ffffff;
+}
+
+.online-avatar-index {
+    position: absolute;
+    margin: 54px 0 0 58px;
+    width: 10px;
+    height: 10px;
+}
+
+.open-topics {
+    cursor: pointer;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
+    margin: 0 auto 0 auto;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 10px;
+    display: block;
+    padding: 5px 0px;
+    width: 240px;
+    text-align: center;
+    margin-left: 10px;
+    background: gray;
+    display: none;
+    transition: background 0.5s ease 0s;
+}
+
+/* .frame-topics {
+    margin: 0 10px;
+    background: #1c1f20b6;
+    transition: all 0.5s ease 0s;
+} */
+
+.frame-topics.active-menu {
+    min-width: 400px;
+    margin: 0 10px 0 10px;
+    display: block;
 }

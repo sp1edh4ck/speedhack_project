@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.forms',
     'forum.apps.ForumConfig',
     'users.apps.UsersConfig',
+    'market.apps.MarketConfig',
     'tools.apps.ToolsConfig',
     'sorl.thumbnail',
     'fontawesomefree',
@@ -111,11 +112,16 @@ USE_L10N = True
 USE_TZ = True
 
 
-MEDIA_URL = '/images/'
+MEDIA_URL = 'static/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+if DEBUG:
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+    MEDIA_URL = 'images/'
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 

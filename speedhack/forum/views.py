@@ -123,9 +123,14 @@ def upgrade(request, username):
         request.POST or None,
         instance=request.user
     )
-    if form.is_valid():
-        form.save()
-        return redirect('forum:profile', username=username)
+    if request.method == 'POST':
+        if form.is_valid():
+            user = CustomUser(username=username)
+            form = user.unique = True
+            form.save()
+            return redirect('forum:profile', username=username)
+        else:
+            form = UserUniquiForm()
     context = {
         'form': form,
     }

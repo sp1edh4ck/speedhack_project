@@ -69,7 +69,7 @@ RANK_STYLE = [
 
 
 class CustomUser(AbstractUser):
-    likes = models.IntegerField(verbose_name='Лайки', default=0)
+    likes = models.IntegerField(verbose_name='Симпатии', default=0)
     balance = models.IntegerField(verbose_name='Баланс', default=0)
     unique = models.BooleanField(verbose_name='Уник', default=False)
     gender = models.TextField(verbose_name='Пол', choices=GENDER, default=GENDER[0][0])

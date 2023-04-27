@@ -1,0 +1,170 @@
+.frame-market-left {
+    background: #1c1f20b6;
+}
+
+.market-sell {
+    margin-bottom: 20px;
+}
+
+.market-sell-button {
+    cursor: pointer;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
+    margin: 0 auto 0 auto;
+    color: #ffffff;
+    background: #ff506f;
+    text-decoration: none;
+    border-radius: 10px;
+    display: block;
+    padding: 5px 0px;
+    width: 270px;
+    text-align: center;
+    transition: all 0.5s ease 0s;
+}
+
+.market-sell-button:hover {
+    background: #ff6b86;
+}
+
+.market-main-left {
+    display: grid;
+    align-content: center;
+    background: #1c1f20b6;
+    padding: 10px 0px;
+    width: 270px;
+    height: 400px;
+    border-radius: 10px;
+}
+
+.market-link-left {
+    text-decoration: none;
+    font-size: 16px;
+    padding: 7px 15px;
+    color: #ececec;
+    transition: all 0.5s ease 0s;
+}
+
+.market-link-left:hover {
+    cursor: pointer;
+    background: #2e2e2eb6;
+    color: #ff506f;
+}
+
+.icon-market-left {
+    width: 20px;
+    margin-right: 10px;
+    color: #505050;
+}
+
+.market-accs {
+    background: #1c1f20b6;
+    padding: 20px;
+    margin-left: 20px;
+    border-radius: 10px;
+    color: #ffffff;
+    width: 970px;
+}
+
+.acc-price {
+    font-weight: 600;
+    padding: 5px 7px;
+    background: #ff506f;
+    color: #ffffff;
+    height: 20px;
+    border-radius: 10px;
+}
+
+.market-banner {
+    background: #1c1f20b6;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.profile-avatar-market {
+    width: 230px;
+}
+
+.market-user-acc {
+    display: block;
+    background: #1c1f20b6;
+    padding: 20px;
+    margin-left: 20px;
+    border-radius: 10px;
+    color: #ffffff;
+    width: 970px;
+}
+
+.user-acc-price {
+    background: none;
+    font-weight: 600;
+}
+
+.reg {
+    margin: 7px 0;
+    color: #949494;
+}
+
+.market-ls {
+    background: #505050;
+    color: #ffffff;
+    display: block;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px 0;
+    border-radius: 7px;
+    border: 0px;
+    width: 230px;
+    text-decoration: none;
+    margin: 0 auto 0 auto;
+    transition: all 0.5s ease 0s;
+}
+
+.market-ls:hover {
+    background: #3f3f3f;
+}
+
+.market-acc-btn {
+    margin: 10px 10px 0 0;
+    background: #ff506f;
+    color: #ffffff;
+    display: block;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px 0;
+    border-radius: 7px;
+    border: 0px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.5s ease 0s;
+}
+
+.market-acc-btn:hover {
+    background: #ff6b86;
+}
+
+.gr-c {
+    background: #505050;
+}
+
+.gr-c:hover {
+    background: #3f3f3f;
+}
+
+.icon-text-mr {
+    color: gray;
+    margin-right: 7px;
+    width: 20px;
+    height: 20px;
+}
+
+.mll-fix {
+    cursor: default;
+    background: none;
+}
+
+.mll-fix:hover {
+    color: #ffffff;
+    cursor: default;
+    background: none;
+}

@@ -4,10 +4,10 @@
 {% block title %}speedhack / форум{% endblock %}
 {% block content %}
     <div class="main">
-        <div class="frames_con">
+        <div class="frames_con optimization">
             <div style="display: block;">
                 <div class="frame-left">
-                    <div style="margin-bottom: 20px;">
+                    <div style="margin-bottom: 20px; display: flex;">
                         {% if request.user.is_authenticated %}
                             {% if request.user.rank == "заблокирован" %}
                                 <label href="" class="button-frame" style="background: gray; cursor: default;">Создать тему</label>
@@ -17,6 +17,7 @@
                         {% else %}
                             <a href="{% url 'users:login' %}" class="button-frame">Войти и создать тему</a>
                         {% endif %}
+                        <label href="" class="button-frame open-topics" id="menu_0_0">Открыть разделы</label>
                     </div>
                     {% include 'includes/filters.html' %}
                 </div>
@@ -50,14 +51,14 @@
                                     <div class="avatar-username">
                                         <img class="user-avatar" src="{{ post.author.avatar.url }}" >
                                         {% if post.author.is_online == True %}
-                                            <div class="online online-avatar" style="margin: 54px 0 0 56px;"></div>
+                                            <div class="online online-avatar-index"></div>
                                         {% endif %}
                                         <label class="text-frame-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
                                     </div>
                                 </div>
                                 {% if not forloop.last %}<br>{% endif %}
                             </a>
-                            {% endfor %}
+                        {% endfor %}
                         {% include '../includes/paginator.html' %}
                     {% else %}
                         <div style="margin: 0 0 5px 10px;">
