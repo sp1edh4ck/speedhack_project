@@ -67,7 +67,8 @@
 
 .acc-price {
     font-weight: 600;
-    padding: 5px 7px;
+    text-align: center;
+    padding: 2px 7px 5px 7px;
     background: #ff506f;
     color: #ffffff;
     height: 20px;
@@ -167,4 +168,33 @@
     color: #ffffff;
     cursor: default;
     background: none;
+}
+
+.pink-separator {
+    width: 5px;
+    height: 5px;
+    background: #ff506f;
+    border-radius: 50px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 5px;
+}
+
+.online-avatar-market {
+    margin: 12px 0 0 10px;
+    width: 10px;
+    height: 10px;
+}
+
+.frame-market-rules {
+    display: flex;
+    color: #ffffff;
+    width: 1300px;
+}
+
+.market-rules {
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    background: #1c1f20b6;
 }

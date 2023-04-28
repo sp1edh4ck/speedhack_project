@@ -7,7 +7,12 @@
             <div style="display: block;">
                 <div class="market-banner">
                     <img class="profile-avatar-market" src="{{ acc.author.avatar.url }}">
-                    <label class="{% if acc.author.username_style != 'gray-un' %}{{ acc.author.username_style }}{% elif acc.author.username_style == 'gray-un' %}gray-un{% endif %}" {% if acc.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} style="font-size: 20px;">{{ acc.author.username }}</label><br>
+                    <div style="display: flex;">
+                        <label class="{% if acc.author.username_style != 'gray-un' %}{{ acc.author.username_style }}{% elif acc.author.username_style == 'gray-un' %}gray-un{% endif %}" {% if acc.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} style="font-size: 20px;">{{ acc.author.username }}</label>
+                        {% if acc.author.is_online == True %}
+                            <div class="online online-avatar-market"></div>
+                        {% endif %}
+                    </div>
                     <div class="reg">
                         <label>Продал 2319 товаров</label><br>
                         <label>На маркете с 12.09.2019</label><br>
@@ -17,10 +22,10 @@
                 </div>
                 <div class="market-main-left">
                     <a href="https://t.me/sp1edh4ck" class="market-link-left" target="_blank"><i class="fa-solid fa-circle-question fa-lg icon-market-left"></i>Нужна помощь</a>
-                    <a href="" class="market-link-left"><i class="fa-solid fa-book fa-lg icon-market-left"></i>Правила и гарантии</a>
+                    <a href="{% url 'market:rules' %}" class="market-link-left"><i class="fa-solid fa-book fa-lg icon-market-left"></i>Правила и гарантии</a>
                     <a href="" class="market-link-left"><i class="fa-solid fa-sheet-plastic fa-lg icon-market-left"></i>Советы и гайды</a>
                     <a href="" class="market-link-left"><i class="fa-solid fa-gear fa-lg icon-market-left"></i>Настройки маркета</a>
-                    <a href="" class="market-link-left"><i class="fa-solid fa-angles-up fa-lg icon-market-left"></i>Повышение статуса</a>
+                    <a href="{% url 'forum:profile_upgrade' request.user %}" class="market-link-left"><i class="fa-solid fa-angles-up fa-lg icon-market-left"></i>Повышение статуса</a>
                     <hr style="margin: 5px 0px; border: 1px solid #444444;">
                     <a href="" class="market-link-left"><i class="fa-solid fa-newspaper fa-lg icon-market-left"></i>Изменения на сайте</a>
                     <a href="" class="market-link-left"><i class="fa-solid fa-flag fa-lg icon-market-left"></i>Сообщить о баге</a>
@@ -61,7 +66,7 @@
                             <label style="color: gray;">|</label>
                             <label class="text-frame-text">30 просмотров</label>
                         </div>
-                        <div class="user-acc-price">
+                        <div class="acc-price">
                             <label>{{ acc.price }}</label> <i class="fa-solid fa-ruble-sign fa-sm" style="padding-right: 3px;"></i>
                         </div>
                     </div>

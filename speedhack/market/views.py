@@ -17,6 +17,22 @@ def market(request):
 
 
 @login_required
+def my_accs(request):
+    user = request.user
+    search_query = request.GET.get('search', '')
+    if search_query:
+        accs = user.acc.filter(title__icontains=search_query)
+    else:
+        accs = user.acc.all()
+    count_accs = accs.count()
+    context = {
+        'accs': accs,
+        'count_accs': count_accs,
+    }
+    return render(request, 'market/index.html', context)
+
+
+@login_required
 def acc_sell(request):
     form = AccForm(
         request.POST or None,
@@ -39,3 +55,7 @@ def acc_detail(request, acc_id):
         'acc': acc,
     }
     return render(request, 'market/acc_detail.html', context)
+
+
+def rules(request):
+    return render(request, 'market/rules.html')
