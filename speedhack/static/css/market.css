@@ -1,5 +1,6 @@
 .frame-market-left {
-    background: #1c1f20b6;
+    background: #242424b6;
+    /* background: #1c1f20b6; */
 }
 
 .market-sell {
@@ -29,7 +30,8 @@
 .market-main-left {
     display: grid;
     align-content: center;
-    background: #1c1f20b6;
+    background: #242424b6;
+    /* background: #1c1f20b6; */
     padding: 10px 0px;
     width: 270px;
     height: 400px;
@@ -57,7 +59,8 @@
 }
 
 .market-accs {
-    background: #1c1f20b6;
+    background: #242424b6;
+    /* background: #1c1f20b6; */
     padding: 20px;
     margin-left: 20px;
     border-radius: 10px;
@@ -76,7 +79,8 @@
 }
 
 .market-banner {
-    background: #1c1f20b6;
+    background: #242424b6;
+    /* background: #1c1f20b6; */
     margin-bottom: 20px;
     border-radius: 10px;
     padding: 20px;
@@ -88,7 +92,8 @@
 
 .market-user-acc {
     display: block;
-    background: #1c1f20b6;
+    background: #242424b6;
+    /* background: #1c1f20b6; */
     padding: 20px;
     margin-left: 20px;
     border-radius: 10px;
@@ -196,5 +201,6 @@
     color: #ffffff;
     padding: 20px;
     border-radius: 10px;
-    background: #1c1f20b6;
+    background: #242424b6;
+    /* background: #1c1f20b6; */
 }

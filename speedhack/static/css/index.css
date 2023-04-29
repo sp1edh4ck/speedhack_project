@@ -16,7 +16,8 @@
 
 .frame-left {
     min-width: 250px;
-    background: #1c1f20b6;
+    background: #242424b6;
+    /* background: #1c1f20b6; */
     border-radius: 10px;
     padding: 20px 10px 15px 10px;
     margin: 0px 20px 10px 0px;
@@ -66,11 +67,13 @@
 }
 
 .li-label-ts:hover {
-    background: #2e2e2eb6;
+    background: #202020b6;
+    /* background: #2e2e2eb6; */
 }
 
 .li-label-ts.active-menu {
-    background: #2e2e2eb6;
+    background: #202020b6;
+    /* backgrounrgba(34, 34, 34, 0.714)eb6; */
 }
 
 .li-label-ts.active-menu .icons-index {
@@ -259,7 +262,8 @@
 
 .frame-right-first-index {
     width: 970px;
-    background: #1c1f20b6;
+    background: #242424b6;
+    /* background: #1c1f20b6; */
     border-radius: 10px;
     padding: 20px;
     margin: 0 0 20px 0;
@@ -339,7 +343,8 @@
     min-width: 235px;
     max-width: 235px;
     font-size: 16px;
-    background: #2e2e2eb6;
+    background: #202020b6;
+    /* background: #2e2e2eb6; */
     border: 0px solid #444444;
     color: #ffffff;
     outline: none;

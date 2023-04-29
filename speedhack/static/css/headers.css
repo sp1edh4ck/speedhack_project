@@ -4,7 +4,8 @@
 }
 
 .header {
-    background: #1e2122;
+    background: #242424;
+    /* background: #1e2122; */
     padding: 5px 0px;
     position: fixed;
     top: 0;
@@ -62,7 +63,8 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
     padding: 2px 8px;
     color: #ff506f;
-    background: #1e2122;
+    background: #242424b6;
+    /* background: #1e2122; */
     border: 1px solid;
     text-decoration: none;
     border-color: #ff506f;
@@ -142,14 +144,16 @@ a.window-button {
 }
 
 .window-other a:hover {
-    background-color: #333333;
+    background: #242424b6;
+    /* background-color: #333333; */
 }
 
 .window-main:hover .window-other {
     display: grid;
     align-content: center;
     border: 1px solid #444444;
-    background: #292a2e;
+    background: #242424;
+    /* background: #292a2e; */
     min-width: 200px;
     border-radius: 10px;
 }

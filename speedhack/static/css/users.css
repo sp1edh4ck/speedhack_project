@@ -4,7 +4,8 @@
     border-radius: 10px;
     padding: 20px;
     max-height: 70px;
-    background: #1c1f20b6;
+    background: #242424b6;
+    /* background: #1c1f20b6; */
 }
 
 .input-filter-users {
@@ -35,14 +36,16 @@
     border-radius: 10px;
     padding: 20px;
     max-height: 90px;
-    background: #1c1f20b6;
+    background: #242424b6;
+    /* background: #1c1f20b6; */
 }
 
 .frame-right-users {
     width: 1050px;
     border-radius: 10px;
     margin-bottom: 20px;
-    background: #1c1f20b6;
+    background: #242424b6;
+    /* background: #1c1f20b6; */
 }
 
 .users-div {
@@ -84,7 +87,7 @@
     min-width: 220px;
     max-width: 220px;
     font-size: 16px;
-    background: #2e2e2eb6;
+    background: #202020b6;
     border: 0px solid #444444;
     color: #ffffff;
     outline: none;
