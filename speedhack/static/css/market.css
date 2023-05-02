@@ -58,9 +58,14 @@
     color: #505050;
 }
 
+.acc-frame {
+    display: block;
+}
+
 .market-accs {
     background: #242424b6;
     /* background: #1c1f20b6; */
+    margin-bottom: 20px;
     padding: 20px;
     margin-left: 20px;
     border-radius: 10px;
