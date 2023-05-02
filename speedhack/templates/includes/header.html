@@ -1,75 +1,75 @@
 {% load static %}
 <header class="header">
-    <div class="header_con">
-        <a href="/"><img class="brandLogo" src="{% static 'images/speedhack_logo.png' %}" alt="speedhack"></a>
-        <i class="fa-solid fa-grip-lines fa-2xl icon-burger"></i>
-        <div class="header-menu" id="menu">
-            <ul class="menu-list">
-                <li class="menu-item"><a href="{% url 'forum:index' %}" class="menu-link">Форум</a></li>
-                <li class="menu-item"><a href="{% url 'market:index' %}" class="menu-link">Маркет</a></li>
-                <li class="menu-item">
-                    <div class="window-main">
-                        <a class="window-button" style="color: #ffffff;">Соц. сети <i class="fas fa-angle-down fa-sm icons-header"></i></a>
-                        <div style="padding-top: 10px;">
-                            <div class="window-other">
-                                <a href="https://t.me/speedhack_project" target="_blank" class="window-button-second">Канал в Telegram</a>
-                                <a href="https://vk.com/speedhack_project" target="_blank" class="window-button-second">Группа ВКонтакте</a>
-                                <a href="https://discord.gg/HH8bCVsyTf" target="_blank" class="window-button-second">Discord сервер</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="menu-item">
-                    <div class="window-main">
-                        <a class="window-button" style="color: #ffffff;">Другое <i class="fa fa-angle-down fa-sm icons-header"></i></a>
-                        <div style="padding-top: 10px;">
-                            <div class="window-other">
-                                <a href="https://t.me/sp1edh4ck_lite" target="_blank" class="window-button-second">Нужна помощь?</a>
-                                <a href="{% url 'forum:users' %}" class="window-button-second">Пользователи</a>
-                                <a href="{% url 'forum:rules' %}" class="window-button-second">Правила сайта</a>
-                                {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' %}
-                                    <a href="{% url 'forum:admin_panel' %}" class="window-button-second">Админка</a>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        {% if request.user.is_authenticated %}
-            <img class="notification" src="{% static 'images/notifications.png' %}">
-            <div class="window-main">
-                <div class="window-button" style="display: flex;">
-                    <div style="margin-right: 10px;">
-                        <a class="{% if request.user.username_style != 'gray-un' %}{{ request.user.username_style }}{% endif %}" {% if request.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ request.user }}</a>
-                    </div>
-                    <div class="user-avatar-header-first">
-                        <img class="user-avatar-header" src="{{ request.user.avatar.url }}" >
-                    </div>
-                </div>
-                <div style="padding-top: 10px;">
-                    <div class="window-other" style="right: 0;">
-                        <a class="window-button-second" href="{% url 'forum:profile' user.username %}">Профиль</a>
-                        <hr style="margin: 5px 0px; border: 1px solid #444444;">
-                        <a class="window-button-second">Баланс: {{ user.balance }} <i class="fas fa-ruble-sign fa-lg icon-rub"></i></a>
-                        <a class="window-button-second" href="{% url 'market:my_accs' %}">Мои аккаунты</a>
-                        <a class="window-button-second" href="#">Мои покупки</a>
-                        <hr style="margin: 5px 0px; border: 1px solid #444444;">
-                        <a class="window-button-second" href="{% url 'forum:my_topics' %}">Мои темы</a>
-                        <a class="window-button-second" href="{% url 'forum:profile_info_edit' user.username %}">Настройки профиля</a>
-                        <a class="window-button-second" href="#">Switch to English</a>
-                        <hr style="margin: 5px 0px; border: 1px solid #444444;">
-                        <a class="window-button-second" href="{% url 'users:logout' %}">Выйти</a>
-                    </div>
-                </div>
+  <div class="header_con">
+    <a href="/"><img class="brandLogo" src="{% static 'images/speedhack_logo.png' %}" alt="speedhack"></a>
+    <i class="fa-solid fa-grip-lines fa-2xl icon-burger"></i>
+    <div class="header-menu" id="menu">
+      <ul class="menu-list">
+        <li class="menu-item"><a href="{% url 'forum:index' %}" class="menu-link">Форум</a></li>
+        <li class="menu-item"><a href="{% url 'market:index' %}" class="menu-link">Маркет</a></li>
+        <li class="menu-item">
+          <div class="window-main">
+            <a class="window-button" style="color: #ffffff;">Соц. сети <i class="fas fa-angle-down fa-sm icons-header"></i></a>
+            <div style="padding-top: 10px;">
+              <div class="window-other">
+                <a href="https://t.me/speedhack_project" target="_blank" class="window-button-second">Канал в Telegram</a>
+                <a href="https://vk.com/speedhack_project" target="_blank" class="window-button-second">Группа ВКонтакте</a>
+                <a href="https://discord.gg/HH8bCVsyTf" target="_blank" class="window-button-second">Discord сервер</a>
+              </div>
             </div>
-        {% else %}
-            <div class="header_logreg">
-                <a href="{% url 'users:login' %}" class="button">Логин</a>
-                <a href="{% url 'users:signup' %}" class="button">Регистрация</a>
+          </div>
+        </li>
+        <li class="menu-item">
+          <div class="window-main">
+            <a class="window-button" style="color: #ffffff;">Другое <i class="fa fa-angle-down fa-sm icons-header"></i></a>
+            <div style="padding-top: 10px;">
+              <div class="window-other">
+                <a href="https://t.me/sp1edh4ck_lite" target="_blank" class="window-button-second">Нужна помощь?</a>
+                <a href="{% url 'forum:users' %}" class="window-button-second">Пользователи</a>
+                <a href="{% url 'forum:rules' %}" class="window-button-second">Правила сайта</a>
+                {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' %}
+                  <a href="{% url 'forum:admin_panel' %}" class="window-button-second">Админка</a>
+                {% endif %}
+              </div>
             </div>
-        {% endif %}
+          </div>
+        </li>
+      </ul>
     </div>
-    <script type="text/javascript" src="{% static 'js/header.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/barMenu.js' %}"></script>
+    {% if request.user.is_authenticated %}
+      <img class="notification" src="{% static 'images/notifications.png' %}">
+      <div class="window-main">
+        <div class="window-button" style="display: flex;">
+          <div style="margin-right: 10px;">
+            <a class="{% if request.user.username_style != 'gray-un' %}{{ request.user.username_style }}{% endif %}" {% if request.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ request.user }}</a>
+          </div>
+          <div class="user-avatar-header-first">
+            <img class="user-avatar-header" src="{{ request.user.avatar.url }}" >
+          </div>
+        </div>
+        <div style="padding-top: 10px;">
+          <div class="window-other" style="right: 0;">
+            <a class="window-button-second" href="{% url 'forum:profile' user.username %}">Профиль</a>
+            <hr style="margin: 5px 0px; border: 1px solid #444444;">
+            <a class="window-button-second">Баланс: {{ user.balance }} <i class="fas fa-ruble-sign fa-lg icon-rub"></i></a>
+            <a class="window-button-second" href="{% url 'market:my_accs' %}">Мои аккаунты</a>
+            <a class="window-button-second" href="#">Мои покупки</a>
+            <hr style="margin: 5px 0px; border: 1px solid #444444;">
+            <a class="window-button-second" href="{% url 'forum:my_topics' %}">Мои темы</a>
+            <a class="window-button-second" href="{% url 'forum:profile_info_edit' user.username %}">Настройки профиля</a>
+            <a class="window-button-second" href="#">Switch to English</a>
+            <hr style="margin: 5px 0px; border: 1px solid #444444;">
+            <a class="window-button-second" href="{% url 'users:logout' %}">Выйти</a>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <div>
+        <a href="{% url 'users:login' %}" class="button">Логин</a>
+        <a href="{% url 'users:signup' %}" class="button">Регистрация</a>
+      </div>
+    {% endif %}
+  </div>
+  <script type="text/javascript" src="{% static 'js/header.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/barMenu.js' %}"></script>
 </header>

@@ -1,49 +1,49 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ru-RU">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <meta name="description" content="Всё хорошо, деньги капают, время улетает :)">
-        <title>
-            {% block title %}
-            {% endblock %}
-        </title>
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <link rel="stylesheet" href="{% static 'css/index.css' %}">
-        <link rel="stylesheet" href="{% static 'css/market.css' %}">
-        <link rel="stylesheet" href="{% static 'css/post_create.css' %}">
-        <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
-        <link rel="stylesheet" href="{% static 'css/faq.css' %}">
-        <link rel="stylesheet" href="{% static 'css/rules.css' %}">
-        <link rel="stylesheet" href="{% static 'css/admin.css' %}">
-        <link rel="stylesheet" href="{% static 'css/users.css' %}">
-        <link rel="stylesheet" href="{% static 'css/login.css' %}">
-        <link rel="stylesheet" href="{% static 'css/profile.css' %}">
-        <link rel="stylesheet" href="{% static 'css/profile_edit.css' %}">
-        <link rel="stylesheet" href="{% static 'css/custom_user.css' %}">
-        <link rel="stylesheet" href="{% static 'css/paginator.css' %}">
-        <link rel="stylesheet" href="{% static 'css/headers.css' %}">
-        <link rel="stylesheet" href="{% static 'css/optimization.css' %}">
-        <link type="image/x-icon" href="{% static 'images/favicon.ico' %}" rel="shortcut icon">
-        <link type="Image/x-icon" href="{% static 'images/favicon.ico' %}" rel="icon">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
-        <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
-        <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    </head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="description" content="Всё хорошо, деньги капают, время улетает :)">
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/market.css' %}">
+    <link rel="stylesheet" href="{% static 'css/post_create.css' %}">
+    <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css/faq.css' %}">
+    <link rel="stylesheet" href="{% static 'css/rules.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/users.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile_edit.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom_user.css' %}">
+    <link rel="stylesheet" href="{% static 'css/paginator.css' %}">
+    <link rel="stylesheet" href="{% static 'css/headers.css' %}">
+    <link rel="stylesheet" href="{% static 'css/optimization.css' %}">
+    <link type="image/x-icon" href="{% static 'images/favicon.ico' %}" rel="shortcut icon">
+    <link type="Image/x-icon" href="{% static 'images/favicon.ico' %}" rel="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  </head>
 
-    <body>
-        {% comment %} <div class="wrapper" id="wrap"> {% endcomment %}
-            {% include 'includes/header.html' %}
-            {% block content %}
-            {% endblock %}
-        {% comment %} </div> {% endcomment %}
-    </body>
+  <body>
+    {% comment %} <div class="wrapper" id="wrap"> {% endcomment %}
+      {% include 'includes/header.html' %}
+      {% block content %}
+      {% endblock %}
+    {% comment %} </div> {% endcomment %}
+  </body>
 </html>

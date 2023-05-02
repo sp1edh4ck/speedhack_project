@@ -22,39 +22,41 @@
           <hr style="margin: 5px 0px; border: 1px solid #444444;">
           <a href="" class="market-link-left"><i class="fa-solid fa-money-bill-trend-up fa-lg icon-market-left"></i>Стоимость инвентаря steam</a>
         </div>
-        <div class="market-main-left" style="margin-top: 20px; height: 465px;">
-          <label class="market-link-left mll-fix">
-            <div style="display: flex;">
-              <div style="margin: 0 auto 0 0;">
-                <i class="fa-solid fa-sack-dollar fa-lg icon-market-left"></i>Баланс
+        {% if user.is_authenticated %}
+          <div class="market-main-left" style="margin-top: 20px; height: 465px;">
+            <label class="market-link-left mll-fix">
+              <div style="display: flex;">
+                <div style="margin: 0 auto 0 0;">
+                  <i class="fa-solid fa-sack-dollar fa-lg icon-market-left"></i>Баланс
+                </div>
+                <div>
+                  <label style="color: #ff506f;">{{ user.balance }} <i class="fa-solid fa-ruble-sign fa-sm" style="padding-right: 3px;"></i></label>
+                </div>
               </div>
-              <div>
-                <label style="color: #ff506f;">{{ user.balance }} <i class="fa-solid fa-ruble-sign fa-sm" style="padding-right: 3px;"></i></label>
-              </div>
-            </div>
-          </label>
-          <a href="" class="market-link-left"><i class="fa-solid fa-circle-plus fa-lg icon-market-left"></i>Пополнить баланс</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-circle-minus fa-lg icon-market-left"></i>Вывести средства</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-money-bill-transfer fa-lg icon-market-left"></i>Перевести средства</a>
-          <hr style="margin: 5px 0px; border: 1px solid #444444;">
-          <a href="{% url 'market:my_accs' %}" class="market-link-left"><i class="fa-solid fa-shop fa-lg icon-market-left"></i>Мои аккаунты</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-bag-shopping fa-lg icon-market-left"></i>Мои покупки</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-bars-staggered icon-market-left"></i>Мои операции</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-bookmark fa-lg icon-market-left"></i>Избранное</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-tag fa-lg icon-market-left"></i>Метки</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-user-xmark fa-lg icon-market-left"></i>Игнор-лист продавцов</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-comments-dollar fa-lg icon-market-left"></i>Мои денежные споры</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-retweet fa-lg icon-market-left"></i>Автоплатежи</a>
-        </div>
+            </label>
+            <a href="" class="market-link-left"><i class="fa-solid fa-circle-plus fa-lg icon-market-left"></i>Пополнить баланс</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-circle-minus fa-lg icon-market-left"></i>Вывести средства</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-money-bill-transfer fa-lg icon-market-left"></i>Перевести средства</a>
+            <hr style="margin: 5px 0px; border: 1px solid #444444;">
+            <a href="{% url 'market:my_accs' %}" class="market-link-left"><i class="fa-solid fa-shop fa-lg icon-market-left"></i>Мои аккаунты</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-bag-shopping fa-lg icon-market-left"></i>Мои покупки</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-bars-staggered icon-market-left"></i>Мои операции</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-bookmark fa-lg icon-market-left"></i>Избранное</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-tag fa-lg icon-market-left"></i>Метки</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-user-xmark fa-lg icon-market-left"></i>Игнор-лист продавцов</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-comments-dollar fa-lg icon-market-left"></i>Мои денежные споры</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-retweet fa-lg icon-market-left"></i>Автоплатежи</a>
+          </div>
+        {% endif %}
       </div>
       <div>
         <div style="margin: 0 0 20px 20px;">
           <label style="color: #ffffff; font-size: 20px;">Выберите категорию</label>
           <div style="margin-top: 20px;">
-            <img src="{% static 'images/steam.png' %}" class="market-png-cat">
-            <img src="{% static 'images/ea.png' %}" class="market-png-cat">
-            <img src="{% static 'images/vk.png' %}" class="market-png-cat">
-            <img src="{% static 'images/telegram.png' %}" class="market-png-cat">
+            <a href="{% url 'market:group_free' 'steam' %}"><img src="{% static 'images/steam.png' %}" class="market-png-cat"></a>
+            <a href="{% url 'market:group_free' 'ea' %}"><img src="{% static 'images/ea.png' %}" class="market-png-cat"></a>
+            <a href="{% url 'market:group_free' 'vk' %}"><img src="{% static 'images/vk.png' %}" class="market-png-cat"></a>
+            <a href="{% url 'market:group_free' 'telegram' %}"><img src="{% static 'images/telegram.png' %}" class="market-png-cat"></a>
           </div>
         </div>
         {% if count_accs != 0 %}

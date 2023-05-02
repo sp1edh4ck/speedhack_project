@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from .models import Market
+from .models import Market, AccGroup
 from .forms import AccForm
 from users.models import CustomUser
 
@@ -14,6 +14,18 @@ def market(request):
         'count_accs': count_accs,
     }
     return render(request, 'market/index.html', context)
+
+
+def group_free(request, slug):
+    group = get_object_or_404(AccGroup, slug=slug)
+    accs = group.acc.all()
+    count_accs = accs.count()
+    context = {
+        'accs': accs,
+        'group': group,
+        'count_accs': count_accs,
+    }
+    return render(request, 'market/template_groups.html', context)
 
 
 @login_required

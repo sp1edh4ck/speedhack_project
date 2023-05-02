@@ -3,95 +3,102 @@
 {% block title %}speedhack / маркет{% endblock %}
 {% block content %}
   <div class="main">
-    <div class="frames_con" style="display: flex;">
-      <div style="display: block;">
-        <div class="market-banner">
-          <img class="profile-avatar-market" src="{{ acc.author.avatar.url }}">
-          <div style="display: flex;">
-            <label class="{% if acc.author.username_style != 'gray-un' %}{{ acc.author.username_style }}{% elif acc.author.username_style == 'gray-un' %}gray-un{% endif %}" {% if acc.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} style="font-size: 20px;">{{ acc.author.username }}</label>
-            {% if acc.author.is_online == True %}
-              <div class="online online-avatar-market"></div>
-            {% endif %}
-          </div>
-          <div class="reg">
-            <label>Продал 2319 товаров</label><br>
-            <label>На маркете с 12.09.2019</label><br>
-            <a href="" class="link-sell">122 аккаунта на продаже</a>
-          </div>
-          <a class="market-ls"><i class="fa-solid fa-envelope fa-lg" style="color: gray; margin-left: 10px;"></i> Отправить сообщение</a>
-        </div>
-        <div class="market-main-left">
-          <a href="https://t.me/sp1edh4ck" class="market-link-left" target="_blank"><i class="fa-solid fa-circle-question fa-lg icon-market-left"></i>Нужна помощь</a>
-          <a href="{% url 'market:rules' %}" class="market-link-left"><i class="fa-solid fa-book fa-lg icon-market-left"></i>Правила и гарантии</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-sheet-plastic fa-lg icon-market-left"></i>Советы и гайды</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-gear fa-lg icon-market-left"></i>Настройки маркета</a>
-          <a href="{% url 'forum:profile_upgrade' request.user %}" class="market-link-left"><i class="fa-solid fa-angles-up fa-lg icon-market-left"></i>Повышение статуса</a>
-          <hr style="margin: 5px 0px; border: 1px solid #444444;">
-          <a href="" class="market-link-left"><i class="fa-solid fa-newspaper fa-lg icon-market-left"></i>Изменения на сайте</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-flag fa-lg icon-market-left"></i>Сообщить о баге</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-circle-info fa-lg icon-market-left"></i>Предложить идею</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-code fa-lg icon-market-left"></i>API для разработчика</a>
-          <hr style="margin: 5px 0px; border: 1px solid #444444;">
-          <a href="" class="market-link-left"><i class="fa-solid fa-money-bill-trend-up fa-lg icon-market-left"></i>Стоимость инвентаря steam</a>
-        </div>
-        <div class="market-main-left" style="margin-top: 20px; height: 465px;">
-          <label class="market-link-left mll-fix">
-            <div style="display: flex;">
-              <div style="margin: 0 auto 0 0;">
-                <i class="fa-solid fa-sack-dollar fa-lg icon-market-left"></i>Баланс
-              </div>
-              <div>
-                <label style="color: #ff506f;">{{ user.balance }} <i class="fa-solid fa-ruble-sign fa-sm" style="padding-right: 3px;"></i></label>
-              </div>
-            </div>
-          </label>
-          <a href="" class="market-link-left"><i class="fa-solid fa-circle-plus fa-lg icon-market-left"></i>Пополнить баланс</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-circle-minus fa-lg icon-market-left"></i>Вывести средства</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-money-bill-transfer fa-lg icon-market-left"></i>Перевести средства</a>
-          <hr style="margin: 5px 0px; border: 1px solid #444444;">
-          <a href="" class="market-link-left"><i class="fa-solid fa-shop fa-lg icon-market-left"></i>Мои аккаунты</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-bag-shopping fa-lg icon-market-left"></i>Мои покупки</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-bars-staggered icon-market-left"></i>Мои операции</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-bookmark fa-lg icon-market-left"></i>Избранное</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-tag fa-lg icon-market-left"></i>Метки</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-user-xmark fa-lg icon-market-left"></i>Игнор-лист продавцов</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-comments-dollar fa-lg icon-market-left"></i>Мои денежные споры</a>
-          <a href="" class="market-link-left"><i class="fa-solid fa-retweet fa-lg icon-market-left"></i>Автоплатежи</a>
-        </div>
+    <div class="frames_con" style="display: block;">
+      <div style="margin-bottom: 20px;">
+        <label class="link-title"><a href="{% url 'market:index' %}" class="link-title-main">Маркет</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'market:group_free' acc.group.slug %}" class="link-title-main">Вернуться к поиску {{ acc.group.title }}</a></label>
       </div>
-      <div style="display: block;">
-        <div class="market-user-acc">
-          <div style="display: flex;">
-            <div class="text-frame-div" style="margin: 0 auto 0 0;">
-              <label class="text-frame-title">{{ acc.title }}</label><br>
-              <label class="text-frame-text">{{ acc.pub_date|date:"d E Y / H:i" }}</label>
-              <label style="color: gray;">|</label>
-              <label class="text-frame-text">30 просмотров</label>
+      <div style="display: flex;">
+        <div style="display: block;">
+          <div class="market-banner">
+            <img class="profile-avatar-market" src="{{ acc.author.avatar.url }}">
+            <div style="display: flex;">
+              <label class="{% if acc.author.username_style != 'gray-un' %}{{ acc.author.username_style }}{% elif acc.author.username_style == 'gray-un' %}gray-un{% endif %}" {% if acc.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} style="font-size: 20px;">{{ acc.author.username }}</label>
+              {% if acc.author.is_online == True %}
+                <div class="online online-avatar-market"></div>
+              {% endif %}
             </div>
-            <div class="acc-price">
-              <label>{{ acc.price }}</label> <i class="fa-solid fa-ruble-sign fa-sm" style="padding-right: 3px;"></i>
+            <div class="reg">
+              <label>Продал 2319 товаров</label><br>
+              <label>На маркете с 12.09.2019</label><br>
+              <a href="" class="link-sell">122 аккаунта на продаже</a>
             </div>
+            <a class="market-ls"><i class="fa-solid fa-envelope fa-lg" style="color: gray; margin-left: 10px;"></i> Отправить сообщение</a>
           </div>
-          <div style="display: flex;">
-            <a class="market-acc-btn" style="width: 90px;">Купить</a>
-            <a class="market-acc-btn" style="width: 100px;">В корзину</a>
-            <a class="market-acc-btn gr-c" style="width: 130px;">Хочу скидку!</a>
-            <a class="market-acc-btn"></a>
-            <a class="market-acc-btn"></a>
+          <div class="market-main-left">
+            <a href="https://t.me/sp1edh4ck" class="market-link-left" target="_blank"><i class="fa-solid fa-circle-question fa-lg icon-market-left"></i>Нужна помощь</a>
+            <a href="{% url 'market:rules' %}" class="market-link-left"><i class="fa-solid fa-book fa-lg icon-market-left"></i>Правила и гарантии</a>
+            <a href="{% url 'forum:group_filter_posts' 111 %}" class="market-link-left"><i class="fa-solid fa-sheet-plastic fa-lg icon-market-left"></i>Советы и гайды</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-gear fa-lg icon-market-left"></i>Настройки маркета</a>
+            <a href="{% url 'forum:profile_upgrade' request.user %}" class="market-link-left"><i class="fa-solid fa-angles-up fa-lg icon-market-left"></i>Повышение статуса</a>
+            <hr style="margin: 5px 0px; border: 1px solid #444444;">
+            <a href="{% url 'forum:post_detail' 19 %}" class="market-link-left"><i class="fa-solid fa-newspaper fa-lg icon-market-left"></i>Изменения на сайте</a>
+            <a href="{% url 'forum:group_filter_posts' 108 %}" class="market-link-left"><i class="fa-solid fa-flag fa-lg icon-market-left"></i>Сообщить о баге</a>
+            <a href="{% url 'forum:group_filter_posts' 109 %}" class="market-link-left"><i class="fa-solid fa-circle-info fa-lg icon-market-left"></i>Предложить идею</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-code fa-lg icon-market-left"></i>API для разработчика</a>
+            <hr style="margin: 5px 0px; border: 1px solid #444444;">
+            <a href="" class="market-link-left"><i class="fa-solid fa-money-bill-trend-up fa-lg icon-market-left"></i>Стоимость инвентаря steam</a>
           </div>
-          <hr style="margin: 20px 0px; border: 1px solid #444444;">
-          <div style="display: block;">
-            <div>
-              <label style="marg"><i class="fa-solid fa-truck-fast fa-lg icon-text-mr"></i> Данные от аккаунта - <label style="color: #00ba78;">сразу</label> после покупки</label>
+          {% if user.is_authenticated %}
+            <div class="market-main-left" style="margin-top: 20px; height: 465px;">
+              <label class="market-link-left mll-fix">
+                <div style="display: flex;">
+                  <div style="margin: 0 auto 0 0;">
+                    <i class="fa-solid fa-sack-dollar fa-lg icon-market-left"></i>Баланс
+                  </div>
+                  <div>
+                    <label style="color: #ff506f;">{{ user.balance }} <i class="fa-solid fa-ruble-sign fa-sm" style="padding-right: 3px;"></i></label>
+                  </div>
+                </div>
+              </label>
+              <a href="" class="market-link-left"><i class="fa-solid fa-circle-plus fa-lg icon-market-left"></i>Пополнить баланс</a>
+              <a href="" class="market-link-left"><i class="fa-solid fa-circle-minus fa-lg icon-market-left"></i>Вывести средства</a>
+              <a href="" class="market-link-left"><i class="fa-solid fa-money-bill-transfer fa-lg icon-market-left"></i>Перевести средства</a>
+              <hr style="margin: 5px 0px; border: 1px solid #444444;">
+              <a href="" class="market-link-left"><i class="fa-solid fa-shop fa-lg icon-market-left"></i>Мои аккаунты</a>
+              <a href="" class="market-link-left"><i class="fa-solid fa-bag-shopping fa-lg icon-market-left"></i>Мои покупки</a>
+              <a href="" class="market-link-left"><i class="fa-solid fa-bars-staggered icon-market-left"></i>Мои операции</a>
+              <a href="" class="market-link-left"><i class="fa-solid fa-bookmark fa-lg icon-market-left"></i>Избранное</a>
+              <a href="" class="market-link-left"><i class="fa-solid fa-tag fa-lg icon-market-left"></i>Метки</a>
+              <a href="" class="market-link-left"><i class="fa-solid fa-user-xmark fa-lg icon-market-left"></i>Игнор-лист продавцов</a>
+              <a href="" class="market-link-left"><i class="fa-solid fa-comments-dollar fa-lg icon-market-left"></i>Мои денежные споры</a>
+              <a href="" class="market-link-left"><i class="fa-solid fa-retweet fa-lg icon-market-left"></i>Автоплатежи</a>
             </div>
-            <div style="margin-top: 10px;">
-              <label><i class="fa-solid fa-envelope-open-text fa-lg icon-text-mr"></i> <label style="color: #00ba78;">Есть доступ</label> к временной почте от аккаунта</label>
+          {% endif %}
+        </div>
+        <div style="display: block;">
+          <div class="market-user-acc">
+            <div style="display: flex;">
+              <div class="text-frame-div" style="margin: 0 auto 0 0;">
+                <label class="text-frame-title">{{ acc.title }}</label><br>
+                <label class="text-frame-text">{{ acc.pub_date|date:"d E Y / H:i" }}</label>
+                <label style="color: gray;">|</label>
+                <label class="text-frame-text">30 просмотров</label>
+              </div>
+              <div class="acc-price">
+                <label>{{ acc.price }}</label> <i class="fa-solid fa-ruble-sign fa-sm" style="padding-right: 3px;"></i>
+              </div>
             </div>
-            <div style="margin-top: 10px;">
-              <label><i class="fa-solid fa-lock fa-lg icon-text-mr"></i> <label style="color: #ff7070;">Отсутствует</label> доступ к родной почте аккаунта</label>
+            <div style="display: flex;">
+              <a class="market-acc-btn" style="width: 90px;">Купить</a>
+              <a class="market-acc-btn" style="width: 100px;">В корзину</a>
+              <a class="market-acc-btn gr-c" style="width: 130px;">Хочу скидку!</a>
+              <a class="market-acc-btn"></a>
+              <a class="market-acc-btn"></a>
             </div>
-            <div style="margin-top: 10px;">
-              <label><i class="fa-solid fa-shield-halved fa-lg icon-text-mr"></i> <label style="color: #f0ff69;">24 часа</label> гарантии</label>
+            <hr style="margin: 20px 0px; border: 1px solid #444444;">
+            <div style="display: block;">
+              <div>
+                <label style="marg"><i class="fa-solid fa-truck-fast fa-lg icon-text-mr"></i> Данные от аккаунта - <label style="color: #00ba78;">сразу</label> после покупки</label>
+              </div>
+              <div style="margin-top: 10px;">
+                <label><i class="fa-solid fa-envelope-open-text fa-lg icon-text-mr"></i> <label style="color: #00ba78;">Есть доступ</label> к временной почте от аккаунта</label>
+              </div>
+              <div style="margin-top: 10px;">
+                <label><i class="fa-solid fa-lock fa-lg icon-text-mr"></i> <label style="color: #ff7070;">Отсутствует</label> доступ к родной почте аккаунта</label>
+              </div>
+              <div style="margin-top: 10px;">
+                <label><i class="fa-solid fa-shield-halved fa-lg icon-text-mr"></i> <label style="color: #f0ff69;">24 часа</label> гарантии</label>
+              </div>
             </div>
           </div>
         </div>

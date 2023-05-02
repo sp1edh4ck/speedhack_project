@@ -66,13 +66,12 @@ def group_free(request, slug):
     else:
         posts = group.posts.all()
     count_posts = posts.count()
-    template = 'forum/template_groups.html'
     context = {
         'count_posts': count_posts,
         'group': group,
         'objects': pagination_post(request, posts),
     }
-    return render(request, template, context)
+    return render(request, 'forum/template_groups.html', context)
 
 
 def profile(request, username):
