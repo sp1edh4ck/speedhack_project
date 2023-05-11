@@ -57,7 +57,7 @@
         </div>
         {% if count_subscriptions != 0 %}
           <div class="frame-left-second">
-            <a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ count_subscriptions }}</label> {%if count_subscriptions == 1 %}подписка{% elif count_subscriptions <= 4 and count_subscriptions >= 2 %}подписки{% elif count_subscriptions <= 100 and count_subscriptions >= 5 %}подписок{% endif %}</a>
+            <a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ count_subscriptions }}</label> {% if count_subscriptions == 1 %}подписка{% elif count_subscriptions <= 4 and count_subscriptions >= 2 %}подписки{% elif count_subscriptions <= 100 and count_subscriptions >= 5 %}подписок{% endif %}</a>
             <div class="subs-left">
               {% for post in subscriptions %}
                 <div style="display: flex;" class="sub-users-div">

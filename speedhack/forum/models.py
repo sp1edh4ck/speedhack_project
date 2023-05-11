@@ -38,6 +38,18 @@ class Forum(models.Model):
         upload_to='posts/',
         blank=True,
     )
+    view = models.IntegerField(
+        default=0,
+        verbose_name='Просмотры'
+    )
+    closed = models.BooleanField(
+        default=False,
+        verbose_name='Закрытая тема',
+    )
+    edit = models.BooleanField(
+        default=False,
+        verbose_name='Пост был отредактирован',
+    )
 
     class Meta:
         verbose_name = 'Пост'
@@ -47,6 +59,28 @@ class Forum(models.Model):
     def __str__(self):
         number_of_chars = 15
         return self.text[:number_of_chars]
+
+
+class Like(models.Model):
+    post = models.ForeignKey(
+        Forum,
+        on_delete=models.CASCADE,
+        related_name='like',
+        verbose_name='Пост',
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='like',
+        verbose_name='Автор',
+    )
+    taked = models.BooleanField(
+        default=False,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата публикации',
+    )
 
 
 class Comment(models.Model):

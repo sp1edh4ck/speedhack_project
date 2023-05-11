@@ -1,51 +1,51 @@
 .button-group {
-    display: block;
+  display: block;
 }
 
 .button-list {
-    font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
-    font-size: 16px;
-    border: 1px solid;
-    border-color: #ff506f;
-    display: block;
-    margin: 0 auto 0 auto;
-    width: 230px;
-    text-align: center;
-    color: #ff506f;
-    background: #242729b6;
-    transition: all 0.5s ease 0s;
+  font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
+  font-size: 16px;
+  border: 1px solid;
+  border-color: #ff506f;
+  display: block;
+  margin: 0 auto 0 auto;
+  width: 230px;
+  text-align: center;
+  color: #ff506f;
+  background: #242729b6;
+  transition: all 0.5s ease 0s;
 }
 
 .button-list:hover {
-    background: #ff506f;
-    color: #ffffff;
+  background: #ff506f;
+  color: #ffffff;
 }
 
 .faq-tech-ques {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .faq-tech-answer {
-    color: gray;
+  color: gray;
 }
 
 .faq-link {
-    color: gray;
-    transition: all 0.5s ease 0s;
+  color: gray;
+  transition: all 0.5s ease 0s;
 }
 
 .faq-link:hover {
-    color: #ff506f;
+  color: #ff506f;
 }
 
 .button-list {
-    padding: 7px 10px;
-    cursor: pointer;
-    transition: all 0.5s ease 0s;
+  padding: 7px 10px;
+  cursor: pointer;
+  transition: all 0.5s ease 0s;
 }
 
 .button-list__active {
-    cursor: default;
-    color: #ffffff;
-    background: #ff506f;
+  cursor: default;
+  color: #ffffff;
+  background: #ff506f;
 }

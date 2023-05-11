@@ -2,11 +2,12 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 
+from market.models import Market
 from users.forms import UserProfileForm, UserUniquiForm
 from users.models import CustomUser
 
 from .forms import ProfileCommentForm, CommentForm, PostForm
-from .models import Follow, Forum, User, Group
+from .models import Follow, Forum, User, Group, Comment
 
 
 def pagination_post(request, post_list):
@@ -24,11 +25,21 @@ def pagination_comments(request, comment_list):
     return paginator.get_page(request.GET.get('page'))
 
 
+def banned_redirect(request):
+    return redirect('forum:banned')
+
+
 def banned(request):
     return render(request, 'users/banned.html')
 
 
+def successfully(request):
+    return render(request, 'forum/successfully.html')
+
+
 def index(request):
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
+        return banned_redirect(request)
     search_query = request.GET.get('search', '')
     if search_query:
         posts = Forum.objects.filter(title__icontains=search_query)
@@ -43,6 +54,8 @@ def index(request):
 
 
 def my_topics(request):
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
+        return banned_redirect(request)
     user = request.user
     search_query = request.GET.get('search', '')
     if search_query:
@@ -58,6 +71,8 @@ def my_topics(request):
 
 
 def group_free(request, slug):
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
+        return banned_redirect(request)
     group = get_object_or_404(Group, slug=slug)
     search_query = request.GET.get('search', '')
     posts = group.posts.all()
@@ -102,6 +117,8 @@ def profile(request, username):
 
 @login_required
 def info_edit(request, username):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
     form = UserProfileForm(
         request.POST or None,
         files=request.FILES or None,
@@ -118,6 +135,8 @@ def info_edit(request, username):
 
 @login_required
 def upgrade(request, username):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
     form = UserUniquiForm(
         request.POST or None,
         instance=request.user
@@ -138,6 +157,8 @@ def upgrade(request, username):
 
 @login_required
 def add_comment_profile(request, username):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
     form = ProfileCommentForm(request.POST or None)
     if form.is_valid():
         comment = form.save(commit=False)
@@ -148,18 +169,57 @@ def add_comment_profile(request, username):
 
 def post_detail(request, post_id):
     post = get_object_or_404(Forum, id=post_id)
+    if request.user.is_authenticated and request.user.rank == "заблокирован" and post.author != request.user:
+        return banned_redirect(request)
+    post.view += 1
+    post.save()
     form = CommentForm(request.POST or None)
     comments = post.comments.all()
+    count_comments = comments.count()
     context = {
         'form': form,
         'post': post,
-        'comments': comments
+        'comments': comments,
+        'count_comments': count_comments,
     }
     return render(request, 'forum/post_detail.html', context)
 
 
 @login_required
+def post_close(request, post_id):
+    post = get_object_or_404(Forum, id=post_id)
+    post.closed = True
+    post.save()
+    return redirect('forum:post_detail', post_id=post_id)
+
+
+@login_required
+def post_open(request, post_id):
+    post = get_object_or_404(Forum, id=post_id)
+    post.closed = False
+    post.save()
+    return redirect('forum:post_detail', post_id=post_id)
+
+
+@login_required
+def likes_add(request, post_id):
+    post = get_object_or_404(Forum, id=post_id)
+    comments = post.comments.all()
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    if post.author.username == request.user.username:
+        user = CustomUser.objects.get(username=comments.username)
+    else:
+        user = CustomUser.objects.get(username=post.author.username)
+    user.likes += 1
+    user.save()
+    return redirect('forum:post_detail', post_id=post_id)
+
+
+@login_required
 def post_create(request):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
     form = PostForm(
         request.POST or None,
         files=request.FILES or None
@@ -178,15 +238,24 @@ def post_create(request):
 
 @login_required
 def post_edit(request, post_id):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
     post = get_object_or_404(Forum, pk=post_id)
     form = PostForm(
         request.POST or None,
         files=request.FILES or None,
         instance=post
     )
-    if request.user == post.author:
+    if (request.user == post.author
+        or request.user.rank == "владелец"
+        or request.user.rank == "гл. администратор"
+        or request.user.rank == "администратор"
+        or request.user.rank == "арбитр"
+        or request.user.rank == "куратор"):
         if request.method == 'POST':
             if form.is_valid():
+                post.edit = True
+                post.save()
                 form.save()
                 return redirect('forum:post_detail', post_id=post_id)
         template = 'forum/post_create.html'
@@ -200,10 +269,30 @@ def post_edit(request, post_id):
 
 
 @login_required
+def post_delete(request, post_id):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    post = get_object_or_404(Forum, pk=post_id)
+    if (request.user == post.author
+        or request.user.rank == "владелец"
+        or request.user.rank == "гл. администратор"
+        or request.user.rank == "администратор"
+        or request.user.rank == "арбитр"
+        or request.user.rank == "куратор"):
+        Forum.objects.filter(pk=post_id).delete()
+        return redirect('forum:successfully')
+
+
+@login_required
 def add_comment(request, post_id):
     post = get_object_or_404(Forum, pk=post_id)
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
     form = CommentForm(request.POST or None)
     if form.is_valid():
+        user = CustomUser.objects.get(username=request.user.username)
+        user.messages += 1
+        user.save()
         comment = form.save(commit=False)
         comment.author = request.user
         comment.post = post
@@ -212,7 +301,17 @@ def add_comment(request, post_id):
 
 
 @login_required
+def delete_comment(request, post_id, pk):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    Comment.objects.filter(pk=pk).delete()
+    return redirect('forum:post_detail', post_id=post_id)
+
+
+@login_required
 def profile_follow(request, username):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
     author = get_object_or_404(User, username=username)
     if author != request.user:
         if not Follow.objects.filter(author=author, user=request.user).exists():
@@ -222,6 +321,8 @@ def profile_follow(request, username):
 
 @login_required
 def profile_unfollow(request, username):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
     author = get_object_or_404(User, username=username)
     author.following.filter(user=request.user).delete()
     return redirect('forum:profile', username=username)
@@ -229,6 +330,8 @@ def profile_unfollow(request, username):
 
 @login_required
 def admin_panel(request):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
     author = Forum.objects.select_related('author').all()
     users_list = CustomUser.objects.all()
     context = {
@@ -243,9 +346,19 @@ def rules(request):
 
 
 def users(request):
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
+        return banned_redirect(request)
     posts = Forum.objects.select_related('author').all()
+    accs = Market.objects.select_related('author').all()
     count_posts = posts.count()
+    count_accs = accs.count()
     users_list = CustomUser.objects.all()
+    count_sellers = 0
+    for user in users_list:
+        if user.rank != "заблокирован":
+            if ((user.rank == "пользователь" and user.privilege != "нет привилегий")
+                or (user.rank != "пользователь" and user.rank != "местный")):
+                count_sellers += 1
     count_users = users_list.count()
     search_query = request.GET.get('search', '')
     if search_query:
@@ -255,8 +368,10 @@ def users(request):
     context = {
         'author': author,
         'users': users_list,
+        'count_sellers': count_sellers,
         'count_posts': count_posts,
         'count_users': count_users,
+        'count_accs': count_accs,
         'count_search': count_search,
     }
     return render(request, 'forum/users.html', context)

@@ -39,7 +39,7 @@
             <a href="" class="market-link-left"><i class="fa-solid fa-money-bill-trend-up fa-lg icon-market-left"></i>Стоимость инвентаря steam</a>
           </div>
           {% if user.is_authenticated %}
-            <div class="market-main-left" style="margin-top: 20px; height: 465px;">
+            <div class="market-main-left" style="margin-top: 15px; height: 465px;">
               <label class="market-link-left mll-fix">
                 <div style="display: flex;">
                   <div style="margin: 0 auto 0 0;">
@@ -66,6 +66,7 @@
           {% endif %}
         </div>
         <div style="display: block;">
+          <div style="display: block;">
           <div class="market-user-acc">
             <div style="display: flex;">
               <div class="text-frame-div" style="margin: 0 auto 0 0;">
@@ -98,6 +99,58 @@
               </div>
               <div style="margin-top: 10px;">
                 <label><i class="fa-solid fa-shield-halved fa-lg icon-text-mr"></i> <label style="color: #f0ff69;">24 часа</label> гарантии</label>
+              </div>
+            </div>
+          </div>
+          </div>
+          <div style="display: block;">
+            <div class="acc-info">
+              <div style="margin-bottom: 15px;">
+                <label style="font-weight: 600; font-size: 20px;">Общая информация</label>
+              </div>
+              <div style="display: flex;">
+                {% for key, value in acc_info.items %}
+                  {% if key == "name" %}
+                    <div style="display: block;">
+                      <div>
+                        <label style="font-size: 18px;">{{ value }}</label>
+                      </div>
+                      <div>
+                        <label style="font-size: 14px; color: gray;">Имя аккаунта</label>
+                      </div>
+                    </div>
+                  {% endif %}
+                  {% if key == "steam_lvl" %}
+                    <div style="display: block; margin-left: 50px;">
+                      <div>
+                        <label style="font-size: 18px;">{{ value }}</label>
+                      </div>
+                      <div>
+                        <label style="font-size: 14px; color: gray;">Уровень steam</label>
+                      </div>
+                    </div>
+                  {% endif %}
+                  {% if key == "two_week_hours" %}
+                    <div style="display: block; margin-left: 50px;">
+                      <div>
+                        <label style="font-size: 18px;">{{ value }}</label>
+                      </div>
+                      <div>
+                        <label style="font-size: 14px; color: gray;">Часов за 2 недели</label>
+                      </div>
+                    </div>
+                  {% endif %}
+                  {% if key == "count_friend" %}
+                    <div style="display: block; margin-left: 50px;">
+                      <div>
+                        <label style="font-size: 18px;">{{ value }}</label>
+                      </div>
+                      <div>
+                        <label style="font-size: 14px; color: gray;">Друзей</label>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
               </div>
             </div>
           </div>

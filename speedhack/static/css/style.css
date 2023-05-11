@@ -1,85 +1,91 @@
 body {
-    background: #2e2e2e;
-    /* background: #242729; */
-    font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
-    margin: 0;
-    line-height: 1.5;
-    height: 100%;
+  background: #2e2e2e;
+  font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
+  margin: 0;
+  line-height: 1.5;
+  height: 100%;
 }
 
 body::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
+  width: 7px;
+  height: 7px;
 }
 
 body::-webkit-scrollbar-track {
-    background: #ffffff;
+  background: #ffffff;
 }
 
 body::-webkit-scrollbar-thumb {
-    background: #ff506f;
+  background: #ff506f;
 }
 
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
 }
 
 .main {
-    flex: 1;
-    padding-top: 70px;
-    margin-bottom: 20px;
+  flex: 1;
+  padding-top: 70px;
+  margin-bottom: 20px;
 }
 
 [class*="_con"] {
-    max-width: 1300px;
-    margin: 0 auto;
-    display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
 }
 
 .frame {
-    background: #17181b;
-    border-radius: 10px;
+  background: #17181b;
+  border-radius: 10px;
 }
 
 .brandColor {
-    color: #ff506f;
-    /* color: #00e1ff;  */
+  color: #ff506f;
+  /* color: #00e1ff;  */
 }
 
 .brandLogo {
-    width: 35px;
+  width: 35px;
 }
 
 .imageSing img {
-    width: 120px;
-    display: block;
-    margin: 0 auto;
+  width: 120px;
+  display: block;
+  margin: 0 auto;
 }
 
 .user-agreement hr,
 .faq-answer hr {
-    background-color: gray;
-    height: 7px;
-    margin-bottom: 30px;
+  background-color: gray;
+  height: 7px;
+  margin-bottom: 30px;
 }
 
 .sign-btn label {
-    margin-left: 74px;
+  margin-left: 74px;
 }
 
 .sign-btn button {
-    margin-left: 74px;
+  margin-left: 74px;
 }
 
 .sign-btn div {
-    margin-left: 44px;
+  margin-left: 44px;
 }
 
 .row {
-    padding-top: 130px;
-    padding-left: 20px;
-    z-index: 50px;
+  padding-top: 130px;
+  padding-left: 20px;
+  z-index: 50px;
+}
+
+.frame-banned_con {
+  width: 1160px;
+  background: #242424b6;
+  border-radius: 10px;
+  padding: 20px;
 }

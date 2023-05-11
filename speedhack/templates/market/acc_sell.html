@@ -6,7 +6,7 @@
   {% else %}
   speedhack / продажа аккаунта
   {% endif %}
-{%endblock%}
+{% endblock %}
 {% load user_filters %}
 {% block content %}
   <div class="main">
@@ -30,7 +30,7 @@
                 <label class="field-label">{{ field.label }}</label>
                 <label style="color: #444444; font-size: 20px; height: 40px;">(выберете платформу продажи)</label>
               </div>
-              {{ field|addclass:"field field-height" }}
+              {{ field|addclass:"field field-height width-fix" }}
             {% elif field.label == "Заголовок" %}
               <div style="display: flex;">
                 <label class="field-label">{{ field.label }}</label>
