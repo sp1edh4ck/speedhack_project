@@ -137,22 +137,6 @@ def info_edit(request, username):
 def upgrade_temp(request, username):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
-    # form = UserUniquiForm(
-    #     request.POST or None,
-    #     instance=request.user
-    # )
-    # if request.method == 'POST':
-    #     if form.is_valid():
-    #         user = CustomUser(username=username)
-    #         user.unique = True
-    #         form.save()
-    #         return redirect('forum:profile', username=username)
-    #     else:
-    #         form = UserUniquiForm()
-    # context = {
-    #     'form': form,
-    # }
-    # return render(request, 'forum/upgrade.html', context)
     return render(request, 'forum/upgrade.html')
 
 

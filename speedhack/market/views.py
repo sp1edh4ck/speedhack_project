@@ -110,5 +110,15 @@ def acc_detail(request, acc_id):
     return render(request, 'market/acc_detail.html', context)
 
 
+@login_required
+def acc_buy(request, acc_id):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    acc = get_object_or_404(Market, id=acc_id)
+    acc.buyer = request.user.username
+    acc.save()
+    return redirect('market:acc_detail', id=acc_id)
+
+
 def rules(request):
     return render(request, 'market/rules.html')

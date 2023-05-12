@@ -274,3 +274,12 @@
   background: #242424b6;
   border-radius: 10px;
 }
+
+.div-market-accs {
+  padding: 20px;
+  background: #242424b6;
+  color: #ffffff;
+  margin-left: 20px;
+  border-radius: 10px;
+  min-width: 870px;
+}

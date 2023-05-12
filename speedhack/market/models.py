@@ -34,7 +34,14 @@ class Market(models.Model):
         User,
         on_delete=models.CASCADE,
         verbose_name='Продавец',
-        related_name='acc',
+        related_name='seller',
+    )
+    buyer = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        verbose_name='Покупатель',
+        related_name='buyer',
     )
 
     class Meta:
