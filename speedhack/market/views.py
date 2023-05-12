@@ -36,7 +36,7 @@ def acc_parser():
 
 
 def market(request):
-    if request.user.is_authenticated and request.user.rank == "заблокирован":
+    if request.user.is_authenticated and request.user.privilege == "заблокирован":
         return banned_redirect(request)
     accs = Market.objects.all()
     count_accs = accs.count()
@@ -48,7 +48,7 @@ def market(request):
 
 
 def group_free(request, slug):
-    if request.user.is_authenticated and request.user.rank == "заблокирован":
+    if request.user.is_authenticated and request.user.privilege == "заблокирован":
         return banned_redirect(request)
     group = get_object_or_404(AccGroup, slug=slug)
     accs = group.acc.all()
@@ -63,7 +63,7 @@ def group_free(request, slug):
 
 @login_required
 def my_accs(request):
-    if request.user.rank == "заблокирован":
+    if request.user.privilege == "заблокирован":
         return banned_redirect(request)
     user = request.user
     search_query = request.GET.get('search', '')
@@ -81,7 +81,7 @@ def my_accs(request):
 
 @login_required
 def acc_sell(request):
-    if request.user.rank == "заблокирован":
+    if request.user.privilege == "заблокирован":
         return banned_redirect(request)
     form = AccForm(
         request.POST or None,
@@ -99,7 +99,7 @@ def acc_sell(request):
 
 
 def acc_detail(request, acc_id):
-    if request.user.is_authenticated and request.user.rank == "заблокирован":
+    if request.user.is_authenticated and request.user.privilege == "заблокирован":
         return banned_redirect(request)
     acc = get_object_or_404(Market, id=acc_id)
     acc_info = acc_parser()
@@ -112,7 +112,7 @@ def acc_detail(request, acc_id):
 
 @login_required
 def acc_buy(request, acc_id):
-    if request.user.rank == "заблокирован":
+    if request.user.privilege == "заблокирован":
         return banned_redirect(request)
     acc = get_object_or_404(Market, id=acc_id)
     acc.buyer = request.user.username

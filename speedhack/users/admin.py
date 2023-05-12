@@ -17,6 +17,7 @@ class CustomUserAdmin(UserAdmin):
                 'tg_link',
                 'rank',
                 'privilege',
+                'buy_privilege',
                 'unique',
                 'supreme',
                 'legend',

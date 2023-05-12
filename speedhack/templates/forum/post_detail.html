@@ -28,7 +28,7 @@
             <div style="display: flex;">
               <div style="margin: 0 auto 0 0;">
                 <a href="{% url 'forum:profile' post.author.username %}" style="text-decoration: none; cursor: pointer;">
-                  <label class="frame-main-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
+                  <label class="frame-main-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.privilege == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
                 </a>
               </div>
               {% if request.user == post.author or request.user.rank == "владелец" or request.user.rank == "гл. администратор" or request.user.rank == "администратор" or request.user.rank == "арбитр" or request.user.rank == "куратор" %}
@@ -81,33 +81,31 @@
           <hr class="hr-post-detail">
         {% endif %}
         {% for comment in comments %}
-          <form method="delete" action="{% url 'forum:add_comment' comment.id %}">
-            <div style="display: flex; padding: 0 20px;">
+          <div style="display: flex; padding: 0 20px;">
+            <div>
+              <img class="frame-main-avatar" src="{{ comment.author.avatar.url }}">
+            </div>
+            <div style="display: block;">
               <div>
-                <img class="frame-main-avatar" src="{{ comment.author.avatar.url }}">
+                <a href="{% url 'forum:profile' comment.author.username %}" class="frame-main-username {% if comment.author.username_style != 'gray-un' %}{{ comment.author.username_style }}{% endif %}" style="text-decoration: none;">{{ comment.author.username }}</a>
               </div>
-              <div style="display: block;">
-                <div>
-                  <a href="{% url 'forum:profile' comment.author.username %}" class="frame-main-username {% if comment.author.username_style != 'gray-un' %}{{ comment.author.username_style }}{% endif %}" style="text-decoration: none;">{{ comment.author.username }}</a>
+              <div class="comment-text">
+                <label>{{ comment.text }}</label>
+              </div>
+              <div style="display: flex;">
+                <div class="comment-date" style="margin: 10px auto 0 0;">
+                  <label>{{ comment.created|date:"d E Y / H:i" }}</label>
                 </div>
-                <div class="comment-text">
-                  <label>{{ comment.text }}</label>
-                </div>
-                <div style="display: flex;">
-                  <div class="comment-date" style="margin: 10px auto 0 0;">
-                    <label>{{ comment.created|date:"d E Y / H:i" }}</label>
+                {% if user.likes >= 20 and request.user.username != comment.author.username %}
+                  <div class="comment-date" style="margin-top: 3px;">
+                    <a href="{% url 'forum:likes_add' post.id %}">
+                      <img src="{% static 'images/heart_pink.png' %}" style="width: 25px; height: 23px; margin: 5px;">
+                    </a>
                   </div>
-                  {% if user.likes >= 20 and request.user.username != comment.author.username %}
-                    <div class="comment-date" style="margin-top: 3px;">
-                      <a href="{% url 'forum:likes_add' post.id %}">
-                        <img src="{% static 'images/heart_pink.png' %}" style="width: 25px; height: 23px; margin: 5px;">
-                      </a>
-                    </div>
-                  {% endif %}
-                </div>
+                {% endif %}
               </div>
             </div>
-          </form>
+          </div>
           {% if not forloop.last %}<hr class="hr-post-detail">{% endif %}
         {% endfor %}
         {% if user.is_authenticated and post.closed != True %}

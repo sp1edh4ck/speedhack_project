@@ -18,16 +18,18 @@
                 <label>Смена ника один раз в 6 месяцев</label><br>
               </div>
               <div>
-                {% if user.balance >= 7500 %}
+                {% if user.balance >= 2999 %}
                   <a href="{% url 'forum:upgrade' user.username 1 %}" class="button-save">Купить</a>
                 {% else %}
                   <a class="button-save a-fix-width ">Пополнить баланс</a>
                 {% endif %}
               </div>
             </div>
-            <hr class="hr-post-detail" style="margin: 0;">
           {% endif %}
           {% if request.user.supreme == False %}
+            {% if request.user.legend == False %}
+              <hr class="hr-post-detail" style="margin: 0;">
+            {% endif %}
             <div style="display: block; padding: 20px;">
               <div style="margin-bottom: 10px;">
                 <label style="font-size: 18px; margin-right: 10px;">Суприм</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">1500 <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ 3 месяца</label>
@@ -39,16 +41,16 @@
                 <label>Уникальный банер под аватаркой</label><br>
               </div>
               <div>
-                {% if user.balance >= 7500 %}
+                {% if user.balance >= 1500 %}
                   <a href="{% url 'forum:upgrade' user.username 2 %}" class="button-save">Купить</a>
                 {% else %}
                   <a class="button-save a-fix-width ">Пополнить баланс</a>
                 {% endif %}
               </div>
             </div>
-            <hr class="hr-post-detail" style="margin: 0;">
           {% endif %}
           {% if request.user.unique == False %}
+            <hr class="hr-post-detail" style="margin: 0;">
             <div style="display: block; padding: 20px;">
               <div style="margin-bottom: 10px;">
                 <label style="font-size: 18px; margin-right: 10px;">Уник</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">7500 <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ навсегда</label>

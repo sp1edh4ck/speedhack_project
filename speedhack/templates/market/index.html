@@ -79,7 +79,7 @@
           <div class="acc-frame">
             <label style="margin: 20px 0 0 20px; color: #ffffff; font-size: 20px;">Последние аккаунты</label>
             {% for acc in accs %}
-              {% if acc.author.rank != 'заблокирован' %}
+              {% if acc.author.privilege != 'заблокирован' %}
                 <div class="market-accs" style="margin-top: 10px;">
                   <a style="text-decoration: none;" href="{% url 'market:acc_detail' acc.id %}">
                     <div class="text-frame">
@@ -94,7 +94,7 @@
                         {% elif acc.group.id == 4 %}
                           <img src="{% static 'images/telegram.png' %}" class="market-png">
                         {% endif %}
-                        <label class="text-frame-username {% if acc.author.username_style != 'gray-un' %}{{ acc.author.username_style }}{% endif %}" {% if acc.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ acc.author.username }}</label>
+                        <label class="text-frame-username {% if acc.author.username_style != 'gray-un' %}{{ acc.author.username_style }}{% endif %}" {% if acc.author.privilege == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ acc.author.username }}</label>
                         <span class="pink-separator"></span>
                         <label class="text-frame-text">
                           {{ acc.pub_date|date:"d E Y / H:i" }}

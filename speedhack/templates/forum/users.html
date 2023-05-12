@@ -70,7 +70,7 @@
                 </div> {% endcomment %}
                 <div style="display: flex;">
                   <div style="margin: 0 0 0 0;">
-                    <a href="{% url 'forum:profile' users.username %}" style="text-decoration: none; cursor: pointer;"><label class="users-un {% if users.username_style != 'gray-un' %}{{ users.username_style }}{% endif %}" {% if users.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ users.username }}</label></a>
+                    <a href="{% url 'forum:profile' users.username %}" style="text-decoration: none; cursor: pointer;"><label class="users-un {% if users.username_style != 'gray-un' %}{{ users.username_style }}{% endif %}" {% if users.privilege == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ users.username }}</label></a>
                     <div style="margin-top: 7px; color: #ff506f;">
                       <img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label>{{ users.likes }}</label>
                     </div>

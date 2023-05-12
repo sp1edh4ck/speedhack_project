@@ -12,12 +12,6 @@ GENDER = [
 ]
 
 MAIN_RANK = [
-    ("пользователь", "пользователь"),
-    ("заблокирован", "заблокирован"),
-    ("местный", "местный"),
-    ("постоялец", "постоялец"),
-    ("эксперт", "эксперт"),
-    ("гуру", "гуру"),
     ("куратор", "куратор"),
     ("арбитр", "арбитр"),
     ("администратор", "администратор"),
@@ -26,12 +20,21 @@ MAIN_RANK = [
     ("владелец", "владелец"),
 ]
 
-SECOND_RANK = [
+PRIVILEGE = [
+    ("пользователь", "пользователь"),
+    ("заблокирован", "заблокирован"),
+    ("местный", "местный"),
+    ("постоялец", "постоялец"),
+    ("эксперт", "эксперт"),
+    ("гуру", "гуру"),
+    ("исскуственный интелект", "исскуственный интелект"),
+]
+
+BUY_RANK = [
     ("нет привилегий", "нет привилегий"),
     ("продавец", "продавец"),
     ("доверенный продавец", "доверенный продавец"),
     ("партнёр", "партнёр"),
-    ("исскуственный интелект", "исскуственный интелект"),
 ]
 
 USERNAME_STYLE = [
@@ -85,7 +88,8 @@ class CustomUser(AbstractUser):
     interests = models.CharField(verbose_name='Интересы', max_length=200, default='')
     description = models.CharField(verbose_name='Описание', max_length=200, default='')
     rank = models.TextField(verbose_name='Ранг', choices=MAIN_RANK, default=MAIN_RANK[0][0])
-    privilege = models.TextField(verbose_name='Привилегия', choices=SECOND_RANK, default=SECOND_RANK[0][0])
+    privilege = models.TextField(verbose_name='Ранг', choices=PRIVILEGE, default=PRIVILEGE[0][0])
+    buy_privilege = models.TextField(verbose_name='Привилегия', choices=BUY_RANK, default=BUY_RANK[0][0])
     profile_sub = models.BooleanField(verbose_name='Доступ к фону профиля', default=False)
     messages = models.IntegerField(verbose_name='Сообщения', default=0)
     tg_link = models.CharField(verbose_name='Ссылка на телеграм', max_length=70, default='', blank=True)
@@ -110,19 +114,19 @@ class CustomUser(AbstractUser):
             return True
         return False
 
-	# last_online = models.DateTimeField(default=timezone.now, blank=True, null=True)
+    # last_online = models.DateTimeField(default=timezone.now, blank=True, null=True)
 
-	# def is_online(self):
-	# 	if self.last_online:
-	# 		return (timezone.now() - self.last_online) < timezone.timedelta(minutes=1)
-	# 	return False
+    # def is_online(self):
+    #     if self.last_online:
+    #         return (timezone.now() - self.last_online) < timezone.timedelta(minutes=1)
+    #     return False
 
-	# def get_online_info(self):
-	# 	if self.is_online():
-	# 		return _('В сети')
-	# 	if self.last_online:
-	# 		return _('В сети {}').format(naturaltime(self.last_online))
-	# 	return _('Неизвестно')
+    # def get_online_info(self):
+    #     if self.is_online():
+    #         return _('В сети')
+    #     if self.last_online:
+    #         return _('В сети {}').format(naturaltime(self.last_online))
+    #     return _('Неизвестно')
 
     def __str__(self):
         return self.username
