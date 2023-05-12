@@ -8,130 +8,132 @@
       <div class="tabItem profile-edit">
         <form method="post" action="{{ request.path }}" enctype="multipart/form-data">
           {% csrf_token %}
-          <div style="display: flex; margin-top: 20px;">
-            <div class="profile-edit-div">
-              <label>Описание:</label>
-            </div>
-            <div>
-              {{ form.description|addclass:"profile-edit-field profile-edit-field-height" }}
-            </div>
-          </div>
-          <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-          <div style="display: flex;">
-            <div class="profile-edit-div">
-              <label>Telegram:</label>
-            </div>
-            <div style="display: block;">
-              <div>
-                {{ form.tg_link|addclass:"profile-edit-field profile-edit-field-height" }}
-              </div>
-              <div style="margin-top: 5px; color: gray;">
-                <label>Укажите только свой telegram username (например: sp1edh4ck)</label>
-              </div>
-            </div>
-          </div>
-          <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-          <div style="display: flex;">
-            <div class="profile-edit-div">
-              <label>Аватар:</label>
-            </div>
-            <div>
-              {{ form.avatar|addclass:"field-load" }}
-            </div>
-          </div>
-          <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-          {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.rank == 'исскуственный интелект' or request.user.profile_sub == True %}
-            <div style="display: flex;">
+          <div style="background: #242424b6; border-radius: 10px;">
+            <div style="display: flex; padding-top: 20px;">
               <div class="profile-edit-div">
-                <label>Фон профиля:</label>
+                <label>Описание:</label>
               </div>
               <div>
-                {{ form.profile_background }}
-              </div>
-            </div>
-            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-          {% endif %}
-          {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.rank == 'исскуственный интелект' or request.user.unique == True %}
-            <div style="display: flex;">
-              <div class="profile-edit-div">
-                <label>Стиль имени:</label>
-              </div>
-              <div>
-                {{ form.username_style }}
+                {{ form.description|addclass:"profile-edit-field profile-edit-field-height" }}
               </div>
             </div>
             <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
             <div style="display: flex;">
               <div class="profile-edit-div">
-                <label>Стиль банера:</label>
+                <label>Telegram:</label>
               </div>
-              <div>
-                {{ form.banner }}
+              <div style="display: block;">
+                <div>
+                  {{ form.tg_link|addclass:"profile-edit-field profile-edit-field-height" }}
+                </div>
+                <div style="margin-top: 5px; color: gray;">
+                  <label>Укажите только свой telegram username (например: sp1edh4ck)</label>
+                </div>
               </div>
             </div>
             <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-          {% endif %}
-          <div style="display: flex;">
-            <div class="profile-edit-div">
-              <label>Пол:</label>
-            </div>
-            <div>
-              {{ form.gender }}
-            </div>
-          </div>
-          <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-          <div style="display: flex;">
-            <div class="profile-edit-div">
-              <label>День рождения:</label>
-            </div>
-            <div style="display: block;">
+            <div style="display: flex;">
+              <div class="profile-edit-div">
+                <label>Аватар:</label>
+              </div>
               <div>
-                {{ form.birthday }}
-              </div>
-              <div style="margin-top: 5px; color: gray;">
-                <label>Введите дату в формате (день.месяц.год / 01.01.2001)</label>
+                {{ form.avatar|addclass:"field-load" }}
               </div>
             </div>
-          </div>
-          <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-          <div style="display: flex;">
-            <div class="profile-edit-div">
-              <label>Род занятий:</label>
-            </div>
-            <div>
-              {{ form.occupation|addclass:"profile-edit-field profile-edit-field-height" }}
-            </div>
-          </div>
-          <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-          <div style="display: flex;">
-            <div class="profile-edit-div">
-              <label>Интересы:</label>
-            </div>
-            <div>
-              {{ form.interests|addclass:"profile-edit-field profile-edit-field-height" }}
-            </div>
-          </div>
-          <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-          <div style="display: flex;">
-            <div class="profile-edit-div">
-              <label></label>
-            </div>
-            <div style="display: block;">
+            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.rank == 'исскуственный интелект' or request.user.profile_sub == True %}
+              <div style="display: flex;">
+                <div class="profile-edit-div">
+                  <label>Фон профиля:</label>
+                </div>
+                <div>
+                  {{ form.profile_background }}
+                </div>
+              </div>
+              <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            {% endif %}
+            {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.rank == 'исскуственный интелект' or request.user.unique == True %}
+              <div style="display: flex;">
+                <div class="profile-edit-div">
+                  <label>Стиль имени:</label>
+                </div>
+                <div>
+                  {{ form.username_style }}
+                </div>
+              </div>
+              <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+              <div style="display: flex;">
+                <div class="profile-edit-div">
+                  <label>Стиль банера:</label>
+                </div>
+                <div>
+                  {{ form.banner }}
+                </div>
+              </div>
+              <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            {% endif %}
+            <div style="display: flex;">
+              <div class="profile-edit-div">
+                <label>Пол:</label>
+              </div>
               <div>
-                <button type="submit" class="button-save">Сохранить</button>
+                {{ form.gender }}
               </div>
-              <div style="margin-top: 20px; color: red;">
-                {% if form.errors %}
-                  {% for field in form %}
-                    {% for error in field.errors %}
-                      {{ form.error.field }}
+            </div>
+            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            <div style="display: flex;">
+              <div class="profile-edit-div">
+                <label>День рождения:</label>
+              </div>
+              <div style="display: block;">
+                <div>
+                  {{ form.birthday }}
+                </div>
+                <div style="margin-top: 5px; color: gray;">
+                  <label>Введите дату в формате (день.месяц.год / 01.01.2001)</label>
+                </div>
+              </div>
+            </div>
+            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            <div style="display: flex;">
+              <div class="profile-edit-div">
+                <label>Род занятий:</label>
+              </div>
+              <div>
+                {{ form.occupation|addclass:"profile-edit-field profile-edit-field-height" }}
+              </div>
+            </div>
+            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            <div style="display: flex;">
+              <div class="profile-edit-div">
+                <label>Интересы:</label>
+              </div>
+              <div>
+                {{ form.interests|addclass:"profile-edit-field profile-edit-field-height" }}
+              </div>
+            </div>
+            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            <div style="display: flex;">
+              <div class="profile-edit-div">
+                <label></label>
+              </div>
+              <div style="display: block;">
+                <div>
+                  <button type="submit" class="button-save">Сохранить</button>
+                </div>
+                <div style="margin-top: 20px; color: red;">
+                  {% if form.errors %}
+                    {% for field in form %}
+                      {% for error in field.errors %}
+                        {{ form.error.field }}
+                        {{ error|escape }}
+                      {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
                       {{ error|escape }}
                     {% endfor %}
-                  {% endfor %}
-                  {% for error in form.non_field_errors %}
-                    {{ error|escape }}
-                  {% endfor %}
-                {% endif %}
+                  {% endif %}
+                </div>
               </div>
             </div>
           </div>

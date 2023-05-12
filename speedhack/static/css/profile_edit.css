@@ -6,10 +6,9 @@
 
 .profile-edit {
   color: #ffffff;
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 10px;
   width: 1100px;
-  background: #242424b6;
 }
 
 .switch-profile-edit {
@@ -164,4 +163,8 @@ option:hover {
 
 .button-save:hover {
   background: #ff6b86;
+}
+
+.a-fix-width {
+  width: 200px;
 }

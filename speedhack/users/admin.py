@@ -18,6 +18,8 @@ class CustomUserAdmin(UserAdmin):
                 'rank',
                 'privilege',
                 'unique',
+                'supreme',
+                'legend',
                 'profile_sub',
                 'username_style',
                 'banner',

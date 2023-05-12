@@ -134,25 +134,47 @@ def info_edit(request, username):
 
 
 @login_required
-def upgrade(request, username):
+def upgrade_temp(request, username):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
-    form = UserUniquiForm(
-        request.POST or None,
-        instance=request.user
-    )
-    if request.method == 'POST':
-        if form.is_valid():
-            user = CustomUser(username=username)
-            form = user.unique = True
-            form.save()
-            return redirect('forum:profile', username=username)
-        else:
-            form = UserUniquiForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'forum/upgrade.html', context)
+    # form = UserUniquiForm(
+    #     request.POST or None,
+    #     instance=request.user
+    # )
+    # if request.method == 'POST':
+    #     if form.is_valid():
+    #         user = CustomUser(username=username)
+    #         user.unique = True
+    #         form.save()
+    #         return redirect('forum:profile', username=username)
+    #     else:
+    #         form = UserUniquiForm()
+    # context = {
+    #     'form': form,
+    # }
+    # return render(request, 'forum/upgrade.html', context)
+    return render(request, 'forum/upgrade.html')
+
+
+@login_required
+def upgrade(request, username, number):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    user = CustomUser.objects.get(username=username)
+    if number == 1:
+        user.legend = True
+        user.balance -= 2999
+        user.save()
+    if number == 2:
+        user.supreme = True
+        user.balance -= 1500
+        user.save()
+    if number == 3:
+        user.unique = True
+        user.balance -= 7500
+        user.save()
+    return redirect('forum:profile', username=username)
+
 
 
 @login_required

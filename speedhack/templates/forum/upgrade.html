@@ -6,32 +6,76 @@
   <div class="main">
     <div class="frame-profile_edit_con">
       <div class="tabItem profile-edit" {% if request.user.unique == True %}style="max-height: 25px;"{% endif %} id="status_upgrade">
-        {% if request.user.unique == False %}
-          <form method="post" action="{{ request.path }}">
-            {% csrf_token %}
-            <div style="display: block;">
+        <div style="background: #242424b6; border-radius: 10px;">
+          {% if request.user.legend == False %}
+            <div style="display: block; padding: 20px;">
+              <div style="margin-bottom: 10px;">
+                <label style="font-size: 18px; margin-right: 10px;">Легенда</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">2999 <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ 12 месяцев</label>
+              </div>
+              <div style="color: #c5c5c5; line-height: 1.75;">
+                <label>Размещение темы о вашем магазине на форуме</label><br>
+                <label>Поднятие тем в ленте раз в 24 часа</label><br>
+                <label>Смена ника один раз в 6 месяцев</label><br>
+              </div>
+              <div>
+                {% if user.balance >= 7500 %}
+                  <a href="{% url 'forum:upgrade' user.username 1 %}" class="button-save">Купить</a>
+                {% else %}
+                  <a class="button-save a-fix-width ">Пополнить баланс</a>
+                {% endif %}
+              </div>
+            </div>
+            <hr class="hr-post-detail" style="margin: 0;">
+          {% endif %}
+          {% if request.user.supreme == False %}
+            <div style="display: block; padding: 20px;">
+              <div style="margin-bottom: 10px;">
+                <label style="font-size: 18px; margin-right: 10px;">Суприм</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">1500 <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ 3 месяца</label>
+              </div>
+              <div style="color: #c5c5c5; line-height: 1.75;">
+                <label>Размещение темы о вашем магазине на форуме</label><br>
+                <label>Поднятие тем в ленте раз в 12 часов</label><br>
+                <label>Смена ника один раз в 3 месяца</label><br>
+                <label>Уникальный банер под аватаркой</label><br>
+              </div>
+              <div>
+                {% if user.balance >= 7500 %}
+                  <a href="{% url 'forum:upgrade' user.username 2 %}" class="button-save">Купить</a>
+                {% else %}
+                  <a class="button-save a-fix-width ">Пополнить баланс</a>
+                {% endif %}
+              </div>
+            </div>
+            <hr class="hr-post-detail" style="margin: 0;">
+          {% endif %}
+          {% if request.user.unique == False %}
+            <div style="display: block; padding: 20px;">
               <div style="margin-bottom: 10px;">
                 <label style="font-size: 18px; margin-right: 10px;">Уник</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">7500 <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ навсегда</label>
               </div>
               <div style="color: #c5c5c5; line-height: 1.75;">
                 <label>Выделись перед всеми уникальным цветом ника, который ты выберешь сам</label><br>
                 <label>Размещение темы о вашем магазине на форуме</label><br>
-                <label>Поднятие тем в ленте раз в 12 часов</label><br>
-                <label>Смена ника один раз в 3 месяца</label><br>
+                <label>Поднятие тем в ленте раз в 6 часов</label><br>
+                <label>Смена ника один раз в месяц</label><br>
                 <label>Скрытие счётчика симпатий в темах</label><br>
                 <label>Анимированная аватарка в темах</label><br>
+                <label>Скрытие онлайна на форуме</label><br>
               </div>
               <div>
                 {% if user.balance >= 7500 %}
-                  <button type="submit" class="button-save">Купить</button>
+                  <a href="{% url 'forum:upgrade' user.username 3 %}" class="button-save">Купить</a>
                 {% else %}
-                  <button type="submit" class="button-save">Продать почку</button>
+                  <a class="button-save a-fix-width ">Пополнить баланс</a>
                 {% endif %}
               </div>
             </div>
-          </form>
-        {% else %}
-          <label>Вы приобрели все наши товары :)</label>
+          {% endif %}
+        </div>
+        {% if request.user.legend == True and request.user.supreme == True and request.user.uniqui == True %}
+          <div style="padding: 20px; background: #242424b6; border-radius: 10px;">
+            <label>Вы приобрели все наши товары :)</label>
+          </div>
         {% endif %}
       </div>
       <div class="switch-profile-edit">

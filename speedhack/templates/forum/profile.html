@@ -235,14 +235,13 @@
                     <label class="text-frame-username {% if author.username_style != 'gray-un' %}{{ author.username_style }}{% endif %}" {% if author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
                   </div>
                 </div>
-                {% if not forloop.last %}<br>{% endif %}
               </a>
             {% endfor %}
             {% include '../includes/paginator.html' %}
           </div>
         {% else %}
           <div id="authorPosts" class="tabItem frame-right-third active-tab">
-            <label style="color: #ffffff;">У пользователя нет постов!</label>
+            <label style="color: #ffffff;">У пользователя нет постов</label>
           </div>
         {% endif %}
       </div>

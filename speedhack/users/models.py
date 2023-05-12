@@ -75,6 +75,8 @@ class CustomUser(AbstractUser):
     likes = models.IntegerField(verbose_name='Симпатии', default=0)
     balance = models.IntegerField(verbose_name='Баланс', default=0)
     unique = models.BooleanField(verbose_name='Уник', default=False)
+    supreme = models.BooleanField(verbose_name='Суприм', default=False)
+    legend = models.BooleanField(verbose_name='Легенда', default=False)
     gender = models.TextField(verbose_name='Пол', choices=GENDER, default=GENDER[0][0])
     username_style = models.TextField(verbose_name='Стиль имени', choices=USERNAME_STYLE, default=USERNAME_STYLE[0][0])
     banner = models.TextField(verbose_name='', choices=RANK_STYLE, default=RANK_STYLE[0][0])

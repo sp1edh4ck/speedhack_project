@@ -113,7 +113,7 @@
 .comment-text {
   color: #ffffff;
   margin-top: 20px;
-  max-width: 1140px;
+  max-width: 1040px;
   word-wrap: break-word;
 }
 
@@ -138,9 +138,8 @@
   color: #ffffff;
   outline: none;
   padding: 7px 10px 10px 10px;
-  width: 1130px;
+  width: 1030px;
   height: 18px;
-  max-width: 1130px;
   overflow: hidden;
   resize: none;
   border-radius: 10px;

@@ -269,11 +269,13 @@
 }
 
 .text-frame-title {
+  cursor: pointer;
   color: #ffffff;
   font-size: 18px;
 }
 
 .text-frame-text {
+  cursor: pointer;
   color: #777777;
   font-size: 14px;
   display: inline-block;
@@ -286,6 +288,7 @@
 }
 
 .user-avatar {
+  cursor: pointer;
   width: 50px;
   height: 50px;
   border-radius: 50px;
@@ -294,6 +297,7 @@
 }
 
 .text-frame-username {
+  cursor: pointer;
   color: gray;
   font-size: 14px;
   width: 170px;
