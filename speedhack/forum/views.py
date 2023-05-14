@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 
 from market.models import Market
-from users.forms import UserProfileForm, UserUniquiForm
+from users.forms import UserProfileForm
 from users.models import CustomUser
 
 from .forms import ProfileCommentForm, CommentForm, PostForm
@@ -146,19 +147,32 @@ def upgrade(request, username, number):
         return banned_redirect(request)
     user = CustomUser.objects.get(username=username)
     if number == 1:
-        user.legend = True
-        user.balance -= 2999
+        user.market_privilege = "продавец"
+        user.balance -= 100
+        user.time_buy_market_privilege = timezone.now()
         user.save()
     if number == 2:
-        user.supreme = True
-        user.balance -= 1500
+        user.profile_sub = True
+        user.balance -= 100
+        user.time_buy_profile_sub = timezone.now()
         user.save()
     if number == 3:
-        user.unique = True
-        user.balance -= 7500
+        user.buy_privilege = "легенда"
+        user.balance -= 2999
+        user.time_buy_privilege = timezone.now()
         user.save()
-    return redirect('forum:profile', username=username)
-
+    if number == 4:
+        user.buy_privilege = "суприм"
+        user.balance -= 1500
+        user.time_buy_privilege = timezone.now()
+        user.save()
+    if number == 5:
+        user.buy_privilege = "уник"
+        user.balance -= 7500
+        user.time_buy_privilege = timezone.now()
+        user.save()
+    # return redirect('forum:profile', username=username)
+    return redirect('forum:profile_upgrade', username=username)
 
 
 @login_required
@@ -220,6 +234,21 @@ def likes_add(request, post_id):
         user = CustomUser.objects.get(username=post.author.username)
     user.likes += 1
     user.save()
+    if user.likes == 20:
+        user.privilege = "местный"
+        user.save()
+    elif user.likes == 200:
+        user.privilege = "постоялец"
+        user.save()
+    elif user.likes == 1000:
+        user.privilege = "эксперт"
+        user.save()
+    elif user.likes == 4000:
+        user.privilege = "гуру"
+        user.save()
+    elif user.likes == 10000:
+        user.privilege = "искусственный интелект"
+        user.save()
     return redirect('forum:post_detail', post_id=post_id)
 
 
@@ -382,3 +411,7 @@ def users(request):
         'count_search': count_search,
     }
     return render(request, 'forum/users.html', context)
+
+
+def faq(request):
+    return render(request, 'forum/faq.html')

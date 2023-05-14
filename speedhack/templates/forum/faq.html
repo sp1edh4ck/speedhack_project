@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% block title %}speedhack / правила{% endblock %}
+{% load static %}
+{% block content %}
+  <div class="main">
+    <div class="user-agreement_con">
+      <div class="frame-rules">
+        <div class="tabItem rules active-tab" id ="users-groups">
+          <div class="faq-tech-ques">
+            <label style="font-size: 20px;">Группы</label><br><br>
+            <div style="margin-left: 10px;">
+              На форуме создана иерархия групп пользователей, основанная на симпатиях.<br><br>
+              <font style="color: gray; font-weight: bold;">Новорег</font><br>
+              <font style="color: #cacaca;">Зарегистрировавшись на форуме, вы получаете группу "Новорег" и имеете следующие права:</font><br>
+              <font style="color: #cacaca;">- Загрузка аватара 195 КБ</font><br>
+              <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
+              <font style="color: #cacaca;">- Нельзя ставить лайки (Симпатии, Мне нравится)</font><br>
+              <font style="color: #cacaca;">- Нельзя менять ник</font><br>
+              <font style="color: #cacaca;">- Нельзя менять статус</font><br>
+              <font style="color: #cacaca;">- Нельзя отправлять репорты</font><br>
+              <font style="color: #cacaca;">- Нельзя размещать свой магазин</font><br>
+              <font style="color: #cacaca;">- Нельзя ставить префикс «Undetected»</font><br>
+              <font style="color: #cacaca;">- Поднятие темы один раз в 72 часа (не больше 5 разных тем)</font><br>
+              <font style="color: #cacaca;">- Деньги с розыгрышей идут в холд</font><br>
+              <font style="color: #cacaca;">- Принять участие в 10 (десяти) розыгрышах в неделю</font><br><br>
+              <font style="color: gray; font-weight: bold;">Местный</font><br>
+              <font style="color: #cacaca;">Имея 20 симпатий вы продвигаетесь в группу "Местный":</font><br>
+              <font style="color: #99ff99;">+ Загрузка аватара 485КБ</font><br>
+              <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
+              <font style="color: #99ff99;">+ Можно ставить симпатии, лайки, ограничение - 10 раз за 24 часа</font><br>
+              <font style="color: #cacaca;">- Нельзя менять ник</font><br>
+              <font style="color: #99ff99;">+ Можно менять статус</font><br>
+              <font style="color: #99ff99;">+ Можно отправлять репорты</font><br>
+              <font style="color: #cacaca;">- Нельзя размещать свой магазин</font><br>
+              <font style="color: #cacaca;">- Нельзя ставить префикс «Undetected»</font><br>
+              <font style="color: #99ff99;">+ Поднятие темы один раз в 48 часов (не больше 5 разных тем)</font><br>
+              <font style="color: #cacaca;">- Деньги с розыгрышей идут в холд</font><br>
+              <font style="color: #99ff99;">+ Короткая ссылка на профиль</font><br>
+              <font style="color: #99ff99;">+ Принять участие в 100 (ста) розыгрышах в неделю</font><br><br>
+              <font style="color: #ffffff; font-weight: bold;">Постоялец</font><br>
+              <font style="color: #cacaca;">Имея 200 симпатий вы продвигаетесь в группу "Постоялец":</font><br>
+              <font style="color: #99ff99;">+ Бесплатный доступ к Маркету</font><br>
+              <font style="color: #99ff99;">+ Белый цвет ника</font><br>
+              <font style="color: #99ff99;">+ Загрузка аватара 1.9МБ</font><br>
+              <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
+              <font style="color: #99ff99;">+ Можно ставить симпатии, лайки, ограничение - 50 раз за 24 часа</font><br>
+              <font style="color: #99ff99;">+ Бесплатная смена ника один раз в 6 месяцев</font><br>
+              <font style="color: #cacaca;">- Можно менять статус</font><br>
+              <font style="color: #cacaca;">- Можно отправлять репорты</font><br>
+              <font style="color: #99ff99;">+ Можно размещать свой магазин</font><br>
+              <font style="color: #99ff99;">+ Можно ставить префикс "Undetected"</font><br>
+              <font style="color: #99ff99;">+ Поднятие темы один раз в 36 часов (не больше 5 разных тем)</font><br>
+              <font style="color: #99ff99;">+ Деньги с розыгрышей идут сразу на баланс, а не в холд</font><br>
+              <font style="color: #cacaca;">- Короткая ссылка на профиль</font><br>
+              <font style="color: #99ff99;">+ Принять участие в 1000 (тысяче) розыгрышах в неделю</font><br><br>
+              <font style="color: #b35ede; font-weight: bold;">Эксперт</font><br>
+              <font style="color: #cacaca;">Имея 1 000 симпатий вы продвигаетесь в группу "Эксперт":</font><br>
+              <font style="color: #cacaca;">- Бесплатный доступ к Маркету</font><br>
+              <font style="color: #99ff99;">+ Фиолетовый цвет ника</font><br>
+              <font style="color: #cacaca;">- Загрузка аватара 1.9МБ</font><br>
+              <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
+              <font style="color: #99ff99;">+ Можно ставить симпатии, лайки, ограничение - 100 раз за 24 часа</font><br>
+              <font style="color: #99ff99;">+ Бесплатная смена ника один раз в 3 месяца</font><br>
+              <font style="color: #cacaca;">- Можно менять статус</font><br>
+              <font style="color: #cacaca;">- Можно отправлять репорты</font><br>
+              <font style="color: #cacaca;">- Можно размещать свой магазин</font><br>
+              <font style="color: #cacaca;">- Можно ставить префикс "Undetected"</font><br>
+              <font style="color: #99ff99;">+ Поднятие темы один раз в 18 часов (не больше 5 разных тем)</font><br>
+              <font style="color: #cacaca;">- Деньги с розыгрышей идут сразу на баланс, а не в холд</font><br>
+              <font style="color: #cacaca;">- Короткая ссылка на профиль</font><br>
+              <font style="color: #99ff99;">+ Принять участие в 10000 (десяти тысячах) розыгрышах в неделю</font><br><br>
+              <font style="color: #ffa8af; font-weight: bold;">Гуру</font><br>
+              <font style="color: #cacaca;">Имея 4 000 симпатий вы продвигаетесь в группу "Гуру":</font><br>
+              <font style="color: #cacaca;">- Бесплатный доступ к Маркету</font><br>
+              <font style="color: #99ff99;">+ Светло-розовый цвет ника</font><br>
+              <font style="color: #99ff99;">+ Загрузка аватара 3МБ</font><br>
+              <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
+              <font style="color: #99ff99;">+ Можно ставить симпатии, лайки, ограничение - 150 раз за 24 часа</font><br>
+              <font style="color: #99ff99;">+ Бесплатная смена ника один раз в месяц</font><br>
+              <font style="color: #cacaca;">- Можно менять статус</font><br>
+              <font style="color: #cacaca;">- Можно отправлять репорты</font><br>
+              <font style="color: #cacaca;">- Можно размещать свой магазин</font><br>
+              <font style="color: #cacaca;">- Можно ставить префикс "Undetected"</font><br>
+              <font style="color: #99ff99;">+ Поднятие темы один раз в 18 часов (не больше 8 разных тем)</font><br>
+              <font style="color: #cacaca;">- Деньги с розыгрышей идут сразу на баланс, а не в холд</font><br>
+              <font style="color: #cacaca;">- Короткая ссылка на профиль</font><br>
+              <font style="color: #cacaca;">- Принять участие в 10000 (десяти тысячах) розыгрышах в неделю</font><br><br>
+              <font style="color: #ff0076; font-weight: bold;">Искусственный интеллект</font><br>
+              <font style="color: #cacaca;">Имея 10 000 симпатий вы попадаете в группу "Искусственный интеллект":</font><br>
+              <font style="color: #99ff99;">+ Возможность менять фон</font><br>
+              <font style="color: #cacaca;">- Бесплатный доступ к Маркету</font><br>
+              <font style="color: #99ff99;">+ Красивый цвет ника</font><br>
+              <font style="color: #99ff99;">+ Загрузка аватара 5МБ</font><br>
+              <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
+              <font style="color: #99ff99;">+ Можно ставить симпатии, лайки, ограничение - 300 раз за 24 часа</font><br>
+              <font style="color: #cacaca;">- Бесплатная смена ника один раз в месяц</font><br>
+              <font style="color: #cacaca;">- Можно менять статус</font><br>
+              <font style="color: #cacaca;">- Можно отправлять репорты</font><br>
+              <font style="color: #cacaca;">- Можно размещать свой магазин</font><br>
+              <font style="color: #cacaca;">- Можно ставить префикс "Undetected"</font><br>
+              <font style="color: #99ff99;">+ Поднятие темы один раз в 12 часов (не больше 10 разных тем)</font><br>
+              <font style="color: #cacaca;">- Деньги с розыгрышей идут сразу на баланс, а не в холд</font><br>
+              <font style="color: #cacaca;">- Короткая ссылка на профиль</font><br>
+              <font style="color: #99ff99;">+ Анимированный аватар за пределами профиля</font><br>
+              <font style="color: #cacaca;">- Принять участие в 10000 (десяти тысячах) розыгрышах в неделю</font><br>
+              <font style="color: #99ff99;">+ Красивый банер в профиль</font><br>
+              <font style="color: #99ff99;">+ Значок под ником</font><br><br>
+            </div>
+          </div>
+        </div>
+        <div class="tabItem rules" id ="other-ques">
+          <div class="faq-tech-ques">
+            <label style="font-size: 20px;">Общие вопросы</label><br><br>
+            <div style="margin-left: 10px;">
+              <label style="font-size: 16px; color:;">Как получить симпатии?</label><br>
+              <label style="font-size: 16px; color: #cacaca;">- Симпатии выдают другие пользователи, если они посчитали ваше сообщение/тему полезной. Так же симпатии можно ставить на розыгрыши в знак благодарности.</label><br><br>
+              <label style="font-size: 16px; color:;">Как ставить симпатии? Почему у меня нет кнопки "Мне нравится"?</label><br>
+              <label style="font-size: 16px; color: #cacaca;">- Чтобы появилась кнопка "Мне нравится", нужно иметь 20 симпатий, либо иметь платную группу (Суприм, Легенда, Уник).</label><br><br>
+              <label style="font-size: 16px; color:;">Как бесплатно изменить ник?</label><br>
+              <label style="font-size: 16px; color: #cacaca;">- Бесплатная смена ника доступна с группы "Постоялец" (200 симпатий) и платным группам (Суприм, Легенда, Уник).</label><br><br>
+              <label style="font-size: 16px; color:;">Почему мои симпатии пропали?</label><br>
+              <label style="font-size: 16px; color: #cacaca;">Возможные причины:</label><br>
+              <label style="font-size: 16px; color: #cacaca;">- Накрутка симпатий на бессмысленные посты с вашей стороны</label><br>
+              <label style="font-size: 16px; color: #cacaca;">- Накрутка симпатий на ваши бессмысленные посты от другого пользователя</label><br>
+              <label style="font-size: 16px; color: #cacaca;">- В случае частичного обнуления симпатий (10-15), причиной является удаление симпатий у нарушителя, который вам поставил часть симпатий на полезные сообщения </label><br><br>
+              <label style="font-size: 16px; color:;">Что значат эти "баллы", которые я получаю после нарушения?</label><br>
+              <label style="font-size: 16px; color: #cacaca;">На форуме реализована система предупреждений (баллов) которые выдаются за нарушения правил форума/разделов</label><br><br>
+              <label style="font-size: 16px; color: #cacaca;">Получив нарушение, пользователю высылается личное сообщение от модератора, который его выдал. Тема письма будет содержать суть нарушения.</label><br>
+              <label style="font-size: 16px; color: #cacaca;">Свои нарушения, если таковы имеются, можно посмотреть во вкладке "Предупреждения" на странице своего профиля. Вы сможете узнать суммарное количество полученных баллов и дату их истечения. Нарушение, которое выдается в размере 2 баллов, обычно, истекает за 10 дней. Каждый пользователь имеет право обжаловать действия модератора в этом разделе.</label><br><br>
+              <label style="font-size: 16px; color: #cacaca;">Значения количества баллов на доступ к форуму:</label><br>
+              <label style="font-size: 16px; color: #cacaca;">- Если у вас менее 5 баллов, то вы имеете полные права на форуме. согласно вашей группе. (Например, Местный)</label><br>
+              <label style="font-size: 16px; color: #cacaca;">- Если у вас от 5 и до 20 баллов, то вам выдается группа «Read Only - только просмотр форума»</label><br>
+              <label style="font-size: 16px; color: #cacaca;">- Если у вас 20 баллов и более, то доступ к форуму будет ограничен. (Исключения: чат, арбитраж, жалобы)</label><br><br>
+              <label style="font-size: 16px; color: #cacaca;">Снятие баллов:</label><br>
+              <label style="font-size: 16px; color: #cacaca;">У каждого предупреждения имеется свой срок действия, и варьируется он от типа нарушения.</label><br>
+            </div>
+          </div>
+        </div>
+        <div class="switch-info" style="max-height: 95px;">
+          <a data-tab="#users-groups" class="switch-button active-tab">Группы пользователей</a>
+          <a data-tab="#other-ques" class="switch-button">Общие вопросы</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="{% static 'js/rules.js' %}"></script>
+{% endblock %}

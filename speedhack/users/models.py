@@ -11,30 +11,38 @@ GENDER = [
     ("Женский", 'Женский'),
 ]
 
-MAIN_RANK = [
+MAIN_POST = [
+    ("пользователь", "пользователь"),
+    ("заблокирован", "заблокирован"),
     ("куратор", "куратор"),
     ("арбитр", "арбитр"),
-    ("администратор", "администратор"),
     ("бот", "бот"),
+    ("администратор", "администратор"),
     ("гл. администратор", "гл. администратор"),
     ("владелец", "владелец"),
 ]
 
 PRIVILEGE = [
-    ("пользователь", "пользователь"),
-    ("заблокирован", "заблокирован"),
+    ("нет привилегий", "нет привилегий"),
     ("местный", "местный"),
     ("постоялец", "постоялец"),
     ("эксперт", "эксперт"),
     ("гуру", "гуру"),
-    ("исскуственный интелект", "исскуственный интелект"),
+    ("искусственный интелект", "искусственный интелект"),
 ]
 
-BUY_RANK = [
+MARKET_PRIVILEGE = [
     ("нет привилегий", "нет привилегий"),
     ("продавец", "продавец"),
     ("доверенный продавец", "доверенный продавец"),
     ("партнёр", "партнёр"),
+]
+
+BUY_PRIVILEGE = [
+    ("нет привилегий", "нет привилегий"),
+    ("легенда", "легенда"),
+    ("суприм", "суприм"),
+    ("уник", "уник"),
 ]
 
 USERNAME_STYLE = [
@@ -77,9 +85,7 @@ RANK_STYLE = [
 class CustomUser(AbstractUser):
     likes = models.IntegerField(verbose_name='Симпатии', default=0)
     balance = models.IntegerField(verbose_name='Баланс', default=0)
-    unique = models.BooleanField(verbose_name='Уник', default=False)
-    supreme = models.BooleanField(verbose_name='Суприм', default=False)
-    legend = models.BooleanField(verbose_name='Легенда', default=False)
+    save_deposit = models.IntegerField(verbose_name='Страховой депозит', default=0)
     gender = models.TextField(verbose_name='Пол', choices=GENDER, default=GENDER[0][0])
     username_style = models.TextField(verbose_name='Стиль имени', choices=USERNAME_STYLE, default=USERNAME_STYLE[0][0])
     banner = models.TextField(verbose_name='', choices=RANK_STYLE, default=RANK_STYLE[0][0])
@@ -87,9 +93,13 @@ class CustomUser(AbstractUser):
     occupation = models.CharField(verbose_name='Род занятий', max_length=200, default='')
     interests = models.CharField(verbose_name='Интересы', max_length=200, default='')
     description = models.CharField(verbose_name='Описание', max_length=200, default='')
-    rank = models.TextField(verbose_name='Ранг', choices=MAIN_RANK, default=MAIN_RANK[0][0])
+    rank = models.TextField(verbose_name='Должность', choices=MAIN_POST, default=MAIN_POST[0][0])
     privilege = models.TextField(verbose_name='Ранг', choices=PRIVILEGE, default=PRIVILEGE[0][0])
-    buy_privilege = models.TextField(verbose_name='Привилегия', choices=BUY_RANK, default=BUY_RANK[0][0])
+    market_privilege = models.TextField(verbose_name='Привилегия на маркете', choices=MARKET_PRIVILEGE, default=MARKET_PRIVILEGE[0][0])
+    buy_privilege = models.TextField(verbose_name='Платные привилегии', choices=BUY_PRIVILEGE, default=BUY_PRIVILEGE[0][0])
+    time_buy_privilege = models.DateField(verbose_name='Дата покупки привилегии', default=timezone.now())
+    time_buy_profile_sub = models.DateField(verbose_name='Дата покупки фона профиля', default=timezone.now())
+    time_buy_market_privilege = models.DateField(verbose_name='Дата покупки доступа к маркету', default=timezone.now())
     profile_sub = models.BooleanField(verbose_name='Доступ к фону профиля', default=False)
     messages = models.IntegerField(verbose_name='Сообщения', default=0)
     tg_link = models.CharField(verbose_name='Ссылка на телеграм', max_length=70, default='', blank=True)

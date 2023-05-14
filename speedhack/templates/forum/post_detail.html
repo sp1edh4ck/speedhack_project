@@ -9,7 +9,7 @@
       <label class="link-title"><a href="{% url 'forum:index' %}" class="link-title-main">Форум</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:group_filter_posts' post.group.id %}" class="link-title-main">{{ post.group.title }}</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:post_detail' post.id %}" class="link-title-main">Пост</a></label>
       <div class="frame-title">
         <label class="text-up-title">{{ post.title }}</label><br>
-        <label class="text-up-all">Тема в разделе <a href="{% url 'forum:group_filter_posts' post.group.slug %}" class="text-up-nick">{{ post.group }}</a> создана пользователем <a href="{% url 'forum:profile' post.author.username %}" class="text-up-nick">{{ post.author.username }}</a> / <img class="heart" src="{% static 'images/heart_gray.png' %}"> <label style="color: #ff506f;">{{ post.author.likes }}</label> / <img src="{% static 'images/views.png' %}" style="width: 25px; vertical-align: middle; margin-bottom: 2px;"> <label style="color: #ff506f;">{{ post.view }}</label> | {{ post.pub_date|date:"d E Y / H:i" }}</label>
+        <label class="text-up-all">Тема в разделе <a href="{% url 'forum:group_filter_posts' post.group.slug %}" class="text-up-nick">{{ post.group }}</a> создана пользователем <a href="{% url 'forum:profile' post.author.username %}" class="text-up-nick {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}">{{ post.author.username }}</a> / <img class="heart" src="{% static 'images/heart_gray.png' %}"> <label style="color: #ff506f;">{{ post.author.likes }}</label> / <img src="{% static 'images/views.png' %}" style="width: 25px; vertical-align: middle; margin-bottom: 2px;"> <label style="color: #ff506f;">{{ post.view }}</label> | <label style="color: gray;">{{ post.pub_date|date:"d E Y / H:i" }}</label></label>
       </div>
       <div class="frame-main">
         <div class="frame-main-avatars">
@@ -31,14 +31,14 @@
                   <label class="frame-main-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.privilege == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
                 </a>
               </div>
-              {% if request.user == post.author or request.user.rank == "владелец" or request.user.rank == "гл. администратор" or request.user.rank == "администратор" or request.user.rank == "арбитр" or request.user.rank == "куратор" %}
+              {% if user.username == post.author.username or user.rank == "владелец" or .user.rank == "гл. администратор" or user.rank == "администратор" or user.rank == "арбитр" or user.rank == "куратор" %}
                 <div style="height: 30px;" class="window-main">
                   <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
                   <div class="window-other" style="right: 0;">
                     <a href="{% url 'forum:post_edit' post.id %}" class="window-button-second">Редактировать запись</a>
                     {% if post.closed == False %}
                       <a href="{% url 'forum:post_close' post.id %}" class="window-button-second">Закрыть тему</a>
-                    {% elif post.closed == True and request.user.rank == "владелец" or request.user.rank == "гл. администратор" or request.user.rank == "администратор" or request.user.rank == "арбитр" or request.user.rank == "куратор" %}
+                    {% elif post.closed == True and user.rank == "владелец" or user.rank == "гл. администратор" or .user.rank == "администратор" or user.rank == "арбитр" or user.rank == "куратор" %}
                       <a href="{% url 'forum:post_open' post.id %}" class="window-button-second">Открыть тему</a>
                     {% endif %}
                     <a href="{% url 'forum:post_delete' post.id %}" class="window-button-second">Удалить пост</a>
@@ -65,7 +65,7 @@
                   </label>
                 {% endif %}
               </div>
-              {% if user.likes >= 20 and request.user.username != post.author.username %}
+              {% if user.likes >= 20 and user.username != post.author.username %}
                 <form method="post" action="{% url 'forum:likes_add' post.id %}">
                   <div class="comment-date" style="margin-top: 3px;">
                     <a href="{% url 'forum:likes_add' post.id %}">
@@ -96,7 +96,7 @@
                 <div class="comment-date" style="margin: 10px auto 0 0;">
                   <label>{{ comment.created|date:"d E Y / H:i" }}</label>
                 </div>
-                {% if user.likes >= 20 and request.user.username != comment.author.username %}
+                {% if user.likes >= 20 and user.username != comment.author.username %}
                   <div class="comment-date" style="margin-top: 3px;">
                     <a href="{% url 'forum:likes_add' post.id %}">
                       <img src="{% static 'images/heart_pink.png' %}" style="width: 25px; height: 23px; margin: 5px;">
@@ -117,7 +117,7 @@
               {% csrf_token %}
               <div style="display: flex;">
                 <div>
-                  <a href="{% url 'forum:profile' request.user %}"><img class="frame-main-avatar" style="width: 40px; height: 40px; margin: 0;" src="{{ user.avatar.url }}"></a>
+                  <a href="{% url 'forum:profile' user %}"><img class="frame-main-avatar" style="width: 40px; height: 40px; margin: 0;" src="{{ user.avatar.url }}"></a>
                 </div>
                 <div style="display: flex;">
                   <div>

@@ -60,9 +60,3 @@ class UserProfileForm(forms.ModelForm):
             "avatar": AvatarWidget,
             "birthday": BirthdayWidget,
         }
-
-
-class UserUniquiForm(forms.ModelForm):
-    class Meta:
-        model = CustomUser
-        fields = ('unique', 'balance',)

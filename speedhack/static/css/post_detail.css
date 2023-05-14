@@ -39,13 +39,12 @@
 
 .text-up-nick {
   text-decoration: none;
-  color: #ff506f;
+  color: gray;
   transition: color 0.5s ease 0s;
 }
 
 .text-up-nick:hover {
   text-decoration:underline;
-  color: #ff6b86;
 }
 
 .heart {
@@ -104,7 +103,7 @@
 }
 
 .frame-main-post-heart {
-  min-width: 1150px;
+  min-width: 1060px;
   color: #ffffff;
   word-wrap: break-word;
   margin-top: 20px;

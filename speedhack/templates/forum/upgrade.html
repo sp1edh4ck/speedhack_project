@@ -1,13 +1,55 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}speedhack / покупка роли{% endblock %}
+{% block title %}speedhack / покупка привилегий{% endblock %}
 {% load user_filters %}
 {% block content %}
   <div class="main">
     <div class="frame-profile_edit_con">
-      <div class="tabItem profile-edit" {% if request.user.unique == True %}style="max-height: 25px;"{% endif %} id="status_upgrade">
+      <div class="tabItem profile-edit" {% if user.unique == True %}style="max-height: 25px;"{% endif %} id="status_upgrade">
         <div style="background: #242424b6; border-radius: 10px;">
-          {% if request.user.legend == False %}
+          {% if user.market_privilege != "продавец" and user.market_privilege != "доверенный продавец" and user.market_privilege != "партнёр" %}
+            <div style="display: block; padding: 20px;">
+              <div style="margin-bottom: 10px;">
+                <label style="font-size: 18px; margin-right: 10px;">Доступ к продажам на маркете</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">100 <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ 30 дней</label>
+              </div>
+              <div style="color: #c5c5c5; line-height: 1.75;">
+                <label>Возможность продажи аккаунтов любой площадки</label><br>
+                <label>Поднятие объявлений раз в 24 часа</label><br>
+                <label>Доступ к Market API</label><br>
+              </div>
+              <div>
+                {% if user.balance >= 100 %}
+                  <a href="{% url 'forum:upgrade' user.username 1 %}" class="button-save">Купить</a>
+                {% else %}
+                  <a class="button-save a-fix-width">Пополнить баланс</a>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+          {% if user.profile_sub == False and user.buy_privilege != "уник" %}
+            {% if user.market_privilege == "нет привилегий" %}
+              <hr class="hr-post-detail" style="margin: 0;">
+            {% endif %}
+            <div style="display: block; padding: 20px;">
+              <div style="margin-bottom: 10px;">
+                <label style="font-size: 18px; margin-right: 10px;">Фон в профиле</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">100 <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ 30 дней</label>
+              </div>
+              <div style="color: #c5c5c5; line-height: 1.75;">
+                <label>Поставь желаемый фон в своем профиле и выделись среди остальных. Твой фон будет виден всем.</label><br>
+              </div>
+              <div>
+                {% if user.balance >= 100 %}
+                  <a href="{% url 'forum:upgrade' user.username 2 %}" class="button-save">Купить</a>
+                {% else %}
+                  <a class="button-save a-fix-width">Пополнить баланс</a>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+          {% if user.buy_privilege != "легенда" and user.buy_privilege != "суприм" and user.buy_privilege != "уник" %}
+            {% if user.profile_sub == False or user.market_privilege == "нет привилегий" %}
+              <hr class="hr-post-detail" style="margin: 0;">
+            {% endif %}
             <div style="display: block; padding: 20px;">
               <div style="margin-bottom: 10px;">
                 <label style="font-size: 18px; margin-right: 10px;">Легенда</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">2999 <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ 12 месяцев</label>
@@ -19,15 +61,15 @@
               </div>
               <div>
                 {% if user.balance >= 2999 %}
-                  <a href="{% url 'forum:upgrade' user.username 1 %}" class="button-save">Купить</a>
+                  <a href="{% url 'forum:upgrade' user.username 3 %}" class="button-save">Купить</a>
                 {% else %}
-                  <a class="button-save a-fix-width ">Пополнить баланс</a>
+                  <a class="button-save a-fix-width">Пополнить баланс</a>
                 {% endif %}
               </div>
             </div>
           {% endif %}
-          {% if request.user.supreme == False %}
-            {% if request.user.legend == False %}
+          {% if user.buy_privilege != "суприм" and user.buy_privilege != "уник" %}
+            {% if user.market_privilege == "нет привилегий" or user.profile_sub == False or user.buy_privilege != "легенда" %}
               <hr class="hr-post-detail" style="margin: 0;">
             {% endif %}
             <div style="display: block; padding: 20px;">
@@ -42,15 +84,17 @@
               </div>
               <div>
                 {% if user.balance >= 1500 %}
-                  <a href="{% url 'forum:upgrade' user.username 2 %}" class="button-save">Купить</a>
+                  <a href="{% url 'forum:upgrade' user.username 4 %}" class="button-save">Купить</a>
                 {% else %}
-                  <a class="button-save a-fix-width ">Пополнить баланс</a>
+                  <a class="button-save a-fix-width">Пополнить баланс</a>
                 {% endif %}
               </div>
             </div>
           {% endif %}
-          {% if request.user.unique == False %}
-            <hr class="hr-post-detail" style="margin: 0;">
+          {% if user.buy_privilege != "уник" %}
+            {% if user.market_privilege == "нет привилегий" or user.profile_sub == False or user.buy_privilege != "суприм" %}
+              <hr class="hr-post-detail" style="margin: 0;">
+            {% endif %}
             <div style="display: block; padding: 20px;">
               <div style="margin-bottom: 10px;">
                 <label style="font-size: 18px; margin-right: 10px;">Уник</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">7500 <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ навсегда</label>
@@ -63,18 +107,19 @@
                 <label>Скрытие счётчика симпатий в темах</label><br>
                 <label>Анимированная аватарка в темах</label><br>
                 <label>Скрытие онлайна на форуме</label><br>
+                <label>Доступ к фону профиля</label><br>
               </div>
               <div>
                 {% if user.balance >= 7500 %}
-                  <a href="{% url 'forum:upgrade' user.username 3 %}" class="button-save">Купить</a>
+                  <a href="{% url 'forum:upgrade' user.username 5 %}" class="button-save">Купить</a>
                 {% else %}
-                  <a class="button-save a-fix-width ">Пополнить баланс</a>
+                  <a class="button-save a-fix-width">Пополнить баланс</a>
                 {% endif %}
               </div>
             </div>
           {% endif %}
         </div>
-        {% if request.user.legend == True and request.user.supreme == True and request.user.uniqui == True %}
+        {% if user.buy_privilege == "уник" and user.market_privilege != "нет привилегий" %}
           <div style="padding: 20px; background: #242424b6; border-radius: 10px;">
             <label>Вы приобрели все наши товары :)</label>
           </div>

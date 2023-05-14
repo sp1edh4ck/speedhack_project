@@ -43,13 +43,16 @@
                     <label class="text-frame-text">
                       {{ post.pub_date|date:"d E Y / H:i" }}
                     </label>
+                    <label class="text-frame-text" style="margin-left: 10px;">
+                      <i class="fa-solid fa-message fa-sm"></i> {{ post.comments.count }}
+                    </label>
                   </div>
                   <div class="avatar-username">
                     <img class="user-avatar" src="{{ post.author.avatar.url }}" >
                     {% if post.author.is_online == True %}
                       <div class="online online-avatar-index"></div>
                     {% endif %}
-                    <label class="text-frame-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.privilege == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
+                    <label class="text-frame-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.privilege == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ post.author.username }}</label>
                   </div>
                 </div>
               </a>
