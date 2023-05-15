@@ -191,12 +191,12 @@
 
 .modal-content {
   color: #ffffff;
-  background: #242424b6;
+  background: #242424;
   margin: 100px auto auto auto;
   padding: 20px;
   border-radius: 10px;
-  width: 400px;
-  height: 140px;
+  width: 700px;
+  height: 500px;
 }
 
 .text-modal {
@@ -206,7 +206,7 @@
 .close {
   color: #ffffff;
   position: absolute;
-  margin-left: 410px;
+  margin-left: 713px;
   float: right;
   font-size: 28px;
   font-weight: bold;
