@@ -9,6 +9,43 @@
   background: #00000000;
 }
 
+.role-banner {
+  color: #ffffff;
+  margin-bottom: 5px;
+  width: 200px;
+  padding: 5px 0;
+  text-align: center;
+  border-radius: 7px;
+}
+.designer-role {
+  background: #2776af;
+}
+.main-designer-role {
+  background: #3288ff;
+}
+.referee-role {
+  background: #f99afe;
+}
+.main-referee-role {
+  background: #f528d9;
+}
+.admin-role {
+  background: #8b373b;
+}
+.main-admin-role {
+  background: #af4147;
+}
+.owner-role {
+  background: #ca343b;
+}
+.curator-role {
+  background: #2f846b;
+}
+.developer-role {
+  background: #b96d00;
+}
+
+
 .gray-un {
   color: gray;
 }

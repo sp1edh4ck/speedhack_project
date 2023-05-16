@@ -9,7 +9,7 @@
         <div class="frame-left">
           <div style="margin-bottom: 20px; display: flex;">
             {% if request.user.is_authenticated %}
-              {% if request.user.privilege == "заблокирован" %}
+              {% if request.user.rank == "заблокирован" %}
                 <label href="" class="button-frame" style="background: gray; cursor: default;">Создать тему</label>
               {% else %}
                 <a href="{% url 'forum:post_create' %}" class="button-frame">Создать тему</a>

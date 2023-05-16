@@ -39,11 +39,12 @@
 
 .text-up-nick {
   text-decoration: none;
-  color: gray;
+  color: #ff506f;
   transition: color 0.5s ease 0s;
 }
 
 .text-up-nick:hover {
+  color: #ff6b86;
   text-decoration:underline;
 }
 

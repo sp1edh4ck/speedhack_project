@@ -39,7 +39,7 @@ def successfully(request):
 
 
 def index(request):
-    if request.user.is_authenticated and request.user.privilege == "заблокирован":
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     search_query = request.GET.get('search', '')
     if search_query:
@@ -55,7 +55,7 @@ def index(request):
 
 
 def my_topics(request):
-    if request.user.is_authenticated and request.user.privilege == "заблокирован":
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     user = request.user
     search_query = request.GET.get('search', '')
@@ -72,7 +72,7 @@ def my_topics(request):
 
 
 def group_free(request, slug):
-    if request.user.is_authenticated and request.user.privilege == "заблокирован":
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     group = get_object_or_404(Group, slug=slug)
     search_query = request.GET.get('search', '')
@@ -117,8 +117,21 @@ def profile(request, username):
 
 
 @login_required
+def ban(request, username):
+    author = get_object_or_404(User, username=username)
+    if author.rank == "заблокирован":
+        author.rank = author.save_rank
+        author.save()
+    elif author.rank != "заблокирован":
+        author.save_rank = author.rank
+        author.rank = "заблокирован"
+        author.save()
+    return redirect('forum:profile', username=username)
+
+
+@login_required
 def info_edit(request, username):
-    if request.user.privilege == "заблокирован":
+    if request.user.rank == "заблокирован":
         return banned_redirect(request)
     form = UserProfileForm(
         request.POST or None,
@@ -136,14 +149,14 @@ def info_edit(request, username):
 
 @login_required
 def upgrade_temp(request, username):
-    if request.user.privilege == "заблокирован":
+    if request.user.rank == "заблокирован":
         return banned_redirect(request)
     return render(request, 'forum/upgrade.html')
 
 
 @login_required
 def upgrade(request, username, number):
-    if request.user.privilege == "заблокирован":
+    if request.user.rank == "заблокирован":
         return banned_redirect(request)
     user = CustomUser.objects.get(username=username)
     if number == 1:
@@ -171,13 +184,12 @@ def upgrade(request, username, number):
         user.balance -= 7500
         user.time_buy_privilege = timezone.now()
         user.save()
-    # return redirect('forum:profile', username=username)
-    return redirect('forum:profile_upgrade', username=username)
+    return redirect('forum:profile', username=username)
 
 
 @login_required
 def add_comment_profile(request, username):
-    if request.user.privilege == "заблокирован":
+    if request.user.rank == "заблокирован":
         return banned_redirect(request)
     form = ProfileCommentForm(request.POST or None)
     if form.is_valid():
@@ -189,7 +201,7 @@ def add_comment_profile(request, username):
 
 def post_detail(request, post_id):
     post = get_object_or_404(Forum, id=post_id)
-    if request.user.is_authenticated and request.user.privilege == "заблокирован" and post.author != request.user:
+    if request.user.is_authenticated and request.user.rank == "заблокирован" and post.author != request.user:
         return banned_redirect(request)
     post.view += 1
     post.save()
@@ -225,7 +237,7 @@ def post_open(request, post_id):
 def likes_add(request, post_id):
     post = get_object_or_404(Forum, id=post_id)
     comments = post.comments.all()
-    if request.user.privilege == "заблокирован":
+    if request.user.rank == "заблокирован":
         return banned_redirect(request)
     if post.author.username == request.user.username:
         for comment in comments:
@@ -254,7 +266,7 @@ def likes_add(request, post_id):
 
 @login_required
 def post_create(request):
-    if request.user.privilege == "заблокирован":
+    if request.user.rank == "заблокирован":
         return banned_redirect(request)
     form = PostForm(
         request.POST or None,
@@ -274,7 +286,7 @@ def post_create(request):
 
 @login_required
 def post_edit(request, post_id):
-    if request.user.privilege == "заблокирован":
+    if request.user.rank == "заблокирован":
         return banned_redirect(request)
     post = get_object_or_404(Forum, pk=post_id)
     form = PostForm(
@@ -306,7 +318,7 @@ def post_edit(request, post_id):
 
 @login_required
 def post_delete(request, post_id):
-    if request.user.privilege == "заблокирован":
+    if request.user.rank == "заблокирован":
         return banned_redirect(request)
     post = get_object_or_404(Forum, pk=post_id)
     if (request.user == post.author
@@ -322,7 +334,7 @@ def post_delete(request, post_id):
 @login_required
 def add_comment(request, post_id):
     post = get_object_or_404(Forum, pk=post_id)
-    if request.user.privilege == "заблокирован":
+    if request.user.rank == "заблокирован":
         return banned_redirect(request)
     form = CommentForm(request.POST or None)
     if form.is_valid():
@@ -338,7 +350,7 @@ def add_comment(request, post_id):
 
 @login_required
 def delete_comment(request, post_id, pk):
-    if request.user.privilege == "заблокирован":
+    if request.user.rank == "заблокирован":
         return banned_redirect(request)
     Comment.objects.filter(pk=pk).delete()
     return redirect('forum:post_detail', post_id=post_id)
@@ -346,7 +358,7 @@ def delete_comment(request, post_id, pk):
 
 @login_required
 def profile_follow(request, username):
-    if request.user.privilege == "заблокирован":
+    if request.user.rank == "заблокирован":
         return banned_redirect(request)
     author = get_object_or_404(User, username=username)
     if author != request.user:
@@ -357,7 +369,7 @@ def profile_follow(request, username):
 
 @login_required
 def profile_unfollow(request, username):
-    if request.user.privilege == "заблокирован":
+    if request.user.rank == "заблокирован":
         return banned_redirect(request)
     author = get_object_or_404(User, username=username)
     author.following.filter(user=request.user).delete()
@@ -366,7 +378,7 @@ def profile_unfollow(request, username):
 
 @login_required
 def admin_panel(request):
-    if request.user.privilege == "заблокирован":
+    if request.user.rank == "заблокирован":
         return banned_redirect(request)
     author = Forum.objects.select_related('author').all()
     users_list = CustomUser.objects.all()
@@ -382,7 +394,7 @@ def rules(request):
 
 
 def users(request):
-    if request.user.is_authenticated and request.user.privilege == "заблокирован":
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     posts = Forum.objects.select_related('author').all()
     accs = Market.objects.select_related('author').all()
@@ -391,9 +403,9 @@ def users(request):
     users_list = CustomUser.objects.all()
     count_sellers = 0
     for user in users_list:
-        if user.privilege != "заблокирован":
-            if ((user.privilege == "пользователь" and user.buy_privilege != "нет привилегий")
-                or (user.privilege != "пользователь" and user.privilege != "местный")):
+        if user.rank != "заблокирован":
+            if ((user.rank == "пользователь" and user.buy_privilege != "нет привилегий")
+                or (user.rank != "пользователь" and user.privilege != "местный")):
                 count_sellers += 1
     count_users = users_list.count()
     search_query = request.GET.get('search', '')

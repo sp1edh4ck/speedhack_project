@@ -12,7 +12,7 @@
           <div class="market-banner">
             <img class="profile-avatar-market" src="{{ acc.author.avatar.url }}">
             <div style="display: flex;">
-              <label class="{% if acc.author.username_style != 'gray-un' %}{{ acc.author.username_style }}{% elif acc.author.username_style == 'gray-un' %}gray-un{% endif %}" {% if acc.author.privilege == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} style="font-size: 20px;">{{ acc.author.username }}</label>
+              <label class="{% if acc.author.username_style != 'gray-un' %}{{ acc.author.username_style }}{% elif acc.author.username_style == 'gray-un' %}gray-un{% endif %}" {% if acc.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} style="font-size: 20px;">{{ acc.author.username }}</label>
               {% if acc.author.is_online == True %}
                 <div class="online online-avatar-market"></div>
               {% endif %}

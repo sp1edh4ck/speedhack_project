@@ -8,13 +8,11 @@
   <div class="main-profile">
     <div class="frame_con">
       <div style="display: block;">
-        <div class="frame-edit" style="{% if user.is_authenticated == False %}max-height: 230px;{% elif user.is_authenticated == False and user.privilege == 'заблокирован' %}max-height: 270px;{% elif user == author %}max-height: 275px;{% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 355px;{% else %}max-height: 315px;{% endif %}">
+        <div class="frame-edit" style="{% if user.is_authenticated == False %}max-height: 230px;{% elif user.is_authenticated == False and user.rank == 'заблокирован' %}max-height: 270px;{% elif user == author %}max-height: 275px;{% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 355px;{% else %}max-height: 315px;{% endif %}">
           <img class="profile-avatar" src="{{ author.avatar.url }}">
-          <div class="{% if author.privilege == "пользователь" %}gray-role{% elif author.rank != "нет ранга" %}{{ author.banner }}{% endif %}">
-            {% if author.rank != "нет ранга" %}
+          <div class="{% if author.rank != "пользователь" and author.rank != "заблокирован" %}role-banner {% if author.rank == "дизайнер" %}designer-role{% elif author.rank == "главный дизайнер" %}{% elif author.rank == "куратор" %}curator-role{% elif author.rank == "арбитр" %}referee-role{% elif author.rank == "главный арбитр" %}main-referee-role{% elif author.rank == "бот" %}admin-role{% elif author.rank == "администратор" %}admin-role{% elif author.rank == "разработчик" %}developer-role{% elif author.rank == "гл. администратор" %}main-admin-role{% elif author.rank == "владелец" %}owner-role{% endif %}{% endif %}">
+            {% if author.rank != "пользователь" and author.rank != "заблокирован" %}
               <label style="font-weight: 600;">{{ author.rank }}</label>
-            {% else %}
-              <label style="font-weight: 600;">{{ author.privilege }}</label>
             {% endif %}
           </div>
           {% if user == author %}
@@ -40,12 +38,12 @@
                 </div>
               </div>
             </div> {% endcomment %}
-            {% if user.privilege != 'заблокирован' %}
+            {% if user.rank != 'заблокирован' %}
               <a class="button-edit" style="margin-top: 5px;" href="{% url 'forum:profile_info_edit' user.username %}">Редактировать</a>
             {% endif %}
           {% else %}
             {% if user.is_authenticated %}
-              {% if user.privilege != 'заблокирован' %}
+              {% if user.rank != 'заблокирован' %}
                 {% if following %}
                   <a class="button-edit" href="{% url 'forum:profile_unfollow' author.username %}">Отписаться</a>
                 {% else %}
@@ -103,7 +101,7 @@
                   <div style="display: block; margin-left: 20px; max-width: 130px;">
                     <a class="sub-users" href="{% url 'forum:profile' post.author.username %}">
                       <div style="margin: 0 0 0 auto;">
-                        <label class="sub-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.privilege == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if post.author.username == "root" %}style="color: red;"{% endif %}>{{ post.author.username }}</label>
+                        <label class="sub-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if post.author.username == "root" %}style="color: red;"{% endif %}>{{ post.author.username }}</label>
                       </div>
                     </a>
                     <div style="color: #888888; font-size: 14px;">
@@ -131,7 +129,7 @@
                   <div style="display: block; margin-left: 20px; max-width: 130px;">
                     <a class="sub-users" href="{% url 'forum:profile' post.user.username %}">
                       <div style="margin: 0 0 0 auto;">
-                        <label class="sub-username {% if post.user.username_style != 'gray-un' %}{{ post.user.username_style }}{% endif %}" {% if post.user.privilege == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if post.user.username == "root" %}style="color: red;"{% endif %}>{{ post.user.username }}</label>
+                        <label class="sub-username {% if post.user.username_style != 'gray-un' %}{{ post.user.username_style }}{% endif %}" {% if post.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if post.user.username == "root" %}style="color: red;"{% endif %}>{{ post.user.username }}</label>
                       </div>
                     </a>
                     <div style="color: #888888; font-size: 13px;">
@@ -152,7 +150,7 @@
         <div class="frame-right-first">
           <div style="display: flex; ">
             <div style="margin: 0 auto 0 0;" class="frt">
-              <label class="{% if author.username_style != 'gray-un' %}{{ author.username_style }}{% elif author.username_style == 'gray-un' %}gray-un{% endif %}" {% if author.privilege == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if author.username == "root" %}style="color: red;"{% endif %}>{{ author.username }}</label>
+              <label class="{% if author.username_style != 'gray-un' %}{{ author.username_style }}{% elif author.username_style == 'gray-un' %}gray-un{% endif %}" {% if author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if author.username == "root" %}style="color: red;"{% endif %}>{{ author.username }}</label>
               {% if user != author %}
                 {% if user.rank == "владелец" or user.rank == "гл. администратор" or user.rank == "администратор" or user.rank == "куратор" %}
                   {% if author.rank != "нет ранга" %}
@@ -161,7 +159,11 @@
                       <a href="" class="window-button-second">Выдать мьют</a>
                       <a href="" class="window-button-second">Выдать штрафные баллы</a>
                       {% if user.rank != "куратор" %}
-                        <a href="" class="window-button-second">Заблокировать</a>
+                        {% if author.rank != "заблокирован" %}
+                          <a href="{% url 'forum:ban' author.username %}" class="window-button-second">Заблокировать</a>
+                        {% elif author.rank == "заблокирован" %}
+                          <a href="{% url 'forum:ban' author.username %}" class="window-button-second">Разблокировать</a>
+                        {% endif %}
                       {% endif %}
                     </div>
                   {% endif %}
@@ -290,7 +292,7 @@
                   </div>
                   <div class="avatar-username">
                     <img class="user-avatar" src="{{ post.author.avatar.url }}">
-                    <label class="text-frame-username {% if author.username_style != 'gray-un' %}{{ author.username_style }}{% endif %}" {% if author.privilege == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
+                    <label class="text-frame-username {% if author.username_style != 'gray-un' %}{{ author.username_style }}{% endif %}" {% if author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
                   </div>
                 </div>
               </a>

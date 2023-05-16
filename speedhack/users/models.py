@@ -14,10 +14,14 @@ GENDER = [
 MAIN_POST = [
     ("пользователь", "пользователь"),
     ("заблокирован", "заблокирован"),
+    ("дизайнер", "дизайнер"),
+    ("главный дизайнер", "главный дизайнер"),
     ("куратор", "куратор"),
     ("арбитр", "арбитр"),
+    ("главный арбитр", "главный арбитр"),
     ("бот", "бот"),
     ("администратор", "администратор"),
+    ("разработчик", "разработчик"),
     ("гл. администратор", "гл. администратор"),
     ("владелец", "владелец"),
 ]
@@ -94,6 +98,7 @@ class CustomUser(AbstractUser):
     interests = models.CharField(verbose_name='Интересы', max_length=200, default='')
     description = models.CharField(verbose_name='Описание', max_length=200, default='')
     rank = models.TextField(verbose_name='Должность', choices=MAIN_POST, default=MAIN_POST[0][0])
+    save_rank = models.TextField(verbose_name='Сохранённый ранг', default='')
     privilege = models.TextField(verbose_name='Ранг', choices=PRIVILEGE, default=PRIVILEGE[0][0])
     market_privilege = models.TextField(verbose_name='Привилегия на маркете', choices=MARKET_PRIVILEGE, default=MARKET_PRIVILEGE[0][0])
     buy_privilege = models.TextField(verbose_name='Платные привилегии', choices=BUY_PRIVILEGE, default=BUY_PRIVILEGE[0][0])

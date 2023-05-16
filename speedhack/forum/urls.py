@@ -10,6 +10,7 @@ urlpatterns = [
     path('forum/my_topics/', views.my_topics, name='my_topics'),
     path('group/<slug:slug>/', views.group_free, name='group_filter_posts'),
     path('profile/<str:username>/', views.profile, name='profile'),
+    path('profile/<str:username>/ban/', views.ban, name='ban'),
     path('profile/<str:username>/info_edit/', views.info_edit, name='profile_info_edit'),
     path('profile/<str:username>/upgrade/', views.upgrade_temp, name='profile_upgrade'),
     path('profile/<str:username>/upgrade/<int:number>/', views.upgrade, name='upgrade'),
