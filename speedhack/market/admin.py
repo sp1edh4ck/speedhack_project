@@ -8,11 +8,11 @@ class MarketAdmin(admin.ModelAdmin):
         'pk',
         'group',
         'title',
-        'data',
         'price',
         'description',
         'pub_date',
         'author',
+        'buyer',
     )
     list_editable = ('group',)
     search_fields = ('group',)

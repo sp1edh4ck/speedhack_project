@@ -70,37 +70,80 @@
           <div class="market-user-acc">
             <div style="display: flex;">
               <div class="text-frame-div" style="margin: 0 auto 0 0;">
-                <label class="text-frame-title">{{ acc.title }}</label><br>
+                <label class="text-frame-title" style="cursor: default;">{{ acc.title }}</label><br>
                 <label class="text-frame-text">{{ acc.pub_date|date:"d E Y / H:i" }}</label>
-                <label style="color: gray;">|</label>
-                <label class="text-frame-text">30 просмотров</label>
+                <span class="pink-separator"></span>
+                <label class="text-frame-text">{{ acc.view }} просмотров</label>
+                {% if acc.buyer != None %}
+                  <span class="pink-separator"></span>
+                  <label class="text-frame-text">Аккаунт купил <a href="{% url 'forum:profile' acc.buyer %}" class="a-buyer">{{ acc.buyer }}</a></label>
+                {% endif %}
               </div>
               <div class="acc-price">
                 <label>{{ acc.price }}</label> <i class="fa-solid fa-ruble-sign fa-sm" style="padding-right: 3px;"></i>
               </div>
             </div>
-            <div style="display: flex;">
-              <a class="market-acc-btn" style="width: 90px;">Купить</a>
-              <a class="market-acc-btn" style="width: 100px;">В корзину</a>
-              <a class="market-acc-btn gr-c" style="width: 130px;">Хочу скидку!</a>
-              <a class="market-acc-btn"></a>
-              <a class="market-acc-btn"></a>
-            </div>
-            <hr style="margin: 20px 0px; border: 1px solid #444444;">
-            <div style="display: block;">
-              <div>
-                <label style="marg"><i class="fa-solid fa-truck-fast fa-lg icon-text-mr"></i> Данные от аккаунта - <label style="color: #00ba78;">сразу</label> после покупки</label>
+            {% if acc.buyer == None %}
+              <div style="display: flex;">
+                {% if acc.author != user %}
+                  <a href="{% url 'market:acc_buy' acc.id %}" class="market-acc-btn" style="width: 90px;">Купить</a>
+                  <a class="market-acc-btn" style="width: 100px;">В корзину</a>
+                  <a class="market-acc-btn gr-c" style="width: 130px;">Хочу скидку!</a>
+                  <a class="market-acc-btn"></a>
+                  <a class="market-acc-btn"></a>
+                {% endif %}
               </div>
-              <div style="margin-top: 10px;">
-                <label><i class="fa-solid fa-envelope-open-text fa-lg icon-text-mr"></i> <label style="color: #00ba78;">Есть доступ</label> к временной почте от аккаунта</label>
+              <hr style="margin: 20px 0px; border: 1px solid #444444;">
+              <div style="display: block;">
+                <div>
+                  <label style="marg"><i class="fa-solid fa-truck-fast fa-lg icon-text-mr"></i> Данные от аккаунта - <label style="color: #00ba78;">сразу</label> после покупки</label>
+                </div>
+                <div style="margin-top: 10px;">
+                  <label><i class="fa-solid fa-envelope-open-text fa-lg icon-text-mr"></i> <label style="color: #00ba78;">Есть доступ</label> к временной почте от аккаунта</label>
+                </div>
+                <div style="margin-top: 10px;">
+                  <label><i class="fa-solid fa-lock fa-lg icon-text-mr"></i> <label style="color: #ff7070;">Отсутствует</label> доступ к родной почте аккаунта</label>
+                </div>
+                <div style="margin-top: 10px;">
+                  <label><i class="fa-solid fa-shield-halved fa-lg icon-text-mr"></i> <label style="color: #f0ff69;">24 часа</label> гарантии</label>
+                </div>
               </div>
-              <div style="margin-top: 10px;">
-                <label><i class="fa-solid fa-lock fa-lg icon-text-mr"></i> <label style="color: #ff7070;">Отсутствует</label> доступ к родной почте аккаунта</label>
+            {% elif user.username == acc.buyer.username %}
+              <div style="display: block;">
+                <div style=" margin-top: 10px;">
+                  <label>Аккаунт восстановили? Есть претензии к продавцу?</label>
+                </div>
+                {% if acc.author != user %}
+                  <a href="{% url 'market:acc_buy' acc.id %}" class="market-acc-btn" style="width: 200px;">Открыть денежный спор</a>
+                {% endif %}
               </div>
-              <div style="margin-top: 10px;">
-                <label><i class="fa-solid fa-shield-halved fa-lg icon-text-mr"></i> <label style="color: #f0ff69;">24 часа</label> гарантии</label>
+              <hr style="margin: 20px 0px; border: 1px solid #444444;">
+              <div style="display: block;">
+                <div>
+                  <label style="marg">Данные от аккаунта:</label>
+                </div>
+                <div style="margin-top: 10px;">
+                  <div>
+                    <label style="color: #cacaca;">Логин: <label style="color: #ffffff;">{{ acc.login }}</label></label>
+                  </div>
+                  <div>
+                    <label style="color: #cacaca;">Пароль: <label style="color: #ffffff;">{{ acc.password }}</label></label>
+                  </div>
+                  <div style="margin-bottom: 10px;">
+                    <label>{{ acc.login }}<label style="color: #cacaca;">:</label>{{ acc.password }}</label>
+                  </div>
+                  <div>
+                    <label style="color: #cacaca;">Почта: <label style="color: #ffffff;">{{ acc.email }}</label></label>
+                  </div>
+                  <div>
+                    <label style="color: #cacaca;">Пароль от почты: <label style="color: #ffffff;">{{ acc.email_password }}</label></label>
+                  </div>
+                  <div>
+                    <label>{{ acc.email }}<label style="color: #cacaca;">:</label>{{ acc.email_password }}</label>
+                  </div>
+                </div>
               </div>
-            </div>
+            {% endif %}
           </div>
           </div>
           <div style="display: block;">

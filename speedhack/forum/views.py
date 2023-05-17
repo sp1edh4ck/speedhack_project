@@ -54,6 +54,7 @@ def index(request):
     return render(request, 'forum/index.html', context)
 
 
+@login_required
 def my_topics(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)

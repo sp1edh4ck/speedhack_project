@@ -73,12 +73,22 @@ def group_free(request, slug):
 def my_accs(request):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
-    user = request.user
-    search_query = request.GET.get('search', '')
-    if search_query:
-        accs = user.acc.filter(title__icontains=search_query)
-    else:
-        accs = user.acc.all()
+    user = CustomUser.objects.get(username=request.user.username)
+    accs = Market.objects.filter(author=user).all()
+    count_accs = accs.count()
+    context = {
+        'accs': accs,
+        'count_accs': count_accs,
+    }
+    return render(request, 'market/index.html', context)
+
+
+@login_required
+def my_buy_accs(request):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    user = CustomUser.objects.get(username=request.user.username)
+    accs = Market.objects.filter(buyer=request.user).all()
     count_accs = accs.count()
     context = {
         'accs': accs,
@@ -112,9 +122,11 @@ def acc_detail(request, acc_id):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     acc = get_object_or_404(Market, id=acc_id)
-    acc_info = acc_parser()
+    acc.view += 1
+    acc.save()
+    # acc_info = acc_parser()
     context = {
-        'acc_info': acc_info,
+        # 'acc_info': acc_info,
         'acc': acc,
     }
     return render(request, 'market/acc_detail.html', context)
@@ -125,9 +137,13 @@ def acc_buy(request, acc_id):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     acc = get_object_or_404(Market, id=acc_id)
-    acc.buyer = request.user.username
-    acc.save()
-    return redirect('market:acc_detail', id=acc_id)
+    user = CustomUser.objects.get(username=request.user.username)
+    if acc.buyer == None and acc.author != user and user.balance >= acc.price:
+        acc.buyer = user
+        user.balance -= acc.price
+        user.save()
+        acc.save()
+    return redirect('market:acc_detail', acc_id=acc_id)
 
 
 def rules(request):

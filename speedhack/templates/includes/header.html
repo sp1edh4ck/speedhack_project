@@ -55,7 +55,7 @@
             <hr style="margin: 5px 0px; border: 1px solid #444444;">
             <a class="window-button-second">Баланс: {{ user.balance }} <i class="fas fa-ruble-sign fa-lg icon-rub"></i></a>
             <a class="window-button-second" href="{% url 'market:my_accs' %}">Мои аккаунты</a>
-            <a class="window-button-second" href="#">Мои покупки</a>
+            <a class="window-button-second" href="{% url 'market:my_buy_accs' %}">Мои покупки</a>
             <hr style="margin: 5px 0px; border: 1px solid #444444;">
             <a class="window-button-second" href="{% url 'forum:my_topics' %}">Мои темы</a>
             <a class="window-button-second" href="{% url 'forum:profile_info_edit' user.username %}">Настройки профиля</a>

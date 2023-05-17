@@ -37,6 +37,34 @@
                 <label style="color: #444444; font-size: 20px; height: 40px;">(опишите в аккаунт)</label>
               </div>
               {{ field|addclass:"field field-height" }}
+            <div style="display: flex;">
+              {% elif field.label == "Логин" %}
+                <div style="display: block;">
+                  <label class="field-label">{{ field.label }}</label>
+                  {% comment %} <label style="color: #444444; font-size: 20px; height: 40px;">(опишите в аккаунт)</label> {% endcomment %}
+                  {{ field|addclass:"field field-height field-fix" }}
+                </div>
+              {% elif field.label == "Пароль" %}
+                <div style="display: block; margin-left: 18px;">
+                  <label class="field-label">{{ field.label }}</label>
+                  {% comment %} <label style="color: #444444; font-size: 20px; height: 40px;">(опишите в аккаунт)</label> {% endcomment %}
+                  {{ field|addclass:"field field-height field-fix" }}
+                </div>
+            </div>
+            <div style="display: flex;">
+              {% elif field.label == "Почта" %}
+                <div style="display: block;">
+                  <label class="field-label">{{ field.label }}</label>
+                  {% comment %} <label style="color: #444444; font-size: 20px; height: 40px;">(опишите в аккаунт)</label> {% endcomment %}
+                  {{ field|addclass:"field field-height field-fix" }}
+                </div>
+              {% elif field.label == "Пароль от почты" %}
+                <div style="display: block; margin-left: 18px;">
+                  <label class="field-label">{{ field.label }}</label>
+                  {% comment %} <label style="color: #444444; font-size: 20px; height: 40px;">(опишите в аккаунт)</label> {% endcomment %}
+                  {{ field|addclass:"field field-height field-fix" }}
+                </div>
+            </div>
             {% elif field.label == "Данные от аккаунта" %}
               <div style="display: flex;">
                 <label class="field-label">{{ field.label }}</label>

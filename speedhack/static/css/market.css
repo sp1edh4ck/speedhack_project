@@ -283,3 +283,19 @@
   border-radius: 10px;
   min-width: 870px;
 }
+
+.a-buyer {
+  cursor: pointer;
+  color: #ffffff;
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+.a-buyer:hover {
+  color: #ff506f;
+  text-decoration: underline;
+}
+
+.field-fix {
+  max-width: 551px;
+}

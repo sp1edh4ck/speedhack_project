@@ -81,33 +81,35 @@
             <div class="acc-frame">
               <label style="margin: 20px 0 0 20px; color: #ffffff; font-size: 20px;">Последние аккаунты</label>
               {% for acc in accs %}
-                {% if acc.author.rank != 'заблокирован' %}
-                  <div class="market-accs" style="margin-top: 10px;">
-                    <a style="text-decoration: none;" href="{% url 'market:acc_detail' acc.id %}">
-                      <div class="text-frame">
-                        <div class="text-frame-div" style="margin: 0 auto 0 0;">
-                          <label class="text-frame-title">{{ acc.title }}</label><br>
-                          {% if acc.group.id == 1 %}
-                            <img src="{% static 'images/steam.png' %}" class="market-png">
-                          {% elif acc.group.id == 2 %}
-                            <img src="{% static 'images/ea.png' %}" class="market-png">
-                          {% elif acc.group.id == 3 %}
-                            <img src="{% static 'images/vk.png' %}" class="market-png">
-                          {% elif acc.group.id == 4 %}
-                            <img src="{% static 'images/telegram.png' %}" class="market-png">
-                          {% endif %}
-                          <label class="text-frame-username {% if acc.author.username_style != 'gray-un' %}{{ acc.author.username_style }}{% endif %}" {% if acc.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ acc.author.username }}</label>
-                          <span class="pink-separator"></span>
-                          <label class="text-frame-text">
-                            {{ acc.pub_date|date:"d E Y / H:i" }}
-                          </label>
+                {% if acc.buyer == None %}
+                  {% if acc.author.rank != 'заблокирован' %}
+                    <div class="market-accs" style="margin-top: 10px;">
+                      <a style="text-decoration: none;" href="{% url 'market:acc_detail' acc.id %}">
+                        <div class="text-frame">
+                          <div class="text-frame-div" style="margin: 0 auto 0 0;">
+                            <label class="text-frame-title">{{ acc.title }}</label><br>
+                            {% if acc.group.id == 1 %}
+                              <img src="{% static 'images/steam.png' %}" class="market-png">
+                            {% elif acc.group.id == 2 %}
+                              <img src="{% static 'images/ea.png' %}" class="market-png">
+                            {% elif acc.group.id == 3 %}
+                              <img src="{% static 'images/vk.png' %}" class="market-png">
+                            {% elif acc.group.id == 4 %}
+                              <img src="{% static 'images/telegram.png' %}" class="market-png">
+                            {% endif %}
+                            <label class="text-frame-username {% if acc.author.username_style != 'gray-un' %}{{ acc.author.username_style }}{% endif %}" {% if acc.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ acc.author.username }}</label>
+                            <span class="pink-separator"></span>
+                            <label class="text-frame-text">
+                              {{ acc.pub_date|date:"d E Y / H:i" }}
+                            </label>
+                          </div>
+                          <div class="acc-price">
+                            <label>{{ acc.price }}</label> <i class="fa-solid fa-ruble-sign fa-sm" style="padding-right: 3px;"></i>
+                          </div>
                         </div>
-                        <div class="acc-price">
-                          <label>{{ acc.price }}</label> <i class="fa-solid fa-ruble-sign fa-sm" style="padding-right: 3px;"></i>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
+                      </a>
+                    </div>
+                  {% endif %}
                 {% endif %}
               {% endfor %}
             </div>

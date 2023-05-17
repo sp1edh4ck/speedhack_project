@@ -84,7 +84,7 @@
           <div style="display: flex; padding: 0 20px;">
             <div>
               <img class="frame-main-avatar" src="{{ comment.author.avatar.url }}">
-              {% if post.author.is_online == True %}
+              {% if post.author.is_online == True or comment.author.is_online == True %}
                 <div class="online online-avatar" style="margin: -20px 0 0 60px;"></div>
               {% endif %}
             </div>

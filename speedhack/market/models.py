@@ -26,10 +26,17 @@ class Market(models.Model):
         verbose_name='Платформа',
     )
     title = models.CharField(verbose_name='Заголовок', max_length=55)
-    data = models.CharField(verbose_name='Данные от аккаунта', max_length=255)
+    login = models.CharField(verbose_name='Логин', max_length=50)
+    password = models.CharField(verbose_name='Пароль', max_length=100)
+    email = models.CharField(verbose_name='Почта', max_length=100)
+    email_password = models.CharField(verbose_name='Пароль от почты', max_length=100)
     price = models.IntegerField(verbose_name='Цена', validators=[MaxValueValidator(150000)])
     description = models.TextField(verbose_name='Описание', max_length=1000)
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
+    view = models.IntegerField(
+        default=0,
+        verbose_name='Просмотры'
+    )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -39,6 +46,7 @@ class Market(models.Model):
     buyer = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
+        blank=True,
         null=True,
         verbose_name='Покупатель',
         related_name='buyer',
