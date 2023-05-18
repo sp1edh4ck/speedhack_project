@@ -204,8 +204,9 @@ def post_detail(request, post_id):
     post = get_object_or_404(Forum, id=post_id)
     if request.user.is_authenticated and request.user.rank == "заблокирован" and post.author != request.user:
         return banned_redirect(request)
-    post.view += 1
-    post.save()
+    if request.user.is_authenticated:
+        post.view += 1
+        post.save()
     form = CommentForm(request.POST or None)
     comments = post.comments.all()
     count_comments = comments.count()

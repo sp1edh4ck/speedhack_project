@@ -43,7 +43,7 @@
       <div class="window-main">
         <div class="window-button" style="display: flex;">
           <div style="margin-right: 10px;">
-            <a class="{% if request.user.username_style != 'gray-un' %}{{ request.user.username_style }}{% endif %}" {% if request.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ request.user }}</a>
+            <a class="{% if request.user.username_style != 'gray-un' and user.rank != "владелец" %}{{ request.user.username_style }}{% elif user.rank == "владелец" %} green-so-beautifull-un{% endif %}" {% if request.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ request.user }}</a>
           </div>
           <div class="user-avatar-header-first">
             <img class="user-avatar-header" src="{{ request.user.avatar.url }}" >

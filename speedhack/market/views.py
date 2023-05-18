@@ -87,8 +87,8 @@ def my_accs(request):
 def my_buy_accs(request):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
-    user = CustomUser.objects.get(username=request.user.username)
-    accs = Market.objects.filter(buyer=request.user).all()
+    user = CustomUser.objects.get(username=request.user)
+    accs = Market.objects.filter(buyer=user)
     count_accs = accs.count()
     context = {
         'accs': accs,

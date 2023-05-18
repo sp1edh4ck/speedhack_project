@@ -45,6 +45,16 @@
   background: #b96d00;
 }
 
+.green-so-beautifull-un {
+  background: linear-gradient(90deg, #03FF03, #136E0C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #1daa6d;
+  text-shadow: 0px 0px 4px #00e2aa,
+  0px 0px 5px #00a078,
+  0px 0px 6px #00694f,
+  0px 0px 7px #004232;
+  border-radius: 10px;
+}
 
 .gray-un {
   color: gray;

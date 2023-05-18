@@ -42,6 +42,7 @@ class Forum(models.Model):
         default=0,
         verbose_name='Просмотры'
     )
+    # views = models.CharField()
     closed = models.BooleanField(
         default=False,
         verbose_name='Закрытая тема',
@@ -59,6 +60,21 @@ class Forum(models.Model):
     def __str__(self):
         number_of_chars = 15
         return self.text[:number_of_chars]
+
+
+class Viewers(models.Model):
+    post = models.ForeignKey(
+        Forum,
+        on_delete=models.CASCADE,
+        verbose_name='Пост',
+        related_name='viewers'
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='Зритель',
+        related_name='views',
+    )
 
 
 class Like(models.Model):
