@@ -73,6 +73,7 @@ USERNAME_STYLE = [
     ("red-orange-shadow-un", ".red-orange-shadow-un"),
     ("light-blue-double-shadow-un", ".light-blue-double-shadow-un"),
     ("aquamarine-shadow-un", ".aquamarine-shadow-un"),
+    ("green-so-beautifull-un", ".green-so-beautifull-un"),
 ]
 
 RANK_STYLE = [

@@ -8,7 +8,7 @@ from users.forms import UserProfileForm
 from users.models import CustomUser
 
 from .forms import ProfileCommentForm, CommentForm, PostForm
-from .models import Follow, Forum, User, Group, Comment
+from .models import Follow, Forum, User, Group, Comment, Viewers
 
 
 def pagination_post(request, post_list):
@@ -204,9 +204,10 @@ def post_detail(request, post_id):
     post = get_object_or_404(Forum, id=post_id)
     if request.user.is_authenticated and request.user.rank == "заблокирован" and post.author != request.user:
         return banned_redirect(request)
-    if request.user.is_authenticated:
-        post.view += 1
-        post.save()
+    # if request.user.is_authenticated:
+        # viewers = post.viewers.all()
+        # post.view += 1
+        # post.save()
     form = CommentForm(request.POST or None)
     comments = post.comments.all()
     count_comments = comments.count()
@@ -429,3 +430,7 @@ def users(request):
 
 def faq(request):
     return render(request, 'forum/faq.html')
+
+
+def guarantor(request):
+    return render(request, 'forum/guarantor.html')

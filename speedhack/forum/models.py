@@ -38,11 +38,6 @@ class Forum(models.Model):
         upload_to='posts/',
         blank=True,
     )
-    view = models.IntegerField(
-        default=0,
-        verbose_name='Просмотры'
-    )
-    # views = models.CharField()
     closed = models.BooleanField(
         default=False,
         verbose_name='Закрытая тема',
@@ -66,14 +61,14 @@ class Viewers(models.Model):
     post = models.ForeignKey(
         Forum,
         on_delete=models.CASCADE,
+        related_name='viewer',
         verbose_name='Пост',
-        related_name='viewers'
     )
-    user = models.ForeignKey(
+    author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        verbose_name='Зритель',
-        related_name='views',
+        related_name='viewers',
+        verbose_name='Пользователь',
     )
 
 

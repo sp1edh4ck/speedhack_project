@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import ProfileComment, Comment, Forum, Group
+from .models import ProfileComment, Comment, Forum, Group, Viewers
 
 
 class ForumAdmin(admin.ModelAdmin):
@@ -31,3 +31,4 @@ admin.site.register(Forum, ForumAdmin)
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Comment)
 admin.site.register(ProfileComment)
+admin.site.register(Viewers)

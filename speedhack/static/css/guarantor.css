@@ -1,0 +1,24 @@
+.frame-guarantor {
+  background: #242424b6;
+  color: #ffffff;
+  border-radius: 10px;
+}
+
+.title-text-guarantor {
+  font-size: 20px;
+  text-align: center;
+  margin: 10px;
+}
+
+.main-taxt-guarantor {
+  padding: 10px 20px 20px 20px;
+}
+
+.a-link-guarantor {
+  color: #ffffff;
+  transition: 0.5s;
+}
+
+.a-link-guarantor:hover {
+  color: #ff506f;
+}
