@@ -110,6 +110,7 @@ class CustomUser(AbstractUser):
     messages = models.IntegerField(verbose_name='Сообщения', default=0)
     tg_link = models.CharField(verbose_name='Ссылка на телеграм', max_length=70, default='', blank=True)
     subscriber = models.IntegerField(verbose_name='Подписчики', default=0)
+    scam = models.BooleanField(verbose_name='Скам', default=False)
     avatar = models.ImageField(
         verbose_name='Аватар',
         upload_to='avatars/',

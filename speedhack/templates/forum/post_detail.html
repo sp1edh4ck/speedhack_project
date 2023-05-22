@@ -28,7 +28,7 @@
             <div style="display: flex;">
               <div style="margin: 0 auto 0 0;">
                 <a href="{% url 'forum:profile' post.author.username %}" style="text-decoration: none; cursor: pointer;">
-                  <label class="frame-main-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
+                  <label class="frame-main-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>{% if user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
                 </a>
               </div>
               {% if user.username == post.author.username or user.rank == "владелец" or .user.rank == "гл. администратор" or user.rank == "администратор" or user.rank == "арбитр" or user.rank == "куратор" %}

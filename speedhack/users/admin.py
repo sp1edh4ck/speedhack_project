@@ -30,6 +30,7 @@ class CustomUserAdmin(UserAdmin):
                 'occupation',
                 'interests',
                 'description',
+                'scam',
             )}),
         (
             'Permissions',

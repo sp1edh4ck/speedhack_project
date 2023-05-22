@@ -64,12 +64,26 @@
           </div>
           {% if user.username == author.username %}
             <div style="display: flex; margin-top: 10px">
-              <a href="" class="save-dep-link sdl-ff">Пополнить</a>
-              <a href="" class="save-dep-link" style="margin: 0 5px;">Снять</a>
-              <span href="" class="save-dep-link" id="myBtn" style="padding: 0;"><i id="myBtn" class="fa-solid fa-circle-info fa-lg" style="color: #cacaca;"></i></span>
+              <span class="save-dep-link sdl-ff" id="depBtn" style="cursor: pointer;">Пополнить</span>
+              <span class="save-dep-link" id="withdraw" style="margin: 0 5px;">Снять</span>
+              <span class="save-dep-link" id="infoBtn" style="padding: 0; cursor: pointer;"><i class="fa-solid fa-circle-info fa-lg" style="color: #cacaca;"></i></span>
             </div>
           {% endif %}
-          <div id="myModal" class="modal">
+          <div id="depModal" class="modal">
+            <div class="modal-content" style="padding: 0px;">
+              <span class="close">&times;</span>
+              <div class="modal-content">
+                <div class="text-modal" style="font-size: 18px;">
+                  Пополнить страховой депозит
+                </div>
+                <div style="font-size: 14px;">
+                  При возвращении страхового депозита форум удерживает комиссию в размере 5% от суммы депозита.
+                  Сумма пополнения: <input type="text" min="0" step="" value="10000" autocomplete="off">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="infoModal" class="modal">
             <div class="modal-content" style="padding: 0px;">
               <span class="close">&times;</span>
               <div class="modal-content">
