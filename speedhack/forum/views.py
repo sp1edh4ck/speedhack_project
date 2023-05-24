@@ -7,7 +7,7 @@ from market.models import Market
 from users.forms import UserProfileForm
 from users.models import CustomUser
 
-from .forms import ProfileCommentForm, CommentForm, PostForm
+from .forms import ProfileCommentForm, CommentForm, PostForm, DepositForm
 from .models import Follow, Forum, User, Group, Comment, Viewers
 
 
@@ -115,6 +115,24 @@ def profile(request, username):
         'subscribers': pagination_sub(request, subscribers),
     }
     return render(request, 'forum/profile.html', context)
+
+
+@login_required
+def deposit(request, username):
+    user = CustomUser.objects.get(username=username)
+    # user.save_deposit += 10000
+    # user.save()
+    if request.method == 'POST':
+        form = DepositForm(
+            request.POST or None
+        )
+        if form.is_valid():
+            user.save_deposit += 10000
+            form.save()
+            return redirect('forum:profile', username=username)
+    else:
+        form = DepositForm()
+    return redirect('forum:profile', username=username)
 
 
 @login_required
@@ -337,18 +355,19 @@ def post_delete(request, post_id):
 @login_required
 def add_comment(request, post_id):
     post = get_object_or_404(Forum, pk=post_id)
-    if request.user.rank == "заблокирован":
-        return banned_redirect(request)
-    form = CommentForm(request.POST or None)
-    if form.is_valid():
-        user = CustomUser.objects.get(username=request.user.username)
-        user.messages += 1
-        user.save()
-        comment = form.save(commit=False)
-        comment.author = request.user
-        comment.post = post
-        comment.save()
-    return redirect('forum:post_detail', post_id=post_id)
+    if post.closed == False:
+        if request.user.rank == "заблокирован":
+            return banned_redirect(request)
+        form = CommentForm(request.POST or None)
+        if form.is_valid():
+            user = CustomUser.objects.get(username=request.user.username)
+            user.messages += 1
+            user.save()
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+        return redirect('forum:post_detail', post_id=post_id)
 
 
 @login_required

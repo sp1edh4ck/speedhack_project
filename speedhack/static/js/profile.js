@@ -35,12 +35,6 @@ depSpan.onclick = function() {
 	depModal.style.display = "none";
 }
 
-window.onclick = function(event) {
-	if (event.target == depModal) {
-		depModal.style.display = "none";
-	}
-}
-
 var infoModal = document.getElementById("infoModal");
 var infoBtn = document.getElementById("infoBtn");
 var infoSpan = document.getElementsByClassName("close")[1];
@@ -56,6 +50,9 @@ infoSpan.onclick = function() {
 window.onclick = function(event) {
 	if (event.target == infoModal) {
 		infoModal.style.display = "none";
+	}
+	if (event.target == depModal) {
+		depModal.style.display = "none";
 	}
 }
 

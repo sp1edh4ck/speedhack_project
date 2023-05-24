@@ -1,6 +1,7 @@
 from django import forms
 
 from .models import ProfileComment, Comment, Forum
+from users.models import CustomUser
 
 
 class PostForm(forms.ModelForm):
@@ -19,3 +20,9 @@ class ProfileCommentForm(forms.ModelForm):
     class Meta:
         model = ProfileComment
         fields = ('text', 'profile', 'image',)
+
+
+class DepositForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ('save_deposit',)

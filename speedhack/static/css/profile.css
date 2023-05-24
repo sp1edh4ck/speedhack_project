@@ -189,8 +189,6 @@
   background-color: rgba(59, 59, 59, 0.473);
 }
 
-
-
 .modal-content {
   color: #ffffff;
   background: #242424;
@@ -311,4 +309,23 @@
 
 .sdl-ff:hover {
   background: #ff6b86;
+}
+
+.fix-input-prof {
+  border: 2px solid gray;
+  min-width: 220px;
+  max-width: 220px;
+  font-size: 16px;
+  background: #202020b6;
+  color: #ffffff;
+  outline: none;
+  border-radius: 10px;
+  height: 30px;
+  padding-left: 10px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.fix-input-prof:focus {
+  border-color: #ff506f;
+  outline: 0;
 }

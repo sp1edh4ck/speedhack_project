@@ -70,15 +70,41 @@
             </div>
           {% endif %}
           <div id="depModal" class="modal">
-            <div class="modal-content" style="padding: 0px;">
+            <div class="modal-content" style="padding: 0px; height: 200px;">
               <span class="close">&times;</span>
-              <div class="modal-content">
-                <div class="text-modal" style="font-size: 18px;">
+              <div class="modal-content" style="height: 200px;">
+                <div class="text-modal" style="font-size: 20px;">
                   Пополнить страховой депозит
                 </div>
-                <div style="font-size: 14px;">
-                  При возвращении страхового депозита форум удерживает комиссию в размере 5% от суммы депозита.
-                  Сумма пополнения: <input type="text" min="0" step="" value="10000" autocomplete="off">
+                <div style="font-size: 16px;">
+                  <div style="margin-bottom: 10px;">
+                    При возвращении страхового депозита форум удерживает комиссию в размере 5% от суммы депозита.
+                  </div>
+                  <div style="display: flex;">
+                    <div style="width: 200px; text-align: right; margin: 4px 10px 0 0;">
+                      Сумма пополнения:
+                    </div>
+                    <form action="{% url 'forum:deposit' user.username %}" method="post">
+                      <div style="display: block;">
+                        <div>
+                          {{ form }}
+                          <input type="number" min="0" step="1000" value="10000" autocomplete="off" class="fix-input-prof">
+                        </div>
+                        {% csrf_token %}
+                        <div style="margin: 5px 0;">
+                          <label style="color: gray;">Минимальная сумма для пополнения - 10 000 <i class="fas fa-ruble-sign fa-lg icon-rub" style="width: 9px; height: 17px;"></i></label>
+                        </div>
+                        <div>
+                        {% comment %} <a href="{% url 'forum:deposit' user.username %}" style="text-decoration: none;"> {% endcomment %}
+                          <button type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 80px; cursor: pointer;">Пополнить</button>
+                        {% comment %} </a> {% endcomment %}
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  {% comment %} <div>
+                    <label style="color: gray;">Минимальная сумма для пополнения - 10 000 <i class="fas fa-ruble-sign fa-lg icon-rub" style="width: 9px; height: 17px;"></i></label>
+                  </div> {% endcomment %}
                 </div>
               </div>
             </div>
