@@ -5,10 +5,19 @@ from django.utils import timezone
 
 from market.models import Market
 from users.forms import UserProfileForm
-from users.models import CustomUser
+from users.models import CustomUser, IpUser
 
 from .forms import ProfileCommentForm, CommentForm, PostForm, DepositForm
 from .models import Follow, Forum, User, Group, Comment, Viewers
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 
 def pagination_post(request, post_list):
@@ -41,6 +50,7 @@ def successfully(request):
 def index(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
+    ip_address = get_client_ip(request)
     search_query = request.GET.get('search', '')
     if search_query:
         posts = Forum.objects.filter(title__icontains=search_query)
@@ -118,20 +128,25 @@ def profile(request, username):
 
 
 @login_required
-def deposit(request, username):
+def deposit(request, username, number):
     user = CustomUser.objects.get(username=username)
-    # user.save_deposit += 10000
-    # user.save()
-    if request.method == 'POST':
-        form = DepositForm(
-            request.POST or None
-        )
-        if form.is_valid():
-            user.save_deposit += 10000
-            form.save()
-            return redirect('forum:profile', username=username)
-    else:
-        form = DepositForm()
+    if number == 1:
+        user.save_deposit += 10000
+        user.save()
+    if number == 2:
+        user.balance -= 10000
+        user.save_deposit += 10000
+        user.save()
+    # if request.method == 'POST':
+    #     form = DepositForm(
+    #         request.POST or None
+    #     )
+    #     if form.is_valid():
+    #         user.save_deposit += 10000
+    #         form.save()
+    #         return redirect('forum:profile', username=username)
+    # else:
+    #     form = DepositForm()
     return redirect('forum:profile', username=username)
 
 
@@ -371,10 +386,11 @@ def add_comment(request, post_id):
 
 
 @login_required
-def delete_comment(request, post_id, pk):
+def delete_comment(request, post_id, id):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
-    Comment.objects.filter(pk=pk).delete()
+    comment = get_object_or_404(Comment, id=id)
+    comment.delete()
     return redirect('forum:post_detail', post_id=post_id)
 
 

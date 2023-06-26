@@ -52,6 +52,7 @@ BUY_PRIVILEGE = [
 USERNAME_STYLE = [
     ("gray-un", ".gray-un"),
     ("white-shadow-un", ".white-shadow-un"),
+    ("purple-white-un", ".purple-white-un"),
     ("grad-wb-un", ".grad-wb-un"),
     ("red-shadow-un", ".red-shadow-un"),
     ("grad-pwv-un", ".grad-pwv-un"),
@@ -147,3 +148,16 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
+class IpUser(models.Model):
+    user = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        related_name='ip_user',
+    )
+    ip_address = models.CharField(max_length=19, verbose_name='Ip-адресс пользователя')
+    banned = models.BooleanField(default=False, verbose_name='Блокировка ip-адресса')
+
+    def __str__(self):
+        return self.ip_address

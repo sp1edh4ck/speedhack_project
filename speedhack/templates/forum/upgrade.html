@@ -7,7 +7,7 @@
     <div class="frame-profile_edit_con">
       <div class="tabItem profile-edit" {% if user.unique == True %}style="max-height: 25px;"{% endif %} id="status_upgrade">
         <div style="background: #242424b6; border-radius: 10px;">
-          {% if user.market_privilege != "продавец" and user.market_privilege != "доверенный продавец" and user.market_privilege != "партнёр" %}
+          {% if user.market_privilege != "продавец" and user.market_privilege != "доверенный продавец" and user.market_privilege != "партнёр" and user.buy_privilege != "уник" %}
             <div style="display: block; padding: 20px;">
               <div style="margin-bottom: 10px;">
                 <label style="font-size: 18px; margin-right: 10px;">Доступ к продажам на маркете</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">100 <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ 30 дней</label>

@@ -9,7 +9,7 @@
       <label class="link-title"><a href="{% url 'forum:index' %}" class="link-title-main">Форум</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:group_filter_posts' post.group.id %}" class="link-title-main">{{ post.group.title }}</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:post_detail' post.id %}" class="link-title-main">Пост</a></label>
       <div class="frame-title">
         <label class="text-up-title">{{ post.title }}</label><br>
-        <label class="text-up-all">Тема в разделе <a href="{% url 'forum:group_filter_posts' post.group.slug %}" class="text-up-nick">{{ post.group }}</a> создана пользователем <a href="{% url 'forum:profile' post.author.username %}" class="text-up-nick {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}">{{ post.author.username }}</a> / <img class="heart" src="{% static 'images/heart_gray.png' %}"> <label style="color: #ff506f;">{{ post.author.likes }}</label> / <img src="{% static 'images/views.png' %}" style="width: 25px; vertical-align: middle; margin-bottom: 2px;"> <label style="color: #ff506f;">{{ count_views }}</label> | <label style="color: gray;">{{ post.pub_date|date:"d E Y / H:i" }}</label></label>
+        <label class="text-up-all">Тема в разделе <a href="{% url 'forum:group_filter_posts' post.group.slug %}" class="text-up-nick">{{ post.group }}</a> создана пользователем <a href="{% url 'forum:profile' post.author.username %}" class="{% if post.author.username_style != 'gray-un' %}text-up-nick2 {{ post.author.username_style }}{% else %}text-up-nick{% endif %}">{{ post.author.username }}</a> / <img class="heart" src="{% static 'images/heart_gray.png' %}"> <label style="color: #ff506f;">{{ post.author.likes }}</label> / <img src="{% static 'images/views.png' %}" style="width: 25px; vertical-align: middle; margin-bottom: 2px;"> <label style="color: #ff506f;">{{ count_views }}</label> | <label style="color: gray;">{{ post.pub_date|date:"d E Y / H:i" }}</label></label>
       </div>
       <div class="frame-main">
         <div class="frame-main-avatars">
@@ -89,8 +89,18 @@
               {% endif %}
             </div>
             <div style="display: block;">
-              <div>
-                <a href="{% url 'forum:profile' comment.author.username %}" class="frame-main-username {% if comment.author.username_style != 'gray-un' %}{{ comment.author.username_style }}{% endif %}" style="text-decoration: none;">{{ comment.author.username }}</a>
+              <div style="display: flex;">
+                <div style="margin: 0 auto 0 0;">
+                  <a href="{% url 'forum:profile' comment.author.username %}" class="frame-main-username {% if comment.author.username_style != 'gray-un' %}{{ comment.author.username_style }}{% endif %}" style="text-decoration: none;">{{ comment.author.username }}</a>
+                </div>
+                {% if user.username == post.author.username or user.rank == "владелец" or .user.rank == "гл. администратор" or user.rank == "администратор" or user.rank == "арбитр" or user.rank == "куратор" %}
+                  <div style="height: 30px;" class="window-main">
+                    <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
+                    <div class="window-other" style="right: 0; width: 220px;">
+                      {% comment %} <a href="{% url 'forum:delete_comment' comment.id %}" class="window-button-second">Удалить комментарий</a> {% endcomment %}
+                    </div>
+                  </div>
+                {% endif %}
               </div>
               <div class="comment-text">
                 <label>{{ comment.text }}</label>

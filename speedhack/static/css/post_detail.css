@@ -43,6 +43,16 @@
   transition: color 0.5s ease 0s;
 }
 
+.text-up-nick2 {
+  text-decoration: none;
+  color: #ff506f;
+  transition: color 0.5s ease 0s;
+}
+
+.text-up-nick2:hover {
+  text-decoration:underline;
+}
+
 .text-up-nick:hover {
   color: #ff6b86;
   text-decoration:underline;

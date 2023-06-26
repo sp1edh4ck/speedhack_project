@@ -84,23 +84,26 @@
                     <div style="width: 200px; text-align: right; margin: 4px 10px 0 0;">
                       Сумма пополнения:
                     </div>
-                    <form action="{% url 'forum:deposit' user.username %}" method="post">
+                    {% comment %} <form action="{% url 'forum:deposit' user.username %}" method="post"> {% endcomment %}
                       <div style="display: block;">
                         <div>
-                          {{ form }}
+                          {% comment %} {{ form }} {% endcomment %}
                           <input type="number" min="0" step="1000" value="10000" autocomplete="off" class="fix-input-prof">
                         </div>
                         {% csrf_token %}
                         <div style="margin: 5px 0;">
                           <label style="color: gray;">Минимальная сумма для пополнения - 10 000 <i class="fas fa-ruble-sign fa-lg icon-rub" style="width: 9px; height: 17px;"></i></label>
                         </div>
-                        <div>
-                        {% comment %} <a href="{% url 'forum:deposit' user.username %}" style="text-decoration: none;"> {% endcomment %}
-                          <button type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 80px; cursor: pointer;">Пополнить</button>
-                        {% comment %} </a> {% endcomment %}
+                        <div style="display: flex;">
+                          <a href="{% url 'forum:deposit' user.username 1 %}" style="text-decoration: none;">
+                            <label type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 80px; cursor: pointer;">Пополнить</label>
+                          </a>
+                          <a href="{% url 'forum:deposit' user.username 2 %}" style="text-decoration: none; margin-left: 10px;">
+                            <label type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 160px; cursor: pointer;">Пополнить с баланса</label>
+                          </a>
                         </div>
                       </div>
-                    </form>
+                    {% comment %} </form> {% endcomment %}
                   </div>
                   {% comment %} <div>
                     <label style="color: gray;">Минимальная сумма для пополнения - 10 000 <i class="fas fa-ruble-sign fa-lg icon-rub" style="width: 9px; height: 17px;"></i></label>
@@ -189,27 +192,31 @@
       <div style="display: block;">
         <div class="frame-right-first">
           <div style="display: flex; ">
-            <div style="margin: 0 auto 0 0;" class="frt">
-              <label class="{% if author.username_style != 'gray-un' %}{{ author.username_style }}{% elif author.username_style == 'gray-un' %}gray-un{% endif %}" {% if author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if author.username == "root" %}style="color: red;"{% endif %}>{{ author.username }}</label>
-              {% if user != author %}
-                {% if user.rank == "владелец" or user.rank == "гл. администратор" or user.rank == "администратор" or user.rank == "куратор" %}
-                  {% if author.rank != "нет ранга" %}
-                    <i class="fa-solid fa-gear fa-lg icon-sett"></i>
-                    <div class="user-sett">
-                      <a href="" class="window-button-second">Выдать мьют</a>
-                      <a href="" class="window-button-second">Выдать штрафные баллы</a>
-                      {% if user.rank != "куратор" %}
-                        {% if author.rank != "заблокирован" %}
-                          <a href="{% url 'forum:ban' author.username %}" class="window-button-second">Заблокировать</a>
-                        {% elif author.rank == "заблокирован" %}
-                          <a href="{% url 'forum:ban' author.username %}" class="window-button-second">Разблокировать</a>
+            <div style="margin: 0 auto 0 0; display: block;" class="frt">
+              <div>
+                <label class="{% if author.username_style != 'gray-un' %}{{ author.username_style }}{% elif author.username_style == 'gray-un' %}gray-un{% endif %}" {% if author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if author.username == "root" %}style="color: red;"{% endif %}>{{ author.username }}</label>
+                {% if user != author %}
+                  {% if user.rank == "владелец" or user.rank == "гл. администратор" or user.rank == "администратор" or user.rank == "куратор" %}
+                    {% if author.rank != "нет ранга" %}
+                      <i class="fa-solid fa-gear fa-lg icon-sett"></i>
+                      <div class="user-sett">
+                        <a href="" class="window-button-second">Выдать мьют</a>
+                        <a href="" class="window-button-second">Выдать штрафные баллы</a>
+                        {% if user.rank != "куратор" %}
+                          {% if author.rank != "заблокирован" %}
+                            <a href="{% url 'forum:ban' author.username %}" class="window-button-second">Заблокировать</a>
+                          {% elif author.rank == "заблокирован" %}
+                            <a href="{% url 'forum:ban' author.username %}" class="window-button-second">Разблокировать</a>
+                          {% endif %}
                         {% endif %}
-                      {% endif %}
-                    </div>
+                      </div>
+                    {% endif %}
                   {% endif %}
                 {% endif %}
-              {% endif %}
-              <label style="color: gray;">{{ author.description }}</label>
+              </div>
+              <div>
+                <label style="color: gray;">{{ author.description }}</label>
+              </div>
             </div>
             <div>
               {% comment %} <label style="color: gray; display: flex;">Последнй онлайн {{ author.last_login }}</label> {% endcomment %}

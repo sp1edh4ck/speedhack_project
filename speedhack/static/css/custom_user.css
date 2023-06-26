@@ -60,6 +60,12 @@
   color: gray;
 }
 
+.purple-white-un {
+  font-weight: bold;
+  color: #d5eaea;
+  text-shadow: 0 0 5px #a67ce0, 0 0 5px #f39ede, 0 0 5px #edd2e1, 0 0 5px #bae5ea, 0 0 5px #8eb6fc, 0 0 4px #a680e3;
+}
+
 .white-shadow-un {
   color: #ffffff;
   text-shadow: 0px 0px 3px rgb(214,210,210),

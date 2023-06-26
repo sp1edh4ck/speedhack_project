@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from users.forms import CustomUserChangeForm
-from users.models import CustomUser
+from users.models import CustomUser, IpUser
 
 
 class CustomUserAdmin(UserAdmin):
@@ -55,6 +55,7 @@ class CustomUserAdmin(UserAdmin):
         'tg_link',
         'rank',
     )
+
     list_filter = (
         'rank',
         'is_staff',
@@ -67,4 +68,26 @@ class CustomUserAdmin(UserAdmin):
     def avatar_tag(self, obj):
         return obj.avatar_tag()
 
+
+class IpUsersAdmin(UserAdmin):
+    ordering = ('user',)
+    fieldsets = (
+        ('Ip address',
+            {'fields': (
+                'user',
+                'ip_address',
+                'banned',
+            )}
+        ),
+    )
+
+    list_display = (
+        'user',
+    )
+
+    list_filter = (
+        'user',
+    )
+
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(IpUser)
