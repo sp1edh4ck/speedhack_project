@@ -65,14 +65,25 @@
           </div>
         </li>
         <ul class="li-label-down first-third-li-label {% if request.path == '/group/18/' or request.path == '/group/19/' or request.path == '/group/20/' or request.path == '/group/59/' or request.path == '/group/21/' or request.path == '/group/22/' or request.path == '/group/23/' or request.path == '/group/24/' or request.path == '/group/25/' or request.path == '/group/26/' or request.path == '/group/27/' or request.path == '/group/28/'%}active-menu{% endif %}">
-          <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/18/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 18 %}">Фишинг</a></li>
-          <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/19/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 19 %}">Трафферы</a></li>
-          <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/20/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 20 %}">Накрутка в соц. сетях</a></li>
+          {% if request.user.is_authenticated %}
+            <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/18/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 18 %}">Фишинг</a></li>
+          {% endif %}
+          {% if request.user.is_authenticated %}
+            <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/19/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 19 %}">Трафферы</a></li>
+          {% endif %}
+          <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/20/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 189 %}">Программирование</a></li>
+          <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/20/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 202 %}">Накрутка в соц. сетях</a></li>
+          <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/20/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 20 %}">Хостинг, аренда магазина</a></li>
           <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/21/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 21 %}">Чек крипты</a></li>
-          <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/22/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 22 %}">Чек логов</a></li>
+          <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/23/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 201 %}">Сигны</a></li>
+          {% if request.user.is_authenticated %}
+            <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/22/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 22 %}">Чек логов</a></li>
+          {% endif %}
           <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/23/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 23 %}">Дизайн</a></li>
           <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/24/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 24 %}">Буст аккаунтов</a></li>
-          <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/59/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 59 %}">Вязка каналов</a></li>
+          {% if request.user.is_authenticated %}
+            <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/59/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 59 %}">Вязка каналов</a></li>
+          {% endif %}
           <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/25/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 25 %}">Озвучка</a></li>
           <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/26/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 26 %}">Обмен средств</a></li>
           <li class="li-label-ts-down"><a class="li-label-ts-a {% if request.path == '/group/27/' %}active-a{% endif %}" href="{% url 'forum:group_filter_posts' 27 %}">Реклама</a></li>

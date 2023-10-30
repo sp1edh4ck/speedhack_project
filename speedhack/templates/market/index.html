@@ -10,7 +10,7 @@
         </div>
         <div class="market-main-left">
           <a href="https://t.me/sp1edh4ck" class="market-link-left" target="_blank"><i class="fa-solid fa-circle-question fa-lg icon-market-left"></i>Нужна помощь</a>
-          <a href="{% url 'market:rules' %}" class="market-link-left"><i class="fa-solid fa-book fa-lg icon-market-left"></i>Правила и гарантии</a>
+          <a href="{% url 'market:rules' %}" class="market-link-left" target="_blank"><i class="fa-solid fa-book fa-lg icon-market-left"></i>Правила и гарантии</a>
           <a href="{% url 'forum:group_filter_posts' 111 %}" class="market-link-left"><i class="fa-solid fa-sheet-plastic fa-lg icon-market-left"></i>Советы и гайды</a>
           <a href="" class="market-link-left"><i class="fa-solid fa-gear fa-lg icon-market-left"></i>Настройки маркета</a>
           <a href="{% url 'forum:profile_upgrade' request.user %}" class="market-link-left"><i class="fa-solid fa-angles-up fa-lg icon-market-left"></i>Повышение статуса</a>
@@ -39,7 +39,7 @@
             <a href="" class="market-link-left"><i class="fa-solid fa-money-bill-transfer fa-lg icon-market-left"></i>Перевести средства</a>
             <hr style="margin: 5px 0px; border: 1px solid #444444;">
             <a href="{% url 'market:my_accs' %}" class="market-link-left"><i class="fa-solid fa-shop fa-lg icon-market-left"></i>Мои аккаунты</a>
-            <a href="" class="market-link-left"><i class="fa-solid fa-bag-shopping fa-lg icon-market-left"></i>Мои покупки</a>
+            <a href="{% url 'market:my_buy_accs' %}" class="market-link-left"><i class="fa-solid fa-bag-shopping fa-lg icon-market-left"></i>Мои покупки</a>
             <a href="" class="market-link-left"><i class="fa-solid fa-bars-staggered icon-market-left"></i>Мои операции</a>
             <a href="" class="market-link-left"><i class="fa-solid fa-bookmark fa-lg icon-market-left"></i>Избранное</a>
             <a href="" class="market-link-left"><i class="fa-solid fa-tag fa-lg icon-market-left"></i>Метки</a>
