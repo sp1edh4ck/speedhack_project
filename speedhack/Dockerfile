@@ -4,6 +4,8 @@ WORKDIR /app
 
 RUN python -m pip install --upgrade pip
 
+RUN ls
+
 RUN pip3 install -r requirements.txt --no-cache-dir
 
 COPY . .
