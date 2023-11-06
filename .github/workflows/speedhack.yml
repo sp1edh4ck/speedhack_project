@@ -50,6 +50,7 @@ jobs:
           key: ${{ secrets.OPEN_SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
+            cd infra
             sudo docker-compose stop
             sudo docker-compose rm web
             touch .env
