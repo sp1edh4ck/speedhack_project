@@ -10,7 +10,6 @@ services:
 
   web:
     image: sp1edh4ck/speedhack_project:latest
-    restart: always
     volumes:
       - static_value:/app/static/
       - media_value:/app/media/
