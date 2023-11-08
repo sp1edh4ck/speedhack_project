@@ -8,4 +8,4 @@ COPY requirements.txt .
 
 RUN pip3 install -r requirements.txt --no-cache-dir
 
-CMD ["uvicorn", "speedhack.wsgi:application", "--fd", "0:8000"]
+CMD ["uvicorn", "--fd", "speedhack.wsgi:application", "0:8000"]
