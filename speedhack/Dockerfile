@@ -8,4 +8,4 @@ COPY requirements.txt .
 
 RUN pip3 install -r requirements.txt --no-cache-dir
 
-CMD ["uvicorn", "speedhack.wsgi:application", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "speedhack.asgi:application", "--host", "0.0.0.0", "--port", "8000"]
