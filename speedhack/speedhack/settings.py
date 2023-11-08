@@ -6,7 +6,7 @@ SECRET_KEY = 'django-insecure-p+ok_!mpq-%$j!@-hg7(%0gpnb37g7t&e((cda7bg_f=9d%8sy
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['158.160.127.162', '*', 'speedhack.online']
 
 CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://localhost:8000', 'http://158.160.127.162']
 
