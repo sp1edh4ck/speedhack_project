@@ -8,6 +8,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://localhost:8000', 'http://158.160.127.162']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
