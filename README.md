@@ -98,3 +98,17 @@ sudo systemctl start docker.service && sudo systemctl enable docker.service
 ###### Если деплой прошёл успешно, то переходим в папку ```cd infra``` и запускаем команду ```sudo docker-compose up -d --build``` на сервере
 
 > Проект готов к работе!
+
+---
+
+#### Дополнительно!
+
+```
+sudo docker container ls -a # посмотреть запущенные контейнеры
+
+sudo docker exec -it <backend id> python manage.py migrate # сделать миграции
+
+sudo docker exec -it <backend id> python manage.py collectstatic # собрать статику
+
+sudo docker-compose exec <backend id> python manage.py createsuperuser # создать суперюзера
+```

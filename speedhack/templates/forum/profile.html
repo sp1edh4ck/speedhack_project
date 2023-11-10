@@ -98,9 +98,15 @@
                           <a href="{% url 'forum:deposit' user.username 1 %}" style="text-decoration: none;">
                             <label type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 80px; cursor: pointer;">Пополнить</label>
                           </a>
-                          <a href="{% url 'forum:deposit' user.username 2 %}" style="text-decoration: none; margin-left: 10px;">
-                            <label type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 160px; cursor: pointer;">Пополнить с баланса</label>
-                          </a>
+                          {% if user.balance >= 10000 %}
+                            <a href="{% url 'forum:deposit' user.username 2 %}" style="text-decoration: none; margin-left: 10px;">
+                              <label type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 160px; cursor: pointer;">Пополнить с баланса</label>
+                            </a>
+                          {% else %}
+                            <a style="text-decoration: none; margin-left: 10px;">
+                              <label type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 160px; background: gray;">Пополнить с баланса</label>
+                            </a>
+                          {% endif %}
                         </div>
                       </div>
                     {% comment %} </form> {% endcomment %}
