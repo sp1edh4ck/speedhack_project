@@ -59,14 +59,42 @@ mkdir nginx
 
 ###### Выходим с сервера и загружаем файлы (docker-copmose.yml, .env, default.conf)
 ```
-scp docker-composa.yml sp1edh4ck@158.160.127.162:/home/sp1edh4ck/infra/
+scp docker-compose.yaml sp1edh4ck@158.160.127.162:/home/sp1edh4ck/infra/
 
 scp .env sp1edh4ck@158.160.127.162:/home/sp1edh4ck/infra/
 
 scp default.conf sp1edh4ck@158.160.127.162:/home/sp1edh4ck/infra/nginx/
 ```
 
+###### Запускаем команду которая совершает 3 действия:
+- Обновляет список доступных пакетов.
+- Устанавливает обновления для всех установленных пакетов на вашей системе.
+- Устанавливает пакет curl на вашей системе.
+```
+sudo apt update && sudo apt upgrade -y && sudo apt install curl -y
+```
+
+###### Загружаем файл Docker Compose
+```
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```
+
+###### Загружаем docker.io
+```
+sudo apt install docker.io
+```
+
+###### Данная команда позволит использовать команду docker-compose из любого места в системе.
+```
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+###### Данная команда будет автоматически запускать docker после перезагрузки системы.
+```
+sudo systemctl start docker.service && sudo systemctl enable docker.service
+```
+
 ###### После этого деплоим проект, чтобы запустить github actions
-###### Если деплой прошёл успешно, то надо запустить команду ```sudo docker-compose up -d --build``` на сервере
+###### Если деплой прошёл успешно, то переходим в папку ```cd infra``` и запускаем команду ```sudo docker-compose up -d --build``` на сервере
 
 > Проект готов к работе!
