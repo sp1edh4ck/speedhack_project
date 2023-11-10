@@ -1,9 +1,4 @@
-# speedhack_project
-
-speedhack_project - это проект, который я делаю сам с абсолютного нуля.
----
-
-### Как развернуть проект?
+### Развёртка проекта локально
 
 ###### Загружаем проект себе на пк
 ```
@@ -39,5 +34,39 @@ python manage.py makemigrations (users, forum)
 
 python manage.py migrate
 ```
+
+> Проект готов к работе!
+
+---
+
+### Развёртка проекта на сервере (yandex cloud)
+
+###### Заходим на сервер
+```
+ssh -o ServerAliveInterval=30 sp1edh4ck@158.160.127.162
+```
+
+###### Создаём нужные папки
+```
+cd ~
+
+mkdir infra
+
+cd infra
+
+mkdir nginx
+```
+
+###### Выходим с сервера и загружаем файлы (docker-copmose.yml, .env, default.conf)
+```
+scp docker-composa.yml sp1edh4ck@158.160.127.162:/home/sp1edh4ck/infra/
+
+scp .env sp1edh4ck@158.160.127.162:/home/sp1edh4ck/infra/
+
+scp default.conf sp1edh4ck@158.160.127.162:/home/sp1edh4ck/infra/nginx/
+```
+
+###### После этого деплоим проект, чтобы запустить github actions
+###### Если деплой прошёл успешно, то надо запустить команду ```sudo docker-compose up -d --build``` на сервере
 
 > Проект готов к работе!
