@@ -4,6 +4,7 @@ body {
   margin: 0;
   line-height: 1.5;
   height: 100%;
+  overflow-y: scroll;
 }
 
 body::-webkit-scrollbar {
@@ -11,9 +12,9 @@ body::-webkit-scrollbar {
   height: 7px;
 }
 
-body::-webkit-scrollbar-track {
+/* body::-webkit-scrollbar-track {
   background: #ffffff;
-}
+} */
 
 body::-webkit-scrollbar-thumb {
   background: #ff506f;

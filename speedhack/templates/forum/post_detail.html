@@ -81,7 +81,48 @@
           <hr class="hr-post-detail">
         {% endif %}
         {% for comment in comments %}
-          <div style="display: flex; padding: 0 20px;">
+          <div class="frame-main-posts">
+            <div>
+              <a href="{% url 'forum:profile' comment.author.username %}"><img class="frame-main-avatar" src="{{ comment.author.avatar.url }}"></a>
+              {% if comment.author.is_online == True %}
+                <div class="online online-avatar" style="margin: -20px 0 0 60px;"></div>
+              {% endif %}
+            </div>
+            <div>
+              <div style="display: flex;">
+                <div style="margin: 0 auto 0 0;">
+                  <a href="{% url 'forum:profile' comment.author.username %}" style="text-decoration: none; cursor: pointer;">
+                    <label class="frame-main-username {% if comment.author.username_style != 'gray-un' %}{{ comment.author.username_style }}{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ comment.author.username }}</label>{% if comment.user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
+                  </a>
+                </div>
+              </div>
+              <div>
+                <div class="frame-main-post-text">
+                  <label>{{ post.text }}</label>
+                </div>
+                <div class="frame-main-post-heart">
+                  {% thumbnail post.image "1050" crop="center" upscale=True as im %}
+                    <img src="{{ im.url }}">
+                  {% endthumbnail %}
+                </div>
+              </div>
+              <div style="display: flex;">
+                <div class="comment-date" style="margin: 10px auto 0 0;">
+                  <label>{{ post.pub_date|date:"d E Y / H:i" }}</label>
+                </div>
+                {% if user.likes >= 20 and user.username != post.author.username %}
+                  <form method="post" action="{% url 'forum:likes_add' post.id %}">
+                    <div class="comment-date" style="margin-top: 3px;">
+                      <a href="{% url 'forum:likes_add' post.id %}">
+                        <img src="{% static 'images/heart_pink.png' %}" style="width: 25px; height: 23px; margin: 5px;">
+                      </a>
+                    </div>
+                  </form>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% comment %} <div style="display: flex; padding: 0 20px;">
             <div>
               <img class="frame-main-avatar" src="{{ comment.author.avatar.url }}">
               {% if post.author.is_online == True or comment.author.is_online == True %}
@@ -97,7 +138,7 @@
                   <div style="height: 30px;" class="window-main">
                     <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
                     <div class="window-other" style="right: 0; width: 220px;">
-                      {% comment %} <a href="{% url 'forum:delete_comment' comment.id %}" class="window-button-second">Удалить комментарий</a> {% endcomment %}
+                      <a href="{% url 'forum:delete_comment' comment.id %}" class="window-button-second">Удалить комментарий</a>
                     </div>
                   </div>
                 {% endif %}
@@ -118,7 +159,7 @@
                 {% endif %}
               </div>
             </div>
-          </div>
+          </div> {% endcomment %}
           {% if not forloop.last %}<hr class="hr-post-detail">{% endif %}
         {% endfor %}
         {% if user.is_authenticated and post.closed != True %}
