@@ -45,6 +45,9 @@
           <span class="rules-reg"> Я согласен с <a class="link-rules" href="{% url 'forum:rules' %}" target="_blank">правилами сайта</a></span>
         </div>
         <button type="submit" name="submit" disabled="" class="button-form btn-reg">Зарегистрироваться</button>
+        <div class="login-link">
+          <label>Есть аккаунт? <a href="{% url 'users:login' %}" class="login-link-a">Войти</a></label>
+        </div>
         <script>
           function check() {
             var submit = document.getElementsByName('submit')[0];

@@ -63,3 +63,33 @@
 .link-decor-a:hover {
   color: #ff506f;
 }
+
+.link-h-words {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 20px;
+  transition: color 0.5s ease 0s;
+}
+
+.link-h-words:hover {
+  color: #ff506f;
+}
+
+.frame-words {
+  margin-top: 20px;
+  background: #242424b6;
+  color: #ffffff;
+  /* padding: 0 20px 20px 20px; */
+  border-radius: 10px;
+}
+
+.tr-1 {
+  display: flex;
+  padding: 10px 20px 10px 20px;
+}
+
+.tr-2 {
+  color: #ffffff;
+  min-width: 180px;
+  margin: auto 0;
+}

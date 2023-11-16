@@ -72,7 +72,23 @@
 
 .button:hover {
   color: #ffffff;
-  background: #ff506f;
+  background: #ff6b86;
+}
+
+.button-off {
+  cursor: pointer;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
+  padding: 7px 8px;
+  color: #b8b8b8;
+  border: none;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.5s ease 0s;
+}
+
+.button-off:hover {
+  color: #ffffff;
 }
 
 .notification {

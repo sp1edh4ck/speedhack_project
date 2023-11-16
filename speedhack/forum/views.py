@@ -193,27 +193,27 @@ def upgrade(request, username, number):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     user = CustomUser.objects.get(username=username)
-    if number == 1:
+    if number == 1 and user.balance <= 100:
         user.market_privilege = "продавец"
         user.balance -= 100
         user.time_buy_market_privilege = timezone.now()
         user.save()
-    if number == 2:
+    if number == 2 and user.balance <= 100:
         user.profile_sub = True
         user.balance -= 100
         user.time_buy_profile_sub = timezone.now()
         user.save()
-    if number == 3:
+    if number == 3 and user.balance <= 2999:
         user.buy_privilege = "легенда"
         user.balance -= 2999
         user.time_buy_privilege = timezone.now()
         user.save()
-    if number == 4:
+    if number == 4 and user.balance <= 1500:
         user.buy_privilege = "суприм"
         user.balance -= 1500
         user.time_buy_privilege = timezone.now()
         user.save()
-    if number == 5:
+    if number == 5 and user.balance <= 7500:
         user.buy_privilege = "уник"
         user.balance -= 7500
         user.time_buy_privilege = timezone.now()
@@ -282,19 +282,19 @@ def likes_add(request, post_id):
         user = CustomUser.objects.get(username=post.author.username)
     user.likes += 1
     user.save()
-    if user.likes == 20:
+    if user.privilege != "местный" and user.likes >= 20 and user.likes <= 199:
         user.privilege = "местный"
         user.save()
-    elif user.likes == 200:
+    elif user.privilege != "постоялец" and user.likes >= 200 and user.likes <= 999:
         user.privilege = "постоялец"
         user.save()
-    elif user.likes == 1000:
+    elif user.privilege != "эксперт" and user.likes >= 1000 and user.likes <= 3999:
         user.privilege = "эксперт"
         user.save()
-    elif user.likes == 4000:
+    elif user.privilege != "гуру" and user.likes >= 4000 and user.likes <= 9999:
         user.privilege = "гуру"
         user.save()
-    elif user.likes == 10000:
+    elif user.privilege != "искусственный интелект" and user.likes >= 10000:
         user.privilege = "искусственный интелект"
         user.save()
     return redirect('forum:post_detail', post_id=post_id)
@@ -382,7 +382,8 @@ def add_comment(request, post_id):
             comment.author = request.user
             comment.post = post
             comment.save()
-        return redirect('forum:post_detail', post_id=post_id)
+            return redirect('forum:post_detail', post_id=post_id)
+    return redirect('forum:post_detail', post_id=post_id)
 
 
 @login_required
@@ -469,3 +470,6 @@ def faq(request):
 
 def guarantor(request):
     return render(request, 'forum/guarantor.html')
+
+def words(request):
+    return render(request, 'forum/words.html')

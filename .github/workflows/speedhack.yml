@@ -1,6 +1,6 @@
 name: speedhack
 
-on: [push]
+# on: [push]
 
 jobs:
   dependencies:
