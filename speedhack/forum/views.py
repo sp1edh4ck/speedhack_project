@@ -173,6 +173,9 @@ def info_edit(request, username):
         instance=request.user
     )
     if form.is_valid():
+        form.brt_day = request.POST.get('brt_day')
+        form.brt_month = request.POST.get('brt_month')
+        form.brt_year = request.POST.get('brt_year')
         form.save()
         return redirect('forum:profile', username=username)
     context = {

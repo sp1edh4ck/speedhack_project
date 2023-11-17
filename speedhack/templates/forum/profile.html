@@ -250,13 +250,25 @@
                 </div>
               </div>
             {% endif %}
-            {% if author.birthday != None %}
+            {% if author.brt_day != None and author.brt_day != None %}
               <div style="display: flex;">
                 <div style="min-width: 165px; max-width: 165px;">
                   <label style="color: gray;">День рождения: </label>
                 </div>
                 <div>
-                  <label style="color: #ffffff;">{{ author.birthday }}</label><br>
+                  <label style="color: #ffffff;">{{ author.brt_month }}</label>
+                  <label style="color: #ffffff;">{{ author.brt_day }}</label>
+                </div>
+              </div>
+            {% elif author.brt_day != None and author.brt_day != None and author.brt_year != None %}
+              <div style="display: flex;">
+                <div style="min-width: 165px; max-width: 165px;">
+                  <label style="color: gray;">День рождения: </label>
+                </div>
+                <div>
+                  <label style="color: #ffffff;">{{ author.brt_day }}</label>
+                  <label style="color: #ffffff;">{{ author.brt_month }}</label>
+                  <label style="color: #ffffff;">{{ author.brt_year }}</label><br>
                 </div>
               </div>
             {% endif %}

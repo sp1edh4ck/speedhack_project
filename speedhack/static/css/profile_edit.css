@@ -168,3 +168,25 @@ option:hover {
 .a-fix-width {
   width: 200px;
 }
+
+.birthday-input {
+  color: #ffffff;
+  background: #222222;
+  border-radius: 10px;
+  border: 2px solid #444444;
+  outline: none;
+  max-width: 90px;
+  height: 30px;
+  padding-left: 7px;
+  font-size: 16px;
+  transition: all 0.15s ease 0s;
+}
+
+.birthday-input:focus {
+  border: 2px solid #ff506f;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}

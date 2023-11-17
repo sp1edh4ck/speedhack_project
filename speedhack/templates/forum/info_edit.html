@@ -87,10 +87,23 @@
               </div>
               <div style="display: block;">
                 <div>
-                  {{ form.birthday }}
-                </div>
-                <div style="margin-top: 5px; color: gray;">
-                  <label>Введите дату в формате (день.месяц.год / 01.01.2001)</label>
+                  <input type="text" name="brt_day" id="id_brt_day" class="birthday-input" placeholder="День" maxlength="2">
+                  <select name="brt_month" id="id_brt_month" class="birthday-input" style="min-width: 101px; height: 34px; -o-appearance: none;">
+                    <option value="Месяц">Месяц</option>
+                    <option value="Январь">Январь</option>
+                    <option value="Февраль">Февраль</option>
+                    <option value="Март">Март</option>
+                    <option value="Апрель">Апрель</option>
+                    <option value="Май">Май</option>
+                    <option value="Июнь">Июнь</option>
+                    <option value="Июль">Июль</option>
+                    <option value="Август">Август</option>
+                    <option value="Сентябрь">Сентябрь</option>
+                    <option value="Октябрь">Октябрь</option>
+                    <option value="Ноябрь">Ноябрь</option>
+                    <option value="Декабрь">Декабрь</option>
+                  </select>
+                  <input name="brt_year" type="text" id="id_brt_year" class="birthday-input" placeholder="Год" maxlength="4">
                 </div>
               </div>
             </div>

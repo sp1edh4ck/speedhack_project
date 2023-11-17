@@ -49,14 +49,15 @@ class CustomUserChangeForm(UserChangeForm):
 
 class UserProfileForm(forms.ModelForm):
     description = forms.CharField(required=False)
-    birthday = forms.DateField(label='Дата рождения', required=False)
+    brt_day = forms.CharField(required=False)
+    brt_month = forms.CharField(required=False)
+    brt_year = forms.CharField(required=False)
     occupation = forms.CharField(required=False)
     interests = forms.CharField(required=False)
 
     class Meta:
         model = CustomUser
-        fields = ('description', 'tg_link', 'avatar', 'profile_background', 'username_style', 'banner', 'gender', 'birthday', 'occupation', 'interests',)
+        fields = ('description', 'tg_link', 'avatar', 'profile_background', 'username_style', 'banner', 'gender', 'brt_day', 'brt_month', 'brt_year', 'occupation', 'interests',)
         widgets = {
             "avatar": AvatarWidget,
-            "birthday": BirthdayWidget,
         }
