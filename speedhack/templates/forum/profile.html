@@ -15,6 +15,11 @@
               <label style="font-weight: 600;">{{ author.rank }}</label>
             {% endif %}
           </div>
+          {% if author.rank == "пользователь" and author.rank != "заблокирован" and author.privilege != "нет привилегий" %}
+            <div class="{% if author.rank != "заблокирован" %}role-banner{% endif %} {{ author.banner }}">
+              <label style="font-weight: bold; {% if author.privilege == "искусственный интелект" %}font-size: 15px;{% endif %}">{{ author.privilege }}</label>
+            </div>
+          {% endif %}
           {% if user == author %}
             {% comment %} <div id="myModal" class="modal">
               <div class="modal-content" style="padding: 0px;">
@@ -250,7 +255,7 @@
                 </div>
               </div>
             {% endif %}
-            {% if author.brt_day != None and author.brt_day != None %}
+            {% if author.brt_day != None and author.brt_day != None and author.brt_day != "Месяц" and author.brt_year == None %}
               <div style="display: flex;">
                 <div style="min-width: 165px; max-width: 165px;">
                   <label style="color: gray;">День рождения: </label>

@@ -58,7 +58,35 @@
                   <label>Стиль имени:</label>
                 </div>
                 <div>
-                  {{ form.username_style }}
+                  {% comment %} {{ form.username_style }} {% endcomment %}
+                  <select name="username_style" id="id_username_style" class="birthday-input" style="min-width: 250px;">
+                    <option value="{{ author.username_style }}">{{ author.username_style }}</option>
+                    <option value="gray-un">.gray-un</option>
+                    <option value="white-shadow-un">.white-shadow-un</option>
+                    <option value="purple-white-un">.purple-white-un</option>
+                    <option value="grad-wb-un">.grad-wb-un</option>
+                    <option value="red-shadow-un">.red-shadow-un</option>
+                    <option value="grad-pwv-un">.grad-pwv-un</option>
+                    <option value="grad-bvr-un">.grad-bvr-un</option>
+                    <option value="grad-p-double-un">.grad-p-double-un</option>
+                    <option value="pink-shadow-un">.pink-shadow-un</option>
+                    <option value="purple-shadow-un">.purple-shadow-un</option>
+                    <option value="light-green-shadow-un">.light-green-shadow-un</option>
+                    <option value="grad-wp-un">.grad-wp-un</option>
+                    <option value="grad-wy-un">.grad-wy-un</option>
+                    <option value="grad-pp-un">.grad-pp-un</option>
+                    <option value="light-red-shadow-un">.light-red-shadow-un</option>
+                    <option value="blue-shadow-un">.blue-shadow-un</option>
+                    <option value="white-double-shadow-un">.white-double-shadow-un</option>
+                    <option value="blue-light-shadow-un">.blue-light-shadow-un</option>
+                    <option value="dark-green-shadow-un">.dark-green-shadow-un</option>
+                    <option value="blue-p-shadow-un">.blue-p-shadow-un</option>
+                    <option value="black-shadow-un">.black-shadow-un</option>
+                    <option value="red-orange-shadow-un">.red-orange-shadow-un</option>
+                    <option value="light-blue-double-shadow-un">.light-blue-double-shadow-un</option>
+                    <option value="aquamarine-shadow-un">.aquamarine-shadow-un</option>
+                    <option value="green-so-beautifull-un" selected="">.green-so-beautifull-un</option>
+                  </select>
                 </div>
               </div>
               <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
@@ -67,7 +95,15 @@
                   <label>Стиль банера:</label>
                 </div>
                 <div>
-                  {{ form.banner }}
+                  <select name="banner" id="id_banner" class="birthday-input" style="min-width: 250px;">
+                    <option value="gray-role">.gray-role</option>
+                    <option value="green-yellow-role">.green-yellow-role</option>
+                    <option value="milk-pink-role">.milk-pink-role</option>
+                    <option value="purple-aquamarine-role">.purple-aquamarine-role</option>
+                    <option value="red-purple-role">.red-purple-role</option>
+                    <option value="yellow-green-role">.yellow-green-role</option>
+                    <option value="blue-pink-role">.blue-pink-role</option>
+                  </select>
                 </div>
               </div>
               <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
@@ -77,7 +113,11 @@
                 <label>Пол:</label>
               </div>
               <div>
-                {{ form.gender }}
+                <select name="gender" id="id_gender" class="birthday-input" style="min-width: 150px;">
+                  <option value="Не выбрано">Не выбрано</option>
+                  <option value="Мужской" selected="">Мужской</option>
+                  <option value="Женский">Женский</option>
+                </select>
               </div>
             </div>
             <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
