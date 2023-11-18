@@ -48,6 +48,8 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class UserProfileForm(forms.ModelForm):
+    username_style = forms.CharField(required=False)
+    banner = forms.CharField(required=False)
     description = forms.CharField(required=False)
     brt_day = forms.CharField(required=False)
     brt_month = forms.CharField(required=False)

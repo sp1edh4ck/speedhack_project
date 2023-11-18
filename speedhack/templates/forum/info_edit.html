@@ -52,22 +52,21 @@
               </div>
               <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
             {% endif %}
-            {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.rank == 'искусственный интелект' or request.user.unique == True %}
+            {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.privilage == 'искусственный интелект' or request.user.unique == True %}
               <div style="display: flex;">
                 <div class="profile-edit-div">
                   <label>Стиль имени:</label>
                 </div>
                 <div>
-                  {% comment %} {{ form.username_style }} {% endcomment %}
                   <select name="username_style" id="id_username_style" class="birthday-input" style="min-width: 250px;">
-                    <option value="{{ author.username_style }}">{{ author.username_style }}</option>
-                    <option value="gray-un">.gray-un</option>
-                    <option value="white-shadow-un">.white-shadow-un</option>
-                    <option value="purple-white-un">.purple-white-un</option>
-                    <option value="grad-wb-un">.grad-wb-un</option>
-                    <option value="red-shadow-un">.red-shadow-un</option>
-                    <option value="grad-pwv-un">.grad-pwv-un</option>
-                    <option value="grad-bvr-un">.grad-bvr-un</option>
+                    <option value="{{ user.username_style }}" selected="">{{ user.username_style }}</option>
+                    <option value="gray-un">Серый</option>
+                    <option value="white-shadow-un">Белая тень</option>
+                    <option value="purple-white-un">Бело-фиолетовый</option>
+                    <option value="grad-wb-un">Градиент бело-синий</option>
+                    <option value="red-shadow-un">Красная тень</option>
+                    <option value="grad-pwv-un">Градиент розово-синий</option>
+                    <option value="grad-bvr-un">Градиент</option>
                     <option value="grad-p-double-un">.grad-p-double-un</option>
                     <option value="pink-shadow-un">.pink-shadow-un</option>
                     <option value="purple-shadow-un">.purple-shadow-un</option>
@@ -85,7 +84,7 @@
                     <option value="red-orange-shadow-un">.red-orange-shadow-un</option>
                     <option value="light-blue-double-shadow-un">.light-blue-double-shadow-un</option>
                     <option value="aquamarine-shadow-un">.aquamarine-shadow-un</option>
-                    <option value="green-so-beautifull-un" selected="">.green-so-beautifull-un</option>
+                    <option value="green-so-beautifull-un">.green-so-beautifull-un</option>
                   </select>
                 </div>
               </div>
@@ -96,6 +95,7 @@
                 </div>
                 <div>
                   <select name="banner" id="id_banner" class="birthday-input" style="min-width: 250px;">
+                    <option value="{{ user.banner }}" selected="">{{ user.banner }}</option>
                     <option value="gray-role">.gray-role</option>
                     <option value="green-yellow-role">.green-yellow-role</option>
                     <option value="milk-pink-role">.milk-pink-role</option>
