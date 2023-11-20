@@ -60,7 +60,7 @@
             {% endif %}
           {% endif %}
         </div>
-        <div class="save-dep">
+        {% comment %} <div class="save-dep">
           <div>
             <label class="save-dep-label">Страховой депозит</label>
           </div>
@@ -89,10 +89,10 @@
                     <div style="width: 200px; text-align: right; margin: 4px 10px 0 0;">
                       Сумма пополнения:
                     </div>
-                    {% comment %} <form action="{% url 'forum:deposit' user.username %}" method="post"> {% endcomment %}
+                    <form action="{% url 'forum:deposit' user.username %}" method="post">
                       <div style="display: block;">
                         <div>
-                          {% comment %} {{ form }} {% endcomment %}
+                          {{ form }}
                           <input type="number" min="0" step="1000" value="10000" autocomplete="off" class="fix-input-prof">
                         </div>
                         {% csrf_token %}
@@ -114,11 +114,11 @@
                           {% endif %}
                         </div>
                       </div>
-                    {% comment %} </form> {% endcomment %}
+                    </form>
                   </div>
-                  {% comment %} <div>
+                  <div>
                     <label style="color: gray;">Минимальная сумма для пополнения - 10 000 <i class="fas fa-ruble-sign fa-lg icon-rub" style="width: 9px; height: 17px;"></i></label>
-                  </div> {% endcomment %}
+                  </div>
                 </div>
               </div>
             </div>
@@ -142,7 +142,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> {% endcomment %}
         {% if count_subscriptions != 0 %}
           <div class="frame-left-second">
             <a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ count_subscriptions }}</label> {% if count_subscriptions == 1 %}подписка{% elif count_subscriptions <= 4 and count_subscriptions >= 2 %}подписки{% elif count_subscriptions <= 100 and count_subscriptions >= 5 %}подписок{% endif %}</a>
@@ -151,6 +151,9 @@
                 <div style="display: flex;" class="sub-users-div">
                   <div>
                     <img class="sub-avatar" src="{{ post.author.avatar.url }}">
+                    {% if post.author.is_online == True %}
+                      <div class="online online-avatar-profile"></div>
+                    {% endif %}
                   </div>
                   <div style="display: block; margin-left: 20px; max-width: 130px;">
                     <a class="sub-users" href="{% url 'forum:profile' post.author.username %}">
@@ -179,6 +182,9 @@
                 <div style="display: flex;" class="sub-users-div">
                   <div>
                     <img class="sub-avatar" src="{{ post.user.avatar.url }}">
+                    {% if post.user.is_online == True %}
+                      <div class="online online-avatar-profile"></div>
+                    {% endif %}
                   </div>
                   <div style="display: block; margin-left: 20px; max-width: 130px;">
                     <a class="sub-users" href="{% url 'forum:profile' post.user.username %}">
@@ -205,7 +211,7 @@
           <div style="display: flex; ">
             <div style="margin: 0 auto 0 0; display: block;" class="frt">
               <div>
-                <label class="{% if author.username_style != 'gray-un' %}{{ author.username_style }}{% else %}gray-un{% endif %}" {% if author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if author.username == "root" %}style="color: red;"{% endif %}>{{ author.username }}</label>
+                <label class="{% if author.username_style != 'gray-un' %}{{ author.username_style }}{% else %}gray-un{% endif %}" {% if author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} {% if author.username == "root" %}style="color: red;"{% endif %}>{{ author.username }}</label>
                 {% if user != author %}
                   {% if user.rank == "владелец" or user.rank == "гл. администратор" or user.rank == "администратор" or user.rank == "куратор" %}
                     {% if author.rank != "нет ранга" %}
@@ -255,25 +261,20 @@
                 </div>
               </div>
             {% endif %}
-            {% if author.brt_day != None and author.brt_day != None and author.brt_day != "Месяц" and author.brt_year == None %}
+            {% if author.brt_day != None and author.brt_month != "Месяц" %}
               <div style="display: flex;">
                 <div style="min-width: 165px; max-width: 165px;">
                   <label style="color: gray;">День рождения: </label>
                 </div>
                 <div>
-                  <label style="color: #ffffff;">{{ author.brt_month }}</label>
-                  <label style="color: #ffffff;">{{ author.brt_day }}</label>
-                </div>
-              </div>
-            {% elif author.brt_day != None and author.brt_day != None and author.brt_year != None %}
-              <div style="display: flex;">
-                <div style="min-width: 165px; max-width: 165px;">
-                  <label style="color: gray;">День рождения: </label>
-                </div>
-                <div>
-                  <label style="color: #ffffff;">{{ author.brt_day }}</label>
-                  <label style="color: #ffffff;">{{ author.brt_month }}</label>
-                  <label style="color: #ffffff;">{{ author.brt_year }}</label><br>
+                  {% if author.brt_year == "" %}
+                    <label style="color: #ffffff;">{{ author.brt_month }}</label>
+                    <label style="color: #ffffff;">{{ author.brt_day }}</label>
+                  {% elif author.brt_year != "" %}
+                    <label style="color: #ffffff;">{{ author.brt_day }}</label>
+                    <label style="color: #ffffff;">{{ author.brt_month }}</label>
+                    <label style="color: #ffffff;">{{ author.brt_year }}</label>
+                  {% endif %}
                 </div>
               </div>
             {% endif %}

@@ -127,6 +127,12 @@ def profile(request, username):
     return render(request, 'forum/profile.html', context)
 
 
+# @login_required
+# def payment(request, username, number):
+#     user = CustomUser.objects.get(username=username)
+#     return render(request, 'forum/payments.html')
+
+
 @login_required
 def deposit(request, username, number):
     user = CustomUser.objects.get(username=username)
@@ -152,15 +158,28 @@ def deposit(request, username, number):
 
 @login_required
 def ban(request, username):
-    author = get_object_or_404(User, username=username)
-    if author.rank == "заблокирован":
-        author.rank = author.save_rank
-        author.save()
-    elif author.rank != "заблокирован":
-        author.save_rank = author.rank
-        author.rank = "заблокирован"
-        author.save()
+    user = get_object_or_404(User, username=username)
+    if user.rank == "заблокирован":
+        user.rank = user.save_rank
+        user.save()
+    elif user.rank != "заблокирован":
+        user.save_rank = user.rank
+        user.rank = "заблокирован"
+        user.save()
     return redirect('forum:profile', username=username)
+
+
+@login_required
+def admin_ban(request, username):
+    user = get_object_or_404(User, username=username)
+    if user.rank == "заблокирован":
+        user.rank = user.save_rank
+        user.save()
+    elif user.rank != "заблокирован":
+        user.save_rank = user.rank
+        user.rank = "заблокирован"
+        user.save()
+    return redirect('forum:admin_panel')
 
 
 @login_required
@@ -422,11 +441,21 @@ def profile_unfollow(request, username):
 def admin_panel(request):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
-    author = Forum.objects.select_related('author').all()
     users_list = CustomUser.objects.all()
+    users_ban_list = CustomUser.objects.filter(rank="заблокирован")
+    count_users = users_list.count()
+    count_users_ban = users_ban_list.count()
+    search_query = request.GET.get('search', '')
+    if search_query:
+        users_list = CustomUser.objects.filter(username__icontains=search_query)
+    count_search = users_list.count()
+    author = Forum.objects.select_related('author').all()
     context = {
         'author': author,
         'users': users_list,
+        'count_users': count_users,
+        'count_search': count_search,
+        'count_users_ban': count_users_ban,
     }
     return render(request, 'forum/admin.html', context)
 
@@ -473,6 +502,7 @@ def faq(request):
 
 def guarantor(request):
     return render(request, 'forum/guarantor.html')
+
 
 def words(request):
     return render(request, 'forum/words.html')

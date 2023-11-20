@@ -1,8 +1,11 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm, AuthenticationForm
-from users.widgets import AvatarWidget, BirthdayWidget
-
+from users.widgets import AvatarWidget
+from random import randint
 from .models import CustomUser
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -20,11 +23,40 @@ class CustomUserCreationForm(UserCreationForm):
         model = CustomUser
         fields = ('username', 'email', 'password1',)
 
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_active = False
+        user.activation_code = randint(100000, 999999)
+        if commit:
+            user.save()
+        return user
+
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
         del self.fields['password2']
         self.fields['password1'].help_text = None
         self.fields['username'].help_text = None
+
+# class CustomUserCreationForm(UserCreationForm):
+#     username = forms.CharField(max_length=15, widget=forms.TextInput(attrs={
+#         'class': 'field-input',
+#     }))
+#     email = forms.EmailField(widget=forms.TextInput(attrs={
+#         'class': 'field-input',
+#     }))
+#     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
+#         'class': 'field-input',
+#     }))
+
+#     class Meta:
+#         model = CustomUser
+#         fields = ('username', 'email', 'password1',)
+
+#     def __init__(self, *args, **kwargs):
+#         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+#         del self.fields['password2']
+#         self.fields['password1'].help_text = None
+#         self.fields['username'].help_text = None
 
 
 class CustomUserLogin(AuthenticationForm):

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}speedhack / регистрация{% endblock %}
+{% block content %}
+{% load user_filters %}
+  <div class="main">
+    <div class="frame-registration">
+      <p style="text-align: center;"><img class="logo" src="{% static 'images/speedhack_logo.png' %}" alt="img"></p>
+      <div class="preview">
+        <span class="login-text">Активация почты</span>
+      </div>
+      {% if form.errors %}
+        {% for field in form %}
+          {% for error in field.errors %}
+            <div style="color: #ff506f; margin: 5px 0 0 0; font-size: 14px;">
+              {{ error|escape }}
+            </div>
+          {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+          <div style="color: #ff506f; margin: 5px 0 0 0; font-size: 14px;">
+            {{ error|escape }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      <form method="post">
+        {% csrf_token %}
+        <div class="form input-box">
+          <input type="text" name="activation_code" placeholder="Введите код активации" class="input-ret">
+        </div>
+        <button type="submit" class="button-form btn-reg">Активировать</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

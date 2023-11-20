@@ -329,3 +329,10 @@
   border-color: #ff506f;
   outline: 0;
 }
+
+.online-avatar-profile {
+  position: absolute;
+  margin: -19px 0 0 35px;
+  width: 8px;
+  height: 8px;
+}

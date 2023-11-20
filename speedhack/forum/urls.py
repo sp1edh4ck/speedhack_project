@@ -29,6 +29,7 @@ urlpatterns = [
     path('forum/words/', views.words, name='words'),
     path('forum/faq/', views.faq, name='faq'),
     path('forum/admin-panel/', views.admin_panel, name='admin_panel'),
+    path('forum/admin-panel/<str:username>/ban/', views.admin_ban, name='admin_ban'),
     path('users/', views.users, name='users'),
     path('profile/<str:username>/comment', views.add_comment_profile, name='add_comment_profile'),
     path('profile/<str:username>/follow', views.profile_follow, name='profile_follow'),

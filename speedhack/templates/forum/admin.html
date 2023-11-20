@@ -3,17 +3,63 @@
 {% block content %}
   <div class="main">
     <div class="frame_con">
-      <div class="frame-users">
-        {% for users in users %}
+      <div style="display: block;">
+        <div class="frame-left-first-users">
+          <span style="color: gray; font-size: 18px;">Найти пользователя</span>
           <div style="display: flex;">
             <div>
-              <img style="width: 40px; border-radius: 10px;" src="{{ users.avatar.url }}">
+              <form action="{% url 'forum:admin_panel' %}">
+                <input class="input-search-users" type="search" name="search" placeholder="Имя..." aria-label="Search">
+              </form>
             </div>
             <div>
-              <label class="users-username">{{ users.username }}</label>
+              <a href="{% url 'forum:admin_panel' %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
             </div>
           </div>
-        {% endfor %}
+        </div>
+        <div class="frame-left-second-users">
+          <span style="color: gray; font-size: 18px;">Статистика форума</span>
+          <div style="display: block;">
+            <div style="margin-top: 15px; color: gray;">
+              <label>Пользователей:</label>
+              <label style="color: #ffffff;">{{ count_users }}</label>
+            </div>
+            <div style="margin-top: 3px; color: gray;">
+              <label>Пользователей в бане:</label>
+              <label style="color: #ffffff;">{{ count_users_ban }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="frame-users" style="{% if count_search == 0 %}max-height: 30px;{% elif count_search == 1 %}max-height: 40px;{% elif count_search == 2 %}max-height: 100px;{% elif count_search == 3 %}max-height: 160px;{% endif %}">
+        {% if count_search != 0 %}
+          {% for user in users %}
+            <div style="display: flex; padding: 0 20px 0 20px;">
+              <div style="margin: 0 10px 0px 0; height: 40px;">
+                <img style="width: 40px; border-radius: 10px;" src="{{ user.avatar.url }}">
+              </div>
+              <div style="margin: 0 auto 0 0;">
+                <a href="{% url 'forum:profile' user.username %}" class="admin-link">
+                  <label class="users-username" {% if user.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ user.username }}</label>
+                </a>
+              </div>
+              <div class="admin-btn">
+                {% if user.rank != "заблокирован" and user.username != request.user.username and request.user.rank_lvl > user.rank_lvl %}
+                  <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button">Заблокировать</a>
+                {% elif user.rank == "заблокирован" and user.username != request.user.username and request.user.rank_lvl > user.rank_lvl %}
+                  <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button">Разблокировать</a>
+                {% else %}
+                  <label class="{% if user.rank != "пользователь" and user.rank != "заблокирован" %}role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}owner-role{% endif %}{% endif %}" style="max-width: 150px;">{{ user.rank }}</label>
+                {% endif %}
+              </div>
+            </div>
+            {% if not forloop.last %}<hr class="admin-hr">{% endif %}
+          {% endfor %}
+        {% else %}
+          <div style="margin: 0 0 0 20px;">
+            <label style="color: #ffffff; font-size: 18px;">Нет пользователя с данным именем</label>
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>

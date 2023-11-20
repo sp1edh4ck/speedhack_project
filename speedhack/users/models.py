@@ -26,6 +26,19 @@ MAIN_POST = [
     ("владелец", "владелец"),
 ]
 
+RANK_LVL = [
+    ("1", "1"),
+    ("0", "0"),
+    ("2", "2"),
+    ("3", "3"),
+    ("4", "4"),
+    ("5", "5"),
+    ("6", "6"),
+    ("7", "7"),
+    ("8", "8"),
+    ("9", "9"),
+]
+
 PRIVILEGE = [
     ("нет привилегий", "нет привилегий"),
     ("местный", "местный"),
@@ -89,6 +102,7 @@ RANK_STYLE = [
 
 
 class CustomUser(AbstractUser):
+    activation_code = models.CharField(max_length=6, blank=True)
     likes = models.IntegerField(verbose_name='Симпатии', default=0)
     balance = models.IntegerField(verbose_name='Баланс', default=0)
     save_deposit = models.IntegerField(verbose_name='Страховой депозит', default=0)
@@ -102,6 +116,7 @@ class CustomUser(AbstractUser):
     interests = models.CharField(verbose_name='Интересы', max_length=200, default='')
     description = models.CharField(verbose_name='Описание', max_length=200, default='')
     rank = models.TextField(verbose_name='Должность', choices=MAIN_POST, default=MAIN_POST[0][0])
+    rank_lvl = models.TextField(verbose_name='Уровень доступа', choices=RANK_LVL, default=RANK_LVL[0][0])
     save_rank = models.TextField(verbose_name='Сохранённый ранг', default='')
     privilege = models.TextField(verbose_name='Ранг', choices=PRIVILEGE, default=PRIVILEGE[0][0])
     market_privilege = models.TextField(verbose_name='Привилегия на маркете', choices=MARKET_PRIVILEGE, default=MARKET_PRIVILEGE[0][0])

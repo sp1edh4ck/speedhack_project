@@ -122,6 +122,14 @@ USE_L10N = True
 USE_TZ = True
 
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = 'speedhack_sup@mail.ru'
+EMAIL_HOST_PASSWORD = 'TP4ZqnL4Egpd00B08v2X'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
 MEDIA_URL = 'static/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 

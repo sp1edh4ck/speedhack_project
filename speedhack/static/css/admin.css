@@ -1,12 +1,44 @@
 .frame-users {
   background: #242424b6;
-  padding: 20px;
   border-radius: 10px;
   width: 1300px;
+  padding: 20px 0 20px 0;
 }
 
 .users-username {
   display: block;
   font-size: 20px;
   color: #ffffff;
+  cursor: pointer;
+}
+
+.admin-link {
+  text-decoration: none;
+}
+
+.admin-btn {
+  display: flex;
+}
+
+.admin-button {
+  background: #3d3d3d;
+  font-size: 16px;
+  padding: 8px 0px;
+  text-align: center;
+  color: #ffffff;
+  border-radius: 10px;
+  text-decoration: none;
+  width: 150px;
+  transition: 0.5s ease 0s;
+}
+
+.admin-button:hover {
+  background: #505050;
+}
+
+.admin-hr {
+  margin: 10px 0 10px 0;
+  border: none;
+  background: #555555;
+  height: 1px;
 }

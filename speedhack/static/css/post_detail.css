@@ -186,3 +186,8 @@
   cursor: pointer;
   color: gray;
 }
+
+.online-avatar-post-detail {
+  position: absolute;
+  margin: -24px 0 0 64px;
+}

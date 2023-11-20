@@ -21,7 +21,7 @@
           <div>
             <a href="{% url 'forum:profile' post.author.username %}"><img class="frame-main-avatar" src="{{ post.author.avatar.url }}"></a>
             {% if post.author.is_online == True %}
-              <div class="online online-avatar" style="margin: -20px 0 0 60px;"></div>
+              <div class="online online-avatar-post-detail"></div>
             {% endif %}
           </div>
           <div>
@@ -85,7 +85,7 @@
             <div>
               <a href="{% url 'forum:profile' comment.author.username %}"><img class="frame-main-avatar" src="{{ comment.author.avatar.url }}"></a>
               {% if comment.author.is_online == True %}
-                <div class="online online-avatar" style="margin: -20px 0 0 60px;"></div>
+                <div class="online online-avatar-post-detail"></div>
               {% endif %}
             </div>
             <div>
@@ -126,7 +126,7 @@
             <div>
               <img class="frame-main-avatar" src="{{ comment.author.avatar.url }}">
               {% if post.author.is_online == True or comment.author.is_online == True %}
-                <div class="online online-avatar" style="margin: -20px 0 0 60px;"></div>
+                <div class="online online-avatar-post-detail"></div>
               {% endif %}
             </div>
             <div style="display: block;">
