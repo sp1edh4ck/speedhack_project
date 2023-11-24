@@ -485,8 +485,10 @@ def my_tickets(request, username):
         return banned_redirect(request)
     user = request.user
     my_tickets = user.tickets.all()
+    my_tickets_count = my_tickets.count()
     context = {
         'my_tickets': my_tickets,
+        'my_tickets_count': my_tickets_count,
     }
     return render(request, 'forum/my_tickets.html', context)
 

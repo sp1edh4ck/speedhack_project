@@ -4,37 +4,8 @@
 {% block content %}
   <div class="main">
     <div class="frame_con">
-      <div class="frame-users" style="max-width: 895px;{% if tickets_open_count == 0 %}max-height: 65px;{% elif tickets_open_count == 1 %}max-height: 80px;{% elif tickets_open_count == 2 %}max-height: 185px;{% elif tickets_open_count == 3 %}max-height: 290px;{% endif %}">
-        {% for ticket in my_tickets %}
-          <a href="{% url 'forum:ticket' ticket.id %}">
-            <div style="display: block;">
-              <div style="display: flex; padding: 0 20px 0 20px; margin-bottom: 10px;">
-                <div style="margin: 0 10px 0px 0; height: 40px;">
-                  <img style="width: 40px; border-radius: 10px;" src="{{ ticket.author.avatar.url }}">
-                </div>
-                <div style="margin: 0 auto 0 0;">
-                  <a href="{% url 'forum:profile' ticket.author %}" class="admin-link">
-                    <label class="users-username" {% if ticket.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ ticket.author }}</label>
-                  </a>
-                </div>
-                <div class="admin-btn">
-                  <a class="admin-button" href="{% url 'forum:ticket_close' ticket.id %}">Закрыть</a>
-                </div>
-              </div>
-              <div class="admin-btn" style="display: flex; padding: 0 20px 0 20px;">
-                <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; background: {% if ticket.open == True %}green{% else %}#393939{% endif %}">{% if ticket.open == True %}Открыт{% else %}Закрыт{% endif %}</label>
-                <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.priority == "Низкий" %}green{% elif ticket.priority == "Средний" %}#c6d400{% elif ticket.priority == "Высокий" %}red;{% endif %}">{{ ticket.priority }}</label>
-                <label class="role-banner" style="width: 30px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.request == "Да" %}green{% elif ticket.request == "Нет" %}red;{% endif %}">{{ ticket.request }}</label>
-                <label class="role-banner" style="width: 300px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.category }}</label>
-                <label class="role-banner" style="width: auto; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.created|date:"d E Y / H:i" }}</label>
-              </div>
-            </div>
-          </a>
-          {% if not forloop.last %}<hr class="admin-hr">{% endif %}
-        {% endfor %}
-      </div>
       <div class="frame-users" style="display: block; max-width: 1200px;{% if tickets_close_count == 0 %}max-height: 65px;{% elif tickets_close_count == 1 %}max-height: 80px;{% elif tickets_close_count == 2 %}max-height: 185px;{% elif tickets_close_count == 3 %}max-height: 290px;{% endif %}">
-        {% if tickets_close_count != 0 %}
+        {% if my_tickets_count != 0 %}
           {% for ticket in my_tickets %}
             <a href="{% url 'forum:ticket' ticket.id %}">
               <div style="display: block;">
@@ -54,7 +25,7 @@
                   <label class="role-banner" style="width: 30px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.request == "Да" %}green{% elif ticket.request == "Нет" %}red;{% endif %}">{{ ticket.request }}</label>
                   <label class="role-banner" style="width: 300px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.category }}</label>
                   <label class="role-banner" style="width: 150px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">Сообщений: {{ ticket.answer.count }}</label>
-                  <label class="role-banner" style="width: auto; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.created }}</label>
+                  <label class="role-banner" style="width: 205px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.created }}</label>
                 </div>
               </div>
             </a>
@@ -62,7 +33,7 @@
           {% endfor %}
         {% else %}
           <div style="margin: 0px 0 0 20px;" id="tickets_open">
-            <label style="color: #ffffff; font-size: 18px;">Нет открытых тикетов</label>
+            <label style="color: #ffffff; font-size: 18px;">Вы ещё не создали ни одного тикета</label>
           </div>
         {% endif %}
       </div>
