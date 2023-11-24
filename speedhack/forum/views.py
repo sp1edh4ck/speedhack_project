@@ -480,6 +480,19 @@ def tickets(request):
 
 
 @login_required
+def my_tickets(request, username):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    user = request.user
+    my_tickets = user.tickets.all()
+    # my_tickets = HelpForum.objects.get(author=username).all()
+    context = {
+        'my_tickets': my_tickets,
+    }
+    return render(request, 'forum/my_tickets.html', context)
+
+
+@login_required
 def ticket(request, ticket_id):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
