@@ -3,6 +3,34 @@ from django.db import models
 
 User = get_user_model()
 
+CATEGORY = [
+    ("Разблокировка аккаунта", "Разблокировка аккаунта"),
+    ("Проблема с пополнением средств", "Проблема с пополнением средств"),
+    ("Проблема с выводом средств", "Проблема с выводом средств"),
+    ("Разблокировка с причиной 'Вбив/отмыв'", "Разблокировка с причиной 'Вбив/отмыв'"),
+    ("Возврат средств за привилегию", "Возврат средств за привилегию"),
+    ("Смена почты на аккаунте", "Смена почты на аккаунте"),
+    ("Разблокировка с причиной 'Взломан'", "Разблокировка с причиной 'Взломан'"),
+    ("Другое", "Другое"),
+]
+
+PRIORITY = [
+    ("Низкий", "Низкий"),
+    ("Средний", "Средний"),
+    ("Высокий", "Высокий"),
+]
+
+PRIORITY_LVL = [
+    ("1", "1"),
+    ("2", "2"),
+    ("3", "3"),
+]
+
+REQUEST = [
+    ("Нет", "Нет"),
+    ("Да", "Да"),
+]
+
 
 class Group(models.Model):
     title = models.CharField(unique=True, max_length=50, verbose_name='Название')
@@ -55,6 +83,34 @@ class Forum(models.Model):
     def __str__(self):
         number_of_chars = 15
         return self.text[:number_of_chars]
+
+
+class HelpForum(models.Model):
+    category = models.TextField(verbose_name='Категория', choices=CATEGORY, default=CATEGORY[0][0])
+    priority = models.TextField(verbose_name='Приоритет', choices=PRIORITY, default=PRIORITY[0][0])
+    priority_lvl = models.TextField(verbose_name='Уровень приоритета', choices=PRIORITY_LVL, default=PRIORITY_LVL[0][0])
+    title = models.TextField(verbose_name='Заголовок')
+    request = models.TextField(verbose_name='Обращение к админу', choices=REQUEST, default=REQUEST[0][0])
+    description = models.TextField(
+        verbose_name='Описание вопроса',
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата публикации',
+    )
+    open = models.BooleanField(
+        default=True,
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='Автор',
+    )
+
+    class Meta:
+        verbose_name = 'Тикет'
+        verbose_name_plural = 'Тикеты'
+        ordering = ('-priority_lvl',)
 
 
 class Viewers(models.Model):

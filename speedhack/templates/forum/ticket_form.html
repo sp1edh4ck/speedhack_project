@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}speedhack / тикет{% endblock %}
+{% block content %}
+{% load user_filters %}
+  <div class="main">
+    <div class="frame_con">
+      <div class="frame-users" style="display: block; padding: 20px;">
+        <form method="post" action="{{ request.path }}" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="ticket-div">
+            <label class="ticket-label">Категория:</label>
+            <div>
+              <div>
+                <select name="category" id="id_category" class="birthday-input" style="min-width: 350px; min-height: 40px;">
+                  <option value="Разблокировка аккаунта" selected="">Разблокировка аккаунта</option>
+                  <option value="Проблема с пополнением средств">Проблема с пополнением средств</option>
+                  <option value="Проблема с выводом средств">Проблема с выводом средств</option>
+                  <option value="Разблокировка с причиной 'Вбив/отмыв'">Разблокировка с причиной "Вбив/отмыв"</option>
+                  <option value="Возврат средств за привилегию">Возврат средств за привилегию</option>
+                  <option value="Смена почты на аккаунте">Смена почты на аккаунте</option>
+                  <option value="Разблокировка с причиной 'Взломан'">Разблокировка с причиной "Взломан"</option>
+                  <option value="Другое">Другое</option>
+                </select>
+              </div>
+              <label style="color: #444444; font-size: 16px; height: 40px;">Выберите категорию, которая больше всего подходит Вашему тикету.</label>
+            </div>
+          </div>
+          <div class="ticket-div" style="margin-bottom: 10px;">
+            <label class="ticket-label">Приоритет:</label>
+            <div>
+              <div>
+                <select name="priority" id="id_priority" class="birthday-input" style="min-width: 200px; min-height: 40px;">
+                  <option value="Низкий" selected="">Низкий</option>
+                  <option value="Средний">Средний</option>
+                  <option value="Высокий">Высокий</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="ticket-div">
+            <label class="ticket-label">Заголовок:</label>
+            <div>
+              <input type="text" name="title" id="id_title" class="field field-height" placeholder="Заголовок..." maxlength="70">
+            </div>
+          </div>
+          <div class="ticket-div">
+            <label class="ticket-label">Писали ли вы человеку который вас заблокировал?:</label>
+            <div>
+              <div>
+                <select name="request" id="id_request" class="birthday-input" style="min-width: 200px; min-height: 40px;">
+                  <option value="Нет" selected="">Нет</option>
+                  <option value="Да">Да</option>
+                </select>
+              </div>
+              <label style="color: #444444; font-size: 16px; height: 40px;">Обязательное поле</label>
+            </div>
+          </div>
+          <div class="ticket-div">
+            <label class="ticket-label">Описание вопроса:</label>
+            <div>
+              {{ form.description|addclass:"field" }}
+            </div>
+          </div>
+          <button type="submit" class="button-level">Создать обращение</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

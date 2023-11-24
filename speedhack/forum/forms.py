@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import ProfileComment, Comment, Forum
+from .models import ProfileComment, Comment, Forum, HelpForum
 from users.models import CustomUser
 
 
@@ -8,6 +8,18 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Forum
         fields = ('group', 'title', 'text', 'image',)
+
+
+class HelpForm(forms.ModelForm):
+    category = forms.CharField(required=True)
+    priority = forms.CharField(required=True)
+    title = forms.CharField(required=True)
+    request = forms.CharField(required=True)
+    description = forms.CharField(required=True)
+
+    class Meta:
+        model = HelpForum
+        fields = ('category', 'priority', 'title', 'request', 'description',)
 
 
 class CommentForm(forms.ModelForm):

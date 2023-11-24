@@ -89,13 +89,13 @@
                     <div style="width: 200px; text-align: right; margin: 4px 10px 0 0;">
                       Сумма пополнения:
                     </div>
-                    <form action="{% url 'forum:deposit' user.username %}" method="post">
+                    <form action="" method="post">
+                      {% csrf_token %}
                       <div style="display: block;">
                         <div>
                           {{ form }}
                           <input type="number" min="0" step="1000" value="10000" autocomplete="off" class="fix-input-prof">
                         </div>
-                        {% csrf_token %}
                         <div style="margin: 5px 0;">
                           <label style="color: gray;">Минимальная сумма для пополнения - 10 000 <i class="fas fa-ruble-sign fa-lg icon-rub" style="width: 9px; height: 17px;"></i></label>
                         </div>
@@ -103,15 +103,9 @@
                           <a href="{% url 'forum:deposit' user.username 1 %}" style="text-decoration: none;">
                             <label type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 80px; cursor: pointer;">Пополнить</label>
                           </a>
-                          {% if user.balance >= 10000 %}
-                            <a href="{% url 'forum:deposit' user.username 2 %}" style="text-decoration: none; margin-left: 10px;">
-                              <label type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 160px; cursor: pointer;">Пополнить с баланса</label>
-                            </a>
-                          {% else %}
-                            <a style="text-decoration: none; margin-left: 10px;">
-                              <label type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 160px; background: gray;">Пополнить с баланса</label>
-                            </a>
-                          {% endif %}
+                          <a href="{% if user.balance >= 10000 %}{% url 'forum:deposit' user.username 2 %}{% endif %}" style="text-decoration: none; margin-left: 10px;">
+                            <label type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 160px;{% if user.balance < 10000 %} background: gray;{% else %} cursor: pointer;{% endif %}">Пополнить с баланса</label>
+                          </a>
                         </div>
                       </div>
                     </form>

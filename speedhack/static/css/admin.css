@@ -1,8 +1,13 @@
 .frame-users {
+  display: none;
   background: #242424b6;
   border-radius: 10px;
   width: 1300px;
   padding: 20px 0 20px 0;
+}
+
+.frame-users.active-tab {
+  display: block;
 }
 
 .users-username {
@@ -41,4 +46,17 @@
   border: none;
   background: #555555;
   height: 1px;
+}
+
+.switch-info-admin {
+  color: #ffffff;
+  display: grid;
+  align-content: center;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  background: #242424b6;
+  padding: 12px 0px;
+  min-width: 205px;
+  max-height: 165px;
+  border-radius: 10px;
 }

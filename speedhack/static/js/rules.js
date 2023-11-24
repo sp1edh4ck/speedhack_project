@@ -11,11 +11,9 @@ tabs.forEach(function(item) {
 			tabs.forEach(function(item) {
 				item.classList.remove('active-tab');
 			});
-	
 		tabsItems.forEach(function(item) {
 			item.classList.remove('active-tab');
 		});
-
 			currentButton.classList.add('active-tab');
 			currentTab.classList.add('active-tab');
 		}

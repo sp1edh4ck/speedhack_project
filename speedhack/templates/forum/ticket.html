@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}speedhack / админка{% endblock %}
+{% load static %}
+{% block content %}
+  <div class="main">
+    <div class="frame_con" style="display: block;">
+      <label class="link-title"><a href="{% url 'forum:admin_panel' %}" class="link-title-main">Админ-панель</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:index' %}" class="link-title-main">Обращение от {{ ticket.author.username }}</a></label>
+      <div class="frame-title">
+        <label class="text-up-title">{{ ticket.category }}</label><br>
+        <label class="text-up-all">Тема в разделе <a href="{% url 'forum:index' %}" class="text-up-nick">{{ user.username }}</a> создана пользователем <a href="{% url 'forum:index' %}" class="{% if post.author.username_style != 'gray-un' %}text-up-nick2 {{ post.author.username_style }}{% else %}text-up-nick{% endif %}">{{ ticket.author.username }}</a> / <img class="heart" src="{% static 'images/heart_gray.png' %}"> <label style="color: #ff506f;">{{ post.author.likes }}</label> / <img src="{% static 'images/views.png' %}" style="width: 25px; vertical-align: middle; margin-bottom: 2px;"> <label style="color: #ff506f;">{{ count_views }}</label> | <label style="color: gray;">{{ post.pub_date|date:"d E Y / H:i" }}</label></label>
+      </div>
+      <div class="frame-users" style="{% if count_search == 0 %}max-height: 30px;{% elif count_search == 1 %}max-height: 40px;{% elif count_search == 2 %}max-height: 100px;{% elif count_search == 3 %}max-height: 160px;{% elif count_search == 4 %}max-height: 220px;{% endif %}">
+          {% for ticket in ticket %}
+            <a href="{% url 'forum:ticket' ticket.author %}">
+              <div style="display: block;">
+                <div style="display: flex; padding: 0 20px 0 20px; margin-bottom: 10px;">
+                  <div style="margin: 0 10px 0px 0; height: 40px;">
+                    <img style="width: 40px; border-radius: 10px;" src="{{ user.avatar.url }}">
+                  </div>
+                  <div style="margin: 0 auto 0 0;">
+                    <a href="{% url 'forum:profile' user.username %}" class="admin-link">
+                      <label class="users-username" {% if user.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ user.username }}</label>
+                    </a>
+                  </div>
+                </div>
+                <div class="admin-btn" style="display: flex; padding: 0 20px 0 20px;">
+                  <label class="role-banner" style="width: auto; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; background: #393939;">{{ ticket.category }}</label>
+                  <label class="role-banner" style="width: auto; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.priority == "Низкий" %}green{% elif ticket.priority == "Средний" %}#c6d400{% elif ticket.priority == "Высокий" %}red;{% endif %}">{{ ticket.priority }}</label>
+                  <label class="role-banner" style="width: auto; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.created }}</label>
+                </div>
+              </div>
+              {% if not forloop.last %}<hr class="admin-hr">{% endif %}
+            </a>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

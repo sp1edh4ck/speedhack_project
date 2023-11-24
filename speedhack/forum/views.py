@@ -7,8 +7,8 @@ from market.models import Market
 from users.forms import UserProfileForm
 from users.models import CustomUser, IpUser
 
-from .forms import ProfileCommentForm, CommentForm, PostForm, DepositForm
-from .models import Follow, Forum, User, Group, Comment, Viewers
+from .forms import ProfileCommentForm, CommentForm, PostForm, DepositForm, HelpForm
+from .models import Follow, Forum, User, Group, Comment, Viewers, HelpForum
 
 
 def get_client_ip(request):
@@ -458,6 +458,77 @@ def admin_panel(request):
         'count_users_ban': count_users_ban,
     }
     return render(request, 'forum/admin.html', context)
+
+
+@login_required
+def tickets(request):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    tickets_list = HelpForum.objects.all()
+    tickets_open_count = HelpForum.objects.filter(open=True).count()
+    tickets_close = HelpForum.objects.filter(open=False)
+    tickets_close_count = tickets_close.count()
+    tickets_count = tickets_list.count()
+    context = {
+        'tickets_list': tickets_list,
+        'tickets_count': tickets_count,
+        'tickets_open_count': tickets_open_count,
+        'tickets_close': tickets_close,
+        'tickets_close_count': tickets_close_count,
+    }
+    return render(request, 'forum/tickets.html', context)
+
+
+@login_required
+def ticket(request, ticket_id):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    ticket = HelpForum.objects.filter(pk=ticket_id)
+    context = {
+        'ticket': ticket,
+    }
+    return render(request, 'forum/ticket.html', context)
+
+
+@login_required
+def ticket_close(request, ticket_id):
+    ticket = get_object_or_404(HelpForum, id=ticket_id)
+    ticket.open = False
+    ticket.save()
+    return redirect('forum:tickets')
+
+
+@login_required
+def ticket_open(request, ticket_id):
+    ticket = get_object_or_404(HelpForum, id=ticket_id)
+    ticket.open = True
+    ticket.save()
+    return redirect('forum:tickets')
+
+
+@login_required
+def ticket_form(request):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    form = HelpForm(
+        request.POST or None
+    )
+    if request.method == 'POST':
+        if form.is_valid():
+            ticket = form.save(commit=False)
+            if ticket.priority == "Низкий":
+                ticket.priority_lvl = 1
+            elif ticket.priority == "Средний":
+                ticket.priority_lvl = 2
+            elif ticket.priority == "Высокий":
+                ticket.priority_lvl = 3
+            ticket.author = request.user
+            ticket.save()
+            return redirect('forum:index')
+    context = {
+        'form': form
+    }
+    return render(request, 'forum/ticket_form.html', context)
 
 
 def rules(request):

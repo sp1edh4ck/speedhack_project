@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import ProfileComment, Comment, Forum, Group, Viewers
+from .models import ProfileComment, Comment, Forum, Group, Viewers, HelpForum
 
 
 class ForumAdmin(admin.ModelAdmin):
@@ -17,6 +17,20 @@ class ForumAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
+class HelpForumAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'category',
+        'priority',
+        'priority_lvl',
+        'request',
+        'created',
+        'author',
+    )
+    list_filter = ('priority_lvl',)
+    empty_value_display = '-пусто-'
+
+
 class GroupAdmin(admin.ModelAdmin):
     list_display = (
         'slug',
@@ -28,6 +42,7 @@ class GroupAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Forum, ForumAdmin)
+admin.site.register(HelpForum, HelpForumAdmin)
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Comment)
 admin.site.register(ProfileComment)
