@@ -7,7 +7,7 @@ from market.models import Market
 from users.forms import UserProfileForm
 from users.models import CustomUser, IpUser
 
-from .forms import ProfileCommentForm, CommentForm, PostForm, DepositForm, HelpForm
+from .forms import ProfileCommentForm, CommentForm, PostForm, DepositForm, HelpForm, AnswerForm
 from .models import Follow, Forum, User, Group, Comment, Viewers, HelpForum
 
 
@@ -483,11 +483,36 @@ def tickets(request):
 def ticket(request, ticket_id):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
-    ticket = HelpForum.objects.filter(pk=ticket_id)
+    form = AnswerForm(request.POST or None)
+    ticket = get_object_or_404(HelpForum, pk=ticket_id)
+    comments = ticket.answer.all()
+    count_comments = comments.count()
     context = {
+        'form': form,
         'ticket': ticket,
+        'comments': comments,
+        'count_comments': count_comments,
     }
     return render(request, 'forum/ticket.html', context)
+
+
+@login_required
+def add_answer(request, ticket_id):
+    ticket = get_object_or_404(HelpForum, pk=ticket_id)
+    if ticket.open:
+        if request.user.rank == "заблокирован":
+            return banned_redirect(request)
+        form = AnswerForm(request.POST or None)
+        if form.is_valid():
+            user = CustomUser.objects.get(username=request.user.username)
+            user.messages += 1
+            user.save()
+            answer = form.save(commit=False)
+            answer.author = request.user
+            answer.ticket = ticket
+            answer.save()
+            return redirect('forum:ticket', ticket_id=ticket_id)
+    return redirect('forum:ticket', ticket_id=ticket_id)
 
 
 @login_required

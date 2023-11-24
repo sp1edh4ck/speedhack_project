@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import ProfileComment, Comment, Forum, HelpForum
+from .models import ProfileComment, Comment, Forum, HelpForum, HelpAnswer
 from users.models import CustomUser
 
 
@@ -20,6 +20,12 @@ class HelpForm(forms.ModelForm):
     class Meta:
         model = HelpForum
         fields = ('category', 'priority', 'title', 'request', 'description',)
+
+
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = HelpAnswer
+        fields = ('text',)
 
 
 class CommentForm(forms.ModelForm):

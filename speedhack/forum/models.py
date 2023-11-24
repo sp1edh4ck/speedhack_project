@@ -113,6 +113,33 @@ class HelpForum(models.Model):
         ordering = ('-priority_lvl',)
 
 
+class HelpAnswer(models.Model):
+    ticket = models.ForeignKey(
+        HelpForum,
+        on_delete=models.CASCADE,
+        related_name='answer',
+        verbose_name='Тикет',
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='answers',
+        verbose_name='Автор',
+    )
+    text = models.TextField(
+        verbose_name='Текст комментария',
+        max_length=2000,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата публикации',
+    )
+
+    class Meta:
+        verbose_name = 'Ответ'
+        verbose_name_plural = 'Ответы'
+
+
 class Viewers(models.Model):
     post = models.ForeignKey(
         Forum,
