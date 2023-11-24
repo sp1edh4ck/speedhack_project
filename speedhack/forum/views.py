@@ -383,7 +383,8 @@ def post_delete(request, post_id):
         or request.user.rank == "владелец"
         or request.user.rank == "гл. администратор"
         or request.user.rank == "администратор"
-        or request.user.rank == "арбитр"
+        or request.user.rank == "бот"
+        or request.user.rank == "главный арбитр"
         or request.user.rank == "куратор"):
         Forum.objects.filter(pk=post_id).delete()
         return redirect('forum:successfully')
@@ -518,9 +519,6 @@ def add_answer(request, ticket_id):
             return banned_redirect(request)
         form = AnswerForm(request.POST or None)
         if form.is_valid():
-            user = CustomUser.objects.get(username=request.user.username)
-            user.messages += 1
-            user.save()
             answer = form.save(commit=False)
             answer.author = request.user
             answer.ticket = ticket

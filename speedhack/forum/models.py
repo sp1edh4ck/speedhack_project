@@ -89,10 +89,11 @@ class HelpForum(models.Model):
     category = models.TextField(verbose_name='Категория', choices=CATEGORY, default=CATEGORY[0][0])
     priority = models.TextField(verbose_name='Приоритет', choices=PRIORITY, default=PRIORITY[0][0])
     priority_lvl = models.TextField(verbose_name='Уровень приоритета', choices=PRIORITY_LVL, default=PRIORITY_LVL[0][0])
-    title = models.TextField(verbose_name='Заголовок')
+    title = models.CharField(verbose_name='Заголовок', max_length=60)
     request = models.TextField(verbose_name='Обращение к админу', choices=REQUEST, default=REQUEST[0][0])
     description = models.TextField(
         verbose_name='Описание вопроса',
+        max_length=2000,
     )
     created = models.DateTimeField(
         auto_now_add=True,
