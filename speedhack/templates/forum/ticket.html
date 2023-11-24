@@ -9,12 +9,10 @@
         <label class="link-title">{% if request.user.rank_lvl >= "4" %}<a href="{% url 'forum:admin_panel' %}" class="link-title-main">Админ-панель</a> <label style="margin: 0 5px 0 5px;">/</label> {% endif %}{% if request.user.username == ticket.author.username %}<a href="{% url 'forum:my_tickets' request.user.username %}" class="link-title-main">Мои тикеты</a>{% else %}<a href="{% url 'forum:tickets' %}" class="link-title-main">Тикеты</a>{% endif %} <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:ticket' ticket.id %}" class="link-title-main">Тикет номер {{ ticket.id }}</a></label>
         <div class="frame-title">
           <label class="text-up-title">{{ ticket.category }}</label><br>
-          <label class="text-up-all">Тикет создан пользователем <a href="{% url 'forum:profile' ticket.author %}" class="{% if ticket.author.username_style != 'gray-un' %}text-up-nick2 {{ ticket.author.username_style }}{% else %}text-up-nick{% endif %}">{{ ticket.author.username }}</a></label>
           <div class="admin-btn" style="display: flex; padding: 5px 20px 0 0;">
             <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; background: {% if ticket.open == True %}green{% else %}#393939{% endif %}">{% if ticket.open == True %}Открыт{% else %}Закрыт{% endif %}</label>
             <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.priority == "Низкий" %}green{% elif ticket.priority == "Средний" %}#c6d400{% elif ticket.priority == "Высокий" %}red;{% endif %}">{{ ticket.priority }}</label>
             <label class="role-banner" style="width: 30px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.request == "Да" %}green{% elif ticket.request == "Нет" %}red;{% endif %}">{{ ticket.request }}</label>
-            <label class="role-banner" style="width: 300px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.category }}</label>
             <label class="role-banner" style="width: auto; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.created|date:"d E Y / H:i" }}</label>
           </div>
         </div>

@@ -485,7 +485,6 @@ def my_tickets(request, username):
         return banned_redirect(request)
     user = request.user
     my_tickets = user.tickets.all()
-    # my_tickets = HelpForum.objects.get(author=username).all()
     context = {
         'my_tickets': my_tickets,
     }

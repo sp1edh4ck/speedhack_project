@@ -58,6 +58,7 @@
             <a class="window-button-second" href="{% url 'market:my_buy_accs' %}">Мои покупки</a>
             <hr style="margin: 5px 0px; border: 1px solid #444444;"> {% endcomment %}
             <a class="window-button-second" href="{% url 'forum:my_topics' %}">Мои темы</a>
+            <a class="window-button-second" href="{% url 'forum:my_tickets' request.user.username %}">Мои тикеты</a>
             <a class="window-button-second" href="{% url 'forum:profile_info_edit' user.username %}">Настройки профиля</a>
             <a class="window-button-second" href="#">Switch to English</a>
             <hr style="margin: 5px 0px; border: 1px solid #444444;">
