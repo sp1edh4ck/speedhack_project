@@ -44,6 +44,23 @@ class Group(models.Model):
         return self.title
 
 
+class Helpers(models.Model):
+    group = models.ForeignKey(
+        Group,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='groups',
+        verbose_name='Группа',
+    )
+    helper = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='group',
+        verbose_name='Куратор',
+    )
+
+
 class Forum(models.Model):
     group = models.ForeignKey(
         Group,

@@ -264,6 +264,22 @@
   font-size: 20px;
 }
 
+.help-group-title {
+  color: #606060;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.help-group-username {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.help-group-username:hover {
+  text-decoration: underline;
+}
+
 .text-frame {
   display: flex;
 }

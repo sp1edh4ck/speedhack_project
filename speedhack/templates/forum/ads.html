@@ -5,36 +5,10 @@
   <div class="main">
     <div class="frame_con">
       <div style="display: block;">
-        <div class="switch-info-admin" style="max-height: 130px;">
-          <a href="{% url 'forum:admin_panel' %}" class="switch-button active-tab" style="text-decoration: none; color: #ffffff;">Основная админ-панель</a>
+        <div class="switch-info-admin" style="min-width: 290px; max-height: 130px;">
+          <a href="{% url 'forum:admin_panel' %}" class="switch-button" style="text-decoration: none; color: #ffffff;">Основная админ-панель</a>
           <a href="{% url 'forum:tickets' %}" class="switch-button" style="text-decoration: none; color: #ffffff;">Обращения</a>
-          <a href="{% url 'forum:ads' %}" class="switch-button" style="text-decoration: none; color: #ffffff;">Реклама</a>
-        </div>
-        <div class="frame-left-first-users">
-          <span style="color: gray; font-size: 18px;">Найти пользователя</span>
-          <div style="display: flex;">
-            <div>
-              <form action="{% url 'forum:admin_panel' %}">
-                <input class="input-search-users" type="search" name="search" placeholder="Имя..." aria-label="Search">
-              </form>
-            </div>
-            <div>
-              <a href="{% url 'forum:admin_panel' %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="frame-left-second-users">
-          <span style="color: gray; font-size: 18px;">Статистика форума</span>
-          <div style="display: block;">
-            <div style="margin-top: 15px; color: gray;">
-              <label>Пользователей:</label>
-              <label style="color: #ffffff;">{{ count_users }}</label>
-            </div>
-            <div style="margin-top: 3px; color: gray;">
-              <label>Пользователей в бане:</label>
-              <label style="color: #ffffff;">{{ count_users_ban }}</label>
-            </div>
-          </div>
+          <a href="{% url 'forum:ads' %}" class="switch-button active-tab" style="text-decoration: none; color: #ffffff;">Реклама</a>
         </div>
       </div>
       <div class="frame-users" style="display: block; {% if count_search == 0 %}max-height: 30px;{% elif count_search == 1 %}max-height: 40px;{% elif count_search == 2 %}max-height: 100px;{% elif count_search == 3 %}max-height: 160px;{% elif count_search == 4 %}max-height: 220px;{% endif %}">

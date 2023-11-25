@@ -32,6 +32,7 @@ urlpatterns = [
     path('forum/faq/', views.faq, name='faq'),
     path('admin-panel/', views.admin_panel, name='admin_panel'),
     path('admin-panel/tickets/', views.tickets, name='tickets'),
+    path('admin-panel/ads/', views.ads, name='ads'),
     path('tickets/<str:username>/', views.my_tickets, name='my_tickets'),
     path('admin-panel/ticket/<int:ticket_id>/close/', views.ticket_close, name='ticket_close'),
     path('admin-panel/ticket/<int:ticket_id>/open/', views.ticket_open, name='ticket_open'),

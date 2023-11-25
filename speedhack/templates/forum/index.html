@@ -22,7 +22,9 @@
         <div class="frame-right-first-index">
           {% if count_posts != 0 %}
             <div style="margin: 0 0 5px 10px;">
-              <label class="posts-group-title">{% if request.path == '/' %}Все обсуждения{% elif request.path == '/forum/my_topics/'%}Мои темы{% endif %}</label>
+              <div style="margin-bottom: 5px;">
+                <label class="posts-group-title">{% if request.path == '/' %}Все обсуждения{% elif request.path == '/forum/my_topics/'%}Мои темы{% endif %}</label>
+              </div>
             </div>
             <div class="search-header search-header-else">
               <div>
@@ -57,10 +59,13 @@
                 </div>
               </a>
             {% endfor %}
+            <div style="margin-bottom: 15px;"></div>
             {% include '../includes/paginator.html' %}
           {% else %}
             <div style="margin: 0 0 5px 10px;">
-              <label class="posts-group-title">{% if request.path == '/' %}Все обсуждения{% elif request.path == '/forum/my_topics/' %}Мои темы{% endif %}</label>
+              <div>
+                <label class="posts-group-title">{% if request.path == '/' %}Все обсуждения{% elif request.path == '/forum/my_topics/' %}Мои темы{% endif %}</label>
+              </div>
             </div>
             <div class="search-header search-header-else">
               <div>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import ProfileComment, Comment, Forum, Group, Viewers, HelpForum
+from .models import ProfileComment, Comment, Forum, Group, Viewers, HelpForum, Helpers
 
 
 class ForumAdmin(admin.ModelAdmin):
@@ -14,6 +14,18 @@ class ForumAdmin(admin.ModelAdmin):
     list_editable = ('group',)
     search_fields = ('group',)
     list_filter = ('pub_date',)
+    empty_value_display = '-пусто-'
+
+
+class HelpersAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'group',
+        'helper',
+    )
+    list_editable = ('group',)
+    search_fields = ('group',)
+    list_filter = ('group',)
     empty_value_display = '-пусто-'
 
 
@@ -42,6 +54,7 @@ class GroupAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Forum, ForumAdmin)
+admin.site.register(Helpers, HelpersAdmin)
 admin.site.register(HelpForum, HelpForumAdmin)
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Comment)

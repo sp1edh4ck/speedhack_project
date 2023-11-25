@@ -8,7 +8,7 @@ from users.forms import UserProfileForm
 from users.models import CustomUser, IpUser
 
 from .forms import ProfileCommentForm, CommentForm, PostForm, DepositForm, HelpForm, AnswerForm
-from .models import Follow, Forum, User, Group, Comment, Viewers, HelpForum
+from .models import Follow, Forum, User, Group, Comment, Viewers, HelpForum, Helpers
 
 
 def get_client_ip(request):
@@ -50,7 +50,6 @@ def successfully(request):
 def index(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
-    ip_address = get_client_ip(request)
     search_query = request.GET.get('search', '')
     if search_query:
         posts = Forum.objects.filter(title__icontains=search_query)
@@ -60,7 +59,6 @@ def index(request):
     context = {
         'count_posts': count_posts,
         'objects': pagination_post(request, posts),
-        'ip_address': ip_address,
     }
     return render(request, 'forum/index.html', context)
 
@@ -93,11 +91,15 @@ def group_free(request, slug):
         posts = group.posts.filter(title__icontains=search_query)
     else:
         posts = group.posts.all()
+    helpers = Helpers.objects.filter(group=group)
+    helpers_count = helpers.count()
     count_posts = posts.count()
     context = {
         'count_posts': count_posts,
         'group': group,
         'objects': pagination_post(request, posts),
+        'helpers': helpers,
+        'helpers_count': helpers_count,
     }
     return render(request, 'forum/template_groups.html', context)
 
@@ -567,6 +569,11 @@ def ticket_form(request):
         'form': form
     }
     return render(request, 'forum/ticket_form.html', context)
+
+
+@login_required
+def ads(request):
+    return render(request, 'forum/ads.html')
 
 
 def rules(request):

@@ -26,7 +26,10 @@
         <div class="frame-right-first-index">
           {% if count_posts != 0 %}
             <div style="margin: 0 0 5px 10px;">
-              <label class="posts-group-title">{{ group.title }}</label>
+              <div>
+                <label class="posts-group-title">{{ group.title }}</label>
+              </div>
+              {% if helpers_count != 0 %}<label class="help-group-title">Проверяющие раздела: {% for helper in helpers%}<a class="help-group-username {% if helper.helper.username_style != 'gray-un' %}{{ helper.helper.username_style }}{% endif %}" href="{% url 'forum:profile' helper.helper.username %}">{{ helper.helper }}</a>{% if helpers_count > 1 and not forloop.last %}<span class="pink-separator"></span>{% endif %}{% endfor %}</label>{% endif %}
             </div>
             <div class="search-header search-header-else">
               <div>
@@ -61,10 +64,14 @@
                 </div>
               </a>
             {% endfor %}
+            <div style="margin-bottom: 15px;"></div>
             {% include '../includes/paginator.html' %}
           {% else %}
             <div style="margin: 0 0 5px 10px;">
-              <label class="posts-group-title">{{ group.title }}</label>
+              <div>
+                <label class="posts-group-title">{{ group.title }}</label>
+              </div>
+              {% if helpers_count != 0 %}<label class="help-group-title">Проверяющие раздела: {% for helper in helpers%}<a class="help-group-username {% if helper.helper.username_style != 'gray-un' %}{{ helper.helper.username_style }}{% endif %}" href="{% url 'forum:profile' helper.helper.username %}">{{ helper.helper }}</a>{% if helpers_count > 1 and not forloop.last %}<span class="pink-separator"></span>{% endif %}{% endfor %}</label>{% endif %}
             </div>
             <div class="search-header search-header-else">
               <div>
