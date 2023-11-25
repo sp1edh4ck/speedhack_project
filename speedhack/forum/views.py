@@ -59,7 +59,8 @@ def index(request):
     count_posts = posts.count()
     context = {
         'count_posts': count_posts,
-        'objects': pagination_post(request, posts)
+        'objects': pagination_post(request, posts),
+        'ip_address': ip_address,
     }
     return render(request, 'forum/index.html', context)
 
