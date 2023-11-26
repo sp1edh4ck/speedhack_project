@@ -585,6 +585,7 @@ def users(request):
         return banned_redirect(request)
     posts = Forum.objects.select_related('author').all()
     accs = Market.objects.select_related('author').all()
+    messages_count = Comment.objects.all().count()
     count_posts = posts.count()
     count_accs = accs.count()
     users_list = CustomUser.objects.all()
@@ -608,6 +609,7 @@ def users(request):
         'count_users': count_users,
         'count_accs': count_accs,
         'count_search': count_search,
+        'messages_count': messages_count,
     }
     return render(request, 'forum/users.html', context)
 

@@ -34,7 +34,7 @@
   margin: 15px 15px 0 0;
   border-radius: 10px;
   padding: 20px;
-  max-height: 90px;
+  max-height: 120px;
   background: #242424b6;
 }
 
@@ -59,7 +59,12 @@
 }
 
 .heart-users {
-  width: 13px;
+  color: #ffffff;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-bottom: -4px;
+  margin-right: 3px;
 }
 
 .search-clear-users {

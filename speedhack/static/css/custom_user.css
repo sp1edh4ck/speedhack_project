@@ -46,6 +46,12 @@
   background: #b96d00;
 }
 
+.so-beautifull-grad {
+  background: linear-gradient(90deg, #5c45ff, #feb5f2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .green-so-beautifull-un {
   background: linear-gradient(90deg, #03FF03, #136E0C);
   -webkit-background-clip: text;
