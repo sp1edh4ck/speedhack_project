@@ -152,7 +152,7 @@
                   <div style="display: block; margin-left: 20px; max-width: 130px;">
                     <a class="sub-users" href="{% url 'forum:profile' post.author.username %}">
                       <div style="margin: 0 0 0 auto;">
-                        <label class="sub-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if post.author.username == "root" %}style="color: red;"{% endif %}>{{ post.author.username }}</label>
+                        <label class="sub-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if post.author.username == "root" %}style="color: red;"{% endif %}>{{ post.author.username }}</label>
                       </div>
                     </a>
                     <div style="color: #888888; font-size: 14px;">
@@ -183,7 +183,7 @@
                   <div style="display: block; margin-left: 20px; max-width: 130px;">
                     <a class="sub-users" href="{% url 'forum:profile' post.user.username %}">
                       <div style="margin: 0 0 0 auto;">
-                        <label class="sub-username {% if post.user.username_style != 'gray-un' %}{{ post.user.username_style }}{% endif %}" {% if post.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if post.user.username == "root" %}style="color: red;"{% endif %}>{{ post.user.username }}</label>
+                        <label class="sub-username {% if post.user.username_style != 'gray-un' and post.user.rank != 'заблокирован' %}{{ post.user.username_style }}{% endif %}" {% if post.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if post.user.username == "root" %}style="color: red;"{% endif %}>{{ post.user.username }}</label>
                       </div>
                     </a>
                     <div style="color: #888888; font-size: 13px;">
@@ -205,7 +205,7 @@
           <div style="display: flex; ">
             <div style="margin: 0 auto 0 0; display: block;" class="frt">
               <div>
-                <label class="{% if author.username_style != 'gray-un' %}{{ author.username_style }}{% else %}gray-un{% endif %}" {% if author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} {% if author.username == "root" %}style="color: red;"{% endif %}>{{ author.username }}</label>
+                <label class="{% if author.username_style != 'gray-un' and author.rank != 'заблокирован' %}{{ author.username_style }}{% else %}gray-un{% endif %}" {% if author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} {% if author.username == "root" %}style="color: red;"{% endif %}>{{ author.username }}</label>
                 {% if user != author %}
                   {% if user.rank == "владелец" or user.rank == "гл. администратор" or user.rank == "администратор" or user.rank == "куратор" %}
                     {% if author.rank != "нет ранга" %}
@@ -357,7 +357,7 @@
                   </div>
                   <div class="avatar-username">
                     <img class="user-avatar" src="{{ post.author.avatar.url }}">
-                    <label class="text-frame-username {% if author.username_style != 'gray-un' %}{{ author.username_style }}{% endif %}" {% if author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
+                    <label class="text-frame-username {% if author.username_style != 'gray-un' and author.rank != 'заблокирован' %}{{ author.username_style }}{% endif %}" {% if author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
                   </div>
                 </div>
               </a>

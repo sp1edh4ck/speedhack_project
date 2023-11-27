@@ -9,7 +9,7 @@
       <label class="link-title"><a href="{% url 'forum:index' %}" class="link-title-main">Форум</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:group_filter_posts' post.group.id %}" class="link-title-main">{{ post.group.title }}</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:post_detail' post.id %}" class="link-title-main">Пост</a></label>
       <div class="frame-title">
         <label class="text-up-title">{{ post.title }}</label><br>
-        <label class="text-up-all">Тема в разделе <a href="{% url 'forum:group_filter_posts' post.group.slug %}" class="text-up-nick">{{ post.group }}</a> создана пользователем <a href="{% url 'forum:profile' post.author.username %}" class="{% if post.author.username_style != 'gray-un' %}text-up-nick2 {{ post.author.username_style }}{% else %}text-up-nick{% endif %}">{{ post.author.username }}</a> / <img class="heart" src="{% static 'images/heart_gray.png' %}"> <label style="color: #ff506f;">{{ post.author.likes }}</label> / <img src="{% static 'images/views.png' %}" style="width: 25px; vertical-align: middle; margin-bottom: 2px;"> <label style="color: #ff506f;">{{ count_views }}</label> | <label style="color: gray;">{{ post.pub_date|date:"d E Y / H:i" }}</label></label>
+        <label class="text-up-all">Тема в разделе <a href="{% url 'forum:group_filter_posts' post.group.slug %}" class="text-up-nick">{{ post.group }}</a> создана пользователем <a href="{% url 'forum:profile' post.author.username %}" class="{% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}text-up-nick2 {{ post.author.username_style }}{% else %}text-up-nick{% endif %}" {% if post.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ post.author.username }}</a> / <img class="heart" src="{% static 'images/heart_gray.png' %}"> <label style="color: #ff506f;">{{ post.author.likes }}</label> / <img src="{% static 'images/views.png' %}" style="width: 25px; vertical-align: middle; margin-bottom: 2px;"> <label style="color: #ff506f;">{{ count_views }}</label> | <label style="color: gray;">{{ post.pub_date|date:"d E Y / H:i" }}</label></label>
       </div>
       <div class="frame-main">
         <div class="frame-main-avatars">
@@ -28,7 +28,7 @@
             <div style="display: flex;">
               <div style="margin: 0 auto 0 0;">
                 <a href="{% url 'forum:profile' post.author.username %}" style="text-decoration: none; cursor: pointer;">
-                  <label class="frame-main-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>{% if user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
+                  <label class="frame-main-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>{% if user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
                 </a>
               </div>
               {% if user.username == post.author.username or user.rank == "владелец" or .user.rank == "гл. администратор" or user.rank == "администратор" or user.rank == "арбитр" or user.rank == "куратор" %}
@@ -92,7 +92,7 @@
               <div style="display: flex;">
                 <div style="margin: 0 auto 0 0;">
                   <a href="{% url 'forum:profile' comment.author.username %}" style="text-decoration: none; cursor: pointer;">
-                    <label class="frame-main-username {% if comment.author.username_style != 'gray-un' %}{{ comment.author.username_style }}{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ comment.author.username }}</label>{% if comment.user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
+                    <label class="frame-main-username {% if comment.author.username_style != 'gray-un' and comment.author.rank != 'заблокирован' %}{{ comment.author.username_style }}{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ comment.author.username }}</label>{% if comment.user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
                   </a>
                 </div>
               </div>

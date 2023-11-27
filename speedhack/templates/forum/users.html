@@ -74,7 +74,7 @@
                 </div> {% endcomment %}
                 <div style="display: flex;">
                   <div style="margin: 0;">
-                    <a href="{% url 'forum:profile' user.username %}" style="text-decoration: none; cursor: pointer;"><label class="users-un {% if user.username_style != 'gray-un' %}{{ user.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if user.username == "root" %}style="color: red;"{% endif %}>{{ user.username }}</label></a>
+                    <a href="{% url 'forum:profile' user.username %}" style="text-decoration: none; cursor: pointer;"><label class="users-un {% if user.username_style != 'gray-un' and user.rank != 'заблокирован' %}{{ user.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if user.username == "root" %}style="color: red;"{% endif %}>{{ user.username }}</label></a>
                     <div style="margin-top: 7px; color: #999999; font-weight: bold;">
                       <img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label style="margin-right: 20px;">{{ user.likes }}</label>
                       <img class="heart-users" src="{% static 'images/messages.png' %}"> <label>{{ user.comments.count }}</label>

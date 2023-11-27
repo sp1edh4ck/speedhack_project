@@ -129,7 +129,7 @@ class HelpForum(models.Model):
     class Meta:
         verbose_name = 'Тикет'
         verbose_name_plural = 'Тикеты'
-        ordering = ('-open', '-priority_lvl',)
+        ordering = ('-open', '-priority_lvl', 'request')
 
 
 class HelpAnswer(models.Model):

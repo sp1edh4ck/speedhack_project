@@ -54,7 +54,7 @@
                     {% if post.author.is_online == True %}
                       <div class="online online-avatar-index"></div>
                     {% endif %}
-                    <label class="text-frame-username {% if post.author.username_style != 'gray-un' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ post.author.username }}</label>
+                    <label class="text-frame-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ post.author.username }}</label>
                   </div>
                 </div>
               </a>
