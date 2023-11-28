@@ -7,6 +7,7 @@ app_name = 'forum'
 urlpatterns = [
     path('', views.index, name='index'),
     path('forum/banned/', views.banned, name='banned'),
+    path('ratelimited/', views.ratelimited, name='ratelimited'),
     path('forum/my_topics/', views.my_topics, name='my_topics'),
     path('forum/tickets/open/', views.ticket_form, name='ticket_form'),
     path('group/<slug:slug>/', views.group_free, name='group_filter_posts'),

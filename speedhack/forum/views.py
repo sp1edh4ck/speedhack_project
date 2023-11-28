@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django_ratelimit.decorators import ratelimit
 
 from market.models import Market
 from users.forms import UserProfileForm
@@ -47,6 +48,11 @@ def successfully(request):
     return render(request, 'forum/successfully.html')
 
 
+def ratelimited(request, exception):
+    return render(request, 'forum/limit.html')
+
+
+@ratelimit(key='ip', rate='100/m')
 def index(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
@@ -63,6 +69,7 @@ def index(request):
     return render(request, 'forum/index.html', context)
 
 
+@ratelimit(key='ip', rate='100/m')
 @login_required
 def my_topics(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
@@ -81,6 +88,7 @@ def my_topics(request):
     return render(request, 'forum/index.html', context)
 
 
+@ratelimit(key='ip', rate='100/m')
 def group_free(request, slug):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
@@ -104,6 +112,7 @@ def group_free(request, slug):
     return render(request, 'forum/template_groups.html', context)
 
 
+@ratelimit(key='ip', rate='100/m')
 def profile(request, username):
     author = get_object_or_404(User, username=username)
     posts = author.posts.all()
@@ -136,6 +145,7 @@ def profile(request, username):
 #     return render(request, 'forum/payments.html')
 
 
+@ratelimit(key='ip', rate='100/m')
 @login_required
 def deposit(request, username, number):
     user = CustomUser.objects.get(username=username)
@@ -185,6 +195,7 @@ def admin_ban(request, username):
     return redirect('forum:admin_panel')
 
 
+@ratelimit(key='ip', rate='3/m')
 @login_required
 def info_edit(request, username):
     if request.user.rank == "заблокирован":
@@ -206,6 +217,7 @@ def info_edit(request, username):
     return render(request, 'forum/info_edit.html', context)
 
 
+# @ratelimit(key='ip', rate='5/m')
 @login_required
 def upgrade_temp(request, username):
     if request.user.rank == "заблокирован":
@@ -213,32 +225,33 @@ def upgrade_temp(request, username):
     return render(request, 'forum/upgrade.html')
 
 
+# @ratelimit(key='ip', rate='5/m')
 @login_required
 def upgrade(request, username, number):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     user = CustomUser.objects.get(username=username)
-    if number == 1 and user.balance <= 100:
+    if number == 1 and request.user.balance >= 100:
         user.market_privilege = "продавец"
         user.balance -= 100
         user.time_buy_market_privilege = timezone.now()
         user.save()
-    if number == 2 and user.balance <= 100:
+    if number == 2 and user.balance >= 100:
         user.profile_sub = True
         user.balance -= 100
         user.time_buy_profile_sub = timezone.now()
         user.save()
-    if number == 3 and user.balance <= 2999:
+    if number == 3 and user.balance >= 2999:
         user.buy_privilege = "легенда"
         user.balance -= 2999
         user.time_buy_privilege = timezone.now()
         user.save()
-    if number == 4 and user.balance <= 1500:
+    if number == 4 and user.balance >= 1499:
         user.buy_privilege = "суприм"
-        user.balance -= 1500
+        user.balance -= 1499
         user.time_buy_privilege = timezone.now()
         user.save()
-    if number == 5 and user.balance <= 7500:
+    if number == 5 and user.balance >= 7500:
         user.buy_privilege = "уник"
         user.balance -= 7500
         user.time_buy_privilege = timezone.now()
@@ -246,6 +259,7 @@ def upgrade(request, username, number):
     return redirect('forum:profile', username=username)
 
 
+@ratelimit(key='ip', rate='5/m')
 @login_required
 def add_comment_profile(request, username):
     if request.user.rank == "заблокирован":
@@ -258,6 +272,7 @@ def add_comment_profile(request, username):
     return redirect('forum:profile', username=username)
 
 
+@ratelimit(key='ip', rate='3/m')
 def post_detail(request, post_id):
     post = get_object_or_404(Forum, id=post_id)
     if request.user.is_authenticated and request.user.rank == "заблокирован" and post.author != request.user:
@@ -278,6 +293,7 @@ def post_detail(request, post_id):
     return render(request, 'forum/post_detail.html', context)
 
 
+@ratelimit(key='ip', rate='3/m')
 @login_required
 def post_close(request, post_id):
     post = get_object_or_404(Forum, id=post_id)
@@ -286,6 +302,7 @@ def post_close(request, post_id):
     return redirect('forum:post_detail', post_id=post_id)
 
 
+@ratelimit(key='ip', rate='3/m')
 @login_required
 def post_open(request, post_id):
     post = get_object_or_404(Forum, id=post_id)
@@ -294,6 +311,7 @@ def post_open(request, post_id):
     return redirect('forum:post_detail', post_id=post_id)
 
 
+@ratelimit(key='ip', rate='30/m')
 @login_required
 def likes_add(request, post_id):
     post = get_object_or_404(Forum, id=post_id)
@@ -325,6 +343,7 @@ def likes_add(request, post_id):
     return redirect('forum:post_detail', post_id=post_id)
 
 
+@ratelimit(key='ip', rate='5/m')
 @login_required
 def post_create(request):
     if request.user.rank == "заблокирован":
@@ -345,6 +364,7 @@ def post_create(request):
     return render(request, 'forum/post_create.html', context)
 
 
+@ratelimit(key='ip', rate='5/m')
 @login_required
 def post_edit(request, post_id):
     if request.user.rank == "заблокирован":
@@ -377,6 +397,7 @@ def post_edit(request, post_id):
     return redirect('forum:post_detail', post_id=post_id)
 
 
+@ratelimit(key='ip', rate='10/m')
 @login_required
 def post_delete(request, post_id):
     if request.user.rank == "заблокирован":
@@ -393,6 +414,7 @@ def post_delete(request, post_id):
         return redirect('forum:successfully')
 
 
+@ratelimit(key='ip', rate='10/m')
 @login_required
 def add_comment(request, post_id):
     post = get_object_or_404(Forum, pk=post_id)
@@ -412,6 +434,7 @@ def add_comment(request, post_id):
     return redirect('forum:post_detail', post_id=post_id)
 
 
+@ratelimit(key='ip', rate='5/m')
 @login_required
 def delete_comment(request, post_id, id):
     if request.user.rank == "заблокирован":
@@ -421,6 +444,7 @@ def delete_comment(request, post_id, id):
     return redirect('forum:post_detail', post_id=post_id)
 
 
+@ratelimit(key='ip', rate='5/m')
 @login_required
 def profile_follow(request, username):
     if request.user.rank == "заблокирован":
@@ -432,6 +456,7 @@ def profile_follow(request, username):
     return redirect('forum:profile', username=username)
 
 
+@ratelimit(key='ip', rate='5/m')
 @login_required
 def profile_unfollow(request, username):
     if request.user.rank == "заблокирован":
@@ -483,6 +508,7 @@ def tickets(request):
     return render(request, 'forum/tickets.html', context)
 
 
+@ratelimit(key='ip', rate='10/m')
 @login_required
 def my_tickets(request, username):
     if request.user.rank == "заблокирован":
@@ -497,6 +523,7 @@ def my_tickets(request, username):
     return render(request, 'forum/my_tickets.html', context)
 
 
+@ratelimit(key='ip', rate='30/m')
 @login_required
 def ticket(request, ticket_id):
     if request.user.rank == "заблокирован":
@@ -514,6 +541,7 @@ def ticket(request, ticket_id):
     return render(request, 'forum/ticket.html', context)
 
 
+@ratelimit(key='ip', rate='5/m')
 @login_required
 def add_answer(request, ticket_id):
     ticket = get_object_or_404(HelpForum, pk=ticket_id)
@@ -530,6 +558,7 @@ def add_answer(request, ticket_id):
     return redirect('forum:ticket', ticket_id=ticket_id)
 
 
+@ratelimit(key='ip', rate='5/m')
 @login_required
 def ticket_close(request, ticket_id):
     ticket = get_object_or_404(HelpForum, id=ticket_id)
@@ -538,6 +567,7 @@ def ticket_close(request, ticket_id):
     return redirect('forum:tickets')
 
 
+@ratelimit(key='ip', rate='5/m')
 @login_required
 def ticket_open(request, ticket_id):
     ticket = get_object_or_404(HelpForum, id=ticket_id)
@@ -546,6 +576,7 @@ def ticket_open(request, ticket_id):
     return redirect('forum:tickets')
 
 
+@ratelimit(key='ip', rate='5/m')
 @login_required
 def ticket_form(request):
     if request.user.rank == "заблокирован":
@@ -576,10 +607,12 @@ def ads(request):
     return render(request, 'forum/ads.html')
 
 
+@ratelimit(key='ip', rate='10/m')
 def rules(request):
     return render(request, 'forum/rules.html')
 
 
+@ratelimit(key='ip', rate='30/m')
 def users(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
@@ -614,13 +647,16 @@ def users(request):
     return render(request, 'forum/users.html', context)
 
 
+@ratelimit(key='ip', rate='10/m')
 def faq(request):
     return render(request, 'forum/faq.html')
 
 
+@ratelimit(key='ip', rate='10/m')
 def guarantor(request):
     return render(request, 'forum/guarantor.html')
 
 
+@ratelimit(key='ip', rate='10/m')
 def words(request):
     return render(request, 'forum/words.html')
