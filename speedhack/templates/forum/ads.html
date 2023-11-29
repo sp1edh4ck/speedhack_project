@@ -2,6 +2,7 @@
 {% block title %}speedhack / админка{% endblock %}
 {% load static %}
 {% block content %}
+{% load user_filters %}
   <div class="main">
     <div class="frame_con">
       <div style="display: block;">
@@ -11,39 +12,41 @@
           <a href="{% url 'forum:ads' %}" class="switch-button active-tab" style="text-decoration: none; color: #ffffff;">Реклама</a>
         </div>
       </div>
-      <div class="frame-users" style="display: block; {% if count_search == 0 %}max-height: 30px;{% elif count_search == 1 %}max-height: 40px;{% elif count_search == 2 %}max-height: 100px;{% elif count_search == 3 %}max-height: 160px;{% elif count_search == 4 %}max-height: 220px;{% endif %}">
-        {% if count_search != 0 %}
-          {% for user in users %}
-            <div style="display: flex; padding: 0 20px 0 20px;">
-              <div style="margin: 0 10px 0px 0; height: 40px;">
-                <img style="width: 40px; border-radius: 10px;" src="{{ user.avatar.url }}">
-              </div>
-              <div style="margin: 0 auto 0 0;">
-                <a href="{% url 'forum:profile' user.username %}" class="admin-link">
-                  <label class="users-username" {% if user.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ user.username }}</label>
-                </a>
-              </div>
-              <div class="admin-btn">
-                {% if user.rank != "заблокирован" and user.username != request.user.username and request.user.rank_lvl > user.rank_lvl %}
-                  {% if user.rank != "пользователь" %}
-                    <label class="role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}" style="max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px;">{{ user.rank }}</label>
-                  {% endif %}
-                  <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button" style="max-height: 40px;">Заблокировать</a>
-                {% elif user.rank == "заблокирован" and user.username != request.user.username and request.user.rank_lvl > user.rank_lvl %}
-                  <label class="role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}" style="max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px;">{{ user.save_rank }}</label>
-                  <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button">Разблокировать</a>
-                {% elif user.rank != "пользователь" %}
-                  <label class="{% if user.rank != "заблокирован" %}role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}{% endif %}" style="max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0px; border-radius: 10px;">{{ user.rank }}</label>
-                {% endif %}
+      <div style="display: block;">
+        <div class="admin-frame-right" style="margin: 0 0 15px 0; padding: 20px 0 0 20px; max-height: 40px;">
+          <a data-tab="#ads_create" class="button-tools active-tab">Создать рекламный пост</a>
+          <a data-tab="#ads_all" class="button-tools">Рекламные посты</a>
+        </div>
+        <div class="tabItem frame-users active-tab" id="ads_create" style="max-width: 895px;{% if tickets_open_count == 0 %}max-height: 65px;{% elif tickets_open_count == 1 %}max-height: 80px;{% elif tickets_open_count == 2 %}max-height: 185px;{% elif tickets_open_count == 3 %}max-height: 290px;{% endif %}">
+          <form method="post" action="{{ request.path }}">
+            {% csrf_token %}
+            <div class="ticket-div" style="max-height: 55px; margin-bottom: 0;">
+              <label class="ads-label">Заголовок:</label>
+              <div>
+                <input type="text" name="title" id="id_title" class="field field-height" style="max-width: 650px; max-height: 36px; padding: 0 7px 0 7px;" placeholder="Заголовок..." maxlength="70">
               </div>
             </div>
-            {% if not forloop.last %}<hr class="admin-hr">{% endif %}
-          {% endfor %}
-        {% else %}
-          <div style="margin: 0 0 0 20px;">
-            <label style="color: #ffffff; font-size: 18px;">Нет пользователя с данным именем</label>
-          </div>
-        {% endif %}
+            <div class="ticket-div" style="max-height: 150px; margin-bottom: 0;">
+              <label class="ads-label">Описание:</label>
+              <div>
+                {{ form.description|addclass:"field ads-description" }}
+              </div>
+            </div>
+            <div class="ticket-div" style="min-height: 80px; margin-bottom: 0;">
+              <label class="ads-label">Длительность в неделях:</label>
+              <div>
+                <input type="number" name="weeks" id="id_weeks" class="field field-height" style="max-width: 250px; max-height: 36px; padding: 0 7px 0 7px;" placeholder="Длительность..." maxlength="5">
+              </div>
+            </div>
+            <div class="ticket-div" style="max-height: 55px; margin-bottom: 0;">
+              <label class="ads-label">Автор:</label>
+              <div>
+                <input type="text" name="author" id="id_author" class="field field-height" style="max-width: 270px; max-height: 36px; padding: 0 7px 0 7px;" placeholder="Автор..." maxlength="15">
+              </div>
+            </div>
+            <button type="submit" class="button-level" style="margin-left: 210px; margin-top: 0;">Создать обращение</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

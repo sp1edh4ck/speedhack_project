@@ -60,3 +60,18 @@
   max-height: 165px;
   border-radius: 10px;
 }
+
+.ads-description {
+  max-width: 650px;
+  max-height: 120px;
+  padding: 7px;
+}
+
+.ads-label {
+  color: #ffffff;
+  font-size: 18px;
+  margin-right: 10px;
+  min-width: 200px;
+  max-width: 200px;
+  text-align: right;
+}

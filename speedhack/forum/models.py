@@ -61,6 +61,19 @@ class Helpers(models.Model):
     )
 
 
+class Ads(models.Model):
+    title = models.CharField(verbose_name='Заголовок', max_length=100)
+    description = models.TextField(verbose_name='Текст', max_length=5000)
+    pub_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
+    author = models.CharField(verbose_name='Автор', max_length=15)
+    weeks = models.IntegerField(verbose_name='Оплаченных недель')
+
+    class Meta:
+        verbose_name = 'Рекламный пост'
+        verbose_name_plural = 'Рекламные посты'
+        ordering = ('-pub_date',)
+
+
 class Forum(models.Model):
     group = models.ForeignKey(
         Group,
@@ -70,7 +83,7 @@ class Forum(models.Model):
         verbose_name='Группа',
     )
     title = models.CharField(verbose_name='Заголовок', max_length=55)
-    text = models.TextField(verbose_name='Текст', max_length=10000)
+    text = models.TextField(verbose_name='Текст', max_length=5000)
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
     author = models.ForeignKey(
         User,

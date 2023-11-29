@@ -127,11 +127,6 @@
             </div>
           {% endif %}
         </div>
-        {% comment %} {% else %}
-          <div style="padding: 20px; background: #242424b6; border-radius: 10px;">
-            <label>Вы приобрели все наши товары :)</label>
-          </div>
-        {% endif %} {% endcomment %}
       </div>
       <div class="switch-profile-edit">
         <a href="{% url 'forum:profile_info_edit' user.username %}" class="switch-button-profile-edit">Персональная информация</a>

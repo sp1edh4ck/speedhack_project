@@ -8,8 +8,8 @@ from market.models import Market
 from users.forms import UserProfileForm
 from users.models import CustomUser, IpUser
 
-from .forms import ProfileCommentForm, CommentForm, PostForm, DepositForm, HelpForm, AnswerForm
-from .models import Follow, Forum, User, Group, Comment, Viewers, HelpForum, Helpers
+from .forms import ProfileCommentForm, CommentForm, PostForm, DepositForm, HelpForm, AnswerForm, AdsForm
+from .models import Follow, Forum, User, Group, Comment, Viewers, HelpForum, Helpers, Ads
 
 
 def get_client_ip(request):
@@ -604,7 +604,16 @@ def ticket_form(request):
 
 @login_required
 def ads(request):
-    return render(request, 'forum/ads.html')
+    form = AdsForm(request.POST or None)
+    ads = Ads.objects.all()
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+    context = {
+        'ads': ads,
+        'form': form,
+    }
+    return render(request, 'forum/ads.html', context)
 
 
 @ratelimit(key='ip', rate='10/m')

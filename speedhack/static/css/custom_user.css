@@ -46,6 +46,18 @@
   background: #b96d00;
 }
 
+.good {
+  background: linear-gradient(20deg, #006eff, #00ff81 52%, #fff 50%, #93cbff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 5px #00ffcf80;
+}
+
+.black-style {
+  color: #000000;
+  text-shadow: 0px 1px 1px #000000, 0px 0px 2px #000000, 0px 0px 0px #000000, 0px 0px 0px #000000, 0px 0px 0px #000000, 0px 0px 0px #000000, 0px 0px 0px #000000, 0px 0px 0px #000000;
+}
+
 .so-beautifull-grad {
   background: linear-gradient(90deg, #5c45ff, #feb5f2 100%);
   -webkit-background-clip: text;

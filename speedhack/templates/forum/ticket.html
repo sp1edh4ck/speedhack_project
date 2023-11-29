@@ -5,96 +5,94 @@
 {% load user_filters %}
   <div class="main">
     <div class="frame_con" style="display: block;">
-      {% comment %} {% for ticket in ticket %} {% endcomment %}
-        <label class="link-title">{% if request.user.rank_lvl >= "4" %}<a href="{% url 'forum:admin_panel' %}" class="link-title-main">Админ-панель</a> <label style="margin: 0 5px 0 5px;">/</label> {% endif %}<a href="{% url 'forum:tickets' %}" class="link-title-main">Тикеты</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:ticket' ticket.id %}" class="link-title-main">Тикет номер {{ ticket.id }}</a></label>
-        <div class="frame-title">
-          <label class="text-up-title">{{ ticket.category }}</label><br>
-          <div class="admin-btn" style="display: flex; padding: 5px 20px 0 0;">
-            <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; background: {% if ticket.open == True %}green{% else %}#393939{% endif %}">{% if ticket.open == True %}Открыт{% else %}Закрыт{% endif %}</label>
-            <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.priority == "Низкий" %}green{% elif ticket.priority == "Средний" %}#c6d400{% elif ticket.priority == "Высокий" %}red;{% endif %}">{{ ticket.priority }}</label>
-            <label class="role-banner" style="width: 30px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.request == "Да" %}green{% elif ticket.request == "Нет" %}red;{% endif %}">{{ ticket.request }}</label>
-            <label class="role-banner" style="width: auto; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.created|date:"d E Y / H:i" }}</label>
+      <label class="link-title">{% if request.user.rank_lvl >= "4" %}<a href="{% url 'forum:admin_panel' %}" class="link-title-main">Админ-панель</a> <label style="margin: 0 5px 0 5px;">/</label> {% endif %}<a href="{% url 'forum:tickets' %}" class="link-title-main">Тикеты</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:ticket' ticket.id %}" class="link-title-main">Тикет номер {{ ticket.id }}</a></label>
+      <div class="frame-title">
+        <label class="text-up-title">{{ ticket.category }}</label><br>
+        <div class="admin-btn" style="display: flex; padding: 5px 20px 0 0;">
+          <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; background: {% if ticket.open == True %}green{% else %}#393939{% endif %}">{% if ticket.open == True %}Открыт{% else %}Закрыт{% endif %}</label>
+          <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.priority == "Низкий" %}green{% elif ticket.priority == "Средний" %}#c6d400{% elif ticket.priority == "Высокий" %}red;{% endif %}">{{ ticket.priority }}</label>
+          <label class="role-banner" style="width: 30px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.request == "Да" %}green{% elif ticket.request == "Нет" %}red;{% endif %}">{{ ticket.request }}</label>
+          <label class="role-banner" style="width: auto; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.created|date:"d E Y / H:i" }}</label>
+        </div>
+      </div>
+      <div class="frame-users" style="display: block; margin-top: 20px; max-width: 1200px;">
+        <div class="frame-main-posts">
+          <div>
+            <a href="{% url 'forum:profile' ticket.author %}"><img class="frame-main-avatar" src="{{ ticket.author.avatar.url }}"></a>
+            {% if ticket.author.is_online == True %}
+              <div class="online online-avatar-post-detail" style="margin: -24px 0 0 61px;"></div>
+            {% endif %}
+          </div>
+          <div>
+            <div style="margin: 0 auto 0 0;">
+              <a href="{% url 'forum:profile' ticket.author %}" style="text-decoration: none; cursor: pointer;">
+                <label class="frame-main-username {% if ticket.author.username_style != 'gray-un' %}{{ ticket.author.username_style }}{% endif %}" {% if ticket.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ ticket.author.username }}</label>{% if user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
+              </a>
+            </div>
+            <div>
+              <div class="frame-main-post-text">
+                <label>{{ ticket.description }}</label>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="frame-users" style="display: block; margin-top: 20px; max-width: 1200px;">
+        {% if count_comments != 0 %}
+          <hr class="hr-post-detail">
+        {% endif %}
+        {% for comment in comments %}
           <div class="frame-main-posts">
             <div>
-              <a href="{% url 'forum:profile' ticket.author %}"><img class="frame-main-avatar" src="{{ ticket.author.avatar.url }}"></a>
-              {% if ticket.author.is_online == True %}
+              <a href="{% url 'forum:profile' comment.author.username %}"><img class="frame-main-avatar" src="{{ comment.author.avatar.url }}"></a>
+              {% if comment.author.is_online == True %}
                 <div class="online online-avatar-post-detail" style="margin: -24px 0 0 61px;"></div>
               {% endif %}
             </div>
             <div>
-              <div style="margin: 0 auto 0 0;">
-                <a href="{% url 'forum:profile' ticket.author %}" style="text-decoration: none; cursor: pointer;">
-                  <label class="frame-main-username {% if ticket.author.username_style != 'gray-un' %}{{ ticket.author.username_style }}{% endif %}" {% if ticket.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ ticket.author.username }}</label>{% if user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
-                </a>
+              <div style="display: flex;">
+                <div style="margin: 0 auto 0 0;">
+                  <a href="{% url 'forum:profile' comment.author.username %}" style="text-decoration: none; cursor: pointer;">
+                    <label class="frame-main-username" {% if comment.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{% if comment.author.username != ticket.author.username %}Support #{{ comment.author.id }}{% else %}{{ comment.author.username }}{% endif %}</label>{% if comment.user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
+                  </a>
+                </div>
               </div>
               <div>
                 <div class="frame-main-post-text">
-                  <label>{{ ticket.description }}</label>
+                  <label>{{ comment.text }}</label>
+                </div>
+              </div>
+              <div style="display: flex;">
+                <div class="comment-date" style="margin: 10px auto 0 0;">
+                  <label>{{ comment.created|date:"d E Y / H:i" }}</label>
                 </div>
               </div>
             </div>
           </div>
-          {% if count_comments != 0 %}
+          {% if not forloop.last %}<hr class="hr-post-detail">{% endif %}
+        {% endfor %}
+        {% if user.is_authenticated and ticket.open == True %}
+          <div>
             <hr class="hr-post-detail">
-          {% endif %}
-          {% for comment in comments %}
-            <div class="frame-main-posts">
-              <div>
-                <a href="{% url 'forum:profile' comment.author.username %}"><img class="frame-main-avatar" src="{{ comment.author.avatar.url }}"></a>
-                {% if comment.author.is_online == True %}
-                  <div class="online online-avatar-post-detail" style="margin: -24px 0 0 61px;"></div>
-                {% endif %}
-              </div>
-              <div>
-                <div style="display: flex;">
-                  <div style="margin: 0 auto 0 0;">
-                    <a href="{% url 'forum:profile' comment.author.username %}" style="text-decoration: none; cursor: pointer;">
-                      <label class="frame-main-username" {% if comment.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{% if comment.author.username != ticket.author.username %}Support #{{ comment.author.id }}{% else %}{{ comment.author.username }}{% endif %}</label>{% if comment.user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
-                    </a>
-                  </div>
-                </div>
+          </div>
+          <div class="frame-main-posts">
+            <form method="post" enctype="multipart/form-data" action="{% url 'forum:add_answer' ticket.id %}">
+              {% csrf_token %}
+              <div style="display: flex;">
                 <div>
-                  <div class="frame-main-post-text">
-                    <label>{{ comment.text }}</label>
-                  </div>
+                  <a href="{% url 'forum:profile' user %}"><img class="frame-main-avatar" style="width: 40px; height: 40px; margin: 0;" src="{{ user.avatar.url }}"></a>
                 </div>
-                <div style="display: flex;">
-                  <div class="comment-date" style="margin: 10px auto 0 0;">
-                    <label>{{ comment.created|date:"d E Y / H:i" }}</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% if not forloop.last %}<hr class="hr-post-detail">{% endif %}
-          {% endfor %}
-          {% if user.is_authenticated and ticket.open == True %}
-            <div>
-              <hr class="hr-post-detail">
-            </div>
-            <div class="frame-main-posts">
-              <form method="post" enctype="multipart/form-data" action="{% url 'forum:add_answer' ticket.id %}">
-                {% csrf_token %}
                 <div style="display: flex;">
                   <div>
-                    <a href="{% url 'forum:profile' user %}"><img class="frame-main-avatar" style="width: 40px; height: 40px; margin: 0;" src="{{ user.avatar.url }}"></a>
+                    {{ form.text|addclass:"field-detail" }}
                   </div>
-                  <div style="display: flex;">
-                    <div>
-                      {{ form.text|addclass:"field-detail" }}
-                    </div>
-                    <div>
-                      <button type="submit" style="background: #ffffff00; border: none; cursor: pointer;"><i class="fab fa-telegram-plane icons-post-detail"></i></button>
-                    </div>
+                  <div>
+                    <button type="submit" style="background: #ffffff00; border: none; cursor: pointer;"><i class="fab fa-telegram-plane icons-post-detail"></i></button>
                   </div>
                 </div>
-              </form>
-            </div>
-          {% endif %}
-        </div>
-      {% comment %} {% endfor %} {% endcomment %}
+              </div>
+            </form>
+          </div>
+        {% endif %}
+      </div>
     </div>
   </div>
 {% endblock %}
