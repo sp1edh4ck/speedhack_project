@@ -12,7 +12,7 @@ jobs:
       with:
         python-version: 3.7
     - name: Install dependencies
-      run: | 
+      run: |
         python -m pip install --upgrade pip
         pip install -r speedhack/requirements.txt
 
