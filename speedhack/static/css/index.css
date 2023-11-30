@@ -411,3 +411,16 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   margin: 0 10px 0 10px;
   display: block;
 }
+
+.li-label-ad {
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 10px 10px;
+  margin: 2px 0;
+  transition: all 0.5s ease 0s;
+}
+
+.li-label-ad:hover {
+  background: #3f3f3fb6;
+  /* background: #2e2e2eb6; */
+}

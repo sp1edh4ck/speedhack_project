@@ -65,8 +65,8 @@ class Ads(models.Model):
     title = models.CharField(verbose_name='Заголовок', max_length=100)
     description = models.TextField(verbose_name='Текст', max_length=5000)
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
-    author = models.CharField(verbose_name='Автор', max_length=15)
     weeks = models.IntegerField(verbose_name='Оплаченных недель')
+    author = models.CharField(verbose_name='Автор', max_length=15)
 
     class Meta:
         verbose_name = 'Рекламный пост'
@@ -142,7 +142,7 @@ class HelpForum(models.Model):
     class Meta:
         verbose_name = 'Тикет'
         verbose_name_plural = 'Тикеты'
-        ordering = ('-open', '-priority_lvl', 'request')
+        ordering = ('-open', '-priority_lvl', 'request', '-created',)
 
 
 class HelpAnswer(models.Model):

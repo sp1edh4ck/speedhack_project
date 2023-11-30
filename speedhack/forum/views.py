@@ -62,8 +62,10 @@ def index(request):
     else:
         posts = Forum.objects.select_related('author').all()
     count_posts = posts.count()
+    ads = Ads.objects.all()
     context = {
         'count_posts': count_posts,
+        'ads': ads,
         'objects': pagination_post(request, posts),
     }
     return render(request, 'forum/index.html', context)
@@ -604,11 +606,13 @@ def ticket_form(request):
 def ads(request):
     form = AdsForm(request.POST or None)
     ads = Ads.objects.all()
+    ads_count = ads.count()
     if request.method == 'POST':
         if form.is_valid():
             form.save()
     context = {
         'ads': ads,
+        'ads_count': ads_count,
         'form': form,
     }
     return render(request, 'forum/ads.html', context)

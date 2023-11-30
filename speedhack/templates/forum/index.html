@@ -21,12 +21,23 @@
       <div style="display: block;">
         <div class="frame-right-first-index">
           {% if count_posts != 0 %}
-            <div style="margin: 0 0 5px 10px;">
-              <div style="margin-bottom: 5px;">
+            <div style="margin: 0 0 0 10px;">
+              <div>
                 <label class="posts-group-title">{% if request.path == '/' %}Все обсуждения{% elif request.path == '/forum/my_topics/'%}Мои темы{% endif %}</label>
               </div>
             </div>
-            <div class="search-header search-header-else">
+            {% if ads.count != 0 %}
+              <div style="margin: 20px 0 20px 0;">
+                {% for ad in ads %}
+                  <div class="li-label-ad" style="font-size: 16px;">
+                    <i class="fa-solid fa-bullhorn" style="color: #515151; margin-right: 15px;"></i><label style="color: #ff506f; cursor: pointer;">{{ ad.title }}</label>
+                  </div>
+                {% endfor %}
+              </div>
+            {% else %}
+              <hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;">
+            {% endif %}
+            {% comment %} <div class="search-header search-header-else">
               <div>
                 <form action="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}">
                   <input class="input-search" type="search" name="search" placeholder="Поиск" aria-label="Search">
@@ -35,8 +46,8 @@
               <div>
                 <a href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
               </div>
-            </div>
-            <hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;">
+            </div> {% endcomment %}
+            {% comment %} <hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;"> {% endcomment %}
             {% for post in objects %}
               <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">
                 <div class="text-frame post">

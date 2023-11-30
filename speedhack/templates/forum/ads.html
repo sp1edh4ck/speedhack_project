@@ -47,7 +47,43 @@
             <button type="submit" class="button-level" style="margin-left: 210px; margin-top: 0;">Создать обращение</button>
           </form>
         </div>
+        <div class="tabItem frame-users" id="ads_all" style="max-width: 895px;{% if tickets_open_count == 0 %}max-height: 65px;{% elif tickets_open_count == 1 %}max-height: 80px;{% elif tickets_open_count == 2 %}max-height: 185px;{% elif tickets_open_count == 3 %}max-height: 290px;{% endif %}">
+          {% if ads_count != 0 %}
+            {% for ad in ads %}
+              <a href="">
+                <div style="display: block;">
+                  <div style="display: flex; padding: 0 20px 0 20px; margin-bottom: 10px;">
+                    <div style="margin: 0 10px 0px 0; height: 40px;">
+                      <img style="width: 40px; border-radius: 10px;" src="{{ ad.author.avatar.url }}">
+                    </div>
+                    <div style="margin: 0 auto 0 0;">
+                      <a href="{% url 'forum:profile' ad.author %}" class="admin-link">
+                        <label class="users-username" {% if ad.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ ad.author }}</label>
+                      </a>
+                    </div>
+                    <div class="admin-btn">
+                      <a class="admin-button" href="">Открыть</a>
+                    </div>
+                  </div>
+                  <div class="admin-btn" style="display: flex; padding: 0 20px 0 20px;">
+                    <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; background: {% if ticket.open == True %}green{% else %}#393939{% endif %}">{% if ticket.open == True %}Открыт{% else %}Закрыт{% endif %}</label>
+                    <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.priority == "Низкий" %}green{% elif ticket.priority == "Средний" %}#c6d400{% elif ticket.priority == "Высокий" %}red;{% endif %}">{{ ticket.priority }}</label>
+                    <label class="role-banner" style="width: 30px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.request == "Да" %}green{% elif ticket.request == "Нет" %}red;{% endif %}">{{ ticket.request }}</label>
+                    <label class="role-banner" style="width: 300px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.category }}</label>
+                    <label class="role-banner" style="width: auto; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.created }}</label>
+                  </div>
+                </div>
+              </a>
+              {% if not forloop.last %}<hr class="admin-hr">{% endif %}
+            {% endfor %}
+          {% else %}
+            <div style="margin: 0px 0 0 20px;" id="ads_all">
+              <label style="color: #ffffff; font-size: 18px;">Нет открытых тикетов</label>
+            </div>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
+  <script type="text/javascript" src="{% static 'js/profile.js' %}"></script>
 {% endblock %}
