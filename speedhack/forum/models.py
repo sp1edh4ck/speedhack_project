@@ -245,22 +245,18 @@ class ProfileComment(models.Model):
     profile = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='profile_with_comments',
+        related_name='profile',
+        verbose_name='Профиль',
     )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='profile_comments',
+        related_name='author',
         verbose_name='Автор',
     )
     text = models.TextField(
         verbose_name='Текст комментария',
         max_length=2000,
-    )
-    image = models.ImageField(
-        'Картинка',
-        upload_to='posts/images/',
-        blank=True
     )
     created = models.DateTimeField(
         auto_now_add=True,
@@ -270,12 +266,7 @@ class ProfileComment(models.Model):
     class Meta:
         verbose_name = 'Комментарий на стене пользователя'
         verbose_name_plural = 'Комментарии на стене пользователя'
-        constraints = [
-            models.UniqueConstraint(
-                fields=('profile', 'author'),
-                name='unique_name_in_comment',
-            )
-        ]
+        ordering = ('-created',)
 
 
 class Follow(models.Model):

@@ -4,374 +4,385 @@
 {% load thumbnail %}
 {% load user_filters %}
 {% block content %}
-<body class="background-img" {% if author.rank == 'владелец' or author.rank == 'гл. администратор' or author.rank == 'администратор' or author.rank == 'арбитр' or author.rank == 'модератор' or author.rank == 'бот' or author.rank == 'искусственный интелект' or author.profile_sub == True %}{% if author.profile_background %}style="background-image: linear-gradient(rgba(54, 54, 54, 0.6), rgba(54, 54, 54, 0.6)), url({{ author.profile_background.url }});"{% endif %}{% endif %}>
-  <div class="main-profile">
-    <div class="frame_con">
-      <div style="display: block;">
-        <div class="frame-edit" style="{% if user.is_authenticated == False %}max-height: 230px;{% elif user.is_authenticated == False and user.rank == 'заблокирован' %}max-height: 270px;{% elif user == author %}max-height: 275px;{% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 355px;{% else %}max-height: 315px;{% endif %}">
-          <img class="profile-avatar" src="{{ author.avatar.url }}">
-          <div class="{% if author.rank != "пользователь" and author.rank != "заблокирован" %}role-banner {% if author.rank == "дизайнер" %}designer-role{% elif author.rank == "главный дизайнер" %}main-designer-role{% elif author.rank == "куратор" %}curator-role{% elif author.rank == "арбитр" %}referee-role{% elif author.rank == "главный арбитр" %}main-referee-role{% elif author.rank == "бот" %}admin-role{% elif author.rank == "администратор" %}admin-role{% elif author.rank == "разработчик" %}developer-role{% elif author.rank == "гл. администратор" %}main-admin-role{% elif author.rank == "владелец" %}milk-pink-role{% endif %}{% endif %}">
-            {% if author.rank != "пользователь" and author.rank != "заблокирован" %}
-              <label style="font-weight: 600;">{{ author.rank }}</label>
+  <body class="background-img" {% if author.rank == 'владелец' or author.rank == 'гл. администратор' or author.rank == 'администратор' or author.rank == 'арбитр' or author.rank == 'модератор' or author.rank == 'бот' or author.rank == 'искусственный интелект' or author.profile_sub == True %}{% if author.profile_background %}style="background-image: linear-gradient(rgba(54, 54, 54, 0.6), rgba(54, 54, 54, 0.6)), url({{ author.profile_background.url }});"{% endif %}{% endif %}>
+    <div class="main-profile">
+      <div class="frame_con">
+        <div style="display: block;">
+          <div class="frame-edit" style="{% if user.is_authenticated == False %}max-height: 230px;{% elif user.is_authenticated == False and user.rank == 'заблокирован' %}max-height: 270px;{% elif user == author %}max-height: 275px;{% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 355px;{% else %}max-height: 315px;{% endif %}">
+            <img class="profile-avatar" src="{{ author.avatar.url }}">
+            <div class="{% if author.rank != "пользователь" and author.rank != "заблокирован" %}role-banner {% if author.rank == "дизайнер" %}designer-role{% elif author.rank == "главный дизайнер" %}main-designer-role{% elif author.rank == "куратор" %}curator-role{% elif author.rank == "арбитр" %}referee-role{% elif author.rank == "главный арбитр" %}main-referee-role{% elif author.rank == "бот" %}admin-role{% elif author.rank == "администратор" %}admin-role{% elif author.rank == "разработчик" %}developer-role{% elif author.rank == "гл. администратор" %}main-admin-role{% elif author.rank == "владелец" %}milk-pink-role{% endif %}{% endif %}">
+              {% if author.rank != "пользователь" and author.rank != "заблокирован" %}
+                <label style="font-weight: 600;">{{ author.rank }}</label>
+              {% endif %}
+            </div>
+            {% if author.rank == "пользователь" and author.rank != "заблокирован" and author.privilege != "нет привилегий" %}
+              <div class="{% if author.rank != "заблокирован" %}role-banner{% endif %} {{ author.banner }}">
+                <label style="font-weight: bold; {% if author.privilege == "искусственный интелект" %}font-size: 15px;{% endif %}">{{ author.privilege }}</label>
+              </div>
+            {% endif %}
+            {% if user == author %}
+              {% comment %} <div id="myModal" class="modal">
+                <div class="modal-content" style="padding: 0px;">
+                  <span class="close">&times;</span>
+                  <div class="modal-content">
+                    <div class="text-modal" style="font-size: 18px;">
+                      Загрузка фото
+                    </div>
+                    <form method="post" action="" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      {{ form.avatar }}
+                      <div>
+                        <input type="file" name="file" id="field-load" class="field field-load">
+                        <label for="field-load" style="margin-top: 20px;">
+                          <div class="file-load">Файл не выбран</div>
+                          <div class="file-save">Выбрать</div>
+                        </label>
+                      </div>
+                      <button type="submit" class="button-edit" style="margin-top: 20px; width: 400px; padding: 5px 0px;">Сохранить</button>
+                    </form>
+                  </div>
+                </div>
+              </div> {% endcomment %}
+              {% if user.rank != 'заблокирован' %}
+                <a class="button-edit" style="margin-top: 5px;" href="{% url 'forum:profile_info_edit' user.username %}">Редактировать</a>
+              {% endif %}
+            {% else %}
+              {% if user.is_authenticated %}
+                {% if user.rank != 'заблокирован' %}
+                  {% if following %}
+                    <a class="button-edit" href="{% url 'forum:profile_unfollow' author.username %}">Отписаться</a>
+                  {% else %}
+                    <a class="button-edit" href="{% url 'forum:profile_follow' author.username %}">Подписаться</a>
+                  {% endif %}
+                  {% if author.username != 'root' %}<label style="max-width: 200px; margin-top: 20px;"><a class="button-edit" style="margin-top: 5px">Написать</a></label>{% endif %}
+                  <a class="button-edit" style="margin-top: 5px;">Пожаловаться</a>
+                {% endif %}
+              {% endif %}
             {% endif %}
           </div>
-          {% if author.rank == "пользователь" and author.rank != "заблокирован" and author.privilege != "нет привилегий" %}
-            <div class="{% if author.rank != "заблокирован" %}role-banner{% endif %} {{ author.banner }}">
-              <label style="font-weight: bold; {% if author.privilege == "искусственный интелект" %}font-size: 15px;{% endif %}">{{ author.privilege }}</label>
+          {% comment %} <div class="save-dep">
+            <div>
+              <label class="save-dep-label">Страховой депозит</label>
             </div>
-          {% endif %}
-          {% if user == author %}
-            {% comment %} <div id="myModal" class="modal">
+            <div style="margin-top: 10px;">
+              <label class="save-dep-label" style="color: #ff506f; font-size: 18px;">{{ author.save_deposit }} <i class="fas fa-ruble-sign fa-lg icon-rub" style="width: 12px; height: 22px;"></i></label>
+            </div>
+            {% if user.username == author.username %}
+              <div style="display: flex; margin-top: 10px">
+                <span class="save-dep-link sdl-ff" id="depBtn" style="cursor: pointer;">Пополнить</span>
+                <span class="save-dep-link" id="withdraw" style="margin: 0 5px;">Снять</span>
+                <span class="save-dep-link" id="infoBtn" style="padding: 0; cursor: pointer;"><i class="fa-solid fa-circle-info fa-lg" style="color: #cacaca;"></i></span>
+              </div>
+            {% endif %}
+            <div id="depModal" class="modal">
+              <div class="modal-content" style="padding: 0px; height: 200px;">
+                <span class="close">&times;</span>
+                <div class="modal-content" style="height: 200px;">
+                  <div class="text-modal" style="font-size: 20px;">
+                    Пополнить страховой депозит
+                  </div>
+                  <div style="font-size: 16px;">
+                    <div style="margin-bottom: 10px;">
+                      При возвращении страхового депозита форум удерживает комиссию в размере 5% от суммы депозита.
+                    </div>
+                    <div style="display: flex;">
+                      <div style="width: 200px; text-align: right; margin: 4px 10px 0 0;">
+                        Сумма пополнения:
+                      </div>
+                      <form action="" method="post">
+                        {% csrf_token %}
+                        <div style="display: block;">
+                          <div>
+                            {{ form }}
+                            <input type="number" min="0" step="1000" value="10000" autocomplete="off" class="fix-input-prof">
+                          </div>
+                          <div style="margin: 5px 0;">
+                            <label style="color: gray;">Минимальная сумма для пополнения - 10 000 <i class="fas fa-ruble-sign fa-lg icon-rub" style="width: 9px; height: 17px;"></i></label>
+                          </div>
+                          <div style="display: flex;">
+                            <a href="{% url 'forum:deposit' user.username 1 %}" style="text-decoration: none;">
+                              <label type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 80px; cursor: pointer;">Пополнить</label>
+                            </a>
+                            <a href="{% if user.balance >= 10000 %}{% url 'forum:deposit' user.username 2 %}{% endif %}" style="text-decoration: none; margin-left: 10px;">
+                              <label type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 160px;{% if user.balance < 10000 %} background: gray;{% else %} cursor: pointer;{% endif %}">Пополнить с баланса</label>
+                            </a>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div>
+                      <label style="color: gray;">Минимальная сумма для пополнения - 10 000 <i class="fas fa-ruble-sign fa-lg icon-rub" style="width: 9px; height: 17px;"></i></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="infoModal" class="modal">
               <div class="modal-content" style="padding: 0px;">
                 <span class="close">&times;</span>
                 <div class="modal-content">
                   <div class="text-modal" style="font-size: 18px;">
-                    Загрузка фото
+                    Страховой депозит
                   </div>
-                  <form method="post" action="" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.avatar }}
+                  <div style="font-size: 14px;">
+                    Страховой депозит - это специальная сумма денег, которую пользователь вносит на свой счет на нашем сайте в качестве гарантии своей надежности и порядочности. Это помогает другим пользователям чувствовать себя увереннее при совершении сделок с вами, поскольку они видят, что вы готовы предоставить финансовую гарантию своих действий.
+                    <br><br>Как это работает:
+                    <br>1. Вы решаете стать участником системы страховых депозитов и вносите определенную сумму денег на свой счет на нашем сайте.
+                    <br><br>2. После внесения страхового депозита в вашем профиле это отобразится, и будет видно другим пользователям. Это подтверждает, что у вас есть страховой депозит, и вы являетесь надежным участником.
+                    <br><br>3. В случае возникновения споров или проблем в ходе совершения сделки, ваш страховой депозит может быть использован для возмещения потерь другой стороне.
+                    <br><br>4. Если все ваши сделки проходят без проблем, и вы решаете завершить участие в программе страховых депозитов, вы сможете вернуть свой депозит обратно на свой счет после истечения холда (7 дней). Однако, при возврате страхового депозита мы удерживаем комиссию в размере 5% от суммы депозита.
+                    <br><br>Система страховых депозитов помогает создавать доверительную среду на сайте, обеспечивая дополнительную защиту для всех участников.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> {% endcomment %}
+          {% if count_subscriptions != 0 %}
+            <div class="frame-left-second">
+              <a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ count_subscriptions }}</label> {% if count_subscriptions == 1 %}подписка{% elif count_subscriptions <= 4 and count_subscriptions >= 2 %}подписки{% elif count_subscriptions <= 100 and count_subscriptions >= 5 %}подписок{% endif %}</a>
+              <div class="subs-left">
+                {% for post in subscriptions %}
+                  <div style="display: flex;" class="sub-users-div">
                     <div>
-                      <input type="file" name="file" id="field-load" class="field field-load">
-                      <label for="field-load" style="margin-top: 20px;">
-                        <div class="file-load">Файл не выбран</div>
-                        <div class="file-save">Выбрать</div>
-                      </label>
-                    </div>
-                    <button type="submit" class="button-edit" style="margin-top: 20px; width: 400px; padding: 5px 0px;">Сохранить</button>
-                  </form>
-                </div>
-              </div>
-            </div> {% endcomment %}
-            {% if user.rank != 'заблокирован' %}
-              <a class="button-edit" style="margin-top: 5px;" href="{% url 'forum:profile_info_edit' user.username %}">Редактировать</a>
-            {% endif %}
-          {% else %}
-            {% if user.is_authenticated %}
-              {% if user.rank != 'заблокирован' %}
-                {% if following %}
-                  <a class="button-edit" href="{% url 'forum:profile_unfollow' author.username %}">Отписаться</a>
-                {% else %}
-                  <a class="button-edit" href="{% url 'forum:profile_follow' author.username %}">Подписаться</a>
-                {% endif %}
-                {% if author.username != 'root' %}<label style="max-width: 200px; margin-top: 20px;"><a class="button-edit" style="margin-top: 5px">Написать</a></label>{% endif %}
-                <a class="button-edit" style="margin-top: 5px;">Пожаловаться</a>
-              {% endif %}
-            {% endif %}
-          {% endif %}
-        </div>
-        {% comment %} <div class="save-dep">
-          <div>
-            <label class="save-dep-label">Страховой депозит</label>
-          </div>
-          <div style="margin-top: 10px;">
-            <label class="save-dep-label" style="color: #ff506f; font-size: 18px;">{{ author.save_deposit }} <i class="fas fa-ruble-sign fa-lg icon-rub" style="width: 12px; height: 22px;"></i></label>
-          </div>
-          {% if user.username == author.username %}
-            <div style="display: flex; margin-top: 10px">
-              <span class="save-dep-link sdl-ff" id="depBtn" style="cursor: pointer;">Пополнить</span>
-              <span class="save-dep-link" id="withdraw" style="margin: 0 5px;">Снять</span>
-              <span class="save-dep-link" id="infoBtn" style="padding: 0; cursor: pointer;"><i class="fa-solid fa-circle-info fa-lg" style="color: #cacaca;"></i></span>
-            </div>
-          {% endif %}
-          <div id="depModal" class="modal">
-            <div class="modal-content" style="padding: 0px; height: 200px;">
-              <span class="close">&times;</span>
-              <div class="modal-content" style="height: 200px;">
-                <div class="text-modal" style="font-size: 20px;">
-                  Пополнить страховой депозит
-                </div>
-                <div style="font-size: 16px;">
-                  <div style="margin-bottom: 10px;">
-                    При возвращении страхового депозита форум удерживает комиссию в размере 5% от суммы депозита.
-                  </div>
-                  <div style="display: flex;">
-                    <div style="width: 200px; text-align: right; margin: 4px 10px 0 0;">
-                      Сумма пополнения:
-                    </div>
-                    <form action="" method="post">
-                      {% csrf_token %}
-                      <div style="display: block;">
-                        <div>
-                          {{ form }}
-                          <input type="number" min="0" step="1000" value="10000" autocomplete="off" class="fix-input-prof">
-                        </div>
-                        <div style="margin: 5px 0;">
-                          <label style="color: gray;">Минимальная сумма для пополнения - 10 000 <i class="fas fa-ruble-sign fa-lg icon-rub" style="width: 9px; height: 17px;"></i></label>
-                        </div>
-                        <div style="display: flex;">
-                          <a href="{% url 'forum:deposit' user.username 1 %}" style="text-decoration: none;">
-                            <label type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 80px; cursor: pointer;">Пополнить</label>
-                          </a>
-                          <a href="{% if user.balance >= 10000 %}{% url 'forum:deposit' user.username 2 %}{% endif %}" style="text-decoration: none; margin-left: 10px;">
-                            <label type="submit" value="Submit" class="save-dep-link sdl-ff" style="max-width: 160px;{% if user.balance < 10000 %} background: gray;{% else %} cursor: pointer;{% endif %}">Пополнить с баланса</label>
-                          </a>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div>
-                    <label style="color: gray;">Минимальная сумма для пополнения - 10 000 <i class="fas fa-ruble-sign fa-lg icon-rub" style="width: 9px; height: 17px;"></i></label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="infoModal" class="modal">
-            <div class="modal-content" style="padding: 0px;">
-              <span class="close">&times;</span>
-              <div class="modal-content">
-                <div class="text-modal" style="font-size: 18px;">
-                  Страховой депозит
-                </div>
-                <div style="font-size: 14px;">
-                  Страховой депозит - это специальная сумма денег, которую пользователь вносит на свой счет на нашем сайте в качестве гарантии своей надежности и порядочности. Это помогает другим пользователям чувствовать себя увереннее при совершении сделок с вами, поскольку они видят, что вы готовы предоставить финансовую гарантию своих действий.
-                  <br><br>Как это работает:
-                  <br>1. Вы решаете стать участником системы страховых депозитов и вносите определенную сумму денег на свой счет на нашем сайте.
-                  <br><br>2. После внесения страхового депозита в вашем профиле это отобразится, и будет видно другим пользователям. Это подтверждает, что у вас есть страховой депозит, и вы являетесь надежным участником.
-                  <br><br>3. В случае возникновения споров или проблем в ходе совершения сделки, ваш страховой депозит может быть использован для возмещения потерь другой стороне.
-                  <br><br>4. Если все ваши сделки проходят без проблем, и вы решаете завершить участие в программе страховых депозитов, вы сможете вернуть свой депозит обратно на свой счет после истечения холда (7 дней). Однако, при возврате страхового депозита мы удерживаем комиссию в размере 5% от суммы депозита.
-                  <br><br>Система страховых депозитов помогает создавать доверительную среду на сайте, обеспечивая дополнительную защиту для всех участников.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> {% endcomment %}
-        {% if count_subscriptions != 0 %}
-          <div class="frame-left-second">
-            <a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ count_subscriptions }}</label> {% if count_subscriptions == 1 %}подписка{% elif count_subscriptions <= 4 and count_subscriptions >= 2 %}подписки{% elif count_subscriptions <= 100 and count_subscriptions >= 5 %}подписок{% endif %}</a>
-            <div class="subs-left">
-              {% for post in subscriptions %}
-                <div style="display: flex;" class="sub-users-div">
-                  <div>
-                    <img class="sub-avatar" src="{{ post.author.avatar.url }}">
-                    {% if post.author.is_online == True %}
-                      <div class="online online-avatar-profile"></div>
-                    {% endif %}
-                  </div>
-                  <div style="display: block; margin-left: 20px; max-width: 130px;">
-                    <a class="sub-users" href="{% url 'forum:profile' post.author.username %}">
-                      <div style="margin: 0 0 0 auto;">
-                        <label class="sub-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if post.author.username == "root" %}style="color: red;"{% endif %}>{{ post.author.username }}</label>
-                      </div>
-                    </a>
-                    <div style="color: #888888; font-size: 14px;">
-                      {% if post.author.rank != "нет ранга" %}
-                        <label>{{ post.author.rank }}</label>
-                      {% else %}
-                        <label>{{ post.author.privilege }}</label>
+                      <img class="sub-avatar" src="{{ post.author.avatar.url }}">
+                      {% if post.author.is_online == True %}
+                        <div class="online online-avatar-profile"></div>
                       {% endif %}
                     </div>
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        {% endif %}
-        {% if count_subscribers != 0 %}
-          <div class="frame-left-third">
-            <a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ count_subscribers }}</label> {% if count_subscribers == 1 %}подписчик{% elif count_subscribers > 1 and count_subscribers < 5%}подписчика{% elif count_subscribers > 4 %}подписчиков{% endif%}</a>
-            <div class="subs-left">
-              {% for post in subscribers %}
-                <div style="display: flex;" class="sub-users-div">
-                  <div>
-                    <img class="sub-avatar" src="{{ post.user.avatar.url }}">
-                    {% if post.user.is_online == True %}
-                      <div class="online online-avatar-profile"></div>
-                    {% endif %}
-                  </div>
-                  <div style="display: block; margin-left: 20px; max-width: 130px;">
-                    <a class="sub-users" href="{% url 'forum:profile' post.user.username %}">
-                      <div style="margin: 0 0 0 auto;">
-                        <label class="sub-username {% if post.user.username_style != 'gray-un' and post.user.rank != 'заблокирован' %}{{ post.user.username_style }}{% endif %}" {% if post.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if post.user.username == "root" %}style="color: red;"{% endif %}>{{ post.user.username }}</label>
-                      </div>
-                    </a>
-                    <div style="color: #888888; font-size: 13px;">
-                      {% if post.user.rank != "нет ранга" %}
-                        <label>{{ post.user.rank }}</label>
-                      {% else %}
-                        <label>{{ post.user.privilege }}</label>
-                      {% endif %}
-                    </div>
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        {% endif %}
-      </div>
-      <div style="display: block;">
-        <div class="frame-right-first">
-          <div style="display: flex; ">
-            <div style="margin: 0 auto 0 0; display: block;" class="frt">
-              <div>
-                <label class="{% if author.username_style != 'gray-un' and author.rank != 'заблокирован' %}{{ author.username_style }}{% else %}gray-un{% endif %}" {% if author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} {% if author.username == "root" %}style="color: red;"{% endif %}>{{ author.username }}</label>
-                {% if user != author %}
-                  {% if user.rank == "владелец" or user.rank == "гл. администратор" or user.rank == "администратор" or user.rank == "куратор" %}
-                    {% if author.rank != "нет ранга" %}
-                      <i class="fa-solid fa-gear fa-lg icon-sett"></i>
-                      <div class="user-sett">
-                        <a href="" class="window-button-second">Выдать мьют</a>
-                        <a href="" class="window-button-second">Выдать штрафные баллы</a>
-                        {% if user.rank != "куратор" %}
-                          {% if author.rank != "заблокирован" %}
-                            <a href="{% url 'forum:ban' author.username %}" class="window-button-second">Заблокировать</a>
-                          {% elif author.rank == "заблокирован" %}
-                            <a href="{% url 'forum:ban' author.username %}" class="window-button-second">Разблокировать</a>
-                          {% endif %}
+                    <div style="display: block; margin-left: 20px; max-width: 130px;">
+                      <a class="sub-users" href="{% url 'forum:profile' post.author.username %}">
+                        <div style="margin: 0 0 0 auto;">
+                          <label class="sub-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if post.author.username == "root" %}style="color: red;"{% endif %}>{{ post.author.username }}</label>
+                        </div>
+                      </a>
+                      <div style="color: #888888; font-size: 14px;">
+                        {% if post.author.rank != "нет ранга" %}
+                          <label>{{ post.author.rank }}</label>
+                        {% else %}
+                          <label>{{ post.author.privilege }}</label>
                         {% endif %}
                       </div>
-                    {% endif %}
-                  {% endif %}
-                {% endif %}
-              </div>
-              <div>
-                <label style="color: gray;">{{ author.description }}</label>
-              </div>
-            </div>
-            <div>
-              {% comment %} <label style="color: gray; display: flex;">Последнй онлайн {{ author.last_login }}</label> {% endcomment %}
-              <label style="color: gray; display: flex;">{% if author.is_online == True %}В сети{% elif author.is_online == False %}Не в сети{% endif %}</label>
-              {% comment %} |date:"d E / H:i" {% endcomment %}
-            </div>
-          </div>
-          <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-          <div>
-            <div style="display: flex;">
-              <div style="min-width: 165px; max-width: 165px;">
-                <label style="color: gray;">Регистрация: </label>
-              </div>
-              <div>
-                <label style="color: #ffffff;">{{ author.date_joined|date:'d E Y' }}</label><br>
-              </div>
-            </div>
-            {% if author.gender != 'Не выбрано' and author.gender != '' %}
-              <div style="display: flex;">
-                <div style="min-width: 165px; max-width: 165px;">
-                  <label style="color: gray;">Пол: </label>
-                </div>
-                <div>
-                  <label style="color: #ffffff;">{{ author.gender }}</label><br>
-                </div>
-              </div>
-            {% endif %}
-            {% if author.brt_day != None and author.brt_month != "Месяц" %}
-              <div style="display: flex;">
-                <div style="min-width: 165px; max-width: 165px;">
-                  <label style="color: gray;">День рождения: </label>
-                </div>
-                <div>
-                  {% if author.brt_year == None %}
-                    <label style="color: #ffffff;">{{ author.brt_month }}</label>
-                    <label style="color: #ffffff;">{{ author.brt_day }}</label>
-                  {% elif author.brt_year != "" %}
-                    <label style="color: #ffffff;">{{ author.brt_day }}</label>
-                    <label style="color: #ffffff;">{{ author.brt_month }}</label>
-                    <label style="color: #ffffff;">{{ author.brt_year }}</label>
-                  {% endif %}
-                </div>
-              </div>
-            {% endif %}
-            {% if author.occupation != '' %}
-              <div style="display: flex;">
-                <div style="min-width: 165px; max-width: 165px;">
-                  <label style="color: gray;">Род занятий: </label>
-                </div>
-                <div>
-                  <label style="color: #ffffff;">{{ author.occupation }}</label><br>
-                </div>
-              </div>
-            {% endif %}
-            {% if author.interests != '' %}
-              <div style="display: flex;">
-                <div style="min-width: 165px; max-width: 165px;">
-                  <label style="color: gray;">Интересы: </label>
-                </div>
-                <div>
-                  <label style="color: #ffffff;">{{ author.interests }}</label><br>
-                </div>
-              </div>
-            {% endif %}
-            {% if author.tg_link != '' %}
-              <div style="display: flex;">
-                <div style="min-width: 165px; max-width: 165px;">
-                  <label style="color: gray;">Telegram: </label>
-                </div>
-                <div>
-                  <label style="color: #ffffff;"><a href="https://t.me/{{ author.tg_link }}" class="profile-link" target="_blank">Открыть чат в телеграм</a> <i class="fa fa-clone" style="width: 15px; height: 15px;"></i></label><br>
-                </div>
-              </div>
-            {% endif %}
-            {% if author.rank == 'бот' %}<label style="color: red;">Данный профиль является системным и работает под управлением бота!{% endif %}</label>
-          </div>
-          <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-          <div style="display: flex;">
-            <label style="color: gray; margin: 0 30px 0 0;">Подписчики: <label style="color: #ff506f;">{{ count_subscribers }}</label></label><br>
-            <label style="color: gray; margin: 0 30px 0 0;">Подписок: <label style="color: #ff506f;">{{ count_subscriptions }}</label></label><br>
-            <label style="color: gray; margin: 0 30px 0 0;">Симпатии: <label style="color: #ff506f;">{{ author.likes }}</label></label><br>
-            <label style="color: gray;">Сообщения: <label style="color: #ff506f;">{{ author.comments.count }}</label></label><br>
-          </div>
-        </div>
-        <div class="frame-right-second">
-          {% comment %} <a data-tab="#userPosts" class="button-tools active-tab">Стена</a> {% endcomment %}
-          <a data-tab="#authorPosts" class="button-tools active-tab">Посты</a>
-          <a data-tab="#" class="button-tools">Жалобы</a>
-        </div>
-        {% comment %} {% if count_comments != 0 %}
-          <div id="userPosts" class="tabItem frame-right-third active-tab">
-            {% if user.is_authenticated %}
-              <div class="frame-right-third-posts">
-                <a href="{% url 'forum:profile' request.user %}"><img class="frame-main-avatar" style="width: 40px; height: 40px; margin: 0;" src="{{ user.avatar.url }}"></a>
-                <form method="post" enctype="multipart/form-data" action="{% url 'forum:add_comment_profile' author.username %}">
-                  {% csrf_token %}
-                  <div style="display: flex;">
-                    <div>
-                      {{ form.text|addclass:"field-comment" }}
-                    </div>
-                    <div>
-                      <button type="submit" style="background: #242527; border: none; cursor: pointer;"><img style="width: 40px;" src="{% static 'images/send.png' %}"></button>
                     </div>
                   </div>
-                </form>
-              </div>
-              <div>
-                {% for comments in profile_with_comments %}
-                  {{ comments.text }}
                 {% endfor %}
               </div>
-            {% endif %}
-          </div>
-        {% else %}
-          <div id="userPosts" class="tabItem frame-right-third active-tab">
-            <label style="color: #ffffff;">На стене пока ничего нет</label>
-          </div>
-        {% endif %} {% endcomment %}
-        {% if count_posts != 0 %}
-          <div id="authorPosts" class="tabItem frame-right-third active-tab">
-            {% for post in objects %}
-              <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">
-                <div class="text-frame post">
-                  <div class="text-frame-div" style="margin: 0 auto 0 0;">
-                    <label class="text-frame-title">{{ post.title }}</label><br>
-                    <label class="text-frame-text">{{ post.pub_date|date:"d E Y / H:i" }}</label>
+            </div>
+          {% endif %}
+          {% if count_subscribers != 0 %}
+            <div class="frame-left-third">
+              <a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ count_subscribers }}</label> {% if count_subscribers == 1 %}подписчик{% elif count_subscribers > 1 and count_subscribers < 5%}подписчика{% elif count_subscribers > 4 %}подписчиков{% endif%}</a>
+              <div class="subs-left">
+                {% for post in subscribers %}
+                  <div style="display: flex;" class="sub-users-div">
+                    <div>
+                      <img class="sub-avatar" src="{{ post.user.avatar.url }}">
+                      {% if post.user.is_online == True %}
+                        <div class="online online-avatar-profile"></div>
+                      {% endif %}
+                    </div>
+                    <div style="display: block; margin-left: 20px; max-width: 130px;">
+                      <a class="sub-users" href="{% url 'forum:profile' post.user.username %}">
+                        <div style="margin: 0 0 0 auto;">
+                          <label class="sub-username {% if post.user.username_style != 'gray-un' and post.user.rank != 'заблокирован' %}{{ post.user.username_style }}{% endif %}" {% if post.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if post.user.username == "root" %}style="color: red;"{% endif %}>{{ post.user.username }}</label>
+                        </div>
+                      </a>
+                      <div style="color: #888888; font-size: 13px;">
+                        {% if post.user.rank != "нет ранга" %}
+                          <label>{{ post.user.rank }}</label>
+                        {% else %}
+                          <label>{{ post.user.privilege }}</label>
+                        {% endif %}
+                      </div>
+                    </div>
                   </div>
-                  <div class="avatar-username">
-                    <img class="user-avatar" src="{{ post.author.avatar.url }}">
-                    <label class="text-frame-username {% if author.username_style != 'gray-un' and author.rank != 'заблокирован' %}{{ author.username_style }}{% endif %}" {% if author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        <div style="display: block;">
+          <div class="frame-right-first">
+            <div style="display: flex; ">
+              <div style="margin: 0 auto 0 0; display: block;" class="frt">
+                <div>
+                  <label class="{% if author.username_style != 'gray-un' and author.rank != 'заблокирован' %}{{ author.username_style }}{% else %}gray-un{% endif %}" {% if author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} {% if author.username == "root" %}style="color: red;"{% endif %}>{{ author.username }}</label>
+                  {% if user != author %}
+                    {% if user.rank == "владелец" or user.rank == "гл. администратор" or user.rank == "администратор" or user.rank == "куратор" %}
+                      {% if author.rank != "нет ранга" %}
+                        <i class="fa-solid fa-gear fa-lg icon-sett"></i>
+                        <div class="user-sett">
+                          <a href="" class="window-button-second">Выдать мьют</a>
+                          <a href="" class="window-button-second">Выдать штрафные баллы</a>
+                          {% if user.rank != "куратор" %}
+                            {% if author.rank != "заблокирован" %}
+                              <a href="{% url 'forum:ban' author.username %}" class="window-button-second">Заблокировать</a>
+                            {% elif author.rank == "заблокирован" %}
+                              <a href="{% url 'forum:ban' author.username %}" class="window-button-second">Разблокировать</a>
+                            {% endif %}
+                          {% endif %}
+                        </div>
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+                </div>
+                <div>
+                  <label style="color: gray;">{{ author.description }}</label>
+                </div>
+              </div>
+              <div>
+                {% comment %} <label style="color: gray; display: flex;">Последнй онлайн {{ author.last_login }}</label> {% endcomment %}
+                <label style="color: gray; display: flex;">{% if author.is_online == True %}В сети{% elif author.is_online == False %}Не в сети{% endif %}</label>
+                {% comment %} |date:"d E / H:i" {% endcomment %}
+              </div>
+            </div>
+            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            <div>
+              <div style="display: flex;">
+                <div style="min-width: 165px; max-width: 165px;">
+                  <label style="color: gray;">Регистрация: </label>
+                </div>
+                <div>
+                  <label style="color: #ffffff;">{{ author.date_joined|date:'d E Y' }}</label><br>
+                </div>
+              </div>
+              {% if author.gender != 'Не выбрано' and author.gender != '' %}
+                <div style="display: flex;">
+                  <div style="min-width: 165px; max-width: 165px;">
+                    <label style="color: gray;">Пол: </label>
+                  </div>
+                  <div>
+                    <label style="color: #ffffff;">{{ author.gender }}</label><br>
                   </div>
                 </div>
-              </a>
-            {% endfor %}
-            {% include '../includes/paginator.html' %}
+              {% endif %}
+              {% if author.brt_day != None and author.brt_month != "Месяц" %}
+                <div style="display: flex;">
+                  <div style="min-width: 165px; max-width: 165px;">
+                    <label style="color: gray;">День рождения: </label>
+                  </div>
+                  <div>
+                    {% if author.brt_year == None %}
+                      <label style="color: #ffffff;">{{ author.brt_month }}</label>
+                      <label style="color: #ffffff;">{{ author.brt_day }}</label>
+                    {% elif author.brt_year != "" %}
+                      <label style="color: #ffffff;">{{ author.brt_day }}</label>
+                      <label style="color: #ffffff;">{{ author.brt_month }}</label>
+                      <label style="color: #ffffff;">{{ author.brt_year }}</label>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+              {% if author.occupation != '' %}
+                <div style="display: flex;">
+                  <div style="min-width: 165px; max-width: 165px;">
+                    <label style="color: gray;">Род занятий: </label>
+                  </div>
+                  <div>
+                    <label style="color: #ffffff;">{{ author.occupation }}</label><br>
+                  </div>
+                </div>
+              {% endif %}
+              {% if author.interests != '' %}
+                <div style="display: flex;">
+                  <div style="min-width: 165px; max-width: 165px;">
+                    <label style="color: gray;">Интересы: </label>
+                  </div>
+                  <div>
+                    <label style="color: #ffffff;">{{ author.interests }}</label><br>
+                  </div>
+                </div>
+              {% endif %}
+              {% if author.tg_link != '' %}
+                <div style="display: flex;">
+                  <div style="min-width: 165px; max-width: 165px;">
+                    <label style="color: gray;">Telegram: </label>
+                  </div>
+                  <div>
+                    <label style="color: #ffffff;"><a href="https://t.me/{{ author.tg_link }}" class="profile-link" target="_blank">Открыть чат в телеграм</a> <i class="fa fa-clone" style="width: 15px; height: 15px;"></i></label><br>
+                  </div>
+                </div>
+              {% endif %}
+              {% if author.rank == 'бот' %}<label style="color: red;">Данный профиль является системным и работает под управлением бота!{% endif %}</label>
+            </div>
+            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            <div style="display: flex;">
+              <label style="color: gray; margin: 0 30px 0 0;">Подписчики: <label style="color: #ff506f;">{{ count_subscribers }}</label></label><br>
+              <label style="color: gray; margin: 0 30px 0 0;">Подписок: <label style="color: #ff506f;">{{ count_subscriptions }}</label></label><br>
+              <label style="color: gray; margin: 0 30px 0 0;">Симпатии: <label style="color: #ff506f;">{{ author.likes }}</label></label><br>
+              <label style="color: gray;">Сообщения: <label style="color: #ff506f;">{{ author.comments.count }}</label></label><br>
+            </div>
           </div>
-        {% else %}
-          <div id="authorPosts" class="tabItem frame-right-third active-tab">
-            <label style="color: #ffffff;">У пользователя нет постов</label>
+          <div class="frame-right-second">
+            <a data-tab="#userPosts" class="button-tools active-tab">Стена</a>
+            <a data-tab="#authorPosts" class="button-tools">Посты</a>
+            {% comment %} <a data-tab="#" class="button-tools">Жалобы</a> {% endcomment %}
           </div>
-        {% endif %}
+          <div id="userPosts" class="tabItem profile-comment-active active-tab">
+            <div class="frame-right-third" style="display: block;">
+              {% if user.is_authenticated %}
+                <div class="frame-right-third-posts">
+                  <a href="{% url 'forum:profile' request.user %}"><img class="frame-main-avatar" style="width: 60px; height: 60px; margin-right: 15px;" src="{{ user.avatar.url }}"></a>
+                  <form method="post" action="{% url 'forum:profile' request.user %}">
+                    {% csrf_token %}
+                    <div>
+                      <div>
+                        <textarea name="text" id="id_text" class="field" style="max-height: 25px; max-width: 800px; margin-bottom: 10px; background: #303030;" placeholder="Напишите что-нибудь..."></textarea>
+                      </div>
+                      <div>
+                        <button type="submit" class="button-level" style="padding: 5px 25px;">Опубликовать</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              {% endif %}
+            </div>
+            {% if profile_comments.count != 0 %}
+              {% for comment in profile_comments %}
+                <div class="frame-right-third" style="display: block;">
+                  <div class="frame-right-third-posts">
+                    <a href="{% url 'forum:profile' comment.author %}"><img class="frame-main-avatar" style="width: 50px; height: 50px; margin-right: 15px;" src="{{ comment.author.avatar.url }}"></a>
+                    <div>
+                      <div>
+                        <label class="{% if comment.author.username_style != 'gray-un' and comment.author.rank != 'заблокирован' %}{{ comment.author.username_style }}{% else %}gray-un{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} {% if comment.author.username == "root" %}style="color: red;"{% endif %}>{{ comment.author.username }}</label>
+                      </div>
+                      <div>
+                        <label style="color: #555555; font-weight: bold;">{{ comment.created|date:'d E Y / H:i' }}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="margin-top: 10px;">
+                    <label class="profile-comment-label">{{ comment.text }}</label>
+                  </div>
+                </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+          {% if count_posts != 0 %}
+            <div id="authorPosts" class="tabItem frame-right-third">
+              {% for post in objects %}
+                <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">
+                  <div class="text-frame post">
+                    <div class="text-frame-div" style="margin: 0 auto 0 0;">
+                      <label class="text-frame-title">{{ post.title }}</label><br>
+                      <label class="text-frame-text">{{ post.pub_date|date:"d E Y / H:i" }}</label>
+                    </div>
+                    <div class="avatar-username">
+                      <img class="user-avatar" src="{{ post.author.avatar.url }}">
+                      <label class="text-frame-username {% if author.username_style != 'gray-un' and author.rank != 'заблокирован' %}{{ author.username_style }}{% endif %}" {% if author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>
+                    </div>
+                  </div>
+                </a>
+              {% endfor %}
+              {% include '../includes/paginator.html' %}
+            </div>
+          {% else %}
+            <div id="authorPosts" class="tabItem frame-right-third">
+              <label style="color: #ffffff;">У пользователя нет постов</label>
+            </div>
+          {% endif %}
+        </div>
       </div>
     </div>
-  </div>
-  <script type="text/javascript" src="{% static 'js/profile.js' %}"></script>
-</body>
+    <script type="text/javascript" src="{% static 'js/profile.js' %}"></script>
+  </body>
 {% endblock %}

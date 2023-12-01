@@ -27,6 +27,7 @@ class SignUpView(View):
             return redirect('users:activation')
         return render(request, 'users/signup.html', {'form': form})
 
+
 class ActivationView(View):
     def get(self, request):
         return render(request, 'users/activation.html')

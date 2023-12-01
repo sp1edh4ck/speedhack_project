@@ -336,3 +336,15 @@
   width: 8px;
   height: 8px;
 }
+
+.profile-comment-label {
+  color: #ffffff;
+}
+
+.profile-comment-active {
+  display: none;
+}
+
+.profile-comment-active.active-tab {
+  display: block;
+}

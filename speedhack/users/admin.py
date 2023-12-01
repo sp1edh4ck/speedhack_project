@@ -48,7 +48,6 @@ class CustomUserAdmin(UserAdmin):
         ('Important dates', {'fields': ('last_login', 'date_joined',)}),
         ('Additional fields', {'fields': ('avatar', 'profile_background',)})
     )
-
     list_display = (
         'username',
         'email',
@@ -58,7 +57,6 @@ class CustomUserAdmin(UserAdmin):
         'tg_link',
         'rank',
     )
-
     list_filter = (
         'rank',
         'is_staff',
@@ -83,11 +81,9 @@ class IpUsersAdmin(UserAdmin):
             )}
         ),
     )
-
     list_display = (
         'user',
     )
-
     list_filter = (
         'user',
     )

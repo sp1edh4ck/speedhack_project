@@ -43,7 +43,7 @@ class CommentForm(forms.ModelForm):
 class ProfileCommentForm(forms.ModelForm):
     class Meta:
         model = ProfileComment
-        fields = ('text', 'profile', 'image',)
+        fields = ('profile', 'author', 'text',)
 
 
 class DepositForm(forms.ModelForm):

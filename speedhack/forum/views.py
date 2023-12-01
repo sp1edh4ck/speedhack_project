@@ -9,16 +9,7 @@ from users.forms import UserProfileForm
 from users.models import CustomUser, IpUser
 
 from .forms import ProfileCommentForm, CommentForm, PostForm, DepositForm, HelpForm, AnswerForm, AdsForm
-from .models import Follow, Forum, User, Group, Comment, Viewers, HelpForum, Helpers, Ads
-
-
-def get_client_ip(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    return ip
+from .models import Follow, Forum, User, Group, Comment, Viewers, HelpForum, Helpers, Ads, ProfileComment
 
 
 def pagination_post(request, post_list):
@@ -117,7 +108,16 @@ def group_free(request, slug):
 @ratelimit(key='ip', rate='50/m')
 def profile(request, username):
     author = get_object_or_404(User, username=username)
+    form = ProfileCommentForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.profile = author
+            comment.author = request.user
+            comment.save()
+            return redirect('forum:profile', username=username)
     posts = author.posts.all()
+    profile_comments = ProfileComment.objects.filter(profile=author)
     subscriptions = author.follower.all()
     subscribers = author.following.all()
     following = (
@@ -129,9 +129,11 @@ def profile(request, username):
     count_subscriptions = subscriptions.count()
     count_subscribers = subscribers.count()
     context = {
+        'form': form,
         'author': author,
         'following': following,
         'count_posts': count_posts,
+        'profile_comments': profile_comments,
         'count_subscriptions': count_subscriptions,
         'count_subscribers': count_subscribers,
         'objects': pagination_post(request, posts),
@@ -266,11 +268,13 @@ def upgrade(request, username, number):
 def add_comment_profile(request, username):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
+    author = get_object_or_404(User, username=username)
     form = ProfileCommentForm(request.POST or None)
     if form.is_valid():
-        comment = form.save(commit=False)
-        comment.author = request.user
-        comment.save()
+        form = form.save(commit=False)
+        form.profile = author
+        form.author = request.user
+        form.save()
     return redirect('forum:profile', username=username)
 
 
@@ -546,17 +550,16 @@ def ticket(request, ticket_id):
 @ratelimit(key='ip', rate='50/m')
 @login_required
 def add_answer(request, ticket_id):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
     ticket = get_object_or_404(HelpForum, pk=ticket_id)
     if ticket.open:
-        if request.user.rank == "заблокирован":
-            return banned_redirect(request)
         form = AnswerForm(request.POST or None)
         if form.is_valid():
             answer = form.save(commit=False)
             answer.author = request.user
             answer.ticket = ticket
             answer.save()
-            return redirect('forum:ticket', ticket_id=ticket_id)
     return redirect('forum:ticket', ticket_id=ticket_id)
 
 
