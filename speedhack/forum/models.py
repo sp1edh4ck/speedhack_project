@@ -93,10 +93,6 @@ class Forum(models.Model):
         upload_to='posts/',
         blank=True,
     )
-    ad = models.BooleanField(
-        default=False,
-        verbose_name='Реклама',
-    )
     closed = models.BooleanField(
         default=False,
         verbose_name='Закрытая тема',
@@ -293,16 +289,16 @@ class Follow(models.Model):
         ]
 
 
-class Favourites(models.Model):
-    post = models.ForeignKey(
-        Forum,
-        on_delete=models.CASCADE,
-    )
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-    )
+# class Favourites(models.Model):
+#     post = models.ForeignKey(
+#         Forum,
+#         on_delete=models.CASCADE,
+#     )
+#     user = models.ForeignKey(
+#         User,
+#         on_delete=models.CASCADE,
+#     )
 
-    class Meta:
-        verbose_name = 'Избранное'
-        verbose_name_plural = 'Избранное'
+#     class Meta:
+#         verbose_name = 'Избранное'
+#         verbose_name_plural = 'Избранное'
