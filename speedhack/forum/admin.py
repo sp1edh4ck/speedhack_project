@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import ProfileComment, Comment, Forum, Group, Viewers, HelpForum, Helpers, Ads, Favourites
+from .models import ProfileComment, Comment, Forum, Group, Viewers, HelpForum, Helpers, Ads
 
 
 class ForumAdmin(admin.ModelAdmin):
