@@ -63,15 +63,12 @@ class Helpers(models.Model):
 
 class Ads(models.Model):
     title = models.CharField(verbose_name='Заголовок', max_length=100)
-    description = models.TextField(verbose_name='Текст', max_length=5000)
-    pub_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
-    weeks = models.IntegerField(verbose_name='Оплаченных недель')
-    author = models.CharField(verbose_name='Автор', max_length=15)
+    post_id = models.CharField(verbose_name='Ссылка', max_length=10)
+    weeks = models.IntegerField(verbose_name='Кол-во оплаченных недель')
 
     class Meta:
         verbose_name = 'Рекламный пост'
         verbose_name_plural = 'Рекламные посты'
-        ordering = ('-pub_date',)
 
 
 class Forum(models.Model):
@@ -96,6 +93,10 @@ class Forum(models.Model):
         upload_to='posts/',
         blank=True,
     )
+    ad = models.BooleanField(
+        default=False,
+        verbose_name='Реклама',
+    )
     closed = models.BooleanField(
         default=False,
         verbose_name='Закрытая тема',
@@ -108,7 +109,7 @@ class Forum(models.Model):
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
-        ordering = ('-pub_date',)
+        ordering = ('-ad', '-pub_date',)
 
     def __str__(self):
         number_of_chars = 15
@@ -290,3 +291,18 @@ class Follow(models.Model):
                 name='unique_name_in_subsciber',
             )
         ]
+
+
+class Favourites(models.Model):
+    post = models.ForeignKey(
+        Forum,
+        on_delete=models.CASCADE,
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+
+    class Meta:
+        verbose_name = 'Избранное'
+        verbose_name_plural = 'Избранное'

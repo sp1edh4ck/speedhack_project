@@ -26,22 +26,16 @@
                 <input type="text" name="title" id="id_title" class="field field-height" style="max-width: 650px; max-height: 36px; padding: 0 7px 0 7px;" placeholder="Заголовок..." maxlength="70">
               </div>
             </div>
-            <div class="ticket-div" style="max-height: 150px; margin-bottom: 0;">
-              <label class="ads-label">Описание:</label>
+            <div class="ticket-div" style="max-height: 55px; margin-bottom: 0;">
+              <label class="ads-label">ID поста:</label>
               <div>
-                {{ form.description|addclass:"field ads-description" }}
+                <input type="integer" name="post_id" id="id_post_id" class="field field-height" style="max-width: 100px; max-height: 36px; padding: 0 7px 0 7px;" placeholder="ID..." maxlength="70">
               </div>
             </div>
             <div class="ticket-div" style="min-height: 80px; margin-bottom: 0;">
               <label class="ads-label">Длительность в неделях:</label>
               <div>
                 <input type="number" name="weeks" id="id_weeks" class="field field-height" style="max-width: 250px; max-height: 36px; padding: 0 7px 0 7px;" placeholder="Длительность..." maxlength="5">
-              </div>
-            </div>
-            <div class="ticket-div" style="max-height: 55px; margin-bottom: 0;">
-              <label class="ads-label">Автор:</label>
-              <div>
-                <input type="text" name="author" id="id_author" class="field field-height" style="max-width: 270px; max-height: 36px; padding: 0 7px 0 7px;" placeholder="Автор..." maxlength="15">
               </div>
             </div>
             <button type="submit" class="button-level" style="margin-left: 210px; margin-top: 0;">Создать обращение</button>
@@ -57,9 +51,9 @@
                       <img style="width: 40px; border-radius: 10px;" src="{{ ad.author.avatar.url }}">
                     </div>
                     <div style="margin: 0 auto 0 0;">
-                      <a href="{% url 'forum:profile' ad.author %}" class="admin-link">
+                      {% comment %} <a href="{% url 'forum:profile' ad.author %}" class="admin-link">
                         <label class="users-username" {% if ad.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ ad.author }}</label>
-                      </a>
+                      </a> {% endcomment %}
                     </div>
                     <div class="admin-btn">
                       <a class="admin-button" href="">Открыть</a>

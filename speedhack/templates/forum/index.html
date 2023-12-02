@@ -29,13 +29,15 @@
             {% if ads.count != 0 %}
               <div style="margin: 20px 0 20px 0;">
                 {% for ad in ads %}
-                  <div class="li-label-ad" style="font-size: 16px;">
-                    <i class="fa-solid fa-bullhorn" style="color: #515151; margin-right: 15px;"></i><label style="color: #ff506f; cursor: pointer;">{{ ad.title }}</label>
-                  </div>
+                  <a style="text-decoration: none;" href="{% url 'forum:post_detail' ad.post_id %}">
+                    <div class="li-label-ad" style="font-size: 16px;">
+                      <i class="fa-solid fa-bullhorn" style="color: #515151; margin-right: 15px;"></i><label style="color: #ff506f; cursor: pointer;">{{ ad.title }}</label>
+                    </div>
+                  </a>
                 {% endfor %}
               </div>
             {% else %}
-              <hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;">
+              <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
             {% endif %}
             {% comment %} <div class="search-header search-header-else">
               <div>

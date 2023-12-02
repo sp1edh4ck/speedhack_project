@@ -151,3 +151,10 @@ media/
 static/
 
 /speedhack/cache/
+/speedhack/forum/migrations/
+/speedhack/market/migrations/
+/speedhack/users/migrations/
+
+/speedhack/forum/__pycache__/
+/speedhack/market/__pycache__/
+/speedhack/users/__pycache__/

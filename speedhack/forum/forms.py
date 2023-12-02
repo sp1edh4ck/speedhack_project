@@ -31,7 +31,7 @@ class AnswerForm(forms.ModelForm):
 class AdsForm(forms.ModelForm):
     class Meta:
         model = Ads
-        fields = ('title', 'description', 'weeks', 'author',)
+        fields = ('title', 'post_id', 'weeks',)
 
 
 class CommentForm(forms.ModelForm):

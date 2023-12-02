@@ -74,8 +74,10 @@ def my_topics(request):
     else:
         posts = user.posts.all()
     count_posts = posts.count()
+    ads = Ads.objects.all()
     context = {
         'count_posts': count_posts,
+        'ads': ads,
         'objects': pagination_post(request, posts)
     }
     return render(request, 'forum/index.html', context)
@@ -415,7 +417,8 @@ def post_delete(request, post_id):
         or request.user.rank == "администратор"
         or request.user.rank == "бот"
         or request.user.rank == "главный арбитр"
-        or request.user.rank == "куратор"):
+        or request.user.rank == "куратор"
+        or request.user.username == post.author):
         Forum.objects.filter(pk=post_id).delete()
         return redirect('forum:successfully')
 

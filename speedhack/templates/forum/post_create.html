@@ -43,7 +43,7 @@
                 <label style="color: #444444; font-size: 20px; height: 40px;">(напишите ваш пост)</label>
               </div>
               {{ field|addclass:"field" }}
-            {% else %}
+            {% elif field.label == "Картинка" %}
               <div style="display: flex;">
                 <label class="field-label">{{ field.label }}</label>
                 <label style="color: #444444; font-size: 20px; height: 40px;">(вставьте картинку по желанию)</label>
@@ -59,6 +59,12 @@
                   $(this).closest('.input-file').find('.input-file-text').html(file.name);
                 });
               </script>
+            {% else %}
+              <div style="display: flex;">
+                <label class="field-label">{{ field.label }}</label>
+                <label style="color: #444444; font-size: 20px; height: 40px;">(напишите ваш пост)</label>
+              </div>
+              {{ field|addclass:"field" }}
             {% endif %}
           {% endfor %}
           <button type="submit" class="button-level">
