@@ -105,7 +105,7 @@ class Forum(models.Model):
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
-        ordering = ('-ad', '-pub_date',)
+        ordering = ('-pub_date',)
 
     def __str__(self):
         number_of_chars = 15
