@@ -53,11 +53,11 @@ class AdsAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
-class FavouriteAdmin(admin.ModelAdmin):
-    list_display = (
-        'post',
-        'user',
-    )
+# class FavouriteAdmin(admin.ModelAdmin):
+#     list_display = (
+#         'post',
+#         'user',
+#     )
 
 
 class GroupAdmin(admin.ModelAdmin):
@@ -75,7 +75,7 @@ admin.site.register(Helpers, HelpersAdmin)
 admin.site.register(HelpForum, HelpForumAdmin)
 admin.site.register(Ads, AdsAdmin)
 admin.site.register(Group, GroupAdmin)
-admin.site.register(Favourites, FavouriteAdmin)
+# admin.site.register(Favourites, FavouriteAdmin)
 admin.site.register(Comment)
 admin.site.register(ProfileComment)
 admin.site.register(Viewers)
