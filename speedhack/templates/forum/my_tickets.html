@@ -32,8 +32,8 @@
             {% if not forloop.last %}<hr class="admin-hr">{% endif %}
           {% endfor %}
         {% else %}
-          <div style="margin: 0px 0 0 20px;" id="tickets_open">
-            <label style="color: #ffffff; font-size: 18px;">Вы ещё не создали ни одного тикета</label>
+          <div style="margin: 0px 0 0 20px; text-align: center;" id="tickets_open">
+            <label style="color: #515151; font-size: 18px; font-weight: bold;">Вы ещё не создали ни одного тикета <a href="{% url 'forum:ticket_form' %}" class="link-tap">*создать*</a></label>
           </div>
         {% endif %}
       </div>

@@ -26,3 +26,14 @@
   max-width: 830px;
   padding-left: 7px;
 }
+
+.link-tap {
+  cursor: pointer;
+  color: #515151;
+  text-decoration: none;
+  transition: 0.5s ease 0s;
+}
+
+.link-tap:hover {
+  color: #ff506f;
+}

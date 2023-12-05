@@ -53,6 +53,14 @@
   text-shadow: 0 0 5px #00ffcf80;
 }
 
+.melt-white {
+  background: -webkit-linear-gradient(1deg, #FFF 49%, #2f3030 98%);
+  -webkit-text-fill-color: transparent;
+  text-shadow: 3px 2px 3px rgba(25,55,55,.2), 3px 2px 3px rgba(255,255,255,.2), 5px 2px 3px rgb(255 255 255 / 7%);
+  -webkit-background-clip: text;
+  font-weight: bold;
+}
+
 .black-style {
   color: #000000;
   text-shadow: 0px 1px 1px #000000, 0px 0px 2px #000000, 0px 0px 0px #000000, 0px 0px 0px #000000, 0px 0px 0px #000000, 0px 0px 0px #000000, 0px 0px 0px #000000, 0px 0px 0px #000000;

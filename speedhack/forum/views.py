@@ -111,13 +111,12 @@ def group_free(request, slug):
 def profile(request, username):
     author = get_object_or_404(User, username=username)
     form = ProfileCommentForm(request.POST or None)
-    if request.method == 'POST':
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.profile = author
-            comment.author = request.user
-            comment.save()
-            return redirect('forum:profile', username=username)
+    if form.is_valid():
+        form = form.save(commit=False)
+        form.profile = author
+        form.author = request.user
+        form.save()
+        return redirect('forum:profile', username=author)
     posts = author.posts.all()
     profile_comments = ProfileComment.objects.filter(profile=author)
     subscriptions = author.follower.all()
@@ -262,21 +261,6 @@ def upgrade(request, username, number):
         user.balance -= 7500
         user.time_buy_privilege = timezone.now()
         user.save()
-    return redirect('forum:profile', username=username)
-
-
-@ratelimit(key='ip', rate='50/m')
-@login_required
-def add_comment_profile(request, username):
-    if request.user.rank == "заблокирован":
-        return banned_redirect(request)
-    author = get_object_or_404(User, username=username)
-    form = ProfileCommentForm(request.POST or None)
-    if form.is_valid():
-        form = form.save(commit=False)
-        form.profile = author
-        form.author = request.user
-        form.save()
     return redirect('forum:profile', username=username)
 
 

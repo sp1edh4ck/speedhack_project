@@ -41,7 +41,6 @@ urlpatterns = [
     path('ticket/<int:ticket_id>/comment/', views.add_answer, name='add_answer'),
     path('admin-panel/<str:username>/ban/', views.admin_ban, name='admin_ban'),
     path('users/', views.users, name='users'),
-    path('profile/<str:username>/comment/', views.add_comment_profile, name='add_comment_profile'),
     path('profile/<str:username>/follow/', views.profile_follow, name='profile_follow'),
     path('profile/<str:username>/unfollow/', views.profile_unfollow, name='profile_unfollow'),
     path('guarantor/', views.guarantor, name='guarantor'),

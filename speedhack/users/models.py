@@ -65,6 +65,7 @@ BUY_PRIVILEGE = [
 USERNAME_STYLE = [
     ("gray-un", ".gray-un"),
     ("white-shadow-un", ".white-shadow-un"),
+    ("melt-white", ".melt-white"),
     ("purple-white-un", ".purple-white-un"),
     ("grad-wb-un", ".grad-wb-un"),
     ("red-shadow-un", ".red-shadow-un"),
