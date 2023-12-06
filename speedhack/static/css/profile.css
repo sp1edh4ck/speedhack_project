@@ -15,7 +15,7 @@
 }
 
 .frame-left-second {
-  color: #ffffff;
+  color: #d6d6d6;
   display: block;
   margin-top: 15px;
   width: 200px;
@@ -25,7 +25,7 @@
 }
 
 .subs-a {
-  color: #ffffff;
+  color: #d6d6d6;
   text-decoration: none;
   transition: all 0.5s ease 0s;
 }
@@ -88,18 +88,37 @@
   transition: background 0.5s ease 0s;
 }
 
+.button-edit:hover {
+  background: #ff6b86;
+}
+
+.edit-fix-back-1 {
+  background: #363636;
+  transition: 0.5s ease 0s;
+}
+
+.edit-fix-back-1:hover {
+  background: #292929;
+}
+
+.edit-fix-back-2 {
+  background: #884444;
+  transition: 0.5s ease 0s;
+}
+
+.edit-fix-back-2:hover {
+  background: #ea4c4c;
+}
+
+
 .profile-link {
-  color: #ffffff;
+  color: #d6d6d6;
   text-decoration: none;
   transition: all 0.5s ease 0s;
 }
 
 .profile-link:hover {
   color: #ff506f;
-}
-
-.button-edit:hover {
-  background: #ff6b86;
 }
 
 .profile-avatar {
@@ -110,7 +129,7 @@
 }
 
 .frame-left-third {
-  color: #ffffff;
+  color: #d6d6d6;
   display: block;
   margin-top: 15px;
   width: 200px;
@@ -140,7 +159,7 @@
 }
 
 .button-tools {
-  color: #ffffff;
+  color: #d6d6d6;
   cursor: pointer;
   text-decoration: none;
   margin-right: 30px;
@@ -190,7 +209,7 @@
 }
 
 .modal-content {
-  color: #ffffff;
+  color: #d6d6d6;
   background: #242424;
   margin: 100px auto auto auto;
   padding: 20px;
@@ -204,7 +223,7 @@
 }
 
 .close {
-  color: #ffffff;
+  color: #d6d6d6;
   position: absolute;
   margin-left: 713px;
   float: right;
@@ -226,7 +245,7 @@
   margin: 0 5px 0 20px;
   background: #222222;
   border: 3px solid #444444;
-  color: #ffffff;
+  color: #d6d6d6;
   outline: none;
   padding: 7px 10px 10px 10px;
   width: 850px;
@@ -287,7 +306,7 @@
 
 .save-dep-link {
   text-decoration: none;
-  color: #ffffff;
+  color: #d6d6d6;
   min-width: 34px;
   padding: 0 10px;
   height: 34px;
@@ -317,7 +336,7 @@
   max-width: 220px;
   font-size: 16px;
   background: #202020b6;
-  color: #ffffff;
+  color: #d6d6d6;
   outline: none;
   border-radius: 10px;
   height: 30px;
@@ -338,7 +357,7 @@
 }
 
 .profile-comment-label {
-  color: #ffffff;
+  color: #d6d6d6;
 }
 
 .profile-comment-active {

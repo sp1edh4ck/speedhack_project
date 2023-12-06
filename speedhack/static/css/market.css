@@ -11,7 +11,7 @@
   font-size: 16px;
   font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
   margin: 0 auto 0 auto;
-  color: #ffffff;
+  color: #d6d6d6;
   background: #ff506f;
   text-decoration: none;
   border-radius: 10px;
@@ -66,7 +66,7 @@
   padding: 20px;
   margin-left: 20px;
   border-radius: 10px;
-  color: #ffffff;
+  color: #d6d6d6;
   width: 870px;
 }
 
@@ -75,7 +75,7 @@
   text-align: center;
   padding: 2px 7px 5px 7px;
   background: #ff506f;
-  color: #ffffff;
+  color: #d6d6d6;
   height: 20px;
   border-radius: 10px;
 }
@@ -97,7 +97,7 @@
   padding: 20px;
   margin-left: 15px;
   border-radius: 10px;
-  color: #ffffff;
+  color: #d6d6d6;
   width: 875px;
 }
 
@@ -113,7 +113,7 @@
 
 .market-ls {
   background: #505050;
-  color: #ffffff;
+  color: #d6d6d6;
   display: block;
   cursor: pointer;
   font-size: 16px;
@@ -133,7 +133,7 @@
 .market-acc-btn {
   margin: 10px 10px 0 0;
   background: #ff506f;
-  color: #ffffff;
+  color: #d6d6d6;
   display: block;
   cursor: pointer;
   font-size: 16px;
@@ -170,7 +170,7 @@
 }
 
 .mll-fix:hover {
-  color: #ffffff;
+  color: #d6d6d6;
   cursor: default;
   background: none;
 }
@@ -193,12 +193,12 @@
 
 .frame-market-rules {
   display: flex;
-  color: #ffffff;
+  color: #d6d6d6;
   width: 1300px;
 }
 
 .market-rules {
-  color: #ffffff;
+  color: #d6d6d6;
   padding: 20px;
   border-radius: 10px;
   background: #242424b6;
@@ -214,7 +214,7 @@
 }
 
 .link-sell {
-  color: #ffffff;
+  color: #d6d6d6;
   text-decoration: none;
   transition: all 0.5s ease 0s;
 }
@@ -270,7 +270,7 @@
   display: block;
   margin: 20px 0 0 15px;
   padding: 20px;
-  color: #ffffff;
+  color: #d6d6d6;
   background: #242424b6;
   border-radius: 10px;
 }
@@ -278,7 +278,7 @@
 .div-market-accs {
   padding: 20px;
   background: #242424b6;
-  color: #ffffff;
+  color: #d6d6d6;
   margin-left: 20px;
   border-radius: 10px;
   min-width: 870px;
@@ -286,7 +286,7 @@
 
 .a-buyer {
   cursor: pointer;
-  color: #ffffff;
+  color: #d6d6d6;
   text-decoration: none;
   transition: 0.5s;
 }

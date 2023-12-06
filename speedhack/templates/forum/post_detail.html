@@ -37,9 +37,9 @@
                   <div class="window-other" style="right: 0;">
                     <a href="{% url 'forum:post_edit' post.id %}" class="window-button-second">Редактировать запись</a>
                     {% if post.closed == False %}
-                      <a href="{% url 'forum:post_close' post.id %}" class="window-button-second">Закрыть тему</a>
-                    {% elif post.closed == True and user.rank == "владелец" or user.rank == "гл. администратор" or .user.rank == "администратор" or user.rank == "арбитр" or user.rank == "куратор" %}
-                      <a href="{% url 'forum:post_open' post.id %}" class="window-button-second">Открыть тему</a>
+                      <a href="{% url 'forum:post_oc' post.id 1 %}" class="window-button-second">Закрыть тему</a>
+                    {% elif post.closed == True and user.rank_lvl >= "5" %}
+                      <a href="{% url 'forum:post_oc' post.id 2 %}" class="window-button-second">Открыть тему</a>
                     {% endif %}
                     <a href="{% url 'forum:post_delete' post.id %}" class="window-button-second">Удалить пост</a>
                   </div>
@@ -183,7 +183,7 @@
                     {{ form.text|addclass:"field-detail" }}
                   </div>
                   <div>
-                    <button type="submit" style="background: #ffffff00; border: none; cursor: pointer;"><i class="fab fa-telegram-plane icons-post-detail"></i></button>
+                    <button type="submit" style="background: #d6d6d600; border: none; cursor: pointer;"><i class="fab fa-telegram-plane icons-post-detail"></i></button>
                   </div>
                 </div>
               </div>

@@ -18,11 +18,11 @@
 
 .button-list:hover {
   background: #ff506f;
-  color: #ffffff;
+  color: #d6d6d6;
 }
 
 .faq-tech-ques {
-  color: #ffffff;
+  color: #d6d6d6;
 }
 
 .faq-tech-answer {
@@ -46,6 +46,6 @@
 
 .button-list__active {
   cursor: default;
-  color: #ffffff;
+  color: #d6d6d6;
   background: #ff506f;
 }

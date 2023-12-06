@@ -287,20 +287,16 @@ def post_detail(request, post_id):
 
 @ratelimit(key='ip', rate='50/m')
 @login_required
-def post_close(request, post_id):
+def post_oc(request, post_id, number):
     post = get_object_or_404(Forum, id=post_id)
-    post.closed = True
-    post.save()
-    return redirect('forum:post_detail', post_id=post_id)
-
-
-@ratelimit(key='ip', rate='50/m')
-@login_required
-def post_open(request, post_id):
-    post = get_object_or_404(Forum, id=post_id)
-    post.closed = False
-    post.save()
-    return redirect('forum:post_detail', post_id=post_id)
+    if number == 1:
+        post.closed = True
+        post.save()
+        return redirect('forum:post_detail', post_id=post_id)
+    elif number == 2:
+        post.closed = False
+        post.save()
+        return redirect('forum:post_detail', post_id=post_id)
 
 
 @ratelimit(key='ip', rate='50/m')
@@ -367,25 +363,19 @@ def post_edit(request, post_id):
         files=request.FILES or None,
         instance=post
     )
-    if (request.user == post.author
-        or request.user.rank == "владелец"
-        or request.user.rank == "гл. администратор"
-        or request.user.rank == "администратор"
-        or request.user.rank == "арбитр"
-        or request.user.rank == "куратор"):
+    if (request.user == post.author or request.user.rank_lvl >= "5"):
         if request.method == 'POST':
             if form.is_valid():
                 post.edit = True
                 post.save()
                 form.save()
                 return redirect('forum:post_detail', post_id=post_id)
-        template = 'forum/post_create.html'
         context = {
             'post': post,
             'form': form,
             'is_edit': True,
         }
-        return render(request, template, context)
+        return render(request, 'forum/post_create.html', context)
     return redirect('forum:post_detail', post_id=post_id)
 
 

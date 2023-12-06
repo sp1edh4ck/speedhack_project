@@ -1,6 +1,6 @@
 .frame-guarantor {
   background: #242424b6;
-  color: #ffffff;
+  color: #d6d6d6;
   border-radius: 10px;
 }
 
@@ -15,7 +15,7 @@
 }
 
 .a-link-guarantor {
-  color: #ffffff;
+  color: #d6d6d6;
   transition: 0.5s;
 }
 

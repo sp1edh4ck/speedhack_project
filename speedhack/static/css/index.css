@@ -28,6 +28,7 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
   margin: 0 auto 0 auto;
   color: #ffffff;
+  font-weight: bold;
   background: #ff506f;
   text-decoration: none;
   border-radius: 10px;
@@ -98,7 +99,7 @@
 }
 
 .li-label-ts-a {
-  color: #ffffff;
+  color: #d6d6d6;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.5s ease 0s;
@@ -233,7 +234,7 @@
 }
 
 .icons-index-arrow:hover {
-  color: #ffffff;
+  color: #d6d6d6;
 }
 
 .text-section-li {
@@ -260,7 +261,7 @@
 }
 
 .posts-group-title {
-  color: #ffffff;
+  color: #d6d6d6;
   font-size: 20px;
 }
 
@@ -272,7 +273,7 @@
 }
 
 .help-group-username {
-  color: #ffffff;
+  color: #d6d6d6;
   text-decoration: none;
 }
 
@@ -286,7 +287,7 @@
 
 .text-frame-title {
   cursor: pointer;
-  color: #ffffff;
+  color: #d6d6d6;
   font-size: 18px;
 }
 
@@ -332,7 +333,7 @@
   font-size: 16px;
   font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
   margin: 10px 0 0 5px;
-  color: #ffffff;
+  color: #d6d6d6;
   background: #ff506f;
   text-decoration: none;
   border: none;
@@ -355,7 +356,7 @@
   font-size: 16px;
   background: #202020b6;
   border: 0px solid #444444;
-  color: #ffffff;
+  color: #d6d6d6;
   outline: none;
   border-radius: 10px;
   height: 30px;
@@ -378,7 +379,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 20px;
-  color: #ffffff;
+  color: #d6d6d6;
 }
 
 .online-avatar-index {
@@ -393,7 +394,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   font-size: 16px;
   font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
   margin: 0 auto 0 auto;
-  color: #ffffff;
+  color: #d6d6d6;
   text-decoration: none;
   border-radius: 10px;
   display: block;

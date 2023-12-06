@@ -6,9 +6,9 @@
     <div class="frame_con">
       <div style="display: block;">
         <div class="switch-info-admin" style="max-height: 130px;">
-          <a href="{% url 'forum:admin_panel' %}" class="switch-button active-tab" style="text-decoration: none; color: #ffffff;">Основная админ-панель</a>
-          <a href="{% url 'forum:tickets' %}" class="switch-button" style="text-decoration: none; color: #ffffff;">Обращения</a>
-          <a href="{% url 'forum:ads' %}" class="switch-button" style="text-decoration: none; color: #ffffff;">Реклама</a>
+          <a href="{% url 'forum:admin_panel' %}" class="switch-button active-tab" style="text-decoration: none; color: #d6d6d6;">Основная админ-панель</a>
+          <a href="{% url 'forum:tickets' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Обращения</a>
+          <a href="{% url 'forum:ads' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Реклама</a>
         </div>
         <div class="frame-left-first-users">
           <span style="color: gray; font-size: 18px;">Найти пользователя</span>
@@ -28,11 +28,11 @@
           <div style="display: block;">
             <div style="margin-top: 15px; color: gray;">
               <label>Пользователей:</label>
-              <label style="color: #ffffff;">{{ count_users }}</label>
+              <label style="color: #d6d6d6;">{{ count_users }}</label>
             </div>
             <div style="margin-top: 3px; color: gray;">
               <label>Пользователей в бане:</label>
-              <label style="color: #ffffff;">{{ count_users_ban }}</label>
+              <label style="color: #d6d6d6;">{{ count_users_ban }}</label>
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@
           {% endfor %}
         {% else %}
           <div style="margin: 0 0 0 20px;">
-            <label style="color: #ffffff; font-size: 18px;">Нет пользователя с данным именем</label>
+            <label style="color: #d6d6d6; font-size: 18px;">Нет пользователя с данным именем</label>
           </div>
         {% endif %}
       </div>

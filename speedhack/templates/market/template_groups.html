@@ -53,7 +53,7 @@
         </div>
         <div>
           <div style="margin: 0 0 20px 20px;">
-            <label style="color: #ffffff; font-size: 20px;">Выберите категорию</label>
+            <label style="color: #d6d6d6; font-size: 20px;">Выберите категорию</label>
             <div style="margin-top: 20px;" class="ger">
               <h2>
                 <a class="a-png" href="{% url 'market:group_free' 'steam' %}">
@@ -79,7 +79,7 @@
           </div>
           {% if count_accs != 0 %}
             <div class="acc-frame">
-              <label style="margin: 20px 0 0 20px; color: #ffffff; font-size: 20px;">Последние аккаунты</label>
+              <label style="margin: 20px 0 0 20px; color: #d6d6d6; font-size: 20px;">Последние аккаунты</label>
               {% for acc in accs %}
                 {% if acc.buyer == None %}
                   {% if acc.author.rank != 'заблокирован' %}

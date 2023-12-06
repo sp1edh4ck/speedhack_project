@@ -56,13 +56,13 @@
               {% else %}
                 {% if user.is_authenticated %}
                   {% if user.rank != 'заблокирован' %}
-                    {% if following %}
-                      <a class="button-edit" href="{% url 'forum:profile_unfollow' author.username %}">Отписаться</a>
-                    {% else %}
-                      <a class="button-edit" href="{% url 'forum:profile_follow' author.username %}">Подписаться</a>
-                    {% endif %}
                     {% if author.username != 'root' %}<label style="max-width: 200px; margin-top: 20px;"><a class="button-edit" style="margin-top: 5px">Написать</a></label>{% endif %}
-                    <a class="button-edit" style="margin-top: 5px;">Пожаловаться</a>
+                    {% if following %}
+                      <a class="button-edit edit-fix-back-1" href="{% url 'forum:profile_unfollow' author.username %}" style="margin-top: 5px;">Отписаться</a>
+                    {% else %}
+                      <a class="button-edit edit-fix-back-1" href="{% url 'forum:profile_follow' author.username %}" style="margin-top: 5px;">Подписаться</a>
+                    {% endif %}
+                    <a class="button-edit edit-fix-back-2" style="margin-top: 5px;">Пожаловаться</a>
                   {% endif %}
                 {% endif %}
               {% endif %}
@@ -249,7 +249,7 @@
                     <label style="color: gray;">Регистрация: </label>
                   </div>
                   <div>
-                    <label style="color: #ffffff;">{{ author.date_joined|date:'d E Y' }}</label><br>
+                    <label style="color: #d6d6d6;">{{ author.date_joined|date:'d E Y' }}</label><br>
                   </div>
                 </div>
                 {% if author.gender != 'Не выбрано' and author.gender != '' %}
@@ -258,7 +258,7 @@
                       <label style="color: gray;">Пол: </label>
                     </div>
                     <div>
-                      <label style="color: #ffffff;">{{ author.gender }}</label><br>
+                      <label style="color: #d6d6d6;">{{ author.gender }}</label><br>
                     </div>
                   </div>
                 {% endif %}
@@ -269,12 +269,12 @@
                     </div>
                     <div>
                       {% if author.brt_year == None %}
-                        <label style="color: #ffffff;">{{ author.brt_month }}</label>
-                        <label style="color: #ffffff;">{{ author.brt_day }}</label>
+                        <label style="color: #d6d6d6;">{{ author.brt_month }}</label>
+                        <label style="color: #d6d6d6;">{{ author.brt_day }}</label>
                       {% elif author.brt_year != "" %}
-                        <label style="color: #ffffff;">{{ author.brt_day }}</label>
-                        <label style="color: #ffffff;">{{ author.brt_month }}</label>
-                        <label style="color: #ffffff;">{{ author.brt_year }}</label>
+                        <label style="color: #d6d6d6;">{{ author.brt_day }}</label>
+                        <label style="color: #d6d6d6;">{{ author.brt_month }}</label>
+                        <label style="color: #d6d6d6;">{{ author.brt_year }}</label>
                       {% endif %}
                     </div>
                   </div>
@@ -285,7 +285,7 @@
                       <label style="color: gray;">Род занятий: </label>
                     </div>
                     <div>
-                      <label style="color: #ffffff;">{{ author.occupation }}</label><br>
+                      <label style="color: #d6d6d6;">{{ author.occupation }}</label><br>
                     </div>
                   </div>
                 {% endif %}
@@ -295,7 +295,7 @@
                       <label style="color: gray;">Интересы: </label>
                     </div>
                     <div>
-                      <label style="color: #ffffff;">{{ author.interests }}</label><br>
+                      <label style="color: #d6d6d6;">{{ author.interests }}</label><br>
                     </div>
                   </div>
                 {% endif %}
@@ -305,10 +305,11 @@
                       <label style="color: gray;">Telegram: </label>
                     </div>
                     <div>
-                      <label style="color: #ffffff;"><a href="https://t.me/{{ author.tg_link }}" class="profile-link" target="_blank">Открыть чат в телеграм</a> <i class="fa fa-clone" style="width: 15px; height: 15px;"></i></label><br>
+                      <label style="color: #d6d6d6;"><a href="https://t.me/{{ author.tg_link }}" class="profile-link" target="_blank">Открыть чат в телеграм</a> <i class="fa fa-clone" style="width: 15px; height: 15px;"></i></label><br>
                     </div>
                   </div>
                 {% endif %}
+                <div></div>
                 {% if author.rank == 'бот' %}<label style="color: red;">Данный профиль является системным и работает под управлением бота!{% endif %}</label>
               </div>
               <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
@@ -362,6 +363,10 @@
                     </div>
                   </div>
                 {% endfor %}
+              {% elif profile_comments.count == 0 %}
+                <div id="userPosts" class="tabItem frame-right-third" style="display: block; text-align: center;">
+                  <label style="color: #515151; font-size: 18px; font-weight: bold;">На стене пока нет ни одного сообщения</label>
+                </div>
               {% endif %}
             </div>
             {% if count_posts != 0 %}
@@ -383,8 +388,8 @@
                 {% include '../includes/paginator.html' %}
               </div>
             {% else %}
-              <div id="authorPosts" class="tabItem frame-right-third">
-                <label style="color: #ffffff;">У пользователя нет постов</label>
+              <div id="authorPosts" class="tabItem frame-right-third" style="text-align: center;">
+                <label style="color: #515151; font-size: 18px; font-weight: bold;">У пользователя нет постов</label>
               </div>
             {% endif %}
           </div>

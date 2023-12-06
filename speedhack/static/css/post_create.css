@@ -6,7 +6,7 @@
 }
 
 .title {
-  color: #ffffff;
+  color: #d6d6d6;
   font-size: 22px;
 }
 
@@ -16,7 +16,7 @@
   font-size: 18px;
   background: #222222;
   border: 2px solid #444444;
-  color: #ffffff;
+  color: #d6d6d6;
   outline: none;
   border-radius: 10px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -65,7 +65,7 @@ textarea {
   font-size: 20px;
   margin-bottom: 5px;
   margin: 0 15px 0 0;
-  color: #ffffff;
+  color: #d6d6d6;
   display: block;
 }
 
@@ -75,7 +75,7 @@ textarea {
 }
 
 .input-file-text {
-  color: #ffffff;
+  color: #d6d6d6;
   background: #222222;
   padding: 0 10px;
   line-height: 40px;
@@ -98,6 +98,7 @@ textarea {
   font-size: 14px;
   vertical-align: middle;
   color: #ffffff;
+  font-weight: bold;
   text-align: center;
   border-radius: 0 10px 10px 0;
   background-color: #ff506f;
@@ -137,6 +138,7 @@ textarea {
 
 .button-level {
   display: block;
+  min-width: 170px;
   padding: 5px 10px;
   font-size: 18px;
   border-radius: 10px;

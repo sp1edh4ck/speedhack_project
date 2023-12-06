@@ -6,24 +6,24 @@
     <div class="frame_con">
       <div style="display: block;">
         <div class="switch-info-admin" style="max-height: 130px;">
-          <a href="{% url 'forum:admin_panel' %}" class="switch-button" style="text-decoration: none; color: #ffffff;">Основная админ-панель</a>
-          <a href="{% url 'forum:tickets' %}" class="switch-button active-tab" style="text-decoration: none; color: #ffffff;">Обращения</a>
-          <a href="{% url 'forum:ads' %}" class="switch-button" style="text-decoration: none; color: #ffffff;">Реклама</a>
+          <a href="{% url 'forum:admin_panel' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Основная админ-панель</a>
+          <a href="{% url 'forum:tickets' %}" class="switch-button active-tab" style="text-decoration: none; color: #d6d6d6;">Обращения</a>
+          <a href="{% url 'forum:ads' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Реклама</a>
         </div>
         <div class="frame-left-second-users" style="max-height: 120px;">
           <span style="color: gray; font-size: 18px;">Статистика форума</span>
           <div style="display: block; height: 200px;">
             <div style="margin-top: 15px; color: gray;">
               <label>Количество тикетов:</label>
-              <label style="color: #ffffff;">{{ tickets_count }}</label>
+              <label style="color: #d6d6d6;">{{ tickets_count }}</label>
             </div>
             <div style="margin-top: 3px; color: gray;">
               <label>Открытых:</label>
-              <label style="color: #ffffff;">{{ tickets_open_count }}</label>
+              <label style="color: #d6d6d6;">{{ tickets_open_count }}</label>
             </div>
             <div style="margin-top: 3px; color: gray;">
               <label>Закрытых:</label>
-              <label style="color: #ffffff;">{{ tickets_close_count }}</label>
+              <label style="color: #d6d6d6;">{{ tickets_close_count }}</label>
             </div>
           </div>
         </div>

@@ -48,7 +48,7 @@
 
 .menu-link {
   text-decoration: none;
-  color: #ffffff;
+  color: #d6d6d6;
   transition: color 0.5s ease 0s;
 }
 
@@ -62,7 +62,7 @@
   font-size: 16px;
   font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
   padding: 7px 8px;
-  color: #ffffff;
+  color: #d6d6d6;
   background: #ff506f;
   border: none;
   text-decoration: none;
@@ -71,7 +71,7 @@
 }
 
 .button:hover {
-  color: #ffffff;
+  color: #d6d6d6;
   background: #ff6b86;
 }
 
@@ -88,7 +88,7 @@
 }
 
 .button-off:hover {
-  color: #ffffff;
+  color: #d6d6d6;
 }
 
 .notification {
@@ -142,7 +142,7 @@ a.window-button {
 }
 
 .window-button-second {
-  color: #ffffff;
+  color: #d6d6d6;
   font-size: 16px;
   position: relative;
   padding: 7px 20px;
@@ -198,6 +198,6 @@ a.window-button {
 
 .icon-burger {
   display: none;
-  color: #ffffff;
+  color: #d6d6d6;
   margin-left: 20px;
 }
