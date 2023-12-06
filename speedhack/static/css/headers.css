@@ -62,7 +62,7 @@
   font-size: 16px;
   font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
   padding: 7px 8px;
-  color: #d6d6d6;
+  color: #ffffff;
   background: #ff506f;
   border: none;
   text-decoration: none;
@@ -71,7 +71,7 @@
 }
 
 .button:hover {
-  color: #d6d6d6;
+  color: #ffffff;
   background: #ff6b86;
 }
 

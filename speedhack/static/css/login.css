@@ -56,13 +56,13 @@
 
 .button-form {
   cursor: pointer;
-  border: #d6d6d6;
+  border: #ffffff;
   border-radius: 10px;
   width: 150px;
   font-size: 16px;
   height: 35px;
   margin: 15px 125px 0px 125px;
-  color: #d6d6d6;
+  color: #ffffff;
   background: #ff506f;
   transition: background 0.5s ease 0s;
 }
