@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import ProfileComment, Comment, Forum, Group, Viewers, HelpForum, Helpers, Ads
+from .models import ProfileComment, Comment, Forum, Group, Viewers, HelpForum, Helpers, Ads, Like
 
 
 class ForumAdmin(admin.ModelAdmin):
@@ -53,6 +53,17 @@ class AdsAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
+class LikeAdmin(admin.ModelAdmin):
+    list_display = (
+        'post',
+        'user',
+        'author',
+        'created',
+    )
+    list_filter = ('post',)
+    empty_value_display = '-пусто-'
+
+
 # class FavouriteAdmin(admin.ModelAdmin):
 #     list_display = (
 #         'post',
@@ -74,6 +85,7 @@ admin.site.register(Forum, ForumAdmin)
 admin.site.register(Helpers, HelpersAdmin)
 admin.site.register(HelpForum, HelpForumAdmin)
 admin.site.register(Ads, AdsAdmin)
+admin.site.register(Like, LikeAdmin)
 admin.site.register(Group, GroupAdmin)
 # admin.site.register(Favourites, FavouriteAdmin)
 admin.site.register(Comment)

@@ -184,6 +184,28 @@ class Viewers(models.Model):
     )
 
 
+# class Like(models.Model):
+#     post = models.ForeignKey(
+#         Forum,
+#         on_delete=models.CASCADE,
+#         related_name='like',
+#         verbose_name='Пост',
+#     )
+#     author = models.ForeignKey(
+#         User,
+#         on_delete=models.CASCADE,
+#         related_name='like',
+#         verbose_name='Автор',
+#     )
+#     taked = models.BooleanField(
+#         default=False,
+#     )
+#     created = models.DateTimeField(
+#         auto_now_add=True,
+#         verbose_name='Дата публикации',
+#     )
+
+
 class Like(models.Model):
     post = models.ForeignKey(
         Forum,
@@ -191,19 +213,30 @@ class Like(models.Model):
         related_name='like',
         verbose_name='Пост',
     )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='liker',
+    )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='like',
-        verbose_name='Автор',
-    )
-    taked = models.BooleanField(
-        default=False,
+        related_name='liking',
     )
     created = models.DateTimeField(
         auto_now_add=True,
-        verbose_name='Дата публикации',
+        verbose_name='Дата лайка',
     )
+
+    class Meta:
+        verbose_name = 'Лайк'
+        verbose_name_plural = 'Лайки'
+        constraints = [
+            models.UniqueConstraint(
+                fields=('user', 'author'),
+                name='unique_name_in_liker',
+            )
+        ]
 
 
 class Comment(models.Model):
@@ -226,7 +259,11 @@ class Comment(models.Model):
     image = models.ImageField(
         'Картинка',
         upload_to='posts/images/',
-        blank=True
+        blank=True,
+    )
+    edit = models.BooleanField(
+        default=False,
+        verbose_name='Комментарий был отредактирован',
     )
     created = models.DateTimeField(
         auto_now_add=True,

@@ -3,6 +3,7 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.utils.crypto import get_random_string
 from django.views import View
+from django_ratelimit.decorators import ratelimit
 
 from .forms import CustomUserCreationForm
 

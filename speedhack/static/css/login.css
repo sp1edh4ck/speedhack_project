@@ -92,7 +92,7 @@
 }
 
 .rules-reg {
-  color: white;
+  color: #d6d6d6;
   font-size: 16px;
 }
 
@@ -181,4 +181,9 @@ input:-webkit-autofill {
   color: #d6d6d6;
   margin-top: -15px;
   display: flex;
+}
+
+.btn-reg:disabled {
+  cursor: default;
+  background: #363636;
 }

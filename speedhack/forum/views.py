@@ -9,7 +9,7 @@ from users.forms import UserProfileForm
 from users.models import CustomUser, IpUser
 
 from .forms import ProfileCommentForm, CommentForm, PostForm, DepositForm, HelpForm, AnswerForm, AdsForm
-from .models import Follow, Forum, User, Group, Comment, Viewers, HelpForum, Helpers, Ads, ProfileComment
+from .models import Follow, Forum, User, Group, Comment, Viewers, HelpForum, Helpers, Ads, ProfileComment, Like
 
 
 def pagination_post(request, post_list):
@@ -276,9 +276,11 @@ def post_detail(request, post_id):
     form = CommentForm(request.POST or None)
     comments = post.comments.all()
     count_comments = comments.count()
+    likes = Like.objects.filter(post=post)
     context = {
         'form': form,
         'post': post,
+        'likes': likes,
         'comments': comments,
         'count_comments': count_comments,
     }
@@ -301,11 +303,22 @@ def post_oc(request, post_id, number):
 
 @ratelimit(key='ip', rate='50/m')
 @login_required
-def likes_add(request, post_id):
-    post = get_object_or_404(Forum, id=post_id)
-    comments = post.comments.all()
+def likes_add(request, post_id, username):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
+    post = get_object_or_404(Forum, id=post_id)
+    author = get_object_or_404(User, username=username)
+    if author != request.user:
+        if not Like.objects.filter(post=post, author=author, user=request.user).exists():
+            author.likes += 1
+            author.save()
+            Like.objects.create(post=post, author=author, user=request.user)
+        else:
+            author.likes -= 1
+            author.save()
+            Like.objects.filter(post=post, author=author, user=request.user).delete()
+        return redirect('forum:post_detail', post_id=post_id)
+    comments = post.comments.all()
     if post.author.username == request.user.username:
         for comment in comments:
             user = CustomUser.objects.get(username=comment.author.username)
@@ -385,14 +398,7 @@ def post_delete(request, post_id):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     post = get_object_or_404(Forum, pk=post_id)
-    if (request.user == post.author
-        or request.user.rank == "владелец"
-        or request.user.rank == "гл. администратор"
-        or request.user.rank == "администратор"
-        or request.user.rank == "бот"
-        or request.user.rank == "главный арбитр"
-        or request.user.rank == "куратор"
-        or request.user.username == post.author):
+    if (request.user == post.author or request.user.rank_lvl >= 5):
         Forum.objects.filter(pk=post_id).delete()
         return redirect('forum:successfully')
 
@@ -415,6 +421,28 @@ def add_comment(request, post_id):
             comment.save()
             return redirect('forum:post_detail', post_id=post_id)
     return redirect('forum:post_detail', post_id=post_id)
+
+
+@ratelimit(key='ip', rate='50/m')
+@login_required
+def edit_comment(request, post_id):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    post = get_object_or_404(Forum, pk=post_id)
+    form = CommentForm(request.POST or None)
+    if request.user == post.author or request.user.rank_lvl >= "5":
+        if request.method == 'POST':
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.edit = True
+                comment.save()
+                return redirect('forum:post_detail', post_id=post_id)
+        context = {
+            'post': post,
+            'form': form,
+            'is_edit': True,
+        }
+        return render(request, 'forum/post_detail.html', context)
 
 
 @ratelimit(key='ip', rate='50/m')

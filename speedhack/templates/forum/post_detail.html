@@ -66,13 +66,19 @@
                 {% endif %}
               </div>
               {% if user.likes >= 20 and user.username != post.author.username %}
-                <form method="post" action="{% url 'forum:likes_add' post.id %}">
-                  <div class="comment-date" style="margin-top: 3px;">
-                    <a href="{% url 'forum:likes_add' post.id %}">
-                      <img src="{% static 'images/heart_pink.png' %}" style="width: 25px; height: 23px; margin: 5px;">
-                    </a>
-                  </div>
-                </form>
+                <div class="comment-date" style="margin-top: 3px;">
+                  <a href="{% url 'forum:likes_add' post.id post.author.username %}">
+                    {% comment %} {% for like in likes %} {% endcomment %}
+                      {{ like.user }}
+                      {% comment %} {{ post }} {% endcomment %}
+                      {% comment %} {% if like.post == post %} {% endcomment %}
+                        <img src="{% static 'images/heart_gray.png' %}" style="width: 25px; height: 23px;">
+                      {% comment %} {% else %} {% endcomment %}
+                        {% comment %} <img src="{% static 'images/heart_pink_full.png' %}" style="width: 25px; height: 23px;"> {% endcomment %}
+                      {% comment %} {% endif %} {% endcomment %}
+                    {% comment %} {% endfor %} {% endcomment %}
+                  </a>
+                </div>
               {% endif %}
             </div>
           </div>
@@ -99,6 +105,7 @@
                   <div style="height: 30px;" class="window-main">
                     <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
                     <div class="window-other" style="right: 0;">
+                      {% comment %} <a href="{% url 'forum:edit_comment' post.id comment.id %}" class="window-button-second">Редактировать комментарий</a> {% endcomment %}
                       <a href="{% url 'forum:delete_comment' post.id comment.id %}" class="window-button-second">Удалить комментарий</a>
                     </div>
                   </div>
@@ -116,13 +123,11 @@
                   <label>{{ comment.created|date:"d E Y / H:i" }}</label>
                 </div>
                 {% if user.likes >= 20 and user.username != comment.author.username %}
-                  <form method="post" action="{% url 'forum:likes_add' post.id %}">
-                    <div class="comment-date" style="margin-top: 3px;">
-                      <a href="{% url 'forum:likes_add' post.id %}">
-                        <img src="{% static 'images/heart_pink.png' %}" style="width: 25px; height: 23px; margin: 5px;">
-                      </a>
-                    </div>
-                  </form>
+                  <div class="comment-date" style="margin-top: 3px;">
+                    <a href="{% url 'forum:likes_add' post.id comment.author.username %}">
+                      <img src="{% static 'images/heart_gray.png' %}" style="width: 25px; height: 23px;">
+                    </a>
+                  </div>
                 {% endif %}
               </div>
             </div>
@@ -172,6 +177,7 @@
             <hr class="hr-post-detail">
           </div>
           <div class="frame-main-posts">
+            {% comment %} {% if id_edit %} {% endcomment %}
             <form method="post" enctype="multipart/form-data" action="{% url 'forum:add_comment' post.id %}">
               {% csrf_token %}
               <div style="display: flex;">
@@ -188,6 +194,24 @@
                 </div>
               </div>
             </form>
+            {% comment %} {% else %}
+              <form method="post" enctype="multipart/form-data" action="{% url 'forum:edit_comment' post.id %}">
+                {% csrf_token %}
+                <div style="display: flex;">
+                  <div>
+                    <a href="{% url 'forum:profile' user %}"><img class="frame-main-avatar" style="width: 40px; height: 40px; margin: 0;" src="{{ user.avatar.url }}"></a>
+                  </div>
+                  <div style="display: flex;">
+                    <div>
+                      {{ form.text|addclass:"field-detail" }}
+                    </div>
+                    <div>
+                      <button type="submit" style="background: #d6d6d600; border: none; cursor: pointer;"><i class="fab fa-telegram-plane icons-post-detail"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            {% endif %} {% endcomment %}
           </div>
         {% endif %}
         {% if post.closed == True %}
