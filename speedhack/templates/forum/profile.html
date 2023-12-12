@@ -8,7 +8,7 @@
     <div class="main-profile">
       <div class="frame_con" style="display: block;">
         {% if request.user != author %}
-          <div class="frame-title" style="margin: 0 0 15px 0; padding: 10px 20px; color: #d6d6d6;">
+          <div class="frame-title" style="margin: 0 0 15px 0; padding: 15px 20px; color: #d6d6d6;">
             <div style="margin-bottom: 10px; font-size: 16px; font-weight: bold;">Уделите одну минуту перед сделкой</div>
             <div style="font-size: 14px;">Перед сделкой сверьте контакты пользователя, скопируйте логин из мессенджера и сверьте с тем, что указан в профиле. Не лишним будет проверить пользователя через ЛС, написав: "Привет, это ты мне пишешь в Телеграме?".</div>
           </div>
@@ -309,20 +309,38 @@
                     </div>
                   </div>
                 {% endif %}
-                <div></div>
-                {% if author.rank == 'бот' %}<label style="color: red;">Данный профиль является системным и работает под управлением бота!{% endif %}</label>
+                {% comment %} <div class="link-profile">
+                  <a class="link-profile-a" href=""><i class="fa-solid fa-message link-profile-a-i" style="margin-right: 10px;"></i>Темы от {{ author.username }}</a>
+                </div> {% endcomment %}
+                {% if author.rank == 'бот' %}<label style="color: red;">Данный профиль является системным и работает под управлением бота!</label>{% endif %}
               </div>
               <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
-              <div style="display: flex;">
-                <label style="color: gray; margin: 0 30px 0 0;">Подписчики: <label style="color: #ff506f;">{{ count_subscribers }}</label></label><br>
-                <label style="color: gray; margin: 0 30px 0 0;">Подписок: <label style="color: #ff506f;">{{ count_subscriptions }}</label></label><br>
-                <label style="color: gray; margin: 0 30px 0 0;">Симпатии: <label style="color: #ff506f;">{{ author.likes }}</label></label><br>
-                <label style="color: gray;">Сообщения: <label style="color: #ff506f;">{{ author.comments.count }}</label></label><br>
+              <div style="display: flex;justify-content: center; text-align: center; overflow: hidden;">
+                <a class="int-info-profile" href="">
+                  <div style="color: #ff506f;">{{ author.likes }}</div>
+                  <div style="color: gray;">симпатий</div>
+                </a>
+                <a class="int-info-profile" href="">
+                  <div style="color: #ff506f;">{{ author.comments.count }}</div>
+                  <div style="color: gray;">cообщения</div>
+                </a>
+                <a class="int-info-profile" href="">
+                  <div style="color: #ff506f;">{{ author.comments.count }}</div>
+                  <div style="color: gray;">розыгрыши</div>
+                </a>
+                <a class="int-info-profile" href="">
+                  <div style="color: #ff506f;">{{ count_subscriptions }}</div>
+                  <div style="color: gray;">подписок</div>
+                </a>
+                <a class="int-info-profile" href="">
+                  <div style="color: #ff506f;">{{ count_subscribers }}</div>
+                  <div style="color: gray;">подписчики</div>
+                </a>
               </div>
             </div>
             <div class="frame-right-second">
               <a data-tab="#userPosts" class="button-tools active-tab">Стена{% if profile_comments.count != 0 %} <label style="margin-left: 5px; color: #707070 ;">{{ profile_comments.count }}</label>{% endif %}</a>
-              <a data-tab="#authorPosts" class="button-tools">Посты{% if count_posts != 0 %} <label style="margin-left: 5px; color: #707070 ;">{{ count_posts }}</label>{% endif %}</a>
+              <a data-tab="#authorPosts" class="button-tools">Посты{% if posts.count != 0 %} <label style="margin-left: 5px; color: #707070 ;">{{ posts.count }}</label>{% endif %}</a>
               {% comment %} <a data-tab="#" class="button-tools">Жалобы</a> {% endcomment %}
             </div>
             <div id="userPosts" class="tabItem profile-comment-active active-tab">
@@ -369,7 +387,7 @@
                 </div>
               {% endif %}
             </div>
-            {% if count_posts != 0 %}
+            {% if posts.count != 0 %}
               <div id="authorPosts" class="tabItem frame-right-third">
                 {% for post in objects %}
                   <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">

@@ -43,7 +43,7 @@ def ratelimited(request, exception):
     return render(request, 'forum/limit.html')
 
 
-@ratelimit(key='ip', rate='50/m')
+@ratelimit(key='ip', rate='5/m')
 def index(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
@@ -126,14 +126,13 @@ def profile(request, username):
         if request.user.is_authenticated
         else False
     )
-    count_posts = posts.count()
     count_subscriptions = subscriptions.count()
     count_subscribers = subscribers.count()
     context = {
         'form': form,
         'author': author,
+        'posts': posts,
         'following': following,
-        'count_posts': count_posts,
         'profile_comments': profile_comments,
         'count_subscriptions': count_subscriptions,
         'count_subscribers': count_subscribers,
@@ -266,9 +265,9 @@ def upgrade(request, username, number):
 
 @ratelimit(key='ip', rate='50/m')
 def post_detail(request, post_id):
-    post = get_object_or_404(Forum, id=post_id)
     if request.user.is_authenticated and request.user.rank == "заблокирован" and post.author != request.user:
         return banned_redirect(request)
+    post = get_object_or_404(Forum, id=post_id)
     # if request.user.is_authenticated:
         # viewers = post.viewers.all()
         # post.view += 1
@@ -307,25 +306,23 @@ def likes_add(request, post_id, username):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     post = get_object_or_404(Forum, id=post_id)
-    author = get_object_or_404(User, username=username)
-    if author != request.user:
-        if not Like.objects.filter(post=post, author=author, user=request.user).exists():
-            author.likes += 1
-            author.save()
-            Like.objects.create(post=post, author=author, user=request.user)
+    owner = get_object_or_404(User, username=username)
+    if owner != request.user:
+        if not Like.objects.filter(post=post, owner=owner, user=request.user).exists():
+            owner.likes += 1
+            owner.save()
+            Like.objects.create(post=post, owner=owner, user=request.user)
         else:
-            author.likes -= 1
-            author.save()
-            Like.objects.filter(post=post, author=author, user=request.user).delete()
-        return redirect('forum:post_detail', post_id=post_id)
+            owner.likes -= 1
+            owner.save()
+            Like.objects.filter(post=post, owner=owner, user=request.user).delete()
+        # return redirect('forum:post_detail', post_id=post_id)
     comments = post.comments.all()
     if post.author.username == request.user.username:
         for comment in comments:
             user = CustomUser.objects.get(username=comment.author.username)
     else:
         user = CustomUser.objects.get(username=post.author.username)
-    user.likes += 1
-    user.save()
     if user.privilege != "местный" and user.likes >= 20 and user.likes <= 199:
         user.privilege = "местный"
         user.save()
@@ -340,6 +337,21 @@ def likes_add(request, post_id, username):
         user.save()
     elif user.privilege != "искусственный интелект" and user.likes >= 10000:
         user.privilege = "искусственный интелект"
+        user.save()
+    if user.likes < 20:
+        user.privilege = "нет привилегий"
+        user.save()
+    elif user.likes < 200:
+        user.privilege = "местный"
+        user.save()
+    elif user.likes < 1000:
+        user.privilege = "постоялец"
+        user.save()
+    elif user.likes < 4000:
+        user.privilege = "эксперт"
+        user.save()
+    elif user.likes < 10000:
+        user.privilege = "гуру"
         user.save()
     return redirect('forum:post_detail', post_id=post_id)
 
@@ -376,7 +388,7 @@ def post_edit(request, post_id):
         files=request.FILES or None,
         instance=post
     )
-    if (request.user == post.author or request.user.rank_lvl >= "5"):
+    if (request.user == post.author or request.user.rank_lvl >= "4"):
         if request.method == 'POST':
             if form.is_valid():
                 post.edit = True
@@ -430,7 +442,7 @@ def edit_comment(request, post_id):
         return banned_redirect(request)
     post = get_object_or_404(Forum, pk=post_id)
     form = CommentForm(request.POST or None)
-    if request.user == post.author or request.user.rank_lvl >= "5":
+    if request.user == post.author or request.user.rank_lvl >= "4":
         if request.method == 'POST':
             if form.is_valid():
                 comment = form.save(commit=False)

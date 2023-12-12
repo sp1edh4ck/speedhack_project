@@ -31,14 +31,14 @@
                   <label class="frame-main-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>{% if user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
                 </a>
               </div>
-              {% if user.username == post.author.username or user.rank_lvl >= "5" %}
+              {% if user.username == post.author.username or user.rank_lvl >= "4" %}
                 <div style="height: 30px;" class="window-main">
                   <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
                   <div class="window-other" style="right: 0;">
                     <a href="{% url 'forum:post_edit' post.id %}" class="window-button-second">Редактировать запись</a>
                     {% if post.closed == False %}
                       <a href="{% url 'forum:post_oc' post.id 1 %}" class="window-button-second">Закрыть тему</a>
-                    {% elif post.closed == True and user.rank_lvl >= "5" %}
+                    {% elif post.closed == True and user.rank_lvl >= "4" %}
                       <a href="{% url 'forum:post_oc' post.id 2 %}" class="window-button-second">Открыть тему</a>
                     {% endif %}
                     <a href="{% url 'forum:post_delete' post.id %}" class="window-button-second">Удалить пост</a>
@@ -68,15 +68,13 @@
               {% if user.likes >= 20 and user.username != post.author.username %}
                 <div class="comment-date" style="margin-top: 3px;">
                   <a href="{% url 'forum:likes_add' post.id post.author.username %}">
-                    {% comment %} {% for like in likes %} {% endcomment %}
-                      {{ like.user }}
-                      {% comment %} {{ post }} {% endcomment %}
-                      {% comment %} {% if like.post == post %} {% endcomment %}
-                        <img src="{% static 'images/heart_gray.png' %}" style="width: 25px; height: 23px;">
-                      {% comment %} {% else %} {% endcomment %}
-                        {% comment %} <img src="{% static 'images/heart_pink_full.png' %}" style="width: 25px; height: 23px;"> {% endcomment %}
-                      {% comment %} {% endif %} {% endcomment %}
-                    {% comment %} {% endfor %} {% endcomment %}
+                    {% if likes.count != 0 %}
+                      {% for like in likes %}
+                        <img src="{% static 'images/heart_pink_full.png' %}" style="width: 25px; height: 23px;">
+                      {% endfor %}
+                    {% else %}
+                      <img src="{% static 'images/heart_gray.png' %}" style="width: 25px; height: 23px;">
+                    {% endif %}
                   </a>
                 </div>
               {% endif %}
@@ -101,7 +99,7 @@
                     <label class="frame-main-username {% if comment.author.username_style != 'gray-un' and comment.author.rank != 'заблокирован' %}{{ comment.author.username_style }}{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ comment.author.username }}</label>{% if comment.user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
                   </a>
                 </div>
-                {% if comment.author.username == request.user.username or user.rank_lvl >= "5" %}
+                {% if comment.author.username == request.user.username or user.rank_lvl >= "4" %}
                   <div style="height: 30px;" class="window-main">
                     <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
                     <div class="window-other" style="right: 0;">

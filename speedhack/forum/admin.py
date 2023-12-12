@@ -57,7 +57,7 @@ class LikeAdmin(admin.ModelAdmin):
     list_display = (
         'post',
         'user',
-        'author',
+        'owner',
         'created',
     )
     list_filter = ('post',)

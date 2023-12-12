@@ -23,7 +23,7 @@
           {% if count_posts != 0 %}
             <div style="margin: 0 0 0 10px;">
               <div>
-                <label class="posts-group-title">{% if request.path == '/' %}Все обсуждения{% elif request.path == '/forum/my_topics/'%}Мои темы{% endif %}</label>
+                <label class="posts-group-title">{% if request.path == '/' %}Все обсуждения{% elif request.path == '/forum/my_topics/' %}Мои темы{% endif %}</label>
               </div>
             </div>
             {% if ads.count != 0 %}

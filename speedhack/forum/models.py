@@ -218,7 +218,7 @@ class Like(models.Model):
         on_delete=models.CASCADE,
         related_name='liker',
     )
-    author = models.ForeignKey(
+    owner = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='liking',
@@ -231,12 +231,6 @@ class Like(models.Model):
     class Meta:
         verbose_name = 'Лайк'
         verbose_name_plural = 'Лайки'
-        constraints = [
-            models.UniqueConstraint(
-                fields=('user', 'author'),
-                name='unique_name_in_liker',
-            )
-        ]
 
 
 class Comment(models.Model):

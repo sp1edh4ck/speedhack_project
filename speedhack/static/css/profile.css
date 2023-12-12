@@ -367,3 +367,34 @@
 .profile-comment-active.active-tab {
   display: block;
 }
+
+.link-profile {
+  margin: 20px 0 0 -12px;
+}
+
+.link-profile-a {
+  border-radius: 10px;
+  padding: 7px 12px;
+  color: #d6d6d6;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.5s ease 0s;
+}
+
+.link-profile-a:hover {
+  background: #333333;
+}
+
+.link-profile-a-i {
+  color: #444444;
+  transition: 0.5s;
+}
+
+.link-profile-a:hover .link-profile-a-i {
+  color: #ff506f;
+}
+
+.int-info-profile {
+  text-decoration: none;
+  padding: 0 15px;
+}
