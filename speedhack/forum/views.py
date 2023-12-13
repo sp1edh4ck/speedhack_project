@@ -39,11 +39,12 @@ def successfully(request):
     return render(request, 'forum/successfully.html')
 
 
-def ratelimited(request, exception):
-    return render(request, 'forum/limit.html')
+# Кастом страница для вывода 403 ошибки
+# def ratelimited(request, exception):
+#     return render(request, 'forum/limit.html')
 
 
-@ratelimit(key='ip', rate='5/m')
+@ratelimit(key='ip', rate='50/m')
 def index(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
@@ -118,6 +119,7 @@ def profile(request, username):
         form.save()
         return redirect('forum:profile', username=author)
     posts = author.posts.all()
+    # post_1 = author.posts.group.filter(slug=1)
     profile_comments = ProfileComment.objects.filter(profile=author)
     subscriptions = author.follower.all()
     subscribers = author.following.all()
@@ -132,6 +134,7 @@ def profile(request, username):
         'form': form,
         'author': author,
         'posts': posts,
+        # 'post_1': post_1,
         'following': following,
         'profile_comments': profile_comments,
         'count_subscriptions': count_subscriptions,
@@ -141,6 +144,15 @@ def profile(request, username):
         'subscribers': pagination_sub(request, subscribers),
     }
     return render(request, 'forum/profile.html', context)
+
+
+@ratelimit(key='ip', rate='50/m')
+@login_required
+def delete_profile_comment(request, username, comment_id):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    ProfileComment.objects.filter(pk=comment_id).delete()
+    return redirect('forum:profile', username=username)
 
 
 # @login_required
@@ -268,6 +280,7 @@ def post_detail(request, post_id):
     if request.user.is_authenticated and request.user.rank == "заблокирован" and post.author != request.user:
         return banned_redirect(request)
     post = get_object_or_404(Forum, id=post_id)
+    # Добавление просмотра (надо доработать)
     # if request.user.is_authenticated:
         # viewers = post.viewers.all()
         # post.view += 1
@@ -339,7 +352,7 @@ def likes_add(request, post_id, username):
         user.privilege = "искусственный интелект"
         user.save()
     if user.likes < 20:
-        user.privilege = "нет привилегий"
+        user.privilege = "новорег"
         user.save()
     elif user.likes < 200:
         user.privilege = "местный"
@@ -391,10 +404,14 @@ def post_edit(request, post_id):
     if (request.user == post.author or request.user.rank_lvl >= "4"):
         if request.method == 'POST':
             if form.is_valid():
-                post.edit = True
-                post.save()
-                form.save()
-                return redirect('forum:post_detail', post_id=post_id)
+                if request.user.rank_lvl >= "4" and request.user != post.author:
+                    form.save()
+                    return redirect('forum:post_detail', post_id=post_id)
+                else:
+                    post.edit = True
+                    post.save()
+                    form.save()
+                    return redirect('forum:post_detail', post_id=post_id)
         context = {
             'post': post,
             'form': form,

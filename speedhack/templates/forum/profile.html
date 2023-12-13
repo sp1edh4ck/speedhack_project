@@ -22,7 +22,7 @@
                   <label style="font-weight: 600;">{{ author.rank }}</label>
                 {% endif %}
               </div>
-              {% if author.rank == "пользователь" and author.rank != "заблокирован" and author.privilege != "нет привилегий" %}
+              {% if author.rank == "пользователь" and author.rank != "заблокирован" and author.privilege != "новорег" %}
                 <div class="{% if author.rank != "заблокирован" %}role-banner{% endif %} {{ author.banner }}">
                   <label style="font-weight: bold; {% if author.privilege == "искусственный интелект" %}font-size: 15px;{% endif %}">{{ author.privilege }}</label>
                 </div>
@@ -312,30 +312,29 @@
                 {% comment %} <div class="link-profile">
                   <a class="link-profile-a" href=""><i class="fa-solid fa-message link-profile-a-i" style="margin-right: 10px;"></i>Темы от {{ author.username }}</a>
                 </div> {% endcomment %}
-                {% if author.rank == 'бот' %}<label style="color: red;">Данный профиль является системным и работает под управлением бота!</label>{% endif %}
               </div>
               <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
               <div style="display: flex;justify-content: center; text-align: center; overflow: hidden;">
-                <a class="int-info-profile" href="">
+                <div class="int-info-profile" href="">
                   <div style="color: #ff506f;">{{ author.likes }}</div>
                   <div style="color: gray;">симпатий</div>
-                </a>
-                <a class="int-info-profile" href="">
+                </div>
+                <div class="int-info-profile" href="">
                   <div style="color: #ff506f;">{{ author.comments.count }}</div>
                   <div style="color: gray;">cообщения</div>
-                </a>
-                <a class="int-info-profile" href="">
+                </div>
+                <div class="int-info-profile" href="">
                   <div style="color: #ff506f;">{{ author.comments.count }}</div>
                   <div style="color: gray;">розыгрыши</div>
-                </a>
-                <a class="int-info-profile" href="">
+                </div>
+                <div class="int-info-profile" href="">
                   <div style="color: #ff506f;">{{ count_subscriptions }}</div>
                   <div style="color: gray;">подписок</div>
-                </a>
-                <a class="int-info-profile" href="">
+                </div>
+                <div class="int-info-profile" href="">
                   <div style="color: #ff506f;">{{ count_subscribers }}</div>
                   <div style="color: gray;">подписчики</div>
-                </a>
+                </div>
               </div>
             </div>
             <div class="frame-right-second">
@@ -367,12 +366,18 @@
                   <div class="frame-right-third" style="display: block;">
                     <div class="frame-right-third-posts">
                       <a href="{% url 'forum:profile' comment.author %}"><img class="frame-main-avatar" style="width: 50px; height: 50px; margin-right: 15px;" src="{{ comment.author.avatar.url }}"></a>
-                      <div>
-                        <div>
-                          <label class="{% if comment.author.username_style != 'gray-un' and comment.author.rank != 'заблокирован' %}{{ comment.author.username_style }}{% else %}gray-un{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} {% if comment.author.username == "root" %}style="color: red;"{% endif %}>{{ comment.author.username }}</label>
+                      <div style="display: flex; margin: 0 auto 0 0;">
+                        <div style="margin: 0 auto 0 0;">
+                          <div class="{% if comment.author.username_style != 'gray-un' and comment.author.rank != 'заблокирован' %}{{ comment.author.username_style }}{% else %}gray-un{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} {% if comment.author.username == "root" %}style="color: red;"{% endif %}>{{ comment.author.username }}</div>
+                          <div style="color: #555555; font-weight: bold;">{{ comment.created|date:'d E Y / H:i' }}</div>
                         </div>
-                        <div>
-                          <label style="color: #555555; font-weight: bold;">{{ comment.created|date:'d E Y / H:i' }}</label>
+                        <div style="margin: 0 0 0 auto; float: right;">
+                          <div class="window-main" style="margin: 0 0 0 auto;">
+                            <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
+                            <div class="window-other" style="right: 0;">
+                              <a href="{% url 'forum:delete_profile_comment' author comment.id %}" class="window-button-second">Удалить пост</a>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

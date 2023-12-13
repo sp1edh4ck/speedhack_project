@@ -46,7 +46,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'users.middleware.ActiveUserMiddleware',
-    'django_ratelimit.middleware.RatelimitMiddleware',
+    # 'django_ratelimit.middleware.RatelimitMiddleware',
 ]
 
 ROOT_URLCONF = 'speedhack.urls'
@@ -111,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'forum:index'
 
-RATELIMIT_VIEW = 'forum.views.ratelimited'
+# RATELIMIT_VIEW = 'forum.views.ratelimited'
 
 LANGUAGE_CODE = 'ru'
 

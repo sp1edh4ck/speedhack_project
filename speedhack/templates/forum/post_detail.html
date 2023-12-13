@@ -120,13 +120,13 @@
                 <div class="comment-date" style="margin: 10px auto 0 0;">
                   <label>{{ comment.created|date:"d E Y / H:i" }}</label>
                 </div>
-                {% if user.likes >= 20 and user.username != comment.author.username %}
+                {% comment %} {% if user.likes >= 20 and user.username != comment.author.username %}
                   <div class="comment-date" style="margin-top: 3px;">
                     <a href="{% url 'forum:likes_add' post.id comment.author.username %}">
                       <img src="{% static 'images/heart_gray.png' %}" style="width: 25px; height: 23px;">
                     </a>
                   </div>
-                {% endif %}
+                {% endif %} {% endcomment %}
               </div>
             </div>
           </div>
