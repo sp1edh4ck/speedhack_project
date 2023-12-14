@@ -1,1 +1,4 @@
 /speedhack/cache/
+**/__pycache__
+**/migrations
+db.sqlite3
