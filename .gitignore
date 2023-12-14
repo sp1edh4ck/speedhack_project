@@ -4,7 +4,14 @@
 db.sqlite3
 **/media/
 **/posts/
-**/static/images/posts/
-**/static/images/avatars/
+**/static/images/posts/*.png
+**/static/images/posts/*.jpg
+**/static/images/posts/*.gif
+**/static/images/posts/*.mp4
+**/static/images/avatars/*.png
+**/static/images/avatars/*.jpg
+**/static/images/avatars/*.gif
+**/static/images/avatars/*.mp4
 **/static/images/cache/
-**/static/images/backgrounds/
+**/static/images/backgrounds/*.png
+**/static/images/backgrounds/*.jpg
