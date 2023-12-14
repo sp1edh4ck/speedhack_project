@@ -2,3 +2,9 @@
 **/__pycache__/
 **/migrations/
 db.sqlite3
+**/media/
+**/posts/
+**/static/images/posts/
+**/static/images/avatars/
+**/static/images/cache/
+**/static/images/backgrounds/
