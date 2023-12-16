@@ -54,7 +54,7 @@
 
 .menu-link:hover {
   color: #ff506f;
-  color: #cacaca;
+  color: #ffffff;
 }
 
 .button {
@@ -124,7 +124,7 @@
 }
 
 .window-button {
-  color: gray;
+  color: #d6d6d6;
   font-size: 16px;
   display: flex;
   text-decoration: none;
@@ -134,7 +134,7 @@
 }
 
 .window-button:hover {
-  color: #cacaca;
+  color: #ffffff;
 }
 
 a.window-button {

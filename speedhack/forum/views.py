@@ -9,7 +9,7 @@ from users.forms import UserProfileForm
 from users.models import CustomUser, IpUser
 
 from .forms import ProfileCommentForm, CommentForm, PostForm, DepositForm, HelpForm, AnswerForm, AdsForm
-from .models import Follow, Forum, User, Group, Comment, Viewers, HelpForum, Helpers, Ads, ProfileComment, Like
+from .models import Follow, Forum, User, Group, Comment, Viewers, HelpForum, Helpers, Ads, ProfileComment, Symp, Like
 
 
 def pagination_post(request, post_list):
@@ -292,11 +292,14 @@ def post_detail(request, post_id):
     form = CommentForm(request.POST or None)
     comments = post.comments.all()
     count_comments = comments.count()
-    likes = Like.objects.filter(post=post)
+    user = get_object_or_404(User, username=request.user.username)
+    my_symp = Symp.objects.filter(post=post, user=user)
+    symps = Symp.objects.filter(post=post)
     context = {
         'form': form,
         'post': post,
-        'likes': likes,
+        'symps': symps,
+        'my_symp': my_symp,
         'comments': comments,
         'count_comments': count_comments,
     }
@@ -321,55 +324,54 @@ def post_oc(request, post_id, number):
 
 @ratelimit(key='ip', rate='50/m')
 @login_required
-def likes_add(request, post_id, username):
+def symps_add(request, post_id, username):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     post = get_object_or_404(Forum, id=post_id)
     owner = get_object_or_404(User, username=username)
     if owner != request.user:
-        if not Like.objects.filter(post=post, owner=owner, user=request.user).exists():
-            owner.likes += 1
+        if not Symp.objects.filter(post=post, owner=owner, user=request.user).exists():
+            owner.symps += 1
             owner.save()
-            Like.objects.create(post=post, owner=owner, user=request.user)
+            Symp.objects.create(post=post, owner=owner, user=request.user)
         else:
-            owner.likes -= 1
+            owner.symps -= 1
             owner.save()
-            Like.objects.filter(post=post, owner=owner, user=request.user).delete()
-        # return redirect('forum:post_detail', post_id=post_id)
+            Symp.objects.filter(post=post, owner=owner, user=request.user).delete()
     comments = post.comments.all()
     if post.author.username == request.user.username:
         for comment in comments:
             user = CustomUser.objects.get(username=comment.author.username)
     else:
         user = CustomUser.objects.get(username=post.author.username)
-    if user.privilege != "местный" and user.likes >= 20 and user.likes <= 199:
+    if user.privilege != "местный" and user.symps >= 20 and user.symps <= 199:
         user.privilege = "местный"
         user.save()
-    elif user.privilege != "постоялец" and user.likes >= 200 and user.likes <= 999:
+    elif user.privilege != "постоялец" and user.symps >= 200 and user.symps <= 999:
         user.privilege = "постоялец"
         user.save()
-    elif user.privilege != "эксперт" and user.likes >= 1000 and user.likes <= 3999:
+    elif user.privilege != "эксперт" and user.symps >= 1000 and user.symps <= 3999:
         user.privilege = "эксперт"
         user.save()
-    elif user.privilege != "гуру" and user.likes >= 4000 and user.likes <= 9999:
+    elif user.privilege != "гуру" and user.symps >= 4000 and user.symps <= 9999:
         user.privilege = "гуру"
         user.save()
-    elif user.privilege != "искусственный интелект" and user.likes >= 10000:
+    elif user.privilege != "искусственный интелект" and user.symps >= 10000:
         user.privilege = "искусственный интелект"
         user.save()
-    if user.likes < 20:
+    if user.symps < 20:
         user.privilege = "новорег"
         user.save()
-    elif user.likes < 200:
+    elif user.symps < 200:
         user.privilege = "местный"
         user.save()
-    elif user.likes < 1000:
+    elif user.symps < 1000:
         user.privilege = "постоялец"
         user.save()
-    elif user.likes < 4000:
+    elif user.symps < 4000:
         user.privilege = "эксперт"
         user.save()
-    elif user.likes < 10000:
+    elif user.symps < 10000:
         user.privilege = "гуру"
         user.save()
     return redirect('forum:post_detail', post_id=post_id)
@@ -433,7 +435,7 @@ def post_delete(request, post_id):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     post = get_object_or_404(Forum, pk=post_id)
-    if (request.user == post.author or request.user.rank_lvl >= 5):
+    if (request.user == post.author or request.user.rank_lvl >= "4"):
         Forum.objects.filter(pk=post_id).delete()
         return redirect('forum:successfully')
 
@@ -654,6 +656,7 @@ def ads(request):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     form = AdsForm(request.POST or None)
+    users = CustomUser.objects.all()
     ads = Ads.objects.all()
     ads_count = ads.count()
     if request.method == 'POST':
@@ -661,6 +664,7 @@ def ads(request):
             form.save()
     context = {
         'ads': ads,
+        'users': users,
         'ads_count': ads_count,
         'form': form,
     }

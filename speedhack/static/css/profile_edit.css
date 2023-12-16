@@ -92,7 +92,7 @@
 
 .profile-edit-field-height {
   height: 30px;
-  padding-left: 15px;
+  padding-left: 10px;
 }
 
 /* #id_birthday {
@@ -158,7 +158,7 @@ option:hover {
   outline: none;
   max-width: 90px;
   height: 30px;
-  padding-left: 7px;
+  padding-left: 10px;
   font-size: 16px;
   transition: all 0.15s ease 0s;
 }

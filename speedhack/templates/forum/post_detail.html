@@ -9,7 +9,7 @@
       <label class="link-title"><a href="{% url 'forum:index' %}" class="link-title-main">Форум</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:group_filter_posts' post.group.id %}" class="link-title-main">{{ post.group.title }}</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:post_detail' post.id %}" class="link-title-main">Пост #{{ post.id }}</a></label>
       <div class="frame-title">
         <label class="text-up-title">{{ post.title }}</label><br>
-        <label class="text-up-all">Тема в разделе <a href="{% url 'forum:group_filter_posts' post.group.slug %}" class="text-up-nick">{{ post.group }}</a> создана пользователем <a href="{% url 'forum:profile' post.author.username %}" class="{% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}text-up-nick2 {{ post.author.username_style }}{% else %}text-up-nick{% endif %}" {% if post.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ post.author.username }}</a> / <img class="heart" src="{% static 'images/heart_gray.png' %}"> <label style="color: #ff506f;">{{ post.author.likes }}</label> {% comment %}/ <img src="{% static 'images/views.png' %}" style="width: 25px; vertical-align: middle; margin-bottom: 2px;"> <label style="color: #ff506f;">{{ count_views }}</label>{% endcomment %}| <label style="color: gray;">{{ post.pub_date|date:"d E Y / H:i" }}</label></label>
+        <label class="text-up-all">Тема в разделе <a href="{% url 'forum:group_filter_posts' post.group.slug %}" class="text-up-nick">{{ post.group }}</a> создана пользователем <a href="{% url 'forum:profile' post.author.username %}" class="{% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}text-up-nick2 {{ post.author.username_style }}{% else %}text-up-nick{% endif %}" {% if post.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ post.author.username }}</a> / <img class="heart" src="{% static 'images/heart_gray.png' %}"> <label style="color: #ff506f;">{{ post.author.symps }}</label> {% comment %}/ <img src="{% static 'images/views.png' %}" style="width: 25px; vertical-align: middle; margin-bottom: 2px;"> <label style="color: #ff506f;">{{ count_views }}</label>{% endcomment %}| <label style="color: gray;">{{ post.pub_date|date:"d E Y / H:i" }}</label></label>
       </div>
       <div class="frame-main">
         <div class="frame-main-avatars">
@@ -28,7 +28,7 @@
             <div style="display: flex;">
               <div style="margin: 0 auto 0 0;">
                 <a href="{% url 'forum:profile' post.author.username %}" style="text-decoration: none; cursor: pointer;">
-                  <label class="frame-main-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>{% if user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
+                  <label class="frame-main-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>{% if user.scam == True %}{% comment %}<abbr data-title="Скам">{% endcomment %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% comment %}</abbr>{% endcomment %}{% endif %}
                 </a>
               </div>
               {% if user.username == post.author.username or user.rank_lvl >= "4" %}
@@ -65,18 +65,28 @@
                   </label>
                 {% endif %}
               </div>
-              {% if user.likes >= 20 and user.username != post.author.username %}
-                <div class="comment-date" style="margin-top: 3px;">
-                  <a href="{% url 'forum:likes_add' post.id post.author.username %}">
-                    {% if likes.count != 0 %}
-                      {% for like in likes %}
-                        <img src="{% static 'images/heart_pink_full.png' %}" style="width: 25px; height: 23px;">
-                      {% endfor %}
-                    {% else %}
-                      <img src="{% static 'images/heart_gray.png' %}" style="width: 25px; height: 23px;">
-                    {% endif %}
-                  </a>
-                </div>
+              {% if symps.count != 0 %}
+                {% if user.symps >= 20 or user.rank_lvl >= "4" and user != post.author %}
+                  <div class="comment-date" style="margin-top: 3px;">
+                    <a href="{% url 'forum:symps_add' post.id post.author.username %}">
+                      {% if my_symp %}
+                        <img src="{% static 'images/heart_pink_full.png' %}" class="symp-img"><label class="symp-label">{{ symps.count }}</label>
+                      {% else %}
+                        <img src="{% static 'images/heart_gray.png' %}" class="symp-img"><label class="symp-label">{{ symps.count }}</label>
+                      {% endif %}
+                    </a>
+                  </div>
+                {% else %}
+                  <img src="{% static 'images/heart_gray.png' %}" class="symp-img" style="cursor: default;"><label class="symp-label" style="cursor: default;">{{ symps.count }}</label>
+                {% endif %}
+              {% elif symps.count == 0 %}
+                {% if user != post.author %}
+                  {% if user.symps >= 20 or user.rank_lvl >= "4" %}
+                    <a href="{% url 'forum:symps_add' post.id post.author.username %}">
+                      <img src="{% static 'images/heart_gray.png' %}" class="symp-img">
+                    </a>
+                  {% endif %}
+                {% endif %}
               {% endif %}
             </div>
           </div>
@@ -96,7 +106,7 @@
               <div style="display: flex;">
                 <div style="margin: 0 auto 0 0;">
                   <a href="{% url 'forum:profile' comment.author.username %}" style="text-decoration: none; cursor: pointer;">
-                    <label class="frame-main-username {% if comment.author.username_style != 'gray-un' and comment.author.rank != 'заблокирован' %}{{ comment.author.username_style }}{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ comment.author.username }}</label>{% if comment.user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
+                    <label class="frame-main-username {% if comment.author.username_style != 'gray-un' and comment.author.rank != 'заблокирован' %}{{ comment.author.username_style }}{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ comment.author.username }}</label>{% if comment.user.scam == True %}{% comment %}<abbr data-title="Скам">{% endcomment %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% comment %}</abbr>{% endcomment %}{% endif %}
                   </a>
                 </div>
                 {% if comment.author.username == request.user.username or user.rank_lvl >= "4" %}
@@ -120,9 +130,9 @@
                 <div class="comment-date" style="margin: 10px auto 0 0;">
                   <label>{{ comment.created|date:"d E Y / H:i" }}</label>
                 </div>
-                {% comment %} {% if user.likes >= 20 and user.username != comment.author.username %}
+                {% comment %} {% if user.symps >= 20 and user.username != comment.author.username %}
                   <div class="comment-date" style="margin-top: 3px;">
-                    <a href="{% url 'forum:likes_add' post.id comment.author.username %}">
+                    <a href="{% url 'forum:symps_add' post.id comment.author.username %}">
                       <img src="{% static 'images/heart_gray.png' %}" style="width: 25px; height: 23px;">
                     </a>
                   </div>
@@ -158,9 +168,9 @@
                 <div class="comment-date" style="margin: 10px auto 0 0;">
                   <label>{{ comment.created|date:"d E Y / H:i" }}</label>
                 </div>
-                {% if user.likes >= 20 and user.username != comment.author.username %}
+                {% if user.symps >= 20 and user.username != comment.author.username %}
                   <div class="comment-date" style="margin-top: 3px;">
-                    <a href="{% url 'forum:likes_add' post.id %}">
+                    <a href="{% url 'forum:symps_add' post.id %}">
                       <img src="{% static 'images/heart_pink.png' %}" style="width: 25px; height: 23px; margin: 5px;">
                     </a>
                   </div>

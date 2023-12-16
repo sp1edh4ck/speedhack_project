@@ -316,7 +316,7 @@
               <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
               <div style="display: flex;justify-content: center; text-align: center; overflow: hidden;">
                 <div class="int-info-profile" href="">
-                  <div style="color: #ff506f;">{{ author.likes }}</div>
+                  <div style="color: #ff506f;">{{ author.symps }}</div>
                   <div style="color: gray;">симпатий</div>
                 </div>
                 <div class="int-info-profile" href="">
@@ -381,8 +381,8 @@
                         </div>
                       </div>
                     </div>
-                    <div style="margin-top: 10px;">
-                      <label class="profile-comment-label">{{ comment.text }}</label>
+                    <div style="margin-top: 10px;" class="profile-comment-label">
+                      <label>{{ comment.text }}</label>
                     </div>
                   </div>
                 {% endfor %}

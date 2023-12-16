@@ -11,10 +11,15 @@
           <div style="background: #242424b6; border-radius: 10px;">
             <div style="display: flex; padding-top: 20px;">
               <div class="profile-edit-div">
-                <label>Описание:</label>
+                <label>Статус:</label>
               </div>
-              <div>
-                {{ form.description|addclass:"profile-edit-field profile-edit-field-height" }}
+              <div style="display: block;">
+                <div>
+                  {{ form.description|addclass:"profile-edit-field profile-edit-field-height" }}
+                </div>
+                <div style="margin-top: 5px; color: gray;">
+                  <label>Отображается рядом с вашим ником в сообщениях.</label>
+                </div>
               </div>
             </div>
             <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
@@ -115,9 +120,9 @@
               </div>
               <div>
                 <select name="gender" id="id_gender" class="birthday-input" style="min-width: 150px;">
-                  <option value="Не выбрано">Не выбрано</option>
-                  <option value="Мужской" selected="">Мужской</option>
-                  <option value="Женский">Женский</option>
+                  <option value="Не выбрано" {% if user.gender == "Не выбрано" %}selected=""{% endif %}>Не выбрано</option>
+                  <option value="Мужской" {% if user.gender == "Мужской" %}selected=""{% endif %}>Мужской</option>
+                  <option value="Женский" {% if user.gender == "Женский" %}selected=""{% endif %}>Женский</option>
                 </select>
               </div>
             </div>
@@ -128,23 +133,23 @@
               </div>
               <div style="display: block;">
                 <div>
-                  <input type="text" name="brt_day" id="id_brt_day" class="birthday-input" placeholder="День" maxlength="2">
+                  <input type="integer" name="brt_day" id="id_brt_day" class="birthday-input" placeholder="День..." value="{{ user.brt_day }}" maxlength="2">
                   <select name="brt_month" id="id_brt_month" class="birthday-input" style="min-width: 101px; height: 34px; -o-appearance: none;">
-                    <option value="Месяц">Месяц</option>
-                    <option value="Январь">Январь</option>
-                    <option value="Февраль">Февраль</option>
-                    <option value="Март">Март</option>
-                    <option value="Апрель">Апрель</option>
-                    <option value="Май">Май</option>
-                    <option value="Июнь">Июнь</option>
-                    <option value="Июль">Июль</option>
-                    <option value="Август">Август</option>
-                    <option value="Сентябрь">Сентябрь</option>
-                    <option value="Октябрь">Октябрь</option>
-                    <option value="Ноябрь">Ноябрь</option>
-                    <option value="Декабрь">Декабрь</option>
+                    <option value="Месяц" {% if user.brt_month == "Месяц" %}selected=""{% endif %}>Месяц</option>
+                    <option value="Январь" {% if user.brt_month == "Январь" %}selected=""{% endif %}>Январь</option>
+                    <option value="Февраль" {% if user.brt_month == "Февраль" %}selected=""{% endif %}>Февраль</option>
+                    <option value="Март" {% if user.brt_month == "Март" %}selected=""{% endif %}>Март</option>
+                    <option value="Апрель" {% if user.brt_month == "Апрель" %}selected=""{% endif %}>Апрель</option>
+                    <option value="Май" {% if user.brt_month == "Май" %}selected=""{% endif %}>Май</option>
+                    <option value="Июнь" {% if user.brt_month == "Июнь" %}selected=""{% endif %}>Июнь</option>
+                    <option value="Июль" {% if user.brt_month == "Июль" %}selected=""{% endif %}>Июль</option>
+                    <option value="Август" {% if user.brt_month == "Август" %}selected=""{% endif %}>Август</option>
+                    <option value="Сентябрь" {% if user.brt_month == "Сентябрь" %}selected=""{% endif %}>Сентябрь</option>
+                    <option value="Октябрь" {% if user.brt_month == "Октябрь" %}selected=""{% endif %}>Октябрь</option>
+                    <option value="Ноябрь" {% if user.brt_month == "Ноябрь" %}selected=""{% endif %}>Ноябрь</option>
+                    <option value="Декабрь" {% if user.brt_month == "Декабрь" %}selected=""{% endif %}>Декабрь</option>
                   </select>
-                  <input name="brt_year" type="text" id="id_brt_year" class="birthday-input" placeholder="Год" maxlength="4">
+                  <input type="integer" name="brt_year" id="id_brt_year" class="birthday-input" placeholder="Год..." value="{{ user.brt_year }}" maxlength="4">
                 </div>
               </div>
             </div>

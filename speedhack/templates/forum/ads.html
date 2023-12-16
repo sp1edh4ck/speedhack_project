@@ -38,6 +38,16 @@
                 <input type="number" name="weeks" id="id_weeks" class="field field-height" style="max-width: 250px; max-height: 36px; padding: 0 7px 0 7px;" placeholder="Длительность..." maxlength="5">
               </div>
             </div>
+            <div class="ticket-div" style="min-height: 80px; margin-bottom: 0;">
+              <label class="ads-label">Автор:</label>
+              <div>
+                <select name="author" id="id_author" class="field field-height" style="max-width: 250px; max-height: 36px; padding: 0 7px 0 7px;" placeholder="Автор...">
+                  {% for user in users %}
+                    <option value="{{ user.id }}">{{ user }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
             <button type="submit" class="button-level" style="margin-left: 210px; margin-top: 0;">Создать обращение</button>
           </form>
         </div>
@@ -48,7 +58,7 @@
                 <div style="display: block;">
                   <div style="display: flex; padding: 0 20px 0 20px; margin-bottom: 10px;">
                     <div class="admin-btn">
-                      <a class="admin-button" href="{% url 'forum:post_detail' ad.id %}">{{ ad.title }}</a>
+                      <a class="admin-button" href="{% url 'forum:post_detail' ad.post_id %}">{{ ad.title }}</a>
                     </div>
                   </div>
                   <div class="admin-btn" style="display: flex; padding: 0 20px 0 20px;">

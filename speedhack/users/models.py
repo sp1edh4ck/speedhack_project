@@ -104,7 +104,8 @@ RANK_STYLE = [
 
 class CustomUser(AbstractUser):
     activation_code = models.CharField(max_length=6, blank=True)
-    likes = models.IntegerField(verbose_name='Симпатии', default=0)
+    symps = models.IntegerField(verbose_name='Симпатии', default=0)
+    likes = models.IntegerField(verbose_name='Лайки', default=0)
     balance = models.IntegerField(verbose_name='Баланс', default=0)
     save_deposit = models.IntegerField(verbose_name='Страховой депозит', default=0)
     gender = models.TextField(verbose_name='Пол', choices=GENDER, default=GENDER[0][0])

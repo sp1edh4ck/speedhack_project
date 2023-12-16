@@ -10,7 +10,7 @@
         <li class="menu-item"><a href="{% url 'forum:guarantor' %}" class="menu-link">Гарант</a></li>
         <li class="menu-item">
           <div class="window-main">
-            <a class="window-button" style="color: #d6d6d6;">Соц. сети <i class="fas fa-angle-down fa-sm icons-header"></i></a>
+            <a class="window-button">Соц. сети <i class="fas fa-angle-down fa-sm icons-header"></i></a>
             <div style="padding-top: 10px;">
               <div class="window-other">
                 <a href="https://t.me/speedhack_project" target="_blank" class="window-button-second">Канал в Telegram</a>
@@ -22,14 +22,14 @@
         </li>
         <li class="menu-item">
           <div class="window-main">
-            <a class="window-button" style="color: #d6d6d6;">Другое <i class="fa fa-angle-down fa-sm icons-header"></i></a>
+            <a class="window-button">Другое <i class="fa fa-angle-down fa-sm icons-header"></i></a>
             <div style="padding-top: 10px;">
               <div class="window-other">
                 <a href="{% url 'forum:ticket_form' %}" class="window-button-second">Нужна помощь?</a>
                 <a href="{% url 'forum:users' %}" class="window-button-second">Пользователи</a>
                 <a href="{% url 'forum:faq' %}" class="window-button-second">FAQ</a>
                 <a href="{% url 'forum:rules' %}" class="window-button-second">Правила форума</a>
-                {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' %}
+                {% if request.user.rank_lvl >= "4" %}
                   <a href="{% url 'forum:admin_panel' %}" class="window-button-second">Админка</a>
                 {% endif %}
               </div>

@@ -191,3 +191,19 @@
   position: absolute;
   margin: -24px 0 0 64px;
 }
+
+.symp-img {
+  cursor: pointer;
+  width: 25px;
+  height: 23px;
+  float: left;
+  text-decoration: none;
+}
+
+.symp-label {
+  cursor: pointer;
+  margin-left: 7px;
+  color: #d6d6d6;
+  font-weight: bold;
+  text-decoration: none;
+}

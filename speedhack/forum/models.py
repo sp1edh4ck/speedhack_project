@@ -65,6 +65,12 @@ class Ads(models.Model):
     title = models.CharField(verbose_name='Заголовок', max_length=100)
     post_id = models.CharField(verbose_name='Ссылка', max_length=10)
     weeks = models.IntegerField(verbose_name='Кол-во оплаченных недель')
+    author = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name='Автор рекламы',
+    )
     created = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации', blank=True, null=True)
 
     class Meta:
@@ -185,28 +191,6 @@ class Viewers(models.Model):
     )
 
 
-# class Like(models.Model):
-#     post = models.ForeignKey(
-#         Forum,
-#         on_delete=models.CASCADE,
-#         related_name='like',
-#         verbose_name='Пост',
-#     )
-#     author = models.ForeignKey(
-#         User,
-#         on_delete=models.CASCADE,
-#         related_name='like',
-#         verbose_name='Автор',
-#     )
-#     taked = models.BooleanField(
-#         default=False,
-#     )
-#     created = models.DateTimeField(
-#         auto_now_add=True,
-#         verbose_name='Дата публикации',
-#     )
-
-
 class Like(models.Model):
     post = models.ForeignKey(
         Forum,
@@ -232,6 +216,33 @@ class Like(models.Model):
     class Meta:
         verbose_name = 'Лайк'
         verbose_name_plural = 'Лайки'
+
+
+class Symp(models.Model):
+    post = models.ForeignKey(
+        Forum,
+        on_delete=models.CASCADE,
+        related_name='symp',
+        verbose_name='Пост',
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='symper',
+    )
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='symping',
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата симпатии',
+    )
+
+    class Meta:
+        verbose_name = 'Симпатия'
+        verbose_name_plural = 'Симпатии'
 
 
 class Comment(models.Model):

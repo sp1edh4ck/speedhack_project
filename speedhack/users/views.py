@@ -56,12 +56,6 @@ class ActivationView(View):
 
 
 
-
-
-
-
-
-
 # from django.views.generic import DetailView, UpdateView, CreateView, View, TemplateView
 # from django.db import transaction
 # from django.urls import reverse_lazy
