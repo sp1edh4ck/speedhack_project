@@ -55,6 +55,7 @@ class AdsAdmin(admin.ModelAdmin):
 
 class SympAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'post',
         'user',
         'owner',
@@ -66,6 +67,7 @@ class SympAdmin(admin.ModelAdmin):
 
 class LikeAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'post',
         'user',
         'owner',
@@ -96,7 +98,7 @@ admin.site.register(Forum, ForumAdmin)
 admin.site.register(Helpers, HelpersAdmin)
 admin.site.register(HelpForum, HelpForumAdmin)
 admin.site.register(Ads, AdsAdmin)
-admin.site.register(Symp, LikeAdmin)
+admin.site.register(Symp, SympAdmin)
 admin.site.register(Like, LikeAdmin)
 admin.site.register(Group, GroupAdmin)
 # admin.site.register(Favourites, FavouriteAdmin)

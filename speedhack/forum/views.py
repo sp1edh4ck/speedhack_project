@@ -298,6 +298,7 @@ def post_detail(request, post_id):
     context = {
         'form': form,
         'post': post,
+        'user': user,
         'symps': symps,
         'my_symp': my_symp,
         'comments': comments,
@@ -625,6 +626,14 @@ def ticket_open(request, ticket_id):
     return redirect('forum:tickets')
 
 
+@login_required
+def ticket_delete(request, ticket_id):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    HelpForum.objects.filter(pk=ticket_id).delete()
+    return redirect('forum:tickets')
+
+
 @ratelimit(key='ip', rate='50/m')
 @login_required
 def ticket_form(request):
@@ -686,6 +695,7 @@ def users(request):
     count_posts = posts.count()
     count_accs = accs.count()
     users_list = CustomUser.objects.all()
+    new_users = CustomUser.objects.order_by("-date_joined")[:10]
     count_sellers = 0
     for user in users_list:
         if user.rank != "заблокирован":
@@ -700,6 +710,7 @@ def users(request):
     author = Forum.objects.select_related('author').all()
     context = {
         'author': author,
+        'new_users': new_users,
         'users': users_list,
         'count_sellers': count_sellers,
         'count_posts': count_posts,

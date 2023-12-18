@@ -48,6 +48,9 @@
                           <label class="users-username" {% if ticket.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ ticket.author }}</label>
                         </a>
                       </div>
+                      <div class="admin-btn" style="margin-right: 5px;">
+                        <a class="admin-button" href="{% url 'forum:ticket_delete' ticket.id %}">Удалить</a>
+                      </div>
                       <div class="admin-btn">
                         <a class="admin-button" href="{% url 'forum:ticket_close' ticket.id %}">Закрыть</a>
                       </div>
@@ -85,6 +88,9 @@
                           <label class="users-username" {% if ticket.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ ticket.author }}</label>
                         </a>
                       </div>
+                      <div class="admin-btn" style="margin-right: 5px;">
+                        <a class="admin-button" href="{% url 'forum:ticket_delete' ticket.id %}">Удалить</a>
+                      </div>
                       <div class="admin-btn">
                         <a class="admin-button" href="{% url 'forum:ticket_open' ticket.id %}">Открыть</a>
                       </div>
@@ -103,7 +109,7 @@
             {% endfor %}
           {% else %}
             <div style="margin: 0px 0 0 20px; text-align: center;" id="tickets_open">
-              <label style="color: #515151; font-size: 18px; font-weight: bold;">Нет открытых тикетов</label>
+              <label style="color: #515151; font-size: 18px; font-weight: bold;">Нет закрытых тикетов</label>
             </div>
           {% endif %}
         </div>

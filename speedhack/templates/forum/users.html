@@ -35,6 +35,22 @@
             </div>
           </div>
         </div>
+        <div class="frame-left-second-users" style="min-height: 50%;">
+          <div style="color: gray; font-size: 18px; margin-bottom: 15px;">Новые пользователи</div>
+          {% for user in new_users %}
+            <div style="display: flex;">
+              <a class="a-users" href="{% url 'forum:profile' user.username %}">
+                <img style="width: 50px; border-radius: 50px;" src="{{ user.avatar.url }}">
+              </a>
+              <div style="margin-left: 10px;">
+                <a href="{% url 'forum:profile' user.username %}" style="text-decoration: none; cursor: pointer; font-size: 14px;">
+                  <label class="users-un {% if user.username_style != 'gray-un' and user.rank != 'заблокирован' %}{{ user.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if user.username == "root" %}style="color: red;"{% endif %} style=" font-size: 16px;">{{ user.username }}</label>
+                </a>
+                <div style="color: #d6d6d6; font-size: 14px;">{{ user.date_joined|date:'d E Y' }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
         {% comment %} <div class="frame-left-second-users">
           <span style="color: gray; font-size: 18px;">Статистика маркета</span>
           <div style="display: block;">
@@ -49,51 +65,107 @@
           </div>
         </div> {% endcomment %}
       </div>
-      <div class="frame-right-users" style="{% if count_search == 0 %}max-height: 60px;{% elif count_search == 1 %}max-height: 100px;{% elif count_search == 2 %}max-height: 210px;{% elif count_search == 3 %}max-height: 320px;{% endif %}">
-        {% if count_search != 0 %}
-          {% for user in users %}
-            <div class="users-div">
-              <div style="padding: 10px 0 10px 10px;">
-                <a class="a-users" href="{% url 'forum:profile' user.username %}">
-                  <img style="width: 60px; border-radius: 50px;" src="{{ user.avatar.url }}">
-                </a>
-                {% if user.is_online == True %}
-                  <div class="online online-avatar"></div>
-                {% endif %}
-              </div>
-              <div style="margin-left: 20px; padding: 10px 0 10px 0;">
-                {% comment %} <div style="display: inline-flex;">
-                  <div>
-                    <a class="a-users" href="{% url 'forum:profile' user.username %}">
-                      <label class="users-un {% if user.username_style != 'gray-un' %}{{ user.username_style }}{% endif %}">{{ user.username }}</label>
-                    </a>
-                  </div>
-                  <div>
-                    <label style="color: #ff506f; font-size: 21px;">{{ users.symps }}</label>
-                  </div>
-                </div> {% endcomment %}
-                <div style="display: flex;">
-                  <div style="margin: 0;">
-                    <a href="{% url 'forum:profile' user.username %}" style="text-decoration: none; cursor: pointer;"><label class="users-un {% if user.username_style != 'gray-un' and user.rank != 'заблокирован' %}{{ user.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if user.username == "root" %}style="color: red;"{% endif %}>{{ user.username }}</label></a>
-                    <div style="margin-top: 7px; color: #999999; font-weight: bold;">
-                      <img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label style="margin-right: 20px;">{{ user.symps }}</label>
-                      <img class="heart-users" src="{% static 'images/messages.png' %}"> <label>{{ user.comments.count }}</label>
+      <div>
+        <div class="admin-frame-right" style="margin: 0 0 15px 0; padding: 20px 0 0 20px; min-height: 50px;">
+          <a data-tab="#all_users" class="button-tools active-tab">Все пользователи</a>
+          <a data-tab="#forum_team" class="button-tools">Команда форума</a>
+        </div>
+        <div id="all_users" class="tabItem frame-right-users users-display active-tab" style="{% if count_search == 0 %}max-height: 60px;{% elif count_search == 1 %}max-height: 100px;{% elif count_search == 2 %}max-height: 210px;{% elif count_search == 3 %}max-height: 320px;{% endif %}">
+          {% if count_search != 0 %}
+            {% for user in users %}
+              <div class="users-div">
+                <div style="padding: 10px 0 10px 10px;">
+                  <a class="a-users" href="{% url 'forum:profile' user.username %}">
+                    <img style="width: 60px; border-radius: 50px;" src="{{ user.avatar.url }}">
+                  </a>
+                  {% if user.is_online == True %}
+                    <div class="online online-avatar"></div>
+                  {% endif %}
+                </div>
+                <div style="margin-left: 20px; padding: 10px 0 10px 0;">
+                  {% comment %} <div style="display: inline-flex;">
+                    <div>
+                      <a class="a-users" href="{% url 'forum:profile' user.username %}">
+                        <label class="users-un {% if user.username_style != 'gray-un' %}{{ user.username_style }}{% endif %}">{{ user.username }}</label>
+                      </a>
                     </div>
-                  </div>
-                  {% comment %} <div>
-                    <label style="color: #ff506f; font-size: 21px;">{{ users.symps }}</label>
+                    <div>
+                      <label style="color: #ff506f; font-size: 21px;">{{ users.symps }}</label>
+                    </div>
                   </div> {% endcomment %}
+                  <div style="display: flex;">
+                    <div style="margin: 0;">
+                      <a href="{% url 'forum:profile' user.username %}" style="text-decoration: none; cursor: pointer;">
+                        <label class="users-un {% if user.username_style != 'gray-un' and user.rank != 'заблокирован' %}{{ user.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if user.username == "root" %}style="color: red;"{% endif %}>{{ user.username }}</label>
+                      </a>
+                      <div style="margin-top: 7px; color: #999999; font-weight: bold;">
+                        <img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label style="margin-right: 20px;">{{ user.symps }}</label>
+                        <img class="heart-users" src="{% static 'images/messages.png' %}"> <label>{{ user.comments.count }}</label>
+                      </div>
+                    </div>
+                    {% comment %} <div>
+                      <label style="color: #ff506f; font-size: 21px;">{{ users.symps }}</label>
+                    </div> {% endcomment %}
+                  </div>
                 </div>
               </div>
+              {% if not forloop.last %}<hr style="border: 1px solid #444444; padding: 0;">{% endif %}
+            {% endfor %}
+          {% else %}
+            <div style="margin: 20px 0 0 20px; text-align: center;">
+              <label style="color: #515151; font-size: 18px; font-weight: bold;">Нет пользователя с данным именем :/</label>
             </div>
-            {% if not forloop.last %}<hr style="border: 1px solid #444444; padding: 0;">{% endif %}
-          {% endfor %}
-        {% else %}
-          <div style="margin: 20px 0 0 20px; text-align: center;">
-            <label style="color: #515151; font-size: 18px; font-weight: bold;">Нет пользователя с данным именем :/</label>
-          </div>
-        {% endif %}
+          {% endif %}
+        </div>
+        <div id="forum_team" class="tabItem frame-right-users users-display" style="{% if count_search == 0 %}max-height: 60px;{% elif count_search == 1 %}max-height: 100px;{% elif count_search == 2 %}max-height: 210px;{% elif count_search == 3 %}max-height: 320px;{% endif %}">
+          {% if count_search != 0 %}
+            {% for user in users %}
+              {% if user.rank_lvl >= "4" %}
+                <div class="users-div">
+                  <div style="padding: 10px 0 10px 10px;">
+                    <a class="a-users" href="{% url 'forum:profile' user.username %}">
+                      <img style="width: 60px; border-radius: 50px;" src="{{ user.avatar.url }}">
+                    </a>
+                    {% if user.is_online == True %}
+                      <div class="online online-avatar"></div>
+                    {% endif %}
+                  </div>
+                  <div style="margin-left: 20px; padding: 10px 0 10px 0;">
+                    {% comment %} <div style="display: inline-flex;">
+                      <div>
+                        <a class="a-users" href="{% url 'forum:profile' user.username %}">
+                          <label class="users-un {% if user.username_style != 'gray-un' %}{{ user.username_style }}{% endif %}">{{ user.username }}</label>
+                        </a>
+                      </div>
+                      <div>
+                        <label style="color: #ff506f; font-size: 21px;">{{ users.symps }}</label>
+                      </div>
+                    </div> {% endcomment %}
+                    <div style="display: flex;">
+                      <div style="margin: 0;">
+                        <a href="{% url 'forum:profile' user.username %}" style="text-decoration: none; cursor: pointer;"><label class="users-un {% if user.username_style != 'gray-un' and user.rank != 'заблокирован' %}{{ user.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if user.username == "root" %}style="color: red;"{% endif %}>{{ user.username }}</label></a>
+                        <div style="margin-top: 7px; color: #999999; font-weight: bold;">
+                          <img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label style="margin-right: 20px;">{{ user.symps }}</label>
+                          <img class="heart-users" src="{% static 'images/messages.png' %}"> <label>{{ user.comments.count }}</label>
+                        </div>
+                      </div>
+                      {% comment %} <div>
+                        <label style="color: #ff506f; font-size: 21px;">{{ users.symps }}</label>
+                      </div> {% endcomment %}
+                    </div>
+                  </div>
+                </div>
+                {% comment %} {% if not forloop.last %}<hr style="border: 1px solid #444444; padding: 0;">{% endif %} {% endcomment %}
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <div style="margin: 20px 0 0 20px; text-align: center;">
+              <label style="color: #515151; font-size: 18px; font-weight: bold;">Нет пользователя с данным именем :/</label>
+            </div>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
+  <script type="text/javascript" src="{% static 'js/profile.js' %}"></script>
 {% endblock %}

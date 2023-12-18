@@ -197,7 +197,6 @@
   width: 25px;
   height: 23px;
   float: left;
-  text-decoration: none;
 }
 
 .symp-label {
@@ -205,5 +204,4 @@
   margin-left: 7px;
   color: #d6d6d6;
   font-weight: bold;
-  text-decoration: none;
 }

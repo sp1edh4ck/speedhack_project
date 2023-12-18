@@ -229,11 +229,13 @@ class Symp(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name='symper',
+        verbose_name='Тот кому поставили',
     )
     owner = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='symping',
+        verbose_name='Тот кто поставили',
     )
     created = models.DateTimeField(
         auto_now_add=True,

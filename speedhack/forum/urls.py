@@ -38,6 +38,7 @@ urlpatterns = [
     path('tickets/<str:username>/', views.my_tickets, name='my_tickets'),
     path('admin-panel/ticket/<int:ticket_id>/close/', views.ticket_close, name='ticket_close'),
     path('admin-panel/ticket/<int:ticket_id>/open/', views.ticket_open, name='ticket_open'),
+    path('admin-panel/ticket/<int:ticket_id>/delete/', views.ticket_delete, name='ticket_delete'),
     path('ticket/<int:ticket_id>/', views.ticket, name='ticket'),
     path('ticket/<int:ticket_id>/comment/', views.add_answer, name='add_answer'),
     path('admin-panel/<str:username>/ban/', views.admin_ban, name='admin_ban'),
