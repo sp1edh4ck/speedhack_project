@@ -695,7 +695,7 @@ def users(request):
     count_posts = posts.count()
     count_accs = accs.count()
     users_list = CustomUser.objects.order_by("-symps")
-    new_users = CustomUser.objects.order_by("-date_joined")[:10]
+    new_users = CustomUser.objects.order_by("-date_joined")[:5]
     count_sellers = 0
     for user in users_list:
         if user.rank != "заблокирован":

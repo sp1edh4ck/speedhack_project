@@ -90,7 +90,7 @@ class GroupAdmin(admin.ModelAdmin):
         'title',
     )
     search_fields = ('slug',)
-    list_filter = ('slug',)
+    ordering = ('id',)
     empty_value_display = '-пусто-'
 
 

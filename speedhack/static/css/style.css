@@ -1,6 +1,6 @@
 body {
   background: #2e2e2e;
-  font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
+  font-family: "Inter", sans-serif !important;
   margin: 0;
   line-height: 1.5;
   height: 100%;

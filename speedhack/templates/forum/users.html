@@ -35,7 +35,7 @@
             </div>
           </div>
         </div>
-        <div class="frame-left-second-users" style="min-height: 50%;">
+        <div class="frame-left-second-users" style="{% if new_users.count == 1 %}min-height: 90px; max-height: 90px;{% elif new_users.count == 2 %}min-height: 140px; max-height: 140px;{% elif new_users.count == 3 %}min-height: 200px; max-height: 200px;{% elif new_users.count == 4 %}min-height: 260px; max-height: 260px;{% elif new_users.count == 5 %}min-height: 310px; max-height: 310px;{% endif %}">
           <div style="color: gray; font-size: 18px; margin-bottom: 15px;">Новые пользователи</div>
           {% for user in new_users %}
             <div style="display: flex;">
@@ -67,7 +67,7 @@
       </div>
       <div>
         <div class="admin-frame-right" style="margin: 0 0 15px 0; padding: 20px 0 0 20px; min-height: 50px;">
-          <a data-tab="#all_users" class="button-tools active-tab">Все пользователи</a>
+          <a data-tab="#all_users" class="button-tools active-tab">Больше всего симпатий</a>
           <a data-tab="#forum_team" class="button-tools">Команда форума</a>
         </div>
         <div id="all_users" class="tabItem frame-right-users users-display active-tab" style="{% if count_search == 0 %}max-height: 60px;{% elif count_search == 1 %}max-height: 100px;{% elif count_search == 2 %}max-height: 210px;{% elif count_search == 3 %}max-height: 320px;{% endif %}">
@@ -103,8 +103,8 @@
                         <img class="heart-users" src="{% static 'images/messages.png' %}"> <label>{{ user.comments.count }}</label>
                       </div>
                     </div>
-                    {% comment %} <div>
-                      <label style="color: #ff506f; font-size: 21px;">{{ users.symps }}</label>
+                    {% comment %} <div style="align: right;">
+                      <label style="color: #ff506f; font-size: 21px;">{{ user.symps }}</label>
                     </div> {% endcomment %}
                   </div>
                 </div>
