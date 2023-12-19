@@ -694,7 +694,7 @@ def users(request):
     messages_count = Comment.objects.all().count()
     count_posts = posts.count()
     count_accs = accs.count()
-    users_list = CustomUser.objects.all()
+    users_list = CustomUser.objects.order_by("-symps")
     new_users = CustomUser.objects.order_by("-date_joined")[:10]
     count_sellers = 0
     for user in users_list:
@@ -707,9 +707,7 @@ def users(request):
     if search_query:
         users_list = CustomUser.objects.filter(username__icontains=search_query)
     count_search = users_list.count()
-    author = Forum.objects.select_related('author').all()
     context = {
-        'author': author,
         'new_users': new_users,
         'users': users_list,
         'count_sellers': count_sellers,

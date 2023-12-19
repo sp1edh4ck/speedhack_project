@@ -51,11 +51,11 @@ class CustomUserAdmin(UserAdmin):
     list_display = (
         'username',
         'email',
-        'is_staff',
-        'symps',
-        'subscriber',
-        'tg_link',
         'rank',
+        'balance',
+        'symps',
+        'privilege',
+        'scam',
     )
     list_filter = (
         'rank',

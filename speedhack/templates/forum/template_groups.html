@@ -29,7 +29,7 @@
               <div>
                 <label class="posts-group-title">{{ group.title }}</label>
               </div>
-              {% if helpers_count != 0 %}<label class="help-group-title">Проверяющие раздела: {% for helper in helpers%}<a class="help-group-username {% if helper.helper.username_style != 'gray-un' and helper.helper.rank != 'заблокирован' %}{{ helper.helper.username_style }}{% endif %}" href="{% url 'forum:profile' helper.helper.username %}" {% if helper.helper.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ helper.helper }}</a>{% if helpers_count > 1 and not forloop.last %}<span class="pink-separator"></span>{% endif %}{% endfor %}</label>{% endif %}
+              {% if helpers_count != 0 %}<label class="help-group-title">Проверяющие раздела: {% for helper in helpers %}<a class="help-group-username {% if helper.helper.username_style != 'gray-un' and helper.helper.rank != 'заблокирован' %}{{ helper.helper.username_style }}{% endif %}" href="{% url 'forum:profile' helper.helper.username %}" {% if helper.helper.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ helper.helper }}</a>{% if helpers_count > 1 and not forloop.last %}<span class="pink-separator"></span>{% endif %}{% endfor %}</label>{% endif %}
             </div>
             <div class="search-header search-header-else">
               <div>
