@@ -28,7 +28,9 @@ def pagination_comments(request, comment_list):
 
 
 def banned_redirect(request):
-    return redirect('forum:banned')
+    if request.user.rank == "заблокирован":
+        return redirect('forum:banned')
+    return redirect('forum:index')
 
 
 def banned(request):
@@ -284,6 +286,9 @@ def post_detail(request, post_id):
     if request.user.is_authenticated and request.user.rank == "заблокирован" and post.author != request.user:
         return banned_redirect(request)
     post = get_object_or_404(Forum, id=post_id)
+    if request.user.is_authenticated:
+        user = get_object_or_404(User, username=request.user.username)
+        my_symp = Symp.objects.filter(post=post, user=user)
     # Добавление просмотра (надо доработать)
     # if request.user.is_authenticated:
         # viewers = post.viewers.all()
@@ -292,15 +297,21 @@ def post_detail(request, post_id):
     form = CommentForm(request.POST or None)
     comments = post.comments.all()
     count_comments = comments.count()
-    user = get_object_or_404(User, username=request.user.username)
-    my_symp = Symp.objects.filter(post=post, user=user)
     symps = Symp.objects.filter(post=post)
+    if request.user.is_authenticated:
+        context = {
+            'form': form,
+            'post': post,
+            'user': user,
+            'symps': symps,
+            'my_symp': my_symp,
+            'comments': comments,
+            'count_comments': count_comments,
+        }
     context = {
         'form': form,
         'post': post,
-        'user': user,
         'symps': symps,
-        'my_symp': my_symp,
         'comments': comments,
         'count_comments': count_comments,
     }

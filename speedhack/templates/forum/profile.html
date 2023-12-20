@@ -343,8 +343,8 @@
               {% comment %} <a data-tab="#" class="button-tools">Жалобы</a> {% endcomment %}
             </div>
             <div id="userPosts" class="tabItem profile-comment-active active-tab">
-              <div class="frame-right-third" style="display: block;">
-                {% if user.is_authenticated %}
+              {% if user.is_authenticated %}
+                <div class="frame-right-third" style="display: block;">
                   <div class="frame-right-third-posts">
                     <a href="{% url 'forum:profile' request.user %}"><img class="frame-main-avatar" style="width: 60px; height: 60px; margin-right: 15px;" src="{{ user.avatar.url }}"></a>
                     <form method="post" action="{% url 'forum:profile' author.username %}">
@@ -359,8 +359,8 @@
                       </div>
                     </form>
                   </div>
-                {% endif %}
-              </div>
+                </div>
+              {% endif %}
               {% if profile_comments.count != 0 %}
                 {% for comment in profile_comments %}
                   <div class="frame-right-third" style="display: block;">
