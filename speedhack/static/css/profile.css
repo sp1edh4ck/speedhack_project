@@ -7,7 +7,7 @@
 .frame-edit {
   display: block;
   background: #242424b6;
-  padding: 20px;
+  padding: 15px;
   max-width: 200px;
   border-radius: 10px;
   margin-right: 15px;
@@ -140,10 +140,10 @@
 
 .frame-right-first {
   background: #242424b6;
-  padding: 20px;
+  padding: 15px 20px 10px;
   border-radius: 10px;
   font-size: 16px;
-  width: 905px;
+  width: 795px;
   min-height: 0px;
 }
 
@@ -153,7 +153,7 @@
   padding: 20px;
   border-radius: 10px;
   font-size: 16px;
-  width: 905px;
+  width: 795px;
   min-height: 0px;
   max-height: 190px;
 }
@@ -186,7 +186,7 @@
   padding: 20px;
   border-radius: 10px;
   font-size: 16px;
-  width: 905px;
+  width: 795px;
 }
 
 .frame-right-third.active-tab {

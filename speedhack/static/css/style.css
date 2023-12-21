@@ -21,8 +21,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 [data-title] {
-  position: relative; /* Относительное позиционирование */ 
-  cursor: help; /* Меняем курсор на справочный */
+  position: relative;
+  cursor: help;
 }
 [data-title]::after {
   content: attr(data-title);
@@ -41,7 +41,7 @@ body::-webkit-scrollbar-thumb {
   transition: 0.3s;
 }
 [data-title]:hover::after {
-  opacity: 1; /* Показываем подсказку */
+  opacity: 1;
 }
 
 .wrapper {
@@ -58,7 +58,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 [class*="_con"] {
-  max-width: 1200px;
+  max-width: 1081px;
   margin: 0 auto;
   display: flex;
 }

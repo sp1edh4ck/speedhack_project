@@ -51,7 +51,7 @@
                 <label>{{ post.text|linebreaksbr }}</label>
               </div>
               <div class="frame-main-post-heart">
-                {% thumbnail post.image "1050" crop="center" upscale=True as im %}
+                {% thumbnail post.image "950" crop="center" upscale=True as im %}
                   <img src="{{ im.url }}">
                 {% endthumbnail %}
               </div>

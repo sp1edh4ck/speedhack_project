@@ -4,7 +4,7 @@
 
 .link-title {
   color: #d6d6d6;
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: 10px;
 }
 
@@ -20,8 +20,9 @@
 }
 
 .frame-title {
-  padding: 20px;
-  min-width: 1160px;
+  padding: 15px 20px;
+  min-width: 1041px;
+  word-wrap: break-word;
   background: #242424b6;
   border-radius: 10px;
   margin-top: 20px;
@@ -29,7 +30,7 @@
 
 .text-up-title {
   color: #d6d6d6;
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .text-up-all {
@@ -73,8 +74,8 @@
 }
 
 .frame-main-avatar {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50px;
   margin-right: 20px;
   cursor: pointer;
@@ -97,27 +98,28 @@
 .frame-main-username {
   cursor: pointer;
   color: gray;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .frame-main-posts {
   display: flex;
-  max-width: 1200px;
+  max-width: 1041px;
   padding: 0 20px;
 }
 
 .frame-main-post-text {
-  max-width: 1040px;
+  max-width: 960px;
   color: #d6d6d6;
+  font-size: 15px;
   word-wrap: break-word;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .frame-main-post-heart {
-  min-width: 1060px;
+  min-width: 960px;
   color: #d6d6d6;
   word-wrap: break-word;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 .comment-text {
@@ -141,14 +143,14 @@
 
 .field-detail {
   display: block;
-  font-size: 18px;
+  font-size: 16px;
   margin: 0 5px 0 20px;
   background: #222222;
   border: 3px solid #444444;
   color: #d6d6d6;
   outline: none;
   padding: 7px 10px 10px 10px;
-  width: 1030px;
+  width: 920px;
   height: 18px;
   overflow: hidden;
   resize: none;
@@ -189,7 +191,7 @@
 
 .online-avatar-post-detail {
   position: absolute;
-  margin: -24px 0 0 64px;
+  margin: -21px 0 0 47px;
 }
 
 .symp-img {
