@@ -29,11 +29,11 @@
         </div>
       </div>
       <div style="display: block;">
-        <div class="admin-frame-right" style="margin: 0 0 15px 0; padding: 20px 0 0 20px; min-height: 50px;">
+        <div class="admin-frame-right" style="margin: 0 0 15px 0; padding: 20px 0 0 20px; min-height: 50px; max-width: 786px;">
           <a data-tab="#tickets_open" class="button-tools active-tab">Открытые тикеты</a>
           <a data-tab="#tickets_close" class="button-tools">Закрытые</a>
         </div>
-        <div class="tabItem frame-users active-tab" id="tickets_open" style="max-width: 895px;{% if tickets_open_count == 0 %}max-height: 65px;{% elif tickets_open_count == 1 %}max-height: 80px;{% elif tickets_open_count == 2 %}max-height: 185px;{% elif tickets_open_count == 3 %}max-height: 290px;{% endif %}">
+        <div class="tabItem frame-users active-tab" id="tickets_open" style="max-width: 806px;{% if tickets_open_count == 0 %}max-height: 65px;{% elif tickets_open_count == 1 %}max-height: 80px;{% elif tickets_open_count == 2 %}max-height: 185px;{% elif tickets_open_count == 3 %}max-height: 290px;{% endif %}">
           {% if tickets_open_count != 0 %}
             {% for ticket in tickets_list %}
               {% if ticket.open != False %}
@@ -73,7 +73,7 @@
             </div>
           {% endif %}
         </div>
-        <div class="tabItem frame-users" id="tickets_close" style="max-width: 895px;{% if tickets_close_count == 0 %}max-height: 65px;{% elif tickets_close_count == 1 %}max-height: 80px;{% elif tickets_close_count == 2 %}max-height: 185px;{% elif tickets_close_count == 3 %}max-height: 290px;{% endif %}">
+        <div class="tabItem frame-users" id="tickets_close" style="max-width: 806px;{% if tickets_close_count == 0 %}max-height: 65px;{% elif tickets_close_count == 1 %}max-height: 80px;{% elif tickets_close_count == 2 %}max-height: 185px;{% elif tickets_close_count == 3 %}max-height: 290px;{% endif %}">
           {% if tickets_close_count != 0 %}
             {% for ticket in tickets_list %}
               {% if ticket.open == False %}

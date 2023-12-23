@@ -85,7 +85,7 @@ class UserProfileForm(forms.ModelForm):
     description = forms.CharField(required=False)
     brt_day = forms.CharField(required=False)
     brt_month = forms.CharField(required=False)
-    brt_year = forms.CharField(required=False)
+    brt_year = forms.CharField(required=False, min_length=4, max_length=4)
     occupation = forms.CharField(required=False)
     interests = forms.CharField(required=False)
 

@@ -16,14 +16,14 @@
   background: #242424b6;
   border-radius: 10px;
   font-size: 16px;
-  width: 875px;
+  width: 785px;
   margin: 0 0 15px 0;
   padding: 20px 0 0 20px;
   min-height: 50px;
 }
 
 .ticket-description {
-  max-width: 830px;
+  max-width: 720px;
   padding-left: 7px;
 }
 

@@ -4,7 +4,7 @@
 {% block content %}
   <div class="main">
     <div class="frame_con">
-      <div class="frame-users" style="display: block; max-width: 1200px;{% if tickets_close_count == 0 %}max-height: 65px;{% elif tickets_close_count == 1 %}max-height: 80px;{% elif tickets_close_count == 2 %}max-height: 185px;{% elif tickets_close_count == 3 %}max-height: 290px;{% endif %}">
+      <div class="frame-users" style="display: block; min-width: 1081px;{% if tickets_close_count == 0 %}max-height: 65px;{% elif tickets_close_count == 1 %}max-height: 80px;{% elif tickets_close_count == 2 %}max-height: 185px;{% elif tickets_close_count == 3 %}max-height: 290px;{% endif %}">
         {% if my_tickets_count != 0 %}
           {% for ticket in my_tickets %}
             <a href="{% url 'forum:ticket' ticket.id %}">

@@ -9,7 +9,7 @@
   color: #d6d6d6;
   padding: 20px;
   border-radius: 10px;
-  width: 940px;
+  width: 820px;
   background: #242424b6;
 }
 
@@ -42,6 +42,17 @@
 .switch-button.active-tab {
   box-shadow: inset 4px 0px 0px 0px #ff506f;
   background: #333333;
+}
+
+.switch-button-fix {
+  padding: 10px 20px;
+  min-width: 165px;
+  transition: background 0.5s ease 0s;
+}
+
+.switch-button-fix:hover {
+  background: #333333;
+  cursor: pointer;
 }
 
 .link-decor {

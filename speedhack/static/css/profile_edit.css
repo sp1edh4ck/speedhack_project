@@ -8,7 +8,7 @@
   color: #d6d6d6;
   /* padding: 20px; */
   border-radius: 10px;
-  width: 1100px;
+  width: 900px;
 }
 
 .switch-profile-edit {
@@ -74,7 +74,7 @@
 }
 
 .profile-edit-field {
-  width: 700px;
+  width: 620px;
   font-size: 16px;
   background: #222222;
   border: 2px solid #444444;

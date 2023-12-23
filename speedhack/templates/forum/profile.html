@@ -262,13 +262,13 @@
                     </div>
                   </div>
                 {% endif %}
-                {% if author.brt_day != None and author.brt_month != "Месяц" %}
+                {% if author.brt_day != "" and author.brt_month != "Месяц" %}
                   <div style="display: flex;">
                     <div style="min-width: 165px; max-width: 165px;">
                       <label style="color: gray;">День рождения: </label>
                     </div>
                     <div>
-                      {% if author.brt_year == None %}
+                      {% if author.brt_year == "" %}
                         <label style="color: #d6d6d6;">{{ author.brt_month }}</label>
                         <label style="color: #d6d6d6;">{{ author.brt_day }}</label>
                       {% elif author.brt_year != "" %}

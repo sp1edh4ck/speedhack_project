@@ -15,12 +15,12 @@
           <label class="role-banner" style="width: auto; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.created|date:"d E Y / H:i" }}</label>
         </div>
       </div>
-      <div class="frame-users" style="display: block; margin-top: 15px; max-width: 1200px;">
+      <div class="frame-users" style="display: block; margin-top: 15px; min-width: 1081px;">
         <div class="frame-main-posts">
           <div>
             <a href="{% url 'forum:profile' ticket.author %}"><img class="frame-main-avatar" src="{{ ticket.author.avatar.url }}"></a>
             {% if ticket.author.is_online == True %}
-              <div class="online online-avatar-post-detail" style="margin: -24px 0 0 61px;"></div>
+              <div class="online online-avatar-post-detail" style="margin: -21px 0 0 47px;"></div>
             {% endif %}
           </div>
           <div>

@@ -6,24 +6,24 @@
   <div class="main">
     <div class="frame_con">
       <div style="display: block;">
-        <div class="switch-info-admin" style="min-width: 290px; max-height: 130px;">
+        <div class="switch-info-admin" style="min-width: 260px; max-height: 130px;">
           <a href="{% url 'forum:admin_panel' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Основная админ-панель</a>
           <a href="{% url 'forum:tickets' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Обращения</a>
           <a href="{% url 'forum:ads' %}" class="switch-button active-tab" style="text-decoration: none; color: #d6d6d6;">Реклама</a>
         </div>
       </div>
       <div style="display: block;">
-        <div class="admin-frame-right" style="margin: 0 0 15px 0; padding: 20px 0 0 20px; max-height: 40px;">
+        <div class="admin-frame-right" style="margin: 0 0 15px 0; padding: 20px 0 0 20px; max-height: 40px; max-width: 785px;">
           <a data-tab="#ads_create" class="button-tools active-tab">Создать рекламный пост</a>
           <a data-tab="#ads_all" class="button-tools">Рекламные посты</a>
         </div>
-        <div class="tabItem frame-users active-tab" id="ads_create" style="max-width: 895px;{% if tickets_open_count == 0 %}max-height: 65px;{% elif tickets_open_count == 1 %}max-height: 80px;{% elif tickets_open_count == 2 %}max-height: 185px;{% elif tickets_open_count == 3 %}max-height: 290px;{% endif %}">
+        <div class="tabItem frame-users active-tab" id="ads_create" style="max-width: 806px;{% if tickets_open_count == 0 %}max-height: 65px;{% elif tickets_open_count == 1 %}max-height: 80px;{% elif tickets_open_count == 2 %}max-height: 185px;{% elif tickets_open_count == 3 %}max-height: 290px;{% endif %}">
           <form method="post" action="{{ request.path }}">
             {% csrf_token %}
             <div class="ticket-div" style="max-height: 55px; margin-bottom: 0;">
               <label class="ads-label">Заголовок:</label>
               <div>
-                <input type="text" name="title" id="id_title" class="field field-height" style="max-width: 650px; max-height: 36px; padding: 0 7px 0 7px;" placeholder="Заголовок..." maxlength="70">
+                <input type="text" name="title" id="id_title" class="field field-height" style="max-width: 530px; max-height: 36px; padding: 0 7px 0 7px;" placeholder="Заголовок..." maxlength="70">
               </div>
             </div>
             <div class="ticket-div" style="max-height: 55px; margin-bottom: 0;">
@@ -51,7 +51,7 @@
             <button type="submit" class="button-level" style="margin-left: 210px; margin-top: 0;">Создать обращение</button>
           </form>
         </div>
-        <div class="tabItem frame-users" id="ads_all" style="max-width: 895px;{% if tickets_open_count == 0 %}max-height: 65px;{% elif tickets_open_count == 1 %}max-height: 80px;{% elif tickets_open_count == 2 %}max-height: 185px;{% elif tickets_open_count == 3 %}max-height: 290px;{% endif %}">
+        <div class="tabItem frame-users" id="ads_all" style="max-width: 806px;{% if tickets_open_count == 0 %}max-height: 65px;{% elif tickets_open_count == 1 %}max-height: 80px;{% elif tickets_open_count == 2 %}max-height: 185px;{% elif tickets_open_count == 3 %}max-height: 290px;{% endif %}">
           {% if ads_count != 0 %}
             {% for ad in ads %}
               <a href="">

@@ -29,13 +29,13 @@
                 <a href="{% url 'forum:users' %}" class="window-button-second">Пользователи</a>
                 <a href="{% url 'forum:faq' %}" class="window-button-second">FAQ</a>
                 <a href="{% url 'forum:rules' %}" class="window-button-second">Правила форума</a>
-                {% if request.user.rank_lvl >= "4" %}
-                  <a href="{% url 'forum:admin_panel' %}" class="window-button-second">Админка</a>
-                {% endif %}
               </div>
             </div>
           </div>
         </li>
+        {% if request.user.rank_lvl >= "4" %}
+          <li class="menu-item"><a href="{% url 'forum:admin_panel' %}" class="menu-link">Админка</a></li>
+        {% endif %}
       </ul>
     </div>
     {% if request.user.is_authenticated %}
@@ -52,10 +52,10 @@
         <div style="padding-top: 10px;">
           <div class="window-other" style="right: 0;">
             <a class="window-button-second" href="{% url 'forum:profile' user.username %}">Мой профиль</a>
-            {% comment %} <hr style="margin: 5px 0px; border: 1px solid #444444;">
+            <hr style="margin: 5px 0px; border: 1px solid #444444;">
             <a class="window-button-second">Баланс: {{ user.balance }} <i class="fas fa-ruble-sign fa-lg icon-rub"></i></a>
-            <a class="window-button-second" href="{% url 'market:my_accs' %}">Мои аккаунты</a>
-            <a class="window-button-second" href="{% url 'market:my_buy_accs' %}">Мои покупки</a> {% endcomment %}
+            {% comment %} <a class="window-button-second" href="{% url 'market:my_accs' %}">Мои аккаунты</a> {% endcomment %}
+            {% comment %} <a class="window-button-second" href="{% url 'market:my_buy_accs' %}">Мои покупки</a> {% endcomment %}
             <hr style="margin: 5px 0px; border: 1px solid #444444;">
             <a class="window-button-second" href="{% url 'forum:my_topics' %}">Мои темы</a>
             <a class="window-button-second" href="{% url 'forum:my_tickets' request.user.username %}">Мои тикеты</a>
