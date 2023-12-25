@@ -33,6 +33,7 @@ urlpatterns = [
     path('forum/words/', views.words, name='words'),
     path('forum/faq/', views.faq, name='faq'),
     path('admin-panel/', views.admin_panel, name='admin_panel'),
+    path('admin-panel/user-edit/<str:username>/', views.user_edit, name='user_edit'),
     path('admin-panel/tickets/', views.tickets, name='tickets'),
     path('admin-panel/ads/', views.ads, name='ads'),
     path('tickets/<str:username>/', views.my_tickets, name='my_tickets'),

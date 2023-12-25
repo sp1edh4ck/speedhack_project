@@ -62,7 +62,11 @@
             <a class="window-button-second" href="{% url 'forum:profile_info_edit' user.username %}">Настройки профиля</a>
             {% comment %} <a class="window-button-second" href="#">Switch to English</a> {% endcomment %}
             <hr style="margin: 5px 0px; border: 1px solid #444444;">
-            <a class="window-button-second" href="{% url 'users:logout' %}">Выйти</a>
+            <form method="post" action="{% url 'users:logout' %}">
+              {% csrf_token %}
+              <button class="window-button-bb" type="submit">Выйти</button>
+            </form>
+            {% comment %} <a class="window-button-second" href="{% url 'users:logout' %}">Выйти</a> {% endcomment %}
           </div>
         </div>
       </div>

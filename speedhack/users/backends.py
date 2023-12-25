@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
-from django.utils import timezone
 from django.contrib.auth.backends import BaseBackend
+from django.utils import timezone
 
 
 class MyBackend(BaseBackend):

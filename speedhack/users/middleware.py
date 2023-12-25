@@ -1,7 +1,8 @@
-from .models import CustomUser
 from django.core.cache import cache
 from django.utils import timezone
 from django.utils.deprecation import MiddlewareMixin
+
+from .models import CustomUser
 
 
 class ActiveUserMiddleware(MiddlewareMixin):

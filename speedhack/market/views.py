@@ -1,13 +1,12 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-
-from .models import Market, AccGroup
-from .forms import AccForm
-from users.models import CustomUser
-
-
 import requests
 from bs4 import BeautifulSoup as BS
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render
+
+from users.models import CustomUser
+
+from .forms import AccForm
+from .models import AccGroup, Market
 
 
 def banned_redirect(request):

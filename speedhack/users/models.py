@@ -1,14 +1,30 @@
 from django.contrib.auth.models import AbstractUser
-from django.db import models
-from django.core.cache import cache
 from django.contrib.humanize.templatetags.humanize import naturaltime
+from django.core.cache import cache
+from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 GENDER = [
-    ("Не выбрано", 'Не выбрано'),
-    ("Мужской", 'Мужской'),
-    ("Женский", 'Женский'),
+    ("Не выбрано", "Не выбрано"),
+    ("Мужской", "Мужской"),
+    ("Женский", "Женский"),
+]
+
+MONTHS = [
+    ("Месяц", "Месяц"),
+    ("Январь", "Январь"),
+    ("Февраль", "Февраль"),
+    ("Март", "Март"),
+    ("Апрель", "Апрель"),
+    ("Май", "Май"),
+    ("Июнь", "Июнь"),
+    ("Июль", "Июль"),
+    ("Август", "Август"),
+    ("Сентябрь", "Сентябрь"),
+    ("Октябрь", "Октябрь"),
+    ("Ноябрь", "Ноябрь"),
+    ("Декабрь", "Декабрь"),
 ]
 
 MAIN_POST = [
@@ -111,9 +127,9 @@ class CustomUser(AbstractUser):
     gender = models.TextField(verbose_name='Пол', choices=GENDER, default=GENDER[0][0])
     username_style = models.TextField(verbose_name='Стиль имени', choices=USERNAME_STYLE, default=USERNAME_STYLE[0][0])
     banner = models.TextField(verbose_name='', choices=RANK_STYLE, default=RANK_STYLE[0][0])
-    brt_day = models.CharField(verbose_name='День', max_length=2, blank=True, null=True)
-    brt_month = models.CharField(verbose_name='Месяц', max_length=10, blank=True, null=True)
-    brt_year = models.CharField(verbose_name='Год', max_length=4, blank=True, null=True)
+    brt_day = models.CharField(verbose_name='День', max_length=2, blank=True)
+    brt_month = models.TextField(verbose_name='Месяц', choices=MONTHS, default=MONTHS[0][0])
+    brt_year = models.CharField(verbose_name='Год', max_length=4, blank=True)
     occupation = models.CharField(verbose_name='Род занятий', max_length=200, default='')
     interests = models.CharField(verbose_name='Интересы', max_length=200, default='')
     description = models.CharField(verbose_name='Описание', max_length=200, default='')

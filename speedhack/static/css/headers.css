@@ -157,6 +157,26 @@ a.window-button {
   cursor: pointer;
 }
 
+.window-button-bb {
+  color: #d6d6d6;
+  background: #242424;
+  border: none;
+  width: 200px;
+  text-align: left;
+  font-size: 16px;
+  position: relative;
+  padding: 7px 20px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.5s ease 0s;
+}
+
+.window-button-bb:hover {
+  box-shadow: inset 4px 0px 0px 0px #ff506f;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 .window-other a:hover {
   background: #242424b6;
   /* background-color: #333333; */

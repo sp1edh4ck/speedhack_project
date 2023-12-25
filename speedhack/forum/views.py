@@ -8,8 +8,10 @@ from market.models import Market
 from users.forms import UserProfileForm
 from users.models import CustomUser, IpUser
 
-from .forms import ProfileCommentForm, CommentForm, PostForm, DepositForm, HelpForm, AnswerForm, AdsForm
-from .models import Follow, Forum, User, Group, Comment, Viewers, HelpForum, Helpers, Ads, ProfileComment, Symp, Like
+from .forms import (AdsForm, AnswerForm, CommentForm, DepositForm, HelpForm,
+                    PostForm, ProfileCommentForm)
+from .models import (Ads, Comment, Follow, Forum, Group, Helpers, HelpForum,
+                     Like, ProfileComment, Symp, User, Viewers)
 
 
 def pagination_post(request, post_list):
@@ -547,6 +549,15 @@ def admin_panel(request):
         'count_users_ban': count_users_ban,
     }
     return render(request, 'forum/admin.html', context)
+
+
+@login_required
+def user_edit(request, username):
+    user = get_object_or_404(User, username=username)
+    context = {
+        'user': user,
+    }
+    return render(request, 'forum/admin_user_edit.html', context)
 
 
 @login_required

@@ -5,10 +5,11 @@ from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordResetConfirmView,
                                        PasswordResetDoneView,
                                        PasswordResetView)
-from django.urls import path, reverse_lazy
-from .forms import CustomUserLogin
+from django.urls import path
 
-from users.views import SignUpView, ActivationView
+from users.views import ActivationView, SignUpView
+
+from .forms import CustomUserLogin
 
 app_name = 'users'
 

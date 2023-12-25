@@ -1,12 +1,10 @@
-from django.contrib.auth import get_user_model, login
+from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
-from django.shortcuts import get_object_or_404, render, redirect
-from django.utils.crypto import get_random_string
+from django.shortcuts import redirect, render
 from django.views import View
 from django_ratelimit.decorators import ratelimit
 
 from .forms import CustomUserCreationForm
-from .models import CustomUser
 
 User = get_user_model()
 
@@ -15,6 +13,16 @@ class SignUpView(View):
     def get(self, request):
         form = CustomUserCreationForm()
         return render(request, 'users/signup.html', {'form': form})
+
+    # def form_valid(self, form):
+    #     user = form.save(commit=False)
+    #     send_mail(
+    #         'Подтверждение почты',
+    #         f'Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой адрес электронной почты: http://{user.activation_code}',
+    #         'speedhack_sup@mail.ru',
+    #         [user.email],
+    #     )
+    #     return redirect('email_confirmation_sent')
 
     def post(self, request):
         form = CustomUserCreationForm(request.POST)
@@ -37,7 +45,6 @@ class ActivationView(View):
     def post(self, request):
         activation_code = request.POST['activation_code']
         user = User.objects.filter(activation_code=activation_code).first()
-
         if user:
             user.is_active = True
             user.activation_code = ''
@@ -263,6 +270,26 @@ class ActivationView(View):
 #         context = super().get_context_data(**kwargs)
 #         context['title'] = 'Ваш электронный адрес не активирован'
 #         return context
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

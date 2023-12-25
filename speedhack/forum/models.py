@@ -76,6 +76,7 @@ class Ads(models.Model):
     class Meta:
         verbose_name = 'Рекламный пост'
         verbose_name_plural = 'Рекламные посты'
+        ordering = ('-created',)
 
 
 class Forum(models.Model):

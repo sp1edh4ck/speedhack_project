@@ -75,3 +75,16 @@
   max-width: 200px;
   text-align: right;
 }
+
+.admin-edit-user {
+  min-width: 45px;
+  min-height: 45px;
+  position: relative;
+  top: -2px;
+  color: #3d3d3d;
+  transition: 0.3s;
+}
+
+.admin-edit-user:hover {
+  color: #505050;
+}
