@@ -63,12 +63,27 @@
                   $(this).closest('.input-file').find('.input-file-text').html(file.name);
                 });
               </script>
-            {% else %}
-              <div style="display: flex;">
-                <label class="field-label">{{ field.label }}</label>
-                <label style="color: #444444; font-size: 20px; height: 40px;">(напишите ваш пост)</label>
-              </div>
-              {{ field|addclass:"field" }}
+            {% elif field.label == "Закрытая тема" %}
+              {% if user.rank_lvl >= "4" %}
+                <div style="display: flex;">
+                  <label class="field-label">Закрыть тему</label>
+                  {{ field }}
+                </div>
+              {% endif %}
+            {% elif field.label == "Пост был отредактирован" %}
+              {% if user.rank_lvl >= "4" %}
+                <div style="display: flex;">
+                  <label class="field-label">Поставить метку об изменении поста</label>
+                  {{ field }}
+                </div>
+              {% endif %}
+            {% elif field.label == "Активности доступны" %}
+              {% if user.rank_lvl >= "4" %}
+                <div style="display: flex;">
+                  <label class="field-label">Включить активности</label>
+                  {{ field }}
+                </div>
+              {% endif %}
             {% endif %}
           {% endfor %}
           <button type="submit" class="button-level">

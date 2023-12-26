@@ -97,7 +97,7 @@ class Forum(models.Model):
         related_name='posts',
     )
     image = models.ImageField(
-        'Картинка',
+        verbose_name='Картинка',
         upload_to='posts/',
         blank=True,
     )
@@ -108,6 +108,10 @@ class Forum(models.Model):
     edit = models.BooleanField(
         default=False,
         verbose_name='Пост был отредактирован',
+    )
+    open_activities = models.BooleanField(
+        default=False,
+        verbose_name='Активности доступны',
     )
 
     class Meta:
@@ -335,16 +339,23 @@ class Follow(models.Model):
         ]
 
 
-# class Favourites(models.Model):
-#     post = models.ForeignKey(
-#         Forum,
-#         on_delete=models.CASCADE,
-#     )
-#     user = models.ForeignKey(
-#         User,
-#         on_delete=models.CASCADE,
-#     )
+class Favourites(models.Model):
+    post = models.ForeignKey(
+        Forum,
+        on_delete=models.CASCADE,
+        verbose_name='Пост',
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='Автор добавления поста в избранное',
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата добавления в избранное',
+    )
 
-#     class Meta:
-#         verbose_name = 'Избранное'
-#         verbose_name_plural = 'Избранное'
+    class Meta:
+        verbose_name = 'Избранное'
+        verbose_name_plural = 'Избранное'
+        ordering = ('-created',)

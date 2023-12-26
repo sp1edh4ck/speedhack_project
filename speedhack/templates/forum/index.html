@@ -23,9 +23,21 @@
           {% if count_posts != 0 %}
             <div style="margin: 0 0 0 10px;">
               <div>
-                <label class="posts-group-title">{% if request.path == '/' %}<abbr data-title="Удалить пост">Все</abbr> обсуждения{% elif request.path == '/forum/my_topics/' %}Мои темы{% endif %}</label>
+                <label class="posts-group-title">{% if request.path == '/' %}Все обсуждения{% elif request.path == '/forum/my_topics/' %}Мои темы{% elif request.path == '/forum/favourites/' %}Избранное{% endif %}</label>
               </div>
             </div>
+            {% if request.path == '/' or request.path == '/forum/my_topics/' %}
+              <div class="search-header search-header-else">
+                <div>
+                  <form action="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}">
+                    <input class="input-search" type="search" name="search" placeholder="Поиск" aria-label="Search">
+                  </form>
+                </div>
+                <div>
+                  <a href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% elif request.path == '/forum/favourites/' %}{% url 'forum:favourites' %}{% endif %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
+                </div>
+              </div>
+            {% endif %}
             {% if ads.count != 0 %}
               <div style="margin: 20px 0 20px 0;">
                 {% for ad in ads %}
@@ -54,26 +66,70 @@
             {% comment %} <hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;"> {% endcomment %}
             {% for post in objects %}
               {% if post.author.rank != "заблокирован" %}
-                <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">
-                  <div class="text-frame post">
-                    <div class="text-frame-div" style="margin: 0 auto 0 0;">
-                      <label class="text-frame-title">{{ post.title }}</label><br>
-                      <label class="text-frame-text">
-                        {{ post.pub_date|date:"d E Y / H:i" }}
-                      </label>
-                      <label class="text-frame-text" style="margin-left: 10px;">
-                        <i class="fa-solid fa-message fa-sm"></i> {{ post.comments.count }}
-                      </label>
+                {% if request.path == '/' %}
+                  <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">
+                    <div class="text-frame post">
+                      <div class="text-frame-div" style="margin: 0 auto 0 0;">
+                        <label class="text-frame-title">{{ post.title }}</label><br>
+                        <label class="text-frame-text">
+                          {{ post.pub_date|date:"d E Y / H:i" }}
+                        </label>
+                        <label class="text-frame-text" style="margin-left: 10px;">
+                          <i class="fa-solid fa-message fa-sm"></i> {{ post.comments.count }}
+                        </label>
+                      </div>
+                      <div class="avatar-username">
+                        <img class="user-avatar" src="{{ post.author.avatar.url }}">
+                        {% if post.author.is_online == True %}
+                          <div class="online online-avatar-index"></div>
+                        {% endif %}
+                        <label class="text-frame-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ post.author.username }}</label>
+                      </div>
                     </div>
-                    <div class="avatar-username">
-                      <img class="user-avatar" src="{{ post.author.avatar.url }}">
-                      {% if post.author.is_online == True %}
-                        <div class="online online-avatar-index"></div>
-                      {% endif %}
-                      <label class="text-frame-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ post.author.username }}</label>
+                  </a>
+                {% elif request.path == '/forum/my_topics/' %}
+                  <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">
+                    <div class="text-frame post">
+                      <div class="text-frame-div" style="margin: 0 auto 0 0;">
+                        <label class="text-frame-title">{{ post.title }}</label><br>
+                        <label class="text-frame-text">
+                          {{ post.pub_date|date:"d E Y / H:i" }}
+                        </label>
+                        <label class="text-frame-text" style="margin-left: 10px;">
+                          <i class="fa-solid fa-message fa-sm"></i> {{ post.comments.count }}
+                        </label>
+                      </div>
+                      <div class="avatar-username">
+                        <img class="user-avatar" src="{{ post.author.avatar.url }}">
+                        {% if post.author.is_online == True %}
+                          <div class="online online-avatar-index"></div>
+                        {% endif %}
+                        <label class="text-frame-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ post.author.username }}</label>
+                      </div>
                     </div>
-                  </div>
-                </a>
+                  </a>
+                {% elif request.path == '/forum/favourites/' %}
+                  <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.post.id %}">
+                    <div class="text-frame post">
+                      <div class="text-frame-div" style="margin: 0 auto 0 0;">
+                        <label class="text-frame-title">{{ post.post.title }}</label><br>
+                        <label class="text-frame-text">
+                          {{ post.post.pub_date|date:"d E Y / H:i" }}
+                        </label>
+                        <label class="text-frame-text" style="margin-left: 10px;">
+                          <i class="fa-solid fa-message fa-sm"></i> {{ post.post.comments.count }}
+                        </label>
+                      </div>
+                      <div class="avatar-username">
+                        <img class="user-avatar" src="{{ post.post.author.avatar.url }}">
+                        {% if post.post.author.is_online == True %}
+                          <div class="online online-avatar-index"></div>
+                        {% endif %}
+                        <label class="text-frame-username {% if post.post.author.username_style != 'gray-un' and post.post.author.rank != 'заблокирован' %}{{ post.post.author.username_style }}{% endif %}" {% if post.post.author.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ post.post.author.username }}</label>
+                      </div>
+                    </div>
+                  </a>
+                {% endif %}
               {% endif %}
             {% endfor %}
             <div style="margin-bottom: 15px;"></div>
@@ -81,7 +137,7 @@
           {% else %}
             <div style="margin: 0 0 5px 10px;">
               <div>
-                <label class="posts-group-title">{% if request.path == '/' %}Все обсуждения{% elif request.path == '/forum/my_topics/' %}Мои темы{% endif %}</label>
+                <label class="posts-group-title">{% if request.path == '/' %}Все обсуждения{% elif request.path == '/forum/my_topics/' %}Мои темы{% elif request.path == '/forum/favourites/' %}Избранное{% endif %}</label>
               </div>
             </div>
             <div class="search-header search-header-else">
@@ -91,12 +147,12 @@
                 </form>
               </div>
               <div>
-                <a href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
+                <a href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% elif request.path == '/forum/favourites/' %}{% url 'forum:favourites' %}{% endif %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
               </div>
             </div>
             <hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;">
-            <div style="margin-left: 10px;">
-              <label style="color: #d6d6d6; font-size: 18px;">На данную тему не было созданно ещё ни одного поста :/</label>
+            <div style="text-align: center;">
+              <label style="color: #515151; font-size: 18px; font-weight: bold;">{% if request.path == '/' %}На данную тему не было созданно ещё ни одного поста :/{% elif request.path == '/forum/my_topics/' %}Вы ещё не создали ни одного поста :/{% elif request.path == '/forum/favourites/' %}У вас нет постов в избранном{% endif %}</label>
             </div>
           {% endif %}
         </div>

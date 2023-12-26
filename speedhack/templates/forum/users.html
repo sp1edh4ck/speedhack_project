@@ -35,7 +35,7 @@
             </div>
           </div>
         </div>
-        <div class="frame-left-second-users" style="{% if new_users.count == 1 %}min-height: 90px; max-height: 90px;{% elif new_users.count == 2 %}min-height: 140px; max-height: 140px;{% elif new_users.count == 3 %}min-height: 200px; max-height: 200px;{% elif new_users.count == 4 %}min-height: 260px; max-height: 260px;{% elif new_users.count == 5 %}min-height: 310px; max-height: 310px;{% endif %}">
+        <div class="frame-left-second-users" style="{% if new_users.count == 1 %}min-height: 90px; max-height: 90px;{% elif new_users.count == 2 %}min-height: 150px; max-height: 150px;{% elif new_users.count == 3 %}min-height: 200px; max-height: 200px;{% elif new_users.count == 4 %}min-height: 260px; max-height: 260px;{% elif new_users.count == 5 %}min-height: 320px; max-height: 320px;{% elif new_users.count == 6 %}min-height: 375px; max-height: 375px;{% elif new_users.count == 7 %}min-height: 430px; max-height: 430px;{% endif %}">
           <div style="color: gray; font-size: 18px; margin-bottom: 15px;">Новые пользователи</div>
           {% for user in new_users %}
             <div style="display: flex;">

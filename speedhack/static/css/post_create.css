@@ -1,5 +1,5 @@
 .frame {
-  max-width: 1160px;
+  max-width: 1041px;
   background: #242424b6;
   border-radius: 10px;
   padding: 20px 20px 20px 20px;
@@ -11,7 +11,7 @@
 }
 
 .field {
-  width: 1139px;
+  width: 1020px;
   margin-bottom: 30px;
   font-size: 18px;
   background: #222222;
@@ -23,7 +23,7 @@
 }
 
 .width-fix {
-  min-width: 1158px;
+  min-width: 1039px;
 }
 
 .field-height {
@@ -33,7 +33,7 @@
 
 textarea {
   padding: 10px 10px 10px 10px;
-  max-width: 1134px;
+  max-width: 1015px;
   resize: none;
   border-radius: 15px;
   border: 0;

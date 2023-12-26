@@ -13,7 +13,11 @@
       </div>
       <div class="frame-main">
         <div class="frame-main-avatars">
-          <i class="fas fa-star fa-lg icons-post-detail" style="cursor: pointer; padding-left: 20px;"></i>
+          {% if favourite %}
+            <a href="{% url 'forum:favourites_post_save' post.id 2 %}" style="margin-left: 20px;"><i class="fas fa-star fa-lg icons-post-detail" style="cursor: pointer; color: #ff506f;"></i></a>
+          {% else %}
+            <a href="{% url 'forum:favourites_post_save' post.id 1 %}" style="margin-left: 20px;"><i class="fas fa-star fa-lg icons-post-detail" style="cursor: pointer;"></i></a>
+          {% endif %}
           {% include '../includes/paginator.html' %}
           <hr class="hr-post-detail" style="margin: 15px 0;">
         </div>
@@ -67,6 +71,33 @@
               </div>
               {% if symps.count != 0 %}
                 {% if user.username != post.author.username %}
+                  {% if user.symps >= 20 or user.rank_lvl >= "4" or post.open_activities %}
+                    <div class="comment-date" style="margin-top: 3px;">
+                      <a href="{% url 'forum:symps_add' post.id post.author.username %}" style="text-decoration: none;">
+                        {% if my_symp %}
+                          <img src="{% static 'images/heart_pink_full.png' %}" class="symp-img"><label class="symp-label">{{ symps.count }}</label>
+                        {% else %}
+                          <img src="{% static 'images/heart_gray.png' %}" class="symp-img"><label class="symp-label">{{ symps.count }}</label>
+                        {% endif %}
+                      </a>
+                    </div>
+                  {% else %}
+                    <img src="{% static 'images/heart_gray.png' %}" class="symp-img" style="cursor: default;"><label class="symp-label" style="cursor: default;">{{ symps.count }}</label>
+                  {% endif %}
+                {% else %}
+                  <img src="{% static 'images/heart_gray.png' %}" class="symp-img" style="cursor: default;"><label class="symp-label" style="cursor: default;">{{ symps.count }}</label>
+                {% endif %}
+              {% elif symps.count == 0 %}
+                {% if user.username != post.author.username %}
+                  {% if user.symps >= 20 or user.rank_lvl >= "4" or post.open_activities %}
+                    <a href="{% url 'forum:symps_add' post.id post.author.username %}">
+                      <img src="{% static 'images/heart_gray.png' %}" class="symp-img">
+                    </a>
+                  {% endif %}
+                {% endif %}
+              {% endif %}
+              {% comment %} {% if symps.count != 0 %}
+                {% if user.username != post.author.username %}
                   {% if user.symps >= 20 or user.rank_lvl >= "4" %}
                     <div class="comment-date" style="margin-top: 3px;">
                       <a href="{% url 'forum:symps_add' post.id post.author.username %}" style="text-decoration: none;">
@@ -91,7 +122,7 @@
                     </a>
                   {% endif %}
                 {% endif %}
-              {% endif %}
+              {% endif %} {% endcomment %}
             </div>
           </div>
         </div>

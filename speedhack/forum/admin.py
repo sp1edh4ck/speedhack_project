@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (Ads, Comment, Forum, Group, Helpers, HelpForum, Like,
-                     ProfileComment, Symp, Viewers)
+                     ProfileComment, Symp, Viewers, Favourites)
 
 
 class ForumAdmin(admin.ModelAdmin):
@@ -78,11 +78,11 @@ class LikeAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
-# class FavouriteAdmin(admin.ModelAdmin):
-#     list_display = (
-#         'post',
-#         'user',
-#     )
+class FavouriteAdmin(admin.ModelAdmin):
+    list_display = (
+        'post',
+        'user',
+    )
 
 
 class GroupAdmin(admin.ModelAdmin):
@@ -102,7 +102,7 @@ admin.site.register(Ads, AdsAdmin)
 admin.site.register(Symp, SympAdmin)
 admin.site.register(Like, LikeAdmin)
 admin.site.register(Group, GroupAdmin)
-# admin.site.register(Favourites, FavouriteAdmin)
+admin.site.register(Favourites, FavouriteAdmin)
 admin.site.register(Comment)
 admin.site.register(ProfileComment)
 admin.site.register(Viewers)

@@ -11,7 +11,7 @@ from users.models import CustomUser, IpUser
 from .forms import (AdsForm, AnswerForm, CommentForm, DepositForm, HelpForm,
                     PostForm, ProfileCommentForm)
 from .models import (Ads, Comment, Follow, Forum, Group, Helpers, HelpForum,
-                     Like, ProfileComment, Symp, User, Viewers)
+                     Like, ProfileComment, Symp, User, Viewers, Favourites)
 
 
 def pagination_post(request, post_list):
@@ -89,6 +89,23 @@ def my_topics(request):
 
 
 @ratelimit(key='ip', rate='50/m')
+@login_required
+def favourites(request):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    user = request.user
+    favourites_posts = Favourites.objects.filter(user=user)
+    count_posts = favourites_posts.count()
+    ads = Ads.objects.all()
+    context = {
+        'count_posts': count_posts,
+        'ads': ads,
+        'objects': pagination_post(request, favourites_posts)
+    }
+    return render(request, 'forum/index.html', context)
+
+
+@ratelimit(key='ip', rate='50/m')
 def group_free(request, slug):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
@@ -150,6 +167,11 @@ def profile(request, username):
         'subscribers': pagination_sub(request, subscribers),
     }
     return render(request, 'forum/profile.html', context)
+
+
+@login_required
+def complaint(request):
+    pass
 
 
 @ratelimit(key='ip', rate='50/m')
@@ -291,6 +313,7 @@ def post_detail(request, post_id):
     if request.user.is_authenticated:
         user = get_object_or_404(User, username=request.user.username)
         my_symp = Symp.objects.filter(post=post, user=user)
+        favourite = Favourites.objects.filter(post=post, user=user)
     # Добавление просмотра (надо доработать)
     # if request.user.is_authenticated:
         # viewers = post.viewers.all()
@@ -303,6 +326,7 @@ def post_detail(request, post_id):
     if request.user.is_authenticated:
         context = {
             'form': form,
+            'favourite': favourite,
             'post': post,
             'user': user,
             'symps': symps,
@@ -310,6 +334,7 @@ def post_detail(request, post_id):
             'comments': comments,
             'count_comments': count_comments,
         }
+        return render(request, 'forum/post_detail.html', context)
     context = {
         'form': form,
         'post': post,
@@ -318,6 +343,16 @@ def post_detail(request, post_id):
         'count_comments': count_comments,
     }
     return render(request, 'forum/post_detail.html', context)
+
+
+@login_required
+def favourites_post_save(request, post_id, number):
+    post = get_object_or_404(Forum, id=post_id)
+    if number == 1:
+        Favourites.objects.create(post=post, user=request.user)
+    elif number == 2:
+        Favourites.objects.filter(post=post, user=request.user).delete()
+    return redirect('forum:post_detail', post_id=post_id)
 
 
 @ratelimit(key='ip', rate='50/m')
@@ -717,7 +752,7 @@ def users(request):
     count_posts = posts.count()
     count_accs = accs.count()
     users_list = CustomUser.objects.order_by("-symps")
-    new_users = CustomUser.objects.order_by("-date_joined")[:5]
+    new_users = CustomUser.objects.order_by("-date_joined")[:7]
     count_sellers = 0
     for user in users_list:
         if user.rank != "заблокирован":
