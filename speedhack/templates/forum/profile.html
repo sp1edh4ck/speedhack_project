@@ -366,13 +366,15 @@
                   <div class="frame-right-third" style="display: block;">
                     <div class="frame-right-third-posts">
                       <a href="{% url 'forum:profile' comment.author %}"><img class="frame-main-avatar" style="width: 50px; height: 50px; margin-right: 15px;" src="{{ comment.author.avatar.url }}"></a>
-                      <div style="display: flex; margin: 0 auto 0 0;">
-                        <div style="margin: 0 auto 0 0;">
+                      <div style="display: flex;">
+                        <div style="min-width: 220px;">
                           <div class="{% if comment.author.username_style != 'gray-un' and comment.author.rank != 'заблокирован' %}{{ comment.author.username_style }}{% else %}gray-un{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} {% if comment.author.username == "root" %}style="color: red;"{% endif %}>{{ comment.author.username }}</div>
                           <div style="color: #555555; font-weight: bold;">{{ comment.created|date:'d E Y / H:i' }}</div>
                         </div>
-                        <div style="margin: 0 0 0 auto; float: right;">
-                          <div class="window-main" style="margin: 0 0 0 auto;">
+                        <div class="frame-main-post-heart" style="min-width: 480px;">
+                        </div>
+                        <div>
+                          <div class="window-main">
                             <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
                             <div class="window-other" style="right: 0;">
                               <a href="{% url 'forum:delete_profile_comment' author comment.id %}" class="window-button-second">Удалить пост</a>
