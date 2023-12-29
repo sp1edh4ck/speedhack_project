@@ -425,3 +425,14 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   background: #3f3f3fb6;
   /* background: #2e2e2eb6; */
 }
+
+.tables-tags {
+  font-size: 11.5px;
+  font-weight: bold;
+  top: -1px;
+  position: relative;
+  background: #505050;
+  padding: 2px 8px;
+  border-radius: 7px;
+  margin-right: 7px;
+}

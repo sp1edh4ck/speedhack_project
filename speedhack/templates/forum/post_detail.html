@@ -14,9 +14,15 @@
       <div class="frame-main">
         <div class="frame-main-avatars">
           {% if favourite %}
-            <a href="{% url 'forum:favourites_post_save' post.id 2 %}" style="margin-left: 20px;"><i class="fas fa-star fa-lg icons-post-detail" style="cursor: pointer; color: #ff506f;"></i></a>
+            <div style="display: flex;">
+              <a href="{% url 'forum:favourites_post_save' post.id 2 %}" style="margin-left: 20px;"><i class="fas fa-star fa-lg icons-post-detail" style="cursor: pointer; color: #ff506f;"></i></a>
+              {% if post.open_activities %}<div style="margin: 0 20px 0 auto" class="active-activities">Активности включены</div>{% endif %}
+            </div>
           {% else %}
-            <a href="{% url 'forum:favourites_post_save' post.id 1 %}" style="margin-left: 20px;"><i class="fas fa-star fa-lg icons-post-detail" style="cursor: pointer;"></i></a>
+            <div style="display: flex;">
+              <a href="{% url 'forum:favourites_post_save' post.id 1 %}" style="margin-left: 20px;"><i class="fas fa-star fa-lg icons-post-detail" style="cursor: pointer;"></i></a>
+              {% if post.open_activities %}<div style="margin: 0 20px 0 auto" class="active-activities">Активности включены</div>{% endif %}
+            </div>
           {% endif %}
           {% include '../includes/paginator.html' %}
           <hr class="hr-post-detail" style="margin: 15px 0;">
