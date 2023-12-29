@@ -371,10 +371,10 @@
                           <div class="{% if comment.author.username_style != 'gray-un' and comment.author.rank != 'заблокирован' %}{{ comment.author.username_style }}{% else %}gray-un{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} {% if comment.author.username == "root" %}style="color: red;"{% endif %}>{{ comment.author.username }}</div>
                           <div style="color: #555555; font-weight: bold;">{{ comment.created|date:'d E Y / H:i' }}</div>
                         </div>
-                        <div class="frame-main-post-heart" style="min-width: 480px;">
+                        <div class="frame-main-post-heart" style="min-width: 485px;">
                         </div>
                         <div>
-                          <div class="window-main">
+                          <div class="window-main" style="top: -8px;">
                             <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
                             <div class="window-other" style="right: 0;">
                               <a href="{% url 'forum:delete_profile_comment' author comment.id %}" class="window-button-second">Удалить пост</a>

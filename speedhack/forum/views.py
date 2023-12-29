@@ -57,11 +57,13 @@ def index(request):
         posts = Forum.objects.filter(title__icontains=search_query)
     else:
         posts = Forum.objects.select_related('author').all()
+    # users = User.objects.filter(is_online=True)
     count_posts = posts.count()
     ads = Ads.objects.all()
     context = {
         'count_posts': count_posts,
         'ads': ads,
+        # 'users': users,
         'objects': pagination_post(request, posts),
     }
     return render(request, 'forum/index.html', context)
@@ -461,7 +463,7 @@ def post_edit(request, post_id):
     if (request.user == post.author or request.user.rank_lvl >= "4"):
         if request.method == 'POST':
             if form.is_valid():
-                if request.user.rank_lvl >= "4" and request.user != post.author:
+                if request.user.rank_lvl >= "4":
                     form.save()
                     return redirect('forum:post_detail', post_id=post_id)
                 else:

@@ -30,6 +30,7 @@ urlpatterns = [
     path('forum/<int:post_id>/delete/', views.post_delete, name='post_delete'),
     path('forum/successfully/', views.successfully, name='successfully'),
     path('forum/<int:post_id>/comment/', views.add_comment, name='add_comment'),
+    # path('forum/<int:post_id>/symps-comment/<str:username>/', views.symps_add_comment, name='symps_add_comment'),
     path('forum/<int:post_id>/comment/edit/', views.edit_comment, name='edit_comment'),
     path('forum/<int:post_id>/comment/<int:id>/', views.delete_comment, name='delete_comment'),
     path('forum/rules/', views.rules, name='rules'),

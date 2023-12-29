@@ -65,23 +65,35 @@
               </script>
             {% elif field.label == "Закрытая тема" %}
               {% if user.rank_lvl >= "4" %}
-                <div style="display: flex;">
-                  <label class="field-label">Закрыть тему</label>
-                  {{ field }}
+                <div class="small-label-post-create">Настройки:</div>
+                <div style="display: flex; margin-bottom: 5px;">
+                  <label class="checkbox style-c">
+                    <input type="checkbox" name="closed" id="id_closed" {% if post.closed == True %}checked{% endif %}>
+                    <div class="checkbox__checkmark"></div>
+                  </label>
+                  <label class="field-label-help">Закрыть тему</label>
                 </div>
               {% endif %}
             {% elif field.label == "Пост был отредактирован" %}
               {% if user.rank_lvl >= "4" %}
-                <div style="display: flex;">
-                  <label class="field-label">Поставить метку об изменении поста</label>
-                  {{ field }}
+                <div style="display: flex; margin-bottom: 5px;">
+                  {% comment %} {{ field }} {% endcomment %}
+                  <label class="checkbox style-c">
+                    <input type="checkbox" name="edit" id="id_edit" {% if post.edit == True %}checked{% endif %}>
+                    <div class="checkbox__checkmark"></div>
+                  </label>
+                  <label class="field-label-help">Поставить метку об изменении поста</label>
                 </div>
               {% endif %}
             {% elif field.label == "Активности доступны" %}
               {% if user.rank_lvl >= "4" %}
-                <div style="display: flex;">
-                  <label class="field-label">Включить активности</label>
-                  {{ field }}
+                <div style="display: flex; margin-bottom: 20px;">
+                  {% comment %} {{ field }} {% endcomment %}
+                  <label class="checkbox style-c">
+                    <input type="checkbox" name="open_activities" id="id_open_activities" {% if post.open_activities == True %}checked{% endif %}>
+                    <div class="checkbox__checkmark"></div>
+                  </label>
+                  <label class="field-label-help">Включить активности</label>
                 </div>
               {% endif %}
             {% endif %}

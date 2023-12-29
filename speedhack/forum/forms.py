@@ -6,10 +6,6 @@ from .models import Ads, Comment, Forum, HelpAnswer, HelpForum, ProfileComment
 
 
 class PostForm(forms.ModelForm):
-    # closed = forms.BooleanField(required=False)
-    # edit = forms.BooleanField(required=False)
-    # open_activities = forms.BooleanField(required=False)
-
     class Meta:
         model = Forum
         fields = ('group', 'title', 'text', 'image', 'closed', 'edit', 'open_activities',)

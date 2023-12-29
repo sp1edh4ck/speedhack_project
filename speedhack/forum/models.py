@@ -387,3 +387,30 @@ class Favourites(models.Model):
  
 #     def __str__(self):
 #         return self.message
+
+
+class Maecenas(models.Model):
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='Меценат',
+    )
+    amount = models.IntegerField(
+        default=0,
+        verbose_name='Сумма',
+    )
+    date_created = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата создания',
+    )
+    date_until = models.DateTimeField(
+        verbose_name='Дата окончания',
+    )
+    active = models.BooleanField(
+        default=False,
+        verbose_name='Активный меценат',
+    )
+
+    class Meta:
+        verbose_name = 'Меценат'
+        verbose_name_plural = 'Меценаты'
