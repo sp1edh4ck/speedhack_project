@@ -359,3 +359,31 @@ class Favourites(models.Model):
         verbose_name = 'Избранное'
         verbose_name_plural = 'Избранное'
         ordering = ('-created',)
+
+
+# Система личных сообщений
+# class Message(models.Model):
+#     author = models.ForeignKey(
+#         User,
+#         on_delete=models.CASCADE,
+#         related_name='message_author',
+#         verbose_name='Автор',
+#     )
+#     user = models.ForeignKey(
+#         User,
+#         on_delete=models.CASCADE,
+#         related_name='message_user',
+#         verbose_name='Пользователь',
+#     )
+#     message = models.TextField(verbose_name='Сообщение',)
+#     created = models.DateTimeField(
+#         auto_now_add=True,
+#         verbose_name='Дата отправки сообщения',
+#     )
+#     is_readed = models.BooleanField(verbose_name='Прочитано', default=False,)
+ 
+#     class Meta:
+#         ordering=['created']
+ 
+#     def __str__(self):
+#         return self.message

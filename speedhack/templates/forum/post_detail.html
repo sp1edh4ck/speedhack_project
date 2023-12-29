@@ -36,7 +36,7 @@
                 </a>
               </div>
               {% if user.username == post.author.username or user.rank_lvl >= "4" %}
-                <div style="height: 30px;" class="window-main">
+                <div style="height: 30px; position: relative; z-index: 1;" class="window-main">
                   <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
                   <div class="window-other" style="right: 0;">
                     <a href="{% url 'forum:post_edit' post.id %}" class="window-button-second">Редактировать запись</a>
@@ -147,7 +147,7 @@
                 {% if comment.author.username == request.user.username or user.rank_lvl >= "4" %}
                   <div style="height: 30px;" class="window-main">
                     <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
-                    <div class="window-other" style="right: 0;">
+                    <div class="window-other" style="right: 0; z-index: 1;">
                       {% comment %} <a href="{% url 'forum:edit_comment' post.id comment.id %}" class="window-button-second">Редактировать комментарий</a> {% endcomment %}
                       <a href="{% url 'forum:delete_comment' post.id comment.id %}" class="window-button-second">Удалить комментарий</a>
                     </div>

@@ -15,6 +15,14 @@ class PostForm(forms.ModelForm):
         fields = ('group', 'title', 'text', 'image', 'closed', 'edit', 'open_activities',)
 
 
+# Система личных сообщений
+# class MessageForm(forms.ModelForm):
+#     class Meta:
+#         model = Message
+#         fields = ['message']
+#         labels = {'message': ""}
+
+
 class HelpForm(forms.ModelForm):
     category = forms.CharField(required=True)
     priority = forms.CharField(required=True)

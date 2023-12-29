@@ -10,8 +10,8 @@ from users.models import CustomUser, IpUser
 
 from .forms import (AdsForm, AnswerForm, CommentForm, DepositForm, HelpForm,
                     PostForm, ProfileCommentForm)
-from .models import (Ads, Comment, Follow, Forum, Group, Helpers, HelpForum,
-                     Like, ProfileComment, Symp, User, Viewers, Favourites)
+from .models import (Ads, Comment, Favourites, Follow, Forum, Group, Helpers,
+                     HelpForum, Like, ProfileComment, Symp, User, Viewers)
 
 
 def pagination_post(request, post_list):
@@ -792,3 +792,13 @@ def guarantor(request):
 @ratelimit(key='ip', rate='50/m')
 def words(request):
     return render(request, 'forum/words.html')
+
+
+# Система личных сообщений
+# def dialogs(self, request):
+#     chats = Message.objects.filter(author=request.user, user=request.user)
+#     context = {
+#         'user_profile': request.user,
+#         'chats': chats,
+#     }
+#     return render(request, 'users/dialogs.html', context)

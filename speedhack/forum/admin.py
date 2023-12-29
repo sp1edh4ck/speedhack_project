@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import (Ads, Comment, Forum, Group, Helpers, HelpForum, Like,
-                     ProfileComment, Symp, Viewers, Favourites)
+from .models import (Ads, Comment, Favourites, Forum, Group, Helpers,
+                     HelpForum, Like, ProfileComment, Symp, Viewers)
 
 
 class ForumAdmin(admin.ModelAdmin):
@@ -16,6 +16,21 @@ class ForumAdmin(admin.ModelAdmin):
     search_fields = ('group',)
     list_filter = ('pub_date',)
     empty_value_display = '-пусто-'
+
+
+# Система личных сообщений
+# class MessageAdmin(admin.ModelAdmin):
+#     list_display = (
+#         'id',
+#         'author',
+#         'user',
+#         'message',
+#         'created',
+#         'is_readed',
+#     )
+#     search_fields = ('id',)
+#     list_filter = ('created',)
+#     empty_value_display = '-пусто-'
 
 
 class HelpersAdmin(admin.ModelAdmin):
