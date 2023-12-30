@@ -288,6 +288,36 @@ class Comment(models.Model):
         verbose_name_plural = 'Комментарии'
 
 
+class CommentSymp(models.Model):
+    comment = models.ForeignKey(
+        Comment,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name='comment_symp',
+        verbose_name='Комментарий',
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='comment_symper',
+        verbose_name='Тот кому поставили',
+    )
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='comment_symping',
+        verbose_name='Тот кто поставили',
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата симпатии',
+    )
+
+    class Meta:
+        verbose_name = 'Симпатия на комментарии'
+        verbose_name_plural = 'Симпатии на комментарии'
+
+
 class ProfileComment(models.Model):
     profile = models.ForeignKey(
         User,

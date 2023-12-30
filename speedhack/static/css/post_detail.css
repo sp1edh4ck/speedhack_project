@@ -211,3 +211,15 @@
 .active-activities {
   color: #d6d6d6;
 }
+
+.tables-tags-post {
+  position: relative;
+  padding: 3px 10px 0 10px;
+  font-weight: bold;
+  color: #d6d6d6;
+  background: #505050;
+  border-radius: 7px;
+  text-align: center;
+  text-align: center;
+  margin-right: 5px;
+}

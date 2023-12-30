@@ -11,7 +11,7 @@ from users.models import CustomUser, IpUser
 from .forms import (AdsForm, AnswerForm, CommentForm, DepositForm, HelpForm,
                     PostForm, ProfileCommentForm)
 from .models import (Ads, Comment, Favourites, Follow, Forum, Group, Helpers,
-                     HelpForum, Like, ProfileComment, Symp, User, Viewers)
+                     HelpForum, Like, ProfileComment, Symp, User, Viewers, CommentSymp)
 
 
 def pagination_post(request, post_list):
@@ -315,6 +315,7 @@ def post_detail(request, post_id):
     if request.user.is_authenticated:
         user = get_object_or_404(User, username=request.user.username)
         my_symp = Symp.objects.filter(post=post, user=user)
+        # my_symp_comment = Symp.objects.filter(comment=comment, user=user)
         favourite = Favourites.objects.filter(post=post, user=user)
     # Добавление просмотра (надо доработать)
     # if request.user.is_authenticated:
@@ -395,6 +396,57 @@ def symps_add(request, post_id, username):
             user = CustomUser.objects.get(username=comment.author.username)
     else:
         user = CustomUser.objects.get(username=post.author.username)
+    if user.privilege != "местный" and user.symps >= 20 and user.symps <= 199:
+        user.privilege = "местный"
+        user.save()
+    elif user.privilege != "постоялец" and user.symps >= 200 and user.symps <= 999:
+        user.privilege = "постоялец"
+        user.save()
+    elif user.privilege != "эксперт" and user.symps >= 1000 and user.symps <= 3999:
+        user.privilege = "эксперт"
+        user.save()
+    elif user.privilege != "гуру" and user.symps >= 4000 and user.symps <= 9999:
+        user.privilege = "гуру"
+        user.save()
+    elif user.privilege != "искусственный интелект" and user.symps >= 10000:
+        user.privilege = "искусственный интелект"
+        user.save()
+    if user.symps < 20:
+        user.privilege = "новорег"
+        user.save()
+    elif user.symps < 200:
+        user.privilege = "местный"
+        user.save()
+    elif user.symps < 1000:
+        user.privilege = "постоялец"
+        user.save()
+    elif user.symps < 4000:
+        user.privilege = "эксперт"
+        user.save()
+    elif user.symps < 10000:
+        user.privilege = "гуру"
+        user.save()
+    return redirect('forum:post_detail', post_id=post_id)
+
+
+@ratelimit(key='ip', rate='50/m')
+@login_required
+def symps_comment_add(request, post_id, comment_id, username):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    post = get_object_or_404(Forum, id=post_id)
+    owner = get_object_or_404(User, username=username)
+    comment = get_object_or_404(Comment, id=comment_id)
+    if owner != request.user:
+        if not CommentSymp.objects.filter(comment=comment, owner=owner, user=request.user).exists():
+            owner.symps += 1
+            owner.save()
+            CommentSymp.objects.create(comment=comment, owner=owner, user=request.user)
+        else:
+            owner.symps -= 1
+            owner.save()
+            CommentSymp.objects.filter(comment=comment, owner=owner, user=request.user).delete()
+    user = CustomUser.objects.get(username=username)
     if user.privilege != "местный" and user.symps >= 20 and user.symps <= 199:
         user.privilege = "местный"
         user.save()
