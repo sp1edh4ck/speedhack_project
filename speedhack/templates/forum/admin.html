@@ -40,30 +40,52 @@
       <div class="frame-users" style="display: block; {% if count_search == 0 %}max-height: 30px;{% elif count_search == 1 %}max-height: 40px;{% elif count_search == 2 %}max-height: 100px;{% elif count_search == 3 %}max-height: 160px;{% elif count_search == 4 %}max-height: 220px;{% elif count_search == 5 %}max-height: 280px;{% elif count_search == 6 %}max-height: 340px;{% endif %}">
         {% if count_search != 0 %}
           {% for user in users %}
-            <div style="display: flex; padding: 0 20px 0 20px;">
-              <div style="margin: 0 10px 0px 0; height: 40px;">
-                <img style="width: 40px; border-radius: 10px;" src="{{ user.avatar.url }}">
+            <div style="display: block; padding: 0 20px 0 20px;">
+              <div style="display: flex;">
+                <div style="margin: 0 10px 0px 0; height: 40px;">
+                  <img style="width: 40px; border-radius: 10px;" src="{{ user.avatar.url }}">
+                </div>
+                <div style="margin: 0 auto 0 0;">
+                  <a href="{% url 'forum:profile' user.username %}" class="admin-link">
+                    <label class="users-username" {% if user.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ user.username }}</label>
+                  </a>
+                </div>
+                <div class="admin-btn">
+                  {% if user.rank != "заблокирован" and user.username != request.user.username and request.user.rank_lvl > user.rank_lvl %}
+                    <label class="role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}" style="font-size: 15px; max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px; font-weight: bold;">{{ user.rank }}</label>
+                    <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button" style="max-height: 40px; margin-right: 5px;">Заблокировать</a>
+                    <a href="{% url 'forum:user_edit' user.username %}" style="max-height: 40px;"><i class="fa-solid fa-angles-down admin-edit-user"></i></a>
+                  {% elif user.rank == "заблокирован" and user.username != request.user.username and request.user.rank_lvl > user.rank_lvl %}
+                    <label class="role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}" style="font-size: 15px; max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px; font-weight: bold;">{{ user.save_rank }}</label>
+                    <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button" style="max-height: 40px; margin-right: 5px;">Разблокировать</a>
+                    <a href="{% url 'forum:user_edit' user.username %}" style="max-height: 40px;"><i class="fa-solid fa-angles-down admin-edit-user"></i></a>
+                  {% elif user.rank != "пользователь" %}
+                    <label class="{% if user.rank != "заблокирован" %}role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}{% endif %}" style="font-size: 15px; max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px; font-weight: bold;">{{ user.rank }}</label>
+                    <a href="{% url 'forum:user_edit' user.username %}" style="max-height: 40px;"><i class="fa-solid fa-angles-down admin-edit-user"></i></a>
+                  {% endif %}
+                </div>
               </div>
-              <div style="margin: 0 auto 0 0;">
-                <a href="{% url 'forum:profile' user.username %}" class="admin-link">
-                  <label class="users-username" {% if user.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ user.username }}</label>
-                </a>
-              </div>
-              <div class="admin-btn">
-                {% if user.rank != "заблокирован" and user.username != request.user.username and request.user.rank_lvl > user.rank_lvl %}
-                  <label class="role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}" style="font-size: 15px; max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px; font-weight: bold;">{{ user.rank }}</label>
-                  <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button" style="max-height: 40px; margin-right: 3px;">Заблокировать</a>
-                  <a href="{% url 'forum:user_edit' user.username %}" style="max-height: 40px;"><i class="fa-solid fa-square-pen admin-edit-user"></i></a>
-                {% elif user.rank == "заблокирован" and user.username != request.user.username and request.user.rank_lvl > user.rank_lvl %}
-                  <label class="role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}" style="font-size: 15px; max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px; font-weight: bold;">{{ user.save_rank }}</label>
-                  <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button" style="max-height: 40px; margin-right: 3px;">Разблокировать</a>
-                  <a href="{% url 'forum:user_edit' user.username %}" style="max-height: 40px;"><i class="fa-solid fa-square-pen admin-edit-user"></i></a>
-                {% elif user.rank != "пользователь" %}
-                  <label class="{% if user.rank != "заблокирован" %}role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}{% endif %}" style="font-size: 15px; max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0px; border-radius: 10px; font-weight: bold;">{{ user.rank }}</label>
-                {% endif %}
+              <div style="margin-top: 10px;">
+                <hr class="admin-hr" style="background: #3f3f3f;">
+                <div class="all-style-admin-user">
+                  <div>Должность: {{ user.rank }}</div>
+                  <div>Уровень доступа: {{ user.rank_lvl }}</div>
+                  <div>Ранг: {{ user.privilege }}</div>
+                  <div>Привилегия на маркете: {{ user.market_privilege }}</div>
+                  <div>Дата покупки доступа к маркету: {{ user.time_buy_market_privilege }}</div>
+                  <div>Платные привилегии: {{ user.buy_privilege }}</div>
+                  <div>Дата покупки привилегии: {{ user.time_buy_privilege }}</div>
+                  <div>Доступ к фону профиля: {{ user.profile_sub }}</div>
+                  <div>Дата покупки фона профиля: {{ user.time_buy_profile_sub }}</div>
+                  <div>Стиль имени: {{ user.username_style }}</div>
+                  <div>Пол: {{ user.gender }}</div>
+                  <div>День: {{ user.brt_day }}</div>
+                  <div>Месяц: {{ user.brt_month }}</div>
+                  <div>Год: {{ user.brt_year }}</div>
+                </div>
               </div>
             </div>
-            {% if not forloop.last %}<hr class="admin-hr">{% endif %} 
+            {% if not forloop.last %}<hr class="admin-hr">{% endif %}
           {% endfor %}
         {% else %}
           <div style="text-align: center;">

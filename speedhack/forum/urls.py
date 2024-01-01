@@ -15,6 +15,7 @@ urlpatterns = [
     # path('<str:username>/', views.profile, name='profile'),
     path('profile/<str:username>/', views.profile, name='profile'),
     path('profile/<str:username>/symps/', views.symps_view, name='symps_view'),
+    path('profile/<str:username>/messages/', views.messages_view, name='messages_view'),
     path('<str:username>/complaint/', views.complaint, name='complaint'),
     path('profile/<str:username>/deposit/<int:number>/', views.deposit, name='deposit'),
     path('profile/<str:username>/ban/', views.ban, name='ban'),

@@ -10,7 +10,7 @@ from users.models import CustomUser, IpUser
 
 from .forms import (AdsForm, AnswerForm, CommentForm, DepositForm, HelpForm,
                     PostForm, ProfileCommentForm)
-from .models import (Ads, Comment, Favourites, Follow, Forum, Group, Helpers,
+from .models import (Ads, Comment, Favourites, Follow, Forum, Group, Helper,
                      HelpForum, Like, ProfileComment, Symp, User, Viewer, CommentSymp)
 
 
@@ -118,15 +118,15 @@ def group_free(request, slug):
         posts = group.posts.filter(title__icontains=search_query)
     else:
         posts = group.posts.all()
-    helpers = Helpers.objects.filter(group=group)
+    helpers = Helper.objects.filter(group=group)
     helpers_count = helpers.count()
     count_posts = posts.count()
     context = {
         'count_posts': count_posts,
         'group': group,
-        'objects': pagination_post(request, posts),
         'helpers': helpers,
         'helpers_count': helpers_count,
+        'objects': pagination_post(request, posts),
     }
     return render(request, 'forum/template_groups.html', context)
 
@@ -181,10 +181,24 @@ def symps_view(request, username):
     user_symps = Symp.objects.filter(user=author)
     owner_symps = Symp.objects.filter(owner=author)
     context = {
+        'author': author,
         'user_symps': user_symps,
         'owner_symps': owner_symps,
     }
     return render(request, 'forum/user_symps.html', context)
+
+
+@login_required
+def messages_view(request, username):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    author = get_object_or_404(User, username=username)
+    user_messages = Comment.objects.filter(author=author).order_by('-created')
+    context = {
+        'author': author,
+        'user_messages': user_messages,
+    }
+    return render(request, 'forum/user_messages.html', context)
 
 
 @login_required
@@ -340,6 +354,7 @@ def post_detail(request, post_id):
     comments = post.comments.all()
     count_comments = comments.count()
     symps = Symp.objects.filter(post=post)
+    author_symps_count = Symp.objects.filter(user=post.author).count()
     if request.user.is_authenticated:
         context = {
             'form': form,
@@ -347,6 +362,7 @@ def post_detail(request, post_id):
             'post': post,
             'user': user,
             'views': views,
+            'author_symps_count': author_symps_count,
             'symps': symps,
             'my_symp': my_symp,
             'comments': comments,
@@ -357,6 +373,7 @@ def post_detail(request, post_id):
         'form': form,
         'post': post,
         'views': views,
+        'author_symps_count': author_symps_count,
         'symps': symps,
         'comments': comments,
         'count_comments': count_comments,

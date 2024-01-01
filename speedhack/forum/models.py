@@ -44,7 +44,7 @@ class Group(models.Model):
         return self.title
 
 
-class Helpers(models.Model):
+class Helper(models.Model):
     group = models.ForeignKey(
         Group,
         on_delete=models.SET_NULL,

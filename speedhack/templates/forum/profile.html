@@ -8,7 +8,7 @@
     <div class="main-profile">
       <div class="frame_con" style="display: block;">
         {% if request.user != author %}
-          <div class="frame-title" style="margin: 0 0 15px 0; padding: 15px 20px; color: #d6d6d6;">
+          <div class="frame-title" style="margin: 0 0 15px 0;">
             <div style="margin-bottom: 10px; font-size: 16px; font-weight: bold;">Уделите одну минуту перед сделкой</div>
             <div style="font-size: 14px;">Перед сделкой сверьте контакты пользователя, скопируйте логин из мессенджера и сверьте с тем, что указан в профиле. Не лишним будет проверить пользователя через ЛС, написав: "Привет, это ты мне пишешь в Телеграме?".</div>
           </div>
@@ -317,23 +317,23 @@
               <div style="display: flex;justify-content: center; text-align: center; overflow: hidden;">
                 <a class="int-info-profile" href="{% url 'forum:symps_view' author.username %}">
                   <div style="color: #ff506f;">{{ author_symps_count }}</div>
-                  <div class="int-info-profile-div1">симпатий</div>
+                  <div class="int-info-profile-div1">{{ author_symps_count|ru_plural:"симпатия,симпатии,симпатий" }}</div>
+                </a>
+                <a class="int-info-profile" href="{% url 'forum:messages_view' author.username %}">
+                  <div style="color: #ff506f;">{{ author.comments.count }}</div>
+                  <div class="int-info-profile-div1">{{ author.comments.count|ru_plural:"сообщение,сообщения,сообщений" }}</div>
                 </a>
                 <div class="int-info-profile" href="">
-                  <div style="color: #ff506f;">{{ author.comments.count }}</div>
-                  <div style="color: gray;">cообщения</div>
-                </div>
-                <div class="int-info-profile" href="">
                   <div style="color: #ff506f;">{{ post_1.count }}</div>
-                  <div style="color: gray;">розыгрыши</div>
+                  <div style="color: gray;">{{ post_1.count|ru_plural:"розыгрыш,розыгрыша,розыгрышей" }}</div>
                 </div>
                 <div class="int-info-profile" href="">
                   <div style="color: #ff506f;">{{ count_subscriptions }}</div>
-                  <div style="color: gray;">подписок</div>
+                  <div style="color: gray;">{{ count_subscriptions|ru_plural:"подписка,подписки,подписок" }}</div>
                 </div>
                 <div class="int-info-profile" href="">
                   <div style="color: #ff506f;">{{ count_subscribers }}</div>
-                  <div style="color: gray;">подписчики</div>
+                  <div style="color: gray;">{{ count_subscribers|ru_plural:"подписчик,подписчика,подписчиков" }}</div>
                 </div>
               </div>
             </div>
