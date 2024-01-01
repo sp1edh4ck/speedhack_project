@@ -14,6 +14,7 @@ urlpatterns = [
     path('group/<slug:slug>/', views.group_free, name='group_filter_posts'),
     # path('<str:username>/', views.profile, name='profile'),
     path('profile/<str:username>/', views.profile, name='profile'),
+    path('profile/<str:username>/symps/', views.symps_view, name='symps_view'),
     path('<str:username>/complaint/', views.complaint, name='complaint'),
     path('profile/<str:username>/deposit/<int:number>/', views.deposit, name='deposit'),
     path('profile/<str:username>/ban/', views.ban, name='ban'),

@@ -181,15 +181,17 @@ class HelpAnswer(models.Model):
         verbose_name_plural = 'Ответы'
 
 
-class Viewers(models.Model):
+class Viewer(models.Model):
     post = models.ForeignKey(
         Forum,
+        null=True,
         on_delete=models.CASCADE,
         related_name='viewer',
         verbose_name='Пост',
     )
-    author = models.ForeignKey(
+    user = models.ForeignKey(
         User,
+        null=True,
         on_delete=models.CASCADE,
         related_name='viewers',
         verbose_name='Пользователь',
@@ -240,7 +242,7 @@ class Symp(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name='symping',
-        verbose_name='Тот кто поставили',
+        verbose_name='Тот кто поставил',
     )
     created = models.DateTimeField(
         auto_now_add=True,

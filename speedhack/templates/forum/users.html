@@ -99,7 +99,7 @@
                         <label class="users-un {% if user.username_style != 'gray-un' and user.rank != 'заблокирован' %}{{ user.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if user.username == "root" %}style="color: red;"{% endif %}>{{ user.username }}</label>
                       </a>
                       <div style="margin-top: 7px; color: #999999; font-weight: bold;">
-                        <img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label style="margin-right: 20px;">{{ user.symps }}</label>
+                        <img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label style="margin-right: 20px;">{{ user.symper.count }}</label>
                         <img class="heart-users" src="{% static 'images/messages.png' %}"> <label>{{ user.comments.count }}</label>
                       </div>
                     </div>

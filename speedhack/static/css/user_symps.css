@@ -1,0 +1,45 @@
+.user-symps-frame {
+  width: 1081px;
+  border-radius: 10px;
+  background: #242424b6;
+  color: #d6d6d6;
+}
+
+.user-symp-post-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.user-symp-post-title-a {
+  color: #d6d6d6;
+  text-decoration: none;
+}
+
+.user-symp-post-title-a:hover {
+  text-decoration: underline;
+}
+
+.user-symp-post-info {
+  font-size: 14px;
+}
+
+.user-symp-a {
+  color: #d6d6d6;
+  text-decoration: none;
+}
+
+.user-symp-a:hover {
+  text-decoration: underline;
+}
+
+.user-symp-post-text {
+  padding: 10px 20px 20px 20px;
+}
+
+.user-symp-active {
+  display: none;
+}
+
+.user-symp-active.active-tab {
+  display: block;
+}

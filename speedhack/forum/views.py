@@ -11,7 +11,7 @@ from users.models import CustomUser, IpUser
 from .forms import (AdsForm, AnswerForm, CommentForm, DepositForm, HelpForm,
                     PostForm, ProfileCommentForm)
 from .models import (Ads, Comment, Favourites, Follow, Forum, Group, Helpers,
-                     HelpForum, Like, ProfileComment, Symp, User, Viewers, CommentSymp)
+                     HelpForum, Like, ProfileComment, Symp, User, Viewer, CommentSymp)
 
 
 def pagination_post(request, post_list):
@@ -145,6 +145,7 @@ def profile(request, username):
         return redirect('forum:profile', username=author)
     posts = author.posts.all()
     post_1 = posts.filter(group=1)
+    author_symps_count = Symp.objects.filter(user=author).count()
     profile_comments = ProfileComment.objects.filter(profile=author)
     subscriptions = author.follower.all()
     subscribers = author.following.all()
@@ -160,6 +161,7 @@ def profile(request, username):
         'author': author,
         'posts': posts,
         'post_1': post_1,
+        'author_symps_count': author_symps_count,
         'following': following,
         'profile_comments': profile_comments,
         'count_subscriptions': count_subscriptions,
@@ -169,6 +171,20 @@ def profile(request, username):
         'subscribers': pagination_sub(request, subscribers),
     }
     return render(request, 'forum/profile.html', context)
+
+
+@login_required
+def symps_view(request, username):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    author = get_object_or_404(User, username=username)
+    user_symps = Symp.objects.filter(user=author)
+    owner_symps = Symp.objects.filter(owner=author)
+    context = {
+        'user_symps': user_symps,
+        'owner_symps': owner_symps,
+    }
+    return render(request, 'forum/user_symps.html', context)
 
 
 @login_required
@@ -314,14 +330,12 @@ def post_detail(request, post_id):
     post = get_object_or_404(Forum, id=post_id)
     if request.user.is_authenticated:
         user = get_object_or_404(User, username=request.user.username)
-        my_symp = Symp.objects.filter(post=post, user=user)
+        my_symp = Symp.objects.filter(post=post, owner=user)
         # my_symp_comment = Symp.objects.filter(comment=comment, user=user)
         favourite = Favourites.objects.filter(post=post, user=user)
-    # Добавление просмотра (надо доработать)
-    # if request.user.is_authenticated:
-        # viewers = post.viewers.all()
-        # post.view += 1
-        # post.save()
+        if not Viewer.objects.filter(post=post, user=user).exists():
+            Viewer.objects.create(post=post, user=user)
+    views = Viewer.objects.filter(post=post).all()
     form = CommentForm(request.POST or None)
     comments = post.comments.all()
     count_comments = comments.count()
@@ -332,6 +346,7 @@ def post_detail(request, post_id):
             'favourite': favourite,
             'post': post,
             'user': user,
+            'views': views,
             'symps': symps,
             'my_symp': my_symp,
             'comments': comments,
@@ -341,6 +356,7 @@ def post_detail(request, post_id):
     context = {
         'form': form,
         'post': post,
+        'views': views,
         'symps': symps,
         'comments': comments,
         'count_comments': count_comments,
@@ -380,16 +396,16 @@ def symps_add(request, post_id, username):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     post = get_object_or_404(Forum, id=post_id)
-    owner = get_object_or_404(User, username=username)
-    if owner != request.user:
-        if not Symp.objects.filter(post=post, owner=owner, user=request.user).exists():
-            owner.symps += 1
-            owner.save()
-            Symp.objects.create(post=post, owner=owner, user=request.user)
+    user = get_object_or_404(User, username=username)
+    if user != request.user:
+        if not Symp.objects.filter(post=post, user=user, owner=request.user).exists():
+            user.symps += 1
+            user.save()
+            Symp.objects.create(post=post, user=user, owner=request.user)
         else:
-            owner.symps -= 1
-            owner.save()
-            Symp.objects.filter(post=post, owner=owner, user=request.user).delete()
+            user.symps -= 1
+            user.save()
+            Symp.objects.filter(post=post, user=user, owner=request.user).delete()
     comments = post.comments.all()
     if post.author.username == request.user.username:
         for comment in comments:

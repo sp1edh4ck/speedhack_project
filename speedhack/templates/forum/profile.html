@@ -315,10 +315,10 @@
               </div>
               <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
               <div style="display: flex;justify-content: center; text-align: center; overflow: hidden;">
-                <div class="int-info-profile" href="">
-                  <div style="color: #ff506f;">{{ author.symps }}</div>
-                  <div style="color: gray;">симпатий</div>
-                </div>
+                <a class="int-info-profile" href="{% url 'forum:symps_view' author.username %}">
+                  <div style="color: #ff506f;">{{ author_symps_count }}</div>
+                  <div class="int-info-profile-div1">симпатий</div>
+                </a>
                 <div class="int-info-profile" href="">
                   <div style="color: #ff506f;">{{ author.comments.count }}</div>
                   <div style="color: gray;">cообщения</div>

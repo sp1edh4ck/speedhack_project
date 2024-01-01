@@ -400,3 +400,12 @@
   text-decoration: none;
   padding: 0 15px;
 }
+
+.int-info-profile-div1 {
+  color: #808080;
+  transition: 0.2s;
+}
+
+.int-info-profile:hover .int-info-profile-div1 {
+  color: #d6d6d6;
+}
