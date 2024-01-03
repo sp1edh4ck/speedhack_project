@@ -105,7 +105,66 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('description', 'tg_link', 'avatar', 'profile_background', 'username_style', 'banner', 'gender', 'brt_day', 'brt_month', 'brt_year', 'occupation', 'interests',)
+        fields = (
+            'description',
+            'tg_link',
+            'avatar',
+            'profile_background',
+            'username_style',
+            'banner',
+            'gender',
+            'brt_day',
+            'brt_month',
+            'brt_year',
+            'occupation',
+            'interests',
+        )
         widgets = {
             "avatar": AvatarWidget,
         }
+
+
+class UserProfileAdminForm(forms.ModelForm):
+    username = forms.CharField(required=False)
+    rank = forms.CharField(required=False)
+    rank_lvl = forms.CharField(required=False)
+    privilege = forms.CharField(required=False)
+    market_privilege = forms.CharField(required=False)
+    time_buy_market_privilege = forms.CharField(required=False)
+    buy_privilege = forms.CharField(required=False)
+    time_buy_privilege = forms.CharField(required=False)
+    profile_sub = forms.CharField(required=False)
+    time_buy_profile_sub = forms.CharField(required=False)
+    tg_link = forms.CharField(required=False)
+    scam = forms.CharField(required=False)
+    username_style = forms.CharField(required=False)
+    gender = forms.CharField(required=False)
+    brt_day = forms.CharField(required=False)
+    brt_month = forms.CharField(required=False)
+    brt_year = forms.CharField(required=False, min_length=4, max_length=4)
+    description = forms.CharField(required=False)
+    occupation = forms.CharField(required=False)
+    interests = forms.CharField(required=False)
+
+    class Meta:
+        model = CustomUser
+        fields = (
+            'username',
+            'rank',
+            'rank_lvl',
+            'privilege',
+            'buy_privilege',
+            'time_buy_privilege',
+            'market_privilege',
+            'time_buy_market_privilege',
+            'tg_link',
+            'description',
+            'occupation',
+            'interests',
+            'gender',
+            'brt_day',
+            'brt_month',
+            'brt_year',
+            'username_style',
+            'scam',
+        )

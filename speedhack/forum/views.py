@@ -5,7 +5,7 @@ from django.utils import timezone
 from django_ratelimit.decorators import ratelimit
 
 from market.models import Market
-from users.forms import UserProfileForm
+from users.forms import UserProfileForm, UserProfileAdminForm
 from users.models import CustomUser, IpUser
 
 from .forms import (AdsForm, AnswerForm, CommentForm, DepositForm, HelpForm,
@@ -41,6 +41,10 @@ def banned(request):
 
 def successfully(request):
     return render(request, 'forum/successfully.html')
+
+
+def empty_page(request):
+    return render(request, 'forum/empty_page.html')
 
 
 # Кастом страница для вывода 403 ошибки
@@ -414,14 +418,11 @@ def symps_add(request, post_id, username):
         return banned_redirect(request)
     post = get_object_or_404(Forum, id=post_id)
     user = get_object_or_404(User, username=username)
+    symps = Symp.objects.filter(user=post.author).all().count()
     if user != request.user:
         if not Symp.objects.filter(post=post, user=user, owner=request.user).exists():
-            user.symps += 1
-            user.save()
             Symp.objects.create(post=post, user=user, owner=request.user)
         else:
-            user.symps -= 1
-            user.save()
             Symp.objects.filter(post=post, user=user, owner=request.user).delete()
     comments = post.comments.all()
     if post.author.username == request.user.username:
@@ -429,36 +430,36 @@ def symps_add(request, post_id, username):
             user = CustomUser.objects.get(username=comment.author.username)
     else:
         user = CustomUser.objects.get(username=post.author.username)
-    if user.privilege != "местный" and user.symps >= 20 and user.symps <= 199:
-        user.privilege = "местный"
-        user.save()
-    elif user.privilege != "постоялец" and user.symps >= 200 and user.symps <= 999:
-        user.privilege = "постоялец"
-        user.save()
-    elif user.privilege != "эксперт" and user.symps >= 1000 and user.symps <= 3999:
-        user.privilege = "эксперт"
-        user.save()
-    elif user.privilege != "гуру" and user.symps >= 4000 and user.symps <= 9999:
-        user.privilege = "гуру"
-        user.save()
-    elif user.privilege != "искусственный интелект" and user.symps >= 10000:
-        user.privilege = "искусственный интелект"
-        user.save()
-    if user.symps < 20:
-        user.privilege = "новорег"
-        user.save()
-    elif user.symps < 200:
-        user.privilege = "местный"
-        user.save()
-    elif user.symps < 1000:
-        user.privilege = "постоялец"
-        user.save()
-    elif user.symps < 4000:
-        user.privilege = "эксперт"
-        user.save()
-    elif user.symps < 10000:
-        user.privilege = "гуру"
-        user.save()
+    if post.author.privilege != "местный" and symps >= 20 and symps <= 199:
+        post.author.privilege = "местный"
+        post.author.save()
+    elif post.author.privilege != "постоялец" and symps >= 200 and symps <= 999:
+        post.author.privilege = "постоялец"
+        post.author.save()
+    elif post.author.privilege != "эксперт" and symps >= 1000 and symps <= 3999:
+        post.author.privilege = "эксперт"
+        post.author.save()
+    elif post.author.privilege != "гуру" and symps >= 4000 and symps <= 9999:
+        post.author.privilege = "гуру"
+        post.author.save()
+    elif post.author.privilege != "искусственный интелект" and symps >= 10000:
+        post.author.privilege = "искусственный интелект"
+        post.author.save()
+    if symps < 20:
+        post.author.privilege = "новорег"
+        post.author.save()
+    elif symps >= 20 and symps < 200:
+        post.author.privilege = "местный"
+        post.author.save()
+    elif symps >= 200 and symps < 1000:
+        post.author.privilege = "постоялец"
+        post.author.save()
+    elif symps >= 1000 and symps < 4000:
+        post.author.privilege = "эксперт"
+        post.author.save()
+    elif symps >= 4000 and symps < 10000:
+        post.author.privilege = "гуру"
+        post.author.save()
     return redirect('forum:post_detail', post_id=post_id)
 
 
@@ -654,6 +655,8 @@ def profile_unfollow(request, username):
 def admin_panel(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
+    if request.user.rank_lvl < "4":
+        return redirect('forum:empty_page')
     users_list = CustomUser.objects.all()
     users_ban_list = CustomUser.objects.filter(rank="заблокирован")
     count_users = users_list.count()
@@ -662,9 +665,7 @@ def admin_panel(request):
     if search_query:
         users_list = CustomUser.objects.filter(username__icontains=search_query)
     count_search = users_list.count()
-    author = Forum.objects.select_related('author').all()
     context = {
-        'author': author,
         'users': users_list,
         'count_users': count_users,
         'count_search': count_search,
@@ -676,16 +677,32 @@ def admin_panel(request):
 @login_required
 def user_edit(request, username):
     user = get_object_or_404(User, username=username)
-    context = {
-        'user': user,
-    }
-    return render(request, 'forum/admin_user_edit.html', context)
+    form = UserProfileAdminForm(
+        request.POST or None,
+        instance=user,
+    )
+    if form.is_valid():
+        if user.buy_privilege != form.cleaned_data.get('id_buy_privilege'):
+            user.time_buy_privilege = timezone.now()
+        if user.market_privilege != form.cleaned_data.get('id_market_privilege'):
+            user.time_buy_market_privilege = timezone.now()
+        user.save()
+        form.username = username
+        form.brt_day = request.POST.get('brt_day')
+        form.brt_month = request.POST.get('brt_month')
+        form.brt_year = request.POST.get('brt_year')
+        form.save()
+        return redirect('forum:admin_panel')
+    return redirect('forum:admin_panel')
+    # return render(request, 'forum/admin_user_edit.html', context)
 
 
 @login_required
 def tickets(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
+    if request.user.rank_lvl < "4":
+        return redirect('forum:empty_page')
     tickets_list = HelpForum.objects.all()
     tickets_open_count = HelpForum.objects.filter(open=True).count()
     tickets_close = HelpForum.objects.filter(open=False)
@@ -808,6 +825,8 @@ def ticket_form(request):
 def ads(request):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
+    if request.user.rank_lvl < "4":
+        return redirect('forum:empty_page')
     form = AdsForm(request.POST or None)
     users = CustomUser.objects.all()
     ads = Ads.objects.all()

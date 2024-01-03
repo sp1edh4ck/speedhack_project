@@ -11,7 +11,7 @@ class CustomUserAdmin(UserAdmin):
         (None, {'fields': ('username', 'password', 'email',)}),
         ('About user',
             {'fields': (
-                'symps',
+                # 'symps',
                 'balance',
                 'subscriber',
                 'tg_link',
@@ -49,11 +49,12 @@ class CustomUserAdmin(UserAdmin):
         ('Additional fields', {'fields': ('avatar', 'profile_background',)})
     )
     list_display = (
+        'id',
         'username',
         'email',
         'rank',
         'balance',
-        'symps',
+        # 'symps',
         'privilege',
         'scam',
     )

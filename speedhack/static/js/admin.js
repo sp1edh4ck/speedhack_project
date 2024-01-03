@@ -19,3 +19,13 @@ tabs.forEach(function(item) {
 		}
 	});
 });
+
+
+const menu_user_edit = document.querySelector('#menu_user_edit');
+const js_menu_user_edit = document.querySelector('.edit-form-user-size');
+
+menu_user_edit.addEventListener('click', function(e) {
+	e.preventDefault();
+	menu_user_edit.classList.toggle('active-menu');
+	js_menu_user_edit.classList.toggle('active-menu');
+});
