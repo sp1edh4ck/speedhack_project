@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django_ratelimit.decorators import ratelimit
+from django.db.models import Count
 
 from market.models import Market
 from users.forms import UserProfileForm, UserProfileAdminForm
@@ -857,7 +858,7 @@ def users(request):
     messages_count = Comment.objects.all().count()
     count_posts = posts.count()
     count_accs = accs.count()
-    users_list = CustomUser.objects.order_by("-symps")
+    users_list = CustomUser.objects.all().annotate(symps=Count("symper")).order_by("-symps")
     new_users = CustomUser.objects.order_by("-date_joined")[:7]
     count_sellers = 0
     for user in users_list:

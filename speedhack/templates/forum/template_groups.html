@@ -47,12 +47,15 @@
                 <div class="text-frame post">
                   <div class="text-frame-div" style="margin: 0 auto 0 0;">
                     <label class="text-frame-title">{{ post.title }}</label><br>
-                    <label class="text-frame-text">
-                      {{ post.pub_date|date:"d E Y / H:i" }}
-                    </label>
-                    <label class="text-frame-text" style="margin-left: 10px;">
-                      <i class="fa-solid fa-message fa-sm"></i> {{ post.comments.count }}
-                    </label>
+                    <div style="display: flex; align-items: baseline;">
+                      {% if post.open_activities %}<label class="tables-tags">Активности</label><br>{% endif %}
+                      <label class="text-frame-text">
+                        {{ post.pub_date|date:"d E Y / H:i" }}
+                      </label>
+                      <label class="text-frame-text" style="margin-left: 10px;">
+                        <i class="fa-solid fa-message fa-sm"></i> {{ post.comments.count }}
+                      </label>
+                    </div>
                   </div>
                   <div class="avatar-username">
                     <img class="user-avatar" src="{{ post.author.avatar.url }}">
