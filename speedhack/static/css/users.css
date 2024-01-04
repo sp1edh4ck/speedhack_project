@@ -98,7 +98,7 @@
   max-width: 200px;
   font-size: 16px;
   background: #202020b6;
-  border: 0px solid #444444;
+  border: 2px solid #4444448a;
   color: #d6d6d6;
   outline: none;
   border-radius: 10px;
@@ -110,15 +110,15 @@
 .input-search-users:focus {
   border-color: #ff506f;
   outline: 0;
-  box-shadow: 0 0 0 2px #ff506f;
+  /* box-shadow: 0 0 0 2px #ff506f; */
 }
 
 .icons-users {
   color: #505050;
   align-items: center;
   margin: 10px 0 0 5px;
-  min-height: 1.4em;
-  max-height: 1.4em;
+  min-height: 1.5em;
+  max-height: 1.5em;
   transition: all 0.5s ease 0s;
 }
 

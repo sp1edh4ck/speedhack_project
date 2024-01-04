@@ -5,7 +5,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
                                        UserCreationForm)
 from django.shortcuts import redirect
-
 from users.widgets import AvatarWidget
 
 from .models import CustomUser

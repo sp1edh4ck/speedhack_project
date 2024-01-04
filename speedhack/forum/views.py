@@ -1,18 +1,18 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django_ratelimit.decorators import ratelimit
-from django.db.models import Count
-
 from market.models import Market
-from users.forms import UserProfileForm, UserProfileAdminForm
+from users.forms import UserProfileAdminForm, UserProfileForm
 from users.models import CustomUser, IpUser
 
 from .forms import (AdsForm, AnswerForm, CommentForm, DepositForm, HelpForm,
                     PostForm, ProfileCommentForm)
-from .models import (Ads, Comment, Favourites, Follow, Forum, Group, Helper,
-                     HelpForum, Like, ProfileComment, Symp, User, Viewer, CommentSymp)
+from .models import (Ads, Comment, CommentSymp, Favourites, Follow, Forum,
+                     Group, Helper, HelpForum, Like, ProfileComment, Symp,
+                     User, Viewer)
 
 
 def pagination_post(request, post_list):
@@ -356,7 +356,7 @@ def post_detail(request, post_id):
             Viewer.objects.create(post=post, user=user)
     views = Viewer.objects.filter(post=post).all()
     form = CommentForm(request.POST or None)
-    comments = post.comments.all()
+    comments = post.comment.all()
     count_comments = comments.count()
     symps = Symp.objects.filter(post=post)
     author_symps_count = Symp.objects.filter(user=post.author).count()
@@ -425,7 +425,7 @@ def symps_add(request, post_id, username):
             Symp.objects.create(post=post, user=user, owner=request.user)
         else:
             Symp.objects.filter(post=post, user=user, owner=request.user).delete()
-    comments = post.comments.all()
+    comments = post.comment.all()
     if post.author.username == request.user.username:
         for comment in comments:
             user = CustomUser.objects.get(username=comment.author.username)
@@ -815,7 +815,7 @@ def ticket_form(request):
                 ticket.priority_lvl = 3
             ticket.author = request.user
             ticket.save()
-            return redirect('forum:index')
+            return redirect('forum:ticket', ticket_id=ticket.id)
     context = {
         'form': form
     }
@@ -858,22 +858,26 @@ def users(request):
     messages_count = Comment.objects.all().count()
     count_posts = posts.count()
     count_accs = accs.count()
-    users_list = CustomUser.objects.all().annotate(symps=Count("symper")).order_by("-symps")
+    users_list_bySymps = CustomUser.objects.all().annotate(symps=Count("symper")).order_by("-symps")
+    users_list_byComments = CustomUser.objects.all().annotate(user_comments=Count("comments")).order_by("-user_comments")
+    users_list_byTeam = CustomUser.objects.filter(rank_lvl__gte="4").annotate(symps=Count("symper")).order_by("-symps")
     new_users = CustomUser.objects.order_by("-date_joined")[:7]
     count_sellers = 0
-    for user in users_list:
+    for user in users_list_bySymps:
         if user.rank != "заблокирован":
             if ((user.rank == "пользователь" and user.buy_privilege != "нет привилегий")
                 or (user.rank != "пользователь" and user.privilege != "местный")):
                 count_sellers += 1
-    count_users = users_list.count()
+    count_users = users_list_bySymps.count()
     search_query = request.GET.get('search', '')
     if search_query:
-        users_list = CustomUser.objects.filter(username__icontains=search_query)
-    count_search = users_list.count()
+        users_list_bySymps = CustomUser.objects.filter(username__icontains=search_query)
+    count_search = users_list_bySymps.count()
     context = {
         'new_users': new_users,
-        'users': users_list,
+        'users_list_bySymps': users_list_bySymps,
+        'users_list_byComments': users_list_byComments,
+        'users_list_byTeam': users_list_byTeam,
         'count_sellers': count_sellers,
         'count_posts': count_posts,
         'count_users': count_users,

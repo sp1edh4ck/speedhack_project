@@ -258,7 +258,7 @@ class Comment(models.Model):
     post = models.ForeignKey(
         Forum,
         on_delete=models.CASCADE,
-        related_name='comments',
+        related_name='comment',
         verbose_name='Пост',
     )
     author = models.ForeignKey(
