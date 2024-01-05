@@ -2,6 +2,7 @@
 {% load static %}
 {% load thumbnail %}
 {% block title %}speedhack / форум{% endblock %}
+{% load user_filters %}
 {% block content %}
   <div class="main">
     <div class="frames_con optimization">
@@ -20,7 +21,7 @@
       </div>
       <div style="display: block;">
         <div class="frame-right-first-index">
-          {% if count_posts != 0 %}
+          {% if posts.count != 0 %}
             <div style="margin: 0 0 0 10px;">
               <div>
                 <label class="posts-group-title">{% if request.path == '/' %}Все обсуждения{% elif request.path == '/forum/my_topics/' %}Мои темы{% elif request.path == '/forum/favourites/' %}Избранное{% endif %}</label>
@@ -77,7 +78,7 @@
                             {{ post.pub_date|date:"d E Y / H:i" }}
                           </label>
                           <label class="text-frame-text" style="margin-left: 10px;">
-                            <i class="fa-solid fa-message fa-sm"></i> {{ post.comment.count }}
+                            <i class="fa-solid fa-message fa-sm"></i> {{ post.comment.count|bf_number }}
                           </label>
                         </div>
                       </div>
@@ -101,7 +102,7 @@
                             {{ post.pub_date|date:"d E Y / H:i" }}
                           </label>
                           <label class="text-frame-text" style="margin-left: 10px;">
-                            <i class="fa-solid fa-message fa-sm"></i> {{ post.comment.count }}
+                            <i class="fa-solid fa-message fa-sm"></i> {{ post.comment.count|bf_number }}
                           </label>
                         </div>
                       </div>
@@ -125,7 +126,7 @@
                             {{ post.post.pub_date|date:"d E Y / H:i" }}
                           </label>
                           <label class="text-frame-text" style="margin-left: 10px;">
-                            <i class="fa-solid fa-message fa-sm"></i> {{ post.post.comment.count }}
+                            <i class="fa-solid fa-message fa-sm"></i> {{ post.post.comment.count|bf_number }}
                           </label>
                         </div>
                       </div>

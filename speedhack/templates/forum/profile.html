@@ -144,9 +144,9 @@
                 </div>
               </div>
             </div> {% endcomment %}
-            {% if count_subscriptions != 0 %}
+            {% if subscriptions.count != 0 %}
               <div class="frame-left-second">
-                <a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ count_subscriptions }}</label> {% if count_subscriptions == 1 %}подписка{% elif count_subscriptions <= 4 and count_subscriptions >= 2 %}подписки{% elif count_subscriptions <= 100 and count_subscriptions >= 5 %}подписок{% endif %}</a>
+                <a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ subscriptions.count|bf_number }}</label> {{ subscriptions.count|ru_plural:"подписка,подписки,подписок" }}</a>
                 <div class="subs-left">
                   {% for post in subscriptions %}
                     <div style="display: flex;" class="sub-users-div">
@@ -175,9 +175,9 @@
                 </div>
               </div>
             {% endif %}
-            {% if count_subscribers != 0 %}
+            {% if subscribers.count != 0 %}
               <div class="frame-left-third">
-                <a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ count_subscribers }}</label> {% if count_subscribers == 1 %}подписчик{% elif count_subscribers > 1 and count_subscribers < 5%}подписчика{% elif count_subscribers > 4 %}подписчиков{% endif%}</a>
+                <a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ subscribers.count|bf_number }}</label> {{ subscribers.count|ru_plural:"подписчик,подписчика,подписчиков" }}</a>
                 <div class="subs-left">
                   {% for post in subscribers %}
                     <div style="display: flex;" class="sub-users-div">
@@ -316,7 +316,7 @@
               <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
               <div style="display: flex;justify-content: center; text-align: center; overflow: hidden;">
                 <a class="int-info-profile" href="{% url 'forum:symps_view' author.username %}">
-                  <div style="color: #ff506f;">{{ author_symps_count }}</div>
+                  <div style="color: #ff506f;">{{ author_symps_count|bf_number }}</div>
                   <div class="int-info-profile-div1">{{ author_symps_count|ru_plural:"симпатия,симпатии,симпатий" }}</div>
                 </a>
                 <a class="int-info-profile" href="{% url 'forum:messages_view' author.username %}">
@@ -324,22 +324,22 @@
                   <div class="int-info-profile-div1">{{ author.comments.count|ru_plural:"сообщение,сообщения,сообщений" }}</div>
                 </a>
                 <div class="int-info-profile" href="">
-                  <div style="color: #ff506f;">{{ post_1.count }}</div>
+                  <div style="color: #ff506f;">{{ post_1.count|bf_number }}</div>
                   <div style="color: gray;">{{ post_1.count|ru_plural:"розыгрыш,розыгрыша,розыгрышей" }}</div>
                 </div>
                 <div class="int-info-profile" href="">
-                  <div style="color: #ff506f;">{{ count_subscriptions }}</div>
-                  <div style="color: gray;">{{ count_subscriptions|ru_plural:"подписка,подписки,подписок" }}</div>
+                  <div style="color: #ff506f;">{{ subscriptions.count|bf_number }}</div>
+                  <div style="color: gray;">{{ subscriptions.count|ru_plural:"подписка,подписки,подписок" }}</div>
                 </div>
                 <div class="int-info-profile" href="">
-                  <div style="color: #ff506f;">{{ count_subscribers }}</div>
-                  <div style="color: gray;">{{ count_subscribers|ru_plural:"подписчик,подписчика,подписчиков" }}</div>
+                  <div style="color: #ff506f;">{{ subscribers.count|bf_number }}</div>
+                  <div style="color: gray;">{{ subscribers.count|ru_plural:"подписчик,подписчика,подписчиков" }}</div>
                 </div>
               </div>
             </div>
             <div class="frame-right-second">
-              <a data-tab="#userPosts" class="button-tools active-tab">Стена{% if profile_comments.count != 0 %} <label style="margin-left: 5px; color: #707070 ;">{{ profile_comments.count }}</label>{% endif %}</a>
-              <a data-tab="#authorPosts" class="button-tools">Посты{% if posts.count != 0 %} <label style="margin-left: 5px; color: #707070 ;">{{ posts.count }}</label>{% endif %}</a>
+              <a data-tab="#userPosts" class="button-tools active-tab">Стена{% if profile_comments.count != 0 %} <label style="margin-left: 5px; color: #707070 ;">{{ profile_comments.count|bf_number }}</label>{% endif %}</a>
+              <a data-tab="#authorPosts" class="button-tools">Посты{% if posts.count != 0 %} <label style="margin-left: 5px; color: #707070 ;">{{ posts.count|bf_number }}</label>{% endif %}</a>
               {% comment %} <a data-tab="#" class="button-tools">Жалобы</a> {% endcomment %}
             </div>
             <div id="userPosts" class="tabItem profile-comment-active active-tab">

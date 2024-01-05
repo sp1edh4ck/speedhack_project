@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}speedhack / админка{% endblock %}
 {% load static %}
+{% load user_filters %}
 {% block content %}
   <div class="main">
     <div class="frame_con">
-      <div class="frame-users" style="display: block; min-width: 1081px;{% if tickets_close_count == 0 %}max-height: 65px;{% elif tickets_close_count == 1 %}max-height: 80px;{% elif tickets_close_count == 2 %}max-height: 185px;{% elif tickets_close_count == 3 %}max-height: 290px;{% endif %}">
-        {% if my_tickets_count != 0 %}
+      <div class="frame-users" style="display: block; min-width: 1081px;{% if tickets_close.count == 0 %}max-height: 65px;{% elif tickets_close.count == 1 %}max-height: 80px;{% elif tickets_close.count == 2 %}max-height: 185px;{% elif tickets_close.count == 3 %}max-height: 290px;{% endif %}">
+        {% if my_tickets.count != 0 %}
           {% for ticket in my_tickets %}
             <a href="{% url 'forum:ticket' ticket.id %}">
               <div style="display: block;">
@@ -24,7 +25,7 @@
                   <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.priority == "Низкий" %}green{% elif ticket.priority == "Средний" %}#c6d400{% elif ticket.priority == "Высокий" %}red;{% endif %}">{{ ticket.priority }}</label>
                   <label class="role-banner" style="width: 30px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.request == "Да" %}green{% elif ticket.request == "Нет" %}red;{% endif %}">{{ ticket.request }}</label>
                   <label class="role-banner" style="width: 300px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.category }}</label>
-                  <label class="role-banner" style="width: 150px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">Сообщений: {{ ticket.answer.count }}</label>
+                  <label class="role-banner" style="width: 150px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">Сообщений: {{ ticket.answer.count|bf_number }}</label>
                   <label class="role-banner" style="width: 205px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.created }}</label>
                 </div>
               </div>

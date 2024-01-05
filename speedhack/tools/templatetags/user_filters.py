@@ -1,4 +1,5 @@
 from django import template
+import locale
 
 register = template.Library()
 
@@ -26,3 +27,9 @@ def ru_plural(value, variants):
         variant = 2
 
     return variants[variant]
+
+
+@register.filter
+def bf_number(value):
+    result = f'{value:,.0f}'.replace(',', ' ')
+    return result

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}speedhack / пользователи{% endblock %}
+{% load user_filters %}
 {% block content %}
   <div class="main">
     <div class="frame_con">
@@ -14,37 +15,37 @@
               </form>
             </div>
             <div>
-              {% comment %} <a href="{% url 'forum:users' %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a> {% endcomment %}
+              <a href="{% url 'forum:users' %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
             </div>
           </div>
         </div>
         <div class="frame-left-second-users">
-          <span style="color: gray; font-size: 18px;">Статистика форума</span>
-          <div style="display: block;">
+          <span style="color: gray; font-size: 16px;">Статистика форума</span>
+          <div style="display: block; font-size: 15px;">
             <div style="margin-top: 15px; color: gray;">
-              <label>Пользователей:</label>
-              <label style="color: #d6d6d6;">{{ count_users }}</label>
-            </div>
-            <div style="margin-top: 3px; color: gray;">
               <label>Тем:</label>
-              <label style="color: #d6d6d6;">{{ count_posts }}</label>
+              <label style="color: #d6d6d6;">{{ posts.count|bf_number }}</label>
             </div>
             <div style="margin-top: 3px; color: gray;">
               <label>Сообщений:</label>
-              <label style="color: #d6d6d6;">{{ messages_count }}</label>
+              <label style="color: #d6d6d6;">{{ messages.count|bf_number }}</label>
+            </div>
+            <div style="margin-top: 3px; color: gray;">
+              <label>Пользователей:</label>
+              <label style="color: #d6d6d6;">{{ users_list.count|bf_number }}</label>
             </div>
           </div>
         </div>
         {% comment %} <div class="frame-left-second-users">
-          <span style="color: gray; font-size: 18px;">Статистика маркета</span>
-          <div style="display: block;">
+          <span style="color: gray; font-size: 16px;">Статистика маркета</span>
+          <div style="display: block; font-size: 15px;">
             <div style="margin-top: 15px; color: gray;">
               <label>Продавцов:</label>
-              <label style="color: #d6d6d6;">{{ users. }}</label>
+              <label style="color: #d6d6d6;">{{ users_sellers|bf_number }}</label>
             </div>
             <div style="margin-top: 3px; color: gray;">
               <label>Аккаунтов:</label>
-              <label style="color: #d6d6d6;">{{ count_accs }}</label>
+              <label style="color: #d6d6d6;">{{ accs.count|bf_number }}</label>
             </div>
           </div>
         </div> {% endcomment %}
@@ -69,10 +70,10 @@
         <div class="admin-frame-right" style="margin: 0 0 15px 0; padding: 20px 0 0 20px; min-height: 50px;">
           <a data-tab="#users_list_bySymps" class="button-tools active-tab">Больше всех симпатий</a>
           <a data-tab="#users_list_byComments" class="button-tools">Больше всех сообщений</a>
-          <a data-tab="#users_list_byTeam" class="button-tools">Команда форума</a>
+          <a data-tab="#users_list_byStaff" class="button-tools">Команда форума</a>
         </div>
-        <div id="users_list_bySymps" class="tabItem frame-right-users users-display active-tab" style="{% if count_search == 0 %}max-height: 60px;{% elif count_search == 1 %}max-height: 100px;{% elif count_search == 2 %}max-height: 210px;{% elif count_search == 3 %}max-height: 320px;{% endif %}">
-          {% if count_search != 0 %}
+        <div id="users_list_bySymps" class="tabItem frame-right-users users-display active-tab" style="{% if users_list_bySymps.count == 0 %}max-height: 60px;{% elif users_list_bySymps.count == 1 %}max-height: 100px;{% elif users_list_bySymps.count == 2 %}max-height: 210px;{% elif users_list_bySymps.count == 3 %}max-height: 320px;{% endif %}">
+          {% if users_list_bySymps.count != 0 %}
             {% for user in users_list_bySymps %}
               <div class="users-div">
                 <div style="padding: 10px 0 10px 10px;">
@@ -93,8 +94,8 @@
                         <label>{{ user.description }}</label>
                       </div>
                       <div style="margin-top: 7px; color: #999999; font-weight: bold;">
-                        <img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label style="margin-right: 20px;">{{ user.symper.count }}</label>
-                        <img class="heart-users" src="{% static 'images/messages.png' %}"> <label>{{ user.comments.count }}</label>
+                        <img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label style="margin-right: 20px;">{{ user.symper.count|bf_number }}</label>
+                        <img class="heart-users" src="{% static 'images/messages.png' %}"> <label>{{ user.comments.count|bf_number }}</label>
                       </div>
                     </div>
                     {% comment %} <div style="align: right;">
@@ -111,8 +112,8 @@
             </div>
           {% endif %}
         </div>
-        <div id="users_list_byComments" class="tabItem frame-right-users users-display" style="{% if count_search == 0 %}max-height: 60px;{% elif count_search == 1 %}max-height: 100px;{% elif count_search == 2 %}max-height: 210px;{% elif count_search == 3 %}max-height: 320px;{% endif %}">
-          {% if count_search != 0 %}
+        <div id="users_list_byComments" class="tabItem frame-right-users users-display" style="{% if users_list_byComments.count == 0 %}max-height: 60px;{% elif users_list_byComments.count == 1 %}max-height: 100px;{% elif users_list_byComments.count == 2 %}max-height: 210px;{% elif users_list_byComments.count == 3 %}max-height: 320px;{% endif %}">
+          {% if users_list_byComments.count != 0 %}
             {% for user in users_list_byComments %}
               <div class="users-div">
                 <div style="padding: 10px 0 10px 10px;">
@@ -133,8 +134,8 @@
                         <label>{{ user.description }}</label>
                       </div>
                       <div style="margin-top: 7px; color: #999999; font-weight: bold;">
-                        <img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label style="margin-right: 20px;">{{ user.symper.count }}</label>
-                        <img class="heart-users" src="{% static 'images/messages.png' %}"> <label>{{ user.comments.count }}</label>
+                        <img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label style="margin-right: 20px;">{{ user.symper.count|bf_number }}</label>
+                        <img class="heart-users" src="{% static 'images/messages.png' %}"> <label>{{ user.comments.count|bf_number }}</label>
                       </div>
                     </div>
                     {% comment %} <div style="align: right;">
@@ -151,9 +152,9 @@
             </div>
           {% endif %}
         </div>
-        <div id="users_list_byTeam" class="tabItem frame-right-users users-display" style="{% if count_search == 0 %}max-height: 60px;{% elif count_search == 1 %}max-height: 100px;{% elif count_search == 2 %}max-height: 210px;{% elif count_search == 3 %}max-height: 320px;{% endif %}">
-          {% if count_search != 0 %}
-            {% for user in users_list_byTeam %}
+        <div id="users_list_byStaff" class="tabItem frame-right-users users-display" style="{% if users_list_byStaff.count == 0 %}max-height: 60px;{% elif users_list_byStaff.count == 1 %}max-height: 100px;{% elif users_list_byStaff.count == 2 %}max-height: 230px;{% elif users_list_byStaff.count == 3 %}max-height: 320px;{% endif %}">
+          {% if users_list_byStaff.count != 0 %}
+            {% for user in users_list_byStaff %}
               {% if user.rank_lvl >= "4" %}
                 <div class="users-div">
                   <div style="padding: 10px 0 10px 10px;">
@@ -174,8 +175,8 @@
                           <label>{{ user.description }}</label>
                         </div>
                         <div style="margin-top: 7px; color: #999999; font-weight: bold;">
-                          <img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label style="margin-right: 20px;">{{ user.symper.count }}</label>
-                          <img class="heart-users" src="{% static 'images/messages.png' %}"> <label>{{ user.comments.count }}</label>
+                          <img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label style="margin-right: 20px;">{{ user.symper.count|bf_number }}</label>
+                          <img class="heart-users" src="{% static 'images/messages.png' %}"> <label>{{ user.comments.count|bf_number }}</label>
                         </div>
                       </div>
                       {% comment %} <div>

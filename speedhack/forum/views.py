@@ -63,10 +63,8 @@ def index(request):
     else:
         posts = Forum.objects.select_related('author').all()
     # users = User.objects.filter(is_online=True)
-    count_posts = posts.count()
     ads = Ads.objects.all()
     context = {
-        'count_posts': count_posts,
         'ads': ads,
         # 'users': users,
         'objects': pagination_post(request, posts),
@@ -85,10 +83,8 @@ def my_topics(request):
         posts = user.posts.filter(title__icontains=search_query)
     else:
         posts = user.posts.all()
-    count_posts = posts.count()
     ads = Ads.objects.all()
     context = {
-        'count_posts': count_posts,
         'ads': ads,
         'objects': pagination_post(request, posts)
     }
@@ -102,10 +98,8 @@ def favourites(request):
         return banned_redirect(request)
     user = request.user
     favourites_posts = Favourites.objects.filter(user=user)
-    count_posts = favourites_posts.count()
     ads = Ads.objects.all()
     context = {
-        'count_posts': count_posts,
         'ads': ads,
         'objects': pagination_post(request, favourites_posts)
     }
@@ -124,13 +118,9 @@ def group_free(request, slug):
     else:
         posts = group.posts.all()
     helpers = Helper.objects.filter(group=group)
-    helpers_count = helpers.count()
-    count_posts = posts.count()
     context = {
-        'count_posts': count_posts,
         'group': group,
         'helpers': helpers,
-        'helpers_count': helpers_count,
         'objects': pagination_post(request, posts),
     }
     return render(request, 'forum/template_groups.html', context)
@@ -159,8 +149,6 @@ def profile(request, username):
         if request.user.is_authenticated
         else False
     )
-    count_subscriptions = subscriptions.count()
-    count_subscribers = subscribers.count()
     context = {
         'form': form,
         'author': author,
@@ -169,11 +157,9 @@ def profile(request, username):
         'author_symps_count': author_symps_count,
         'following': following,
         'profile_comments': profile_comments,
-        'count_subscriptions': count_subscriptions,
-        'count_subscribers': count_subscribers,
+        'subscriptions': subscriptions,
+        'subscribers': subscribers,
         'objects': pagination_post(request, posts),
-        'subscriptions': pagination_sub(request, subscriptions),
-        'subscribers': pagination_sub(request, subscribers),
     }
     return render(request, 'forum/profile.html', context)
 
@@ -257,6 +243,7 @@ def ban(request, username):
     user = get_object_or_404(User, username=username)
     if user.rank == "заблокирован":
         user.rank = user.save_rank
+        user.save_rank = ''
         user.save()
     elif user.rank != "заблокирован":
         user.save_rank = user.rank
@@ -270,6 +257,7 @@ def admin_ban(request, username):
     user = get_object_or_404(User, username=username)
     if user.rank == "заблокирован":
         user.rank = user.save_rank
+        user.save_rank = ''
         user.save()
     elif user.rank != "заблокирован":
         user.save_rank = user.rank
@@ -357,7 +345,6 @@ def post_detail(request, post_id):
     views = Viewer.objects.filter(post=post).all()
     form = CommentForm(request.POST or None)
     comments = post.comment.all()
-    count_comments = comments.count()
     symps = Symp.objects.filter(post=post)
     author_symps_count = Symp.objects.filter(user=post.author).count()
     if request.user.is_authenticated:
@@ -371,7 +358,6 @@ def post_detail(request, post_id):
             'symps': symps,
             'my_symp': my_symp,
             'comments': comments,
-            'count_comments': count_comments,
         }
         return render(request, 'forum/post_detail.html', context)
     context = {
@@ -381,7 +367,6 @@ def post_detail(request, post_id):
         'author_symps_count': author_symps_count,
         'symps': symps,
         'comments': comments,
-        'count_comments': count_comments,
     }
     return render(request, 'forum/post_detail.html', context)
 
@@ -660,17 +645,12 @@ def admin_panel(request):
         return redirect('forum:empty_page')
     users_list = CustomUser.objects.all()
     users_ban_list = CustomUser.objects.filter(rank="заблокирован")
-    count_users = users_list.count()
-    count_users_ban = users_ban_list.count()
     search_query = request.GET.get('search', '')
     if search_query:
         users_list = CustomUser.objects.filter(username__icontains=search_query)
-    count_search = users_list.count()
     context = {
-        'users': users_list,
-        'count_users': count_users,
-        'count_search': count_search,
-        'count_users_ban': count_users_ban,
+        'users_list': users_list,
+        'users_ban_list': users_ban_list,
     }
     return render(request, 'forum/admin.html', context)
 
@@ -707,14 +687,10 @@ def tickets(request):
     tickets_list = HelpForum.objects.all()
     tickets_open_count = HelpForum.objects.filter(open=True).count()
     tickets_close = HelpForum.objects.filter(open=False)
-    tickets_close_count = tickets_close.count()
-    tickets_count = tickets_list.count()
     context = {
         'tickets_list': tickets_list,
-        'tickets_count': tickets_count,
         'tickets_open_count': tickets_open_count,
         'tickets_close': tickets_close,
-        'tickets_close_count': tickets_close_count,
     }
     return render(request, 'forum/tickets.html', context)
 
@@ -726,10 +702,8 @@ def my_tickets(request, username):
         return banned_redirect(request)
     user = request.user
     my_tickets = user.tickets.all()
-    my_tickets_count = my_tickets.count()
     context = {
         'my_tickets': my_tickets,
-        'my_tickets_count': my_tickets_count,
     }
     return render(request, 'forum/my_tickets.html', context)
 
@@ -742,12 +716,10 @@ def ticket(request, ticket_id):
     form = AnswerForm(request.POST or None)
     ticket = get_object_or_404(HelpForum, pk=ticket_id)
     comments = ticket.answer.all()
-    count_comments = comments.count()
     context = {
         'form': form,
         'ticket': ticket,
         'comments': comments,
-        'count_comments': count_comments,
     }
     return render(request, 'forum/ticket.html', context)
 
@@ -831,14 +803,12 @@ def ads(request):
     form = AdsForm(request.POST or None)
     users = CustomUser.objects.all()
     ads = Ads.objects.all()
-    ads_count = ads.count()
     if request.method == 'POST':
         if form.is_valid():
             form.save()
     context = {
         'ads': ads,
         'users': users,
-        'ads_count': ads_count,
         'form': form,
     }
     return render(request, 'forum/ads.html', context)
@@ -855,35 +825,30 @@ def users(request):
         return banned_redirect(request)
     posts = Forum.objects.select_related('author').all()
     accs = Market.objects.select_related('author').all()
-    messages_count = Comment.objects.all().count()
-    count_posts = posts.count()
-    count_accs = accs.count()
-    users_list_bySymps = CustomUser.objects.all().annotate(symps=Count("symper")).order_by("-symps")
-    users_list_byComments = CustomUser.objects.all().annotate(user_comments=Count("comments")).order_by("-user_comments")
-    users_list_byTeam = CustomUser.objects.filter(rank_lvl__gte="4").annotate(symps=Count("symper")).order_by("-symps")
+    messages = Comment.objects.all()
+    users_list = CustomUser.objects.all().annotate(symps=Count("symper")).order_by("-symps")
+    users_list_bySymps = CustomUser.objects.all().annotate(symps=Count("symper")).order_by("-symps", "date_joined")[:20]
+    users_list_byComments = CustomUser.objects.all().annotate(user_comments=Count("comments")).order_by("-user_comments", "date_joined")[:20]
+    users_list_byStaff = CustomUser.objects.filter(rank_lvl__gte="4").annotate(symps=Count("symper")).order_by("-symps")[:20]
     new_users = CustomUser.objects.order_by("-date_joined")[:7]
-    count_sellers = 0
-    for user in users_list_bySymps:
-        if user.rank != "заблокирован":
-            if ((user.rank == "пользователь" and user.buy_privilege != "нет привилегий")
-                or (user.rank != "пользователь" and user.privilege != "местный")):
-                count_sellers += 1
-    count_users = users_list_bySymps.count()
+    users_sellers = users_list.exclude(
+        market_privilege="нет привилегий",
+        rank_lvl__lt="4",
+        privilege__lt="постоялец",
+    ).count()
     search_query = request.GET.get('search', '')
     if search_query:
         users_list_bySymps = CustomUser.objects.filter(username__icontains=search_query)
-    count_search = users_list_bySymps.count()
     context = {
-        'new_users': new_users,
+        'posts': posts,
+        'accs': accs,
+        'messages': messages,
+        'users_list': users_list,
         'users_list_bySymps': users_list_bySymps,
         'users_list_byComments': users_list_byComments,
-        'users_list_byTeam': users_list_byTeam,
-        'count_sellers': count_sellers,
-        'count_posts': count_posts,
-        'count_users': count_users,
-        'count_accs': count_accs,
-        'count_search': count_search,
-        'messages_count': messages_count,
+        'users_list_byStaff': users_list_byStaff,
+        'new_users': new_users,
+        'users_sellers': users_sellers,
     }
     return render(request, 'forum/users.html', context)
 

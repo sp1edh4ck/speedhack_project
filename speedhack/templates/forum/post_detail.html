@@ -12,7 +12,7 @@
           {% if post.open_activities %}<label class="tables-tags-post">Активности</label><br>{% endif %}
           <label class="text-up-title">{{ post.title }}</label><br>
         </div>
-        <label class="text-up-all">Тема в разделе <a href="{% url 'forum:group_filter_posts' post.group.slug %}" class="text-up-nick">{{ post.group }}</a> создана пользователем <a href="{% url 'forum:profile' post.author.username %}" class="{% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}text-up-nick2 {{ post.author.username_style }}{% else %}text-up-nick{% endif %}" {% if post.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ post.author.username }}</a> / <img class="heart" src="{% static 'images/heart_gray.png' %}"> <label style="color: #ff506f;">{{ author_symps_count }}</label> / <label style="color: #949494;">{{ views.count }} {{ views.count|ru_plural:"просмотр,просмотра,просмотров" }}</label> | <label style="color: gray;">{{ post.pub_date|date:"d E Y / H:i" }}</label></label>
+        <label class="text-up-all">Тема в разделе <a href="{% url 'forum:group_filter_posts' post.group.slug %}" class="text-up-nick">{{ post.group }}</a> создана пользователем <a href="{% url 'forum:profile' post.author.username %}" class="{% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}text-up-nick2 {{ post.author.username_style }}{% else %}text-up-nick{% endif %}" {% if post.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ post.author.username }}</a> / <img class="heart" src="{% static 'images/heart_gray.png' %}"> <label style="color: #ff506f;">{{ author_symps_count|bf_number }}</label> / <label style="color: #949494;">{{ views.count|bf_number }} {{ views.count|ru_plural:"просмотр,просмотра,просмотров" }}</label> | <label style="color: gray;">{{ post.pub_date|date:"d E Y / H:i" }}</label></label>
       </div>
       <div class="frame-main">
         <div class="frame-main-avatars">
@@ -82,17 +82,17 @@
                     <div class="comment-date" style="margin-top: 3px;">
                       <a href="{% url 'forum:symps_add' post.id post.author.username %}" style="text-decoration: none;">
                         {% if my_symp %}
-                          <img src="{% static 'images/heart_pink_full.png' %}" class="symp-img"><label class="symp-label">{{ symps.count }}</label>
+                          <img src="{% static 'images/heart_pink_full.png' %}" class="symp-img"><label class="symp-label">{{ symps.count|bf_number }}</label>
                         {% else %}
-                          <img src="{% static 'images/heart_gray.png' %}" class="symp-img"><label class="symp-label">{{ symps.count }}</label>
+                          <img src="{% static 'images/heart_gray.png' %}" class="symp-img"><label class="symp-label">{{ symps.count|bf_number }}</label>
                         {% endif %}
                       </a>
                     </div>
                   {% else %}
-                    <img src="{% static 'images/heart_gray.png' %}" class="symp-img" style="cursor: default;"><label class="symp-label" style="cursor: default;">{{ symps.count }}</label>
+                    <img src="{% static 'images/heart_gray.png' %}" class="symp-img" style="cursor: default;"><label class="symp-label" style="cursor: default;">{{ symps.count|bf_number }}</label>
                   {% endif %}
                 {% else %}
-                  <img src="{% static 'images/heart_gray.png' %}" class="symp-img" style="cursor: default;"><label class="symp-label" style="cursor: default;">{{ symps.count }}</label>
+                  <img src="{% static 'images/heart_gray.png' %}" class="symp-img" style="cursor: default;"><label class="symp-label" style="cursor: default;">{{ symps.count|bf_number }}</label>
                 {% endif %}
               {% elif symps.count == 0 %}
                 {% if user.username != post.author.username %}
@@ -109,17 +109,17 @@
                     <div class="comment-date" style="margin-top: 3px;">
                       <a href="{% url 'forum:symps_add' post.id post.author.username %}" style="text-decoration: none;">
                         {% if my_symp %}
-                          <img src="{% static 'images/heart_pink_full.png' %}" class="symp-img"><label class="symp-label">{{ symps.count }}</label>
+                          <img src="{% static 'images/heart_pink_full.png' %}" class="symp-img"><label class="symp-label">{{ symps.count|bf_number }}</label>
                         {% else %}
-                          <img src="{% static 'images/heart_gray.png' %}" class="symp-img"><label class="symp-label">{{ symps.count }}</label>
+                          <img src="{% static 'images/heart_gray.png' %}" class="symp-img"><label class="symp-label">{{ symps.count|bf_number }}</label>
                         {% endif %}
                       </a>
                     </div>
                   {% else %}
-                    <img src="{% static 'images/heart_gray.png' %}" class="symp-img" style="cursor: default;"><label class="symp-label" style="cursor: default;">{{ symps.count }}</label>
+                    <img src="{% static 'images/heart_gray.png' %}" class="symp-img" style="cursor: default;"><label class="symp-label" style="cursor: default;">{{ symps.count|bf_number }}</label>
                   {% endif %}
                 {% else %}
-                  <img src="{% static 'images/heart_gray.png' %}" class="symp-img" style="cursor: default;"><label class="symp-label" style="cursor: default;">{{ symps.count }}</label>
+                  <img src="{% static 'images/heart_gray.png' %}" class="symp-img" style="cursor: default;"><label class="symp-label" style="cursor: default;">{{ symps.count|bf_number }}</label>
                 {% endif %}
               {% elif symps.count == 0 %}
                 {% if user.username != post.author.username %}
@@ -133,7 +133,7 @@
             </div>
           </div>
         </div>
-        {% if count_comments != 0 %}
+        {% if comments.count != 0 %}
           <hr class="hr-post-detail">
         {% endif %}
         {% for comment in comments %}
@@ -178,17 +178,17 @@
                       <div class="comment-date" style="margin-top: 3px;">
                         <a href="{% url 'forum:symps_comment_add' post.id comment.id comment.author.username %}" style="text-decoration: none;">
                           {% if my_symp %}
-                            <img src="{% static 'images/heart_pink_full.png' %}" class="symp-img"><label class="symp-label">{{ symps.count }}</label>
+                            <img src="{% static 'images/heart_pink_full.png' %}" class="symp-img"><label class="symp-label">{{ symps.count|bf_number }}</label>
                           {% else %}
-                            <img src="{% static 'images/heart_gray.png' %}" class="symp-img"><label class="symp-label">{{ symps.count }}</label>
+                            <img src="{% static 'images/heart_gray.png' %}" class="symp-img"><label class="symp-label">{{ symps.count|bf_number }}</label>
                           {% endif %}
                         </a>
                       </div>
                     {% else %}
-                      <img src="{% static 'images/heart_gray.png' %}" class="symp-img" style="cursor: default;"><label class="symp-label" style="cursor: default;">{{ comment_symps.count }}</label>
+                      <img src="{% static 'images/heart_gray.png' %}" class="symp-img" style="cursor: default;"><label class="symp-label" style="cursor: default;">{{ comment_symps.count|bf_number }}</label>
                     {% endif %}
                   {% else %}
-                    <img src="{% static 'images/heart_gray.png' %}" class="symp-img" style="cursor: default;"><label class="symp-label" style="cursor: default;">{{ comment_symps.count }}</label>
+                    <img src="{% static 'images/heart_gray.png' %}" class="symp-img" style="cursor: default;"><label class="symp-label" style="cursor: default;">{{ comment_symps.count|bf_number }}</label>
                   {% endif %}
                 {% elif comment_symps.count == 0 %}
                   {% if user.username != comment.author.username %}

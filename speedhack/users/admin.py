@@ -58,10 +58,9 @@ class CustomUserAdmin(UserAdmin):
         'scam',
     )
     list_filter = (
+        'id',
         'rank',
-        'is_staff',
-        'is_superuser',
-        'is_active',
+        'save_rank',
     )
 
     form = CustomUserChangeForm

@@ -19,7 +19,7 @@
             </div>
             <div style="margin-top: 3px; color: gray;">
               <label>Сообщений:</label>
-              <label style="color: #d6d6d6;">{{ user.comments.count }}</label>
+              <label style="color: #d6d6d6;">{{ user.comments.count|bf_number }}</label>
             </div>
           </div>
         </div>

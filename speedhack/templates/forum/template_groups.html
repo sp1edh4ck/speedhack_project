@@ -24,12 +24,12 @@
       </div>
       <div style="display: block;">
         <div class="frame-right-first-index">
-          {% if count_posts != 0 %}
+          {% if posts.count != 0 %}
             <div style="margin: 0 0 5px 10px;">
               <div>
                 <label class="posts-group-title">{{ group.title }}</label>
               </div>
-              {% if helpers_count != 0 %}<label class="help-group-title">Проверяющие раздела: {% for helper in helpers %}<a class="help-group-username {% if helper.helper.username_style != 'gray-un' and helper.helper.rank != 'заблокирован' %}{{ helper.helper.username_style }}{% endif %}" href="{% url 'forum:profile' helper.helper.username %}" {% if helper.helper.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ helper.helper }}</a>{% if helpers_count > 1 and not forloop.last %}<span class="pink-separator"></span>{% endif %}{% endfor %}</label>{% endif %}
+              {% if helpers.count != 0 %}<label class="help-group-title">Проверяющие раздела: {% for helper in helpers %}<a class="help-group-username {% if helper.helper.username_style != 'gray-un' and helper.helper.rank != 'заблокирован' %}{{ helper.helper.username_style }}{% endif %}" href="{% url 'forum:profile' helper.helper.username %}" {% if helper.helper.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ helper.helper }}</a>{% if helpers.count > 1 and not forloop.last %}<span class="pink-separator"></span>{% endif %}{% endfor %}</label>{% endif %}
             </div>
             <div class="search-header search-header-else">
               <div>
@@ -53,7 +53,7 @@
                         {{ post.pub_date|date:"d E Y / H:i" }}
                       </label>
                       <label class="text-frame-text" style="margin-left: 10px;">
-                        <i class="fa-solid fa-message fa-sm"></i> {{ post.comment.count }}
+                        <i class="fa-solid fa-message fa-sm"></i> {{ post.comment.count|bf_number }}
                       </label>
                     </div>
                   </div>
@@ -74,7 +74,7 @@
               <div>
                 <label class="posts-group-title">{{ group.title }}</label>
               </div>
-              {% if helpers_count != 0 %}<label class="help-group-title">Проверяющие раздела: {% for helper in helpers%}<a class="help-group-username {% if helper.helper.username_style != 'gray-un' %}{{ helper.helper.username_style }}{% endif %}" href="{% url 'forum:profile' helper.helper.username %}">{{ helper.helper }}</a>{% if helpers_count > 1 and not forloop.last %}<span class="pink-separator"></span>{% endif %}{% endfor %}</label>{% endif %}
+              {% if helpers.count != 0 %}<label class="help-group-title">Проверяющие раздела: {% for helper in helpers %}<a class="help-group-username {% if helper.helper.username_style != 'gray-un' %}{{ helper.helper.username_style }}{% endif %}" href="{% url 'forum:profile' helper.helper.username %}">{{ helper.helper }}</a>{% if helpers.count > 1 and not forloop.last %}<span class="pink-separator"></span>{% endif %}{% endfor %}</label>{% endif %}
             </div>
             <div class="search-header search-header-else">
               <div>

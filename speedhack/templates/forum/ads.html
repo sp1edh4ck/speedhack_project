@@ -52,7 +52,7 @@
           </form>
         </div>
         <div class="tabItem frame-users" id="ads_all" style="max-width: 806px;{% if tickets_open_count == 0 %}max-height: 65px;{% elif tickets_open_count == 1 %}max-height: 80px;{% elif tickets_open_count == 2 %}max-height: 185px;{% elif tickets_open_count == 3 %}max-height: 290px;{% endif %}">
-          {% if ads_count != 0 %}
+          {% if ads.count != 0 %}
             {% for ad in ads %}
               <a href="">
                 <div style="display: block;">

@@ -29,18 +29,18 @@
           <div style="display: block;">
             <div style="margin-top: 15px; color: gray;">
               <label>Пользователей:</label>
-              <label style="color: #d6d6d6;">{{ count_users }}</label>
+              <label style="color: #d6d6d6;">{{ users_list.count|bf_number }}</label>
             </div>
             <div style="margin-top: 3px; color: gray;">
               <label>Пользователей в бане:</label>
-              <label style="color: #d6d6d6;">{{ count_users_ban }}</label>
+              <label style="color: #d6d6d6;">{{ users_ban_list.count|bf_number }}</label>
             </div>
           </div>
         </div>
       </div>
-      <div class="frame-users" style="max-width: 806px; display: block; {% if count_search == 0 %}max-height: 30px;{% elif count_search == 1 %}max-height: 40px;{% elif count_search == 2 %}max-height: 100px;{% elif count_search == 3 %}max-height: 160px;{% elif count_search == 4 %}max-height: 220px;{% elif count_search == 5 %}max-height: 280px;{% elif count_search == 6 %}max-height: 340px;{% endif %}">
-        {% if count_search != 0 %}
-          {% for user in users %}
+      <div class="frame-users" style="max-width: 806px; display: block; {% if users_list.count == 0 %}max-height: 30px;{% elif users_list.count == 1 %}max-height: 40px;{% elif users_list.count == 2 %}max-height: 100px;{% elif users_list.count == 3 %}max-height: 160px;{% elif users_list.count == 4 %}max-height: 220px;{% elif users_list.count == 5 %}max-height: 280px;{% elif users_list.count == 6 %}max-height: 340px;{% endif %}">
+        {% if users_list.count != 0 %}
+          {% for user in users_list %}
             <div style="padding: 0 20px 0 20px;">
               <div style="display: flex;">
                 <div style="margin: 0 10px 0px 0; height: 40px;">
