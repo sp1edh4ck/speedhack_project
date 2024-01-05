@@ -45,10 +45,8 @@ def market(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     accs = Market.objects.all()
-    count_accs = accs.count()
     context = {
         'accs': accs,
-        'count_accs': count_accs,
     }
     return render(request, 'market/index.html', context)
 
@@ -58,11 +56,9 @@ def group_free(request, slug):
         return banned_redirect(request)
     group = get_object_or_404(AccGroup, slug=slug)
     accs = group.acc.all()
-    count_accs = accs.count()
     context = {
         'accs': accs,
         'group': group,
-        'count_accs': count_accs,
     }
     return render(request, 'market/template_groups.html', context)
 
@@ -73,10 +69,8 @@ def my_accs(request):
         return banned_redirect(request)
     user = CustomUser.objects.get(username=request.user.username)
     accs = Market.objects.filter(author=user).all()
-    count_accs = accs.count()
     context = {
         'accs': accs,
-        'count_accs': count_accs,
     }
     return render(request, 'market/index.html', context)
 
@@ -87,10 +81,8 @@ def my_buy_accs(request):
         return banned_redirect(request)
     user = CustomUser.objects.get(username=request.user)
     accs = Market.objects.filter(buyer=user)
-    count_accs = accs.count()
     context = {
         'accs': accs,
-        'count_accs': count_accs,
     }
     return render(request, 'market/index.html', context)
 
