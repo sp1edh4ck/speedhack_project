@@ -4,7 +4,7 @@
 {% load thumbnail %}
 {% load user_filters %}
 {% block content %}
-  <body class="background-img" {% if author.rank == 'владелец' or author.rank == 'гл. администратор' or author.rank == 'администратор' or author.rank == 'арбитр' or author.rank == 'модератор' or author.rank == 'бот' or author.rank == 'искусственный интелект' or author.profile_sub == True %}{% if author.profile_background %}style="background-image: linear-gradient(rgba(54, 54, 54, 0.6), rgba(54, 54, 54, 0.6)), url({{ author.profile_background.url }});"{% endif %}{% endif %}>
+  <body class="background-img" {% if author.rank_lvl >= "2" or author.rank == 'искусственный интелект' or author.profile_sub == True %}{% if author.profile_background %}style="background-image: linear-gradient(rgba(54, 54, 54, 0.6), rgba(54, 54, 54, 0.6)), url({{ author.profile_background.url }});"{% endif %}{% endif %}>
     <div class="main-profile">
       <div class="frame_con" style="display: block;">
         {% if request.user != author %}
@@ -15,16 +15,16 @@
         {% endif %}
         <div style="display: flex;">
           <div style="display: block;">
-            <div class="frame-edit" style="{% if user.is_authenticated == False %}max-height: 230px;{% elif user.is_authenticated == False and user.rank == 'заблокирован' %}max-height: 270px;{% elif user == author %}max-height: 275px;{% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 355px;{% else %}max-height: 315px;{% endif %}">
+            <div class="frame-edit" style="{% if user.is_authenticated == False %}max-height: 230px;{% elif user.is_authenticated == False and user.rank == 'заблокирован' %}max-height: 270px;{% elif user == author %}max-height: 280px;{% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 355px;{% else %}max-height: 315px;{% endif %}">
               <img class="profile-avatar" src="{{ author.avatar.url }}">
               <div class="{% if author.rank != "пользователь" and author.rank != "заблокирован" %}role-banner {% if author.rank == "дизайнер" %}designer-role{% elif author.rank == "главный дизайнер" %}main-designer-role{% elif author.rank == "куратор" %}curator-role{% elif author.rank == "арбитр" %}referee-role{% elif author.rank == "главный арбитр" %}main-referee-role{% elif author.rank == "бот" %}admin-role{% elif author.rank == "администратор" %}admin-role{% elif author.rank == "разработчик" %}developer-role{% elif author.rank == "гл. администратор" %}main-admin-role{% elif author.rank == "владелец" %}milk-pink-role{% endif %}{% endif %}">
                 {% if author.rank != "пользователь" and author.rank != "заблокирован" %}
                   <label style="font-weight: 600;">{{ author.rank }}</label>
                 {% endif %}
               </div>
-              {% if author.rank == "пользователь" and author.rank != "заблокирован" and author.privilege != "новорег" %}
-                <div class="{% if author.rank != "заблокирован" %}role-banner{% endif %} {{ author.banner }}">
-                  <label style="font-weight: bold; {% if author.privilege == "искусственный интелект" %}font-size: 15px;{% endif %}">{{ author.privilege }}</label>
+              {% if author.rank != "заблокирован" and author.rank_lvl < "2" and author.privilege == "искусственный интелект" %}
+                <div class="role-banner banner-ii">
+                  <label style="font-weight: bold; font-size: 15px;">{{ author.privilege }}</label>
                 </div>
               {% endif %}
               {% if user == author %}
@@ -146,27 +146,27 @@
             </div> {% endcomment %}
             {% if subscriptions.count != 0 %}
               <div class="frame-left-second">
-                <a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ subscriptions.count|bf_number }}</label> {{ subscriptions.count|ru_plural:"подписка,подписки,подписок" }}</a>
+                <a href="{% url 'forum:subscriptions_view' author.username %}" class="subs-a"><label class="brandColor">{{ subscriptions.count|bf_number }}</label> {{ subscriptions.count|ru_plural:"подписка,подписки,подписок" }}</a>
                 <div class="subs-left">
-                  {% for post in subscriptions %}
+                  {% for subscription_user in subscriptions_max %}
                     <div style="display: flex;" class="sub-users-div">
                       <div>
-                        <img class="sub-avatar" src="{{ post.author.avatar.url }}">
-                        {% if post.author.is_online == True %}
+                        <img class="sub-avatar" src="{{ subscription_user.author.avatar.url }}">
+                        {% if subscription_user.author.is_online == True %}
                           <div class="online online-avatar-profile"></div>
                         {% endif %}
                       </div>
                       <div style="display: block; margin-left: 20px; max-width: 130px;">
-                        <a class="sub-users" href="{% url 'forum:profile' post.author.username %}">
+                        <a class="sub-users" href="{% url 'forum:profile' subscription_user.author.username %}">
                           <div style="margin: 0 0 0 auto;">
-                            <label class="sub-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if post.author.username == "root" %}style="color: red;"{% endif %}>{{ post.author.username }}</label>
+                            <label class="sub-username {% if subscription_user.author.username_style != 'gray-un' and subscription_user.author.rank != 'заблокирован' %}{{ subscription_user.author.username_style }}{% endif %}" {% if subscription_user.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if subscription_user.author.username == "root" %}style="color: red;"{% endif %}>{{ subscription_user.author.username }}</label>
                           </div>
                         </a>
                         <div style="color: #888888; font-size: 14px;">
-                          {% if post.author.rank != "нет ранга" %}
-                            <label>{{ post.author.rank }}</label>
+                          {% if subscription_user.author.rank != "нет ранга" %}
+                            <label>{{ subscription_user.author.rank }}</label>
                           {% else %}
-                            <label>{{ post.author.privilege }}</label>
+                            <label>{{ subscription_user.author.privilege }}</label>
                           {% endif %}
                         </div>
                       </div>
@@ -177,27 +177,27 @@
             {% endif %}
             {% if subscribers.count != 0 %}
               <div class="frame-left-third">
-                <a href="{% url 'forum:profile' user.username %}" class="subs-a"><label class="brandColor">{{ subscribers.count|bf_number }}</label> {{ subscribers.count|ru_plural:"подписчик,подписчика,подписчиков" }}</a>
+                <a href="{% url 'forum:subscribers_view' author.username %}" class="subs-a"><label class="brandColor">{{ subscribers.count|bf_number }}</label> {{ subscribers.count|ru_plural:"подписчик,подписчика,подписчиков" }}</a>
                 <div class="subs-left">
-                  {% for post in subscribers %}
+                  {% for subscriber_user in subscribers_max %}
                     <div style="display: flex;" class="sub-users-div">
                       <div>
-                        <img class="sub-avatar" src="{{ post.user.avatar.url }}">
-                        {% if post.user.is_online == True %}
+                        <img class="sub-avatar" src="{{ subscriber_user.user.avatar.url }}">
+                        {% if subscriber_user.user.is_online == True %}
                           <div class="online online-avatar-profile"></div>
                         {% endif %}
                       </div>
                       <div style="display: block; margin-left: 20px; max-width: 130px;">
-                        <a class="sub-users" href="{% url 'forum:profile' post.user.username %}">
+                        <a class="sub-users" href="{% url 'forum:profile' subscriber_user.user.username %}">
                           <div style="margin: 0 0 0 auto;">
-                            <label class="sub-username {% if post.user.username_style != 'gray-un' and post.user.rank != 'заблокирован' %}{{ post.user.username_style }}{% endif %}" {% if post.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if post.user.username == "root" %}style="color: red;"{% endif %}>{{ post.user.username }}</label>
+                            <label class="sub-username {% if subscriber_user.user.username_style != 'gray-un' and subscriber_user.user.rank != 'заблокирован' %}{{ subscriber_user.user.username_style }}{% endif %}" {% if subscriber_user.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if subscriber_user.user.username == "root" %}style="color: red;"{% endif %}>{{ subscriber_user.user.username }}</label>
                           </div>
                         </a>
                         <div style="color: #888888; font-size: 13px;">
-                          {% if post.user.rank != "нет ранга" %}
-                            <label>{{ post.user.rank }}</label>
+                          {% if subscriber_user.user.rank != "нет ранга" %}
+                            <label>{{ subscriber_user.user.rank }}</label>
                           {% else %}
-                            <label>{{ post.user.privilege }}</label>
+                            <label>{{ subscriber_user.user.privilege }}</label>
                           {% endif %}
                         </div>
                       </div>
@@ -208,6 +208,12 @@
             {% endif %}
           </div>
           <div style="display: block;">
+            {% if author.rank == "заблокирован" %}
+              <div class="profile-banned-alert">
+                <div style="margin-bottom: 10px; font-size: 16px; font-weight: bold; color: #ea4c4c;">Пользователь заблокирован</div>
+                <div style="font-size: 14px;">Если у вас планируется какая-то сделка с его участием, настоятельно рекомендуем ее не производить до окончания блокировки. Если пользователь уже обманул вас каким-либо образом, обратитесь в наш арбитраж, дабы мы могли по возможности урегулировать возникшую у вас проблему.</div>
+              </div>
+            {% endif %}
             <div class="frame-right-first">
               <div style="display: flex; ">
                 <div style="margin: 0 auto 0 0; display: block;" class="frt">
@@ -327,14 +333,14 @@
                   <div style="color: #ff506f;">{{ post_1.count|bf_number }}</div>
                   <div style="color: gray;">{{ post_1.count|ru_plural:"розыгрыш,розыгрыша,розыгрышей" }}</div>
                 </div>
-                <div class="int-info-profile" href="">
+                <a class="int-info-profile" href="{% url 'forum:subscriptions_view' author.username %}">
                   <div style="color: #ff506f;">{{ subscriptions.count|bf_number }}</div>
-                  <div style="color: gray;">{{ subscriptions.count|ru_plural:"подписка,подписки,подписок" }}</div>
-                </div>
-                <div class="int-info-profile" href="">
+                  <div class="int-info-profile-div1">{{ subscriptions.count|ru_plural:"подписка,подписки,подписок" }}</div>
+                </a>
+                <a class="int-info-profile" href="{% url 'forum:subscribers_view' author.username %}">
                   <div style="color: #ff506f;">{{ subscribers.count|bf_number }}</div>
-                  <div style="color: gray;">{{ subscribers.count|ru_plural:"подписчик,подписчика,подписчиков" }}</div>
-                </div>
+                  <div class="int-info-profile-div1">{{ subscribers.count|ru_plural:"подписчик,подписчика,подписчиков" }}</div>
+                </a>
               </div>
             </div>
             <div class="frame-right-second">

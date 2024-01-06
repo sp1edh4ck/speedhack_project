@@ -30,6 +30,9 @@
   color: #ffffff;
   font-weight: bold;
   background: #ff506f;
+  /* background: #701198; */
+  /* background: #66b814; */
+  /* background: #4169E1; */
   text-decoration: none;
   border-radius: 10px;
   display: block;
@@ -355,7 +358,7 @@
   max-width: 235px;
   font-size: 16px;
   background: #202020b6;
-  border: 0px solid #444444;
+  border: 2px solid #4444448a;
   color: #d6d6d6;
   outline: none;
   border-radius: 10px;
@@ -372,7 +375,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 .input-search:focus {
   border-color: #ff506f;
   outline: 0;
-  box-shadow: 0 0 0 2px #ff506f;
 }
 
 .text-frame-div {

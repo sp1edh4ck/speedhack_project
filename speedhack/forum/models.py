@@ -65,12 +65,7 @@ class Ads(models.Model):
     title = models.CharField(verbose_name='Заголовок', max_length=100)
     post_id = models.CharField(verbose_name='Ссылка', max_length=10)
     weeks = models.IntegerField(verbose_name='Кол-во оплаченных недель')
-    author = models.ForeignKey(
-        User,
-        on_delete=models.SET_NULL,
-        null=True,
-        verbose_name='Автор рекламы',
-    )
+    author = models.CharField(verbose_name='Автор рекламы', max_length=15)
     created = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации', blank=True, null=True)
 
     class Meta:

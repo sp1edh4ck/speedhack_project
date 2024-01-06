@@ -409,3 +409,11 @@
 .int-info-profile:hover .int-info-profile-div1 {
   color: #d6d6d6;
 }
+
+.profile-banned-alert {
+  background: #242424b6;
+  margin-bottom: 15px;
+  color: #d6d6d6;
+  padding: 15px;
+  border-radius: 10px;
+}

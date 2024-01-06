@@ -3,7 +3,8 @@
 {% load static %}
 {% block content %}
   <div class="main">
-    <div class="frame_con">
+    <div class="frame_con" style="display: block;">
+      <label class="link-title"><a href="{% url 'forum:index' %}" class="link-title-main">Форум</a> <label style="margin: 0 5px;">/</label> <a href="{% url 'forum:profile' author.username %}" class="link-title-main">{{ author.username }}</a></label>
       <div class="user-symps-frame">
         <div class="frame-right-second" style="margin: 0;">
           <a data-tab="#sympUser" class="button-tools active-tab">Полученные симпатии</a>

@@ -31,7 +31,7 @@
               <div class="search-header search-header-else">
                 <div>
                   <form action="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}">
-                    <input class="input-search" type="search" name="search" placeholder="Поиск" aria-label="Search">
+                    <input class="input-search" type="search" name="search" placeholder="Поиск" aria-label="Search" autocomplete="off">
                   </form>
                 </div>
                 <div>

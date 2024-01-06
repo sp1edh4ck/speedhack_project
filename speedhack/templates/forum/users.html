@@ -11,7 +11,7 @@
           <div style="display: flex;">
             <div>
               <form action="{% url 'forum:users' %}">
-                <input class="input-search-users" type="search" name="search" placeholder="Имя..." aria-label="Search">
+                <input class="input-search-users" type="search" name="search" placeholder="Имя..." aria-label="Search" autocomplete="off">
               </form>
             </div>
             <div>
@@ -75,7 +75,7 @@
         <div id="users_list_bySymps" class="tabItem frame-right-users users-display active-tab" style="{% if users_list_bySymps.count == 0 %}max-height: 60px;{% elif users_list_bySymps.count == 1 %}max-height: 100px;{% elif users_list_bySymps.count == 2 %}max-height: 210px;{% elif users_list_bySymps.count == 3 %}max-height: 320px;{% endif %}">
           {% if users_list_bySymps.count != 0 %}
             {% for user in users_list_bySymps %}
-              <div class="users-div">
+              <div class="users-div" style="{% if user.description != '' %}min-height: 100px;{% endif %}">
                 <div style="padding: 10px 0 10px 10px;">
                   <a class="a-users" href="{% url 'forum:profile' user.username %}">
                     <img style="width: 60px; border-radius: 50px;" src="{{ user.avatar.url }}">

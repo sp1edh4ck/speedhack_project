@@ -4,6 +4,7 @@ from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django_ratelimit.decorators import ratelimit
+
 from market.models import Market
 from users.forms import UserProfileAdminForm, UserProfileForm
 from users.models import CustomUser, IpUser
@@ -16,12 +17,7 @@ from .models import (Ads, Comment, CommentSymp, Favourites, Follow, Forum,
 
 
 def pagination_post(request, post_list):
-    paginator = Paginator(post_list, 12)
-    return paginator.get_page(request.GET.get('page'))
-
-
-def pagination_sub(request, sub_list):
-    paginator = Paginator(sub_list, 5)
+    paginator = Paginator(post_list, 20)
     return paginator.get_page(request.GET.get('page'))
 
 
@@ -147,7 +143,9 @@ def profile(request, username):
     author_symps_count = Symp.objects.filter(user=author).count()
     profile_comments = ProfileComment.objects.filter(profile=author)
     subscriptions = author.follower.all()
+    subscriptions_max = author.follower.all()[:5]
     subscribers = author.following.all()
+    subscribers_max = author.following.all()[:5]
     following = (
         author.following.filter(user_id=request.user.id).exists()
         if request.user.is_authenticated
@@ -162,13 +160,14 @@ def profile(request, username):
         'following': following,
         'profile_comments': profile_comments,
         'subscriptions': subscriptions,
+        'subscriptions_max': subscriptions_max,
         'subscribers': subscribers,
+        'subscribers_max': subscribers_max,
         'objects': pagination_post(request, posts),
     }
     return render(request, 'forum/profile.html', context)
 
 
-@login_required
 def symps_view(request, username):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
@@ -183,7 +182,6 @@ def symps_view(request, username):
     return render(request, 'forum/user_symps.html', context)
 
 
-@login_required
 def messages_view(request, username):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
@@ -194,6 +192,30 @@ def messages_view(request, username):
         'user_messages': user_messages,
     }
     return render(request, 'forum/user_messages.html', context)
+
+
+def subscriptions_view(request, username):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    author = get_object_or_404(User, username=username)
+    user_subscriptions = author.follower.all()
+    context = {
+        'author': author,
+        'user_subscriptions': user_subscriptions,
+    }
+    return render(request, 'forum/user_subscriptions.html', context)
+
+
+def subscribers_view(request, username):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    author = get_object_or_404(User, username=username)
+    user_subscribers = author.following.all()
+    context = {
+        'author': author,
+        'user_subscribers': user_subscribers,
+    }
+    return render(request, 'forum/user_subscribers.html', context)
 
 
 @login_required
@@ -275,6 +297,8 @@ def admin_ban(request, username):
 def info_edit(request, username):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
+    if request.path != f"/profile/{request.user.username}/info-edit/":
+        return empty_page(request)
     form = UserProfileForm(
         request.POST or None,
         files=request.FILES or None,
@@ -297,6 +321,8 @@ def info_edit(request, username):
 def upgrade_temp(request, username):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
+    if request.path != f"/profile/{request.user.username}/upgrade/":
+        return empty_page(request)
     return render(request, 'forum/upgrade.html')
 
 
@@ -694,7 +720,7 @@ def tickets(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     if request.user.rank_lvl < "4":
-        return redirect('forum:empty_page')
+        return empty_page(request)
     tickets_count = HelpForum.objects.all().count()
     tickets_open = HelpForum.objects.filter(open=True)
     tickets_close = HelpForum.objects.filter(open=False)
@@ -711,6 +737,8 @@ def tickets(request):
 def my_tickets(request, username):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
+    if request.user.username != username:
+        return empty_page(request)
     user = request.user
     my_tickets = user.tickets.all()
     context = {
@@ -724,6 +752,8 @@ def my_tickets(request, username):
 def ticket(request, ticket_id):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
+    if request.user.rank_lvl < "4":
+        return empty_page(request)
     form = AnswerForm(request.POST or None)
     ticket = get_object_or_404(HelpForum, pk=ticket_id)
     comments = ticket.answer.all()
@@ -879,6 +909,11 @@ def guarantor(request):
 @ratelimit(key='ip', rate='50/m')
 def words(request):
     return render(request, 'forum/words.html')
+
+
+@ratelimit(key='ip', rate='50/m')
+def about_us(request):
+    return render(request, 'forum/about_us.html')
 
 
 # Система личных сообщений

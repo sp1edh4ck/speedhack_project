@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+
 from users.forms import CustomUserChangeForm
 from users.models import CustomUser, IpUser
 
@@ -58,10 +59,11 @@ class CustomUserAdmin(UserAdmin):
         'scam',
     )
     list_filter = (
-        'id',
         'rank',
         'save_rank',
+        'scam',
     )
+    ordering = ('id',)
 
     form = CustomUserChangeForm
 

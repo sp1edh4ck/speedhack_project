@@ -103,18 +103,18 @@
   max-width: 570px;
 }
 
-/* .rrft.active-menu .admin-edit-user {
-  transform: rotate(180deg);
-} */
-
 .edit-form-user {
   max-height: 0px;
   overflow: hidden;
   color: #d6d6d6;
-  /* transition: all 0.7s ease-in-out 0s; */
 }
-/* 
-.edit-form-user-size.active-menu {
-  margin-top: 10px;
-  max-height: 900px;
-} */
+
+.ads-link-title {
+  color: #d6d6d6;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.ads-link-title:hover {
+  text-decoration: underline;
+}

@@ -1,5 +1,6 @@
-from django import template
 import locale
+
+from django import template
 
 register = template.Library()
 

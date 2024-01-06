@@ -23,29 +23,28 @@
             <div class="ticket-div" style="max-height: 55px; margin-bottom: 0;">
               <label class="ads-label">Заголовок:</label>
               <div>
-                <input type="text" name="title" id="id_title" class="field field-height" style="max-width: 530px; max-height: 36px; padding: 0 7px 0 7px;" placeholder="Заголовок..." maxlength="70">
+                <input type="text" name="title" id="id_title" class="field field-height" style="max-width: 530px; max-height: 36px; padding: 0 7px;" placeholder="Заголовок..." maxlength="70">
               </div>
             </div>
             <div class="ticket-div" style="max-height: 55px; margin-bottom: 0;">
               <label class="ads-label">ID поста:</label>
               <div>
-                <input type="integer" name="post_id" id="id_post_id" class="field field-height" style="max-width: 100px; max-height: 36px; padding: 0 7px 0 7px;" placeholder="ID..." maxlength="70">
+                <input type="integer" name="post_id" id="id_post_id" class="field field-height" style="max-width: 100px; max-height: 36px; padding: 0 7px;" placeholder="ID..." maxlength="70">
               </div>
             </div>
             <div class="ticket-div" style="min-height: 80px; margin-bottom: 0;">
               <label class="ads-label">Длительность в неделях:</label>
               <div>
-                <input type="number" name="weeks" id="id_weeks" class="field field-height" style="max-width: 250px; max-height: 36px; padding: 0 7px 0 7px;" placeholder="Длительность..." maxlength="5">
+                <input type="number" name="weeks" id="id_weeks" class="field field-height" style="max-width: 250px; max-height: 36px; padding: 0 7px;" placeholder="Длительность..." maxlength="5">
               </div>
             </div>
-            <div class="ticket-div" style="min-height: 80px; margin-bottom: 0;">
+            <div class="ticket-div" style="min-height: 20px; margin-bottom: 0;">
               <label class="ads-label">Автор:</label>
               <div>
-                <select name="author" id="id_author" class="field field-height" style="max-width: 250px; max-height: 36px; padding: 0 7px 0 7px;" placeholder="Автор...">
-                  {% for user in users %}
-                    <option value="{{ user.id }}">{{ user }}</option>
-                  {% endfor %}
-                </select>
+                <input type="text" name="author" id="id_author" class="field field-height" style="max-width: 150px; max-height: 36px; padding: 0 7px; margin-bottom: 5px;" placeholder="Имя пользователя..." maxlength="15" value="{{ request.user.username }}">
+                <div style="color: gray; margin-bottom: 15px;">
+                  <label style="color: #444444; font-weight: bold;">Ваш username</label>
+                </div>
               </div>
             </div>
             <button type="submit" class="button-level" style="margin-left: 210px; margin-top: 0;">Создать обращение</button>
@@ -58,12 +57,13 @@
                 <div style="display: block;">
                   <div style="display: flex; padding: 0 20px 0 20px; margin-bottom: 10px;">
                     <div class="admin-btn">
-                      <a class="admin-button" href="{% url 'forum:post_detail' ad.post_id %}">{{ ad.title }}</a>
+                      <a class="ads-link-title" href="{% url 'forum:post_detail' ad.post_id %}">{{ ad.title }}</a>
                     </div>
                   </div>
                   <div class="admin-btn" style="display: flex; padding: 0 20px 0 20px;">
-                    <label class="role-banner" style="width: 190px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px;">Оплаченных недель: {{ ad.weeks }}</label>
-                    <label class="role-banner" style="width: auto; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ad.created }}</label>
+                    <label class="role-banner" style="width: 180px; height: 25px; padding: 3px 10px; margin: 0px; border-radius: 10px;">Оплаченных недель: {{ ad.weeks }}</label>
+                    <label class="role-banner" style="width: 250px; height: 25px; padding: 3px 10px; margin: 0px; border-radius: 10px; margin-left: 5px;">Автор рекламы: {{ ad.author }}</label>
+                    <label class="role-banner" style="width: auto; height: 25px; padding: 3px 10px; margin: 0px; border-radius: 10px; margin-left: 5px; background: #393939;">{{ ad.created }}</label>
                   </div>
                 </div>
               </a>
