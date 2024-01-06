@@ -10,7 +10,7 @@ class CustomUserAdmin(UserAdmin):
         (None, {'fields': ('username', 'password', 'email',)}),
         ('About user',
             {'fields': (
-                # 'symps',
+                'symps_count_per_day',
                 'balance',
                 'subscriber',
                 'tg_link',
@@ -53,7 +53,7 @@ class CustomUserAdmin(UserAdmin):
         'email',
         'rank',
         'balance',
-        # 'symps',
+        'symps_count_per_day',
         'privilege',
         'scam',
     )

@@ -31,7 +31,7 @@
           </div>
           <div style="margin: 0 auto 0 0;">
             <a href="{% url 'forum:profile' user.username %}" class="admin-link">
-              <label class="users-username" {% if user.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ user.username }}</label>
+              <label class="users-username {% if author.username_style != 'gray-un' and author.rank != 'заблокирован' %}{{ author.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ user.username }}</label>
             </a>
           </div>
           <div class="admin-btn">

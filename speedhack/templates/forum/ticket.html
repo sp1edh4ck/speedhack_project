@@ -51,7 +51,7 @@
               <div style="display: flex;">
                 <div style="margin: 0 auto 0 0;">
                   <a href="{% url 'forum:profile' comment.author.username %}" style="text-decoration: none; cursor: pointer;">
-                    <label class="frame-main-username" {% if comment.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{% if comment.author.username != ticket.author.username %}Support #{{ comment.author.id }}{% else %}{{ comment.author.username }}{% endif %}</label>{% if comment.user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
+                    <label class="frame-main-username {% if comment.author.username_style != 'gray-un' %}{{ comment.author.username_style }}{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{% if comment.author.username != ticket.author.username %}Support #{{ comment.author.id }}{% else %}{{ comment.author.username }}{% endif %}</label>{% if comment.user.scam == True %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% endif %}
                   </a>
                 </div>
               </div>

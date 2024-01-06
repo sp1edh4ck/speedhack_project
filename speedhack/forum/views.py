@@ -48,6 +48,10 @@ def empty_page(request):
     return render(request, 'forum/empty_page.html')
 
 
+def error404_page(request):
+    return render(request, 'forum/error404_page.html')
+
+
 # Кастом страница для вывода 403 ошибки
 # def ratelimited(request, exception):
 #     return render(request, 'forum/limit.html')
@@ -404,12 +408,19 @@ def symps_add(request, post_id, username):
         return banned_redirect(request)
     post = get_object_or_404(Forum, id=post_id)
     user = get_object_or_404(User, username=username)
+    request_user = get_object_or_404(User, username=request.user.username)
     symps = Symp.objects.filter(user=post.author).all().count()
     if user != request.user:
-        if not Symp.objects.filter(post=post, user=user, owner=request.user).exists():
-            Symp.objects.create(post=post, user=user, owner=request.user)
-        else:
-            Symp.objects.filter(post=post, user=user, owner=request.user).delete()
+        if request_user.symps_count_per_day > 0:
+            if not Symp.objects.filter(post=post, user=user, owner=request.user).exists():
+                request_user.symps_count_per_day -= 1
+                request_user.save()
+                Symp.objects.create(post=post, user=user, owner=request.user)
+            else:
+                if request_user.symps_count_per_day < 7:
+                    request_user.symps_count_per_day += 1
+                    request_user.save()
+                Symp.objects.filter(post=post, user=user, owner=request.user).delete()
     comments = post.comment.all()
     if post.author.username == request.user.username:
         for comment in comments:
@@ -643,7 +654,7 @@ def admin_panel(request):
         return banned_redirect(request)
     if request.user.rank_lvl < "4":
         return redirect('forum:empty_page')
-    users_list = CustomUser.objects.all()
+    users_list = CustomUser.objects.all().order_by("-date_joined")
     users_ban_list = CustomUser.objects.filter(rank="заблокирован")
     search_query = request.GET.get('search', '')
     if search_query:
@@ -684,12 +695,12 @@ def tickets(request):
         return banned_redirect(request)
     if request.user.rank_lvl < "4":
         return redirect('forum:empty_page')
-    tickets_list = HelpForum.objects.all()
-    tickets_open_count = HelpForum.objects.filter(open=True).count()
+    tickets_count = HelpForum.objects.all().count()
+    tickets_open = HelpForum.objects.filter(open=True)
     tickets_close = HelpForum.objects.filter(open=False)
     context = {
-        'tickets_list': tickets_list,
-        'tickets_open_count': tickets_open_count,
+        'tickets_count': tickets_count,
+        'tickets_open': tickets_open,
         'tickets_close': tickets_close,
     }
     return render(request, 'forum/tickets.html', context)
