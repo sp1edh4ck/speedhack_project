@@ -2,8 +2,7 @@ from random import randint
 
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
-                                       UserCreationForm)
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.shortcuts import redirect
 
 from users.widgets import AvatarWidget
@@ -14,21 +13,22 @@ User = get_user_model()
 
 
 class CustomUserCreationForm(UserCreationForm):
-    username = forms.CharField(max_length=15, widget=forms.TextInput(attrs={
-        'class': 'field-input',
-    }))
-    email = forms.EmailField(widget=forms.TextInput(attrs={
-        'class': 'field-input',
-    }))
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'field-input',
-    }))
+    username = forms.CharField(
+        max_length=15,
+        widget=forms.TextInput(attrs={'class': 'field-input',})
+    )
+    email = forms.EmailField(
+        widget=forms.TextInput(attrs={'class': 'field-input',})
+    )
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'field-input',})
+    )
 
     class Meta:
         model = CustomUser
         fields = ('username', 'email', 'password1',)
 
-    def save(self, commit=True):
+    def save(self):
         user = super().save(commit=False)
         user.is_active = False
         # token = default_token_generator.make_token(user)
@@ -37,8 +37,7 @@ class CustomUserCreationForm(UserCreationForm):
         # current_site = Forum.objects.get_current().domain
         # user.activation_code = f'http://{current_site}{activation_url}'
         user.activation_code = randint(100000, 999999)
-        if commit:
-            user.save()
+        user.save()
         return user
 
     def __init__(self, *args, **kwargs):
@@ -47,35 +46,19 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields['password1'].help_text = None
         self.fields['username'].help_text = None
 
-# class CustomUserCreationForm(UserCreationForm):
-#     username = forms.CharField(max_length=15, widget=forms.TextInput(attrs={
-#         'class': 'field-input',
-#     }))
-#     email = forms.EmailField(widget=forms.TextInput(attrs={
-#         'class': 'field-input',
-#     }))
-#     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
-#         'class': 'field-input',
-#     }))
 
-#     class Meta:
-#         model = CustomUser
-#         fields = ('username', 'email', 'password1',)
+class CustomUserLogin(forms.Form):
+    username = forms.CharField(
+        max_length=15,
+        widget=forms.TextInput(attrs={'class': 'field-input',})
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'field-input',})
+    )
 
-#     def __init__(self, *args, **kwargs):
-#         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
-#         del self.fields['password2']
-#         self.fields['password1'].help_text = None
-#         self.fields['username'].help_text = None
-
-
-class CustomUserLogin(AuthenticationForm):
-    username = forms.CharField(max_length=15, widget=forms.TextInput(attrs={
-        'class': 'field-input',
-    }))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'field-input',
-    }))
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'password',)
 
     def confirm_login_allowed(self, user):
         if not user.is_active:

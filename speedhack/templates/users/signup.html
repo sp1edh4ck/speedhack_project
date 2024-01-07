@@ -25,7 +25,7 @@
       {% endif %}
       <form method="post" action="{% url 'users:signup' %}">
         {% csrf_token %}
-        {% for field in form %}
+        {% comment %} {% for field in form %}
           <div class="form input-box" {% if field.field.required %} aria-required="true"{% else %}aria-required="false"{% endif %}>
             {{ field|addclass:"input-ret" }}
             {% if field.label == "Username" %}
@@ -39,9 +39,21 @@
               <i class="fa-solid fa-lock fa-lg icon-login"></i>
             {% endif %}
           </div>
-        {% endfor %}
+        {% endfor %} {% endcomment %}
+        <div class="form input-box" {% if field.field.required %} aria-required="true"{% else %}aria-required="false"{% endif %}>
+          <input class="input-ret" type="text" name="username" id="id_username" autocomplete="off" style="margin-right: 5px;" placeholder="Логин...">
+          <i class="fa-solid fa-user fa-lg icon-login"></i>
+        </div>
+        <div class="form input-box" {% if field.field.required %} aria-required="true"{% else %}aria-required="false"{% endif %}>
+          <input class="input-ret" type="email" name="email" id="id_email" autocomplete="off" style="margin-right: 5px;" placeholder="Почта...">
+          <i class="fa-solid fa-envelope fa-lg icon-login"></i>
+        </div>
+        <div class="form input-box" {% if field.field.required %} aria-required="true"{% else %}aria-required="false"{% endif %}>
+          <input class="input-ret" type="password" name="password1" id="id_password1" autocomplete="off" style="margin-right: 5px;" placeholder="Пароль...">
+          <i class="fa-solid fa-lock fa-lg icon-login"></i>
+        </div>
         <div class="remember-me">
-          <input type="checkbox"  id="politics" onclick="check();" value="" autocomplete="off" style="margin-right: 5px;">
+          <input type="checkbox" id="politics" onclick="check();" value="" autocomplete="off" style="margin-right: 5px;">
           <span class="rules-reg"> Я согласен с <a class="link-rules" href="{% url 'forum:rules' %}" target="_blank">правилами сайта</a></span>
         </div>
         <button type="submit" name="submit" disabled="" class="button-form btn-reg">Зарегистрироваться</button>

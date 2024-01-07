@@ -37,10 +37,14 @@ def banned(request):
 
 
 def successfully(request):
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
+        return banned_redirect(request)
     return render(request, 'forum/successfully.html')
 
 
 def empty_page(request):
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
+        return banned_redirect(request)
     return render(request, 'forum/empty_page.html')
 
 
@@ -362,9 +366,9 @@ def upgrade(request, username, number):
 
 @ratelimit(key='ip', rate='50/m')
 def post_detail(request, post_id):
+    post = get_object_or_404(Forum, id=post_id)
     if request.user.is_authenticated and request.user.rank == "заблокирован" and post.author != request.user:
         return banned_redirect(request)
-    post = get_object_or_404(Forum, id=post_id)
     if request.user.is_authenticated:
         user = get_object_or_404(User, username=request.user.username)
         my_symp = Symp.objects.filter(post=post, owner=user)
@@ -712,7 +716,6 @@ def user_edit(request, username):
         form.save()
         return redirect('forum:admin_panel')
     return redirect('forum:admin_panel')
-    # return render(request, 'forum/admin_user_edit.html', context)
 
 
 @login_required
@@ -735,8 +738,6 @@ def tickets(request):
 @ratelimit(key='ip', rate='50/m')
 @login_required
 def my_tickets(request, username):
-    if request.user.rank == "заблокирован":
-        return banned_redirect(request)
     if request.user.username != username:
         return empty_page(request)
     user = request.user
@@ -750,12 +751,11 @@ def my_tickets(request, username):
 @ratelimit(key='ip', rate='50/m')
 @login_required
 def ticket(request, ticket_id):
-    if request.user.rank == "заблокирован":
-        return banned_redirect(request)
-    if request.user.rank_lvl < "4":
-        return empty_page(request)
     form = AnswerForm(request.POST or None)
     ticket = get_object_or_404(HelpForum, pk=ticket_id)
+    if request.user.username != ticket.author.username:
+        if request.user.rank_lvl < "4":
+            return empty_page(request)
     comments = ticket.answer.all()
     context = {
         'form': form,
@@ -768,8 +768,6 @@ def ticket(request, ticket_id):
 @ratelimit(key='ip', rate='50/m')
 @login_required
 def add_answer(request, ticket_id):
-    if request.user.rank == "заблокирован":
-        return banned_redirect(request)
     ticket = get_object_or_404(HelpForum, pk=ticket_id)
     if ticket.open:
         form = AnswerForm(request.POST or None)
@@ -812,8 +810,6 @@ def ticket_delete(request, ticket_id):
 @ratelimit(key='ip', rate='50/m')
 @login_required
 def ticket_form(request):
-    if request.user.rank == "заблокирован":
-        return banned_redirect(request)
     form = HelpForm(
         request.POST or None
     )

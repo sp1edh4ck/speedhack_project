@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (Ads, Comment, CommentSymp, Favourites, Forum, Group,
-                     Helper, HelpForum, Like, ProfileComment, Symp, Viewer)
+                     Helper, HelpForum, Like, ProfileComment, Symp, Viewer, BanIp)
 
 
 class ForumAdmin(admin.ModelAdmin):
@@ -131,6 +131,17 @@ class GroupAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
+class BanIpAdmin(admin.ModelAdmin):
+    list_display = (
+        'ip_address',
+        'attempts',
+        'time_unblock',
+        'status',
+    )
+    ordering = ('ip_address', 'status',)
+    search_fields = ('status',)
+
+
 admin.site.register(Forum, ForumAdmin)
 admin.site.register(Helper, HelperAdmin)
 admin.site.register(HelpForum, HelpForumAdmin)
@@ -143,3 +154,4 @@ admin.site.register(Favourites, FavouriteAdmin)
 admin.site.register(Comment)
 admin.site.register(ProfileComment)
 admin.site.register(Viewer, ViewerAdmin)
+admin.site.register(BanIp, BanIpAdmin)

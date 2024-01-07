@@ -8,7 +8,7 @@ from users.models import CustomUser, IpUser
 class CustomUserAdmin(UserAdmin):
     readonly_fields = ["avatar_tag"]
     fieldsets = (
-        (None, {'fields': ('username', 'password', 'email',)}),
+        (None, {'fields': ('username', 'password', 'email', 'activation_code',)}),
         ('About user',
             {'fields': (
                 'symps_count_per_day',

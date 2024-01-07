@@ -10,6 +10,7 @@ from django.urls import path
 from users.views import ActivationView, SignUpView
 
 from .forms import CustomUserLogin
+from . import views
 
 app_name = 'users'
 
@@ -25,12 +26,16 @@ urlpatterns = [
         LogoutView.as_view(next_page='forum:index'),
         name='logout'
     ),
-    path(
-        'login/',
-        LoginView.as_view(template_name='users/login.html',
-                          authentication_form=CustomUserLogin),
-        name='login'
-    ),
+    # * старый логин
+    # ? ----------
+    # path(
+    #     'login/',
+    #     LoginView.as_view(template_name='users/login.html',
+    #                       authentication_form=CustomUserLogin),
+    #     name='login'
+    # ),
+    # ? ----------
+    path('login/', views.login_user, name='login'),
     # path(
     #     'password_change/',
     #     PasswordChangeView.as_view(

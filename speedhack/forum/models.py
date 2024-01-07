@@ -441,3 +441,13 @@ class Maecenas(models.Model):
     class Meta:
         verbose_name = 'Меценат'
         verbose_name_plural = 'Меценаты'
+
+
+class BanIp(models.Model):
+    ip_address = models.CharField(verbose_name='IP адрес', max_length=9)
+    attempts = models.IntegerField(verbose_name='Неудачных попыток', default=0)
+    time_unblock = models.DateTimeField(verbose_name='Время разблокировки', blank=True)
+    status = models.BooleanField(verbose_name='Статус блокировки', default=False)
+
+    def __str__(self):
+        return self.ip_address

@@ -5,7 +5,7 @@
 {% load user_filters %}
   <div class="main">
     <div class="frame_con" style="display: block;">
-      <label class="link-title">{% if request.user.rank_lvl >= "4" %}<a href="{% url 'forum:admin_panel' %}" class="link-title-main">Админ-панель</a> <label style="margin: 0 5px 0 5px;">/</label> {% endif %}<a href="{% url 'forum:tickets' %}" class="link-title-main">Тикеты</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:ticket' ticket.id %}" class="link-title-main">Тикет #{{ ticket.id }}</a></label>
+      <label class="link-title">{% if request.user.rank_lvl >= "4" %}<a href="{% url 'forum:admin_panel' %}" class="link-title-main">Админ-панель</a> <label style="margin: 0 5px 0 5px;">/</label> {% endif %}<a href="{% url 'forum:my_tickets' request.user.username %}" class="link-title-main">Тикеты</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:ticket' ticket.id %}" class="link-title-main">Тикет #{{ ticket.id }}</a></label>
       <div class="frame-title">
         <label class="text-up-title">{{ ticket.category }}</label><br>
         <div class="admin-btn" style="display: flex; padding: 5px 20px 0 0;">

@@ -25,10 +25,10 @@
       {% endif %}
       <form method="post" {% if action_url %}action="{% url action_url %}" {% endif %}>
         {% csrf_token %}
-        {% for field in form %}
+        {% comment %} {% for field in form %}
           <div class="form input-box" {% if field.field.required %} aria-required="true"{% else %}aria-required="false"{% endif %}>
             {{ field|addclass:"input-ret" }}
-            {% if field.label == "Имя пользователя" %}
+            {% if field.label == "Username" %}
               <label for="Имя пользователя">Логин</label>
               <i class="fa-solid fa-user fa-lg icon-login"></i>
             {% elif field.label == "Password" %}
@@ -36,7 +36,15 @@
               <i class="fa-solid fa-lock fa-lg icon-login"></i>
             {% endif %}
           </div>
-        {% endfor %}
+        {% endfor %} {% endcomment %}
+        <div class="form input-box" {% if field.field.required %} aria-required="true"{% else %}aria-required="false"{% endif %}>
+          <input class="input-ret" type="text" name="username" id="id_username" autocomplete="off" style="margin-right: 5px;" placeholder="Логин...">
+          <i class="fa-solid fa-user fa-lg icon-login"></i>
+        </div>
+        <div class="form input-box" {% if field.field.required %} aria-required="true"{% else %}aria-required="false"{% endif %}>
+          <input class="input-ret" type="password" name="password" id="id_password" autocomplete="off" style="margin-right: 5px;" placeholder="Пароль...">
+          <i class="fa-solid fa-envelope fa-lg icon-login"></i>
+        </div>
         <div class="remember-me" style="justify-content: space-between;">
           <label><input type="checkbox" style="margin-right: 5px;">Запомнить меня</label>
           <a href="" class="login-link-a">Забыли пароль?</a>

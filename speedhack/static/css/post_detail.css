@@ -131,7 +131,8 @@
 }
 
 .comment-date {
-  color: #555555;
+  color: #757575;
+  font-weight: bold;
   display: flex;
 }
 
@@ -147,7 +148,7 @@
   font-size: 16px;
   margin: 0 5px 0 20px;
   background: #222222;
-  border: 3px solid #444444;
+  border: 2px solid #444444;
   color: #d6d6d6;
   outline: none;
   padding: 7px 10px 10px 10px;
@@ -162,7 +163,6 @@
 .field-detail:focus {
   border-color: #ff506f;
   outline: 0;
-  box-shadow: 0 0 0 1px #ff506f;
 }
 
 .button-edit-post {

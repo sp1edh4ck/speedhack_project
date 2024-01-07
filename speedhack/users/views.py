@@ -1,10 +1,13 @@
-from django.contrib.auth import get_user_model
+from random import randint
+
+from django.contrib.auth import authenticate, login, get_user_model
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django.views import View
 from django_ratelimit.decorators import ratelimit
 
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserLogin
+from users.models import CustomUser
 
 User = get_user_model()
 
@@ -13,16 +16,6 @@ class SignUpView(View):
     def get(self, request):
         form = CustomUserCreationForm()
         return render(request, 'users/signup.html', {'form': form})
-
-    # def form_valid(self, form):
-    #     user = form.save(commit=False)
-    #     send_mail(
-    #         'Подтверждение почты',
-    #         f'Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой адрес электронной почты: http://{user.activation_code}',
-    #         'speedhack_sup@mail.ru',
-    #         [user.email],
-    #     )
-    #     return redirect('email_confirmation_sent')
 
     def post(self, request):
         form = CustomUserCreationForm(request.POST)
@@ -54,226 +47,31 @@ class ActivationView(View):
             return redirect('users:activation')
 
 
-
-
-
-
-
-
-
-
-
-# from django.views.generic import DetailView, UpdateView, CreateView, View, TemplateView
-# from django.db import transaction
-# from django.urls import reverse_lazy
-# from django.contrib.messages.views import SuccessMessageMixin
-# from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView 
-# from django.contrib.sites.models import Site
-# from django.contrib.auth import get_user_model
-# from django.contrib.auth.tokens import default_token_generator
-# from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-# from django.utils.encoding import force_bytes
-# from django.core.mail import send_mail
-# from django.shortcuts import redirect
-# from django.contrib.auth import login
-
-# from .models import Profile
-# from .forms import UserUpdateForm, ProfileUpdateForm, UserRegisterForm, UserLoginForm, UserPasswordChangeForm, UserForgotPasswordForm, UserSetNewPasswordForm
-# # from ..services.mixins import UserIsNotAuthenticated
-
-# User = get_user_model()
-
-# class ProfileDetailView(DetailView):
-#     """
-#     Представление для просмотра профиля
-#     """
-#     model = Profile
-#     context_object_name = 'profile'
-#     template_name = 'system/profile_detail.html'
-#     queryset = model.objects.all().select_related('user')
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = f'Страница пользователя: {self.object.user.username}'
-#         return context
-
-
-# class ProfileUpdateView(UpdateView):
-#     """
-#     Представление для редактирования профиля 
-#     """
-#     model = Profile
-#     form_class = ProfileUpdateForm
-#     template_name = 'system/profile_edit.html'
-
-#     def get_object(self, queryset=None):
-#         return self.request.user.profile
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = f'Редактирование профиля пользователя: {self.request.user.username}'
-#         if self.request.POST:
-#             context['user_form'] = UserUpdateForm(self.request.POST, instance=self.request.user)
-#         else:
-#             context['user_form'] = UserUpdateForm(instance=self.request.user)
-#         return context
-
-#     def form_valid(self, form):
-#         context = self.get_context_data()
-#         user_form = context['user_form']
-#         with transaction.atomic():
-#             if all([form.is_valid(), user_form.is_valid()]):
-#                 user_form.save()
-#                 form.save()
-#             else:
-#                 context.update({'user_form': user_form})
-#                 return self.render_to_response(context)
-#         return super(ProfileUpdateView, self).form_valid(form)
-
-#     def get_success_url(self):
-#         return reverse_lazy('profile_detail', kwargs={'slug': self.object.slug})
-    
-
-# class UserLoginView(SuccessMessageMixin, LoginView):
-#     """
-#     Авторизация на сайте
-#     """
-#     form_class = UserLoginForm
-#     template_name = 'system/registration/user_login.html'
-#     next_page = 'home'
-#     success_message = 'Добро пожаловать на сайт!'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = 'Авторизация на сайте'
-#         return context
-    
-
-# class UserPasswordChangeView(SuccessMessageMixin, PasswordChangeView):
-#     """
-#     Изменение пароля пользователя
-#     """
-#     form_class = UserPasswordChangeForm
-#     template_name = 'system/registration/user_password_change.html'
-#     success_message = 'Ваш пароль был успешно изменён!'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = 'Изменение пароля на сайте'
-#         return context
-
-#     def get_success_url(self):
-#         return reverse_lazy('profile_detail', kwargs={'slug': self.request.user.profile.slug})
-    
-
-# class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):
-#     """
-#     Представление по сбросу пароля по почте
-#     """
-#     form_class = UserForgotPasswordForm
-#     template_name = 'system/registration/user_password_reset.html'
-#     success_url = reverse_lazy('home')
-#     success_message = 'Письмо с инструкцией по восстановлению пароля отправлена на ваш email'
-#     subject_template_name = 'system/email/password_subject_reset_mail.txt'
-#     email_template_name = 'system/email/password_reset_mail.html'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = 'Запрос на восстановление пароля'
-#         return context
-    
-
-# class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView):
-#     """
-#     Представление установки нового пароля
-#     """
-#     form_class = UserSetNewPasswordForm
-#     template_name = 'system/registration/user_password_set_new.html'
-#     success_url = reverse_lazy('home')
-#     success_message = 'Пароль успешно изменен. Можете авторизоваться на сайте.'
-               
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = 'Установить новый пароль'
-#         return context
-    
-
-# class UserRegisterView(UserIsNotAuthenticated, CreateView):
-#     """
-#     Представление регистрации на сайте с формой регистрации
-#     """
-#     form_class = UserRegisterForm
-#     success_url = reverse_lazy('home')
-#     template_name = 'system/registration/user_register.html'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = 'Регистрация на сайте'
-#         return context
-
-#     def form_valid(self, form):
-#         user = form.save(commit=False)
-#         user.is_active = False
-#         user.save()
-#         # Функционал для отправки письма и генерации токена
-#         token = default_token_generator.make_token(user)
-#         uid = urlsafe_base64_encode(force_bytes(user.pk))
-#         activation_url = reverse_lazy('confirm_email', kwargs={'uidb64': uid, 'token': token})
-#         current_site = Site.objects.get_current().domain
-#         send_mail(
-#             'Подтвердите свой электронный адрес',
-#             f'Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой адрес электронной почты: http://{current_site}{activation_url}',
-#             'service.notehunter@gmail.com',
-#             [user.email],
-#             fail_silently=False,
-#         )
-#         return redirect('email_confirmation_sent')
-
-
-# class UserConfirmEmailView(View):
-#     def get(self, request, uidb64, token):
-#         try:
-#             uid = urlsafe_base64_decode(uidb64)
-#             user = User.objects.get(pk=uid)
-#         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-#             user = None
-
-#         if user is not None and default_token_generator.check_token(user, token):
-#             user.is_active = True
-#             user.save()
-#             login(request, user)
-#             return redirect('email_confirmed')
-#         else:
-#             return redirect('email_confirmation_failed')
-        
-
-# class EmailConfirmationSentView(TemplateView):
-#     template_name = 'system/registration/email_confirmation_sent.html'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = 'Письмо активации отправлено'
-#         return context
-
-# class EmailConfirmedView(TemplateView):
-#     template_name = 'system/registration/email_confirmed.html'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = 'Ваш электронный адрес активирован'
-#         return context
-
-# class EmailConfirmationFailedView(TemplateView):
-#     template_name = 'system/registration/email_confirmation_failed.html'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = 'Ваш электронный адрес не активирован'
-#         return context
-
-
-
-
+def login_user(request):
+    if request.method == 'POST':
+        form = CustomUserLogin(request.POST)
+        if form.is_valid():
+            user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            if user and user.is_active:
+                login(request, user)
+                return redirect('forum:index')
+            else:
+                u = CustomUser.objects.get(username=form.cleaned_data['username'])
+                u.activation_code = randint(100000, 999999)
+                u.save()
+                send_mail(
+                    'Подтверждение почты',
+                    f'Ваш код активации: {u.activation_code}',
+                    'speedhack_sup@mail.ru',
+                    [u.email],
+                )
+                return redirect('users:activation')
+    else:
+        form = CustomUserLogin()
+    context = {
+        'form': form,
+    }
+    return render(request, 'users/login.html', context)
 
 
 
