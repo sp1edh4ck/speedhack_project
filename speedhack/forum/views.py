@@ -33,7 +33,9 @@ def banned_redirect(request):
 
 
 def banned(request):
-    return render(request, 'users/banned.html')
+    if request.user.rank == "заблокирован":
+        return render(request, 'users/banned.html')
+    return redirect('forum:empty_page')
 
 
 def successfully(request):
@@ -66,11 +68,9 @@ def index(request):
         posts = Forum.objects.filter(title__icontains=search_query)
     else:
         posts = Forum.objects.select_related('author').all()
-    # users = User.objects.filter(is_online=True)
     ads = Ads.objects.all()
     context = {
         'ads': ads,
-        # 'users': users,
         'objects': pagination_post(request, posts),
     }
     return render(request, 'forum/index.html', context)
@@ -147,9 +147,9 @@ def profile(request, username):
     author_symps_count = Symp.objects.filter(user=author).count()
     profile_comments = ProfileComment.objects.filter(profile=author)
     subscriptions = author.follower.all()
-    subscriptions_max = author.follower.all()[:5]
+    subscriptions_max = author.follower.all()[:6]
     subscribers = author.following.all()
-    subscribers_max = author.following.all()[:5]
+    subscribers_max = author.following.all()[:6]
     following = (
         author.following.filter(user_id=request.user.id).exists()
         if request.user.is_authenticated
@@ -176,7 +176,12 @@ def symps_view(request, username):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     author = get_object_or_404(User, username=username)
-    user_symps = Symp.objects.filter(user=author)
+    search_query = request.GET.get('search', '')
+    if search_query:
+        # posts = group.posts.filter(user__icontains=search_query)
+        user_symps = Symp.objects.filter(author__icontains=search_query)
+    else:
+        user_symps = Symp.objects.filter(user=author)
     owner_symps = Symp.objects.filter(owner=author)
     context = {
         'author': author,
@@ -229,10 +234,11 @@ def complaint(request):
 
 @ratelimit(key='ip', rate='50/m')
 @login_required
-def delete_profile_comment(request, username, comment_id):
+def delete_profile_comment(request, username, author, comment_id):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
-    ProfileComment.objects.filter(pk=comment_id).delete()
+    if request.user.rank_lvl >= "4" or request.user.username == author or request.user.username == username:
+        ProfileComment.objects.filter(id=comment_id).delete()
     return redirect('forum:profile', username=username)
 
 
@@ -270,6 +276,8 @@ def deposit(request, username, number):
 
 @login_required
 def ban(request, username):
+    if request.user.username == username or request.user.rank_lvl < "4":
+        return redirect('forum:empty_page')
     user = get_object_or_404(User, username=username)
     if user.rank == "заблокирован":
         user.rank = user.save_rank
@@ -284,6 +292,8 @@ def ban(request, username):
 
 @login_required
 def admin_ban(request, username):
+    if request.user.username == username or request.user.rank_lvl < "4":
+        return redirect('forum:empty_page')
     user = get_object_or_404(User, username=username)
     if user.rank == "заблокирован":
         user.rank = user.save_rank
@@ -421,6 +431,8 @@ def post_oc(request, post_id, number):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     post = get_object_or_404(Forum, id=post_id)
+    if request.user.rank_lvl < "4":
+        return redirect('forum:empty_page')
     if number == 1:
         post.closed = True
         post.save()
@@ -439,106 +451,89 @@ def symps_add(request, post_id, username):
     post = get_object_or_404(Forum, id=post_id)
     user = get_object_or_404(User, username=username)
     request_user = get_object_or_404(User, username=request.user.username)
+    if user != request_user:
+        if not Symp.objects.filter(post=post, user=user, owner=request_user).exists():
+            Symp.objects.create(post=post, user=user, owner=request_user)
+        else:
+            Symp.objects.filter(post=post, user=user, owner=request_user).delete()
     symps = Symp.objects.filter(user=post.author).all().count()
-    if user != request.user:
-        if request_user.symps_count_per_day > 0:
-            if not Symp.objects.filter(post=post, user=user, owner=request.user).exists():
-                request_user.symps_count_per_day -= 1
-                request_user.save()
-                Symp.objects.create(post=post, user=user, owner=request.user)
-            else:
-                if request_user.symps_count_per_day < 7:
-                    request_user.symps_count_per_day += 1
-                    request_user.save()
-                Symp.objects.filter(post=post, user=user, owner=request.user).delete()
     comments = post.comment.all()
     if post.author.username == request.user.username:
         for comment in comments:
             user = CustomUser.objects.get(username=comment.author.username)
     else:
         user = CustomUser.objects.get(username=post.author.username)
-    if post.author.privilege != "местный" and symps >= 20 and symps <= 199:
-        post.author.privilege = "местный"
-        post.author.save()
-    elif post.author.privilege != "постоялец" and symps >= 200 and symps <= 999:
-        post.author.privilege = "постоялец"
-        post.author.save()
-    elif post.author.privilege != "эксперт" and symps >= 1000 and symps <= 3999:
-        post.author.privilege = "эксперт"
-        post.author.save()
-    elif post.author.privilege != "гуру" and symps >= 4000 and symps <= 9999:
-        post.author.privilege = "гуру"
-        post.author.save()
-    elif post.author.privilege != "искусственный интелект" and symps >= 10000:
-        post.author.privilege = "искусственный интелект"
-        post.author.save()
-    if symps < 20:
+    if post.author.privilege != "новорег" and symps < 20:
         post.author.privilege = "новорег"
         post.author.save()
-    elif symps >= 20 and symps < 200:
+    elif post.author.privilege != "местный" and symps > 19 and symps < 200:
         post.author.privilege = "местный"
         post.author.save()
-    elif symps >= 200 and symps < 1000:
+    elif post.author.privilege != "постоялец" and symps > 199 and symps < 1000:
         post.author.privilege = "постоялец"
         post.author.save()
-    elif symps >= 1000 and symps < 4000:
+    elif post.author.privilege != "эксперт" and symps > 999 and symps < 4000:
         post.author.privilege = "эксперт"
         post.author.save()
-    elif symps >= 4000 and symps < 10000:
+    elif post.author.privilege != "гуру" and symps > 3999 and symps < 10000:
         post.author.privilege = "гуру"
+        post.author.save()
+    elif post.author.privilege != "искусственный интелект" and symps > 9999:
+        post.author.privilege = "искусственный интелект"
         post.author.save()
     return redirect('forum:post_detail', post_id=post_id)
 
 
-@ratelimit(key='ip', rate='50/m')
-@login_required
-def symps_comment_add(request, post_id, comment_id, username):
-    if request.user.rank == "заблокирован":
-        return banned_redirect(request)
-    post = get_object_or_404(Forum, id=post_id)
-    owner = get_object_or_404(User, username=username)
-    comment = get_object_or_404(Comment, id=comment_id)
-    if owner != request.user:
-        if not CommentSymp.objects.filter(comment=comment, owner=owner, user=request.user).exists():
-            owner.symps += 1
-            owner.save()
-            CommentSymp.objects.create(comment=comment, owner=owner, user=request.user)
-        else:
-            owner.symps -= 1
-            owner.save()
-            CommentSymp.objects.filter(comment=comment, owner=owner, user=request.user).delete()
-    user = CustomUser.objects.get(username=username)
-    if user.privilege != "местный" and user.symps >= 20 and user.symps <= 199:
-        user.privilege = "местный"
-        user.save()
-    elif user.privilege != "постоялец" and user.symps >= 200 and user.symps <= 999:
-        user.privilege = "постоялец"
-        user.save()
-    elif user.privilege != "эксперт" and user.symps >= 1000 and user.symps <= 3999:
-        user.privilege = "эксперт"
-        user.save()
-    elif user.privilege != "гуру" and user.symps >= 4000 and user.symps <= 9999:
-        user.privilege = "гуру"
-        user.save()
-    elif user.privilege != "искусственный интелект" and user.symps >= 10000:
-        user.privilege = "искусственный интелект"
-        user.save()
-    if user.symps < 20:
-        user.privilege = "новорег"
-        user.save()
-    elif user.symps < 200:
-        user.privilege = "местный"
-        user.save()
-    elif user.symps < 1000:
-        user.privilege = "постоялец"
-        user.save()
-    elif user.symps < 4000:
-        user.privilege = "эксперт"
-        user.save()
-    elif user.symps < 10000:
-        user.privilege = "гуру"
-        user.save()
-    return redirect('forum:post_detail', post_id=post_id)
+# TODO: сделать лайки на комментарии
+# @ratelimit(key='ip', rate='50/m')
+# @login_required
+# def symps_comment_add(request, post_id, comment_id, username):
+#     if request.user.rank == "заблокирован":
+#         return banned_redirect(request)
+#     post = get_object_or_404(Forum, id=post_id)
+#     owner = get_object_or_404(User, username=username)
+#     comment = get_object_or_404(Comment, id=comment_id)
+#     if owner != request.user:
+#         if not CommentSymp.objects.filter(comment=comment, owner=owner, user=request.user).exists():
+#             owner.symps += 1
+#             owner.save()
+#             CommentSymp.objects.create(comment=comment, owner=owner, user=request.user)
+#         else:
+#             owner.symps -= 1
+#             owner.save()
+#             CommentSymp.objects.filter(comment=comment, owner=owner, user=request.user).delete()
+#     user = CustomUser.objects.get(username=username)
+#     if user.privilege != "местный" and user.symps >= 20 and user.symps <= 199:
+#         user.privilege = "местный"
+#         user.save()
+#     elif user.privilege != "постоялец" and user.symps >= 200 and user.symps <= 999:
+#         user.privilege = "постоялец"
+#         user.save()
+#     elif user.privilege != "эксперт" and user.symps >= 1000 and user.symps <= 3999:
+#         user.privilege = "эксперт"
+#         user.save()
+#     elif user.privilege != "гуру" and user.symps >= 4000 and user.symps <= 9999:
+#         user.privilege = "гуру"
+#         user.save()
+#     elif user.privilege != "искусственный интелект" and user.symps >= 10000:
+#         user.privilege = "искусственный интелект"
+#         user.save()
+#     if user.symps < 20:
+#         user.privilege = "новорег"
+#         user.save()
+#     elif user.symps < 200:
+#         user.privilege = "местный"
+#         user.save()
+#     elif user.symps < 1000:
+#         user.privilege = "постоялец"
+#         user.save()
+#     elif user.symps < 4000:
+#         user.privilege = "эксперт"
+#         user.save()
+#     elif user.symps < 10000:
+#         user.privilege = "гуру"
+#         user.save()
+#     return redirect('forum:post_detail', post_id=post_id)
 
 
 @ratelimit(key='ip', rate='50/m')
@@ -602,6 +597,7 @@ def post_delete(request, post_id):
     if (request.user == post.author or request.user.rank_lvl >= "4"):
         Forum.objects.filter(pk=post_id).delete()
         return redirect('forum:successfully')
+    return redirect('forum:post_detail', pk=post_id)
 
 
 @ratelimit(key='ip', rate='50/m')
@@ -652,29 +648,24 @@ def delete_comment(request, post_id, id):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     comment = get_object_or_404(Comment, id=id)
+    if request.user.username != comment.author.username or request.user.rank_lvl < "4":
+        return redirect('forum:empty_page')
     comment.delete()
     return redirect('forum:post_detail', post_id=post_id)
 
 
 @ratelimit(key='ip', rate='50/m')
 @login_required
-def profile_follow(request, username):
+def profile_uf(request, username, number):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     author = get_object_or_404(User, username=username)
-    if author != request.user:
-        if not Follow.objects.filter(author=author, user=request.user).exists():
-            Follow.objects.create(author=author, user=request.user)
-    return redirect('forum:profile', username=username)
-
-
-@ratelimit(key='ip', rate='50/m')
-@login_required
-def profile_unfollow(request, username):
-    if request.user.rank == "заблокирован":
-        return banned_redirect(request)
-    author = get_object_or_404(User, username=username)
-    author.following.filter(user=request.user).delete()
+    if number == 1:
+        if author != request.user:
+            if not Follow.objects.filter(author=author, user=request.user).exists():
+                Follow.objects.create(author=author, user=request.user)
+    elif number == 2:
+        author.following.filter(user=request.user).delete()
     return redirect('forum:profile', username=username)
 
 
@@ -698,6 +689,8 @@ def admin_panel(request):
 
 @login_required
 def user_edit(request, username):
+    if request.user.rank_lvl < "4":
+        return redirect('forum:empty_page')
     user = get_object_or_404(User, username=username)
     form = UserProfileAdminForm(
         request.POST or None,
@@ -753,9 +746,8 @@ def my_tickets(request, username):
 def ticket(request, ticket_id):
     form = AnswerForm(request.POST or None)
     ticket = get_object_or_404(HelpForum, pk=ticket_id)
-    if request.user.username != ticket.author.username:
-        if request.user.rank_lvl < "4":
-            return empty_page(request)
+    if request.user.username != ticket.author.username or request.user.rank_lvl < "4":
+        return empty_page(request)
     comments = ticket.answer.all()
     context = {
         'form': form,
@@ -769,6 +761,8 @@ def ticket(request, ticket_id):
 @login_required
 def add_answer(request, ticket_id):
     ticket = get_object_or_404(HelpForum, pk=ticket_id)
+    if request.user.username != ticket.author.username or request.user.rank_lvl < "4":
+        return redirect('forum:empty_page')
     if ticket.open:
         form = AnswerForm(request.POST or None)
         if form.is_valid():
@@ -780,22 +774,18 @@ def add_answer(request, ticket_id):
 
 
 @login_required
-def ticket_close(request, ticket_id):
+def ticket_oc(request, ticket_id, number):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
+    if request.user.rank_lvl < "4":
+        return redirect('forum:empty_page')
     ticket = get_object_or_404(HelpForum, id=ticket_id)
-    ticket.open = False
-    ticket.save()
-    return redirect('forum:tickets')
-
-
-@login_required
-def ticket_open(request, ticket_id):
-    if request.user.rank == "заблокирован":
-        return banned_redirect(request)
-    ticket = get_object_or_404(HelpForum, id=ticket_id)
-    ticket.open = True
-    ticket.save()
+    if number == 1:
+        ticket.open = False
+        ticket.save()
+    elif number == 2:
+        ticket.open = True
+        ticket.save()
     return redirect('forum:tickets')
 
 
@@ -803,6 +793,8 @@ def ticket_open(request, ticket_id):
 def ticket_delete(request, ticket_id):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
+    if request.user.rank_lvl < "4":
+        return redirect('forum:empty_page')
     HelpForum.objects.filter(pk=ticket_id).delete()
     return redirect('forum:tickets')
 

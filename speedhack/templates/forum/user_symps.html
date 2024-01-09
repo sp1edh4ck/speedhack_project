@@ -21,7 +21,7 @@
                 </div>
                 <div>
                   <div class="user-symp-post-title"><a class="user-symp-post-title-a" href="{% url 'forum:post_detail' user_symp.post.id %}">{{ user_symp.post.title }}</a></div>
-                  <div class="user-symp-post-info"><a class="user-symp-a" href="{% url 'forum:profile' user_symp.owner.username %}">{{ user_symp.owner }}</a><i class="fa-solid fa-arrow-right" style="margin: 0 10px 0 7px;"></i><a class="user-symp-a" href="{% url 'forum:profile' user_symp.user.username %}">{{ user_symp.user }}</a><span class="pink-separator" style="margin: 0 10px;"></span><a class="user-symp-a" href="{% url 'forum:group_filter_posts' user_symp.post.group.id %}">{{ user_symp.post.group }}</a><span class="pink-separator" style="margin: 0 10px;"></span>{{ user_symp.created|date:"d E Y / H:i" }}</div>
+                  <div class="user-symp-post-info"><a class="user-symp-a" href="{% url 'forum:profile' user_symp.owner.username %}">{{ user_symp.owner.username }}</a><i class="fa-solid fa-arrow-right" style="margin: 0 10px 0 7px;"></i><a class="user-symp-a" href="{% url 'forum:profile' user_symp.user.username %}">{{ user_symp.user.username }}</a><span class="pink-separator" style="margin: 0 10px;"></span><a class="user-symp-a" href="{% url 'forum:group_filter_posts' user_symp.post.group.id %}">{{ user_symp.post.group }}</a><span class="pink-separator" style="margin: 0 10px;"></span>{{ user_symp.created|date:"d E Y / H:i" }}</div>
                 </div>
               </div>
               <div class="user-symp-post-text">{{ user_symp.post.text|truncatechars:80|linebreaksbr }}</div>

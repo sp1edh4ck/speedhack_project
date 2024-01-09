@@ -53,7 +53,7 @@
                         <a class="admin-button" href="{% url 'forum:ticket_delete' ticket.id %}">Удалить</a>
                       </div>
                       <div class="admin-btn">
-                        <a class="admin-button" href="{% url 'forum:ticket_close' ticket.id %}">Закрыть</a>
+                        <a class="admin-button" href="{% url 'forum:ticket_oc' ticket.id 1 %}">Закрыть</a>
                       </div>
                     </div>
                     <div class="admin-btn" style="display: flex; padding: 0 20px 0 20px;">
@@ -93,7 +93,7 @@
                         <a class="admin-button" href="{% url 'forum:ticket_delete' ticket.id %}">Удалить</a>
                       </div>
                       <div class="admin-btn">
-                        <a class="admin-button" href="{% url 'forum:ticket_open' ticket.id %}">Открыть</a>
+                        <a class="admin-button" href="{% url 'forum:ticket_oc' ticket.id 2 %}">Открыть</a>
                       </div>
                     </div>
                     <div class="admin-btn" style="display: flex; padding: 0 20px 0 20px;">

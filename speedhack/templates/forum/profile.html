@@ -58,9 +58,9 @@
                   {% if user.rank != 'заблокирован' %}
                     {% if author.username != 'root' %}<label style="max-width: 200px; margin-top: 20px;"><a class="button-edit" style="margin-top: 5px">Написать</a></label>{% endif %}
                     {% if following %}
-                      <a class="button-edit edit-fix-back-1" href="{% url 'forum:profile_unfollow' author.username %}" style="margin-top: 5px;">Отписаться</a>
+                      <a class="button-edit edit-fix-back-1" href="{% url 'forum:profile_uf' author.username 2 %}" style="margin-top: 5px;">Отписаться</a>
                     {% else %}
-                      <a class="button-edit edit-fix-back-1" href="{% url 'forum:profile_follow' author.username %}" style="margin-top: 5px;">Подписаться</a>
+                      <a class="button-edit edit-fix-back-1" href="{% url 'forum:profile_uf' author.username 1 %}" style="margin-top: 5px;">Подписаться</a>
                     {% endif %}
                     <a class="button-edit edit-fix-back-2" style="margin-top: 5px;">Пожаловаться</a>
                   {% endif %}
@@ -159,7 +159,7 @@
                       <div style="display: block; margin-left: 20px; max-width: 130px;">
                         <a class="sub-users" href="{% url 'forum:profile' subscription_user.author.username %}">
                           <div style="margin: 0 0 0 auto;">
-                            <label class="sub-username {% if subscription_user.author.username_style != 'gray-un' and subscription_user.author.rank != 'заблокирован' %}{{ subscription_user.author.username_style }}{% endif %}" {% if subscription_user.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if subscription_user.author.username == "root" %}style="color: red;"{% endif %}>{{ subscription_user.author.username }}</label>
+                            <label class="sub-username {% if subscription_user.author.rank_lvl < "2" and subscription_user.author.rank != "бот" %}{% if subscription_user.author.username_style != 'gray-un' and subscription_user.author.rank != 'заблокирован' %}{{ subscription_user.author.username_style }}{% endif %}{% elif subscription_user.author.rank == "дизайнер" %}designer-role-name{% elif subscription_user.author.rank == "главный дизайнер" %}main-designer-role-name{% elif subscription_user.author.rank == "куратор" %}curator-role-name{% elif subscription_user.author.rank == "арбитр" %}referee-role-name{% elif subscription_user.author.rank == "главный арбитр" %}main-referee-role-name{% elif subscription_user.author.rank == "администратор" %}admin-role-name{% elif subscription_user.author.rank == "разработчик" %}developer-role-name{% elif subscription_user.author.rank == "гл. администратор" %}main-admin-role-name{% elif subscription_user.author.rank == "владелец" %}{{ subscription_user.author.username_style }}{% endif %}" {% if subscription_user.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if subscription_user.author.rank == "бот" %}style="color: red;"{% endif %}>{{ subscription_user.author.username }}</label>
                           </div>
                         </a>
                         <div style="color: #888888; font-size: 14px;">
@@ -190,7 +190,7 @@
                       <div style="display: block; margin-left: 20px; max-width: 130px;">
                         <a class="sub-users" href="{% url 'forum:profile' subscriber_user.user.username %}">
                           <div style="margin: 0 0 0 auto;">
-                            <label class="sub-username {% if subscriber_user.user.username_style != 'gray-un' and subscriber_user.user.rank != 'заблокирован' %}{{ subscriber_user.user.username_style }}{% endif %}" {% if subscriber_user.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if subscriber_user.user.username == "root" %}style="color: red;"{% endif %}>{{ subscriber_user.user.username }}</label>
+                            <label class="sub-username {% if subscriber_user.user.rank_lvl < "2" and subscriber_user.user.rank != "бот" %}{% if subscriber_user.user.username_style != 'gray-un' and subscriber_user.user.rank != 'заблокирован' %}{{ subscriber_user.user.username_style }}{% endif %}{% elif subscriber_user.user.rank == "дизайнер" %}designer-role-name{% elif subscriber_user.user.rank == "главный дизайнер" %}main-designer-role-name{% elif subscriber_user.user.rank == "куратор" %}curator-role-name{% elif subscriber_user.user.rank == "арбитр" %}referee-role-name{% elif subscriber_user.user.rank == "главный арбитр" %}main-referee-role-name{% elif subscriber_user.user.rank == "администратор" %}admin-role-name{% elif subscriber_user.user.rank == "разработчик" %}developer-role-name{% elif subscriber_user.user.rank == "гл. администратор" %}main-admin-role-name{% elif subscriber_user.user.rank == "владелец" %}{{ subscriber_user.user.username_style }}{% endif %}" {% if subscriber_user.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if subscriber_user.user.username == "root" %}style="color: red;"{% endif %}>{{ subscriber_user.user.username }}</label>
                           </div>
                         </a>
                         <div style="color: #888888; font-size: 13px;">
@@ -377,16 +377,18 @@
                           <div class="{% if comment.author.username_style != 'gray-un' and comment.author.rank != 'заблокирован' %}{{ comment.author.username_style }}{% else %}gray-un{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} {% if comment.author.username == "root" %}style="color: red;"{% endif %}>{{ comment.author.username }}</div>
                           <div style="color: #555555; font-weight: bold;">{{ comment.created|date:'d E Y / H:i' }}</div>
                         </div>
-                        <div class="frame-main-post-heart" style="min-width: 485px;">
-                        </div>
-                        <div>
-                          <div class="window-main" style="top: -8px;">
-                            <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
-                            <div class="window-other" style="right: 0;">
-                              <a href="{% url 'forum:delete_profile_comment' author comment.id %}" class="window-button-second">Удалить пост</a>
+                        {% if request.user.rank_lvl >= "4" or request.user.username == comment.author.username or request.user.username == author.username %}
+                          <div class="frame-main-post-heart" style="min-width: 485px;">
+                          </div>
+                          <div>
+                            <div class="window-main" style="top: -8px;">
+                              <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
+                              <div class="window-other" style="right: 0;">
+                                <a href="{% url 'forum:delete_profile_comment' author.username comment.author.username comment.id %}" class="window-button-second">Удалить пост</a>
+                              </div>
                             </div>
                           </div>
-                        </div>
+                        {% endif %}
                       </div>
                     </div>
                     <div style="margin-top: 10px;" class="profile-comment-label">

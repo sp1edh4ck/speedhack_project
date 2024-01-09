@@ -47,7 +47,35 @@
   background: #2f846b;
 }
 .developer-role {
-  background: #b96d00;
+  background: #e28b11;
+}
+
+.designer-role-name {
+  color: #3288ff;
+}
+.main-designer-role-name {
+  color: #4c00ff;
+}
+.referee-role-name {
+  color: #ff9afc;
+}
+.main-referee-role-name {
+  color: #f528d9;
+}
+.admin-role-name {
+  color: #b40036;
+}
+.main-admin-role-name {
+  color: #ff0000;
+}
+.owner-role-name {
+  color: #ff0000;
+}
+.curator-role-name {
+  color: #2f846b;
+}
+.developer-role-name {
+  color: #e28b11;
 }
 
 .good {
