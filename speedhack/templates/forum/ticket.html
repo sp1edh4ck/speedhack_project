@@ -9,7 +9,7 @@
       <div class="frame-title">
         <label class="text-up-title">{{ ticket.category }}</label><br>
         <div class="admin-btn" style="display: flex; padding: 5px 20px 0 0;">
-          <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; background: {% if ticket.open == True %}green{% else %}#393939{% endif %}">{% if ticket.open == True %}Открыт{% else %}Закрыт{% endif %}</label>
+          <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; background: {% if ticket.closed == False %}green{% else %}#393939{% endif %}">{% if ticket.closed == False %}Открыт{% else %}Закрыт{% endif %}</label>
           <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.priority == "Низкий" %}green{% elif ticket.priority == "Средний" %}#b86e00{% elif ticket.priority == "Высокий" %}#b43300;{% endif %}">{{ ticket.priority }}</label>
           <label class="role-banner" style="width: 30px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.request == "Да" %}green{% elif ticket.request == "Нет" %}#b43300;{% endif %}">{{ ticket.request }}</label>
           <label class="role-banner" style="width: auto; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.created|date:"d E Y / H:i" }}</label>
@@ -69,7 +69,7 @@
           </div>
           {% if not forloop.last %}<hr class="hr-post-detail">{% endif %}
         {% endfor %}
-        {% if user.is_authenticated and ticket.open == True %}
+        {% if user.is_authenticated and ticket.closed == False %}
           <div>
             <hr class="hr-post-detail">
           </div>

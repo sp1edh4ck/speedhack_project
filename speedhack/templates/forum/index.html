@@ -21,7 +21,7 @@
       </div>
       <div style="display: block;">
         <div class="frame-right-first-index">
-          {% if posts.count != 0 %}
+          {% if objects.count != 0 %}
             <div style="margin: 0 0 0 10px;">
               <div>
                 <label class="posts-group-title">{% if request.path == '/' %}Все обсуждения{% elif request.path == '/forum/my_topics/' %}Мои темы{% elif request.path == '/forum/favourites/' %}Избранное{% endif %}</label>

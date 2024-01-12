@@ -37,7 +37,7 @@
         <div class="tabItem frame-users active-tab" id="tickets_open" style="max-width: 806px;{% if tickets_open_count == 0 %}max-height: 65px;{% elif tickets_open_count == 1 %}max-height: 80px;{% elif tickets_open_count == 2 %}max-height: 185px;{% elif tickets_open_count == 3 %}max-height: 290px;{% endif %}">
           {% if tickets_open.count != 0 %}
             {% for ticket in tickets_open %}
-              {% if ticket.open != False %}
+              {% if ticket.closed == False %}
                 <a href="{% url 'forum:ticket' ticket.id %}">
                   <div style="display: block;">
                     <div style="display: flex; padding: 0 20px 0 20px; margin-bottom: 10px;">
@@ -57,7 +57,7 @@
                       </div>
                     </div>
                     <div class="admin-btn" style="display: flex; padding: 0 20px 0 20px;">
-                      {% comment %} <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; background: {% if ticket.open == True %}green{% else %}#393939{% endif %}">{% if ticket.open == True %}Открыт{% else %}Закрыт{% endif %}</label> {% endcomment %}
+                      {% comment %} <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; background: {% if ticket.closed == False %}green{% else %}#393939{% endif %}">{% if ticket.closed == False %}Открыт{% else %}Закрыт{% endif %}</label> {% endcomment %}
                       <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; background: {% if ticket.priority == "Низкий" %}green{% elif ticket.priority == "Средний" %}#b86e00{% elif ticket.priority == "Высокий" %}#b43300;{% endif %}">{{ ticket.priority }}</label>
                       <label class="role-banner" style="width: 30px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.request == "Да" %}green{% elif ticket.request == "Нет" %}#b43300;{% endif %}">{{ ticket.request }}</label>
                       <label class="role-banner" style="width: 300px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.category }}</label>
@@ -77,7 +77,7 @@
         <div class="tabItem frame-users" id="tickets_close" style="max-width: 806px;{% if tickets_close.count == 0 %}max-height: 65px;{% elif tickets_close.count == 1 %}max-height: 80px;{% elif tickets_close.count == 2 %}max-height: 185px;{% elif tickets_close.count == 3 %}max-height: 290px;{% endif %}">
           {% if tickets_close.count != 0 %}
             {% for ticket in tickets_close %}
-              {% if ticket.open == False %}
+              {% if ticket.closed == True %}
                 <a href="{% url 'forum:ticket' ticket.id %}">
                   <div style="display: block;">
                     <div style="display: flex; padding: 0 20px 0 20px; margin-bottom: 10px;">
@@ -97,7 +97,7 @@
                       </div>
                     </div>
                     <div class="admin-btn" style="display: flex; padding: 0 20px 0 20px;">
-                      {% comment %} <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; background: {% if ticket.open == True %}green{% else %}#393939{% endif %}">{% if ticket.open == True %}Открыт{% else %}Закрыт{% endif %}</label> {% endcomment %}
+                      {% comment %} <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; background: {% if ticket.closed == False %}green{% else %}#393939{% endif %}">{% if ticket.closed == False %}Открыт{% else %}Закрыт{% endif %}</label> {% endcomment %}
                       <label class="role-banner" style="width: 80px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; background: {% if ticket.priority == "Низкий" %}green{% elif ticket.priority == "Средний" %}#b86e00{% elif ticket.priority == "Высокий" %}#b43300;{% endif %}">{{ ticket.priority }}</label>
                       <label class="role-banner" style="width: 30px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: {% if ticket.request == "Да" %}green{% elif ticket.request == "Нет" %}#b43300;{% endif %}">{{ ticket.request }}</label>
                       <label class="role-banner" style="width: 300px; height: 25px; padding: 3px 15px 3px 15px; margin: 0px; border-radius: 10px; margin-left: 10px; background: #393939;">{{ ticket.category }}</label>

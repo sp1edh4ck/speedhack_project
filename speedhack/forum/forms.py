@@ -11,6 +11,18 @@ class PostForm(forms.ModelForm):
         fields = ('group', 'title', 'text', 'image', 'closed', 'edit', 'open_activities',)
 
 
+# class ArbitrationPostForm(forms.ModelForm):
+#     class Meta:
+#         model = Forum
+#         fields = ('defendant', 'market', 'contacts', 'amount', 'guarantor', 'transfer', 'screens', 'description',)
+
+
+# class ArbitrationPostForm(forms.ModelForm):
+#     class Meta:
+#         model = Forum
+#         fields = ('defendant', 'market', 'contacts', 'amount', 'guarantor', 'transfer', 'screens', 'description',)
+
+
 # Система личных сообщений
 # class MessageForm(forms.ModelForm):
 #     class Meta:

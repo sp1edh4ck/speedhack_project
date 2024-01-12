@@ -124,6 +124,7 @@ def group_free(request, slug):
     helpers = Helper.objects.filter(group=group)
     context = {
         'group': group,
+        'posts': posts,
         'helpers': helpers,
         'objects': pagination_post(request, posts),
     }
@@ -312,7 +313,7 @@ def info_edit(request, username):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     if request.path != f"/profile/{request.user.username}/info-edit/":
-        return empty_page(request)
+        return redirect('forum:empty_page')
     form = UserProfileForm(
         request.POST or None,
         files=request.FILES or None,
@@ -336,7 +337,7 @@ def upgrade_temp(request, username):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     if request.path != f"/profile/{request.user.username}/upgrade/":
-        return empty_page(request)
+        return redirect('forum:empty_page')
     return render(request, 'forum/upgrade.html')
 
 
@@ -377,7 +378,7 @@ def upgrade(request, username, number):
 @ratelimit(key='ip', rate='50/m')
 def post_detail(request, post_id):
     post = get_object_or_404(Forum, id=post_id)
-    if request.user.is_authenticated and request.user.rank == "заблокирован" and post.author != request.user:
+    if request.user.is_authenticated and request.user.rank == "заблокирован" and post.author != request.user and post.group != 34:
         return banned_redirect(request)
     if request.user.is_authenticated:
         user = get_object_or_404(User, username=request.user.username)
@@ -716,7 +717,7 @@ def tickets(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     if request.user.rank_lvl < "4":
-        return empty_page(request)
+        return redirect('forum:empty_page')
     tickets_count = HelpForum.objects.all().count()
     tickets_open = HelpForum.objects.filter(open=True)
     tickets_close = HelpForum.objects.filter(open=False)
@@ -732,7 +733,7 @@ def tickets(request):
 @login_required
 def my_tickets(request, username):
     if request.user.username != username:
-        return empty_page(request)
+        return redirect('forum:empty_page')
     user = request.user
     my_tickets = user.tickets.all()
     context = {
@@ -746,8 +747,9 @@ def my_tickets(request, username):
 def ticket(request, ticket_id):
     form = AnswerForm(request.POST or None)
     ticket = get_object_or_404(HelpForum, pk=ticket_id)
-    if request.user.username != ticket.author.username or request.user.rank_lvl < "4":
-        return empty_page(request)
+    if request.user.username != ticket.author.username:
+        if request.user.rank_lvl < "4":
+            return redirect('forum:empty_page')
     comments = ticket.answer.all()
     context = {
         'form': form,
@@ -761,9 +763,10 @@ def ticket(request, ticket_id):
 @login_required
 def add_answer(request, ticket_id):
     ticket = get_object_or_404(HelpForum, pk=ticket_id)
-    if request.user.username != ticket.author.username or request.user.rank_lvl < "4":
-        return redirect('forum:empty_page')
-    if ticket.open:
+    if request.user.username != ticket.author.username:
+        if request.user.rank_lvl < "4":
+            return redirect('forum:empty_page')
+    if ticket.closed == False:
         form = AnswerForm(request.POST or None)
         if form.is_valid():
             answer = form.save(commit=False)
@@ -781,10 +784,10 @@ def ticket_oc(request, ticket_id, number):
         return redirect('forum:empty_page')
     ticket = get_object_or_404(HelpForum, id=ticket_id)
     if number == 1:
-        ticket.open = False
+        ticket.closed = True
         ticket.save()
     elif number == 2:
-        ticket.open = True
+        ticket.closed = False
         ticket.save()
     return redirect('forum:tickets')
 
