@@ -75,4 +75,4 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             ${{ github.workflow }} успешно выполнен!
-            Сервер: http://158.160.127.162/
+            Сервер: http://speedhack.ru/

@@ -31,7 +31,7 @@
 .switch-button {
   padding: 10px 15px;
   min-width: 165px;
-  transition: background 0.5s ease 0s;
+  transition: all .3s;
 }
 
 .switch-button:hover {
@@ -47,7 +47,7 @@
 .switch-button-fix {
   padding: 10px 20px;
   min-width: 165px;
-  transition: background 0.5s ease 0s;
+  transition: all .3s;
 }
 
 .switch-button-fix:hover {
@@ -58,7 +58,7 @@
 .link-decor {
   color: #d6d6d6;
   text-decoration: underline;
-  transition: color 0.5s ease 0s;
+  transition: all .3s;
 }
 
 .link-decor:hover {
@@ -68,7 +68,7 @@
 .link-decor-a {
   color: gray;
   text-decoration: underline;
-  transition: color 0.5s ease 0s;
+  transition: all .3s;
 }
 
 .link-decor-a:hover {
@@ -79,7 +79,7 @@
   color: #d6d6d6;
   text-decoration: none;
   font-size: 20px;
-  transition: color 0.5s ease 0s;
+  transition: all .3s;
 }
 
 .link-h-words:hover {

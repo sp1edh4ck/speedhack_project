@@ -7,8 +7,6 @@ app_name = 'forum'
 urlpatterns = [
     # * ссылки на страницы
     path('', views.index, name='index'),
-    path('forum/banned/', views.banned, name='banned'),
-    path('forum/empty-page/', views.empty_page, name='empty_page'),
     # ? ----------
     # * страница, для отображения ошибки 403 (может пригодится)
     # path('ratelimited/', views.ratelimited, name='ratelimited'),
@@ -31,10 +29,6 @@ urlpatterns = [
     path('forum/create_post/', views.post_create, name='post_create'),
     path('forum/<int:post_id>/', views.post_detail, name='post_detail'),
     path('forum/<int:post_id>/edit/', views.post_edit, name='post_edit'),
-    path('successfully/', views.successfully, name='successfully'),
-    path('forum/rules/', views.rules, name='rules'),
-    path('forum/words/', views.words, name='words'),
-    path('forum/faq/', views.faq, name='faq'),
     path('admin-panel/', views.admin_panel, name='admin_panel'),
     path('admin-panel/tickets/', views.tickets, name='tickets'),
     path('admin-panel/ads/', views.ads, name='ads'),
@@ -42,7 +36,13 @@ urlpatterns = [
     path('ticket/<int:ticket_id>/', views.ticket, name='ticket'),
     path('<str:username>/complaint/', views.complaint, name='complaint'),
     path('users/', views.users, name='users'),
-    path('guarantor/', views.guarantor, name='guarantor'),
+    path('misc/banned/', views.banned, name='banned'),
+    path('misc/empty-page/', views.empty_page, name='empty_page'),
+    path('misc/rules/', views.rules, name='rules'),
+    path('misc/words/', views.words, name='words'),
+    path('misc/faq/', views.faq, name='faq'),
+    path('misc/successfully/', views.successfully, name='successfully'),
+    path('misc/guarantor/', views.guarantor, name='guarantor'),
     path('misc/about/', views.about_us, name='about_us'),
     # * ссылки на действия
     path('profile/<str:username>/deposit/<int:number>/', views.deposit, name='deposit'),
@@ -57,7 +57,7 @@ urlpatterns = [
     # path('forum/<int:post_id>/symps-comment/<int:comment_id>/<str:username>/', views.symps_comment_add, name='symps_comment_add'),
     path('forum/<int:post_id>/comment/edit/', views.edit_comment, name='edit_comment'),
     path('forum/<int:post_id>/del-comment/<int:id>/', views.delete_comment, name='delete_comment'),
-    path('admin-panel/user-edit/<str:username>/', views.user_edit, name='user_edit'),
+    path('admin-panel/user-edit/<str:username>/', views.admin_user_edit, name='admin_user_edit'),
     path('admin-panel/<str:username>/ban/', views.admin_ban, name='admin_ban'),
     path('admin-panel/ticket/<int:ticket_id>/close/<int:number>/', views.ticket_oc, name='ticket_oc'),
     path('admin-panel/ticket/<int:ticket_id>/delete/', views.ticket_delete, name='ticket_delete'),

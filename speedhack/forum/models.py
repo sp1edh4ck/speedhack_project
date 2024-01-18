@@ -108,11 +108,15 @@ class Forum(models.Model):
         verbose_name='Активности доступны',
         default=False,
     )
+    pinned = models.BooleanField(
+        verbose_name='Закреплённое сообщение',
+        default=False,
+    )
 
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
-        ordering = ('-pub_date',)
+        ordering = ('-pinned', '-pub_date',)
 
     def __str__(self):
         number_of_chars = 15

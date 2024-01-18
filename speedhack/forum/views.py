@@ -689,7 +689,7 @@ def admin_panel(request):
 
 
 @login_required
-def user_edit(request, username):
+def admin_user_edit(request, username):
     if request.user.rank_lvl < "4":
         return redirect('forum:empty_page')
     user = get_object_or_404(User, username=username)

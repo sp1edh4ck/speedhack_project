@@ -67,7 +67,7 @@
               <div class="edit-form-user edit-form-user-size">
                 <hr class="admin-hr" style="background: #3f3f3f;">
                 <div class="all-style-admin-user">
-                  <form method="post" action="{% url 'forum:user_edit' user.username %}">
+                  <form method="post" action="{% url 'forum:admin_user_edit' user.username %}">
                     {% csrf_token %}
                     <div style="display: flex; padding-top: 10px;">
                       <div class="profile-edit-div">
