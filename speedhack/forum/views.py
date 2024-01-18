@@ -137,7 +137,7 @@ def profile(request, username):
         return banned_redirect(request)
     author = get_object_or_404(User, username=username)
     form = ProfileCommentForm(request.POST or None)
-    if form.is_valid():
+    if form.is_valid() and request.user.is_authenticated:
         form = form.save(commit=False)
         form.profile = author
         form.author = request.user
@@ -266,7 +266,7 @@ def deposit(request, username, number):
     #     form = DepositForm(
     #         request.POST or None
     #     )
-    #     if form.is_valid():
+    #     if form.is_valid() and request.user.is_authenticated:
     #         user.save_deposit += 10000
     #         form.save()
     #         return redirect('forum:profile', username=username)
@@ -319,7 +319,7 @@ def info_edit(request, username):
         files=request.FILES or None,
         instance=request.user
     )
-    if form.is_valid():
+    if form.is_valid() and request.user.is_authenticated:
         form.brt_day = request.POST.get('brt_day')
         form.brt_month = request.POST.get('brt_month')
         form.brt_year = request.POST.get('brt_year')
@@ -547,7 +547,7 @@ def post_create(request):
         files=request.FILES or None
     )
     if request.method == 'POST':
-        if form.is_valid():
+        if form.is_valid() and request.user.is_authenticated:
             new_post = form.save(commit=False)
             new_post.author = request.user
             new_post.save()
@@ -571,7 +571,7 @@ def post_edit(request, post_id):
     )
     if (request.user == post.author or request.user.rank_lvl >= "4"):
         if request.method == 'POST':
-            if form.is_valid():
+            if form.is_valid() and request.user.is_authenticated:
                 if request.user.rank_lvl >= "4":
                     form.save()
                     return redirect('forum:post_detail', post_id=post_id)
@@ -609,7 +609,7 @@ def add_comment(request, post_id):
     post = get_object_or_404(Forum, pk=post_id)
     if post.closed == False:
         form = CommentForm(request.POST or None)
-        if form.is_valid():
+        if form.is_valid() and request.user.is_authenticated:
             user = CustomUser.objects.get(username=request.user.username)
             user.messages += 1
             user.save()
@@ -630,7 +630,7 @@ def edit_comment(request, post_id):
     form = CommentForm(request.POST or None)
     if request.user == post.author or request.user.rank_lvl >= "4":
         if request.method == 'POST':
-            if form.is_valid():
+            if form.is_valid() and request.user.is_authenticated:
                 comment = form.save(commit=False)
                 comment.edit = True
                 comment.save()
@@ -697,7 +697,7 @@ def admin_user_edit(request, username):
         request.POST or None,
         instance=user,
     )
-    if form.is_valid():
+    if form.is_valid() and request.user.is_authenticated:
         if user.buy_privilege != form.cleaned_data.get('id_buy_privilege'):
             user.time_buy_privilege = timezone.now()
         if user.market_privilege != form.cleaned_data.get('id_market_privilege'):
@@ -768,7 +768,7 @@ def add_answer(request, ticket_id):
             return redirect('forum:empty_page')
     if ticket.closed == False:
         form = AnswerForm(request.POST or None)
-        if form.is_valid():
+        if form.is_valid() and request.user.is_authenticated:
             answer = form.save(commit=False)
             answer.author = request.user
             answer.ticket = ticket
@@ -809,7 +809,7 @@ def ticket_form(request):
         request.POST or None
     )
     if request.method == 'POST':
-        if form.is_valid():
+        if form.is_valid() and request.user.is_authenticated:
             ticket = form.save(commit=False)
             if ticket.priority == "Низкий":
                 ticket.priority_lvl = 1
@@ -836,7 +836,7 @@ def ads(request):
     users = CustomUser.objects.all()
     ads = Ads.objects.all()
     if request.method == 'POST':
-        if form.is_valid():
+        if form.is_valid() and request.user.is_authenticated:
             form.save()
     context = {
         'ads': ads,

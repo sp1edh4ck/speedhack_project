@@ -49,6 +49,7 @@ urlpatterns = [
     path('profile/<str:username>/ban/', views.ban, name='ban'),
     path('profile/<str:username>/upgrade/<int:number>/', views.upgrade, name='upgrade'),
     path('profile/<str:username>/comment/<str:author>/<int:comment_id>/', views.delete_profile_comment, name='delete_profile_comment'),
+    path('profile/<str:username>/follow/<int:number>/', views.profile_uf, name='profile_uf'),
     path('forum/<int:post_id>/favourites-post-save/<int:number>/', views.favourites_post_save, name='favourites_post_save'),
     path('forum/<int:post_id>/close/<int:number>/', views.post_oc, name='post_oc'),
     path('forum/<int:post_id>/symps/<str:username>/', views.symps_add, name='symps_add'),
@@ -62,7 +63,6 @@ urlpatterns = [
     path('admin-panel/ticket/<int:ticket_id>/close/<int:number>/', views.ticket_oc, name='ticket_oc'),
     path('admin-panel/ticket/<int:ticket_id>/delete/', views.ticket_delete, name='ticket_delete'),
     path('ticket/<int:ticket_id>/comment/', views.add_answer, name='add_answer'),
-    path('profile/<str:username>/follow/<int:number>/', views.profile_uf, name='profile_uf'),
 
     # Система личных сообщений
     # path('dialogs/', views.dialogs, name='dialogs'),

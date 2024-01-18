@@ -98,7 +98,7 @@ def acc_sell(request):
         request.POST or None,
     )
     if request.method == 'POST':
-        if form.is_valid():
+        if form.is_valid() and request.user.is_authenticated:
             new_acc = form.save(commit=False)
             new_acc.author = request.user
             new_acc.save()
