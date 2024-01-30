@@ -76,22 +76,6 @@ def login_user(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # from django.urls import reverse_lazy
 # from django.views.generic import CreateView
 # from django.shortcuts import redirect

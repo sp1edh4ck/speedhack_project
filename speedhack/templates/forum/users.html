@@ -15,7 +15,7 @@
               </form>
             </div>
             <div>
-              <a href="{% url 'forum:users' %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
+              <a href="{% url 'forum:users' %}" rel="noopener noreferrer"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
             </div>
           </div>
         </div>
@@ -53,11 +53,11 @@
           <div style="color: gray; font-size: 18px; margin-bottom: 15px;">Новые пользователи</div>
           {% for user in new_users %}
             <div style="display: flex;">
-              <a class="a-users" href="{% url 'forum:profile' user.username %}">
+              <a class="a-users" href="{% url 'forum:profile' user.username %}" rel="noopener noreferrer">
                 <img style="width: 50px; border-radius: 50px;" src="{{ user.avatar.url }}">
               </a>
               <div style="margin-left: 10px;">
-                <a href="{% url 'forum:profile' user.username %}" style="text-decoration: none; cursor: pointer; font-size: 14px;">
+                <a href="{% url 'forum:profile' user.username %}" style="text-decoration: none; cursor: pointer; font-size: 14px;" rel="noopener noreferrer">
                   <label class="users-un {% if user.username_style != 'gray-un' and user.rank != 'заблокирован' %}{{ user.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if user.username == "root" %}style="color: red;"{% endif %} style=" font-size: 16px;">{{ user.username }}</label>
                 </a>
                 <div style="color: #d6d6d6; font-size: 14px;">{{ user.date_joined|date:'d E Y' }}</div>
@@ -77,7 +77,7 @@
             {% for user in users_list_bySymps %}
               <div class="users-div" style="{% if user.description != '' %}min-height: 100px;{% endif %}">
                 <div style="padding: 10px 0 10px 10px;">
-                  <a class="a-users" href="{% url 'forum:profile' user.username %}">
+                  <a class="a-users" href="{% url 'forum:profile' user.username %}" rel="noopener noreferrer">
                     <img style="width: 60px; border-radius: 50px;" src="{{ user.avatar.url }}">
                   </a>
                   {% if user.is_online == True %}
@@ -87,7 +87,7 @@
                 <div style="margin-left: 20px; padding: 10px 0 10px 0;">
                   <div style="display: flex;">
                     <div style="margin: 0;">
-                      <a href="{% url 'forum:profile' user.username %}" style="text-decoration: none; cursor: pointer;">
+                      <a href="{% url 'forum:profile' user.username %}" style="text-decoration: none; cursor: pointer;" rel="noopener noreferrer">
                         <label class="users-un {% if user.username_style != 'gray-un' and user.rank != 'заблокирован' %}{{ user.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if user.username == "root" %}style="color: red;"{% endif %}>{{ user.username }}</label>
                       </a>
                       <div style="color: #909090; margin: 3px 0;">
@@ -117,7 +117,7 @@
             {% for user in users_list_byComments %}
               <div class="users-div">
                 <div style="padding: 10px 0 10px 10px;">
-                  <a class="a-users" href="{% url 'forum:profile' user.username %}">
+                  <a class="a-users" href="{% url 'forum:profile' user.username %}" rel="noopener noreferrer">
                     <img style="width: 60px; border-radius: 50px;" src="{{ user.avatar.url }}">
                   </a>
                   {% if user.is_online == True %}
@@ -127,7 +127,7 @@
                 <div style="margin-left: 20px; padding: 10px 0 10px 0;">
                   <div style="display: flex;">
                     <div style="margin: 0;">
-                      <a href="{% url 'forum:profile' user.username %}" style="text-decoration: none; cursor: pointer;">
+                      <a href="{% url 'forum:profile' user.username %}" style="text-decoration: none; cursor: pointer;" rel="noopener noreferrer">
                         <label class="users-un {% if user.username_style != 'gray-un' and user.rank != 'заблокирован' %}{{ user.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if user.username == "root" %}style="color: red;"{% endif %}>{{ user.username }}</label>
                       </a>
                       <div style="color: #909090; margin: 3px 0;">
@@ -158,7 +158,7 @@
               {% if user.rank_lvl >= "4" %}
                 <div class="users-div">
                   <div style="padding: 10px 0 10px 10px;">
-                    <a class="a-users" href="{% url 'forum:profile' user.username %}">
+                    <a class="a-users" href="{% url 'forum:profile' user.username %}" rel="noopener noreferrer">
                       <img style="width: 60px; border-radius: 50px;" src="{{ user.avatar.url }}">
                     </a>
                     {% if user.is_online == True %}
@@ -168,7 +168,7 @@
                   <div style="margin-left: 20px; padding: 10px 0 10px 0;">
                     <div style="display: flex;">
                       <div style="margin: 0;">
-                        <a href="{% url 'forum:profile' user.username %}" style="text-decoration: none; cursor: pointer;">
+                        <a href="{% url 'forum:profile' user.username %}" style="text-decoration: none; cursor: pointer;" rel="noopener noreferrer">
                           <label class="users-un {% if user.username_style != 'gray-un' and user.rank != 'заблокирован' %}{{ user.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if user.username == "root" %}style="color: red;"{% endif %}>{{ user.username }}</label>
                         </a>
                         <div style="color: #909090; margin: 3px 0;">

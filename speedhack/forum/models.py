@@ -109,7 +109,7 @@ class Forum(models.Model):
         default=False,
     )
     pinned = models.BooleanField(
-        verbose_name='Закреплённое сообщение',
+        verbose_name='Закреплённый пост',
         default=False,
     )
 

@@ -5,7 +5,7 @@
   <div class="main">
     <div class="frames_con" style="display: block;">
       <div style="margin-bottom: 20px;">
-        <label class="link-title"><a href="{% url 'market:index' %}" class="link-title-main">Маркет</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'market:group_free' acc.group.slug %}" class="link-title-main">Вернуться к поиску {{ acc.group.title }}</a></label>
+        <label class="link-title"><a href="{% url 'market:index' %}" class="link-title-main" rel="noopener noreferrer">Маркет</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'market:group_free' acc.group.slug %}" class="link-title-main" rel="noopener noreferrer">Вернуться к поиску {{ acc.group.title }}</a></label>
       </div>
       <div style="display: flex;">
         <div style="display: block;">
@@ -20,23 +20,23 @@
             <div class="reg">
               <label>Продал 2319 товаров</label><br>
               <label>На маркете с 12.09.2019</label><br>
-              <a href="" class="link-sell">122 аккаунта на продаже</a>
+              <a href="" class="link-sell" rel="noopener noreferrer">122 аккаунта на продаже</a>
             </div>
-            <a class="market-ls"><i class="fa-solid fa-envelope fa-lg" style="color: gray; margin-left: 10px;"></i> Отправить сообщение</a>
+            <a class="market-ls" rel="noopener noreferrer"><i class="fa-solid fa-envelope fa-lg" style="color: gray; margin-left: 10px;"></i> Отправить сообщение</a>
           </div>
           <div class="market-main-left">
-            <a href="https://t.me/sp1edh4ck" class="market-link-left" target="_blank"><i class="fa-solid fa-circle-question fa-lg icon-market-left"></i>Нужна помощь</a>
-            <a href="{% url 'market:rules' %}" class="market-link-left"><i class="fa-solid fa-book fa-lg icon-market-left"></i>Правила и гарантии</a>
-            <a href="{% url 'forum:group_filter_posts' 111 %}" class="market-link-left"><i class="fa-solid fa-sheet-plastic fa-lg icon-market-left"></i>Советы и гайды</a>
-            <a href="" class="market-link-left"><i class="fa-solid fa-gear fa-lg icon-market-left"></i>Настройки маркета</a>
-            <a href="{% url 'forum:profile_upgrade' request.user %}" class="market-link-left"><i class="fa-solid fa-angles-up fa-lg icon-market-left"></i>Повышение статуса</a>
+            <a href="https://t.me/sp1edh4ck" class="market-link-left" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-question fa-lg icon-market-left"></i>Нужна помощь</a>
+            <a href="{% url 'market:rules' %}" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-book fa-lg icon-market-left"></i>Правила и гарантии</a>
+            <a href="{% url 'forum:group_filter_posts' 111 %}" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-sheet-plastic fa-lg icon-market-left"></i>Советы и гайды</a>
+            <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-gear fa-lg icon-market-left"></i>Настройки маркета</a>
+            <a href="{% url 'forum:profile_upgrade' request.user %}" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-angles-up fa-lg icon-market-left"></i>Повышение статуса</a>
             <hr style="margin: 5px 0px; border: 1px solid #444444;">
-            <a href="{% url 'forum:post_detail' 19 %}" class="market-link-left"><i class="fa-solid fa-newspaper fa-lg icon-market-left"></i>Изменения на сайте</a>
-            <a href="{% url 'forum:group_filter_posts' 108 %}" class="market-link-left"><i class="fa-solid fa-flag fa-lg icon-market-left"></i>Сообщить о баге</a>
-            <a href="{% url 'forum:group_filter_posts' 109 %}" class="market-link-left"><i class="fa-solid fa-circle-info fa-lg icon-market-left"></i>Предложить идею</a>
-            <a href="" class="market-link-left"><i class="fa-solid fa-code fa-lg icon-market-left"></i>API для разработчика</a>
+            <a href="{% url 'forum:post_detail' 19 %}" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-newspaper fa-lg icon-market-left"></i>Изменения на сайте</a>
+            <a href="{% url 'forum:group_filter_posts' 108 %}" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-flag fa-lg icon-market-left"></i>Сообщить о баге</a>
+            <a href="{% url 'forum:group_filter_posts' 109 %}" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-circle-info fa-lg icon-market-left"></i>Предложить идею</a>
+            <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-code fa-lg icon-market-left"></i>API для разработчика</a>
             <hr style="margin: 5px 0px; border: 1px solid #444444;">
-            <a href="" class="market-link-left"><i class="fa-solid fa-money-bill-trend-up fa-lg icon-market-left"></i>Стоимость инвентаря steam</a>
+            <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-money-bill-trend-up fa-lg icon-market-left"></i>Стоимость инвентаря steam</a>
           </div>
           {% if user.is_authenticated %}
             <div class="market-main-left" style="margin-top: 15px; height: 465px;">
@@ -50,18 +50,18 @@
                   </div>
                 </div>
               </label>
-              <a href="" class="market-link-left"><i class="fa-solid fa-circle-plus fa-lg icon-market-left"></i>Пополнить баланс</a>
-              <a href="" class="market-link-left"><i class="fa-solid fa-circle-minus fa-lg icon-market-left"></i>Вывести средства</a>
-              <a href="" class="market-link-left"><i class="fa-solid fa-money-bill-transfer fa-lg icon-market-left"></i>Перевести средства</a>
+              <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-circle-plus fa-lg icon-market-left"></i>Пополнить баланс</a>
+              <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-circle-minus fa-lg icon-market-left"></i>Вывести средства</a>
+              <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-money-bill-transfer fa-lg icon-market-left"></i>Перевести средства</a>
               <hr style="margin: 5px 0px; border: 1px solid #444444;">
-              <a href="" class="market-link-left"><i class="fa-solid fa-shop fa-lg icon-market-left"></i>Мои аккаунты</a>
-              <a href="" class="market-link-left"><i class="fa-solid fa-bag-shopping fa-lg icon-market-left"></i>Мои покупки</a>
-              <a href="" class="market-link-left"><i class="fa-solid fa-bars-staggered icon-market-left"></i>Мои операции</a>
-              <a href="" class="market-link-left"><i class="fa-solid fa-bookmark fa-lg icon-market-left"></i>Избранное</a>
-              <a href="" class="market-link-left"><i class="fa-solid fa-tag fa-lg icon-market-left"></i>Метки</a>
-              <a href="" class="market-link-left"><i class="fa-solid fa-user-xmark fa-lg icon-market-left"></i>Игнор-лист продавцов</a>
-              <a href="" class="market-link-left"><i class="fa-solid fa-comments-dollar fa-lg icon-market-left"></i>Мои денежные споры</a>
-              <a href="" class="market-link-left"><i class="fa-solid fa-retweet fa-lg icon-market-left"></i>Автоплатежи</a>
+              <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-shop fa-lg icon-market-left"></i>Мои аккаунты</a>
+              <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-bag-shopping fa-lg icon-market-left"></i>Мои покупки</a>
+              <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-bars-staggered icon-market-left"></i>Мои операции</a>
+              <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-bookmark fa-lg icon-market-left"></i>Избранное</a>
+              <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-tag fa-lg icon-market-left"></i>Метки</a>
+              <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-user-xmark fa-lg icon-market-left"></i>Игнор-лист продавцов</a>
+              <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-comments-dollar fa-lg icon-market-left"></i>Мои денежные споры</a>
+              <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-retweet fa-lg icon-market-left"></i>Автоплатежи</a>
             </div>
           {% endif %}
         </div>
@@ -76,7 +76,7 @@
                 <label class="text-frame-text">{{ acc.view }} просмотров</label>
                 {% if acc.buyer != None %}
                   <span class="pink-separator"></span>
-                  <label class="text-frame-text">Аккаунт купил <a href="{% url 'forum:profile' acc.buyer %}" class="a-buyer">{{ acc.buyer }}</a></label>
+                  <label class="text-frame-text">Аккаунт купил <a href="{% url 'forum:profile' acc.buyer %}" class="a-buyer" rel="noopener noreferrer">{{ acc.buyer }}</a></label>
                 {% endif %}
               </div>
               <div class="acc-price">
@@ -86,11 +86,11 @@
             {% if acc.buyer == None %}
               <div style="display: flex;">
                 {% if acc.author != user %}
-                  <a href="{% url 'market:acc_buy' acc.id %}" class="market-acc-btn" style="width: 90px;">Купить</a>
-                  <a class="market-acc-btn" style="width: 100px;">В корзину</a>
-                  <a class="market-acc-btn gr-c" style="width: 130px;">Хочу скидку!</a>
-                  <a class="market-acc-btn"></a>
-                  <a class="market-acc-btn"></a>
+                  <a href="{% url 'market:acc_buy' acc.id %}" class="market-acc-btn" style="width: 90px;" rel="noopener noreferrer">Купить</a>
+                  <a class="market-acc-btn" style="width: 100px;" rel="noopener noreferrer">В корзину</a>
+                  <a class="market-acc-btn gr-c" style="width: 130px;" rel="noopener noreferrer">Хочу скидку!</a>
+                  <a class="market-acc-btn" rel="noopener noreferrer"></a>
+                  <a class="market-acc-btn" rel="noopener noreferrer"></a>
                 {% endif %}
               </div>
               <hr style="margin: 20px 0px; border: 1px solid #444444;">
@@ -114,7 +114,7 @@
                   <label>Аккаунт восстановили? Есть претензии к продавцу?</label>
                 </div>
                 {% if acc.author != user %}
-                  <a href="{% url 'market:acc_buy' acc.id %}" class="market-acc-btn" style="width: 200px;">Открыть денежный спор</a>
+                  <a href="{% url 'market:acc_buy' acc.id %}" class="market-acc-btn" style="width: 200px;" rel="noopener noreferrer">Открыть денежный спор</a>
                 {% endif %}
               </div>
               <hr style="margin: 20px 0px; border: 1px solid #444444;">

@@ -8,14 +8,14 @@
       <div class="frame-users" style="display: block; min-width: 1081px;{% if tickets_close.count == 0 %}max-height: 65px;{% elif tickets_close.count == 1 %}max-height: 80px;{% elif tickets_close.count == 2 %}max-height: 185px;{% elif tickets_close.count == 3 %}max-height: 290px;{% endif %}">
         {% if my_tickets.count != 0 %}
           {% for ticket in my_tickets %}
-            <a href="{% url 'forum:ticket' ticket.id %}">
+            <a href="{% url 'forum:ticket' ticket.id %}" rel="noopener noreferrer">
               <div style="display: block;">
                 <div style="display: flex; padding: 0 20px 0 20px; margin-bottom: 10px;">
                   <div style="margin: 0 10px 0px 0; height: 40px;">
                     <img style="width: 40px; border-radius: 10px;" src="{{ ticket.author.avatar.url }}">
                   </div>
                   <div style="margin: 0 auto 0 0;">
-                    <a href="{% url 'forum:profile' ticket.author %}" class="admin-link">
+                    <a href="{% url 'forum:profile' ticket.author %}" class="admin-link" rel="noopener noreferrer">
                       <label class="users-username {% if ticket.author.username_style != 'gray-un' and ticket.author.rank != 'заблокирован' %}{{ ticket.author.username_style }}{% endif %}" {% if ticket.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ ticket.author }}</label>
                     </a>
                   </div>
@@ -34,7 +34,7 @@
           {% endfor %}
         {% else %}
           <div style="margin: 0px 0 0 20px; text-align: center;" id="tickets_open">
-            <label style="color: #515151; font-size: 18px; font-weight: bold;">Вы ещё не создали ни одного тикета <a href="{% url 'forum:ticket_form' %}" class="link-tap">*создать*</a></label>
+            <label style="color: #515151; font-size: 18px; font-weight: bold;">Вы ещё не создали ни одного тикета <a href="{% url 'forum:ticket_form' %}" class="link-tap" rel="noopener noreferrer">*создать*</a></label>
           </div>
         {% endif %}
       </div>

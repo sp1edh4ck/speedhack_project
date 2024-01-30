@@ -87,13 +87,24 @@
               {% endif %}
             {% elif field.label == "Активности доступны" %}
               {% if user.rank_lvl >= "4" %}
-                <div style="display: flex; margin-bottom: 20px;">
+                <div style="display: flex; margin-bottom: 5px;">
                   {% comment %} {{ field }} {% endcomment %}
                   <label class="checkbox style-c">
                     <input type="checkbox" name="open_activities" id="id_open_activities" {% if post.open_activities == True %}checked{% endif %}>
                     <div class="checkbox__checkmark"></div>
                   </label>
                   <label class="field-label-help">Включить активности</label>
+                </div>
+              {% endif %}
+            {% elif field.label == "Закреплённый пост" %}
+              {% if user.rank_lvl >= "4" %}
+                <div style="display: flex; margin-bottom: 20px;">
+                  {% comment %} {{ field }} {% endcomment %}
+                  <label class="checkbox style-c">
+                    <input type="checkbox" name="pinned" id="id_pinned" {% if post.pinned == True %}checked{% endif %}>
+                    <div class="checkbox__checkmark"></div>
+                  </label>
+                  <label class="field-label-help">Закрепить пост</label>
                 </div>
               {% endif %}
             {% endif %}

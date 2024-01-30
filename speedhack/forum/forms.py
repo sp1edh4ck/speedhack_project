@@ -8,7 +8,7 @@ from .models import Ads, Comment, Forum, HelpAnswer, HelpForum, ProfileComment
 class PostForm(forms.ModelForm):
     class Meta:
         model = Forum
-        fields = ('group', 'title', 'text', 'image', 'closed', 'edit', 'open_activities',)
+        fields = ('group', 'title', 'text', 'image', 'closed', 'edit', 'open_activities', 'pinned',)
 
 
 # class ArbitrationPostForm(forms.ModelForm):

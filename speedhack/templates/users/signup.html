@@ -54,11 +54,11 @@
         </div>
         <div class="remember-me">
           <input type="checkbox" id="politics" onclick="check();" value="" autocomplete="off" style="margin-right: 5px;">
-          <span class="rules-reg"> Я согласен с <a class="link-rules" href="{% url 'forum:rules' %}" target="_blank">правилами сайта</a></span>
+          <span class="rules-reg"> Я согласен с <a class="link-rules" href="{% url 'forum:rules' %}" target="_blank" rel="noopener noreferrer">правилами сайта</a></span>
         </div>
         <button type="submit" name="submit" disabled="" class="button-form btn-reg">Зарегистрироваться</button>
         <div class="login-link">
-          <label>Есть аккаунт? <a href="{% url 'users:login' %}" class="login-link-a">Войти</a></label>
+          <label>Есть аккаунт? <a href="{% url 'users:login' %}" class="login-link-a" rel="noopener noreferrer">Войти</a></label>
         </div>
         <script>
           function check() {

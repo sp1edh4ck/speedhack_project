@@ -6,9 +6,9 @@
     <div class="frame_con">
       <div style="display: block;">
         <div class="switch-info-admin" style="max-height: 130px;">
-          <a href="{% url 'forum:admin_panel' %}" class="switch-button active-tab" style="text-decoration: none; color: #d6d6d6;">Основная админ-панель</a>
-          <a href="{% url 'forum:tickets' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Обращения</a>
-          <a href="{% url 'forum:ads' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Реклама</a>
+          <a href="{% url 'forum:admin_panel' %}" class="switch-button active-tab" style="text-decoration: none; color: #d6d6d6;" rel="noopener noreferrer">Основная админ-панель</a>
+          <a href="{% url 'forum:tickets' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;" rel="noopener noreferrer">Обращения</a>
+          <a href="{% url 'forum:ads' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;" rel="noopener noreferrer">Реклама</a>
         </div>
         <div class="frame-left-second-users">
           <span style="color: gray; font-size: 18px;">Статистика пользователя</span>
@@ -30,7 +30,7 @@
             <img style="width: 40px; border-radius: 10px;" src="{{ user.avatar.url }}">
           </div>
           <div style="margin: 0 auto 0 0;">
-            <a href="{% url 'forum:profile' user.username %}" class="admin-link">
+            <a href="{% url 'forum:profile' user.username %}" class="admin-link" rel="noopener noreferrer">
               <label class="users-username {% if author.username_style != 'gray-un' and author.rank != 'заблокирован' %}{{ author.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ user.username }}</label>
             </a>
           </div>

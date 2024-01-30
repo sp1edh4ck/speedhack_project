@@ -719,8 +719,8 @@ def tickets(request):
     if request.user.rank_lvl < "4":
         return redirect('forum:empty_page')
     tickets_count = HelpForum.objects.all().count()
-    tickets_open = HelpForum.objects.filter(open=True)
-    tickets_close = HelpForum.objects.filter(open=False)
+    tickets_open = HelpForum.objects.filter(closed=True)
+    tickets_close = HelpForum.objects.filter(closed=False)
     context = {
         'tickets_count': tickets_count,
         'tickets_open': tickets_open,

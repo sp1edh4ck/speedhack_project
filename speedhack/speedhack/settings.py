@@ -144,6 +144,7 @@ if DEBUG:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
     MEDIA_URL = 'images/'
 else:
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'

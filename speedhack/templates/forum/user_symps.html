@@ -4,7 +4,7 @@
 {% block content %}
   <div class="main">
     <div class="frame_con" style="display: block;">
-      <label class="link-title"><a href="{% url 'forum:index' %}" class="link-title-main">Форум</a> <label style="margin: 0 5px;">/</label> <a href="{% url 'forum:profile' author.username %}" class="link-title-main">{{ author.username }}</a></label>
+      <label class="link-title"><a href="{% url 'forum:index' %}" class="link-title-main" rel="noopener noreferrer">Форум</a> <label style="margin: 0 5px;">/</label> <a href="{% url 'forum:profile' author.username %}" class="link-title-main" rel="noopener noreferrer">{{ author.username }}</a></label>
       <div class="user-symps-frame">
         <div class="frame-right-second" style="margin: 0;">
           <a data-tab="#sympUser" class="button-tools active-tab">Полученные симпатии</a>
@@ -17,11 +17,11 @@
             {% for user_symp in user_symps %}
               <div style="padding: 20px 20px 0 20px; display: flex;">
                 <div style="margin-right: 10px;">
-                  <a href="{% url 'forum:profile' user_symp.owner.username %}"><img style="width: 50px; border-radius: 50px;" src="{{ user_symp.owner.avatar.url }}"></a>
+                  <a href="{% url 'forum:profile' user_symp.owner.username %}" rel="noopener noreferrer"><img style="width: 50px; border-radius: 50px;" src="{{ user_symp.owner.avatar.url }}"></a>
                 </div>
                 <div>
-                  <div class="user-symp-post-title"><a class="user-symp-post-title-a" href="{% url 'forum:post_detail' user_symp.post.id %}">{{ user_symp.post.title }}</a></div>
-                  <div class="user-symp-post-info"><a class="user-symp-a" href="{% url 'forum:profile' user_symp.owner.username %}">{{ user_symp.owner.username }}</a><i class="fa-solid fa-arrow-right" style="margin: 0 10px 0 7px;"></i><a class="user-symp-a" href="{% url 'forum:profile' user_symp.user.username %}">{{ user_symp.user.username }}</a><span class="pink-separator" style="margin: 0 10px;"></span><a class="user-symp-a" href="{% url 'forum:group_filter_posts' user_symp.post.group.id %}">{{ user_symp.post.group }}</a><span class="pink-separator" style="margin: 0 10px;"></span>{{ user_symp.created|date:"d E Y / H:i" }}</div>
+                  <div class="user-symp-post-title"><a class="user-symp-post-title-a" href="{% url 'forum:post_detail' user_symp.post.id %}" rel="noopener noreferrer">{{ user_symp.post.title }}</a></div>
+                  <div class="user-symp-post-info"><a class="user-symp-a" href="{% url 'forum:profile' user_symp.owner.username %}" rel="noopener noreferrer">{{ user_symp.owner.username }}</a><i class="fa-solid fa-arrow-right" style="margin: 0 10px 0 7px;"></i><a class="user-symp-a" href="{% url 'forum:profile' user_symp.user.username %}" rel="noopener noreferrer">{{ user_symp.user.username }}</a><span class="pink-separator" style="margin: 0 10px;"></span><a class="user-symp-a" href="{% url 'forum:group_filter_posts' user_symp.post.group.id %}" rel="noopener noreferrer">{{ user_symp.post.group }}</a><span class="pink-separator" style="margin: 0 10px;"></span>{{ user_symp.created|date:"d E Y / H:i" }}</div>
                 </div>
               </div>
               <div class="user-symp-post-text">{{ user_symp.post.text|truncatechars:80|linebreaksbr }}</div>
@@ -38,11 +38,11 @@
             {% for owner_symp in owner_symps %}
               <div style="padding: 20px 20px 0 20px; display: flex;">
                 <div style="margin-right: 10px;">
-                  <a href="{% url 'forum:profile' owner_symp.owner.username %}"><img style="width: 50px; border-radius: 50px;" src="{{ owner_symp.owner.avatar.url }}"></a>
+                  <a href="{% url 'forum:profile' owner_symp.owner.username %}" rel="noopener noreferrer"><img style="width: 50px; border-radius: 50px;" src="{{ owner_symp.owner.avatar.url }}"></a>
                 </div>
                 <div>
-                  <div class="user-symp-post-title"><a class="user-symp-post-title-a" href="{% url 'forum:post_detail' owner_symp.post.id %}">{{ owner_symp.post.title }}</div>
-                  <div class="user-symp-post-info"><a class="user-symp-a" href="{% url 'forum:profile' owner_symp.owner.username %}">{{ owner_symp.owner }}</a><i class="fa-solid fa-arrow-right" style="margin: 0 10px 0 7px;"></i><a class="user-symp-a" href="{% url 'forum:profile' owner_symp.user.username %}">{{ owner_symp.user }}</a><span class="pink-separator" style="margin: 0 10px;"></span><a class="user-symp-a" href="{% url 'forum:group_filter_posts' owner_symp.post.group.id %}">{{ owner_symp.post.group }}</a><span class="pink-separator" style="margin: 0 10px;"></span>{{ owner_symp.created }}</div>
+                  <div class="user-symp-post-title"><a class="user-symp-post-title-a" href="{% url 'forum:post_detail' owner_symp.post.id %}" rel="noopener noreferrer">{{ owner_symp.post.title }}</div>
+                  <div class="user-symp-post-info"><a class="user-symp-a" href="{% url 'forum:profile' owner_symp.owner.username %}" rel="noopener noreferrer">{{ owner_symp.owner }}</a><i class="fa-solid fa-arrow-right" style="margin: 0 10px 0 7px;"></i><a class="user-symp-a" href="{% url 'forum:profile' owner_symp.user.username %}" rel="noopener noreferrer">{{ owner_symp.user }}</a><span class="pink-separator" style="margin: 0 10px;"></span><a class="user-symp-a" href="{% url 'forum:group_filter_posts' owner_symp.post.group.id %}" rel="noopener noreferrer">{{ owner_symp.post.group }}</a><span class="pink-separator" style="margin: 0 10px;"></span>{{ owner_symp.created }}</div>
                 </div>
               </div>
               <div class="user-symp-post-text">{{ owner_symp.post.text }}</div>

@@ -7,9 +7,9 @@
     <div class="frame_con">
       <div style="display: block;">
         <div class="switch-info-admin" style="min-width: 260px; max-height: 130px;">
-          <a href="{% url 'forum:admin_panel' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Основная админ-панель</a>
-          <a href="{% url 'forum:tickets' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Обращения</a>
-          <a href="{% url 'forum:ads' %}" class="switch-button active-tab" style="text-decoration: none; color: #d6d6d6;">Реклама</a>
+          <a href="{% url 'forum:admin_panel' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;" rel="noopener noreferrer">Основная админ-панель</a>
+          <a href="{% url 'forum:tickets' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;" rel="noopener noreferrer">Обращения</a>
+          <a href="{% url 'forum:ads' %}" class="switch-button active-tab" style="text-decoration: none; color: #d6d6d6;" rel="noopener noreferrer">Реклама</a>
         </div>
       </div>
       <div style="display: block;">
@@ -57,7 +57,7 @@
                 <div style="display: block;">
                   <div style="display: flex; padding: 0 20px 0 20px; margin-bottom: 10px;">
                     <div class="admin-btn">
-                      <a class="ads-link-title" href="{% url 'forum:post_detail' ad.post_id %}">{{ ad.title }}</a>
+                      <a class="ads-link-title" href="{% url 'forum:post_detail' ad.post_id %}" rel="noopener noreferrer">{{ ad.title }}</a>
                     </div>
                   </div>
                   <div class="admin-btn" style="display: flex; padding: 0 20px 0 20px;">

@@ -7,9 +7,9 @@
     <div class="frame_con">
       <div style="display: block;">
         <div class="switch-info-admin" style="max-height: 130px;">
-          <a href="{% url 'forum:admin_panel' %}" class="switch-button active-tab" style="text-decoration: none; color: #d6d6d6;">Основная админ-панель</a>
-          <a href="{% url 'forum:tickets' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Обращения</a>
-          <a href="{% url 'forum:ads' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Реклама</a>
+          <a href="{% url 'forum:admin_panel' %}" class="switch-button active-tab" style="text-decoration: none; color: #d6d6d6;" rel="noopener noreferrer">Основная админ-панель</a>
+          <a href="{% url 'forum:tickets' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;" rel="noopener noreferrer">Обращения</a>
+          <a href="{% url 'forum:ads' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;" rel="noopener noreferrer">Реклама</a>
         </div>
         <div class="frame-left-first-users">
           <span style="color: gray; font-size: 18px;">Найти пользователя</span>
@@ -20,7 +20,7 @@
               </form>
             </div>
             <div>
-              <a href="{% url 'forum:admin_panel' %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
+              <a href="{% url 'forum:admin_panel' %}" rel="noopener noreferrer"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
             </div>
           </div>
         </div>
@@ -47,17 +47,17 @@
                   <img style="width: 40px; border-radius: 10px;" src="{{ user.avatar.url }}">
                 </div>
                 <div style="margin: 0 auto 0 0;">
-                  <a href="{% url 'forum:profile' user.username %}" class="admin-link">
+                  <a href="{% url 'forum:profile' user.username %}" class="admin-link" rel="noopener noreferrer">
                     <label class="users-username {% if user.username_style != 'gray-un' and user.rank != 'заблокирован' %}{{ user.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ user.username }}</label>
                   </a>
                 </div>
                 <div class="admin-btn">
                   {% if user.rank != "заблокирован" and user.username != request.user.username and request.user.rank_lvl > user.rank_lvl %}
                     <label class="role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}" style="font-size: 15px; max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px; font-weight: bold;">{{ user.rank }}</label>
-                    <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button" style="max-height: 40px; margin-right: 5px;">Заблокировать</a>
+                    <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button" style="max-height: 40px; margin-right: 5px;" rel="noopener noreferrer">Заблокировать</a>
                   {% elif user.rank == "заблокирован" and user.username != request.user.username and request.user.rank_lvl > user.rank_lvl %}
                     <label class="role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}" style="font-size: 15px; max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px; font-weight: bold;">{{ user.save_rank }}</label>
-                    <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button" style="max-height: 40px; margin-right: 5px;">Разблокировать</a>
+                    <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button" style="max-height: 40px; margin-right: 5px;" rel="noopener noreferrer">Разблокировать</a>
                   {% elif user.rank != "пользователь" %}
                     <label class="{% if user.rank != "заблокирован" %}role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}{% endif %}" style="font-size: 15px; max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px; font-weight: bold;">{{ user.rank }}</label>
                   {% endif %}
