@@ -4,6 +4,7 @@ from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django_ratelimit.decorators import ratelimit
+from django.utils.http import unquote
 
 from market.models import Market
 from users.forms import UserProfileAdminForm, UserProfileForm
@@ -88,8 +89,10 @@ def my_topics(request):
     else:
         posts = user.posts.all()
     ads = Ads.objects.all()
+    posts_count = posts.count
     context = {
         'ads': ads,
+        'posts_count': posts_count,
         'objects': pagination_post(request, posts)
     }
     return render(request, 'forum/index.html', context)
@@ -102,9 +105,11 @@ def favourites(request):
         return banned_redirect(request)
     user = request.user
     favourites_posts = Favourites.objects.filter(user=user)
+    favourites_posts_count = favourites_posts.count
     ads = Ads.objects.all()
     context = {
         'ads': ads,
+        'favourites_posts_count': favourites_posts_count,
         'objects': pagination_post(request, favourites_posts)
     }
     return render(request, 'forum/index.html', context)
@@ -174,7 +179,7 @@ def profile(request, username):
 
 
 def symps_view(request, username):
-    if request.user.rank == "заблокирован":
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     author = get_object_or_404(User, username=username)
     search_query = request.GET.get('search', '')
@@ -193,7 +198,7 @@ def symps_view(request, username):
 
 
 def messages_view(request, username):
-    if request.user.rank == "заблокирован":
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     author = get_object_or_404(User, username=username)
     user_messages = Comment.objects.filter(author=author).order_by('-created')
@@ -205,7 +210,7 @@ def messages_view(request, username):
 
 
 def subscriptions_view(request, username):
-    if request.user.rank == "заблокирован":
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     author = get_object_or_404(User, username=username)
     user_subscriptions = author.follower.all()
@@ -217,7 +222,7 @@ def subscriptions_view(request, username):
 
 
 def subscribers_view(request, username):
-    if request.user.rank == "заблокирован":
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     author = get_object_or_404(User, username=username)
     user_subscribers = author.following.all()
@@ -847,11 +852,6 @@ def ads(request):
 
 
 @ratelimit(key='ip', rate='50/m')
-def rules(request):
-    return render(request, 'forum/rules.html')
-
-
-@ratelimit(key='ip', rate='50/m')
 def users(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
@@ -891,15 +891,30 @@ def faq(request):
 
 
 @ratelimit(key='ip', rate='50/m')
-def guarantor(request):
-    if request.user.is_authenticated and request.user.rank == "заблокирован":
-        return banned_redirect(request)
-    return render(request, 'forum/guarantor.html')
+def faq_q(request):
+    return render(request, 'forum/faq_q.html')
+
+
+@ratelimit(key='ip', rate='50/m')
+def rules(request):
+    return render(request, 'forum/rules.html')
+
+
+@ratelimit(key='ip', rate='50/m')
+def user_ag(request):
+    return render(request, 'forum/user_ag.html')
 
 
 @ratelimit(key='ip', rate='50/m')
 def words(request):
     return render(request, 'forum/words.html')
+
+
+@ratelimit(key='ip', rate='50/m')
+def guarantor(request):
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    return render(request, 'forum/guarantor.html')
 
 
 @ratelimit(key='ip', rate='50/m')

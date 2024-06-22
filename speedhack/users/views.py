@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 from django.views import View
 from django_ratelimit.decorators import ratelimit
 
-from .forms import CustomUserCreationForm, CustomUserLogin
+from .forms import CustomUserCreationForm, CustomUserLogin, CustomUserChangePassForm
 from users.models import CustomUser
 
 User = get_user_model()
@@ -74,6 +74,21 @@ def login_user(request):
     return render(request, 'users/login.html', context)
 
 
+class ChangePasswordView(View):
+    def get(self, request):
+        form = CustomUserChangePassForm()
+        return render(request, 'users/password_change.html', {'form': form})
+
+    def post(self, request):
+        username = request.POST['username']
+        password = request.POST['password']
+        new_password = request.POST['new_password']
+        user = User.objects.filter(username=username).first()
+        if user and user.is_active and password != new_password:
+            user.password = new_password
+            return redirect('users:password_change_done')
+        else:
+            return redirect('users:login')
 
 
 # from django.urls import reverse_lazy

@@ -108,37 +108,12 @@
             </div>
           </div>
         </div>
-        <div class="tabItem rules" id="other-ques">
-          <div class="faq-tech-ques">
-            <label style="font-size: 20px;">Общие вопросы</label><br><br>
-            <div style="margin-left: 10px;">
-              <label style="font-size: 16px; color:;">Как получить симпатии?</label><br>
-              <label style="font-size: 16px; color: #cacaca;">- Симпатии выдают другие пользователи, если они посчитали ваше сообщение/тему полезной. Так же симпатии можно ставить на розыгрыши в знак благодарности.</label><br><br>
-              <label style="font-size: 16px; color:;">Как ставить симпатии? Почему у меня нет кнопки "Мне нравится"?</label><br>
-              <label style="font-size: 16px; color: #cacaca;">- Чтобы появилась кнопка "Мне нравится", нужно иметь 20 симпатий, либо иметь платную группу (Суприм, Легенда, Уник).</label><br><br>
-              <label style="font-size: 16px; color:;">Как бесплатно изменить ник?</label><br>
-              <label style="font-size: 16px; color: #cacaca;">- Бесплатная смена ника доступна с группы "Постоялец" (200 симпатий) и платным группам (Суприм, Легенда, Уник).</label><br><br>
-              <label style="font-size: 16px; color:;">Почему мои симпатии пропали?</label><br>
-              <label style="font-size: 16px; color: #cacaca;">Возможные причины:</label><br>
-              <label style="font-size: 16px; color: #cacaca;">- Накрутка симпатий на бессмысленные посты с вашей стороны</label><br>
-              <label style="font-size: 16px; color: #cacaca;">- Накрутка симпатий на ваши бессмысленные посты от другого пользователя</label><br>
-              <label style="font-size: 16px; color: #cacaca;">- В случае частичного обнуления симпатий (10-15), причиной является удаление симпатий у нарушителя, который вам поставил часть симпатий на полезные сообщения </label><br><br>
-              <label style="font-size: 16px; color:;">Что значат эти "баллы", которые я получаю после нарушения?</label><br>
-              <label style="font-size: 16px; color: #cacaca;">На форуме реализована система предупреждений (баллов) которые выдаются за нарушения правил форума/разделов</label><br><br>
-              <label style="font-size: 16px; color: #cacaca;">Получив нарушение, пользователю высылается личное сообщение от модератора, который его выдал. Тема письма будет содержать суть нарушения.</label><br>
-              <label style="font-size: 16px; color: #cacaca;">Свои нарушения, если таковы имеются, можно посмотреть во вкладке "Предупреждения" на странице своего профиля. Вы сможете узнать суммарное количество полученных баллов и дату их истечения. Нарушение, которое выдается в размере 2 баллов, обычно, истекает за 10 дней. Каждый пользователь имеет право обжаловать действия модератора в этом разделе.</label><br><br>
-              <label style="font-size: 16px; color: #cacaca;">Значения количества баллов на доступ к форуму:</label><br>
-              <label style="font-size: 16px; color: #cacaca;">- Если у вас менее 5 баллов, то вы имеете полные права на форуме. согласно вашей группе. (Например, Местный)</label><br>
-              <label style="font-size: 16px; color: #cacaca;">- Если у вас от 5 и до 20 баллов, то вам выдается группа «Read Only - только просмотр форума»</label><br>
-              <label style="font-size: 16px; color: #cacaca;">- Если у вас 20 баллов и более, то доступ к форуму будет ограничен. (Исключения: чат, арбитраж, жалобы)</label><br><br>
-              <label style="font-size: 16px; color: #cacaca;">Снятие баллов:</label><br>
-              <label style="font-size: 16px; color: #cacaca;">У каждого предупреждения имеется свой срок действия, и варьируется он от типа нарушения.</label><br>
-            </div>
-          </div>
-        </div>
-        <div class="switch-info" style="min-width: 205px; max-wisth: 205px; max-height: 70px;">
-          <a data-tab="#users-groups" class="switch-button active-tab">Группы пользователей</a>
-          <a data-tab="#other-ques" class="switch-button">Общие вопросы</a>
+        <div class="switch-info" style="min-width: 205px; max-width: 205px; max-height: 230px;">
+            <a href="{% url 'forum:faq' %}" class="switch-button active-tab" style="color: #d6d6d6; text-decoration: none;">Группы пользователей</a>
+            <a href="{% url 'forum:faq_q' %}" class="switch-button" style="color: #d6d6d6; text-decoration: none;">Общие вопросы</a>
+            <a href="{% url 'forum:rules' %}" class="switch-button" style="color: #d6d6d6; text-decoration: none;">Условия и правила</a>
+            <a href="{% url 'forum:user_ag' %}" class="switch-button" style="color: #d6d6d6; text-decoration: none;">Пользовательское соглашение</a>
+            <a href="{% url 'forum:words' %}" class="switch-button" style="color: #d6d6d6; text-decoration: none;" rel="noopener noreferrer">Ключевые слова</a>
         </div>
       </div>
     </div>

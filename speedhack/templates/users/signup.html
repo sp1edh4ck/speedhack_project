@@ -52,9 +52,12 @@
           <input class="input-ret" type="password" name="password1" id="id_password1" autocomplete="off" style="margin-right: 5px;" placeholder="Пароль...">
           <i class="fa-solid fa-lock fa-lg icon-login"></i>
         </div>
-        <div class="remember-me">
-          <input type="checkbox" id="politics" onclick="check();" value="" autocomplete="off" style="margin-right: 5px;">
-          <span class="rules-reg"> Я согласен с <a class="link-rules" href="{% url 'forum:rules' %}" target="_blank" rel="noopener noreferrer">правилами сайта</a></span>
+        <div style="display: flex; margin-bottom: 5px;">
+          <label class="checkbox style-c">
+            <input type="checkbox" id="politics" onclick="check();">
+            <div class="checkbox__checkmark"></div>
+          </label>
+          <label class="field-label-help">Я согласен с <a class="link-rules" href="{% url 'forum:rules' %}" target="_blank" rel="noopener noreferrer">правилами сайта</a></label>
         </div>
         <button type="submit" name="submit" disabled="" class="button-form btn-reg">Зарегистрироваться</button>
         <div class="login-link">

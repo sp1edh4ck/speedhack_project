@@ -34,3 +34,13 @@ def ru_plural(value, variants):
 def bf_number(value):
     result = f'{value:,.0f}'.replace(',', ' ')
     return result
+
+
+@register.filter
+def mail_forced(value):
+    name, end = value.split('@',)
+    lens = len(name) - 1
+    letter_start = name[:1]
+    letter_end = name[lens:]
+    result = str(letter_start) + str('*' * (lens - 1)) + str(letter_end) + '@' + str(end)
+    return result

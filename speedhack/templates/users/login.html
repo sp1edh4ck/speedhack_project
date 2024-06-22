@@ -43,11 +43,17 @@
         </div>
         <div class="form input-box" {% if field.field.required %} aria-required="true"{% else %}aria-required="false"{% endif %}>
           <input class="input-ret" type="password" name="password" id="id_password" autocomplete="off" style="margin-right: 5px;" placeholder="Пароль...">
-          <i class="fa-solid fa-envelope fa-lg icon-login"></i>
+          <i class="fa-solid fa-lock fa-lg icon-login"></i>
         </div>
         <div class="remember-me" style="justify-content: space-between;">
-          <label><input type="checkbox" style="margin-right: 5px;">Запомнить меня</label>
-          <a href="" class="login-link-a" rel="noopener noreferrer">Забыли пароль?</a>
+          <label>
+            <label class="checkbox style-c" style="margin-top: -5px;">
+              <input type="checkbox" style="position: static; top: 5px;">
+              <div class="checkbox__checkmark"></div>
+            </label>
+            Запомнить меня
+          </label>
+          <a href="{% url 'users:password_change' %}" class="login-link-a" rel="noopener noreferrer">Забыли пароль?</a>
         </div>
         <button type="submit" class="button-form">Войти</button>
         <div class="login-link">

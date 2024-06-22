@@ -4,10 +4,10 @@ from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordResetCompleteView,
                                        PasswordResetConfirmView,
                                        PasswordResetDoneView,
-                                       PasswordResetView)
+                                       PasswordResetView,)
 from django.urls import path
 
-from users.views import ActivationView, SignUpView
+from users.views import ActivationView, SignUpView, ChangePasswordView
 
 from .forms import CustomUserLogin
 from . import views
@@ -16,16 +16,8 @@ app_name = 'users'
 
 urlpatterns = [
     path('activation', ActivationView.as_view(), name='activation'),
-    path(
-        'signup/',
-        SignUpView.as_view(),
-        name='signup'
-    ),
-    path(
-        'logout/',
-        LogoutView.as_view(next_page='forum:index'),
-        name='logout'
-    ),
+    path('signup/', SignUpView.as_view(), name='signup'),
+    path('logout/', LogoutView.as_view(next_page='forum:index'), name='logout'),
     # * старый логин
     # ? ----------
     # path(
@@ -36,19 +28,14 @@ urlpatterns = [
     # ),
     # ? ----------
     path('login/', views.login_user, name='login'),
-    # path(
-    #     'password_change/',
-    #     PasswordChangeView.as_view(
-    #         template_name='users/password_change_form.html',
-    #         success_url=reverse_lazy('users:password_change')),
-    #     name='password_change'
-    # ),
-    # path(
-    #     'password_change/done/',
-    #     PasswordChangeDoneView.as_view(
-    #         template_name='users/password_change_done.html'),
-    #     name='password_change_done'
-    # ),
+    path('password_change/', ChangePasswordView.as_view(), name='password_change'),
+    path(
+        'password_change/done/',
+        PasswordChangeDoneView.as_view(
+            template_name='users/password_change_done.html'
+        ),
+        name='password_change_done'
+    ),
     # path(
     #     'password_reset/',
     #     PasswordResetView.as_view(
