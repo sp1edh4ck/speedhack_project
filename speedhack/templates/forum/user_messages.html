@@ -4,22 +4,22 @@
 {% block content %}
   <div class="main">
     <div class="frame_con" style="display: block;">
-      <label class="link-title"><a href="{% url 'forum:index' %}" class="link-title-main" rel="noopener noreferrer">Форум</a> <label style="margin: 0 5px;">/</label> <a href="{% url 'forum:profile' author.username %}" class="link-title-main" rel="noopener noreferrer">{{ author.username }}</a></label>
+      <label class="link-title"><a href="{% url 'forum:index' %}" class="link-title-main">Форум</a> <label style="margin: 0 5px;">/</label> <a href="{% url 'forum:profile' author.username %}" class="link-title-main">{{ author.username }}</a></label>
       <div class="user-symps-frame">
         <div>
           {% if user_messages.count != 0 %}
             {% for user_message in user_messages %}
               <div style="padding: 20px 20px 0 20px; display: flex;">
                 <div style="margin-right: 10px;">
-                  <a href="{% url 'forum:profile' user_message.author.username %}" rel="noopener noreferrer"><img style="width: 50px; border-radius: 50px;" src="{{ user_message.author.avatar.url }}"></a>
+                  <a href="{% url 'forum:profile' user_message.author.username %}"><img style="width: 50px; border-radius: 50px;" src="{{ user_message.author.avatar.url }}"></a>
                 </div>
                 <div style="margin-bottom: 20px;">
                   <div style="display: flex; min-width: 980px;">
-                    <div class="user-symp-post-title" style="margin: 0 auto 0 0;"><a class="user-symp-post-title-a" href="{% url 'forum:post_detail' user_message.post.id %}" rel="noopener noreferrer">{{ user_message.post.title }}</a></div>
+                    <div class="user-symp-post-title" style="margin: 0 auto 0 0;"><a class="user-symp-post-title-a" href="{% url 'forum:post_detail' user_message.post.id %}">{{ user_message.post.title }}</a></div>
                     <div class="user-symp-post-info" style="color: #909090;">Сообщение</div>
                   </div>
                   <div class="user-symp-post-info" style="max-width: 980px; word-wrap: break-word;">{{ user_message.text }}</div>
-                  <div class="user-symp-post-info"><a class="user-symp-a" style="font-weight: bold;" href="{% url 'forum:profile' user_message.author.username %}" rel="noopener noreferrer">{{ user_message.author.username }}</a><span class="pink-separator" style="margin: 0 10px;"></span><a class="user-symp-a" href="{% url 'forum:group_filter_posts' user_message.post.group.id %}" rel="noopener noreferrer">{{ user_message.post.group }}</a><span class="pink-separator" style="margin: 0 10px;"></span>{{ user_message.created|date:"d E Y / H:i" }}</div>
+                  <div class="user-symp-post-info"><a class="user-symp-a" style="font-weight: bold;" href="{% url 'forum:profile' user_message.author.username %}">{{ user_message.author.username }}</a><span class="pink-separator" style="margin: 0 10px;"></span><a class="user-symp-a" href="{% url 'forum:group_filter_posts' user_message.post.group.id %}">{{ user_message.post.group }}</a><span class="pink-separator" style="margin: 0 10px;"></span>{{ user_message.created|date:"d E Y / H:i" }}</div>
                 </div>
               </div>
               {% if not forloop.last %}<hr class="hr-post-detail" style="margin: 0;">{% endif %}

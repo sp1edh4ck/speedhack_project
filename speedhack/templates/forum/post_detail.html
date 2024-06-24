@@ -6,23 +6,23 @@
 {% load user_filters %}
   <div class="main">
     <div class="frame-post_con">
-      <label class="link-title"><a href="{% url 'forum:index' %}" class="link-title-main" rel="noopener noreferrer">Форум</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:group_filter_posts' post.group.id %}" class="link-title-main" rel="noopener noreferrer">{{ post.group.title }}</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:post_detail' post.id %}" class="link-title-main" rel="noopener noreferrer">Пост #{{ post.id }}</a></label>
+      <label class="link-title"><a href="{% url 'forum:index' %}" class="link-title-main">Форум</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:group_filter_posts' post.group.id %}" class="link-title-main">{{ post.group.title }}</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'forum:post_detail' post.id %}" class="link-title-main">Пост #{{ post.id }}</a></label>
       <div class="frame-title">
         <div style="display: flex;">
           {% if post.open_activities %}<label class="tables-tags-post">Активности</label><br>{% endif %}
           <label class="text-up-title">{{ post.title }}</label><br>
         </div>
-        <label class="text-up-all">Тема в разделе <a href="{% url 'forum:group_filter_posts' post.group.slug %}" class="text-up-nick" rel="noopener noreferrer">{{ post.group }}</a> создана пользователем <a href="{% url 'forum:profile' post.author.username %}" class="{% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}text-up-nick2 {{ post.author.username_style }}{% else %}text-up-nick{% endif %}" {% if post.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} rel="noopener noreferrer">{{ post.author.username }}</a> / <img class="heart" src="{% static 'images/heart_gray.png' %}"> <label style="color: #ff506f;">{{ author_symps_count|bf_number }}</label> / <label style="color: #949494;">{{ views.count|bf_number }} {{ views.count|ru_plural:"просмотр,просмотра,просмотров" }}</label> | <label style="color: gray;">{{ post.pub_date|date:"d E Y / H:i" }}</label></label>
+        <label class="text-up-all">Тема в разделе <a href="{% url 'forum:group_filter_posts' post.group.slug %}" class="text-up-nick">{{ post.group }}</a> создана пользователем <a href="{% url 'forum:profile' post.author.username %}" class="{% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}text-up-nick2 {{ post.author.username_style }}{% else %}text-up-nick{% endif %}" {% if post.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ post.author.username }}</a> / <img class="heart" src="{% static 'images/heart_gray.png' %}"> <label style="color: #ff506f;">{{ author_symps_count|bf_number }}</label> / <label style="color: #949494;">{{ views.count|bf_number }} {{ views.count|ru_plural:"просмотр,просмотра,просмотров" }}</label> | <label style="color: gray;">{{ post.pub_date|date:"d E Y / H:i" }}</label></label>
       </div>
       <div class="frame-main">
         <div class="frame-main-avatars">
           {% if favourite %}
             <div style="display: flex;">
-              <a href="{% url 'forum:favourites_post_save' post.id 2 %}" style="margin-left: 20px;" rel="noopener noreferrer"><i class="fas fa-star fa-lg icons-post-detail" style="cursor: pointer; color: #ff506f;"></i></a>
+              <a href="{% url 'forum:favourites_post_save' post.id 2 %}" style="margin-left: 20px;"><i class="fas fa-star fa-lg icons-post-detail" style="cursor: pointer; color: #ff506f;"></i></a>
             </div>
           {% else %}
             <div style="display: flex;">
-              <a href="{% url 'forum:favourites_post_save' post.id 1 %}" style="margin-left: 20px;" rel="noopener noreferrer"><i class="fas fa-star fa-lg icons-post-detail" style="cursor: pointer;"></i></a>
+              <a href="{% url 'forum:favourites_post_save' post.id 1 %}" style="margin-left: 20px;"><i class="fas fa-star fa-lg icons-post-detail" style="cursor: pointer;"></i></a>
             </div>
           {% endif %}
           {% include '../includes/paginator.html' %}
@@ -30,7 +30,7 @@
         </div>
         <div class="frame-main-posts">
           <div>
-            <a href="{% url 'forum:profile' post.author.username %}" rel="noopener noreferrer"><img class="frame-main-avatar" src="{{ post.author.avatar.url }}"></a>
+            <a href="{% url 'forum:profile' post.author.username %}"><img class="frame-main-avatar" src="{{ post.author.avatar.url }}"></a>
             {% if post.author.is_online == True %}
               <div class="online online-avatar-post-detail"></div>
             {% endif %}
@@ -38,7 +38,7 @@
           <div>
             <div style="display: flex;">
               <div style="margin: 0 auto 0 0;">
-                <a href="{% url 'forum:profile' post.author.username %}" style="text-decoration: none; cursor: pointer;" rel="noopener noreferrer">
+                <a href="{% url 'forum:profile' post.author.username %}" style="text-decoration: none; cursor: pointer;">
                   <label class="frame-main-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>{% if user.scam == True %}{% comment %}<abbr data-title="Скам">{% endcomment %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% comment %}</abbr>{% endcomment %}{% endif %}
                 </a>
               </div>
@@ -46,13 +46,13 @@
                 <div style="height: 30px; position: relative; z-index: 1;" class="window-main">
                   <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
                   <div class="window-other" style="right: 0;">
-                    <a href="{% url 'forum:post_edit' post.id %}" class="window-button-second" rel="noopener noreferrer">Редактировать запись</a>
-                    {% if post.closed == False %}
-                      <a href="{% url 'forum:post_oc' post.id 1 %}" class="window-button-second" rel="noopener noreferrer">Закрыть тему</a>
+                    <a href="{% url 'forum:post_edit' post.id %}" class="window-button-second">Редактировать запись</a>
+                    {% if post.closed == False and user.rank_lvl >= "4" %}
+                      <a href="{% url 'forum:post_oc' post.id 1 %}" class="window-button-second">Закрыть тему</a>
                     {% elif post.closed == True and user.rank_lvl >= "4" %}
-                      <a href="{% url 'forum:post_oc' post.id 2 %}" class="window-button-second" rel="noopener noreferrer">Открыть тему</a>
+                      <a href="{% url 'forum:post_oc' post.id 2 %}" class="window-button-second">Открыть тему</a>
                     {% endif %}
-                    <a href="{% url 'forum:post_delete' post.id %}" class="window-button-second" rel="noopener noreferrer">Удалить пост</a>
+                    <a href="{% url 'forum:post_delete' post.id %}" class="window-button-second">Удалить пост</a>
                   </div>
                 </div>
               {% endif %}
@@ -80,7 +80,7 @@
                 {% if user.username != post.author.username %}
                   {% if user.symps >= 20 or user.rank_lvl >= "4" or post.open_activities %}
                     <div class="comment-date" style="margin-top: 3px;">
-                      <a href="{% url 'forum:symps_add' post.id post.author.username %}" style="text-decoration: none;" rel="noopener noreferrer">
+                      <a href="{% url 'forum:symps_add' post.id post.author.username %}" style="text-decoration: none;">
                         {% if my_symp %}
                           <img src="{% static 'images/heart_pink_full.png' %}" class="symp-img"><label class="symp-label">{{ symps.count|bf_number }}</label>
                         {% else %}
@@ -97,7 +97,7 @@
               {% elif symps.count == 0 %}
                 {% if user.username != post.author.username %}
                   {% if user.symps >= 20 or user.rank_lvl >= "4" or post.open_activities %}
-                    <a href="{% url 'forum:symps_add' post.id post.author.username %}" rel="noopener noreferrer">
+                    <a href="{% url 'forum:symps_add' post.id post.author.username %}">
                       <img src="{% static 'images/heart_gray.png' %}" class="symp-img">
                     </a>
                   {% endif %}
@@ -107,7 +107,7 @@
                 {% if user.username != post.author.username %}
                   {% if user.symps >= 20 or user.rank_lvl >= "4" %}
                     <div class="comment-date" style="margin-top: 3px;">
-                      <a href="{% url 'forum:symps_add' post.id post.author.username %}" style="text-decoration: none;" rel="noopener noreferrer">
+                      <a href="{% url 'forum:symps_add' post.id post.author.username %}" style="text-decoration: none;">
                         {% if my_symp %}
                           <img src="{% static 'images/heart_pink_full.png' %}" class="symp-img"><label class="symp-label">{{ symps.count|bf_number }}</label>
                         {% else %}
@@ -124,7 +124,7 @@
               {% elif symps.count == 0 %}
                 {% if user.username != post.author.username %}
                   {% if user.symps >= 20 or user.rank_lvl >= "4" %}
-                    <a href="{% url 'forum:symps_add' post.id post.author.username %}" rel="noopener noreferrer">
+                    <a href="{% url 'forum:symps_add' post.id post.author.username %}">
                       <img src="{% static 'images/heart_gray.png' %}" class="symp-img">
                     </a>
                   {% endif %}
@@ -139,7 +139,7 @@
         {% for comment in comments %}
           <div class="frame-main-posts">
             <div>
-              <a href="{% url 'forum:profile' comment.author.username %}" rel="noopener noreferrer"><img class="frame-main-avatar" src="{{ comment.author.avatar.url }}"></a>
+              <a href="{% url 'forum:profile' comment.author.username %}"><img class="frame-main-avatar" src="{{ comment.author.avatar.url }}"></a>
               {% if comment.author.is_online == True %}
                 <div class="online online-avatar-post-detail"></div>
               {% endif %}
@@ -147,7 +147,7 @@
             <div>
               <div style="display: flex;">
                 <div style="margin: 0 auto 0 0;">
-                  <a href="{% url 'forum:profile' comment.author.username %}" style="text-decoration: none; cursor: pointer;" rel="noopener noreferrer">
+                  <a href="{% url 'forum:profile' comment.author.username %}" style="text-decoration: none; cursor: pointer;">
                     <label class="frame-main-username {% if comment.author.username_style != 'gray-un' and comment.author.rank != 'заблокирован' %}{{ comment.author.username_style }}{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ comment.author.username }}</label>{% if comment.user.scam == True %}{% comment %}<abbr data-title="Скам">{% endcomment %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% comment %}</abbr>{% endcomment %}{% endif %}
                   </a>
                 </div>
@@ -155,8 +155,8 @@
                   <div style="height: 30px;" class="window-main">
                     <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
                     <div class="window-other" style="right: 0; z-index: 1;">
-                      {% comment %} <a href="{% url 'forum:edit_comment' post.id comment.id %}" class="window-button-second" rel="noopener noreferrer">Редактировать комментарий</a> {% endcomment %}
-                      <a href="{% url 'forum:delete_comment' post.id comment.id %}" class="window-button-second" rel="noopener noreferrer">Удалить комментарий</a>
+                      {% comment %} <a href="{% url 'forum:edit_comment' post.id comment.id %}" class="window-button-second">Редактировать комментарий</a> {% endcomment %}
+                      <a href="{% url 'forum:delete_comment' post.id comment.id %}" class="window-button-second">Удалить комментарий</a>
                     </div>
                   </div>
                 {% endif %}
@@ -176,7 +176,7 @@
                   {% if user.username != comment.author.username %}
                     {% if user.symps >= 20 or user.rank_lvl >= "4" or post.open_activities %}
                       <div class="comment-date" style="margin-top: 3px;">
-                        <a href="{% url 'forum:symps_comment_add' post.id comment.id comment.author.username %}" style="text-decoration: none;" rel="noopener noreferrer">
+                        <a href="{% url 'forum:symps_comment_add' post.id comment.id comment.author.username %}" style="text-decoration: none;">
                           {% if my_symp %}
                             <img src="{% static 'images/heart_pink_full.png' %}" class="symp-img"><label class="symp-label">{{ symps.count|bf_number }}</label>
                           {% else %}
@@ -193,7 +193,7 @@
                 {% elif comment_symps.count == 0 %}
                   {% if user.username != comment.author.username %}
                     {% if user.symps >= 20 or user.rank_lvl >= "4" or post.open_activities %}
-                      <a href="{% url 'forum:symps_comment_add' post.id comment.id comment.author.username %}" rel="noopener noreferrer">
+                      <a href="{% url 'forum:symps_comment_add' post.id comment.id comment.author.username %}">
                         <img src="{% static 'images/heart_gray.png' %}" class="symp-img">
                       </a>
                     {% endif %}
@@ -201,7 +201,7 @@
                 {% endif %} {% endcomment %}
                 {% comment %} {% if user.symps >= 20 and user.username != comment.author.username %}
                   <div class="comment-date" style="margin-top: 3px;">
-                    <a href="{% url 'forum:symps_add' post.id comment.author.username %}" rel="noopener noreferrer">
+                    <a href="{% url 'forum:symps_add' post.id comment.author.username %}">
                       <img src="{% static 'images/heart_gray.png' %}" style="width: 25px; height: 23px;">
                     </a>
                   </div>
@@ -219,13 +219,13 @@
             <div style="display: block;">
               <div style="display: flex;">
                 <div style="margin: 0 auto 0 0;">
-                  <a href="{% url 'forum:profile' comment.author.username %}" class="frame-main-username {% if comment.author.username_style != 'gray-un' %}{{ comment.author.username_style }}{% endif %}" style="text-decoration: none;" rel="noopener noreferrer">{{ comment.author.username }}</a>
+                  <a href="{% url 'forum:profile' comment.author.username %}" class="frame-main-username {% if comment.author.username_style != 'gray-un' %}{{ comment.author.username_style }}{% endif %}" style="text-decoration: none;">{{ comment.author.username }}</a>
                 </div>
                 {% if user.username == post.author.username or user.rank == "владелец" or .user.rank == "гл. администратор" or user.rank == "администратор" or user.rank == "арбитр" or user.rank == "куратор" %}
                   <div style="height: 30px;" class="window-main">
                     <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
                     <div class="window-other" style="right: 0; width: 220px;">
-                      <a href="{% url 'forum:delete_comment' comment.id %}" class="window-button-second" rel="noopener noreferrer">Удалить комментарий</a>
+                      <a href="{% url 'forum:delete_comment' comment.id %}" class="window-button-second">Удалить комментарий</a>
                     </div>
                   </div>
                 {% endif %}
@@ -239,7 +239,7 @@
                 </div>
                 {% if user.symps >= 20 and user.username != comment.author.username %}
                   <div class="comment-date" style="margin-top: 3px;">
-                    <a href="{% url 'forum:symps_add' post.id %}" rel="noopener noreferrer">
+                    <a href="{% url 'forum:symps_add' post.id %}">
                       <img src="{% static 'images/heart_pink.png' %}" style="width: 25px; height: 23px; margin: 5px;">
                     </a>
                   </div>
@@ -259,7 +259,7 @@
               {% csrf_token %}
               <div style="display: flex;">
                 <div>
-                  <a href="{% url 'forum:profile' user %}" rel="noopener noreferrer"><img class="frame-main-avatar" style="width: 40px; height: 40px; margin: 0;" src="{{ user.avatar.url }}"></a>
+                  <a href="{% url 'forum:profile' user %}"><img class="frame-main-avatar" style="width: 40px; height: 40px; margin: 0;" src="{{ user.avatar.url }}"></a>
                 </div>
                 <div style="display: flex;">
                   <div>
@@ -276,7 +276,7 @@
                 {% csrf_token %}
                 <div style="display: flex;">
                   <div>
-                    <a href="{% url 'forum:profile' user %}" rel="noopener noreferrer"><img class="frame-main-avatar" style="width: 40px; height: 40px; margin: 0;" src="{{ user.avatar.url }}"></a>
+                    <a href="{% url 'forum:profile' user %}"><img class="frame-main-avatar" style="width: 40px; height: 40px; margin: 0;" src="{{ user.avatar.url }}"></a>
                   </div>
                   <div style="display: flex;">
                     <div>

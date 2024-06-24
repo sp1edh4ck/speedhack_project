@@ -26,21 +26,21 @@
           {% csrf_token %}
           {% for field in form %}
             {% if field.label == "Группа" %}
-              <div style="display: flex;">
+              <div style="display: block;">
                 <label class="field-label">{{ field.label }}</label>
-                <label style="color: #444444; font-size: 20px; height: 40px;">(выберете тему поста)</label>
+                <div style="color: #666666; font-size: 18px; height: 40px;">Выберете тему поста</div>
               </div>
               {{ field|addclass:"field field-height width-fix" }}
             {% elif field.label == "Заголовок" %}
-              <div style="display: flex;">
+              <div style="display: block;">
                 <label class="field-label">{{ field.label }}</label>
-                <label style="color: #444444; font-size: 20px; height: 40px;">(опишите суть вашего поста)</label>
+                <label style="color: #666666; font-size: 18px; height: 40px;">Будьте конкретны. Представьте, что вы задаёте вопрос другому человеку.</label>
               </div>
               {{ field|addclass:"field field-height" }}
             {% elif field.label == "Текст" %}
-              <div style="display: flex;">
+              <div style="display: block;">
                 <label class="field-label">{{ field.label }}</label>
-                <label style="color: #444444; font-size: 20px; height: 40px;">(напишите ваш пост)</label>
+                <label style="color: #666666; font-size: 18px; height: 40px;">Напишите ваш пост</label>
               </div>
               <script>
                 let textarea = document.querySelector('textarea');
@@ -48,9 +48,9 @@
               </script>
               {{ field|addclass:"field" }}
             {% elif field.label == "Картинка" %}
-              <div style="display: flex;">
+              <div style="display: block;">
                 <label class="field-label">{{ field.label }}</label>
-                <label style="color: #444444; font-size: 20px; height: 40px;">(вставьте картинку по желанию)</label>
+                <label style="color: #666666; font-size: 18px; height: 40px;">Вставьте картинку по желанию</label>
               </div>
               <label class="input-file">
                 <span class="input-file-text" type="text"></span>
@@ -63,9 +63,45 @@
                   $(this).closest('.input-file').find('.input-file-text').html(file.name);
                 });
               </script>
+            {% elif field.label == "Отключить оповещения" %}
+              <div class="small-label-post-create">Настройки:</div>
+              <div style="display: flex; margin-bottom: 5px;">
+                <label class="checkbox style-c">
+                  <input type="checkbox" name="notification" id="id_notification" {% if post.notification == True %}checked{% endif %}>
+                  <div class="checkbox__checkmark"></div>
+                </label>
+                <label class="field-label-help">Не оповещать подписчиков о создании темы</label>
+              </div>
+            {% elif field.label == "Скрыть контакты" %}
+              <div style="display: flex; margin-bottom: 5px;">
+                {% comment %} {{ field }} {% endcomment %}
+                <label class="checkbox style-c">
+                  <input type="checkbox" name="hide" id="id_hide" {% if post.hide == True %}checked{% endif %}>
+                  <div class="checkbox__checkmark"></div>
+                </label>
+                <label class="field-label-help">Скрывать контакты в теме</label>
+              </div>
+            {% elif field.label == "Разрешение на запрос личного" %}
+              <div style="display: flex; margin-bottom: 5px;">
+                {% comment %} {{ field }} {% endcomment %}
+                <label class="checkbox style-c">
+                  <input type="checkbox" name="permission" id="id_permission" {% if post.permission == True %}checked{% endif %}>
+                  <div class="checkbox__checkmark"></div>
+                </label>
+                <label class="field-label-help">Разрешить просить "Личный" (если есть "хайд" в теме)</label>
+              </div>
+            {% elif field.label == "Подписка на тему" %}
+              <div style="display: flex; margin-bottom: 20px;">
+                {% comment %} {{ field }} {% endcomment %}
+                <label class="checkbox style-c">
+                  <input type="checkbox" name="subscribe" id="id_subscribe" {% if post.subscribe == True %}checked{% endif %}>
+                  <div class="checkbox__checkmark"></div>
+                </label>
+                <label class="field-label-help">Подписаться на тему</label>
+              </div>
             {% elif field.label == "Закрытая тема" %}
               {% if user.rank_lvl >= "4" %}
-                <div class="small-label-post-create">Настройки:</div>
+                <div class="small-label-post-create">Админ-настройки:</div>
                 <div style="display: flex; margin-bottom: 5px;">
                   <label class="checkbox style-c">
                     <input type="checkbox" name="closed" id="id_closed" {% if post.closed == True %}checked{% endif %}>

@@ -60,6 +60,10 @@ class Helper(models.Model):
         verbose_name='Куратор',
     )
 
+    class Meta:
+        verbose_name = 'Куратор'
+        verbose_name_plural = 'Кураторы'
+
 
 class Ads(models.Model):
     title = models.CharField(verbose_name='Заголовок', max_length=100,)
@@ -82,7 +86,7 @@ class Forum(models.Model):
         related_name='posts',
         verbose_name='Группа',
     )
-    title = models.CharField(verbose_name='Заголовок', max_length=55)
+    title = models.CharField(verbose_name='Заголовок', max_length=100)
     text = models.TextField(verbose_name='Текст', max_length=5000)
     pub_date = models.DateTimeField(verbose_name='Дата', auto_now_add=True,)
     author = models.ForeignKey(
@@ -95,6 +99,22 @@ class Forum(models.Model):
         verbose_name='Картинка',
         upload_to='posts/',
         blank=True,
+    )
+    notification = models.BooleanField(
+        verbose_name='Отключить оповещения',
+        default=False,
+    )
+    hide = models.BooleanField(
+        verbose_name='Скрыть контакты',
+        default=False,
+    )
+    permission = models.BooleanField(
+        verbose_name='Разрешение на запрос личного',
+        default=False,
+    )
+    subscribe = models.BooleanField(
+        verbose_name='Подписка на тему',
+        default=False,
     )
     closed = models.BooleanField(
         verbose_name='Закрытая тема',
@@ -196,6 +216,11 @@ class Viewer(models.Model):
         related_name='viewers',
         verbose_name='Пользователь',
     )
+    data = models.DateTimeField(verbose_name="Дата просмотра", auto_now_add=True,)
+
+    class Meta:
+        verbose_name = 'Пользователь посмотревший пост'
+        verbose_name_plural = 'Пользователи посмотревшие посты'
 
 
 class Like(models.Model):
@@ -457,6 +482,10 @@ class BanIp(models.Model):
     attempts = models.IntegerField(verbose_name='Неудачных попыток', default=0,)
     time_unblock = models.DateTimeField(verbose_name='Время разблокировки', blank=True,)
     status = models.BooleanField(verbose_name='Статус блокировки', default=False,)
+
+    class Meta:
+        verbose_name = 'Забаненый IP'
+        verbose_name_plural = 'Забаненые IP'
 
     def __str__(self):
         return self.ip_address

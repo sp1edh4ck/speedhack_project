@@ -28,7 +28,7 @@
 
 .field-height {
   height: 40px;
-  padding-left: 15px;
+  padding: 0 10px;
 }
 
 textarea {

@@ -5,26 +5,26 @@
   <div class="main">
     <div class="frames_con" style="display: block;">
       <div style="margin-bottom: 20px;">
-        <label class="link-title"><a href="{% url 'market:index' %}" class="link-title-main" rel="noopener noreferrer">Маркет</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'market:group_free' group.slug %}" class="link-title-main">{{ group.title }}</a></label>
+        <label class="link-title"><a href="{% url 'market:index' %}" class="link-title-main">Маркет</a> <label style="margin: 0 5px 0 5px;">/</label> <a href="{% url 'market:group_free' group.slug %}" class="link-title-main">{{ group.title }}</a></label>
       </div>
       <div style="display: flex;">
         <div style="display: block;">
           <div class="market-sell">
-            <a href="{% url 'market:acc_sell' %}" class="market-sell-button" rel="noopener noreferrer">Продать аккаунт</a>
+            <a href="{% url 'market:acc_sell' %}" class="market-sell-button">Продать аккаунт</a>
           </div>
           <div class="market-main-left">
             <a href="https://t.me/sp1edh4ck" class="market-link-left" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-question fa-lg icon-market-left"></i>Нужна помощь</a>
-            <a href="{% url 'market:rules' %}" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-book fa-lg icon-market-left"></i>Правила и гарантии</a>
-            <a href="{% url 'forum:group_filter_posts' 111 %}" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-sheet-plastic fa-lg icon-market-left"></i>Советы и гайды</a>
+            <a href="{% url 'market:rules' %}" class="market-link-left"><i class="fa-solid fa-book fa-lg icon-market-left"></i>Правила и гарантии</a>
+            <a href="{% url 'forum:group_filter_posts' 111 %}" class="market-link-left"><i class="fa-solid fa-sheet-plastic fa-lg icon-market-left"></i>Советы и гайды</a>
             <a href="" class="market-link-left"><i class="fa-solid fa-gear fa-lg icon-market-left"></i>Настройки маркета</a>
-            <a href="{% url 'forum:profile_upgrade' request.user %}" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-angles-up fa-lg icon-market-left"></i>Повышение статуса</a>
+            <a href="{% url 'forum:profile_upgrade' request.user %}" class="market-link-left"><i class="fa-solid fa-angles-up fa-lg icon-market-left"></i>Повышение статуса</a>
             <hr style="margin: 5px 0px; border: 1px solid #444444;">
-            <a href="{% url 'forum:post_detail' 19 %}" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-newspaper fa-lg icon-market-left"></i>Изменения на сайте</a>
-            <a href="{% url 'forum:group_filter_posts' 108 %}" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-flag fa-lg icon-market-left"></i>Сообщить о баге</a>
-            <a href="{% url 'forum:group_filter_posts' 109 %}" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-circle-info fa-lg icon-market-left"></i>Предложить идею</a>
-            <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-code fa-lg icon-market-left"></i>API для разработчика</a>
+            <a href="{% url 'forum:post_detail' 19 %}" class="market-link-left"><i class="fa-solid fa-newspaper fa-lg icon-market-left"></i>Изменения на сайте</a>
+            <a href="{% url 'forum:group_filter_posts' 108 %}" class="market-link-left"><i class="fa-solid fa-flag fa-lg icon-market-left"></i>Сообщить о баге</a>
+            <a href="{% url 'forum:group_filter_posts' 109 %}" class="market-link-left"><i class="fa-solid fa-circle-info fa-lg icon-market-left"></i>Предложить идею</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-code fa-lg icon-market-left"></i>API для разработчика</a>
             <hr style="margin: 5px 0px; border: 1px solid #444444;">
-            <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-money-bill-trend-up fa-lg icon-market-left"></i>Стоимость инвентаря steam</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-money-bill-trend-up fa-lg icon-market-left"></i>Стоимость инвентаря steam</a>
           </div>
           <div class="market-main-left" style="margin-top: 15px; height: 465px;">
             <label class="market-link-left mll-fix">
@@ -37,18 +37,18 @@
                 </div>
               </div>
             </label>
-            <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-circle-plus fa-lg icon-market-left"></i>Пополнить баланс</a>
-            <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-circle-minus fa-lg icon-market-left"></i>Вывести средства</a>
-            <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-money-bill-transfer fa-lg icon-market-left"></i>Перевести средства</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-circle-plus fa-lg icon-market-left"></i>Пополнить баланс</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-circle-minus fa-lg icon-market-left"></i>Вывести средства</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-money-bill-transfer fa-lg icon-market-left"></i>Перевести средства</a>
             <hr style="margin: 5px 0px; border: 1px solid #444444;">
-            <a href="{% url 'market:my_accs' %}" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-shop fa-lg icon-market-left"></i>Мои аккаунты</a>
-            <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-bag-shopping fa-lg icon-market-left"></i>Мои покупки</a>
-            <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-bars-staggered icon-market-left"></i>Мои операции</a>
-            <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-bookmark fa-lg icon-market-left"></i>Избранное</a>
-            <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-tag fa-lg icon-market-left"></i>Метки</a>
-            <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-user-xmark fa-lg icon-market-left"></i>Игнор-лист продавцов</a>
-            <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-comments-dollar fa-lg icon-market-left"></i>Мои денежные споры</a>
-            <a href="" class="market-link-left" rel="noopener noreferrer"><i class="fa-solid fa-retweet fa-lg icon-market-left"></i>Автоплатежи</a>
+            <a href="{% url 'market:my_accs' %}" class="market-link-left"><i class="fa-solid fa-shop fa-lg icon-market-left"></i>Мои аккаунты</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-bag-shopping fa-lg icon-market-left"></i>Мои покупки</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-bars-staggered icon-market-left"></i>Мои операции</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-bookmark fa-lg icon-market-left"></i>Избранное</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-tag fa-lg icon-market-left"></i>Метки</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-user-xmark fa-lg icon-market-left"></i>Игнор-лист продавцов</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-comments-dollar fa-lg icon-market-left"></i>Мои денежные споры</a>
+            <a href="" class="market-link-left"><i class="fa-solid fa-retweet fa-lg icon-market-left"></i>Автоплатежи</a>
           </div>
         </div>
         <div>
@@ -56,22 +56,22 @@
             <label style="color: #d6d6d6; font-size: 20px;">Выберите категорию</label>
             <div style="margin-top: 20px;" class="ger">
               <h2>
-                <a class="a-png" href="{% url 'market:group_free' 'steam' %}" rel="noopener noreferrer">
+                <a class="a-png" href="{% url 'market:group_free' 'steam' %}">
                   <img src="{% static 'images/steam.png' %}" class="market-png-cat">
                 </a>
               </h2>
               <h2>
-                <a class="a-png" href="{% url 'market:group_free' 'ea' %}" rel="noopener noreferrer">
+                <a class="a-png" href="{% url 'market:group_free' 'ea' %}">
                   <img src="{% static 'images/ea.png' %}" class="market-png-cat">
                 </a>
               </h2>
               <h2>
-                <a class="a-png" href="{% url 'market:group_free' 'vk' %}" rel="noopener noreferrer">
+                <a class="a-png" href="{% url 'market:group_free' 'vk' %}">
                   <img src="{% static 'images/vk.png' %}" class="market-png-cat">
                 </a>
               </h2>
               <h2>
-                <a class="a-png" href="{% url 'market:group_free' 'telegram' %}" rel="noopener noreferrer">
+                <a class="a-png" href="{% url 'market:group_free' 'telegram' %}">
                   <img src="{% static 'images/telegram.png' %}" class="market-png-cat">
                 </a>
               </h2>
@@ -84,7 +84,7 @@
                 {% if acc.buyer == None %}
                   {% if acc.author.rank != 'заблокирован' %}
                     <div class="market-accs" style="margin-top: 10px;">
-                      <a style="text-decoration: none;" href="{% url 'market:acc_detail' acc.id %}" rel="noopener noreferrer">
+                      <a style="text-decoration: none;" href="{% url 'market:acc_detail' acc.id %}">
                         <div class="text-frame">
                           <div class="text-frame-div" style="margin: 0 auto 0 0;">
                             <label class="text-frame-title">{{ acc.title }}</label><br>

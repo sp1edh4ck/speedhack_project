@@ -20,9 +20,9 @@
                 </div>
                 <div>
                   {% if user.balance >= 100 %}
-                    <a href="{% url 'forum:upgrade' user.username 1 %}" class="button-save" rel="noopener noreferrer">Купить</a>
+                    <a href="{% url 'forum:upgrade' user.username 1 %}" class="button-save">Купить</a>
                   {% else %}
-                    <a class="button-save a-fix-width" rel="noopener noreferrer">Пополнить баланс</a>
+                    <a class="button-save a-fix-width">Пополнить баланс</a>
                   {% endif %}
                 </div>
               </div>
@@ -40,9 +40,9 @@
                 </div>
                 <div>
                   {% if user.balance >= 100 %}
-                    <a href="{% url 'forum:upgrade' user.username 2 %}" class="button-save" rel="noopener noreferrer">Купить</a>
+                    <a href="{% url 'forum:upgrade' user.username 2 %}" class="button-save">Купить</a>
                   {% else %}
-                    <a class="button-save a-fix-width" rel="noopener noreferrer">Пополнить баланс</a>
+                    <a class="button-save a-fix-width">Пополнить баланс</a>
                   {% endif %}
                 </div>
               </div>
@@ -62,9 +62,9 @@
                 </div>
                 <div>
                   {% if user.balance >= 2999 %}
-                    <a href="{% url 'forum:upgrade' user.username 3 %}" class="button-save" rel="noopener noreferrer">Купить</a>
+                    <a href="{% url 'forum:upgrade' user.username 3 %}" class="button-save">Купить</a>
                   {% else %}
-                    <a class="button-save a-fix-width" rel="noopener noreferrer">Пополнить баланс</a>
+                    <a class="button-save a-fix-width">Пополнить баланс</a>
                   {% endif %}
                 </div>
               </div>
@@ -86,9 +86,9 @@
                 </div>
                 <div>
                   {% if user.balance >= 1499 %}
-                    <a href="{% url 'forum:upgrade' user.username 4 %}" class="button-save" rel="noopener noreferrer">Купить</a>
+                    <a href="{% url 'forum:upgrade' user.username 4 %}" class="button-save">Купить</a>
                   {% else %}
-                    <a class="button-save a-fix-width" rel="noopener noreferrer">Пополнить баланс</a>
+                    <a class="button-save a-fix-width">Пополнить баланс</a>
                   {% endif %}
                 </div>
               </div>
@@ -114,9 +114,9 @@
                 </div>
                 <div>
                   {% if user.balance >= 7500 %}
-                    <a href="{% url 'forum:upgrade' user.username 5 %}" class="button-save" rel="noopener noreferrer">Купить</a>
+                    <a href="{% url 'forum:upgrade' user.username 5 %}" class="button-save">Купить</a>
                   {% else %}
-                    <a class="button-save a-fix-width" rel="noopener noreferrer">Пополнить баланс</a>
+                    <a class="button-save a-fix-width">Пополнить баланс</a>
                   {% endif %}
                 </div>
               </div>
@@ -129,17 +129,17 @@
         </div>
       </div>
       <div class="switch-profile-edit">
-        <a href="{% url 'forum:profile_info_edit' user.username %}" class="switch-button-profile-edit" rel="noopener noreferrer">Персональная информация</a>
-        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit" rel="noopener noreferrer">Контактная информация</a> {% endcomment %}
-        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit" rel="noopener noreferrer">Предпочтения</a> {% endcomment %}
-        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit" rel="noopener noreferrer">Приватность</a> {% endcomment %}
-        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit" rel="noopener noreferrer">Настройка оповещений</a> {% endcomment %}
-        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit" rel="noopener noreferrer">Чёрный список</a> {% endcomment %}
-        <a href="{% url 'forum:profile_upgrade' user.username %}" class="switch-button-profile-edit active-tab" rel="noopener noreferrer">Повышение статуса</a>
-        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit" rel="noopener noreferrer">Учётные записи</a> {% endcomment %}
-        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit" rel="noopener noreferrer">Безопасность</a> {% endcomment %}
-        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit" rel="noopener noreferrer">API для разработчика</a> {% endcomment %}
-        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit" rel="noopener noreferrer">Настройки маркета</a> {% endcomment %}
+        <a href="{% url 'forum:profile_info_edit' user.username %}" class="switch-button-profile-edit">Персональная информация</a>
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Контактная информация</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Предпочтения</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Приватность</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройка оповещений</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Чёрный список</a> {% endcomment %}
+        <a href="{% url 'forum:profile_upgrade' user.username %}" class="switch-button-profile-edit active-tab">Повышение статуса</a>
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Учётные записи</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Безопасность</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">API для разработчика</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройки маркета</a> {% endcomment %}
       </div>
     </div>
   </div>

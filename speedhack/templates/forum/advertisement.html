@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}speedhack / гарант{% endblock %}
+{% load static %}
+{% block content %}
+  <div class="main">
+    <div class="ads_con">
+      <div class="ads-main-div">
+        <div style="color: #ffffff; font-size: 24px;">Реклама на форуме</div>
+        <div class="ads-main-div-content">
+        </div>
+      </div>
+      <div class="ads-main-div">
+        <div style="color: #ffffff; font-size: 24px; font-weight: bold; margin-bottom: 10px;">Наша статистика</div>
+        <div style="color: #949494; font-size: 18px; margin-bottom: 20px;">Актуальная общая статистика форума</div>
+        <div class="ads-main-div-content">
+          <div class="ads-cart">
+            <div class="ads-block-title">{{ users_list_count }}</div>
+            <div class="ads-block-text">Пользователей</div>
+          </div>
+          <div class="ads-cart">
+            <div class="ads-block-title">{{ posts_count }}</div>
+            <div class="ads-block-text">Созданных тем</div>
+          </div>
+          <div class="ads-cart">
+            <div class="ads-block-title">{{ messages_count }}</div>
+            <div class="ads-block-text">Сообщений</div>
+          </div>
+          {% comment %} <div class="ads-cart">
+            <div></div>
+            <div></div>
+          </div> {% endcomment %}
+        </div>
+      </div>
+      <div class="ads-main-div">
+        <div style="color: #ffffff; font-size: 24px;">График посещений и страны посетителей форума за май 2023 года</div>
+        <div class="ads-main-div-content">
+        </div>
+      </div>
+      <div class="ads-main-div">
+        <div style="color: #ffffff; font-size: 24px;">Варианты размещения рекламы на форуме</div>
+        <div class="ads-main-div-content">
+        </div>
+      </div>
+      <div class="ads-main-div">
+        <div style="color: #ffffff; font-size: 24px;">Реклама в Telegram</div>
+        <div class="ads-main-div-content">
+        </div>
+      </div>
+      <div class="ads-main-div">
+        <div style="color: #ffffff; font-size: 24px;">Статистика Telegram каналов</div>
+        <div class="ads-main-div-content">
+        </div>
+      </div>
+      <div class="ads-main-div">
+        <div style="color: #ffffff; font-size: 24px;">Варианты размещения рекламы в Telegram</div>
+        <div class="ads-main-div-content">
+        </div>
+      </div>
+      <div class="ads-main-div">
+        <div style="color: #ffffff; font-size: 24px;">Реклама в ВКонтакте</div>
+        <div class="ads-main-div-content">
+        </div>
+      </div>
+      <div class="ads-main-div">
+        <div style="color: #ffffff; font-size: 24px;">Наши предложения</div>
+        <div class="ads-main-div-content">
+        </div>
+      </div>
+      <div class="ads-main-div">
+        <div style="color: #ffffff; font-size: 24px;">Варианты размещения рекламы в группе ВКонтакте</div>
+        <div class="ads-main-div-content">
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -5,21 +5,21 @@
 {% block content %}
   <div class="main">
     <div class="frame_con" style="display: block;">
-      <label class="link-title"><a href="{% url 'forum:index' %}" class="link-title-main" rel="noopener noreferrer">Форум</a> <label style="margin: 0 5px;">/</label> <a href="{% url 'forum:profile' author.username %}" class="link-title-main" rel="noopener noreferrer">{{ author.username }}</a></label>
+      <label class="link-title"><a href="{% url 'forum:index' %}" class="link-title-main">Форум</a> <label style="margin: 0 5px;">/</label> <a href="{% url 'forum:profile' author.username %}" class="link-title-main">{{ author.username }}</a></label>
       <div class="user-symps-frame">
         <div>
           {% if user_subscriptions.count != 0 %}
             {% for user_subscription in user_subscriptions %}
               <div class="users-div" style="{% if user_subscription.user.description != '' %}min-height: 100px;{% endif %}">
                 <div style="padding: 10px 0 10px 10px;">
-                  <a class="a-users" href="{% url 'forum:profile' user_subscription.author.username %}" rel="noopener noreferrer">
+                  <a class="a-users" href="{% url 'forum:profile' user_subscription.author.username %}">
                     <img style="width: 60px; border-radius: 50px;" src="{{ user_subscription.author.avatar.url }}">
                   </a>
                 </div>
                 <div style="margin-left: 20px; padding: 10px 0 10px 0;">
                   <div style="display: flex;">
                     <div style="margin: 0;">
-                      <a href="{% url 'forum:profile' user_subscription.author.username %}" style="text-decoration: none; cursor: pointer;" rel="noopener noreferrer">
+                      <a href="{% url 'forum:profile' user_subscription.author.username %}" style="text-decoration: none; cursor: pointer;">
                         <label class="users-un {% if user_subscription.author.username_style != 'gray-un' and user_subscription.author.rank != 'заблокирован' %}{{ user_subscription.author.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} {% if user_subscription.author.username == "root" %}style="color: red;"{% endif %}>{{ user_subscription.author.username }}</label>
                       </a>
                       <div style="color: #909090; margin: 3px 0;">

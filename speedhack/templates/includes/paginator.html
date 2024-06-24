@@ -3,23 +3,23 @@
     <ul class="pagination">
       {% if objects.has_previous %}
         <li class="page-item">
-          <a class="page-link" href="?page=1" rel="noopener noreferrer">Первая</a>
+          <a class="page-link" href="?page=1">Первая</a>
         </li>
       {% endif %}
       {% for i in objects.paginator.page_range %}
         {% if objects.number == i and objects.number != 1 %}
           <li class="page-item active">
-            <a class="page-link" href="?page={{ i }}" rel="noopener noreferrer">{{ i }}</a>
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
           </li>
         {% else %}
           <li class="page-item">
-            <a class="page-link" href="?page={{ i }}" rel="noopener noreferrer">{{ i }}</a>
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
           </li>
         {% endif %}
       {% endfor %}
       {% if objects.has_next %}
         <li class="page-item">
-          <a class="page-link" href="?page={{ objects.paginator.num_pages }}" rel="noopener noreferrer">Последняя</a>
+          <a class="page-link" href="?page={{ objects.paginator.num_pages }}">Последняя</a>
         </li>
       {% endif %}
     </ul>

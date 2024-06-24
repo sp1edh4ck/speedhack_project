@@ -2,21 +2,21 @@
 {% load user_filters %}
 <header class="header">
   <div class="header_con">
-    <a href="/" rel="noopener noreferrer"><img class="brandLogo" src="{% static 'images/speedhack_logo.png' %}" alt="speedhack"></a>
+    <a href="/"><img class="brandLogo" src="{% static 'images/speedhack_logo.png' %}" alt="speedhack"></a>
     <i class="fa-solid fa-grip-lines fa-2xl icon-burger"></i>
     <div class="header-menu" id="menu">
       <ul class="menu-list">
-        <li class="menu-item"><a href="{% url 'forum:index' %}" class="menu-link" rel="noopener noreferrer">Форум</a></li>
-        {% comment %} <li class="menu-item"><a href="{% url 'market:index' %}" class="menu-link" rel="noopener noreferrer">Маркет</a></li> {% endcomment %}
-        <li class="menu-item"><a href="{% url 'forum:guarantor' %}" class="menu-link" rel="noopener noreferrer">Гарант</a></li>
+        <li class="menu-item"><a href="{% url 'forum:index' %}" class="menu-link">Форум</a></li>
+        {% comment %} <li class="menu-item"><a href="{% url 'market:index' %}" class="menu-link">Маркет</a></li> {% endcomment %}
+        <li class="menu-item"><a href="{% url 'forum:guarantor' %}" class="menu-link">Гарант</a></li>
         <li class="menu-item">
           <div class="window-main">
             <a class="window-button">Соц. сети <i class="fas fa-angle-down fa-sm icons-header"></i></a>
             <div style="padding-top: 10px;">
               <div class="window-other">
-                <a href="https://t.me/speedhack_project" target="_blank" class="window-button-second" rel="noopener noreferrer">Канал в Telegram</a>
-                <a href="https://vk.com/speedhack_project" target="_blank" class="window-button-second" rel="noopener noreferrer">Группа ВКонтакте</a>
-                <a href="https://discord.gg/HH8bCVsyTf" target="_blank" class="window-button-second" rel="noopener noreferrer">Discord сервер</a>
+                <a href="https://t.me/speedhack_project" target="_blank" rel="noopener noreferrer" class="window-button-second">Канал в Telegram</a>
+                <a href="https://vk.com/speedhack_project" target="_blank" rel="noopener noreferrer" class="window-button-second">Группа ВКонтакте</a>
+                <a href="https://discord.gg/HH8bCVsyTf" target="_blank" rel="noopener noreferrer" class="window-button-second">Discord сервер</a>
               </div>
             </div>
           </div>
@@ -26,17 +26,17 @@
             <a class="window-button">Другое <i class="fa fa-angle-down fa-sm icons-header"></i></a>
             <div style="padding-top: 10px;">
               <div class="window-other">
-                <a href="{% url 'forum:ticket_form' %}" class="window-button-second" rel="noopener noreferrer">Нужна помощь?</a>
-                <a href="{% url 'forum:users' %}" class="window-button-second" rel="noopener noreferrer">Пользователи</a>
-                <a href="{% url 'forum:faq' %}" class="window-button-second" rel="noopener noreferrer">FAQ</a>
-                <a href="{% url 'forum:rules' %}" class="window-button-second" rel="noopener noreferrer">Правила форума</a>
-                <a href="{% url 'forum:post_detail' 2 %}" class="window-button-second" rel="noopener noreferrer">Реклама</a>
+                <a href="{% url 'forum:ticket_form' %}" class="window-button-second">Нужна помощь?</a>
+                <a href="{% url 'forum:users' %}" class="window-button-second">Пользователи</a>
+                <a href="{% url 'forum:faq' %}" class="window-button-second">FAQ</a>
+                <a href="{% url 'forum:rules' %}" class="window-button-second">Правила форума</a>
+                <a href="{% url 'forum:advertisement' %}" class="window-button-second">Реклама</a>
               </div>
             </div>
           </div>
         </li>
         {% if request.user.rank_lvl >= "4" %}
-          <li class="menu-item"><a href="{% url 'forum:admin_panel' %}" class="menu-link" rel="noopener noreferrer">Админка</a></li>
+          <li class="menu-item"><a href="{% url 'forum:admin_panel' %}" class="menu-link">Админка</a></li>
         {% endif %}
       </ul>
     </div>
@@ -45,7 +45,7 @@
       <div class="window-main">
         <div class="window-button" style="display: flex;">
           <div style="margin-right: 10px;">
-            <a class="{% if request.user.username_style != 'gray-un' and request.user.rank != 'заблокирован' %}{{ request.user.username_style }}{% endif %}" {% if request.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %} rel="noopener noreferrer">{{ request.user }}</a>
+            <a class="{% if request.user.username_style != 'gray-un' and request.user.rank != 'заблокирован' %}{{ request.user.username_style }}{% endif %}" {% if request.user.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ request.user }}</a>
           </div>
           <div class="user-avatar-header-first">
             <img class="user-avatar-header" src="{{ request.user.avatar.url }}" >
@@ -53,29 +53,29 @@
         </div>
         <div style="padding-top: 10px;">
           <div class="window-other" style="right: 0;">
-            <a class="window-button-second" href="{% url 'forum:profile' user.username %}" rel="noopener noreferrer">Мой профиль</a>
+            <a class="window-button-second" href="{% url 'forum:profile' user.username %}">Мой профиль</a>
             <hr style="margin: 5px 0px; border: 1px solid #444444;">
             <a class="window-button-second">Баланс: {{ user.balance|bf_number }} <i class="fas fa-ruble-sign fa-lg icon-rub"></i></a>
-            {% comment %} <a class="window-button-second" href="{% url 'market:my_accs' %}" rel="noopener noreferrer">Мои аккаунты</a> {% endcomment %}
-            {% comment %} <a class="window-button-second" href="{% url 'market:my_buy_accs' %}" rel="noopener noreferrer">Мои покупки</a> {% endcomment %}
+            {% comment %} <a class="window-button-second" href="{% url 'market:my_accs' %}">Мои аккаунты</a> {% endcomment %}
+            {% comment %} <a class="window-button-second" href="{% url 'market:my_buy_accs' %}">Мои покупки</a> {% endcomment %}
             <hr style="margin: 5px 0px; border: 1px solid #444444;">
-            <a class="window-button-second" href="{% url 'forum:my_topics' %}" rel="noopener noreferrer">Мои темы</a>
-            <a class="window-button-second" href="{% url 'forum:my_tickets' request.user.username %}" rel="noopener noreferrer">Мои тикеты</a>
-            <a class="window-button-second" href="{% url 'forum:profile_info_edit' user.username %}" rel="noopener noreferrer">Настройки профиля</a>
-            {% comment %} <a class="window-button-second" href="#" rel="noopener noreferrer">Switch to English</a> {% endcomment %}
+            <a class="window-button-second" href="{% url 'forum:my_topics' %}">Мои темы</a>
+            <a class="window-button-second" href="{% url 'forum:my_tickets' request.user.username %}">Мои тикеты</a>
+            <a class="window-button-second" href="{% url 'forum:profile_info_edit' user.username %}">Настройки профиля</a>
+            {% comment %} <a class="window-button-second" href="#">Switch to English</a> {% endcomment %}
             <hr style="margin: 5px 0px; border: 1px solid #444444;">
             <form method="post" action="{% url 'users:logout' %}">
               {% csrf_token %}
               <button class="window-button-bb" type="submit">Выйти</button>
             </form>
-            {% comment %} <a class="window-button-second" href="{% url 'users:logout' %}" rel="noopener noreferrer">Выйти</a> {% endcomment %}
+            {% comment %} <a class="window-button-second" href="{% url 'users:logout' %}">Выйти</a> {% endcomment %}
           </div>
         </div>
       </div>
     {% else %}
       <div>
-        <a href="{% url 'users:login' %}" class="button" style="font-weight: bold;" rel="noopener noreferrer">Логин</a>
-        <a href="{% url 'users:signup' %}" class="button-off" style="font-weight: bold;" rel="noopener noreferrer">Регистрация</a>
+        <a href="{% url 'users:login' %}" class="button" style="font-weight: bold;">Логин</a>
+        <a href="{% url 'users:signup' %}" class="button-off" style="font-weight: bold;">Регистрация</a>
       </div>
     {% endif %}
   </div>

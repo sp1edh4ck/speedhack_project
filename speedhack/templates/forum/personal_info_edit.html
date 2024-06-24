@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}speedhack / редактирование профиля{% endblock %}
+{% load user_filters %}
+{% block content %}
+  <div class="main">
+    <div class="frame-profile_edit_con">
+      <div class="tabItem profile-edit">
+        <form method="post" action="{{ request.path }}" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div style="background: #242424b6; border-radius: 10px;">
+            <div style="display: flex; padding-top: 20px;">
+              <div class="profile-edit-div">
+                <label>Статус:</label>
+              </div>
+              <div style="display: block;">
+                <div>
+                  {{ form.description|addclass:"profile-edit-field profile-edit-field-height" }}
+                </div>
+                <div style="margin-top: 5px; color: gray;">
+                  <label>Отображается рядом с вашим ником в сообщениях.</label>
+                </div>
+              </div>
+            </div>
+            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            <div style="display: flex;">
+              <div class="profile-edit-div">
+                <label>Telegram:</label>
+              </div>
+              <div style="display: block;">
+                <div>
+                  {{ form.tg_link|addclass:"profile-edit-field profile-edit-field-height" }}
+                </div>
+                <div style="margin-top: 5px; color: gray;">
+                  <label>Укажите только свой telegram username (например: sp1edh4ck)</label>
+                </div>
+              </div>
+            </div>
+            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            <div style="display: flex;">
+              <div class="profile-edit-div">
+                <label>Аватар:</label>
+              </div>
+              <div>
+                <input class="field-load" type="file" name="avatar" id="id_avatar" accept=".png,.jpg,.jpeg">
+                {% comment %} {{ form.avatar|addclass:"field-load" }} {% endcomment %}
+              </div>
+            </div>
+            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.rank == 'искусственный интелект' or request.user.profile_sub == True %}
+              <div style="display: flex;">
+                <div class="profile-edit-div">
+                  <label>Фон профиля:</label>
+                </div>
+                <div>
+                  {{ form.profile_background }}
+                </div>
+              </div>
+              <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            {% endif %}
+            {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.privilage == 'искусственный интелект' or request.user.unique == True %}
+              <div style="display: flex;">
+                <div class="profile-edit-div">
+                  <label>Стиль имени:</label>
+                </div>
+                <div>
+                  <select name="username_style" id="id_username_style" class="birthday-input" style="min-width: 250px;">
+                    <option value="{{ user.username_style }}" selected="">{{ user.username_style }}</option>
+                    <option value="gray-un">Серый</option>
+                    <option value="white-shadow-un">Белая тень</option>
+                    <option value="melt-white">melt-white</option>
+                    <option value="purple-white-un">Бело-фиолетовый</option>
+                    <option value="grad-wb-un">Градиент бело-синий</option>
+                    <option value="red-shadow-un">Красная тень</option>
+                    <option value="grad-pwv-un">Градиент розово-синий</option>
+                    <option value="grad-bvr-un">Градиент</option>
+                    <option value="grad-p-double-un">.grad-p-double-un</option>
+                    <option value="pink-shadow-un">.pink-shadow-un</option>
+                    <option value="purple-shadow-un">.purple-shadow-un</option>
+                    <option value="light-green-shadow-un">.light-green-shadow-un</option>
+                    <option value="grad-wp-un">.grad-wp-un</option>
+                    <option value="grad-wy-un">.grad-wy-un</option>
+                    <option value="grad-pp-un">.grad-pp-un</option>
+                    <option value="light-red-shadow-un">.light-red-shadow-un</option>
+                    <option value="blue-shadow-un">.blue-shadow-un</option>
+                    <option value="white-double-shadow-un">.white-double-shadow-un</option>
+                    <option value="blue-light-shadow-un">.blue-light-shadow-un</option>
+                    <option value="dark-green-shadow-un">.dark-green-shadow-un</option>
+                    <option value="blue-p-shadow-un">.blue-p-shadow-un</option>
+                    <option value="black-shadow-un">.black-shadow-un</option>
+                    <option value="red-orange-shadow-un">.red-orange-shadow-un</option>
+                    <option value="light-blue-double-shadow-un">.light-blue-double-shadow-un</option>
+                    <option value="aquamarine-shadow-un">.aquamarine-shadow-un</option>
+                    <option value="green-so-beautifull-un">.green-so-beautifull-un</option>
+                  </select>
+                </div>
+              </div>
+              <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+              <div style="display: flex;">
+                <div class="profile-edit-div">
+                  <label>Стиль банера:</label>
+                </div>
+                <div>
+                  <select name="banner" id="id_banner" class="birthday-input" style="min-width: 250px;">
+                    <option value="{{ user.banner }}" selected="">{{ user.banner }}</option>
+                    <option value="gray-role">.gray-role</option>
+                    <option value="green-yellow-role">.green-yellow-role</option>
+                    <option value="milk-pink-role">.milk-pink-role</option>
+                    <option value="purple-aquamarine-role">.purple-aquamarine-role</option>
+                    <option value="red-purple-role">.red-purple-role</option>
+                    <option value="yellow-green-role">.yellow-green-role</option>
+                    <option value="blue-pink-role">.blue-pink-role</option>
+                  </select>
+                </div>
+              </div>
+              <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            {% endif %}
+            <div style="display: flex;">
+              <div class="profile-edit-div">
+                <label>Пол:</label>
+              </div>
+              <div>
+                <select name="gender" id="id_gender" class="birthday-input" style="min-width: 150px;">
+                  <option value="Не выбрано" {% if user.gender == "Не выбрано" %}selected=""{% endif %}>Не выбрано</option>
+                  <option value="Мужской" {% if user.gender == "Мужской" %}selected=""{% endif %}>Мужской</option>
+                  <option value="Женский" {% if user.gender == "Женский" %}selected=""{% endif %}>Женский</option>
+                </select>
+              </div>
+            </div>
+            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            <div style="display: flex;">
+              <div class="profile-edit-div">
+                <label>День рождения:</label>
+              </div>
+              <div style="display: block;">
+                <div>
+                  <input type="integer" name="brt_day" id="id_brt_day" class="birthday-input" placeholder="День..." value="{{ user.brt_day }}" maxlength="2">
+                  <select name="brt_month" id="id_brt_month" class="birthday-input" style="min-width: 101px; height: 34px; -o-appearance: none;">
+                    <option value="Месяц" {% if user.brt_month == "Месяц" %}selected=""{% endif %}>Месяц</option>
+                    <option value="Январь" {% if user.brt_month == "Январь" %}selected=""{% endif %}>Январь</option>
+                    <option value="Февраль" {% if user.brt_month == "Февраль" %}selected=""{% endif %}>Февраль</option>
+                    <option value="Март" {% if user.brt_month == "Март" %}selected=""{% endif %}>Март</option>
+                    <option value="Апрель" {% if user.brt_month == "Апрель" %}selected=""{% endif %}>Апрель</option>
+                    <option value="Май" {% if user.brt_month == "Май" %}selected=""{% endif %}>Май</option>
+                    <option value="Июнь" {% if user.brt_month == "Июнь" %}selected=""{% endif %}>Июнь</option>
+                    <option value="Июль" {% if user.brt_month == "Июль" %}selected=""{% endif %}>Июль</option>
+                    <option value="Август" {% if user.brt_month == "Август" %}selected=""{% endif %}>Август</option>
+                    <option value="Сентябрь" {% if user.brt_month == "Сентябрь" %}selected=""{% endif %}>Сентябрь</option>
+                    <option value="Октябрь" {% if user.brt_month == "Октябрь" %}selected=""{% endif %}>Октябрь</option>
+                    <option value="Ноябрь" {% if user.brt_month == "Ноябрь" %}selected=""{% endif %}>Ноябрь</option>
+                    <option value="Декабрь" {% if user.brt_month == "Декабрь" %}selected=""{% endif %}>Декабрь</option>
+                  </select>
+                  <input type="integer" name="brt_year" id="id_brt_year" class="birthday-input" placeholder="Год..." value="{{ user.brt_year }}" maxlength="4">
+                </div>
+              </div>
+            </div>
+            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            <div style="display: flex;">
+              <div class="profile-edit-div">
+                <label>Род занятий:</label>
+              </div>
+              <div>
+                {{ form.occupation|addclass:"profile-edit-field profile-edit-field-height" }}
+              </div>
+            </div>
+            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            <div style="display: flex;">
+              <div class="profile-edit-div">
+                <label>Интересы:</label>
+              </div>
+              <div>
+                {{ form.interests|addclass:"profile-edit-field profile-edit-field-height" }}
+              </div>
+            </div>
+            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            <div style="display: flex;">
+              <div class="profile-edit-div">
+                <label></label>
+              </div>
+              <div style="display: block;">
+                <div>
+                  <button type="submit" class="button-save">Сохранить</button>
+                </div>
+                <div style="margin-top: 20px; color: red;">
+                  {% if form.errors %}
+                    {% for field in form %}
+                      {% for error in field.errors %}
+                        {{ form.error.field }}
+                        {{ error|escape }}
+                      {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                      {{ error|escape }}
+                    {% endfor %}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="switch-profile-edit">
+        <a href="{% url 'forum:profile_personal_info_edit' user.username %}" class="switch-button-profile-edit active-tab">Персональная информация</a>
+        <a href="{% url 'forum:profile_contact_info_edit' %}" class="switch-button-profile-edit">Контактная информация</a>
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Предпочтения</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Приватность</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройка оповещений</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Чёрный список</a> {% endcomment %}
+        <a href="{% url 'forum:profile_upgrade' user.username %}" class="switch-button-profile-edit">Повышение статуса</a>
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Учётные записи</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Безопасность</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">API для разработчика</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройки маркета</a> {% endcomment %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

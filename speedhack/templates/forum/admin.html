@@ -7,9 +7,9 @@
     <div class="frame_con">
       <div style="display: block;">
         <div class="switch-info-admin" style="max-height: 130px;">
-          <a href="{% url 'forum:admin_panel' %}" class="switch-button active-tab" style="text-decoration: none; color: #d6d6d6;" rel="noopener noreferrer">Основная админ-панель</a>
-          <a href="{% url 'forum:tickets' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;" rel="noopener noreferrer">Обращения</a>
-          <a href="{% url 'forum:ads' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;" rel="noopener noreferrer">Реклама</a>
+          <a href="{% url 'forum:admin_panel' %}" class="switch-button active-tab" style="text-decoration: none; color: #d6d6d6;">Основная админ-панель</a>
+          <a href="{% url 'forum:tickets' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Обращения</a>
+          <a href="{% url 'forum:ads' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Реклама</a>
         </div>
         <div class="frame-left-first-users">
           <span style="color: gray; font-size: 18px;">Найти пользователя</span>
@@ -20,7 +20,7 @@
               </form>
             </div>
             <div>
-              <a href="{% url 'forum:admin_panel' %}" rel="noopener noreferrer"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
+              <a href="{% url 'forum:admin_panel' %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
             </div>
           </div>
         </div>
@@ -38,314 +38,317 @@
           </div>
         </div>
       </div>
-      <div class="frame-users" style="max-width: 806px; display: block; {% if users_list.count == 0 %}max-height: 30px;{% elif users_list.count == 1 %}max-height: 40px;{% elif users_list.count == 2 %}max-height: 100px;{% elif users_list.count == 3 %}max-height: 160px;{% elif users_list.count == 4 %}max-height: 220px;{% elif users_list.count == 5 %}max-height: 280px;{% elif users_list.count == 6 %}max-height: 340px;{% endif %}">
-        {% if users_list.count != 0 %}
-          {% for user in users_list %}
-            <div style="padding: 0 20px 0 20px;">
-              <div style="display: flex;">
-                <div style="margin: 0 10px 0px 0; height: 40px;">
-                  <img style="width: 40px; border-radius: 10px;" src="{{ user.avatar.url }}">
-                </div>
-                <div style="margin: 0 auto 0 0;">
-                  <a href="{% url 'forum:profile' user.username %}" class="admin-link" rel="noopener noreferrer">
-                    <label class="users-username {% if user.username_style != 'gray-un' and user.rank != 'заблокирован' %}{{ user.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ user.username }}</label>
-                  </a>
-                </div>
-                <div class="admin-btn">
-                  {% if user.rank != "заблокирован" and user.username != request.user.username and request.user.rank_lvl > user.rank_lvl %}
-                    <label class="role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}" style="font-size: 15px; max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px; font-weight: bold;">{{ user.rank }}</label>
-                    <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button" style="max-height: 40px; margin-right: 5px;" rel="noopener noreferrer">Заблокировать</a>
-                  {% elif user.rank == "заблокирован" and user.username != request.user.username and request.user.rank_lvl > user.rank_lvl %}
-                    <label class="role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}" style="font-size: 15px; max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px; font-weight: bold;">{{ user.save_rank }}</label>
-                    <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button" style="max-height: 40px; margin-right: 5px;" rel="noopener noreferrer">Разблокировать</a>
-                  {% elif user.rank != "пользователь" %}
-                    <label class="{% if user.rank != "заблокирован" %}role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}{% endif %}" style="font-size: 15px; max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px; font-weight: bold;">{{ user.rank }}</label>
-                  {% endif %}
-                  <label class="rrft" id="menu_user_edit"><i class="fa-solid fa-angles-down admin-edit-user"></i></label>
-                </div>
-              </div>
-              <div class="edit-form-user edit-form-user-size">
-                <hr class="admin-hr" style="background: #3f3f3f;">
-                <div class="all-style-admin-user">
-                  <form method="post" action="{% url 'forum:admin_user_edit' user.username %}">
-                    {% csrf_token %}
-                    <div style="display: flex; padding-top: 10px;">
-                      <div class="profile-edit-div">
-                        <label>Имя пользователя:</label>
-                      </div>
-                      <div>
-                        <input type="text" name="username" id="id_username" class="birthday-input" placeholder="Имя пользователя..." value="{{ user.username }}" maxlength="15">
-                      </div>
-                    </div>
-                    <hr class="admin-hr" style="background: #3f3f3f;">
-                    <div style="display: flex;">
-                      <div class="profile-edit-div">
-                        <label>Должность:</label>
-                      </div>
-                      <div>
-                        <select name="rank" id="id_rank" class="birthday-input" style="min-width: 250px;">
-                          <option value="{{ user.rank }}" selected="">{{ user.rank }}</option>
-                          {% if user.rank != "пользователь" %}<option value="пользователь">пользователь</option>{% endif %}
-                          {% if user.rank != "заблокирован" %}<option value="заблокирован">заблокирован</option>{% endif %}
-                          {% if user.rank != "дизайнер" %}<option value="дизайнер">дизайнер</option>{% endif %}
-                          {% if user.rank != "главный дизайнер" %}<option value="главный дизайнер">главный дизайнер</option>{% endif %}
-                          {% if user.rank != "куратор" %}<option value="куратор">куратор</option>{% endif %}
-                          {% if user.rank != "арбитр" %}<option value="арбитр">арбитр</option>{% endif %}
-                          {% if user.rank != "главный арбитр" %}<option value="главный арбитр">главный арбитр</option>{% endif %}
-                          {% if user.rank != "бот" %}<option value="бот">бот</option>{% endif %}
-                          {% if user.rank != "администратор" %}<option value="администратор">администратор</option>{% endif %}
-                          {% if user.rank != "разработчик" %}<option value="разработчик">разработчик</option>{% endif %}
-                          {% if user.rank != "гл. администратор" %}<option value="гл. администратор">гл. администратор</option>{% endif %}
-                          {% if user.rank != "владелец" %}<option value="владелец">владелец</option>{% endif %}
-                        </select>
-                      </div>
-                    </div>
-                    <hr class="admin-hr" style="background: #3f3f3f;">
-                    <div style="display: flex;">
-                      <div class="profile-edit-div">
-                        <label>Уровень доступа:</label>
-                      </div>
-                      <div>
-                        <select name="rank_lvl" id="id_rank_lvl" class="birthday-input" style="min-width: 50px;">
-                          <option value="{{ user.rank_lvl }}" selected="">{{ user.rank_lvl }}</option>
-                          {% if user.rank_lvl != "1" %}<option value="1">1</option>{% endif %}
-                          {% if user.rank_lvl != "0" %}<option value="0">0</option>{% endif %}
-                          {% if user.rank_lvl != "2" %}<option value="2">2</option>{% endif %}
-                          {% if user.rank_lvl != "3" %}<option value="3">3</option>{% endif %}
-                          {% if user.rank_lvl != "4" %}<option value="4">4</option>{% endif %}
-                          {% if user.rank_lvl != "5" %}<option value="5">5</option>{% endif %}
-                          {% if user.rank_lvl != "6" %}<option value="6">6</option>{% endif %}
-                          {% if user.rank_lvl != "7" %}<option value="7">7</option>{% endif %}
-                          {% if user.rank_lvl != "8" %}<option value="8">8</option>{% endif %}
-                          {% if user.rank_lvl != "9" %}<option value="9">9</option>{% endif %}
-                        </select>
-                      </div>
-                    </div>
-                    <hr class="admin-hr" style="background: #3f3f3f;">
-                    <div style="display: flex;">
-                      <div class="profile-edit-div">
-                        <label>Ранг:</label>
-                      </div>
-                      <div>
-                        <select name="privilege" id="id_privilege" class="birthday-input" style="min-width: 220px;">
-                          <option value="{{ user.privilege }}" selected="">{{ user.privilege }}</option>
-                          {% if user.privilege != "новорег" %}<option value="новорег">новорег</option>{% endif %}
-                          {% if user.privilege != "местный" %}<option value="местный">местный</option>{% endif %}
-                          {% if user.privilege != "постоялец" %}<option value="постоялец">постоялец</option>{% endif %}
-                          {% if user.privilege != "эксперт" %}<option value="эксперт">эксперт</option>{% endif %}
-                          {% if user.privilege != "гуру" %}<option value="гуру">гуру</option>{% endif %}
-                          {% if user.privilege != "искусственный интелект" %}<option value="искусственный интелект">искусственный интелект</option>{% endif %}
-                        </select>
-                      </div>
-                    </div>
-                    <hr class="admin-hr" style="background: #3f3f3f;">
-                    <div style="display: flex;">
-                      <div class="profile-edit-div">
-                        <label>Платные привилегии:</label>
-                      </div>
-                      <div>
-                        <select name="buy_privilege" id="id_buy_privilege" class="birthday-input" style="min-width: 220px;">
-                          <option value="{{ user.buy_privilege }}" selected="">{{ user.buy_privilege }}</option>
-                          {% if user.buy_privilege != "нет привилегий" %}<option value="нет привилегий">нет привилегий</option>{% endif %}
-                          {% if user.buy_privilege != "легенда" %}<option value="легенда">легенда</option>{% endif %}
-                          {% if user.buy_privilege != "суприм" %}<option value="суприм">суприм</option>{% endif %}
-                          {% if user.buy_privilege != "уник" %}<option value="уник">уник</option>{% endif %}
-                        </select>
-                      </div>
-                    </div>
-                    <hr class="admin-hr" style="background: #3f3f3f;">
-                    <div style="display: flex;">
-                      <div class="profile-edit-div">
-                        <label>Привилегия на маркете:</label>
-                      </div>
-                      <div>
-                        <select name="market_privilege" id="id_market_privilege" class="birthday-input" style="min-width: 220px;">
-                          <option value="{{ user.market_privilege }}" selected="">{{ user.market_privilege }}</option>
-                          {% if user.market_privilege != "нет привилегий" %}<option value="нет привилегий">нет привилегий</option>{% endif %}
-                          {% if user.market_privilege != "продавец" %}<option value="продавец">продавец</option>{% endif %}
-                          {% if user.market_privilege != "партнёр" %}<option value="партнёр">партнёр</option>{% endif %}
-                        </select>
-                      </div>
-                    </div>
-                    <hr class="admin-hr" style="background: #3f3f3f;">
-                    <div style="display: flex;">
-                      <div class="profile-edit-div">
-                        <label>Telegram:</label>
-                      </div>
-                      <div style="display: block;">
-                        <div>
-                          <input type="text" name="tg_link" id="id_tg_link" class="profile-edit-field profile-edit-field-height admin-edit-width" placeholder="Telegram..." value="{{ user.tg_link }}" maxlength="70">
-                        </div>
-                        <div style="margin-top: 5px; color: gray;">
-                          <label>Укажите только telegram username (например: sp1edh4ck)</label>
-                        </div>
-                      </div>
-                    </div>
-                    <hr class="admin-hr" style="background: #3f3f3f;">
-                    <div style="display: flex;">
-                      <div class="profile-edit-div">
-                        <label>Статус:</label>
-                      </div>
-                      <div style="display: block;">
-                        <div>
-                          <input type="text" name="description" id="id_description" class="profile-edit-field profile-edit-field-height admin-edit-width" placeholder="Описание..." value="{{ user.description }}">
-                        </div>
-                        <div style="margin-top: 5px; color: gray;">
-                          <label>Отображается рядом с вашим ником в сообщениях.</label>
-                        </div>
-                      </div>
-                    </div>
-                    <hr class="admin-hr" style="background: #3f3f3f;">
-                    <div style="display: flex;">
-                      <div class="profile-edit-div">
-                        <label>Род занятий:</label>
-                      </div>
-                      <div>
-                        <input type="text" name="occupation" id="id_occupation" class="profile-edit-field profile-edit-field-height admin-edit-width" placeholder="Род занятий..." value="{{ user.occupation }}">
-                      </div>
-                    </div>
-                    <hr class="admin-hr" style="background: #3f3f3f;">
-                    <div style="display: flex;">
-                      <div class="profile-edit-div">
-                        <label>Интересы:</label>
-                      </div>
-                      <div>
-                        <input type="text" name="interests" id="id_interests" class="profile-edit-field profile-edit-field-height admin-edit-width" placeholder="Интересы..." value="{{ user.interests }}">
-                      </div>
-                    </div>
-                    <hr class="admin-hr" style="background: #3f3f3f;">
-                    {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.privilage == 'искусственный интелект' or request.user.unique == True %}
-                      <div style="display: flex;">
-                        <div class="profile-edit-div">
-                          <label>Стиль имени:</label>
-                        </div>
-                        <div>
-                          <select name="username_style" id="id_username_style" class="birthday-input" style="min-width: 250px;">
-                            <option value="{{ user.username_style }}" selected="">{{ user.username_style }}</option>
-                            {% if user.username_style != "gray-un" %}<option value="gray-un">Серый</option>{% endif %}
-                            {% if user.username_style != "white-shadow-un" %}<option value="white-shadow-un">Белая тень</option>{% endif %}
-                            {% if user.username_style != "melt-white" %}<option value="melt-white">melt-white</option>{% endif %}
-                            {% if user.username_style != "purple-white-un" %}<option value="purple-white-un">Бело-фиолетовый</option>{% endif %}
-                            {% if user.username_style != "grad-wb-un" %}<option value="grad-wb-un">Градиент бело-синий</option>{% endif %}
-                            {% if user.username_style != "red-shadow-un" %}<option value="red-shadow-un">Красная тень</option>{% endif %}
-                            {% if user.username_style != "grad-pwv-un" %}<option value="grad-pwv-un">Градиент розово-синий</option>{% endif %}
-                            {% if user.username_style != "grad-bvr-un" %}<option value="grad-bvr-un">Градиент</option>{% endif %}
-                            {% if user.username_style != "grad-p-double-un" %}<option value="grad-p-double-un">.grad-p-double-un</option>{% endif %}
-                            {% if user.username_style != "pink-shadow-un" %}<option value="pink-shadow-un">.pink-shadow-un</option>{% endif %}
-                            {% if user.username_style != "purple-shadow-un" %}<option value="purple-shadow-un">.purple-shadow-un</option>{% endif %}
-                            {% if user.username_style != "light-green-shadow-un" %}<option value="light-green-shadow-un">.light-green-shadow-un</option>{% endif %}
-                            {% if user.username_style != "grad-wp-un" %}<option value="grad-wp-un">.grad-wp-un</option>{% endif %}
-                            {% if user.username_style != "grad-wy-un" %}<option value="grad-wy-un">.grad-wy-un</option>{% endif %}
-                            {% if user.username_style != "grad-pp-un" %}<option value="grad-pp-un">.grad-pp-un</option>{% endif %}
-                            {% if user.username_style != "light-red-shadow-un" %}<option value="light-red-shadow-un">.light-red-shadow-un</option>{% endif %}
-                            {% if user.username_style != "blue-shadow-un" %}<option value="blue-shadow-un">.blue-shadow-un</option>{% endif %}
-                            {% if user.username_style != "white-double-shadow-un" %}<option value="white-double-shadow-un">.white-double-shadow-un</option>{% endif %}
-                            {% if user.username_style != "blue-light-shadow-un" %}<option value="blue-light-shadow-un">.blue-light-shadow-un</option>{% endif %}
-                            {% if user.username_style != "dark-green-shadow-un" %}<option value="dark-green-shadow-un">.dark-green-shadow-un</option>{% endif %}
-                            {% if user.username_style != "blue-p-shadow-un" %}<option value="blue-p-shadow-un">.blue-p-shadow-un</option>{% endif %}
-                            {% if user.username_style != "black-shadow-un" %}<option value="black-shadow-un">.black-shadow-un</option>{% endif %}
-                            {% if user.username_style != "red-orange-shadow-un" %}<option value="red-orange-shadow-un">.red-orange-shadow-un</option>{% endif %}
-                            {% if user.username_style != "light-blue-double-shadow-un" %}<option value="light-blue-double-shadow-un">.light-blue-double-shadow-un</option>{% endif %}
-                            {% if user.username_style != "aquamarine-shadow-un" %}<option value="aquamarine-shadow-un">.aquamarine-shadow-un</option>{% endif %}
-                            {% if user.username_style != "green-so-beautifull-un" %}<option value="green-so-beautifull-un">.green-so-beautifull-un</option>{% endif %}
-                          </select>
-                        </div>
-                      </div>
-                      <hr class="admin-hr" style="background: #3f3f3f;">
-                      <div style="display: flex;">
-                        <div class="profile-edit-div">
-                          <label>Стиль банера:</label>
-                        </div>
-                        <div>
-                          <select name="banner" id="id_banner" class="birthday-input" style="min-width: 250px;">
-                            <option value="{{ user.banner }}" selected="">{{ user.banner }}</option>
-                            {% if user.banner != "gray-role" %}<option value="gray-role">.gray-role</option>{% endif %}
-                            {% if user.banner != "green-yellow-role" %}<option value="green-yellow-role">.green-yellow-role</option>{% endif %}
-                            {% if user.banner != "milk-pink-role" %}<option value="milk-pink-role">.milk-pink-role</option>{% endif %}
-                            {% if user.banner != "purple-aquamarine-role" %}<option value="purple-aquamarine-role">.purple-aquamarine-role</option>{% endif %}
-                            {% if user.banner != "red-purple-role" %}<option value="red-purple-role">.red-purple-role</option>{% endif %}
-                            {% if user.banner != "yellow-green-role" %}<option value="yellow-green-role">.yellow-green-role</option>{% endif %}
-                            {% if user.banner != "blue-pink-role" %}<option value="blue-pink-role">.blue-pink-role</option>{% endif %}
-                          </select>
-                        </div>
-                      </div>
-                      <hr class="admin-hr" style="background: #3f3f3f;">
+      <div>
+        <div class="frame-users" id="id_frame_users" style="max-width: 806px; display: block;">
+          {% comment %} {% if users_list.count == 0 %}max-height: 30px;{% elif users_list.count == 1 %}max-height: 40px;{% elif users_list.count == 2 %}max-height: 100px;{% elif users_list.count == 3 %}max-height: 160px;{% elif users_list.count == 4 %}max-height: 220px;{% elif users_list.count == 5 %}max-height: 280px;{% elif users_list.count == 6 %}max-height: 340px;{% endif %}" {% endcomment %}
+          {% if users_list.count != 0 %}
+            {% for user in users_list %}
+              <div style="padding: 0 20px 0 20px;">
+                <div style="display: flex;">
+                  <div style="margin: 0 10px 0px 0; height: 40px;">
+                    <img style="width: 40px; border-radius: 10px;" src="{{ user.avatar.url }}">
+                  </div>
+                  <div style="margin: 0 auto 0 0;">
+                    <a href="{% url 'forum:profile' user.username %}" class="admin-link">
+                      <label class="users-username {% if user.username_style != 'gray-un' and user.rank != 'заблокирован' %}{{ user.username_style }}{% endif %}" {% if user.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ user.username }}</label>
+                    </a>
+                  </div>
+                  <div class="admin-btn">
+                    {% if user.rank != "заблокирован" and user.username != request.user.username and request.user.rank_lvl > user.rank_lvl %}
+                      <label class="role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}" style="font-size: 15px; max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px; font-weight: bold;">{{ user.rank }}</label>
+                      <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button" style="max-height: 40px; margin-right: 5px;">Заблокировать</a>
+                    {% elif user.rank == "заблокирован" and user.username != request.user.username and request.user.rank_lvl > user.rank_lvl %}
+                      <label class="role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}" style="font-size: 15px; max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px; font-weight: bold;">{{ user.save_rank }}</label>
+                      <a href="{% url 'forum:admin_ban' user.username %}" class="admin-button" style="max-height: 40px; margin-right: 5px;">Разблокировать</a>
+                    {% elif user.rank != "пользователь" %}
+                      <label class="{% if user.rank != "заблокирован" %}role-banner {% if user.rank == "дизайнер" %}designer-role{% elif user.rank == "главный дизайнер" %}main-designer-role{% elif user.rank == "куратор" %}curator-role{% elif user.rank == "арбитр" %}referee-role{% elif user.rank == "главный арбитр" %}main-referee-role{% elif user.rank == "бот" %}admin-role{% elif user.rank == "администратор" %}admin-role{% elif user.rank == "разработчик" %}developer-role{% elif user.rank == "гл. администратор" %}main-admin-role{% elif user.rank == "владелец" %}milk-pink-role{% endif %}{% endif %}" style="font-size: 15px; max-width: 150px; height: 30px; padding: 7px 0 3px 0; margin: 0 5px 0 0; border-radius: 10px; font-weight: bold;">{{ user.rank }}</label>
                     {% endif %}
-                    <div style="display: flex;">
-                      <div class="profile-edit-div">
-                        <label>Пол:</label>
-                      </div>
-                      <div>
-                        <select name="gender" id="id_gender" class="birthday-input" style="min-width: 150px;">
-                          <option value="{{ user.gender }}" selected="">{{ user.gender }}</option>
-                          {% if user.gender != "Не выбрано" %}<option value="Не выбрано">Не выбрано</option>{% endif %}
-                          {% if user.gender != "Мужской" %}<option value="Мужской" >Мужской</option>{% endif %}
-                          {% if user.gender != "Женский" %}<option value="Женский" >Женский</option>{% endif %}
-                        </select>
-                      </div>
-                    </div>
-                    <hr class="admin-hr" style="background: #3f3f3f;">
-                    <div style="display: flex;">
-                      <div class="profile-edit-div">
-                        <label>День рождения:</label>
-                      </div>
-                      <div style="display: block;">
+                    <label class="rrft" id="menu_user_edit"><i class="fa-solid fa-angles-down admin-edit-user"></i></label>
+                  </div>
+                </div>
+                <div class="edit-form-user edit-form-user-size">
+                  <hr class="admin-hr" style="background: #3f3f3f;">
+                  <div class="all-style-admin-user">
+                    <form method="post" action="{% url 'forum:admin_user_edit' user.username %}">
+                      {% csrf_token %}
+                      <div style="display: flex; padding-top: 10px;">
+                        <div class="profile-edit-div">
+                          <label>Имя пользователя:</label>
+                        </div>
                         <div>
-                          <input type="integer" name="brt_day" id="id_brt_day" class="birthday-input" placeholder="День..." value="{{ user.brt_day }}" maxlength="2">
-                          <select name="brt_month" id="id_brt_month" class="birthday-input" style="min-width: 101px; height: 34px; -o-appearance: none;">
-                            <option value="{{ user.brt_month }}" selected="">{{ user.brt_month }}</option>
-                            {% if user.brt_month != "Месяц" %}<option value="Месяц">Месяц</option>{% endif %}
-                            {% if user.brt_month != "Январь" %}<option value="Январь">Январь</option>{% endif %}
-                            {% if user.brt_month != "Февраль" %}<option value="Февраль">Февраль</option>{% endif %}
-                            {% if user.brt_month != "Март" %}<option value="Март">Март</option>{% endif %}
-                            {% if user.brt_month != "Апрель" %}<option value="Апрель">Апрель</option>{% endif %}
-                            {% if user.brt_month != "Май" %}<option value="Май">Май</option>{% endif %}
-                            {% if user.brt_month != "Июнь" %}<option value="Июнь">Июнь</option>{% endif %}
-                            {% if user.brt_month != "Июль" %}<option value="Июль">Июль</option>{% endif %}
-                            {% if user.brt_month != "Август" %}<option value="Август">Август</option>{% endif %}
-                            {% if user.brt_month != "Сентябрь" %}<option value="Сентябрь">Сентябрь</option>{% endif %}
-                            {% if user.brt_month != "Октябрь" %}<option value="Октябрь">Октябрь</option>{% endif %}
-                            {% if user.brt_month != "Ноябрь" %}<option value="Ноябрь">Ноябрь</option>{% endif %}
-                            {% if user.brt_month != "Декабрь" %}<option value="Декабрь">Декабрь</option>{% endif %}
+                          <input type="text" name="username" id="id_username" class="birthday-input" placeholder="Имя пользователя..." value="{{ user.username }}" maxlength="15">
+                        </div>
+                      </div>
+                      <hr class="admin-hr" style="background: #3f3f3f;">
+                      <div style="display: flex;">
+                        <div class="profile-edit-div">
+                          <label>Должность:</label>
+                        </div>
+                        <div>
+                          <select name="rank" id="id_rank" class="birthday-input" style="min-width: 250px;">
+                            <option value="{{ user.rank }}" selected="">{{ user.rank }}</option>
+                            {% if user.rank != "пользователь" %}<option value="пользователь">пользователь</option>{% endif %}
+                            {% if user.rank != "заблокирован" %}<option value="заблокирован">заблокирован</option>{% endif %}
+                            {% if user.rank != "дизайнер" %}<option value="дизайнер">дизайнер</option>{% endif %}
+                            {% if user.rank != "главный дизайнер" %}<option value="главный дизайнер">главный дизайнер</option>{% endif %}
+                            {% if user.rank != "куратор" %}<option value="куратор">куратор</option>{% endif %}
+                            {% if user.rank != "арбитр" %}<option value="арбитр">арбитр</option>{% endif %}
+                            {% if user.rank != "главный арбитр" %}<option value="главный арбитр">главный арбитр</option>{% endif %}
+                            {% if user.rank != "бот" %}<option value="бот">бот</option>{% endif %}
+                            {% if user.rank != "администратор" %}<option value="администратор">администратор</option>{% endif %}
+                            {% if user.rank != "разработчик" %}<option value="разработчик">разработчик</option>{% endif %}
+                            {% if user.rank != "гл. администратор" %}<option value="гл. администратор">гл. администратор</option>{% endif %}
+                            {% if user.rank != "владелец" %}<option value="владелец">владелец</option>{% endif %}
                           </select>
-                          <input type="integer" name="brt_year" id="id_brt_year" class="birthday-input" placeholder="Год..." value="{{ user.brt_year }}" maxlength="4">
                         </div>
                       </div>
-                    </div>
-                    <div style="display: flex;">
-                      <div class="profile-edit-div">
-                        <label></label>
-                      </div>
-                      <div style="display: block;">
+                      <hr class="admin-hr" style="background: #3f3f3f;">
+                      <div style="display: flex;">
+                        <div class="profile-edit-div">
+                          <label>Уровень доступа:</label>
+                        </div>
                         <div>
-                          <button type="submit" class="button-save">Сохранить</button>
+                          <select name="rank_lvl" id="id_rank_lvl" class="birthday-input" style="min-width: 50px;">
+                            <option value="{{ user.rank_lvl }}" selected="">{{ user.rank_lvl }}</option>
+                            {% if user.rank_lvl != "1" %}<option value="1">1</option>{% endif %}
+                            {% if user.rank_lvl != "0" %}<option value="0">0</option>{% endif %}
+                            {% if user.rank_lvl != "2" %}<option value="2">2</option>{% endif %}
+                            {% if user.rank_lvl != "3" %}<option value="3">3</option>{% endif %}
+                            {% if user.rank_lvl != "4" %}<option value="4">4</option>{% endif %}
+                            {% if user.rank_lvl != "5" %}<option value="5">5</option>{% endif %}
+                            {% if user.rank_lvl != "6" %}<option value="6">6</option>{% endif %}
+                            {% if user.rank_lvl != "7" %}<option value="7">7</option>{% endif %}
+                            {% if user.rank_lvl != "8" %}<option value="8">8</option>{% endif %}
+                            {% if user.rank_lvl != "9" %}<option value="9">9</option>{% endif %}
+                          </select>
                         </div>
-                        <div style="margin-top: 20px; color: red;">
-                          {% if form.errors %}
-                            {% for field in form %}
-                              {% for error in field.errors %}
-                                {{ form.error.field }}
+                      </div>
+                      <hr class="admin-hr" style="background: #3f3f3f;">
+                      <div style="display: flex;">
+                        <div class="profile-edit-div">
+                          <label>Ранг:</label>
+                        </div>
+                        <div>
+                          <select name="privilege" id="id_privilege" class="birthday-input" style="min-width: 220px;">
+                            <option value="{{ user.privilege }}" selected="">{{ user.privilege }}</option>
+                            {% if user.privilege != "новорег" %}<option value="новорег">новорег</option>{% endif %}
+                            {% if user.privilege != "местный" %}<option value="местный">местный</option>{% endif %}
+                            {% if user.privilege != "постоялец" %}<option value="постоялец">постоялец</option>{% endif %}
+                            {% if user.privilege != "эксперт" %}<option value="эксперт">эксперт</option>{% endif %}
+                            {% if user.privilege != "гуру" %}<option value="гуру">гуру</option>{% endif %}
+                            {% if user.privilege != "искусственный интелект" %}<option value="искусственный интелект">искусственный интелект</option>{% endif %}
+                          </select>
+                        </div>
+                      </div>
+                      <hr class="admin-hr" style="background: #3f3f3f;">
+                      <div style="display: flex;">
+                        <div class="profile-edit-div">
+                          <label>Платные привилегии:</label>
+                        </div>
+                        <div>
+                          <select name="buy_privilege" id="id_buy_privilege" class="birthday-input" style="min-width: 220px;">
+                            <option value="{{ user.buy_privilege }}" selected="">{{ user.buy_privilege }}</option>
+                            {% if user.buy_privilege != "нет привилегий" %}<option value="нет привилегий">нет привилегий</option>{% endif %}
+                            {% if user.buy_privilege != "легенда" %}<option value="легенда">легенда</option>{% endif %}
+                            {% if user.buy_privilege != "суприм" %}<option value="суприм">суприм</option>{% endif %}
+                            {% if user.buy_privilege != "уник" %}<option value="уник">уник</option>{% endif %}
+                          </select>
+                        </div>
+                      </div>
+                      <hr class="admin-hr" style="background: #3f3f3f;">
+                      <div style="display: flex;">
+                        <div class="profile-edit-div">
+                          <label>Привилегия на маркете:</label>
+                        </div>
+                        <div>
+                          <select name="market_privilege" id="id_market_privilege" class="birthday-input" style="min-width: 220px;">
+                            <option value="{{ user.market_privilege }}" selected="">{{ user.market_privilege }}</option>
+                            {% if user.market_privilege != "нет привилегий" %}<option value="нет привилегий">нет привилегий</option>{% endif %}
+                            {% if user.market_privilege != "продавец" %}<option value="продавец">продавец</option>{% endif %}
+                            {% if user.market_privilege != "партнёр" %}<option value="партнёр">партнёр</option>{% endif %}
+                          </select>
+                        </div>
+                      </div>
+                      <hr class="admin-hr" style="background: #3f3f3f;">
+                      <div style="display: flex;">
+                        <div class="profile-edit-div">
+                          <label>Telegram:</label>
+                        </div>
+                        <div style="display: block;">
+                          <div>
+                            <input type="text" name="tg_link" id="id_tg_link" class="profile-edit-field profile-edit-field-height admin-edit-width" placeholder="Telegram..." value="{{ user.tg_link }}" maxlength="70">
+                          </div>
+                          <div style="margin-top: 5px; color: gray;">
+                            <label>Укажите только telegram username (например: sp1edh4ck)</label>
+                          </div>
+                        </div>
+                      </div>
+                      <hr class="admin-hr" style="background: #3f3f3f;">
+                      <div style="display: flex;">
+                        <div class="profile-edit-div">
+                          <label>Статус:</label>
+                        </div>
+                        <div style="display: block;">
+                          <div>
+                            <input type="text" name="description" id="id_description" class="profile-edit-field profile-edit-field-height admin-edit-width" placeholder="Описание..." value="{{ user.description }}">
+                          </div>
+                          <div style="margin-top: 5px; color: gray;">
+                            <label>Отображается рядом с вашим ником в сообщениях.</label>
+                          </div>
+                        </div>
+                      </div>
+                      <hr class="admin-hr" style="background: #3f3f3f;">
+                      <div style="display: flex;">
+                        <div class="profile-edit-div">
+                          <label>Род занятий:</label>
+                        </div>
+                        <div>
+                          <input type="text" name="occupation" id="id_occupation" class="profile-edit-field profile-edit-field-height admin-edit-width" placeholder="Род занятий..." value="{{ user.occupation }}">
+                        </div>
+                      </div>
+                      <hr class="admin-hr" style="background: #3f3f3f;">
+                      <div style="display: flex;">
+                        <div class="profile-edit-div">
+                          <label>Интересы:</label>
+                        </div>
+                        <div>
+                          <input type="text" name="interests" id="id_interests" class="profile-edit-field profile-edit-field-height admin-edit-width" placeholder="Интересы..." value="{{ user.interests }}">
+                        </div>
+                      </div>
+                      <hr class="admin-hr" style="background: #3f3f3f;">
+                      {% if request.user.rank_lvl >= "4" or request.user.privilage == 'искусственный интелект' or request.user.unique == True %}
+                        <div style="display: flex;">
+                          <div class="profile-edit-div">
+                            <label>Стиль имени:</label>
+                          </div>
+                          <div>
+                            <select name="username_style" id="id_username_style" class="birthday-input" style="min-width: 250px;">
+                              <option value="{{ user.username_style }}" selected="">{{ user.username_style }}</option>
+                              {% if user.username_style != "gray-un" %}<option value="gray-un">Серый</option>{% endif %}
+                              {% if user.username_style != "white-shadow-un" %}<option value="white-shadow-un">Белая тень</option>{% endif %}
+                              {% if user.username_style != "melt-white" %}<option value="melt-white">melt-white</option>{% endif %}
+                              {% if user.username_style != "purple-white-un" %}<option value="purple-white-un">Бело-фиолетовый</option>{% endif %}
+                              {% if user.username_style != "grad-wb-un" %}<option value="grad-wb-un">Градиент бело-синий</option>{% endif %}
+                              {% if user.username_style != "red-shadow-un" %}<option value="red-shadow-un">Красная тень</option>{% endif %}
+                              {% if user.username_style != "grad-pwv-un" %}<option value="grad-pwv-un">Градиент розово-синий</option>{% endif %}
+                              {% if user.username_style != "grad-bvr-un" %}<option value="grad-bvr-un">Градиент</option>{% endif %}
+                              {% if user.username_style != "grad-p-double-un" %}<option value="grad-p-double-un">.grad-p-double-un</option>{% endif %}
+                              {% if user.username_style != "pink-shadow-un" %}<option value="pink-shadow-un">.pink-shadow-un</option>{% endif %}
+                              {% if user.username_style != "purple-shadow-un" %}<option value="purple-shadow-un">.purple-shadow-un</option>{% endif %}
+                              {% if user.username_style != "light-green-shadow-un" %}<option value="light-green-shadow-un">.light-green-shadow-un</option>{% endif %}
+                              {% if user.username_style != "grad-wp-un" %}<option value="grad-wp-un">.grad-wp-un</option>{% endif %}
+                              {% if user.username_style != "grad-wy-un" %}<option value="grad-wy-un">.grad-wy-un</option>{% endif %}
+                              {% if user.username_style != "grad-pp-un" %}<option value="grad-pp-un">.grad-pp-un</option>{% endif %}
+                              {% if user.username_style != "light-red-shadow-un" %}<option value="light-red-shadow-un">.light-red-shadow-un</option>{% endif %}
+                              {% if user.username_style != "blue-shadow-un" %}<option value="blue-shadow-un">.blue-shadow-un</option>{% endif %}
+                              {% if user.username_style != "white-double-shadow-un" %}<option value="white-double-shadow-un">.white-double-shadow-un</option>{% endif %}
+                              {% if user.username_style != "blue-light-shadow-un" %}<option value="blue-light-shadow-un">.blue-light-shadow-un</option>{% endif %}
+                              {% if user.username_style != "dark-green-shadow-un" %}<option value="dark-green-shadow-un">.dark-green-shadow-un</option>{% endif %}
+                              {% if user.username_style != "blue-p-shadow-un" %}<option value="blue-p-shadow-un">.blue-p-shadow-un</option>{% endif %}
+                              {% if user.username_style != "black-shadow-un" %}<option value="black-shadow-un">.black-shadow-un</option>{% endif %}
+                              {% if user.username_style != "red-orange-shadow-un" %}<option value="red-orange-shadow-un">.red-orange-shadow-un</option>{% endif %}
+                              {% if user.username_style != "light-blue-double-shadow-un" %}<option value="light-blue-double-shadow-un">.light-blue-double-shadow-un</option>{% endif %}
+                              {% if user.username_style != "aquamarine-shadow-un" %}<option value="aquamarine-shadow-un">.aquamarine-shadow-un</option>{% endif %}
+                              {% if user.username_style != "green-so-beautifull-un" %}<option value="green-so-beautifull-un">.green-so-beautifull-un</option>{% endif %}
+                            </select>
+                          </div>
+                        </div>
+                        <hr class="admin-hr" style="background: #3f3f3f;">
+                        <div style="display: flex;">
+                          <div class="profile-edit-div">
+                            <label>Стиль банера:</label>
+                          </div>
+                          <div>
+                            <select name="banner" id="id_banner" class="birthday-input" style="min-width: 250px;">
+                              <option value="{{ user.banner }}" selected="">{{ user.banner }}</option>
+                              {% if user.banner != "gray-role" %}<option value="gray-role">.gray-role</option>{% endif %}
+                              {% if user.banner != "green-yellow-role" %}<option value="green-yellow-role">.green-yellow-role</option>{% endif %}
+                              {% if user.banner != "milk-pink-role" %}<option value="milk-pink-role">.milk-pink-role</option>{% endif %}
+                              {% if user.banner != "purple-aquamarine-role" %}<option value="purple-aquamarine-role">.purple-aquamarine-role</option>{% endif %}
+                              {% if user.banner != "red-purple-role" %}<option value="red-purple-role">.red-purple-role</option>{% endif %}
+                              {% if user.banner != "yellow-green-role" %}<option value="yellow-green-role">.yellow-green-role</option>{% endif %}
+                              {% if user.banner != "blue-pink-role" %}<option value="blue-pink-role">.blue-pink-role</option>{% endif %}
+                            </select>
+                          </div>
+                        </div>
+                        <hr class="admin-hr" style="background: #3f3f3f;">
+                      {% endif %}
+                      <div style="display: flex;">
+                        <div class="profile-edit-div">
+                          <label>Пол:</label>
+                        </div>
+                        <div>
+                          <select name="gender" id="id_gender" class="birthday-input" style="min-width: 150px;">
+                            <option value="{{ user.gender }}" selected="">{{ user.gender }}</option>
+                            {% if user.gender != "Не выбрано" %}<option value="Не выбрано">Не выбрано</option>{% endif %}
+                            {% if user.gender != "Мужской" %}<option value="Мужской" >Мужской</option>{% endif %}
+                            {% if user.gender != "Женский" %}<option value="Женский" >Женский</option>{% endif %}
+                          </select>
+                        </div>
+                      </div>
+                      <hr class="admin-hr" style="background: #3f3f3f;">
+                      <div style="display: flex;">
+                        <div class="profile-edit-div">
+                          <label>День рождения:</label>
+                        </div>
+                        <div style="display: block;">
+                          <div>
+                            <input type="integer" name="brt_day" id="id_brt_day" class="birthday-input" placeholder="День..." value="{{ user.brt_day }}" maxlength="2">
+                            <select name="brt_month" id="id_brt_month" class="birthday-input" style="min-width: 101px; height: 34px; -o-appearance: none;">
+                              <option value="{{ user.brt_month }}" selected="">{{ user.brt_month }}</option>
+                              {% if user.brt_month != "Месяц" %}<option value="Месяц">Месяц</option>{% endif %}
+                              {% if user.brt_month != "Январь" %}<option value="Январь">Январь</option>{% endif %}
+                              {% if user.brt_month != "Февраль" %}<option value="Февраль">Февраль</option>{% endif %}
+                              {% if user.brt_month != "Март" %}<option value="Март">Март</option>{% endif %}
+                              {% if user.brt_month != "Апрель" %}<option value="Апрель">Апрель</option>{% endif %}
+                              {% if user.brt_month != "Май" %}<option value="Май">Май</option>{% endif %}
+                              {% if user.brt_month != "Июнь" %}<option value="Июнь">Июнь</option>{% endif %}
+                              {% if user.brt_month != "Июль" %}<option value="Июль">Июль</option>{% endif %}
+                              {% if user.brt_month != "Август" %}<option value="Август">Август</option>{% endif %}
+                              {% if user.brt_month != "Сентябрь" %}<option value="Сентябрь">Сентябрь</option>{% endif %}
+                              {% if user.brt_month != "Октябрь" %}<option value="Октябрь">Октябрь</option>{% endif %}
+                              {% if user.brt_month != "Ноябрь" %}<option value="Ноябрь">Ноябрь</option>{% endif %}
+                              {% if user.brt_month != "Декабрь" %}<option value="Декабрь">Декабрь</option>{% endif %}
+                            </select>
+                            <input type="integer" name="brt_year" id="id_brt_year" class="birthday-input" placeholder="Год..." value="{{ user.brt_year }}" maxlength="4">
+                          </div>
+                        </div>
+                      </div>
+                      <div style="display: flex;">
+                        <div class="profile-edit-div">
+                          <label></label>
+                        </div>
+                        <div style="display: block;">
+                          <div>
+                            <button type="submit" class="button-save">Сохранить</button>
+                          </div>
+                          <div style="margin-top: 20px; color: red;">
+                            {% if form.errors %}
+                              {% for field in form %}
+                                {% for error in field.errors %}
+                                  {{ form.error.field }}
+                                  {{ error|escape }}
+                                {% endfor %}
+                              {% endfor %}
+                              {% for error in form.non_field_errors %}
                                 {{ error|escape }}
                               {% endfor %}
-                            {% endfor %}
-                            {% for error in form.non_field_errors %}
-                              {{ error|escape }}
-                            {% endfor %}
-                          {% endif %}
+                            {% endif %}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </form>
+                    </form>
+                  </div>
                 </div>
               </div>
+              {% if not forloop.last %}<hr class="admin-hr">{% endif %}
+            {% endfor %}
+          {% else %}
+            <div style="text-align: center;">
+              <label style="color: #515151; font-size: 18px; font-weight: bold;">Нет пользователя с данным именем</label>
             </div>
-            {% if not forloop.last %}<hr class="admin-hr">{% endif %}
-          {% endfor %}
-        {% else %}
-          <div style="text-align: center;">
-            <label style="color: #515151; font-size: 18px; font-weight: bold;">Нет пользователя с данным именем</label>
-          </div>
-        {% endif %}
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>

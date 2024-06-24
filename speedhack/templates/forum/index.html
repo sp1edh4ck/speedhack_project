@@ -10,9 +10,9 @@
         <div class="frame-left">
           <div style="margin-bottom: 20px; display: flex;">
             {% if request.user.is_authenticated %}
-              <a href="{% url 'forum:post_create' %}" class="button-frame" rel="noopener noreferrer">Создать тему</a>
+              <a href="{% url 'forum:post_create' %}" class="button-frame">Создать тему</a>
             {% else %}
-              <a href="{% url 'users:login' %}" class="button-frame" rel="noopener noreferrer">Войти и создать тему</a>
+              <a href="{% url 'users:login' %}" class="button-frame">Войти и создать тему</a>
             {% endif %}
             <label href="" class="button-frame open-topics" id="menu_0_0">Открыть разделы</label>
           </div>
@@ -34,7 +34,7 @@
                 </form>
               </div>
               <div>
-                <a href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% elif request.path == '/forum/favourites/' %}{% url 'forum:favourites' %}{% endif %}" rel="noopener noreferrer"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
+                <a href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% elif request.path == '/forum/favourites/' %}{% url 'forum:favourites' %}{% endif %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
               </div>
             </div>
           {% endif %}
@@ -42,7 +42,7 @@
             <div style="margin: 20px 0 20px 0;">
               {% for ad in ads %}
                 {% if ad.author.rank != "заблокирован" %}
-                  <a style="text-decoration: none;" href="{% url 'forum:post_detail' ad.post_id %}" rel="noopener noreferrer">
+                  <a style="text-decoration: none;" href="{% url 'forum:post_detail' ad.post_id %}">
                     <div class="li-label-ad" style="font-size: 16px;">
                       <i class="fa-solid fa-bullhorn" style="color: #515151; margin-right: 15px;"></i><label style="color: #ff506f; cursor: pointer;">{{ ad.title }}</label>
                     </div>
@@ -60,7 +60,7 @@
               </form>
             </div>
             <div>
-              <a href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}" rel="noopener noreferrer"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
+              <a href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
             </div>
           </div> {% endcomment %}
           {% comment %} <hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;"> {% endcomment %}
@@ -70,7 +70,7 @@
                 {% if post.pinned %}
                   <div style="margin: 0 0 0 -15px; padding: 0 0 0 10px; border-left: 5px solid #2d2d2d;">
                 {% endif %}
-                    <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}" rel="noopener noreferrer">
+                    <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">
                       <div class="text-frame post">
                         <div class="text-frame-div" style="margin: 0 auto 0 0;">
                           <label class="text-frame-title">{{ post.title }}</label><br>
@@ -97,7 +97,7 @@
                   </div>
                 {% endif %}
               {% elif request.path == '/forum/my_topics/' %}
-                <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}" rel="noopener noreferrer">
+                <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">
                   <div class="text-frame post">
                     <div class="text-frame-div" style="margin: 0 auto 0 0;">
                       <label class="text-frame-title">{{ post.title }}</label><br>
@@ -122,7 +122,7 @@
                 </a>
               {% elif request.path == '/forum/favourites/' %}
                 {% if favourites_posts_count != 0 %}
-                  <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.post.id %}" rel="noopener noreferrer">
+                  <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.post.id %}">
                     <div class="text-frame post">
                       <div class="text-frame-div" style="margin: 0 auto 0 0;">
                         <label class="text-frame-title">{{ post.post.title }}</label><br>
@@ -158,7 +158,7 @@
                       </form>
                     </div>
                     <div>
-                      <a href="{% url 'forum:favourites' %}" rel="noopener noreferrer"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
+                      <a href="{% url 'forum:favourites' %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
                     </div>
                   </div>
                   <hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;">

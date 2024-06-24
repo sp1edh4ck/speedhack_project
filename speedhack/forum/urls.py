@@ -15,17 +15,18 @@ urlpatterns = [
     path('forum/favourites/', views.favourites, name='favourites'),
     path('forum/tickets/open/', views.ticket_form, name='ticket_form'),
     path('group/<slug:slug>/', views.group_free, name='group_filter_posts'),
-    path('profile/<str:username>/', views.profile, name='profile'),
+    path('members/<str:username>/', views.profile, name='profile'),
     # ? ----------
     # TODO: сделать для пользователей с привилегиями короткие ссылки на профиль
     # path('<str:username>/', views.profile, name='profile'),
     # ? ----------
-    path('profile/<str:username>/symps/', views.symps_view, name='symps_view'),
-    path('profile/<str:username>/messages/', views.messages_view, name='messages_view'),
-    path('profile/<str:username>/subscriptions/', views.subscriptions_view, name='subscriptions_view'),
-    path('profile/<str:username>/subscribers/', views.subscribers_view, name='subscribers_view'),
-    path('profile/<str:username>/info-edit/', views.info_edit, name='profile_info_edit'),
-    path('profile/<str:username>/upgrade/', views.upgrade_temp, name='profile_upgrade'),
+    path('members/<str:username>/symps/', views.symps_view, name='symps_view'),
+    path('members/<str:username>/messages/', views.messages_view, name='messages_view'),
+    path('members/<str:username>/subscriptions/', views.subscriptions_view, name='subscriptions_view'),
+    path('members/<str:username>/subscribers/', views.subscribers_view, name='subscribers_view'),
+    path('members/<str:username>/personal-details/', views.profile_personal_info_edit, name='profile_personal_info_edit'),
+    path('members/<str:username>/contact-details/', views.profile_contact_info_edit, name='profile_contact_info_edit'),
+    path('members/<str:username>/upgrade/', views.upgrade_temp, name='profile_upgrade'),
     path('forum/create_post/', views.post_create, name='post_create'),
     path('forum/<int:post_id>/', views.post_detail, name='post_detail'),
     path('forum/<int:post_id>/edit/', views.post_edit, name='post_edit'),
@@ -46,6 +47,7 @@ urlpatterns = [
     path('misc/successfully/', views.successfully, name='successfully'),
     path('misc/guarantor/', views.guarantor, name='guarantor'),
     path('misc/about/', views.about_us, name='about_us'),
+    path('misc/ads/', views.advertisement, name='advertisement'),
     # * ссылки на действия
     path('profile/<str:username>/deposit/<int:number>/', views.deposit, name='deposit'),
     path('profile/<str:username>/ban/', views.ban, name='ban'),

@@ -7,9 +7,9 @@
     <div class="frame_con">
       <div style="display: block;">
         <div class="switch-info-admin" style="max-height: 130px;">
-          <a href="{% url 'forum:admin_panel' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;" rel="noopener noreferrer">Основная админ-панель</a>
-          <a href="{% url 'forum:tickets' %}" class="switch-button active-tab" style="text-decoration: none; color: #d6d6d6;" rel="noopener noreferrer">Обращения</a>
-          <a href="{% url 'forum:ads' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;" rel="noopener noreferrer">Реклама</a>
+          <a href="{% url 'forum:admin_panel' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Основная админ-панель</a>
+          <a href="{% url 'forum:tickets' %}" class="switch-button active-tab" style="text-decoration: none; color: #d6d6d6;">Обращения</a>
+          <a href="{% url 'forum:ads' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Реклама</a>
         </div>
         <div class="frame-left-second-users" style="max-height: 120px;">
           <span style="color: gray; font-size: 18px;">Статистика форума</span>
@@ -38,22 +38,22 @@
           {% if tickets_open.count != 0 %}
             {% for ticket in tickets_open %}
               {% if ticket.closed == False %}
-                <a href="{% url 'forum:ticket' ticket.id %}" rel="noopener noreferrer">
+                <a href="{% url 'forum:ticket' ticket.id %}">
                   <div style="display: block;">
                     <div style="display: flex; padding: 0 20px 0 20px; margin-bottom: 10px;">
                       <div style="margin: 0 10px 0px 0; height: 40px;">
                         <img style="width: 40px; border-radius: 10px;" src="{{ ticket.author.avatar.url }}">
                       </div>
                       <div style="margin: 0 auto 0 0;">
-                        <a href="{% url 'forum:profile' ticket.author %}" class="admin-link" rel="noopener noreferrer">
+                        <a href="{% url 'forum:profile' ticket.author %}" class="admin-link">
                           <label class="users-username {% if ticket.author.username_style != 'gray-un' %}{{ ticket.author.username_style }}{% endif %}" {% if ticket.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ ticket.author }}</label>
                         </a>
                       </div>
                       <div class="admin-btn" style="margin-right: 5px;">
-                        <a class="admin-button" href="{% url 'forum:ticket_delete' ticket.id %}" rel="noopener noreferrer">Удалить</a>
+                        <a class="admin-button" href="{% url 'forum:ticket_delete' ticket.id %}">Удалить</a>
                       </div>
                       <div class="admin-btn">
-                        <a class="admin-button" href="{% url 'forum:ticket_oc' ticket.id 1 %}" rel="noopener noreferrer">Закрыть</a>
+                        <a class="admin-button" href="{% url 'forum:ticket_oc' ticket.id 1 %}">Закрыть</a>
                       </div>
                     </div>
                     <div class="admin-btn" style="display: flex; padding: 0 20px 0 20px;">
@@ -78,22 +78,22 @@
           {% if tickets_close.count != 0 %}
             {% for ticket in tickets_close %}
               {% if ticket.closed == True %}
-                <a href="{% url 'forum:ticket' ticket.id %}" rel="noopener noreferrer">
+                <a href="{% url 'forum:ticket' ticket.id %}">
                   <div style="display: block;">
                     <div style="display: flex; padding: 0 20px 0 20px; margin-bottom: 10px;">
                       <div style="margin: 0 10px 0px 0; height: 40px;">
                         <img style="width: 40px; border-radius: 10px;" src="{{ ticket.author.avatar.url }}">
                       </div>
                       <div style="margin: 0 auto 0 0;">
-                        <a href="{% url 'forum:profile' ticket.author %}" class="admin-link" rel="noopener noreferrer">
+                        <a href="{% url 'forum:profile' ticket.author %}" class="admin-link">
                           <label class="users-username" {% if ticket.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %}>{{ ticket.author }}</label>
                         </a>
                       </div>
                       <div class="admin-btn" style="margin-right: 5px;">
-                        <a class="admin-button" href="{% url 'forum:ticket_delete' ticket.id %}" rel="noopener noreferrer">Удалить</a>
+                        <a class="admin-button" href="{% url 'forum:ticket_delete' ticket.id %}">Удалить</a>
                       </div>
                       <div class="admin-btn">
-                        <a class="admin-button" href="{% url 'forum:ticket_oc' ticket.id 2 %}" rel="noopener noreferrer">Открыть</a>
+                        <a class="admin-button" href="{% url 'forum:ticket_oc' ticket.id 2 %}">Открыть</a>
                       </div>
                     </div>
                     <div class="admin-btn" style="display: flex; padding: 0 20px 0 20px;">
