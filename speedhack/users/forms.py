@@ -93,7 +93,7 @@ class CustomUserChangeForm(UserChangeForm):
         }
 
 
-class UserProfileForm(forms.ModelForm):
+class UserPersonalForm(forms.ModelForm):
     username_style = forms.CharField(required=False)
     banner = forms.CharField(required=False)
     description = forms.CharField(required=False)
@@ -107,7 +107,6 @@ class UserProfileForm(forms.ModelForm):
         model = CustomUser
         fields = (
             'description',
-            'tg_link',
             'avatar',
             'profile_background',
             'username_style',
@@ -124,6 +123,18 @@ class UserProfileForm(forms.ModelForm):
         }
 
 
+class UserContactForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = (
+            'tg_link',
+            'vk_link',
+            'discord_link',
+            'steam_link',
+            'github_link',
+        )
+
+
 class UserProfileAdminForm(forms.ModelForm):
     username = forms.CharField(required=False)
     rank = forms.CharField(required=False)
@@ -136,6 +147,10 @@ class UserProfileAdminForm(forms.ModelForm):
     profile_sub = forms.CharField(required=False)
     time_buy_profile_sub = forms.CharField(required=False)
     tg_link = forms.CharField(required=False)
+    vk_link = forms.CharField(required=False)
+    discord_link = forms.CharField(required=False)
+    steam_link = forms.CharField(required=False)
+    github_link = forms.CharField(required=False)
     scam = forms.CharField(required=False)
     username_style = forms.CharField(required=False)
     gender = forms.CharField(required=False)
@@ -158,6 +173,10 @@ class UserProfileAdminForm(forms.ModelForm):
             'market_privilege',
             'time_buy_market_privilege',
             'tg_link',
+            'vk_link',
+            'discord_link',
+            'steam_link',
+            'github_link',
             'description',
             'occupation',
             'interests',

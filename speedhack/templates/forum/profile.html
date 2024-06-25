@@ -51,7 +51,7 @@
                   </div>
                 </div> {% endcomment %}
                 {% if user.rank != 'заблокирован' %}
-                  <a class="button-edit" style="margin-top: 5px;" href="{% url 'forum:profile_info_edit' user.username %}">Редактировать</a>
+                  <a class="button-edit" style="margin-top: 5px;" href="{% url 'forum:profile_personal_info_edit' user.username %}">Редактировать</a>
                 {% endif %}
               {% else %}
                 {% if user.is_authenticated %}
@@ -250,7 +250,7 @@
               </div>
               <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
               <div>
-                <div style="display: flex;">
+                <div class="author-info-title">
                   <div style="min-width: 165px; max-width: 165px;">
                     <label style="color: gray;">Регистрация: </label>
                   </div>
@@ -259,7 +259,7 @@
                   </div>
                 </div>
                 {% if author.gender != 'Не выбрано' and author.gender != '' %}
-                  <div style="display: flex;">
+                  <div class="author-info-title">
                     <div style="min-width: 165px; max-width: 165px;">
                       <label style="color: gray;">Пол: </label>
                     </div>
@@ -269,7 +269,7 @@
                   </div>
                 {% endif %}
                 {% if author.brt_day != "" and author.brt_month != "Месяц" %}
-                  <div style="display: flex;">
+                  <div class="author-info-title">
                     <div style="min-width: 165px; max-width: 165px;">
                       <label style="color: gray;">День рождения: </label>
                     </div>
@@ -286,7 +286,7 @@
                   </div>
                 {% endif %}
                 {% if author.occupation != '' %}
-                  <div style="display: flex;">
+                  <div class="author-info-title">
                     <div style="min-width: 165px; max-width: 165px;">
                       <label style="color: gray;">Род занятий: </label>
                     </div>
@@ -296,7 +296,7 @@
                   </div>
                 {% endif %}
                 {% if author.interests != '' %}
-                  <div style="display: flex;">
+                  <div class="author-info-title">
                     <div style="min-width: 165px; max-width: 165px;">
                       <label style="color: gray;">Интересы: </label>
                     </div>
@@ -306,12 +306,52 @@
                   </div>
                 {% endif %}
                 {% if author.tg_link != '' %}
-                  <div style="display: flex;">
+                  <div class="author-info-title">
                     <div style="min-width: 165px; max-width: 165px;">
                       <label style="color: gray;">Telegram: </label>
                     </div>
                     <div>
                       <label style="color: #d6d6d6;"><a href="https://t.me/{{ author.tg_link }}" class="profile-link" target="_blank" rel="noopener noreferrer">Открыть чат в телеграм</a> <i class="fa fa-clone" style="width: 15px; height: 15px;"></i></label><br>
+                    </div>
+                  </div>
+                {% endif %}
+                {% if author.vk_link != '' %}
+                  <div class="author-info-title">
+                    <div style="min-width: 165px; max-width: 165px;">
+                      <label style="color: gray;">ВКонтакте: </label>
+                    </div>
+                    <div>
+                      <label style="color: #d6d6d6;"><a href="{{ author.vk_link }}" class="profile-link" target="_blank" rel="noopener noreferrer">{{ author.vk_link }}</a></i></label><br>
+                    </div>
+                  </div>
+                {% endif %}
+                {% if author.discord_link != '' %}
+                  <div class="author-info-title">
+                    <div style="min-width: 165px; max-width: 165px;">
+                      <label style="color: gray;">Discord: </label>
+                    </div>
+                    <div>
+                      <label style="color: #d6d6d6; cursor: auto;">{{ author.discord_link }}</label><br>
+                    </div>
+                  </div>
+                {% endif %}
+                {% if author.steam_link != '' %}
+                  <div class="author-info-title">
+                    <div style="min-width: 165px; max-width: 165px;">
+                      <label style="color: gray;">Steam: </label>
+                    </div>
+                    <div>
+                      <label style="color: #d6d6d6;"><a href="{{ author.steam_link }}" class="profile-link" target="_blank" rel="noopener noreferrer">{{ author.steam_link }}</a></label><br>
+                    </div>
+                  </div>
+                {% endif %}
+                {% if author.github_link != '' %}
+                  <div class="author-info-title">
+                    <div style="min-width: 165px; max-width: 165px;">
+                      <label style="color: gray;">GitHub: </label>
+                    </div>
+                    <div>
+                      <label style="color: #d6d6d6;"><a href="{{ author.github_link }}" class="profile-link" target="_blank" rel="noopener noreferrer">{{ author.github_link }}</a></label><br>
                     </div>
                   </div>
                 {% endif %}

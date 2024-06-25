@@ -2,7 +2,30 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from users.forms import CustomUserChangeForm
-from users.models import CustomUser, IpUser
+from users.models import CustomUser, IpUser, BannedUsers
+
+
+class BannedUsersAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('Information',
+            {'fields': (
+                'user',
+                'admin',
+                'ban_date',
+                'ban_reason',
+                'ban_time_value',
+                'ban_time_item',
+            )}
+        ),
+    )
+    list_display = (
+        "user",
+        "admin",
+        "ban_date",
+        "ban_reason",
+        "ban_time_value",
+        "ban_time_item",
+    )
 
 
 class CustomUserAdmin(UserAdmin):
@@ -15,6 +38,10 @@ class CustomUserAdmin(UserAdmin):
                 'balance',
                 'subscriber',
                 'tg_link',
+                'vk_link',
+                'discord_link',
+                'steam_link',
+                'github_link',
                 'rank',
                 'rank_lvl',
                 'privilege',
@@ -89,5 +116,6 @@ class IpUsersAdmin(UserAdmin):
         'user',
     )
 
+admin.site.register(BannedUsers, BannedUsersAdmin)
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(IpUser)

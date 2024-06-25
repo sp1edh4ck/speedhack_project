@@ -7,8 +7,8 @@ from django_ratelimit.decorators import ratelimit
 from django.utils.http import unquote
 
 from market.models import Market
-from users.forms import UserProfileAdminForm, UserProfileForm
-from users.models import CustomUser, IpUser
+from users.forms import UserProfileAdminForm, UserPersonalForm, UserContactForm
+from users.models import CustomUser, IpUser, BannedUsers
 
 from .forms import (AdsForm, AnswerForm, CommentForm, DepositForm, HelpForm,
                     PostForm, ProfileCommentForm)
@@ -17,28 +17,16 @@ from .models import (Ads, Comment, CommentSymp, Favourites, Follow, Forum,
                      User, Viewer)
 
 
-def permission_banned(redirect_path, render_path):
-    def permission_banned_func(func):
-        def check_ban(request):
-            if request.user.rank == "заблокирован":
-                result = redirect(redirect_path)
-            else:
-                result = render(request, render_path)
-            return result
-        return check_ban
-    return permission_banned_func
-
-
-def permission_auth_banned(redirect_path, render_path):
-    def permission_auth_banned_func(func):
-        def check_auth_ban(request):
-            if request.user.is_authenticated and request.user.rank == "заблокирован":
-                result = banned_redirect(redirect_path)
-
-
-def permission_level(func):
-    def check_level():
-        pass
+# def permission_banned(redirect_path, render_path):
+#     def permission_banned_func(func):
+#         def check_ban(request):
+#             if request.user.rank == "заблокирован":
+#                 result = redirect(redirect_path)
+#             else:
+#                 result = render(request, render_path)
+#             return result
+#         return check_ban
+#     return permission_banned_func
 
 
 def pagination_post(request, post_list):
@@ -52,7 +40,6 @@ def pagination_comments(request, comment_list):
 
 
 # @ratelimit(key='user_or_ip', rate='17/m')
-# @permission_banned(redirect_path='forum:banned', render_path='users/banned.html')
 def banned_redirect(request):
     if request.user.rank == "заблокирован":
         return redirect('forum:banned')
@@ -91,7 +78,6 @@ def error404_page(request):
 
 
 # @ratelimit(key='user_or_ip', rate='17/m')
-@permission_banned(redirect_path='', render_path='forum/index.html')
 def index(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
@@ -172,6 +158,8 @@ def profile(request, username):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     author = get_object_or_404(User, username=username)
+    if not BannedUsers.objects.filter(user=author).exists():
+        pass
     form = ProfileCommentForm(request.POST or None)
     if form.is_valid() and request.user.is_authenticated:
         form = form.save(commit=False)
@@ -354,7 +342,7 @@ def profile_personal_info_edit(request, username):
         return banned_redirect(request)
     if request.path != f"/members/{request.user.username}/personal-details/":
         return redirect('forum:empty_page')
-    form = UserProfileForm(
+    form = UserPersonalForm(
         request.POST or None,
         files=request.FILES or None,
         instance=request.user
@@ -378,7 +366,7 @@ def profile_contact_info_edit(request, username):
         return banned_redirect(request)
     if request.path != f"/members/{request.user.username}/contact-details/":
         return redirect('forum:empty_page')
-    form = UserProfileForm(
+    form = UserContactForm(
         request.POST or None,
         files=request.FILES or None,
         instance=request.user

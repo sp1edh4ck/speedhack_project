@@ -78,6 +78,14 @@ BUY_PRIVILEGE = [
     ("уник", "уник"),
 ]
 
+BAN_ITEM = [
+    ("не выбранно", "не выбранно"),
+    ("минут", "минут"),
+    ("часов", "часов"),
+    ("дней", "дней"),
+]
+
+
 USERNAME_STYLE = [
     ("gray-un", ".gray-un"),
     ("white-shadow-un", ".white-shadow-un"),
@@ -139,12 +147,16 @@ class CustomUser(AbstractUser):
     privilege = models.TextField(verbose_name='Ранг', choices=PRIVILEGE, default=PRIVILEGE[0][0])
     market_privilege = models.TextField(verbose_name='Привилегия на маркете', choices=MARKET_PRIVILEGE, default=MARKET_PRIVILEGE[0][0])
     buy_privilege = models.TextField(verbose_name='Платные привилегии', choices=BUY_PRIVILEGE, default=BUY_PRIVILEGE[0][0])
-    time_buy_privilege = models.DateField(verbose_name='Дата покупки привилегии', default=timezone.now())
-    time_buy_profile_sub = models.DateField(verbose_name='Дата покупки фона профиля', default=timezone.now())
-    time_buy_market_privilege = models.DateField(verbose_name='Дата покупки доступа к маркету', default=timezone.now())
+    time_buy_privilege = models.DateField(verbose_name='Дата покупки привилегии', default=timezone.now)
+    time_buy_profile_sub = models.DateField(verbose_name='Дата покупки фона профиля', default=timezone.now)
+    time_buy_market_privilege = models.DateField(verbose_name='Дата покупки доступа к маркету', default=timezone.now)
     profile_sub = models.BooleanField(verbose_name='Доступ к фону профиля', default=False)
     messages = models.IntegerField(verbose_name='Сообщения', default=0)
     tg_link = models.CharField(verbose_name='Ссылка на телеграм', max_length=70, default='', blank=True)
+    vk_link = models.CharField(verbose_name='Ссылка на ВКонтакте', max_length=70, default='', blank=True)
+    discord_link = models.CharField(verbose_name='Ссылка на дискорд', max_length=70, default='', blank=True)
+    steam_link = models.CharField(verbose_name='Ссылка на стим', max_length=70, default='', blank=True)
+    github_link = models.CharField(verbose_name='Ссылка на гитхаб', max_length=70, default='', blank=True)
     subscriber = models.IntegerField(verbose_name='Подписчики', default=0)
     scam = models.BooleanField(verbose_name='Скам', default=False)
     avatar = models.ImageField(
@@ -183,6 +195,25 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
+class BannedUsers(models.Model):
+    user = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        related_name='take_ban',
+        verbose_name='Забаненый пользователь',
+    )
+    admin = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        related_name='add_ban',
+        verbose_name='Администратор выдавший бан',
+    )
+    ban_date = models.DateTimeField(verbose_name='Дата блокировки', default=timezone.now)
+    ban_reason = models.TextField(verbose_name='Причина блокировки', default='')
+    ban_time_value = models.IntegerField(verbose_name='Время')
+    ban_time_item = models.TextField(verbose_name='Значение', choices=BAN_ITEM, default=BAN_ITEM[0][0])
 
 
 class IpUser(models.Model):

@@ -417,3 +417,8 @@
   padding: 15px;
   border-radius: 10px;
 }
+
+.author-info-title {
+  display: flex;
+  padding-top: 5px;
+}

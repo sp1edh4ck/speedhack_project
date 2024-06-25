@@ -51,7 +51,7 @@
               {% endfor %}
             </div>
           {% else %}
-            <hr style="margin: 20px 0; border: 1px solid #444444; border-radius: 10px;">
+            <hr style="margin: 20px 0; border: 1px solid #2d2d2d; border-radius: 10px;">
           {% endif %}
           {% comment %} <div class="search-header search-header-else">
             <div>
@@ -63,7 +63,7 @@
               <a href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
             </div>
           </div> {% endcomment %}
-          {% comment %} <hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;"> {% endcomment %}
+          {% comment %} <hr style="margin-bottom: 20px; border: 1px solid #2d2d2d; border-radius: 10px;"> {% endcomment %}
           {% for post in objects %}
             {% if post.author.rank != "заблокирован" %}
               {% if request.path == '/' %}
@@ -161,7 +161,7 @@
                       <a href="{% url 'forum:favourites' %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
                     </div>
                   </div>
-                  <hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;">
+                  <hr style="margin-bottom: 20px; border: 1px solid #2d2d2d; border-radius: 10px;">
                   <div style="text-align: center;">
                     <label style="color: #515151; font-size: 18px; font-weight: bold;">У вас нет постов в избранном</label>
                   </div>
