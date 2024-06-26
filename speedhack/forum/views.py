@@ -11,7 +11,7 @@ from users.forms import UserProfileAdminForm, UserPersonalForm, UserContactForm
 from users.models import CustomUser, IpUser, BannedUsers
 
 from .forms import (AdsForm, AnswerForm, CommentForm, DepositForm, HelpForm,
-                    PostForm, ProfileCommentForm)
+                    PostForm, ProfileCommentForm, UserBanForm)
 from .models import (Ads, Comment, CommentSymp, Favourites, Follow, Forum,
                      Group, Helper, HelpForum, Like, ProfileComment, Symp,
                      User, Viewer)
@@ -738,6 +738,21 @@ def admin_panel(request):
         'users_ban_list': users_ban_list,
     }
     return render(request, 'forum/admin.html', context)
+
+
+@login_required
+def users_bans(request):
+    if request.user.is_authenticated:
+        pass
+    if request.user.rank_lvl < "4":
+        return redirect('forum:empty_page')
+    users_list = CustomUser.objects.all()
+    users_list_ban = CustomUser.objects.filter(rank="заблокирован")
+    context = {
+        'users_list': users_list,
+        'users_list_ban': users_list_ban,
+    }
+    return render(request, 'forum/admin_users_bans.html', context)
 
 
 @login_required

@@ -31,6 +31,7 @@ urlpatterns = [
     path('forum/<int:post_id>/', views.post_detail, name='post_detail'),
     path('forum/<int:post_id>/edit/', views.post_edit, name='post_edit'),
     path('admin-panel/', views.admin_panel, name='admin_panel'),
+    path('admin-panel/users-bans/', views.users_bans, name='users_bans'),
     path('admin-panel/tickets/', views.tickets, name='tickets'),
     path('admin-panel/ads/', views.ads, name='ads'),
     path('tickets/<str:username>/', views.my_tickets, name='my_tickets'),

@@ -1,6 +1,6 @@
 from django import forms
 
-from users.models import CustomUser
+from users.models import CustomUser, BannedUsers
 
 from .models import Ads, Comment, Forum, HelpAnswer, HelpForum, ProfileComment
 
@@ -9,6 +9,12 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Forum
         fields = ('group', 'title', 'text', 'image', 'notification', 'hide', 'permission', 'subscribe', 'closed', 'edit', 'open_activities', 'pinned',)
+
+
+class UserBanForm(forms.ModelForm):
+    class Meta:
+        model = BannedUsers
+        fields = ('user', 'admin', 'ban_date', 'ban_reason', 'ban_time_value', 'ban_time_item',)
 
 
 # class ArbitrationPostForm(forms.ModelForm):

@@ -6,8 +6,9 @@
   <div class="main">
     <div class="frame_con">
       <div style="display: block;">
-        <div class="switch-info-admin" style="max-height: 130px;">
+        <div class="switch-info-admin" style="max-height: 175px;">
           <a href="{% url 'forum:admin_panel' %}" class="switch-button active-tab" style="text-decoration: none; color: #d6d6d6;">Основная админ-панель</a>
+          <a href="{% url 'forum:users_bans' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Панель блокировки</a>
           <a href="{% url 'forum:tickets' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Обращения</a>
           <a href="{% url 'forum:ads' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Реклама</a>
         </div>
