@@ -14,7 +14,7 @@ class PostForm(forms.ModelForm):
 class UserBanForm(forms.ModelForm):
     class Meta:
         model = BannedUsers
-        fields = ('user', 'admin', 'ban_date', 'ban_reason', 'ban_time_value', 'ban_time_item',)
+        fields = ('user', 'admin', 'ban_reason', 'ban_time_value', 'ban_time_item',)
 
 
 # class ArbitrationPostForm(forms.ModelForm):

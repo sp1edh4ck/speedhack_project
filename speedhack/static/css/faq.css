@@ -1,7 +1,3 @@
-.button-group {
-  display: block;
-}
-
 .button-list {
   font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
   font-size: 16px;
@@ -23,19 +19,6 @@
 
 .faq-tech-ques {
   color: #d6d6d6;
-}
-
-.faq-tech-answer {
-  color: gray;
-}
-
-.faq-link {
-  color: gray;
-  transition: all 0.5s ease 0s;
-}
-
-.faq-link:hover {
-  color: #ff506f;
 }
 
 .button-list {

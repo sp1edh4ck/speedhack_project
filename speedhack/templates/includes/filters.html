@@ -7,6 +7,17 @@
           <li class="li-label-ts {% if request.path == '/' %}active-menu{% endif %}">
             <i class="fas fa-globe-americas fa-lg icons-index"></i>
             <label class="text-section-li">Все обсуждения</label>
+            <div style="float: right;">
+              <i class="fa-solid fa-magnifying-glass icons-index" style="margin: 0;"></i>
+            </div>
+          </li>
+        </ul>
+      </a>
+      <a class="li-label-ts-a" href="{% url 'forum:viewed_threads' %}">
+        <ul style="list-style-type: none;">
+          <li class="li-label-ts {% if request.path == '/forum/viewed_threads/' %}active-menu{% endif %}">
+            <i class="fas fa-user-alt fa-lg icons-index"></i>
+            <label class="text-section-li">Прочитанные темы</label>
           </li>
         </ul>
       </a>

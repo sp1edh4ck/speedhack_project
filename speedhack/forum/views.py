@@ -81,6 +81,23 @@ def error404_page(request):
 def index(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
+    user_symps_count = Symp.objects.filter(user=request.user).count()
+    symp_type = ""
+    if user_symps_count < 20:
+        user_symps_count = 20 - user_symps_count
+        symp_type = "Местный"
+    elif user_symps_count > 19 and user_symps_count < 200:
+        user_symps_count = 200 - user_symps_count
+        symp_type = "Постоялец"
+    elif user_symps_count > 199 and user_symps_count < 1000:
+        user_symps_count = 1000 - user_symps_count
+        symp_type = "Эксперт"
+    elif user_symps_count > 999 and user_symps_count < 4000:
+        user_symps_count = 4000 - user_symps_count
+        symp_type = "Гуру"
+    elif user_symps_count > 3999 and user_symps_count < 10000:
+        user_symps_count = 10000 - user_symps_count
+        symp_type = "Искусственный интелект"
     search_query = request.GET.get('search', '')
     if search_query:
         posts = Forum.objects.filter(title__icontains=search_query)
@@ -89,7 +106,28 @@ def index(request):
     ads = Ads.objects.all()
     context = {
         'ads': ads,
+        'user_symps_count': user_symps_count,
+        'symp_type': symp_type,
         'objects': pagination_post(request, posts),
+    }
+    return render(request, 'forum/index.html', context)
+
+
+@ratelimit(key='user_or_ip', rate='17/m')
+@login_required
+def viewed_threads(request):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    user = request.user
+    search_query = request.GET.get('search', '')
+    if search_query:
+        viewed_posts = Viewer.objects.filter(title__icontains=search_query, user=user)
+    else: 
+        viewed_posts = Viewer.objects.filter(user=user)
+    ads = Ads.objects.all()
+    context = {
+        'ads': ads,
+        'objects': pagination_post(request, viewed_posts)
     }
     return render(request, 'forum/index.html', context)
 
@@ -742,15 +780,25 @@ def admin_panel(request):
 
 @login_required
 def users_bans(request):
-    if request.user.is_authenticated:
-        pass
     if request.user.rank_lvl < "4":
         return redirect('forum:empty_page')
-    users_list = CustomUser.objects.all()
-    users_list_ban = CustomUser.objects.filter(rank="заблокирован")
+    form = UserBanForm(
+        request.POST or None,
+        instance=request.user,
+    )
+    if request.method == 'POST':
+        if form.is_valid() and request.user.is_authenticated:
+            pre_form = form.save(commit=False)
+            pre_form.user = request.POST.get('user')
+            pre_form.admin = request.user
+            pre_form.ban_reason = request.POST.get('ban_reason')
+            pre_form.ban_time_value = request.POST.get('ban_time_value')
+            pre_form.ban_time_item = request.POST.get('ban_time_item')
+            pre_form.save()
+            return redirect('forum:users_bans')
+    ban_list = BannedUsers.objects.all()
     context = {
-        'users_list': users_list,
-        'users_list_ban': users_list_ban,
+        'ban_list': ban_list,
     }
     return render(request, 'forum/admin_users_bans.html', context)
 

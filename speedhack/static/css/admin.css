@@ -62,12 +62,6 @@
   border-radius: 10px;
 }
 
-.ads-description {
-  max-width: 650px;
-  max-height: 120px;
-  padding: 7px;
-}
-
 .ads-label {
   color: #d6d6d6;
   font-size: 18px;
@@ -96,11 +90,10 @@
 
 .all-style-admin-user {
   color: #d6d6d6;
-  
 }
 
 .admin-edit-width {
-  max-width: 570px;
+  max-width: 540px;
 }
 
 .edit-form-user {

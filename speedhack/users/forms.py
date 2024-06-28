@@ -14,6 +14,7 @@ User = get_user_model()
 
 class CustomUserCreationForm(UserCreationForm):
     username = forms.CharField(
+        min_length=4,
         max_length=15,
         widget=forms.TextInput(attrs={'class': 'field-input',})
     )

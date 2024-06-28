@@ -28,15 +28,58 @@
         <div class="frame-left-second-users">
           <span style="color: gray; font-size: 18px;">Статистика форума</span>
           <div style="display: block;">
-            <div style="margin-top: 15px; color: gray;">
-              <label>Пользователей:</label>
-              <label style="color: #d6d6d6;">{{ users_list.count|bf_number }}</label>
-            </div>
             <div style="margin-top: 3px; color: gray;">
-              <label>Пользователей в бане:</label>
-              <label style="color: #d6d6d6;">{{ users_ban_list.count|bf_number }}</label>
+              <label>Бан-записей:</label>
+              <label style="color: #d6d6d6;">{{ ban_list.count|bf_number }}</label>
             </div>
           </div>
+        </div>
+      </div>
+      <div>
+        <div class="admin-frame-right" style="margin: 0 0 15px 0; padding: 20px 0 0 20px; min-height: 50px; max-width: 786px;">
+          <a data-tab="#tickets_open" class="button-tools active-tab">Форма для блокировки</a>
+          <a data-tab="#tickets_close" class="button-tools">Записи банов</a>
+        </div>
+        <div class="tabItem frame-users active-tab" id="ads_create" style="max-width: 806px;{% if tickets_open_count == 0 %}max-height: 65px;{% elif tickets_open_count == 1 %}max-height: 80px;{% elif tickets_open_count == 2 %}max-height: 185px;{% elif tickets_open_count == 3 %}max-height: 290px;{% endif %}">
+          <form method="post" action="{{ request.path }}">
+            {% csrf_token %}
+            <div class="ticket-div" style="height: 55px; margin-bottom: 0;">
+              <label class="ads-label">Пользователь:</label>
+              <div>
+                <input type="text" name="user" id="id_user" class="field field-height" style="max-width: 200px; max-height: 36px; padding: 0 7px; margin-bottom: 5px;" placeholder="Имя пользователя..." maxlength="15">
+              </div>
+            </div>
+            <div class="ticket-div" style="min-height: 20px; margin-bottom: 0;">
+              <label class="ads-label">Администротор:</label>
+              <div>
+                <input type="text" name="admin" id="id_admin" class="field field-height" style="max-width: 200px; max-height: 36px; padding: 0 7px; margin-bottom: 5px;" placeholder="Имя администратора..." maxlength="15" value="{{ request.user.username }}">
+                <div style="color: gray; margin-bottom: 15px;">
+                  <label style="color: #444444; font-weight: bold;">Ваш username</label>
+                </div>
+              </div>
+            </div>
+            <div class="ticket-div" style="max-height: 55px; margin-bottom: 0;">
+              <label class="ads-label">Причина блокировки:</label>
+              <div>
+                <input type="text" name="ban_reason" id="id_ban_reason" class="field field-height" style="max-width: 530px; max-height: 36px; padding: 0 7px;" placeholder="Объяснение..." maxlength="70">
+              </div>
+            </div>
+            <div class="ticket-div" style="margin-bottom: 0;">
+              <label class="ads-label">Длительность бана:</label>
+              <div>
+                <input type="integer" name="ban_time_value" id="id_ban_time_value" class="field field-height" style="max-width: 80px; max-height: 36px; padding: 0 7px;" placeholder="Число..." maxlength="5" autocomplete="off">
+              </div>
+              <div style="margin-left: 10px;">
+                <select name="ban_time_item" id="id_ban_time_item" class="field field-height" style="max-width: 150px;">
+                  <option value="не выбранно" selected="">не выбранно</option>
+                  <option value="минуты">минуты</option>
+                  <option value="часы">часы</option>
+                  <option value="дни">дни</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="button-level" style="margin-left: 210px; margin-top: 0;">Создать запись</button>
+          </form>
         </div>
       </div>
     </div>

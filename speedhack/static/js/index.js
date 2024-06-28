@@ -19,6 +19,16 @@ sandwichmenu_1_1.addEventListener('click', function(e) {
 	js_menu_1_1.classList.toggle('active-menu');
 });
 
+const popup_sandwichmenu_1_1 = document.querySelector('#popup_menu_1_1');
+const popup_js_menu_1_1 = document.querySelector('#popup_menu_1');
+
+popup_sandwichmenu_1_1.addEventListener('click', function(e) {
+	e.preventDefault();
+	popup_sandwichmenu_1_1.classList.toggle('active-menu');
+	popup_js_menu_1_1.classList.toggle('active-menu');
+});
+
+
 const sandwichmenu_1_2 = document.querySelector('#menu_1_2');
 const js_menu_1_2 = document.querySelector('.first-second-li-label');
 
