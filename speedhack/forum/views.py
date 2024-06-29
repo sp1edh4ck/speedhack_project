@@ -1077,6 +1077,13 @@ def advertisement(request):
     return render(request, 'forum/advertisement.html', context)
 
 
+@login_required
+def safe_deal(request):
+    if request.user.is_authenticated and request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    return render(request, 'forum/safe_deal.html')
+
+
 # Система личных сообщений
 # def dialogs(self, request):
 #     chats = Message.objects.filter(author=request.user, user=request.user)

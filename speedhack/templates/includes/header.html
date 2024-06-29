@@ -60,7 +60,9 @@
             {% comment %} <a class="window-button-second" href="{% url 'market:my_buy_accs' %}">Мои покупки</a> {% endcomment %}
             <hr style="margin: 5px 0px; border: 1px solid #444444;">
             <a class="window-button-second" href="{% url 'forum:my_topics' %}">Мои темы</a>
+            <a class="window-button-second" href="{% url 'forum:messages_view' request.user.username %}">Мои сообщения</a>
             <a class="window-button-second" href="{% url 'forum:my_tickets' request.user.username %}">Мои тикеты</a>
+            <a class="window-button-second" href="{% url 'forum:favourites' %}">Избранное</a>
             <a class="window-button-second" href="{% url 'forum:profile_personal_info_edit' user.username %}">Настройки профиля</a>
             {% comment %} <a class="window-button-second" href="#">Switch to English</a> {% endcomment %}
             <hr style="margin: 5px 0px; border: 1px solid #444444;">

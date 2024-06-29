@@ -50,6 +50,7 @@ urlpatterns = [
     path('misc/guarantor/', views.guarantor, name='guarantor'),
     path('misc/about/', views.about_us, name='about_us'),
     path('misc/ads/', views.advertisement, name='advertisement'),
+    path('payment/safe-deal/', views.safe_deal, name='safe_deal'),
     # * ссылки на действия
     path('profile/<str:username>/deposit/<int:number>/', views.deposit, name='deposit'),
     path('profile/<str:username>/ban/', views.ban, name='ban'),
