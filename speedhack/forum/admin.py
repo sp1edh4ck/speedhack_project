@@ -16,6 +16,7 @@ class ForumAdmin(admin.ModelAdmin):
     list_editable = ('group',)
     search_fields = ('group',)
     list_filter = ('pub_date',)
+    raw_id_fields = ['author',]
     empty_value_display = '-пусто-'
 
 
@@ -152,7 +153,7 @@ class MaecenasAdmin(admin.ModelAdmin):
         'active',
         'description',
     )
-    ordering = ('amount', 'active',)
+    # raw_id_fields = ['author',]
     search_fields = ('amount',)
 
 admin.site.register(Forum, ForumAdmin)

@@ -107,38 +107,40 @@
           </div>
           {% include 'includes/filters.html' %}
         </div>
-        <div class="frame-left" style="min-width: 230px; max-width: 230px; padding: 20px;">
-          <div class="avatar-username" style="margin-bottom: 10px;">
-            <div>
-              <img class="user-avatar" src="{{ request.user.avatar.url }}">
-              {% if request.user.is_online == True %}
-                <div class="online online-avatar-index"></div>
-              {% endif %}
-            </div>
-            <div style="display: block;">
-              <div style="display: block;">
-                <a href="{% url 'forum:profile' request.user.username %}" class="post-author-link">
-                  <label class="text-frame-username {% if request.user.username_style != 'gray-un' and request.user.rank != 'заблокирован' %}{{ request.user.username_style }}{% endif %}" {% if request.user.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ request.user.username }}</label>
-                </a>
+        {% if request.user.is_authenticated %}
+          <div class="frame-left" style="min-width: 230px; max-width: 230px; padding: 20px;">
+            <div class="avatar-username" style="margin-bottom: 10px;">
+              <div>
+                <img class="user-avatar" src="{{ request.user.avatar.url }}">
+                {% if request.user.is_online == True %}
+                  <div class="online online-avatar-index"></div>
+                {% endif %}
               </div>
-              <div class="text-frame-text" style="margin: 0;">{{ request.user.description }}</div>
+              <div style="display: block;">
+                <div style="display: block;">
+                  <a href="{% url 'forum:profile' request.user.username %}" class="post-author-link">
+                    <label class="text-frame-username {% if request.user.username_style != 'gray-un' and request.user.rank != 'заблокирован' %}{{ request.user.username_style }}{% endif %}" {% if request.user.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ request.user.username }}</label>
+                  </a>
+                </div>
+                <div class="text-frame-text" style="margin: 0;">{{ request.user.description }}</div>
+              </div>
+            </div>
+            <div class="user-stats">
+              <div style="width: 50%">
+                <img src="{% static 'images/heart_gray.png' %}" class="symp-img"><label class="symp-label">{{ request.user.symper.count|bf_number }}</label>
+              </div>
+              <div style="width: 50%">
+                <img src="{% static 'images/messages.png' %}" class="symp-img"><label class="symp-label">{{ request.user.comments.count|bf_number }}</label>
+              </div>
+              <div style="color: #ececec; margin: 20px 0 10px 0;">
+                Наберите ещё {{ symp_result }} {{ symp_result|ru_plural:"симпатию,симпатии,симпатий" }}, и вы получите группу {%if symp_type == "Местный" %}{{ symp_type }}{% endif %}
+              </div>
+              <div>
+                <a href="{% url 'forum:profile_upgrade' user.username %}" class="button-frame" style="padding: 7px 0;">Платное повышение прав</a>
+              </div>
             </div>
           </div>
-          <div class="user-stats">
-            <div style="width: 50%">
-              <img src="{% static 'images/heart_gray.png' %}" class="symp-img"><label class="symp-label">{{ request.user.symper.count|bf_number }}</label>
-            </div>
-            <div style="width: 50%">
-              <img src="{% static 'images/messages.png' %}" class="symp-img"><label class="symp-label">{{ request.user.comments.count|bf_number }}</label>
-            </div>
-            <div style="color: #ececec; margin: 20px 0 10px 0;">
-              Наберите ещё {{ symp_result}} {{ symp_result|ru_plural:"симпатию,симпатии,симпатий" }}, и вы получите группу {%if symp_type == "Местный" %}{{ symp_type }}{% endif %}
-            </div>
-            <div>
-              <a href="{% url 'forum:profile_upgrade' user.username %}" class="button-frame" style="padding: 7px 0;">Платное повышение прав</a>
-            </div>
-          </div>
-        </div>
+        {% endif %}
         <div class="frame-left" style="min-width: 230px; max-width: 230px; padding: 20px;">
           <div style="color: #949494; margin-bottom: 10px;">Меценат форума {{ maecenas.date_created|date:"d.m" }} - {{ maecenas.date_until|date:"d.m" }}</div>
           <div class="avatar-username" style="margin-bottom: 10px;">
@@ -213,7 +215,7 @@
               Почта для жалоб:
             </div>
             <div style="color: #ececec;">
-              zelenka_abuse@proton.me
+              speedhack_sup@mail.ru
             </div>
           </div>
         </div>

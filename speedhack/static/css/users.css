@@ -138,7 +138,8 @@
 }
 
 .online {
-  background: #0dff00;
+  /* background: #0dff00; */
+  background: #ff506f;
   border: 2px solid black;
   border-radius: 50%;
   width: 10px;
