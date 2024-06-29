@@ -72,10 +72,10 @@
           <a data-tab="#users_list_byComments" class="button-tools">Больше всех сообщений</a>
           <a data-tab="#users_list_byStaff" class="button-tools">Команда форума</a>
         </div>
-        <div id="users_list_bySymps" class="tabItem frame-right-users users-display active-tab" style="{% if users_list_bySymps.count == 0 %}max-height: 60px;{% elif users_list_bySymps.count == 1 %}max-height: 100px;{% elif users_list_bySymps.count == 2 %}max-height: 210px;{% elif users_list_bySymps.count == 3 %}max-height: 320px;{% endif %}">
+        <div id="users_list_bySymps" class="tabItem frame-right-users users-display active-tab">
           {% if users_list_bySymps.count != 0 %}
             {% for user in users_list_bySymps %}
-              <div class="users-div" style="{% if user.description != '' %}min-height: 100px;{% endif %}">
+              <div class="users-div" style="{% if user.description != '' %}min-height: 110px; max-height: 110px;{% else %}min-height: 90px; max-height: 90px;{% endif %}">
                 <div style="padding: 10px 0 10px 10px;">
                   <a class="a-users" href="{% url 'forum:profile' user.username %}">
                     <img style="width: 60px; border-radius: 50px;" src="{{ user.avatar.url }}">
@@ -112,10 +112,10 @@
             </div>
           {% endif %}
         </div>
-        <div id="users_list_byComments" class="tabItem frame-right-users users-display" style="{% if users_list_byComments.count == 0 %}max-height: 60px;{% elif users_list_byComments.count == 1 %}max-height: 100px;{% elif users_list_byComments.count == 2 %}max-height: 210px;{% elif users_list_byComments.count == 3 %}max-height: 320px;{% endif %}">
+        <div id="users_list_byComments" class="tabItem frame-right-users users-display">
           {% if users_list_byComments.count != 0 %}
             {% for user in users_list_byComments %}
-              <div class="users-div">
+              <div class="users-div" style="{% if user.description != '' %}min-height: 110px; max-height: 110px;{% else %}min-height: 90px; max-height: 90px;{% endif %}">
                 <div style="padding: 10px 0 10px 10px;">
                   <a class="a-users" href="{% url 'forum:profile' user.username %}">
                     <img style="width: 60px; border-radius: 50px;" src="{{ user.avatar.url }}">
@@ -152,11 +152,11 @@
             </div>
           {% endif %}
         </div>
-        <div id="users_list_byStaff" class="tabItem frame-right-users users-display" style="{% if users_list_byStaff.count == 0 %}max-height: 60px;{% elif users_list_byStaff.count == 1 %}max-height: 100px;{% elif users_list_byStaff.count == 2 %}max-height: 230px;{% elif users_list_byStaff.count == 3 %}max-height: 320px;{% endif %}">
+        <div id="users_list_byStaff" class="tabItem frame-right-users users-display">
           {% if users_list_byStaff.count != 0 %}
             {% for user in users_list_byStaff %}
               {% if user.rank_lvl >= "4" %}
-                <div class="users-div">
+                <div class="users-div" style="{% if user.description != '' %}min-height: 110px; max-height: 110px;{% else %}min-height: 90px; max-height: 90px;{% endif %}">
                   <div style="padding: 10px 0 10px 10px;">
                     <a class="a-users" href="{% url 'forum:profile' user.username %}">
                       <img style="width: 60px; border-radius: 50px;" src="{{ user.avatar.url }}">

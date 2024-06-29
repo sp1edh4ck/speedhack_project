@@ -129,8 +129,8 @@
         </div>
       </div>
       <div class="switch-profile-edit">
-        <a href="{% url 'forum:profile_info_edit' user.username %}" class="switch-button-profile-edit">Персональная информация</a>
-        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Контактная информация</a> {% endcomment %}
+        <a href="{% url 'forum:profile_personal_info_edit' user.username %}" class="switch-button-profile-edit">Персональная информация</a>
+        <a href="{% url 'forum:profile_contact_info_edit' user.username %}" class="switch-button-profile-edit">Контактная информация</a>
         {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Предпочтения</a> {% endcomment %}
         {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Приватность</a> {% endcomment %}
         {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройка оповещений</a> {% endcomment %}

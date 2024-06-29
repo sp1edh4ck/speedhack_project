@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 from .models import (Ads, Comment, CommentSymp, Favourites, Forum, Group,
-                     Helper, HelpForum, Like, ProfileComment, Symp, Viewer, BanIp)
+                     Helper, HelpForum, Like, ProfileComment, Symp, Viewer, BanIp,
+                     Maecenas)
 
 
 class ForumAdmin(admin.ModelAdmin):
@@ -142,6 +143,18 @@ class BanIpAdmin(admin.ModelAdmin):
     search_fields = ('status',)
 
 
+class MaecenasAdmin(admin.ModelAdmin):
+    list_display = (
+        'author',
+        'amount',
+        'date_created',
+        'date_until',
+        'active',
+        'description',
+    )
+    ordering = ('amount', 'active',)
+    search_fields = ('amount',)
+
 admin.site.register(Forum, ForumAdmin)
 admin.site.register(Helper, HelperAdmin)
 admin.site.register(HelpForum, HelpForumAdmin)
@@ -155,3 +168,4 @@ admin.site.register(Comment)
 admin.site.register(ProfileComment)
 admin.site.register(Viewer, ViewerAdmin)
 admin.site.register(BanIp, BanIpAdmin)
+admin.site.register(Maecenas, MaecenasAdmin)

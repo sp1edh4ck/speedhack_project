@@ -107,7 +107,7 @@
           </div>
           {% include 'includes/filters.html' %}
         </div>
-        <div class="frame-left" style="padding: 20px;">
+        <div class="frame-left" style="min-width: 230px; max-width: 230px; padding: 20px;">
           <div class="avatar-username" style="margin-bottom: 10px;">
             <div>
               <img class="user-avatar" src="{{ request.user.avatar.url }}">
@@ -131,8 +131,89 @@
             <div style="width: 50%">
               <img src="{% static 'images/messages.png' %}" class="symp-img"><label class="symp-label">{{ request.user.comments.count|bf_number }}</label>
             </div>
+            <div style="color: #ececec; margin: 20px 0 10px 0;">
+              Наберите ещё {{ symp_result}} {{ symp_result|ru_plural:"симпатию,симпатии,симпатий" }}, и вы получите группу {%if symp_type == "Местный" %}{{ symp_type }}{% endif %}
+            </div>
             <div>
-              Наберите ещё {{ user_symps_count}} {{ user_symps_count|ru_plural:"симпатию,симпатии,симпатий" }}, и вы получите группу {{ symp_type }}
+              <a href="{% url 'forum:profile_upgrade' user.username %}" class="button-frame" style="padding: 7px 0;">Платное повышение прав</a>
+            </div>
+          </div>
+        </div>
+        <div class="frame-left" style="min-width: 230px; max-width: 230px; padding: 20px;">
+          <div style="color: #949494; margin-bottom: 10px;">Меценат форума {{ maecenas.date_created|date:"d.m" }} - {{ maecenas.date_until|date:"d.m" }}</div>
+          <div class="avatar-username" style="margin-bottom: 10px;">
+            <div>
+              <img class="user-avatar" src="{{ maecenas.author.avatar.url }}">
+            </div>
+            <div style="display: block;">
+              <div style="display: block;">
+                <a href="{% url 'forum:profile' maecenas.author.username %}" class="post-author-link">
+                  <label class="text-frame-username {% if maecenas.author.username_style != 'gray-un' and maecenas.author.rank != 'заблокирован' %}{{ maecenas.author.username_style }}{% endif %}" {% if maecenas.author.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ maecenas.author.username }}</label>
+                </a>
+              </div>
+              <div class="text-frame-text" style="color: #ff506f; margin: 0; font-size: 14px;">{{ maecenas.amount|bf_number }} <i class="fas fa-ruble-sign fa-lg icon-rub" style="width: 15px; height: 15px; vertical-align: -.15em;"></i></div>
+            </div>
+          </div>
+          <div class="maecenas-description">
+            {{ maecenas.description|linebreaksbr }}
+          </div>
+        </div>
+        <div class="frame-left" style="min-width: 250px; max-width: 250px;">
+          <div style="color: #949494; margin-bottom: 10px; padding: 0 10px;">Прочее</div>
+          {% comment %} <a class="li-label-ts-a" href="{% url 'forum:index' %}">
+            <ul style="list-style-type: none; margin-top: 10px;">
+              <li class="li-label-ts">
+                <i class="fa-solid fa-s fa-lg icons-index"></i>
+                <label class="text-section-li">О нас</label>
+              </li>
+            </ul>
+          </a> {% endcomment %}
+          <a class="li-label-ts-a" href="https://t.me/ss_litw14" target="_blank" rel="noopener noreferrer">
+            <ul style="list-style-type: none;">
+              <li class="li-label-ts">
+                <i class="fa-solid fa-paper-plane fa-lg icons-index"></i>
+                <label class="text-section-li">Связаться с нами</label>
+              </li>
+            </ul>
+          </a>
+          <a class="li-label-ts-a" href="{% url 'forum:advertisement' %}">
+            <ul style="list-style-type: none;">
+              <li class="li-label-ts">
+                <i class="fa-solid fa-arrow-trend-up fa-lg icons-index"></i>
+                <label class="text-section-li">Реклама</label>
+              </li>
+            </ul>
+          </a>
+          {% comment %} <a class="li-label-ts-a" href="{% url 'forum:favourites' %}">
+            <ul style="list-style-type: none;">
+              <li class="li-label-ts">
+                <i class="fa-solid fa-image fa-lg icons-index"></i>
+                <label class="text-section-li">Брендинг</label>
+              </li>
+            </ul>
+          </a> {% endcomment %}
+          {% comment %} <a class="li-label-ts-a" href="{% url 'forum:favourites' %}">
+            <ul style="list-style-type: none;">
+              <li class="li-label-ts">
+                <i class="fa-solid fa-trophy fa-lg icons-index"></i>
+                <label class="text-section-li">Турниры</label>
+              </li>
+            </ul>
+          </a> {% endcomment %}
+          {% comment %} <a class="li-label-ts-a" href="{% url 'forum:favourites' %}">
+            <ul style="list-style-type: none;">
+              <li class="li-label-ts">
+                <i class="fa-solid fa-file-lines fa-lg icons-index"></i>
+                <label class="text-section-li">О компании</label>
+              </li>
+            </ul>
+          </a> {% endcomment %}
+          <div style="margin-top: 20px; padding: 0 10px;">
+            <div style="color: #949494;">
+              Почта для жалоб:
+            </div>
+            <div style="color: #ececec;">
+              zelenka_abuse@proton.me
             </div>
           </div>
         </div>
@@ -195,7 +276,7 @@
                         <div style="display: flex;">
                           {% if post.open_activities %}<label class="tables-tags">Активности</label><br>{% endif %}
                           <div class="text-frame-text" style="margin: 0 2px 0 0;">
-                            <a href="{% url 'forum:profile' post.author.username %}" class="post-author-link"><label class="text-frame-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ post.author.username }}</label></a>
+                            <a href="{% url 'forum:profile' post.author.username %}" class="post-author-link"><label class="text-frame-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" style="{% if post.author.rank == 'заблокирован' %}text-decoration: line-through; z-index: 10000;{% endif %} padding-left: 4px;">{{ post.author.username }}</label></a>
                           </div>
                           <span class="pink-separator" style="margin-top: 8px;"></span>
                           <div class="text-frame-text" style="margin: 0 10px 0 2px;">
@@ -220,7 +301,7 @@
                           <div style="display: block;">
                             <div style="display: block;">
                               <a href="{% url 'forum:profile' post.comment.last.author.username %}" class="post-author-link">
-                                <label class="text-frame-username {% if post.comment.last.author.username_style != 'gray-un' and post.comment.last.author.rank != 'заблокирован' %}{{ post.comment.last.author.username_style }}{% endif %}" {% if post.comment.last.author.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ post.comment.last.author.username }}</label>
+                                <label class="text-frame-username {% if post.comment.last.author.username_style != 'gray-un' and post.comment.last.author.rank != 'заблокирован' %}{{ post.comment.last.author.username_style }}{% endif %}" style="{% if post.comment.last.author.rank == 'заблокирован' %}text-decoration: line-through; z-index: 10000;{% endif %} padding-left: 4px;">{{ post.comment.last.author.username }}</label>
                               </a>
                             </div>
                             <div class="text-frame-text" style="margin: 0;">{{ post.comment.last.created|date:"d E Y" }}</div>
@@ -230,14 +311,14 @@
                         <div class="avatar-username" style="min-width: 180px; max-width: 180px;">
                           <div>
                             <img class="user-avatar" src="{{ post.author.avatar.url }}">
-                            {% if post.comment.last.author.is_online == True %}
+                            {% if post.author.is_online == True %}
                               <div class="online online-avatar-index"></div>
                             {% endif %}
                           </div>
                           <div style="display: block;">
                             <div style="display: block;">
                               <a href="{% url 'forum:profile' post.author.username %}" class="post-author-link">
-                                <label class="text-frame-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ post.author.username }}</label>
+                                <label class="text-frame-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" style="{% if post.author.rank == 'заблокирован' %}text-decoration: line-through; z-index: 10000;{% endif %} padding-left: 4px;">{{ post.author.username }}</label>
                               </a>
                             </div>
                             <div class="text-frame-text" style="margin: 0;">{{ post.pub_date|date:"d E Y" }}</div>
@@ -257,7 +338,7 @@
                       <div style="display: flex;">
                         {% if post.post.open_activities %}<label class="tables-tags">Активности</label><br>{% endif %}
                         <div class="text-frame-text" style="margin: 0 2px 0 0;">
-                          <a href="{% url 'forum:profile' post.post.author.username %}" class="post-author-link"><label class="text-frame-username {% if post.post.author.username_style != 'gray-un' and post.post.author.rank != 'заблокирован' %}{{ post.post.author.username_style }}{% endif %}" {% if post.post.author.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ post.post.author.username }}</label></a>
+                          <a href="{% url 'forum:profile' post.post.author.username %}" class="post-author-link"><label class="text-frame-username {% if post.post.author.username_style != 'gray-un' and post.post.author.rank != 'заблокирован' %}{{ post.post.author.username_style }}{% endif %}" style="{% if post.post.author.rank == 'заблокирован' %}text-decoration: line-through; z-index: 10000;{% endif %} padding-left: 4px;">{{ post.post.author.username }}</label></a>
                         </div>
                         <span class="pink-separator" style="margin-top: 8px;"></span>
                         <div class="text-frame-text" style="margin: 0 10px 0 2px;">
@@ -282,7 +363,7 @@
                         <div style="display: block;">
                           <div style="display: block;">
                             <a href="{% url 'forum:profile' post.post.comment.last.author.username %}" class="post-author-link">
-                              <label class="text-frame-username {% if post.post.comment.last.author.username_style != 'gray-un' and post.post.comment.last.author.rank != 'заблокирован' %}{{ post.post.comment.last.author.username_style }}{% endif %}" {% if post.post.comment.last.author.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ post.post.comment.last.author.username }}</label>
+                              <label class="text-frame-username {% if post.post.comment.last.author.username_style != 'gray-un' and post.post.comment.last.author.rank != 'заблокирован' %}{{ post.post.comment.last.author.username_style }}{% endif %}" style="{% if post.post.comment.last.author.rank == 'заблокирован' %}text-decoration: line-through; z-index: 10000;{% endif %} padding-left: 4px;">{{ post.post.comment.last.author.username }}</label>
                             </a>
                           </div>
                           <div class="text-frame-text" style="margin: 0;">{{ post.post.comment.last.created|date:"d E Y" }}</div>
@@ -292,14 +373,14 @@
                       <div class="avatar-username" style="min-width: 180px; max-width: 180px;">
                         <div>
                           <img class="user-avatar" src="{{ post.post.author.avatar.url }}">
-                          {% if post.post.comment.last.author.is_online == True %}
+                          {% if post.post.author.is_online == True %}
                             <div class="online online-avatar-index"></div>
                           {% endif %}
                         </div>
                         <div style="display: block;">
                           <div style="display: block;">
                             <a href="{% url 'forum:profile' post.post.author.username %}" class="post-author-link">
-                              <label class="text-frame-username {% if post.post.author.username_style != 'gray-un' and post.post.author.rank != 'заблокирован' %}{{ post.post.author.username_style }}{% endif %}" {% if post.post.author.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ post.post.author.username }}</label>
+                              <label class="text-frame-username {% if post.post.author.username_style != 'gray-un' and post.post.author.rank != 'заблокирован' %}{{ post.post.author.username_style }}{% endif %}" style="{% if post.post.author.rank == 'заблокирован' %}text-decoration: line-through; z-index: 10000;{% endif %} padding-left: 4px;">{{ post.post.author.username }}</label>
                             </a>
                           </div>
                           <div class="text-frame-text" style="margin: 0;">{{ post.post.pub_date|date:"d E Y" }}</div>
@@ -312,24 +393,59 @@
                 <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.id %}">
                   <div class="text-frame post">
                     <div class="text-frame-div" style="margin: 0 auto 0 0;">
-                      <label class="text-frame-title">{{ post.title }}</label><br>
-                      <div style="display: flex; align-items: baseline;">
+                      <div class="text-frame-title" style="margin-bottom: 15px;">{{ post.title }}</div>
+                      <div style="display: flex;">
                         {% if post.open_activities %}<label class="tables-tags">Активности</label><br>{% endif %}
-                        <label class="text-frame-text">
+                        <div class="text-frame-text" style="margin: 0 2px 0 0;">
+                          <a href="{% url 'forum:profile' post.author.username %}" class="post-author-link"><label class="text-frame-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" style="{% if post.author.rank == 'заблокирован' %}text-decoration: line-through; z-index: 10000;{% endif %} padding-left: 4px;">{{ post.author.username }}</label></a>
+                        </div>
+                        <span class="pink-separator" style="margin-top: 8px;"></span>
+                        <div class="text-frame-text" style="margin: 0 10px 0 2px;">
                           {{ post.pub_date|date:"d E Y / H:i" }}
-                        </label>
-                        <label class="text-frame-text" style="margin-left: 10px;">
+                        </div>
+                        <div class="text-frame-text" style="margin: 0 10px 0 0;">
                           <i class="fa-solid fa-message fa-sm"></i> {{ post.comment.count|bf_number }}
-                        </label>
+                        </div>
+                        <div class="text-frame-text" style="margin: 0;">
+                          <i class="fa-solid fa-heart"></i> {{ post.symp.count|bf_number }}
+                        </div>
                       </div>
                     </div>
-                    <div class="avatar-username">
-                      <img class="user-avatar" src="{{ post.author.avatar.url }}">
-                      {% if post.author.is_online == True %}
-                        <div class="online online-avatar-index"></div>
-                      {% endif %}
-                      <label class="text-frame-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ post.author.username }}</label>
-                    </div>
+                    {% if post.comment.count != 0 %}
+                      <div class="avatar-username" style="min-width: 180px; max-width: 180px;">
+                        <div>
+                          <img class="user-avatar" src="{{ post.comment.last.author.avatar.url }}">
+                          {% if post.comment.last.author.is_online == True %}
+                            <div class="online online-avatar-index"></div>
+                          {% endif %}
+                        </div>
+                        <div style="display: block;">
+                          <div style="display: block;">
+                            <a href="{% url 'forum:profile' post.comment.last.author.username %}" class="post-author-link">
+                              <label class="text-frame-username {% if post.comment.last.author.username_style != 'gray-un' and post.comment.last.author.rank != 'заблокирован' %}{{ post.comment.last.author.username_style }}{% endif %}" style="{% if post.comment.last.author.rank == 'заблокирован' %}text-decoration: line-through; z-index: 10000;{% endif %} padding-left: 4px;">{{ post.comment.last.author.username }}</label>
+                            </a>
+                          </div>
+                          <div class="text-frame-text" style="margin: 0;">{{ post.comment.last.created|date:"d E Y" }}</div>
+                        </div>
+                      </div>
+                    {% else %}
+                      <div class="avatar-username" style="min-width: 180px; max-width: 180px;">
+                        <div>
+                          <img class="user-avatar" src="{{ post.author.avatar.url }}">
+                          {% if post.author.is_online == True %}
+                            <div class="online online-avatar-index"></div>
+                          {% endif %}
+                        </div>
+                        <div style="display: block;">
+                          <div style="display: block;">
+                            <a href="{% url 'forum:profile' post.author.username %}" class="post-author-link">
+                              <label class="text-frame-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" style="{% if post.author.rank == 'заблокирован' %}text-decoration: line-through; z-index: 10000;{% endif %} padding-left: 4px;">{{ post.author.username }}</label>
+                            </a>
+                          </div>
+                          <div class="text-frame-text" style="margin: 0;">{{ post.pub_date|date:"d E Y" }}</div>
+                        </div>
+                      </div>
+                    {% endif %}
                   </div>
                 </a>
               {% elif request.path == '/forum/favourites/' %}
@@ -337,24 +453,59 @@
                   <a style="text-decoration: none;" href="{% url 'forum:post_detail' post.post.id %}">
                     <div class="text-frame post">
                       <div class="text-frame-div" style="margin: 0 auto 0 0;">
-                        <label class="text-frame-title">{{ post.post.title }}</label><br>
-                        <div style="display: flex; align-items: baseline;">
+                        <div class="text-frame-title" style="margin-bottom: 15px;">{{ post.post.title }}</div>
+                        <div style="display: flex;">
                           {% if post.post.open_activities %}<label class="tables-tags">Активности</label><br>{% endif %}
-                          <label class="text-frame-text">
+                          <div class="text-frame-text" style="margin: 0 2px 0 0;">
+                            <a href="{% url 'forum:profile' post.post.author.username %}" class="post-author-link"><label class="text-frame-username {% if post.post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.post.author.username_style }}{% endif %}" style="{% if post.post.author.rank == 'заблокирован' %}text-decoration: line-through; z-index: 10000;{% endif %} padding-left: 4px;">{{ post.post.author.username }}</label></a>
+                          </div>
+                          <span class="pink-separator" style="margin-top: 8px;"></span>
+                          <div class="text-frame-text" style="margin: 0 10px 0 2px;">
                             {{ post.post.pub_date|date:"d E Y / H:i" }}
-                          </label>
-                          <label class="text-frame-text" style="margin-left: 10px;">
+                          </div>
+                          <div class="text-frame-text" style="margin: 0 10px 0 0;">
                             <i class="fa-solid fa-message fa-sm"></i> {{ post.post.comment.count|bf_number }}
-                          </label>
+                          </div>
+                          <div class="text-frame-text" style="margin: 0;">
+                            <i class="fa-solid fa-heart"></i> {{ post.post.symp.count|bf_number }}
+                          </div>
                         </div>
                       </div>
-                      <div class="avatar-username">
-                        <img class="user-avatar" src="{{ post.post.author.avatar.url }}">
-                        {% if post.post.author.is_online == True %}
-                          <div class="online online-avatar-index"></div>
-                        {% endif %}
-                        <label class="text-frame-username {% if post.post.author.username_style != 'gray-un' and post.post.author.rank != 'заблокирован' %}{{ post.post.author.username_style }}{% endif %}" {% if post.post.author.rank == 'заблокирован' %}style="text-decoration: line-through; z-index: 10000;"{% endif %}>{{ post.post.author.username }}</label>
-                      </div>
+                      {% if post.post.comment.count != 0 %}
+                        <div class="avatar-username" style="min-width: 180px; max-width: 180px;">
+                          <div>
+                            <img class="user-avatar" src="{{ post.post.comment.last.author.avatar.url }}">
+                            {% if post.post.comment.last.author.is_online == True %}
+                              <div class="online online-avatar-index"></div>
+                            {% endif %}
+                          </div>
+                          <div style="display: block;">
+                            <div style="display: block;">
+                              <a href="{% url 'forum:profile' post.post.comment.last.author.username %}" class="post-author-link">
+                                <label class="text-frame-username {% if post.post.comment.last.author.username_style != 'gray-un' and post.post.comment.last.author.rank != 'заблокирован' %}{{ post.post.comment.last.author.username_style }}{% endif %}" style="{% if post.post.comment.last.author.rank == 'заблокирован' %}text-decoration: line-through; z-index: 10000;{% endif %} padding-left: 4px;">{{ post.post.comment.last.author.username }}</label>
+                              </a>
+                            </div>
+                            <div class="text-frame-text" style="margin: 0;">{{ post.post.comment.last.created|date:"d E Y" }}</div>
+                          </div>
+                        </div>
+                      {% else %}
+                        <div class="avatar-username" style="min-width: 180px; max-width: 180px;">
+                          <div>
+                            <img class="user-avatar" src="{{ post.post.author.avatar.url }}">
+                            {% if post.post.author.is_online == True %}
+                              <div class="online online-avatar-index"></div>
+                            {% endif %}
+                          </div>
+                          <div style="display: block;">
+                            <div style="display: block;">
+                              <a href="{% url 'forum:profile' post.post.author.username %}" class="post-author-link">
+                                <label class="text-frame-username {% if post.post.author.username_style != 'gray-un' and post.post.author.rank != 'заблокирован' %}{{ post.post.author.username_style }}{% endif %}" style="{% if post.post.author.rank == 'заблокирован' %}text-decoration: line-through; z-index: 10000;{% endif %} padding-left: 4px;">{{ post.post.author.username }}</label>
+                              </a>
+                            </div>
+                            <div class="text-frame-text" style="margin: 0;">{{ post.post.pub_date|date:"d E Y" }}</div>
+                          </div>
+                        </div>
+                      {% endif %}
                     </div>
                   </a>
                 {% else %}

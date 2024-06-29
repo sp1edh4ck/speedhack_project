@@ -471,6 +471,9 @@ class Maecenas(models.Model):
         verbose_name='Активный меценат',
         default=False,
     )
+    description = models.TextField(
+        verbose_name='Текст',
+    )
 
     class Meta:
         verbose_name = 'Меценат'

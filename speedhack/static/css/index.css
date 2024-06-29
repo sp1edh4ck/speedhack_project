@@ -19,7 +19,7 @@
   background: #242424b6;
   border-radius: 10px;
   padding: 20px 10px 15px 10px;
-  margin: 0px 15px 10px 0px;
+  margin: 0px 15px 20px 0px;
 }
 
 .button-frame {
@@ -453,4 +453,13 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   justify-content: center;
   align-items: center;
   align-content: center;
+}
+
+.maecenas-description {
+  padding: 10px;
+  color: #ececec;
+  background: #303030;
+  border-radius: 10px;
+  margin-top: 10px;
+  word-wrap: break-word;
 }

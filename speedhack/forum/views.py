@@ -14,7 +14,7 @@ from .forms import (AdsForm, AnswerForm, CommentForm, DepositForm, HelpForm,
                     PostForm, ProfileCommentForm, UserBanForm)
 from .models import (Ads, Comment, CommentSymp, Favourites, Follow, Forum,
                      Group, Helper, HelpForum, Like, ProfileComment, Symp,
-                     User, Viewer)
+                     User, Viewer, Maecenas)
 
 
 # def permission_banned(redirect_path, render_path):
@@ -81,22 +81,23 @@ def error404_page(request):
 def index(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
+    maecenas = Maecenas.objects.last()
     user_symps_count = Symp.objects.filter(user=request.user).count()
     symp_type = ""
     if user_symps_count < 20:
-        user_symps_count = 20 - user_symps_count
+        symp_result = 20 - user_symps_count
         symp_type = "Местный"
     elif user_symps_count > 19 and user_symps_count < 200:
-        user_symps_count = 200 - user_symps_count
+        symp_result = 200 - user_symps_count
         symp_type = "Постоялец"
     elif user_symps_count > 199 and user_symps_count < 1000:
-        user_symps_count = 1000 - user_symps_count
+        symp_result = 1000 - user_symps_count
         symp_type = "Эксперт"
     elif user_symps_count > 999 and user_symps_count < 4000:
-        user_symps_count = 4000 - user_symps_count
+        symp_result = 4000 - user_symps_count
         symp_type = "Гуру"
     elif user_symps_count > 3999 and user_symps_count < 10000:
-        user_symps_count = 10000 - user_symps_count
+        symp_result = 10000 - user_symps_count
         symp_type = "Искусственный интелект"
     search_query = request.GET.get('search', '')
     if search_query:
@@ -106,7 +107,8 @@ def index(request):
     ads = Ads.objects.all()
     context = {
         'ads': ads,
-        'user_symps_count': user_symps_count,
+        'maecenas': maecenas,
+        'symp_result': symp_result,
         'symp_type': symp_type,
         'objects': pagination_post(request, posts),
     }
@@ -118,6 +120,24 @@ def index(request):
 def viewed_threads(request):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
+    maecenas = Maecenas.objects.last()
+    user_symps_count = Symp.objects.filter(user=request.user).count()
+    symp_type = ""
+    if user_symps_count < 20:
+        symp_result = 20 - user_symps_count
+        symp_type = "Местный"
+    elif user_symps_count > 19 and user_symps_count < 200:
+        symp_result = 200 - user_symps_count
+        symp_type = "Постоялец"
+    elif user_symps_count > 199 and user_symps_count < 1000:
+        symp_result = 1000 - user_symps_count
+        symp_type = "Эксперт"
+    elif user_symps_count > 999 and user_symps_count < 4000:
+        symp_result = 4000 - user_symps_count
+        symp_type = "Гуру"
+    elif user_symps_count > 3999 and user_symps_count < 10000:
+        symp_result = 10000 - user_symps_count
+        symp_type = "Искусственный интелект"
     user = request.user
     search_query = request.GET.get('search', '')
     if search_query:
@@ -127,6 +147,9 @@ def viewed_threads(request):
     ads = Ads.objects.all()
     context = {
         'ads': ads,
+        'maecenas': maecenas,
+        'symp_result': symp_result,
+        'symp_type': symp_type,
         'objects': pagination_post(request, viewed_posts)
     }
     return render(request, 'forum/index.html', context)
@@ -137,6 +160,24 @@ def viewed_threads(request):
 def my_topics(request):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
+    maecenas = Maecenas.objects.last()
+    user_symps_count = Symp.objects.filter(user=request.user).count()
+    symp_type = ""
+    if user_symps_count < 20:
+        symp_result = 20 - user_symps_count
+        symp_type = "Местный"
+    elif user_symps_count > 19 and user_symps_count < 200:
+        symp_result = 200 - user_symps_count
+        symp_type = "Постоялец"
+    elif user_symps_count > 199 and user_symps_count < 1000:
+        symp_result = 1000 - user_symps_count
+        symp_type = "Эксперт"
+    elif user_symps_count > 999 and user_symps_count < 4000:
+        symp_result = 4000 - user_symps_count
+        symp_type = "Гуру"
+    elif user_symps_count > 3999 and user_symps_count < 10000:
+        symp_result = 10000 - user_symps_count
+        symp_type = "Искусственный интелект"
     user = request.user
     search_query = request.GET.get('search', '')
     if search_query:
@@ -147,6 +188,9 @@ def my_topics(request):
     posts_count = posts.count
     context = {
         'ads': ads,
+        'maecenas': maecenas,
+        'symp_result': symp_result,
+        'symp_type': symp_type,
         'posts_count': posts_count,
         'objects': pagination_post(request, posts)
     }
@@ -158,12 +202,33 @@ def my_topics(request):
 def favourites(request):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
+    maecenas = Maecenas.objects.last()
+    user_symps_count = Symp.objects.filter(user=request.user).count()
+    symp_type = ""
+    if user_symps_count < 20:
+        symp_result = 20 - user_symps_count
+        symp_type = "Местный"
+    elif user_symps_count > 19 and user_symps_count < 200:
+        symp_result = 200 - user_symps_count
+        symp_type = "Постоялец"
+    elif user_symps_count > 199 and user_symps_count < 1000:
+        symp_result = 1000 - user_symps_count
+        symp_type = "Эксперт"
+    elif user_symps_count > 999 and user_symps_count < 4000:
+        symp_result = 4000 - user_symps_count
+        symp_type = "Гуру"
+    elif user_symps_count > 3999 and user_symps_count < 10000:
+        symp_result = 10000 - user_symps_count
+        symp_type = "Искусственный интелект"
     user = request.user
     favourites_posts = Favourites.objects.filter(user=user)
     favourites_posts_count = favourites_posts.count
     ads = Ads.objects.all()
     context = {
         'ads': ads,
+        'maecenas': maecenas,
+        'symp_result': symp_result,
+        'symp_type': symp_type,
         'favourites_posts_count': favourites_posts_count,
         'objects': pagination_post(request, favourites_posts)
     }
