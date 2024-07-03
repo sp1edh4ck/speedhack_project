@@ -197,7 +197,7 @@ class CustomUser(AbstractUser):
         return self.username
 
 
-class BannedUsers(models.Model):
+class BannedUser(models.Model):
     user = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
@@ -214,6 +214,11 @@ class BannedUsers(models.Model):
     ban_reason = models.TextField(verbose_name='Причина блокировки', default='')
     ban_time_value = models.IntegerField(verbose_name='Время')
     ban_time_item = models.TextField(verbose_name='Значение', choices=BAN_ITEM, default=BAN_ITEM[0][0])
+
+    class Meta:
+        verbose_name = 'Запись бана'
+        verbose_name_plural = 'Записи банов'
+        ordering = ('-ban_date',)
 
 
 class IpUser(models.Model):

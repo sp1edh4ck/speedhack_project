@@ -2,10 +2,12 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from users.forms import CustomUserChangeForm
-from users.models import CustomUser, IpUser, BannedUsers
+from users.models import CustomUser, IpUser, BannedUser
+
+from forum.forms import UserBanForm
 
 
-class BannedUsersAdmin(admin.ModelAdmin):
+class BannedUserAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Information',
             {'fields': (
@@ -26,6 +28,8 @@ class BannedUsersAdmin(admin.ModelAdmin):
         "ban_time_value",
         "ban_time_item",
     )
+
+    form = UserBanForm
 
 
 class CustomUserAdmin(UserAdmin):
@@ -116,6 +120,6 @@ class IpUsersAdmin(UserAdmin):
         'user',
     )
 
-admin.site.register(BannedUsers, BannedUsersAdmin)
+admin.site.register(BannedUser, BannedUserAdmin)
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(IpUser)

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}speedhack / js{% endblock %}
+{% block content %}
+  {% comment %} <div class="main">
+    <div class="frame-banned_con">
+      <div style="display: block;">
+        <div>
+          <input style="font-size: 20px; color: #ffffff; border: none; background: #333333; padding: 10px; width: 500px; border-radius: 10px;" autocompleate="off">
+        </div>
+        <hr class="admin-hr" style="background: #3f3f3f;">
+        <div style="color: #ffffff;">
+          {% for user in users %}
+            <div style="{% if not forloop.last %}margin-bottom: 20px;{% endif %}">
+              {{ user.username }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div> {% endcomment %}
+  <body class="bg-dark text-light">
+    <div class="container w-50 pt-5">
+      <h1>Калькулятор</h1>
+      <input type="number" class="form-control mb-2" placeholder="Введите 1 число" id="input1" value="10">
+      <input type="number" class="form-control mb-2" placeholder="Введите 2 число" id="input2" value="5">
+      <div class="d-flex mb-2">
+        <button class="btn btn-success flex-grow-1 mx-2" id="plus">+</button>
+        <button class="btn btn-danger flex-grow-1 mx-2" id="minus">-</button>
+      </div>
+      <button class="btn btn-outline-info w-100 mb-2" id="submit">Вычислить</button>
+      <div class="text-bg-light p-3 text-center">
+        <h4>Результат:</h4>
+        <p id="result" class="mb-0">49</p>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+{% endblock %}

@@ -8,13 +8,21 @@ from django.utils.http import unquote
 
 from market.models import Market
 from users.forms import UserProfileAdminForm, UserPersonalForm, UserContactForm
-from users.models import CustomUser, IpUser, BannedUsers
+from users.models import CustomUser, IpUser, BannedUser
 
 from .forms import (AdsForm, AnswerForm, CommentForm, DepositForm, HelpForm,
                     PostForm, ProfileCommentForm, UserBanForm)
 from .models import (Ads, Comment, CommentSymp, Favourites, Follow, Forum,
                      Group, Helper, HelpForum, Like, ProfileComment, Symp,
                      User, Viewer, Maecenas)
+
+
+def js_read(request):
+    users = CustomUser.objects.all()
+    context = {
+        'users': users,
+    }
+    return render(request, 'forum/js_read.html', context)
 
 
 # def permission_banned(redirect_path, render_path):
@@ -74,7 +82,6 @@ def error404_page(request):
 
 def user_symps_count_check(request):
     user_symps_count = Symp.objects.filter(user=request.user).count()
-    print(user_symps_count)
     symp_type = ""
     if user_symps_count < 20:
         symp_result = 20 - user_symps_count
@@ -91,8 +98,6 @@ def user_symps_count_check(request):
     elif user_symps_count > 3999 and user_symps_count < 10000:
         symp_result = 10000 - user_symps_count
         symp_type = "Искусственный интелект"
-    print(symp_result)
-    print(symp_type)
     return symp_result, symp_type
 
 
@@ -228,7 +233,7 @@ def profile(request, username):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     author = get_object_or_404(User, username=username)
-    if not BannedUsers.objects.filter(user=author).exists():
+    if not BannedUser.objects.filter(user=author).exists():
         pass
     form = ProfileCommentForm(request.POST or None)
     if form.is_valid() and request.user.is_authenticated:
@@ -237,6 +242,8 @@ def profile(request, username):
         form.author = request.user
         form.save()
         return redirect('forum:profile', username=author)
+    if BannedUser.objects.filter(user=author).exists:
+        user_ban = BannedUser.objects.filter(user=author)
     posts = author.posts.all()
     post_1 = posts.filter(group=1)
     author_symps_count = Symp.objects.filter(user=author).count()
@@ -253,6 +260,7 @@ def profile(request, username):
     context = {
         'form': form,
         'author': author,
+        'user_ban': user_ban,
         'posts': posts,
         'post_1': post_1,
         'author_symps_count': author_symps_count,
@@ -378,6 +386,8 @@ def ban(request, username):
     if request.user.username == username or request.user.rank_lvl < "4":
         return redirect('forum:empty_page')
     user = get_object_or_404(User, username=username)
+    if not BannedUser.objects.filter(user=user.username).exists():
+        return redirect('forum:users_bans', user=user.username)
     if user.rank == "заблокирован":
         user.rank = user.save_rank
         user.save_rank = ''
@@ -816,20 +826,21 @@ def users_bans(request):
         return redirect('forum:empty_page')
     form = UserBanForm(
         request.POST or None,
-        instance=request.user,
     )
     if request.method == 'POST':
-        if form.is_valid() and request.user.is_authenticated:
-            pre_form = form.save(commit=False)
-            pre_form.user = request.POST.get('user')
-            pre_form.admin = request.user
-            pre_form.ban_reason = request.POST.get('ban_reason')
-            pre_form.ban_time_value = request.POST.get('ban_time_value')
-            pre_form.ban_time_item = request.POST.get('ban_time_item')
-            pre_form.save()
+        if form.is_valid():
+            form = form.save(commit=False)
+            user = get_object_or_404(User, username=request.POST.geet('user'))
+            form.user_id = user
+            form.admin_id = request.user
+            form.ban_reason = request.POST.get('ban_reason')
+            form.ban_time_value = request.POST.get('ban_time_value')
+            form.ban_time_item = request.POST.get('ban_time_item')
+            form.save()
             return redirect('forum:users_bans')
-    ban_list = BannedUsers.objects.all()
+    ban_list = BannedUser.objects.all()
     context = {
+        'form': form,
         'ban_list': ban_list,
     }
     return render(request, 'forum/admin_users_bans.html', context)
@@ -983,7 +994,7 @@ def ads(request):
     users = CustomUser.objects.all()
     ads = Ads.objects.all()
     if request.method == 'POST':
-        if form.is_valid() and request.user.is_authenticated:
+        if form.is_valid():
             form.save()
     context = {
         'ads': ads,
