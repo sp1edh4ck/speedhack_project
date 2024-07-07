@@ -5,97 +5,8 @@
 {% load user_filters %}
 {% block content %}
   <div class="main">
-    <div class="frames_con optimization" style="flex-direction: row-reverse;">
-      <div style="display: block;">
-        {% comment %} <div class="index-groups-popup">
-          <div class="index-title-group-popup">
-            <div class="index-title-popup">Выберите раздел</div>
-            <div class="index-close-popup"><i class="fa-solid fa-xmark"></i></div>
-          </div>
-          <div class="div-ul-up">
-            <label class="text-section">Основной раздел</label>
-            <ul style="list-style-type: none; margin-top: 10px;">
-              <li class="li-label-ts" id="popup_menu_1_1">
-                <i class="fas fa-gift fa-lg icons-index"></i>
-                <label class="text-section-li">Халява</label>
-                <div style="float: right;">
-                  <i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
-                </div>
-              </li>
-              <ul class="li-label-down first-first-li-label" id="popup_menu_1">
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 1 %}">Розыгрыши</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 2 %}">Раздачи баз</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 3 %}">Раздачи аккаунтов / ключей</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 4 %}">Раздачи вещей steam</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 5 %}">Раздачи прокси / логов</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 6 %}">Бесплатная накрутка</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 7 %}">Промокоды</a></li>
-              </ul>
-              <li class="li-label-ts" id="popup_menu_1_2">
-                <i class="fas fa-store fa-lg icons-index"></i>
-                <label class="text-section-li">Торговля</label>
-                <div style="float: right;">
-                  <i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
-                </div>
-              </li>
-              <ul class="li-label-down first-second-li-label">
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 8 %}">Игры</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 9 %}">Соц. сети</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 10 %}">YouTube / Twitch / Discord</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 11 %}">Кошельки</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 12 %}">Акки с балансом / бонусами</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 13 %}">Прокси / VPN</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 14 %}">Базы / логи</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 15 %}">Вещи</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 16 %}">Оценка товара</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 17 %}">Другое</a></li>
-              </ul>
-              <li class="li-label-ts" id="popup_menu_1_3">
-                <i class="fas fa-credit-card fa-lg icons-index"></i>
-                <label class="text-section-li">Работа и услуги</label>
-                <div style="float: right;">
-                  <i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
-                </div>
-              </li>
-              <ul class="li-label-down first-third-li-label">
-                {% if request.user.is_authenticated %}
-                  <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 18 %}">Фишинг</a></li>
-                {% endif %}
-                {% if request.user.is_authenticated %}
-                  <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 19 %}">Трафферы</a></li>
-                {% endif %}
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 20 %}">Программирование</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 21 %}">Накрутка в соц. сетях</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 22 %}">Хостинг, аренда магазина</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 23 %}">Чек крипты</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 24 %}">Сигны</a></li>
-                {% if request.user.is_authenticated %}
-                  <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 25 %}">Чек логов</a></li>
-                {% endif %}
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 26 %}">Дизайн</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 27 %}">Буст аккаунтов</a></li>
-                {% if request.user.is_authenticated %}
-                  <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 28 %}">Вязка каналов</a></li>
-                {% endif %}
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 29 %}">Озвучка</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 30 %}">Обмен средств</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 31 %}">Реклама</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 32 %}">Поиск работы</a></li>
-              </ul>
-              <li class="li-label-ts" id="popup_menu_1_4">
-                <i class="fas fa-user fa-lg icons-index"></i>
-                <label class="text-section-li">Арбитраж</label>
-                <div style="float: right;">
-                  <i class="fas fa-angle-down fa-lg icons-index-arrow"></i>
-                </div>
-              </li>
-              <ul class="li-label-down first-fourth-li-label">
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 33 %}">Решённые вопросы</a></li>
-                <li class="li-label-ts-down"><a class="li-label-ts-a" href="{% url 'forum:group_filter_posts' 34 %}">Нерешённые вопросы</a></li>
-              </ul>
-            </ul>
-          </div>
-        </div> {% endcomment %}
+    <div class="frames-con optimization">
+      <div class="slide-bar-m">
         <div class="frame-left">
           <div style="margin-bottom: 20px; display: flex;">
             {% if request.user.is_authenticated %}
@@ -220,7 +131,13 @@
           </div>
         </div>
       </div>
-      <div style="display: block;">
+      <div class="slide-bar-s">
+        <div class="slide-bar-s-dop">
+          <div class="slide-bar-s-btns" style="background: #ff506f;">Создать тему</div>
+          <div class="slide-bar-s-btns" style="background: #363636;">Открыть разделы</div>
+        </div>
+      </div>
+      <div>
         <div class="frame-right-first-index">
           <div style="margin: 0 0 0 10px;">
             <div>
