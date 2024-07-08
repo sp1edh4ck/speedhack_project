@@ -1,9 +1,112 @@
 {% load static %}
 {% load user_filters %}
 <header class="header">
+  <div class="bg-header" id="burgerMenuId">
+    <div class="bg-header-con">
+      <ul>
+        {% comment %} <div class="bg-search">
+        </div> {% endcomment %}
+        <div class="bg-links">
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-house fa-lg bg-icons"></i>
+            <div class="bg-link-text">На главную</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-file-lines fa-lg bg-icons"></i>
+            <div class="bg-link-text">Статьи</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-basket-shopping fa-lg bg-icons"></i>
+            <div class="bg-link-text">Маркет</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-shield fa-lg bg-icons"></i>
+            <div class="bg-link-text">Гарант</div>
+          </a>
+        </div>
+        <div class="bg-sep">
+          <div class="bg-sep-text">Каналы и чаты</div>
+          <div class="bg-sep-line"></div>
+        </div>
+        <div class="bg-links">
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+            <div class="bg-link-text">Чат</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-brands fa-telegram fa-lg bg-icons"></i>
+            <div class="bg-link-text">Telegram канал</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-brands fa-telegram fa-lg bg-icons"></i>
+            <div class="bg-link-text">sp news</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+            <div class="bg-link-text">SP TG чат</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+            <div class="bg-link-text">Группа ВКонтакте</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-microphone fa-lg bg-icons"></i>
+            <div class="bg-link-text">Discord сервер</div>
+          </a>
+        </div>
+        <div class="bg-sep">
+          <div class="bg-sep-text">Другое</div>
+          <div class="bg-sep-line"></div>
+        </div>
+        <div class="bg-links">
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+            <div class="bg-link-text">Пользователи</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+            <div class="bg-link-text">Заблокированные</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+            <div class="bg-link-text">Правила форума</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+            <div class="bg-link-text">Не пришли деньги?</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+            <div class="bg-link-text">FAQ</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+            <div class="bg-link-text">Реклама</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+            <div class="bg-link-text">Турниры</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+            <div class="bg-link-text">О нас</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+            <div class="bg-link-text">Нужна помощь</div>
+          </a>
+          <a class="bg-link" href="{% url "forum:index" %}">
+            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+            <div class="bg-link-text">Switch to English</div>
+          </a>
+        </div>
+      </ul>
+    </div>
+    <script type="text/javascript" src="{% static "js/misc.js" %}" defer></script>
+  </div>
   <div class="header-con">
     <a href="/"><img class="brandLogo brandLogo-op" src="{% static 'images/speedhack_logo.png' %}" alt="speedhack"></a>
-    <a><i class="fa-solid fa-bars fa-2xl burger-btn"></i></a>
+    <div id="burgerBtnId"><i class="fa-solid fa-bars fa-2xl burger-btn"></i></div>
     <i class="fa-solid fa-grip-lines fa-2xl icon-burger"></i>
     <div class="header-menu" id="menu">
       <ul class="menu-list menu-list-op">

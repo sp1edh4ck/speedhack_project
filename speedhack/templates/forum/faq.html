@@ -3,118 +3,123 @@
 {% load static %}
 {% block content %}
   <div class="main">
-    <div class="user-agreement_con">
-      <div class="frame-rules">
-        <div class="tabItem rules active-tab" id="users-groups">
-          <div class="faq-tech-ques">
-            <label style="font-size: 20px;">Группы</label><br><br>
-            <div style="margin-left: 10px;">
-              На форуме создана иерархия групп пользователей, основанная на симпатиях.<br><br>
-              <font style="color: gray; font-weight: bold;">Новорег</font><br>
-              <font style="color: #cacaca;">Зарегистрировавшись на форуме, вы получаете группу "Новорег" и имеете следующие права:</font><br>
-              <font style="color: #cacaca;">- Загрузка аватара 195 КБ</font><br>
-              <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
-              <font style="color: #cacaca;">- Нельзя ставить лайки (Симпатии, Мне нравится)</font><br>
-              <font style="color: #cacaca;">- Нельзя менять ник</font><br>
-              <font style="color: #cacaca;">- Нельзя менять статус</font><br>
-              <font style="color: #cacaca;">- Нельзя отправлять репорты</font><br>
-              <font style="color: #cacaca;">- Нельзя размещать свой магазин</font><br>
-              <font style="color: #cacaca;">- Нельзя ставить префикс «Undetected»</font><br>
-              <font style="color: #cacaca;">- Поднятие темы один раз в 72 часа (не больше 5 разных тем)</font><br>
-              <font style="color: #cacaca;">- Деньги с розыгрышей идут в холд</font><br>
-              <font style="color: #cacaca;">- Принять участие в 10 (десяти) розыгрышах в неделю</font><br><br>
-              <font style="color: gray; font-weight: bold;">Местный</font><br>
-              <font style="color: #cacaca;">Имея 20 симпатий вы продвигаетесь в группу "Местный":</font><br>
-              <font style="color: #99ff99;">+ Загрузка аватара 485КБ</font><br>
-              <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
-              <font style="color: #99ff99;">+ Можно ставить симпатии, лайки, ограничение - 10 раз за 24 часа</font><br>
-              <font style="color: #cacaca;">- Нельзя менять ник</font><br>
-              <font style="color: #99ff99;">+ Можно менять статус</font><br>
-              <font style="color: #99ff99;">+ Можно отправлять репорты</font><br>
-              <font style="color: #cacaca;">- Нельзя размещать свой магазин</font><br>
-              <font style="color: #cacaca;">- Нельзя ставить префикс «Undetected»</font><br>
-              <font style="color: #99ff99;">+ Поднятие темы один раз в 48 часов (не больше 5 разных тем)</font><br>
-              <font style="color: #cacaca;">- Деньги с розыгрышей идут в холд</font><br>
-              <font style="color: #99ff99;">+ Короткая ссылка на профиль</font><br>
-              <font style="color: #99ff99;">+ Принять участие в 100 (ста) розыгрышах в неделю</font><br><br>
-              <font style="color: #eeeeee; font-weight: bold;">Постоялец</font><br>
-              <font style="color: #cacaca;">Имея 200 симпатий вы продвигаетесь в группу "Постоялец":</font><br>
-              <font style="color: #99ff99;">+ Бесплатный доступ к Маркету</font><br>
-              <font style="color: #99ff99;">+ Белый цвет ника</font><br>
-              <font style="color: #99ff99;">+ Загрузка аватара 1.9МБ</font><br>
-              <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
-              <font style="color: #99ff99;">+ Можно ставить симпатии, лайки, ограничение - 50 раз за 24 часа</font><br>
-              <font style="color: #99ff99;">+ Бесплатная смена ника один раз в 6 месяцев</font><br>
-              <font style="color: #cacaca;">- Можно менять статус</font><br>
-              <font style="color: #cacaca;">- Можно отправлять репорты</font><br>
-              <font style="color: #99ff99;">+ Можно размещать свой магазин</font><br>
-              <font style="color: #99ff99;">+ Можно ставить префикс "Undetected"</font><br>
-              <font style="color: #99ff99;">+ Поднятие темы один раз в 36 часов (не больше 5 разных тем)</font><br>
-              <font style="color: #99ff99;">+ Деньги с розыгрышей идут сразу на баланс, а не в холд</font><br>
-              <font style="color: #cacaca;">- Короткая ссылка на профиль</font><br>
-              <font style="color: #99ff99;">+ Принять участие в 1000 (тысяче) розыгрышах в неделю</font><br><br>
-              <font style="color: #b35ede; font-weight: bold;">Эксперт</font><br>
-              <font style="color: #cacaca;">Имея 1 000 симпатий вы продвигаетесь в группу "Эксперт":</font><br>
-              <font style="color: #cacaca;">- Бесплатный доступ к Маркету</font><br>
-              <font style="color: #99ff99;">+ Фиолетовый цвет ника</font><br>
-              <font style="color: #cacaca;">- Загрузка аватара 1.9МБ</font><br>
-              <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
-              <font style="color: #99ff99;">+ Можно ставить симпатии, лайки, ограничение - 100 раз за 24 часа</font><br>
-              <font style="color: #99ff99;">+ Бесплатная смена ника один раз в 3 месяца</font><br>
-              <font style="color: #cacaca;">- Можно менять статус</font><br>
-              <font style="color: #cacaca;">- Можно отправлять репорты</font><br>
-              <font style="color: #cacaca;">- Можно размещать свой магазин</font><br>
-              <font style="color: #cacaca;">- Можно ставить префикс "Undetected"</font><br>
-              <font style="color: #99ff99;">+ Поднятие темы один раз в 18 часов (не больше 5 разных тем)</font><br>
-              <font style="color: #cacaca;">- Деньги с розыгрышей идут сразу на баланс, а не в холд</font><br>
-              <font style="color: #cacaca;">- Короткая ссылка на профиль</font><br>
-              <font style="color: #99ff99;">+ Принять участие в 10000 (десяти тысячах) розыгрышах в неделю</font><br><br>
-              <font style="color: #ffa8af; font-weight: bold;">Гуру</font><br>
-              <font style="color: #cacaca;">Имея 4 000 симпатий вы продвигаетесь в группу "Гуру":</font><br>
-              <font style="color: #cacaca;">- Бесплатный доступ к Маркету</font><br>
-              <font style="color: #99ff99;">+ Светло-розовый цвет ника</font><br>
-              <font style="color: #99ff99;">+ Загрузка аватара 3МБ</font><br>
-              <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
-              <font style="color: #99ff99;">+ Можно ставить симпатии, лайки, ограничение - 150 раз за 24 часа</font><br>
-              <font style="color: #99ff99;">+ Бесплатная смена ника один раз в месяц</font><br>
-              <font style="color: #cacaca;">- Можно менять статус</font><br>
-              <font style="color: #cacaca;">- Можно отправлять репорты</font><br>
-              <font style="color: #cacaca;">- Можно размещать свой магазин</font><br>
-              <font style="color: #cacaca;">- Можно ставить префикс "Undetected"</font><br>
-              <font style="color: #99ff99;">+ Поднятие темы один раз в 18 часов (не больше 8 разных тем)</font><br>
-              <font style="color: #cacaca;">- Деньги с розыгрышей идут сразу на баланс, а не в холд</font><br>
-              <font style="color: #cacaca;">- Короткая ссылка на профиль</font><br>
-              <font style="color: #cacaca;">- Принять участие в 10000 (десяти тысячах) розыгрышах в неделю</font><br><br>
-              <font style="color: #ff0076; font-weight: bold;">Искусственный интеллект</font><br>
-              <font style="color: #cacaca;">Имея 10 000 симпатий вы попадаете в группу "Искусственный интеллект":</font><br>
-              <font style="color: #99ff99;">+ Возможность менять фон</font><br>
-              <font style="color: #cacaca;">- Бесплатный доступ к Маркету</font><br>
-              <font style="color: #99ff99;">+ Красивый цвет ника</font><br>
-              <font style="color: #99ff99;">+ Загрузка аватара 5МБ</font><br>
-              <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
-              <font style="color: #99ff99;">+ Можно ставить симпатии, лайки, ограничение - 300 раз за 24 часа</font><br>
-              <font style="color: #cacaca;">- Бесплатная смена ника один раз в месяц</font><br>
-              <font style="color: #cacaca;">- Можно менять статус</font><br>
-              <font style="color: #cacaca;">- Можно отправлять репорты</font><br>
-              <font style="color: #cacaca;">- Можно размещать свой магазин</font><br>
-              <font style="color: #cacaca;">- Можно ставить префикс "Undetected"</font><br>
-              <font style="color: #99ff99;">+ Поднятие темы один раз в 12 часов (не больше 10 разных тем)</font><br>
-              <font style="color: #cacaca;">- Деньги с розыгрышей идут сразу на баланс, а не в холд</font><br>
-              <font style="color: #cacaca;">- Короткая ссылка на профиль</font><br>
-              <font style="color: #99ff99;">+ Анимированный аватар за пределами профиля</font><br>
-              <font style="color: #cacaca;">- Принять участие в 10000 (десяти тысячах) розыгрышах в неделю</font><br>
-              <font style="color: #99ff99;">+ Красивый банер в профиль</font><br>
-              <font style="color: #99ff99;">+ Значок под ником</font><br><br>
-            </div>
+    <div class="switch-info switch-info-h-fix switch-info-op">
+      <div class="switch-button active-tab"><a href="{% url 'forum:faq' %}" style="color: #d6d6d6; text-decoration: none;">Группы пользователей</a></div>
+      <div class="switch-button"><a href="{% url 'forum:faq_q' %}" style="color: #d6d6d6; text-decoration: none;">Общие вопросы</a></div>
+      <div class="switch-button"><a href="{% url 'forum:rules' %}" style="color: #d6d6d6; text-decoration: none;">Условия и правила</a></div>
+      <div class="switch-button"><a href="{% url 'forum:user_ag' %}" style="color: #d6d6d6; text-decoration: none;">Пользовательское соглашение</a></div>
+      <div class="switch-button"><a href="{% url 'forum:words' %}" style="color: #d6d6d6; text-decoration: none;">Ключевые слова</a></div>
+    </div>
+    <div class="frame-rules">
+      <div class="tabItem rules active-tab">
+        <div class="faq-tech-ques">
+          <label style="font-size: 20px;">Группы</label><br><br>
+          <div style="margin-left: 10px;">
+            На форуме создана иерархия групп пользователей, основанная на симпатиях.<br><br>
+            <font style="color: gray; font-weight: bold;">Новорег</font><br>
+            <font style="color: #cacaca;">Зарегистрировавшись на форуме, вы получаете группу "Новорег" и имеете следующие права:</font><br>
+            <font style="color: #cacaca;">- Загрузка аватара 195 КБ</font><br>
+            <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
+            <font style="color: #cacaca;">- Нельзя ставить лайки (Симпатии, Мне нравится)</font><br>
+            <font style="color: #cacaca;">- Нельзя менять ник</font><br>
+            <font style="color: #cacaca;">- Нельзя менять статус</font><br>
+            <font style="color: #cacaca;">- Нельзя отправлять репорты</font><br>
+            <font style="color: #cacaca;">- Нельзя размещать свой магазин</font><br>
+            <font style="color: #cacaca;">- Нельзя ставить префикс «Undetected»</font><br>
+            <font style="color: #cacaca;">- Поднятие темы один раз в 72 часа (не больше 5 разных тем)</font><br>
+            <font style="color: #cacaca;">- Деньги с розыгрышей идут в холд</font><br>
+            <font style="color: #cacaca;">- Принять участие в 10 (десяти) розыгрышах в неделю</font><br><br>
+            <font style="color: gray; font-weight: bold;">Местный</font><br>
+            <font style="color: #cacaca;">Имея 20 симпатий вы продвигаетесь в группу "Местный":</font><br>
+            <font style="color: #99ff99;">+ Загрузка аватара 485КБ</font><br>
+            <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
+            <font style="color: #99ff99;">+ Можно ставить симпатии, лайки, ограничение - 10 раз за 24 часа</font><br>
+            <font style="color: #cacaca;">- Нельзя менять ник</font><br>
+            <font style="color: #99ff99;">+ Можно менять статус</font><br>
+            <font style="color: #99ff99;">+ Можно отправлять репорты</font><br>
+            <font style="color: #cacaca;">- Нельзя размещать свой магазин</font><br>
+            <font style="color: #cacaca;">- Нельзя ставить префикс «Undetected»</font><br>
+            <font style="color: #99ff99;">+ Поднятие темы один раз в 48 часов (не больше 5 разных тем)</font><br>
+            <font style="color: #cacaca;">- Деньги с розыгрышей идут в холд</font><br>
+            <font style="color: #99ff99;">+ Короткая ссылка на профиль</font><br>
+            <font style="color: #99ff99;">+ Принять участие в 100 (ста) розыгрышах в неделю</font><br><br>
+            <font style="color: #eeeeee; font-weight: bold;">Постоялец</font><br>
+            <font style="color: #cacaca;">Имея 200 симпатий вы продвигаетесь в группу "Постоялец":</font><br>
+            <font style="color: #99ff99;">+ Бесплатный доступ к Маркету</font><br>
+            <font style="color: #99ff99;">+ Белый цвет ника</font><br>
+            <font style="color: #99ff99;">+ Загрузка аватара 1.9МБ</font><br>
+            <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
+            <font style="color: #99ff99;">+ Можно ставить симпатии, лайки, ограничение - 50 раз за 24 часа</font><br>
+            <font style="color: #99ff99;">+ Бесплатная смена ника один раз в 6 месяцев</font><br>
+            <font style="color: #cacaca;">- Можно менять статус</font><br>
+            <font style="color: #cacaca;">- Можно отправлять репорты</font><br>
+            <font style="color: #99ff99;">+ Можно размещать свой магазин</font><br>
+            <font style="color: #99ff99;">+ Можно ставить префикс "Undetected"</font><br>
+            <font style="color: #99ff99;">+ Поднятие темы один раз в 36 часов (не больше 5 разных тем)</font><br>
+            <font style="color: #99ff99;">+ Деньги с розыгрышей идут сразу на баланс, а не в холд</font><br>
+            <font style="color: #cacaca;">- Короткая ссылка на профиль</font><br>
+            <font style="color: #99ff99;">+ Принять участие в 1000 (тысяче) розыгрышах в неделю</font><br><br>
+            <font style="color: #b35ede; font-weight: bold;">Эксперт</font><br>
+            <font style="color: #cacaca;">Имея 1 000 симпатий вы продвигаетесь в группу "Эксперт":</font><br>
+            <font style="color: #cacaca;">- Бесплатный доступ к Маркету</font><br>
+            <font style="color: #99ff99;">+ Фиолетовый цвет ника</font><br>
+            <font style="color: #cacaca;">- Загрузка аватара 1.9МБ</font><br>
+            <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
+            <font style="color: #99ff99;">+ Можно ставить симпатии, лайки, ограничение - 100 раз за 24 часа</font><br>
+            <font style="color: #99ff99;">+ Бесплатная смена ника один раз в 3 месяца</font><br>
+            <font style="color: #cacaca;">- Можно менять статус</font><br>
+            <font style="color: #cacaca;">- Можно отправлять репорты</font><br>
+            <font style="color: #cacaca;">- Можно размещать свой магазин</font><br>
+            <font style="color: #cacaca;">- Можно ставить префикс "Undetected"</font><br>
+            <font style="color: #99ff99;">+ Поднятие темы один раз в 18 часов (не больше 5 разных тем)</font><br>
+            <font style="color: #cacaca;">- Деньги с розыгрышей идут сразу на баланс, а не в холд</font><br>
+            <font style="color: #cacaca;">- Короткая ссылка на профиль</font><br>
+            <font style="color: #99ff99;">+ Принять участие в 10000 (десяти тысячах) розыгрышах в неделю</font><br><br>
+            <font style="color: #ffa8af; font-weight: bold;">Гуру</font><br>
+            <font style="color: #cacaca;">Имея 4 000 симпатий вы продвигаетесь в группу "Гуру":</font><br>
+            <font style="color: #cacaca;">- Бесплатный доступ к Маркету</font><br>
+            <font style="color: #99ff99;">+ Светло-розовый цвет ника</font><br>
+            <font style="color: #99ff99;">+ Загрузка аватара 3МБ</font><br>
+            <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
+            <font style="color: #99ff99;">+ Можно ставить симпатии, лайки, ограничение - 150 раз за 24 часа</font><br>
+            <font style="color: #99ff99;">+ Бесплатная смена ника один раз в месяц</font><br>
+            <font style="color: #cacaca;">- Можно менять статус</font><br>
+            <font style="color: #cacaca;">- Можно отправлять репорты</font><br>
+            <font style="color: #cacaca;">- Можно размещать свой магазин</font><br>
+            <font style="color: #cacaca;">- Можно ставить префикс "Undetected"</font><br>
+            <font style="color: #99ff99;">+ Поднятие темы один раз в 18 часов (не больше 8 разных тем)</font><br>
+            <font style="color: #cacaca;">- Деньги с розыгрышей идут сразу на баланс, а не в холд</font><br>
+            <font style="color: #cacaca;">- Короткая ссылка на профиль</font><br>
+            <font style="color: #cacaca;">- Принять участие в 10000 (десяти тысячах) розыгрышах в неделю</font><br><br>
+            <font style="color: #ff0076; font-weight: bold;">Искусственный интеллект</font><br>
+            <font style="color: #cacaca;">Имея 10 000 симпатий вы попадаете в группу "Искусственный интеллект":</font><br>
+            <font style="color: #99ff99;">+ Возможность менять фон</font><br>
+            <font style="color: #cacaca;">- Бесплатный доступ к Маркету</font><br>
+            <font style="color: #99ff99;">+ Красивый цвет ника</font><br>
+            <font style="color: #99ff99;">+ Загрузка аватара 5МБ</font><br>
+            <font style="color: #cacaca;">- Редактирование своих сообщений</font><br>
+            <font style="color: #99ff99;">+ Можно ставить симпатии, лайки, ограничение - 300 раз за 24 часа</font><br>
+            <font style="color: #cacaca;">- Бесплатная смена ника один раз в месяц</font><br>
+            <font style="color: #cacaca;">- Можно менять статус</font><br>
+            <font style="color: #cacaca;">- Можно отправлять репорты</font><br>
+            <font style="color: #cacaca;">- Можно размещать свой магазин</font><br>
+            <font style="color: #cacaca;">- Можно ставить префикс "Undetected"</font><br>
+            <font style="color: #99ff99;">+ Поднятие темы один раз в 12 часов (не больше 10 разных тем)</font><br>
+            <font style="color: #cacaca;">- Деньги с розыгрышей идут сразу на баланс, а не в холд</font><br>
+            <font style="color: #cacaca;">- Короткая ссылка на профиль</font><br>
+            <font style="color: #99ff99;">+ Анимированный аватар за пределами профиля</font><br>
+            <font style="color: #cacaca;">- Принять участие в 10000 (десяти тысячах) розыгрышах в неделю</font><br>
+            <font style="color: #99ff99;">+ Красивый банер в профиль</font><br>
+            <font style="color: #99ff99;">+ Значок под ником</font><br><br>
           </div>
         </div>
-        <div class="switch-info" style="min-width: 205px; max-width: 205px; max-height: 230px;">
-          <a href="{% url 'forum:faq' %}" class="switch-button active-tab" style="color: #d6d6d6; text-decoration: none;">Группы пользователей</a>
-          <a href="{% url 'forum:faq_q' %}" class="switch-button" style="color: #d6d6d6; text-decoration: none;">Общие вопросы</a>
-          <a href="{% url 'forum:rules' %}" class="switch-button" style="color: #d6d6d6; text-decoration: none;">Условия и правила</a>
-          <a href="{% url 'forum:user_ag' %}" class="switch-button" style="color: #d6d6d6; text-decoration: none;">Пользовательское соглашение</a>
-          <a href="{% url 'forum:words' %}" class="switch-button" style="color: #d6d6d6; text-decoration: none;">Ключевые слова</a>
-        </div>
+      </div>
+      <div class="switch-info switch-info-h-fix">
+        <a href="{% url 'forum:faq' %}" class="switch-button active-tab" style="color: #d6d6d6; text-decoration: none;">Группы пользователей</a>
+        <a href="{% url 'forum:faq_q' %}" class="switch-button" style="color: #d6d6d6; text-decoration: none;">Общие вопросы</a>
+        <a href="{% url 'forum:rules' %}" class="switch-button" style="color: #d6d6d6; text-decoration: none;">Условия и правила</a>
+        <a href="{% url 'forum:user_ag' %}" class="switch-button" style="color: #d6d6d6; text-decoration: none;">Пользовательское соглашение</a>
+        <a href="{% url 'forum:words' %}" class="switch-button" style="color: #d6d6d6; text-decoration: none;">Ключевые слова</a>
       </div>
     </div>
   </div>

@@ -8,34 +8,34 @@ let action = "+"
 
 
 plusBtn.onclick = function () {
-    action = '+'
+  action = '+'
 }
 
 
 minusBtn.onclick = function () {
-    action = '-'
+  action = '-'
 }
 
 
 function colorResult(sum) {
-    if (sum < 0) {
-        result.style.color = 'red'
-    } else {
-        result.style.color = 'green'
-    }
-    result.textContent = sum
+  if (sum < 0) {
+    result.style.color = 'red'
+  } else {
+    result.style.color = 'green'
+  }
+  result.textContent = sum
 }
 
 
 function computeNumbers(val1, val2, actionSymbol) {
-    const num1 = Number(val1.value)
-    const num2 = Number(val2.value)
-    return actionSymbol == '+' ? num1 + num2 : num1 - num2
+  const num1 = Number(val1.value)
+  const num2 = Number(val2.value)
+  return actionSymbol == '+' ? num1 + num2 : num1 - num2
 }
 
 
 subBtn.onclick = function () {
-    computeNumbers(input1, input2, action)
-    colorResult(sum)
+  computeNumbers(input1, input2, action)
+  colorResult(sum)
 }
 

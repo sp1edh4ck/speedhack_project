@@ -1,7 +1,8 @@
 .frame-rules {
   display: flex;
   color: #d6d6d6;
-  width: 1300px;
+  width: 1081px;
+  margin: 0 auto;
 }
 
 .rules {
@@ -24,8 +25,16 @@
   background: #242424b6;
   padding: 20px 0px;
   min-width: 205px;
-  max-height: 185px;
+  max-width: 205px;
   border-radius: 10px;
+}
+
+.switch-info-op {
+  display: none;
+}
+
+.switch-info-h-fix {
+  height: 230px;
 }
 
 .switch-button {

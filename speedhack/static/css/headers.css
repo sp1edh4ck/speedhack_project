@@ -3,22 +3,87 @@
   padding: 0;
 }
 
+.bg-header {
+  display: none;
+  background: #242424;
+  padding: 2px 0px;
+  position: fixed;
+  z-index: 9999;
+  max-width: 70%;
+  overflow: hidden;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overscroll-behavior: contain;
+  line-height: 20px;
+}
+
+.bg-links {
+  display: block;
+  margin-top: 10px;
+}
+
+.bg-link {
+  display: flex;
+  text-decoration: none;
+  padding: 8px 0 8px 16px;
+}
+
+.bg-icons {
+  color: #505050;
+  width: 20px;
+  height: 20px;
+}
+
+.bg-link-text {
+  font-size: 15px;
+  color: #ececec;
+  display: block;
+  margin-left: 12px;
+}
+
+.bg-sep {
+  padding-left: 16px;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.bg-sep-text {
+  white-space: nowrap;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 120%;
+  color: #A2A2A2;
+}
+
+.bg-sep-line {
+  width: 100%;
+  margin-left: 8px;
+  height: 1px;
+  background-color: #ffffff26;
+}
+
 .header {
   background: #242424;
   /* background: #1e2122; */
-  padding: 2px 0px;
   position: fixed;
   z-index: 100;
-  height: 40px;
+  height: 44px;
   width: 100%;
   line-height: 20px;
 }
 
 .header-con {
-  max-width: 1081px;
+  width: 1081px;
   margin: 0 auto;
   display: flex;
   align-items: center;
+  padding: 2px 0;
 }
 
 .brandLogo {

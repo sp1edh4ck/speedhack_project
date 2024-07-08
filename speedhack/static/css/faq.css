@@ -1,3 +1,9 @@
+.user-agreement-con {
+  max-width: 1081px;
+  margin: 0 auto;
+  display: flex;
+}
+
 .button-list {
   font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
   font-size: 16px;
