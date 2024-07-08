@@ -210,7 +210,7 @@
                         </div>
                       </div>
                       {% if post.comment.count != 0 %}
-                        <div class="avatar-username" style="min-width: 180px; max-width: 180px;">
+                        <div class="avatar-username avatar-username-op" style="min-width: 180px; max-width: 180px;">
                           <div>
                             <img class="user-avatar" src="{{ post.comment.last.author.avatar.url }}">
                             {% if post.comment.last.author.is_online == True %}
@@ -227,7 +227,7 @@
                           </div>
                         </div>
                       {% else %}
-                        <div class="avatar-username" style="min-width: 180px; max-width: 180px;">
+                        <div class="avatar-username avatar-username-op" style="min-width: 180px; max-width: 180px;">
                           <div>
                             <img class="user-avatar" src="{{ post.author.avatar.url }}">
                             {% if post.author.is_online == True %}
@@ -272,7 +272,7 @@
                       </div>
                     </div>
                     {% if post.post.comment.count != 0 %}
-                      <div class="avatar-username" style="min-width: 180px; max-width: 180px;">
+                      <div class="avatar-username avatar-username-op" style="min-width: 180px; max-width: 180px;">
                         <div>
                           <img class="user-avatar" src="{{ post.post.comment.last.author.avatar.url }}">
                           {% if post.post.comment.last.author.is_online == True %}
@@ -289,7 +289,7 @@
                         </div>
                       </div>
                     {% else %}
-                      <div class="avatar-username" style="min-width: 180px; max-width: 180px;">
+                      <div class="avatar-username avatar-username-op" style="min-width: 180px; max-width: 180px;">
                         <div>
                           <img class="user-avatar" src="{{ post.post.author.avatar.url }}">
                           {% if post.post.author.is_online == True %}
@@ -331,7 +331,7 @@
                       </div>
                     </div>
                     {% if post.comment.count != 0 %}
-                      <div class="avatar-username" style="min-width: 180px; max-width: 180px;">
+                      <div class="avatar-username avatar-username-op" style="min-width: 180px; max-width: 180px;">
                         <div>
                           <img class="user-avatar" src="{{ post.comment.last.author.avatar.url }}">
                           {% if post.comment.last.author.is_online == True %}
@@ -348,7 +348,7 @@
                         </div>
                       </div>
                     {% else %}
-                      <div class="avatar-username" style="min-width: 180px; max-width: 180px;">
+                      <div class="avatar-username avatar-username-op" style="min-width: 180px; max-width: 180px;">
                         <div>
                           <img class="user-avatar" src="{{ post.author.avatar.url }}">
                           {% if post.author.is_online == True %}
@@ -391,7 +391,7 @@
                         </div>
                       </div>
                       {% if post.post.comment.count != 0 %}
-                        <div class="avatar-username" style="min-width: 180px; max-width: 180px;">
+                        <div class="avatar-username avatar-username-op" style="min-width: 180px; max-width: 180px;">
                           <div>
                             <img class="user-avatar" src="{{ post.post.comment.last.author.avatar.url }}">
                             {% if post.post.comment.last.author.is_online == True %}
@@ -408,7 +408,7 @@
                           </div>
                         </div>
                       {% else %}
-                        <div class="avatar-username" style="min-width: 180px; max-width: 180px;">
+                        <div class="avatar-username avatar-username-op" style="min-width: 180px; max-width: 180px;">
                           <div>
                             <img class="user-avatar" src="{{ post.post.author.avatar.url }}">
                             {% if post.post.author.is_online == True %}

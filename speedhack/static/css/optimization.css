@@ -22,6 +22,17 @@
 }
 
 @media (max-width: 1020px) {
+  /* HEADER */
+  .menu-list-op {
+    display: none;
+  }
+  .brandLogo-op {
+    display: none;
+  }
+  .burger-btn {
+    display: block;
+  }
+
   /* INDEX */
   .frames-con {
     max-width: 1020px;
@@ -41,8 +52,10 @@
   }
 }
 
-@media (max-width: 850px) {
-
+@media (max-width: 610px) {
+  .avatar-username-op {
+    display: none;
+  }
 }
 
 @media (max-width: 650px) {

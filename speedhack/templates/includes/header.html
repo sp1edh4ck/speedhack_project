@@ -2,10 +2,11 @@
 {% load user_filters %}
 <header class="header">
   <div class="header-con">
-    <a href="/"><img class="brandLogo" src="{% static 'images/speedhack_logo.png' %}" alt="speedhack"></a>
+    <a href="/"><img class="brandLogo brandLogo-op" src="{% static 'images/speedhack_logo.png' %}" alt="speedhack"></a>
+    <a><i class="fa-solid fa-bars fa-2xl burger-btn"></i></a>
     <i class="fa-solid fa-grip-lines fa-2xl icon-burger"></i>
     <div class="header-menu" id="menu">
-      <ul class="menu-list">
+      <ul class="menu-list menu-list-op">
         <li class="menu-item"><a href="{% url 'forum:index' %}" class="menu-link">Форум</a></li>
         {% comment %} <li class="menu-item"><a href="{% url 'market:index' %}" class="menu-link">Маркет</a></li> {% endcomment %}
         <li class="menu-item"><a href="{% url 'forum:guarantor' %}" class="menu-link">Гарант</a></li>
