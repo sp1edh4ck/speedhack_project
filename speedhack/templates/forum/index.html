@@ -5,12 +5,22 @@
 {% load user_filters %}
 {% block content %}
   <div class="main">
+    <div class="modal-w-topics" id="modal-w-topic">
+      <div class="modal-w-overlay" id="modal-w-overlay"></div>
+      <div class="modal-w-content">
+        <div class="modal-w-top">
+          <div class="modal-w-title">Выберите раздел</div>
+          <div class="modal-w-close" id="modal-w-close"><i class="fa-solid fa-xmark fa-lg"></i></div>
+        </div>
+      </div>
+    </div>
     <div class="frames-con optimization">
       <div class="slide-bar-m">
         <div class="frame-left">
           <div style="margin-bottom: 20px; display: flex;">
             {% if request.user.is_authenticated %}
-              <a href="{% url 'forum:post_create' %}" class="button-frame">Создать тему</a>
+              {% comment %} <a href="{% url 'forum:post_create' %}" class="button-frame">Создать тему</a> {% endcomment %}
+              <a id="modal-w-open" class="button-frame">Создать тему</a>
             {% else %}
               <a href="{% url 'users:login' %}" class="button-frame">Войти и создать тему</a>
             {% endif %}

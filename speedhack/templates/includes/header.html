@@ -4,8 +4,11 @@
   <div class="bg-header" id="burgerMenuId">
     <div class="bg-header-con">
       <ul>
-        {% comment %} <div class="bg-search">
-        </div> {% endcomment %}
+        <div class="bg-search">
+          <form action="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}">
+            <input class="bg-input-search" type="search" name="search" placeholder="Поиск" aria-label="Search" autocomplete="off">
+          </form>
+        </div>
         <div class="bg-links">
           <a class="bg-link" href="{% url "forum:index" %}">
             <i class="fa-solid fa-house fa-lg bg-icons"></i>

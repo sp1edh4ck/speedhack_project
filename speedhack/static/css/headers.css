@@ -4,19 +4,57 @@
 }
 
 .bg-header {
-  display: none;
+  --mm-ocd-width: 80%;
+  --mm-ocd-min-width: 200px;
+  --mm-ocd-max-width: 440px;
+  display: block;
   background: #242424;
   padding: 2px 0px;
   position: fixed;
   z-index: 9999;
-  max-width: 70%;
-  overflow: hidden;
+  width: var(--mm-ocd-width);
+  min-width: var(--mm-ocd-min-width);
+  max-width: var(--mm-ocd-max-width);
+  overflow: scroll;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
   overscroll-behavior: contain;
   line-height: 20px;
+  transform: translate3d(-100%, 0, 0);
+  transition: .3s;
+}
+
+.bg-open {
+  transform: translate3d(0, 0, 0);
+}
+
+.bg-search .bg-input-search {
+  margin: 15px 15px 0;
+}
+
+.bg-input-search {
+  width: calc(100% - 34px);
+  font-size: 16px;
+  background-color: #2d2d2d;
+  border: 2px solid #44444400;
+  color: #d6d6d6;
+  outline: none;
+  border-radius: 10px;
+  height: 35px;
+  padding-left: 10px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.bg-input-search:focus {
+  border: 2px solid #4444448a;
+  border-color: #ff506f;
+  outline: 0;
+}
+
+.bg-search {
+  margin: 0 auto;
 }
 
 .bg-links {

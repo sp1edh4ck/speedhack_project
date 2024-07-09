@@ -19,7 +19,7 @@
           <a data-tab="#ads_all" class="button-tools">Рекламные посты</a>
         </div>
         <div class="tabItem frame-users active-tab" id="ads_create" style="max-width: 806px;{% if tickets_open_count == 0 %}max-height: 65px;{% elif tickets_open_count == 1 %}max-height: 80px;{% elif tickets_open_count == 2 %}max-height: 185px;{% elif tickets_open_count == 3 %}max-height: 290px;{% endif %}">
-          <form method="post" action="{{ request.path }}">
+          <form method="post" action="{{ request.path }}" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="ticket-div" style="max-height: 55px; margin-bottom: 0;">
               <label class="ads-label">Заголовок:</label>

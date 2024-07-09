@@ -24,6 +24,7 @@
 
 .ticket-description {
   max-width: 720px;
+  min-height: 200px;
   padding-left: 7px;
 }
 
