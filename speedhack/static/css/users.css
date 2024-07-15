@@ -1,9 +1,9 @@
 .frame-left-first-users {
-  width: 230px;
+  width: 260px;
   margin-right: 15px;
   border-radius: 10px;
   padding: 15px;
-  max-height: 70px;
+  height: 100px;
   background: #242424b6;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .frame-left-second-users {
-  width: 230px;
+  width: 260px;
   margin: 15px 15px 0 0;
   border-radius: 10px;
   padding: 15px;
@@ -138,9 +138,8 @@
 }
 
 .online {
-  /* background: #0dff00; */
   background: #ff506f;
-  border: 2px solid black;
+  background: #0dff00;
   border-radius: 50%;
   width: 10px;
   height: 10px;

@@ -18,7 +18,7 @@
   background: #242424b6;
   padding: 20px 0px;
   min-width: 200px;
-  max-height: 140px;
+  max-height: 180px;
   border-radius: 10px;
 }
 
@@ -78,7 +78,7 @@
   width: 610px;
   font-size: 16px;
   background: #222222;
-  border: 2px solid #444444;
+  border: 2px solid #44444400;
   color: #d6d6d6;
   outline: none;
   border-radius: 10px;
@@ -86,13 +86,12 @@
 }
 
 .profile-edit-field:focus {
-  border-color: #ff506f;
   outline: 0;
-  box-shadow: 0 0 0 1px #ff506f;
+  border: 2px solid #ff506f;
 }
 
 .profile-edit-field-height {
-  height: 30px;
+  height: 40px;
   padding: 0 10px;
 }
 
@@ -152,20 +151,24 @@ option:hover {
 }
 
 .birthday-input {
-  color: #d6d6d6;
-  background: #222222;
-  border-radius: 10px;
-  border: 2px solid #4444448a;
-  outline: none;
-  max-width: 90px;
-  height: 30px;
+  width: 610px;
   padding-left: 10px;
+  height: 40px;
   font-size: 16px;
-  transition: all 0.15s ease 0s;
+  background: #222222;
+  border: 2px solid #44444400;
+  color: #d6d6d6;
+  outline: none;
+  border-radius: 10px;
+  transition: all .15s;
 }
 
 .birthday-input:focus {
   border: 2px solid #ff506f;
+}
+
+.profile-edit-small-input {
+  max-width: 100px;
 }
 
 select {

@@ -3,18 +3,18 @@ from django.core.paginator import Paginator
 from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from django_ratelimit.decorators import ratelimit
 from django.utils.http import unquote
+from django_ratelimit.decorators import ratelimit
 
 from market.models import Market
-from users.forms import UserProfileAdminForm, UserPersonalForm, UserContactForm
-from users.models import CustomUser, IpUser, BannedUser
+from users.forms import UserContactForm, UserPersonalForm, UserProfileAdminForm
+from users.models import BannedUser, CustomUser, IpUser
 
 from .forms import (AdsForm, AnswerForm, CommentForm, DepositForm, HelpForm,
                     PostForm, ProfileCommentForm, UserBanForm)
 from .models import (Ads, Comment, CommentSymp, Favourites, Follow, Forum,
-                     Group, Helper, HelpForum, Like, ProfileComment, Symp,
-                     User, Viewer, Maecenas)
+                     Group, Helper, HelpForum, Like, Maecenas, ProfileComment,
+                     Symp, User, Viewer)
 
 
 def js_read(request):
@@ -117,10 +117,16 @@ def index(request):
     else:
         posts = Forum.objects.select_related('author').all()
     ads = Ads.objects.all()
+    ads_clear = []
+    for ad in ads:
+        if Forum.objects.filter(id=ad.post_id).exists():
+            ads_clear.append(ad)
+        else:
+            continue
     if request.user.is_authenticated:
         symp_result, symp_type = user_symps_count_check(request)
         context = {
-            'ads': ads,
+            'ads_clear': ads_clear,
             'maecenas': maecenas,
             'symp_result': symp_result,
             'symp_type': symp_type,
@@ -128,7 +134,7 @@ def index(request):
         }
     else:
         context = {
-            'ads': ads,
+            'ads_clear': ads_clear,
             'maecenas': maecenas,
             'objects': pagination_post(request, posts),
         }
@@ -149,8 +155,14 @@ def viewed_threads(request):
     else: 
         viewed_posts = Viewer.objects.filter(user=user)
     ads = Ads.objects.all()
+    ads_clear = []
+    for ad in ads:
+        if Forum.objects.filter(id=ad.post_id).exists():
+            ads_clear.append(ad)
+        else:
+            continue
     context = {
-        'ads': ads,
+        'ads_clear': ads_clear,
         'maecenas': maecenas,
         'symp_result': symp_result,
         'symp_type': symp_type,
@@ -173,9 +185,15 @@ def my_topics(request):
     else:
         posts = user.posts.all()
     ads = Ads.objects.all()
+    ads_clear = []
+    for ad in ads:
+        if Forum.objects.filter(id=ad.post_id).exists():
+            ads_clear.append(ad)
+        else:
+            continue
     posts_count = posts.count
     context = {
-        'ads': ads,
+        'ads_clear': ads_clear,
         'maecenas': maecenas,
         'symp_result': symp_result,
         'symp_type': symp_type,
@@ -196,8 +214,14 @@ def favourites(request):
     favourites_posts = Favourites.objects.filter(user=user)
     favourites_posts_count = favourites_posts.count
     ads = Ads.objects.all()
+    ads_clear = []
+    for ad in ads:
+        if Forum.objects.filter(id=ad.post_id).exists():
+            ads_clear.append(ad)
+        else:
+            continue
     context = {
-        'ads': ads,
+        'ads_clear': ads_clear,
         'maecenas': maecenas,
         'symp_result': symp_result,
         'symp_type': symp_type,
@@ -432,7 +456,7 @@ def profile_personal_info_edit(request, username):
         form.brt_month = request.POST.get('brt_month')
         form.brt_year = request.POST.get('brt_year')
         form.save()
-        return redirect('forum:profile', username=username)
+        return redirect('forum:profile_personal_info_edit', username=username)
     context = {
         'form': form,
     }
@@ -448,15 +472,28 @@ def profile_contact_info_edit(request, username):
         return redirect('forum:empty_page')
     form = UserContactForm(
         request.POST or None,
-        files=request.FILES or None,
-        instance=request.user
+        instance=request.user,
     )
     if form.is_valid() and request.user.is_authenticated:
-        form.brt_day = request.POST.get('brt_day')
-        form.brt_month = request.POST.get('brt_month')
-        form.brt_year = request.POST.get('brt_year')
+        links_dict = {
+            "tg_link": form.cleaned_data.get("tg_link").split("/"),
+            "vk_link": form.cleaned_data.get("vk_link").split("/"),
+            "steam_link": form.cleaned_data.get("steam_link").split("/"),
+            "github_link": form.cleaned_data.get("github_link").split("/"),
+        }
+        pre_form = form.save(commit=False)
+        for link_key, link_item in links_dict.items():
+            if len(link_item) == 1:
+                setattr(pre_form, link_key, link_item[0])
+            elif len(link_item) == 2:
+                setattr(pre_form, link_key, link_item[1])
+            elif len(link_item) == 4:
+                setattr(pre_form, link_key, link_item[3])
+            elif len(link_item) == 5 or len(link_item) == 6:
+                setattr(pre_form, link_key, link_item[4])
+        pre_form.save()
         form.save()
-        return redirect('forum:profile', username=username)
+        return redirect('forum:profile_contact_info_edit', username=username)
     context = {
         'form': form,
     }
@@ -690,6 +727,15 @@ def post_create(request):
     return render(request, 'forum/post_create.html', context)
 
 
+@ratelimit(key='user_or_ip', rate="17/m")
+@login_required
+def create_thread(request, slug):
+    if request.user.rank == "заблокирован":
+        return banned_redirect(request)
+    form = PostForm()
+    pass
+
+
 @ratelimit(key='user_or_ip', rate='17/m')
 @login_required
 def post_edit(request, post_id):
@@ -809,12 +855,14 @@ def admin_panel(request):
     if request.user.rank_lvl < "4":
         return redirect('forum:empty_page')
     users_list = CustomUser.objects.all().order_by("-date_joined")
+    users_list_count = users_list.count()
     users_ban_list = CustomUser.objects.filter(rank="заблокирован")
     search_query = request.GET.get('search', '')
     if search_query:
         users_list = CustomUser.objects.filter(username__icontains=search_query)
     context = {
         'users_list': users_list,
+        'users_list_count': users_list_count,
         'users_ban_list': users_ban_list,
     }
     return render(request, 'forum/admin.html', context)
@@ -829,13 +877,7 @@ def users_bans(request):
     )
     if request.method == 'POST':
         if form.is_valid():
-            form = form.save(commit=False)
-            user = get_object_or_404(User, username=request.POST.geet('user'))
-            form.user_id = user
-            form.admin_id = request.user
-            form.ban_reason = request.POST.get('ban_reason')
-            form.ban_time_value = request.POST.get('ban_time_value')
-            form.ban_time_item = request.POST.get('ban_time_item')
+            form.admin = request.POST.get("admin")
             form.save()
             return redirect('forum:users_bans')
     ban_list = BannedUser.objects.all()

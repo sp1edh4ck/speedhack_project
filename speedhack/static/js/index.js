@@ -1,4 +1,13 @@
-// Открытие разделов сортировки
+
+
+
+
+
+
+
+
+
+
 
 const sandwichmenu_0_0 = document.querySelector('#menu_0_0');
 const js_menu_0_0 = document.querySelector('.frame-topics');

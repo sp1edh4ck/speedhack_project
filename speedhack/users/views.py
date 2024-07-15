@@ -1,13 +1,15 @@
 from random import randint
 
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import authenticate, get_user_model, login
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django.views import View
 from django_ratelimit.decorators import ratelimit
 
-from .forms import CustomUserCreationForm, CustomUserLogin, CustomUserChangePassForm
 from users.models import CustomUser
+
+from .forms import (CustomUserChangePassForm, CustomUserCreationForm,
+                    CustomUserLogin)
 
 User = get_user_model()
 

@@ -24,21 +24,21 @@ burgerMenu.addEventListener('click', event => {
 
 
 
-const modalWindow = document.getElementById("modal-w-topic")
-const modalOpenBtn = document.getElementById("modal-w-open")
-const modalCloseBtn = document.getElementById("modal-w-close")
-const modalOverlay = document.getElementById("modal-w-overlay")
+// const modalWindow = document.getElementById("modal-w-topic")
+// const modalOpenBtn = document.getElementById("modal-w-open")
+// const modalCloseBtn = document.getElementById("modal-w-close")
+// const modalOverlay = document.getElementById("modal-w-overlay")
 
-modalOpenBtn.onclick = function () {
-  modalWindow.classList.add("mw-topic-active")
-  modalOverlay.style.display = 'block'
-  document.body.style.overflow = 'hidden'
-  document.body.style.opacity = '0.7'
-}
+// modalOpenBtn.onclick = function () {
+//   modalWindow.classList.add("mw-topic-active")
+//   modalOverlay.style.display = 'block'
+//   document.body.style.overflow = 'hidden'
+//   document.body.style.opacity = '0.7'
+// }
 
-modalCloseBtn.onclick = function () {
-  modalWindow.classList.remove("mw-topic-active")
-  modalOverlay.style.display = 'none'
-  document.body.style.overflow = 'scroll'
-  document.body.style.opacity = '1'
-}
+// modalCloseBtn.onclick = function () {
+//   modalWindow.classList.remove("mw-topic-active")
+//   modalOverlay.style.display = 'none'
+//   document.body.style.overflow = 'scroll'
+//   document.body.style.opacity = '1'
+// }

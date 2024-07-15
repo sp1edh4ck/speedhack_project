@@ -25,17 +25,17 @@
               </div>
             </div>
             <hr style="margin: 20px 0; border: 1px solid #2d2d2d; border-radius: 10px;">
-            <div style="display: flex;">
+            {% comment %} <div style="display: flex;">
               <div class="profile-edit-div">
                 <label>Аватар:</label>
               </div>
               <div>
                 <input class="field-load" type="file" name="avatar" id="id_avatar" accept=".png,.jpg,.jpeg">
-                {% comment %} {{ form.avatar|addclass:"field-load" }} {% endcomment %}
+                {{ form.avatar|addclass:"field-load" }}
               </div>
             </div>
-            <hr style="margin: 20px 0; border: 1px solid #2d2d2d; border-radius: 10px;">
-            {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.rank == 'искусственный интелект' or request.user.profile_sub == True %}
+            <hr style="margin: 20px 0; border: 1px solid #2d2d2d; border-radius: 10px;"> {% endcomment %}
+            {% comment %} {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.rank == 'искусственный интелект' or request.user.profile_sub == True %}
               <div style="display: flex;">
                 <div class="profile-edit-div">
                   <label>Фон профиля:</label>
@@ -45,7 +45,7 @@
                 </div>
               </div>
               <hr style="margin: 20px 0; border: 1px solid #2d2d2d; border-radius: 10px;">
-            {% endif %}
+            {% endif %} {% endcomment %}
             {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.privilage == 'искусственный интелект' or request.user.unique == True %}
               <div style="display: flex;">
                 <div class="profile-edit-div">
@@ -122,8 +122,8 @@
               </div>
               <div style="display: block;">
                 <div>
-                  <input type="integer" name="brt_day" id="id_brt_day" class="birthday-input" placeholder="День..." value="{{ user.brt_day }}" maxlength="2">
-                  <select name="brt_month" id="id_brt_month" class="birthday-input" style="min-width: 101px; height: 34px; -o-appearance: none;">
+                  <input type="integer" name="brt_day" id="id_brt_day" class="birthday-input profile-edit-small-input" placeholder="День..." value="{{ user.brt_day }}" maxlength="2">
+                  <select name="brt_month" id="id_brt_month" class="birthday-input profile-edit-small-input">
                     <option value="Месяц" {% if user.brt_month == "Месяц" %}selected=""{% endif %}>Месяц</option>
                     <option value="Январь" {% if user.brt_month == "Январь" %}selected=""{% endif %}>Январь</option>
                     <option value="Февраль" {% if user.brt_month == "Февраль" %}selected=""{% endif %}>Февраль</option>
@@ -138,7 +138,7 @@
                     <option value="Ноябрь" {% if user.brt_month == "Ноябрь" %}selected=""{% endif %}>Ноябрь</option>
                     <option value="Декабрь" {% if user.brt_month == "Декабрь" %}selected=""{% endif %}>Декабрь</option>
                   </select>
-                  <input type="integer" name="brt_year" id="id_brt_year" class="birthday-input" placeholder="Год..." value="{{ user.brt_year }}" maxlength="4">
+                  <input type="integer" name="brt_year" id="id_brt_year" class="birthday-input profile-edit-small-input" placeholder="Год..." value="{{ user.brt_year }}" maxlength="4">
                 </div>
               </div>
             </div>

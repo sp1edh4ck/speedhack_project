@@ -1,7 +1,7 @@
 @media (max-width: 1220px) {
   /* HEADER */
   .header-con {
-    width: calc(100% - 60px);
+    width: calc(100% - 10px);
     display: flex;
     align-items: center;
     padding: 2px 10px;
@@ -14,7 +14,7 @@
     margin: 0 auto;
   }
   .frame-right-first-index {
-    width: 618px;
+    width: 656px;
   }
 
   /* MISC */
@@ -47,14 +47,14 @@
   .frame-right-first-index {
     position: absolute;
     top: 160px;
-    width: calc(100% - 40px);
+    width: 100%;
   }
   .slide-bar-m {
     display: none;
   }
   .slide-bar-s {
     display: block;
-    width: calc(100% - 40px);
+    width: 100%;
   }
 
   /* FAQ */

@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.validators import MinLengthValidator
 from django.db import models
 
 User = get_user_model()
@@ -86,7 +87,7 @@ class Forum(models.Model):
         related_name='posts',
         verbose_name='Группа',
     )
-    title = models.CharField(verbose_name='Заголовок', max_length=100)
+    title = models.CharField(verbose_name='Заголовок', max_length=100, validators=[MinLengthValidator(5)],)
     text = models.TextField(verbose_name='Текст', max_length=5000)
     pub_date = models.DateTimeField(verbose_name='Дата', auto_now_add=True,)
     author = models.ForeignKey(

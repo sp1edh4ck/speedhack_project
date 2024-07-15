@@ -198,27 +198,22 @@ class CustomUser(AbstractUser):
 
 
 class BannedUser(models.Model):
-    user = models.ForeignKey(
-        CustomUser,
-        on_delete=models.CASCADE,
-        related_name='take_ban',
-        verbose_name='Забаненый пользователь',
-    )
+    user = models.CharField(verbose_name='Забаненный пользователь', max_length=15)
     admin = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
-        related_name='add_ban',
+        related_name='give_ban',
         verbose_name='Администратор выдавший бан',
     )
-    ban_date = models.DateTimeField(verbose_name='Дата блокировки', default=timezone.now)
-    ban_reason = models.TextField(verbose_name='Причина блокировки', default='')
-    ban_time_value = models.IntegerField(verbose_name='Время')
-    ban_time_item = models.TextField(verbose_name='Значение', choices=BAN_ITEM, default=BAN_ITEM[0][0])
+    date = models.DateTimeField(verbose_name='Дата блокировки', default=timezone.now)
+    reason = models.TextField(verbose_name='Причина блокировки', default='')
+    time_value = models.IntegerField(verbose_name='Время')
+    time_item = models.TextField(verbose_name='Значение', choices=BAN_ITEM, default=BAN_ITEM[0][0])
 
     class Meta:
         verbose_name = 'Запись бана'
         verbose_name_plural = 'Записи банов'
-        ordering = ('-ban_date',)
+        ordering = ('-date',)
 
 
 class IpUser(models.Model):

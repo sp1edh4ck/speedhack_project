@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background: #2c2c2c;
   font-family: "Inter", sans-serif !important;
@@ -55,6 +61,10 @@ body::-webkit-scrollbar-thumb {
   flex: 1;
   padding-top: 70px;
   margin-bottom: 20px;
+}
+
+.search-items-hide {
+  display: none;
 }
 
 [class*="_con"] {

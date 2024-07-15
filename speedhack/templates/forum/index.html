@@ -19,8 +19,8 @@
         <div class="frame-left">
           <div style="margin-bottom: 20px; display: flex;">
             {% if request.user.is_authenticated %}
-              {% comment %} <a href="{% url 'forum:post_create' %}" class="button-frame">Создать тему</a> {% endcomment %}
-              <a id="modal-w-open" class="button-frame">Создать тему</a>
+              <a href="{% url 'forum:post_create' %}" class="button-frame">Создать тему</a>
+              {% comment %} <a id="modal-w-open" class="button-frame">Создать тему</a> {% endcomment %}
             {% else %}
               <a href="{% url 'users:login' %}" class="button-frame">Войти и создать тему</a>
             {% endif %}
@@ -29,7 +29,7 @@
           {% include 'includes/filters.html' %}
         </div>
         {% if request.user.is_authenticated %}
-          <div class="frame-left" style="min-width: 230px; max-width: 230px; padding: 20px;">
+          <div class="frame-left" style="width: 260px; padding: 20px;">
             <div class="avatar-username" style="margin-bottom: 10px;">
               <div>
                 <img class="user-avatar" src="{{ request.user.avatar.url }}">
@@ -57,12 +57,12 @@
                 Наберите ещё {{ symp_result }} {{ symp_result|ru_plural:"симпатию,симпатии,симпатий" }}, и вы получите группу {%if symp_type == "Местный" %}{{ symp_type }}{% endif %}
               </div>
               <div>
-                <a href="{% url 'forum:profile_upgrade' user.username %}" class="button-frame" style="padding: 7px 0;">Платное повышение прав</a>
+                <a href="{% url 'forum:profile_upgrade' user.username %}" class="button-frame" style="width: 220px; padding: 7px 0; font-size: 14px;">Платное повышение прав</a>
               </div>
             </div>
           </div>
         {% endif %}
-        <div class="frame-left" style="min-width: 230px; max-width: 230px; padding: 20px;">
+        <div class="frame-left" style="width: 260px; padding: 20px;">
           <div style="color: #949494; margin-bottom: 10px;">Меценат форума {{ maecenas.date_created|date:"d.m" }} - {{ maecenas.date_until|date:"d.m" }}</div>
           <div class="avatar-username" style="margin-bottom: 10px;">
             <div>
@@ -81,7 +81,7 @@
             {{ maecenas.description|linebreaksbr }}
           </div>
         </div>
-        <div class="frame-left" style="min-width: 250px; max-width: 250px;">
+        <div class="frame-left" style="width: 260px;">
           <div style="color: #949494; margin-bottom: 10px; padding: 0 10px;">Прочее</div>
           {% comment %} <a class="li-label-ts-a" href="{% url 'forum:index' %}">
             <ul style="list-style-type: none; margin-top: 10px;">
@@ -156,19 +156,22 @@
           </div>
           {% if request.path == '/' or request.path == '/forum/viewed_threads/' or request.path == '/forum/my_topics/' %}
             <div class="search-header search-header-else">
-              <div>
-                <form action="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}">
+              <div class="search-div">
+                {% comment %} <form action="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}">
                   <input class="input-search" type="search" name="search" placeholder="Поиск" aria-label="Search" autocomplete="off">
-                </form>
+                </form> {% endcomment %}
+                <input class="input-search" type="search" name="input" id="input" placeholder="Поиск" aria-label="Search" autocomplete="off">
+                {% comment %} <i class="fa fa-times-circle fa-lg icon-delete-search"></i> {% endcomment %}
               </div>
               <div>
-                <a href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% elif request.path == '/forum/favourites/' %}{% url 'forum:favourites' %}{% endif %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
+                {% comment %} <a href="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% elif request.path == '/forum/favourites/' %}{% url 'forum:favourites' %}{% endif %}"><i class="fa fa-times-circle icon-delete"></i></a> {% endcomment %}
+                <button id="delete_id" style="background: none; border: none;"><i class="fa fa-times-circle icon-delete" style="cursor: pointer;"></i></button>
               </div>
             </div>
           {% endif %}
-          {% if ads.count != 0 and request.user.is_authenticated %}
+          {% if ads_clear.count != 0 and request.user.is_authenticated %}
             <div style="margin: 20px 0 20px 0;">
-              {% for ad in ads %}
+              {% for ad in ads_clear %}
                 {% if ad.author.rank != "заблокирован" %}
                   <a style="text-decoration: none;" href="{% url 'forum:post_detail' ad.post_id %}">
                     <div class="li-label-ad" style="font-size: 16px;">
@@ -193,6 +196,7 @@
           </div> {% endcomment %}
           {% comment %} <hr style="margin-bottom: 20px; border: 1px solid #2d2d2d; border-radius: 10px;"> {% endcomment %}
           {% for post in objects %}
+            <div class="index-box-search">
             {% if post.author.rank != "заблокирован" %}
               {% if request.path == '/' %}
                 {% if post.pinned %}
@@ -445,9 +449,11 @@
                   </div>
                   <div class="search-header search-header-else">
                     <div>
-                      <form action="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}">
+                      {% comment %} <form action="{% if request.path == '/' %}{% url 'forum:index' %}{% elif request.path == '/forum/my_topics/' %}{% url 'forum:my_topics' %}{% endif %}">
                         <input class="input-search" type="search" name="search" placeholder="Поиск" aria-label="Search">
-                      </form>
+                      </form> {% endcomment %}
+                      <input class="input-search" type="search" name="input" id="input" placeholder="Поиск" aria-label="Search" autocomplete="off">
+                      <i class="fa fa-times-circle fa-lg icons-users">
                     </div>
                     <div>
                       <a href="{% url 'forum:favourites' %}"><i class="fa fa-times-circle fa-lg icons-users"></i></a>
@@ -460,6 +466,7 @@
                 {% endif %}
               {% endif %}
             {% endif %}
+            </div>
           {% endfor %}
           <div style="margin-bottom: 15px;"></div>
           {% include '../includes/paginator.html' %}
@@ -467,6 +474,7 @@
       </div>
     </div>
   </div>
+  <script type="text/javascript" src="{% static 'js/index_search.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/profile.js' %}"></script>
 {% endblock %}

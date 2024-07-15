@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from .models import (Ads, Comment, CommentSymp, Favourites, Forum, Group,
-                     Helper, HelpForum, Like, ProfileComment, Symp, Viewer, BanIp,
-                     Maecenas)
+from .models import (Ads, BanIp, Comment, CommentSymp, Favourites, Forum,
+                     Group, Helper, HelpForum, Like, Maecenas, ProfileComment,
+                     Symp, Viewer)
 
 
 class ForumAdmin(admin.ModelAdmin):

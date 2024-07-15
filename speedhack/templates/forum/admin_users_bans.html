@@ -6,7 +6,7 @@
   <div class="main">
     <div class="frame_con">
       <div style="display: block;">
-        <div class="switch-info-admin" style="max-height: 175px;">
+        <div class="switch-info-admin" style="max-height: 205px;">
           <a href="{% url 'forum:admin_panel' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Основная админ-панель</a>
           <a href="{% url 'forum:users_bans' %}" class="switch-button active-tab" style="text-decoration: none; color: #d6d6d6;">Панель блокировки</a>
           <a href="{% url 'forum:tickets' %}" class="switch-button" style="text-decoration: none; color: #d6d6d6;">Обращения</a>
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div>
-        <div class="admin-frame-right" style="margin: 0 0 15px 0; padding: 20px 0 0 20px; min-height: 50px; max-width: 786px;">
+        <div class="admin-frame-right">
           <a data-tab="#tickets_open" class="button-tools active-tab">Форма для блокировки</a>
           <a data-tab="#tickets_close" class="button-tools">Записи банов</a>
         </div>
@@ -61,16 +61,16 @@
             <div class="ticket-div" style="max-height: 55px; margin-bottom: 0;">
               <label class="ads-label">Причина блокировки:</label>
               <div>
-                <input name="ban_reason" id="id_ban_reason" class="field field-height" style="max-width: 530px; max-height: 36px; padding: 0 7px;" placeholder="Объяснение..." maxlength="70">
+                <input name="reason" id="id_reason" class="field field-height" style="max-width: 530px; max-height: 36px; padding: 0 7px;" placeholder="Объяснение..." maxlength="70">
               </div>
             </div>
             <div class="ticket-div" style="margin-bottom: 0;">
               <label class="ads-label">Длительность бана:</label>
               <div>
-                <input type="integer" name="ban_time_value" id="id_ban_time_value" class="field field-height" style="max-width: 80px; max-height: 36px; padding: 0 7px;" placeholder="Число..." maxlength="5" autocomplete="off">
+                <input type="integer" name="time_value" id="id_time_value" class="field field-height" style="max-width: 80px; max-height: 36px; padding: 0 7px;" placeholder="Число..." maxlength="5" autocomplete="off">
               </div>
               <div style="margin-left: 10px;">
-                <select name="ban_time_item" id="id_ban_time_item" class="field field-height" style="max-width: 150px;">
+                <select name="time_item" id="id_time_item" class="field field-height" style="max-width: 150px;">
                   <option value="не выбранно" selected="">не выбранно</option>
                   <option value="минуты">минуты</option>
                   <option value="часы">часы</option>

@@ -17,6 +17,7 @@ urlpatterns = [
     path('forum/favourites/', views.favourites, name='favourites'),
     path('forum/tickets/open/', views.ticket_form, name='ticket_form'),
     path('group/<slug:slug>/', views.group_free, name='group_filter_posts'),
+    path('group/<slug:slug>/create_thread/', views.create_thread, name='create_thread'),
     path('members/<str:username>/', views.profile, name='profile'),
     # ? ----------
     # TODO: сделать для пользователей с привилегиями короткие ссылки на профиль

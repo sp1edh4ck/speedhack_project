@@ -49,10 +49,10 @@
             </div>
           </div>
         </div> {% endcomment %}
-        <div class="frame-left-second-users" style="{% if new_users.count == 1 %}min-height: 90px; max-height: 90px;{% elif new_users.count == 2 %}min-height: 150px; max-height: 150px;{% elif new_users.count == 3 %}min-height: 200px; max-height: 200px;{% elif new_users.count == 4 %}min-height: 260px; max-height: 260px;{% elif new_users.count == 5 %}min-height: 320px; max-height: 320px;{% elif new_users.count == 6 %}min-height: 375px; max-height: 375px;{% elif new_users.count == 7 %}min-height: 440px; max-height: 440px;{% endif %}">
+        <div class="frame-left-second-users" style="{% if new_users.count == 1 %}min-height: 90px; max-height: 90px;{% elif new_users.count == 2 %}min-height: 170px; max-height: 170px;{% elif new_users.count == 3 %}min-height: 225px; max-height: 225px;{% elif new_users.count == 4 %}min-height: 280px; max-height: 280px;{% elif new_users.count == 5 %}min-height: 335px; max-height: 335px;{% elif new_users.count == 6 %}min-height: 390px; max-height: 390px;{% elif new_users.count == 7 %}min-height: 445px; max-height: 445px;{% endif %}">
           <div style="color: gray; font-size: 18px; margin-bottom: 15px;">Новые пользователи</div>
           {% for user in new_users %}
-            <div style="display: flex;">
+            <div style="display: flex; max-height: 55px;">
               <a class="a-users" href="{% url 'forum:profile' user.username %}">
                 <img style="width: 50px; border-radius: 50px;" src="{{ user.avatar.url }}">
               </a>
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div>
-        <div class="admin-frame-right" style="margin: 0 0 15px 0; padding: 20px 0 0 20px; min-height: 50px;">
+        <div class="admin-frame-right">
           <a data-tab="#users_list_bySymps" class="button-tools active-tab">Больше всех симпатий</a>
           <a data-tab="#users_list_byComments" class="button-tools">Больше всех сообщений</a>
           <a data-tab="#users_list_byStaff" class="button-tools">Команда форума</a>
@@ -75,7 +75,7 @@
         <div id="users_list_bySymps" class="tabItem frame-right-users users-display active-tab">
           {% if users_list_bySymps.count != 0 %}
             {% for user in users_list_bySymps %}
-              <div class="users-div" style="{% if user.description != '' %}min-height: 110px; max-height: 110px;{% else %}min-height: 90px; max-height: 90px;{% endif %}">
+              <div class="users-div" style="{% if user.description != '' %}min-height: 125px; max-height: 125px;{% else %}min-height: 100px; max-height: 100px;{% endif %}">
                 <div style="padding: 10px 0 10px 10px;">
                   <a class="a-users" href="{% url 'forum:profile' user.username %}">
                     <img style="width: 60px; border-radius: 50px;" src="{{ user.avatar.url }}">
@@ -115,7 +115,7 @@
         <div id="users_list_byComments" class="tabItem frame-right-users users-display">
           {% if users_list_byComments.count != 0 %}
             {% for user in users_list_byComments %}
-              <div class="users-div" style="{% if user.description != '' %}min-height: 110px; max-height: 110px;{% else %}min-height: 90px; max-height: 90px;{% endif %}">
+              <div class="users-div" style="{% if user.description != '' %}min-height: 125px; max-height: 125px;{% else %}min-height: 100px; max-height: 100px;{% endif %}">
                 <div style="padding: 10px 0 10px 10px;">
                   <a class="a-users" href="{% url 'forum:profile' user.username %}">
                     <img style="width: 60px; border-radius: 50px;" src="{{ user.avatar.url }}">
@@ -156,7 +156,7 @@
           {% if users_list_byStaff.count != 0 %}
             {% for user in users_list_byStaff %}
               {% if user.rank_lvl >= "4" %}
-                <div class="users-div" style="{% if user.description != '' %}min-height: 110px; max-height: 110px;{% else %}min-height: 90px; max-height: 90px;{% endif %}">
+                <div class="users-div" style="{% if user.description != '' %}min-height: 125px; max-height: 125px;{% else %}min-height: 100px; max-height: 100px;{% endif %}">
                   <div style="padding: 10px 0 10px 10px;">
                     <a class="a-users" href="{% url 'forum:profile' user.username %}">
                       <img style="width: 60px; border-radius: 50px;" src="{{ user.avatar.url }}">

@@ -1,5 +1,5 @@
 .frame-login {
-  max-width: 400px;
+  width: 440px;
   background: #242424b6;
   padding: 20px;
   border-radius: 10px;
@@ -7,7 +7,7 @@
 }
 
 .frame-registration {
-  max-width: 400px;
+  width: 440px;
   background: #242424b6;
   padding: 20px;
   border-radius: 10px;
@@ -109,7 +109,7 @@
 .input-box {
   position: relative;
   width: 100%;
-  height: 50px;
+  min-height: 50px;
   border-bottom: 2px solid gray;
   margin: 30px 0;
 }
@@ -128,14 +128,14 @@
   top: -5px;
 }
 
-.input-box input:valid~.icon-login {
+/* .input-box input:valid~.icon-login {
   color: #ff506f;
-}
+} */
 
 .input-ret {
   color: #d6d6d6;
   font-size: 20px;
-  width: 100%;
+  width: 90%;
   height: 35px;
   margin-top: 10px;
   padding: 0 0px 0 5px;
@@ -151,11 +151,10 @@ input:-webkit-autofill {
 }
 
 .icon-login {
-  width: 15px;
-  height: 15px;
-  position: absolute;
-  right: 8px;
-  top: 17px;
+  width: 17px;
+  height: 17px;
+  float: right;
+  margin-top: 17px;
   transition: .5s;
 }
 

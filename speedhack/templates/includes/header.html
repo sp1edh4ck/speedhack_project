@@ -14,15 +14,15 @@
             <i class="fa-solid fa-house fa-lg bg-icons"></i>
             <div class="bg-link-text">На главную</div>
           </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
+          {% comment %} <a class="bg-link" href="{% url "forum:index" %}">
             <i class="fa-solid fa-file-lines fa-lg bg-icons"></i>
             <div class="bg-link-text">Статьи</div>
-          </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
+          </a> {% endcomment %}
+          {% comment %} <a class="bg-link" href="{% url "forum:market" %}">
             <i class="fa-solid fa-basket-shopping fa-lg bg-icons"></i>
             <div class="bg-link-text">Маркет</div>
-          </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
+          </a> {% endcomment %}
+          <a class="bg-link" href="{% url "forum:guarantor" %}">
             <i class="fa-solid fa-shield fa-lg bg-icons"></i>
             <div class="bg-link-text">Гарант</div>
           </a>
@@ -32,27 +32,27 @@
           <div class="bg-sep-line"></div>
         </div>
         <div class="bg-links">
-          <a class="bg-link" href="{% url "forum:index" %}">
+          {% comment %} <a class="bg-link" href="{% url "forum:index" %}">
             <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
             <div class="bg-link-text">Чат</div>
-          </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
+          </a> {% endcomment %}
+          <a class="bg-link" href="https://t.me/speedhack_project" target="_blank" rel="noopener noreferrer">
             <i class="fa-brands fa-telegram fa-lg bg-icons"></i>
             <div class="bg-link-text">Telegram канал</div>
           </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
+          {% comment %} <a class="bg-link" href="{% url "forum:index" %}">
             <i class="fa-brands fa-telegram fa-lg bg-icons"></i>
             <div class="bg-link-text">sp news</div>
-          </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
+          </a> {% endcomment %}
+          <a class="bg-link" href="https://t.me/speedhack_chat">
             <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
             <div class="bg-link-text">SP TG чат</div>
           </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
+          <a class="bg-link" href="https://vk.com/speedhack_project" target="_blank" rel="noopener noreferrer">
             <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
             <div class="bg-link-text">Группа ВКонтакте</div>
           </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
+          <a class="bg-link" href="https://discord.gg/HH8bCVsyTf" target="_blank" rel="noopener noreferrer">
             <i class="fa-solid fa-microphone fa-lg bg-icons"></i>
             <div class="bg-link-text">Discord сервер</div>
           </a>
@@ -62,46 +62,47 @@
           <div class="bg-sep-line"></div>
         </div>
         <div class="bg-links">
-          <a class="bg-link" href="{% url "forum:index" %}">
-            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+          <a class="bg-link" href="{% url "forum:users" %}">
+            {% comment %} <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i> {% endcomment %}
+            <i class="fa-solid fa-users fa-lg bg-icons"></i>
             <div class="bg-link-text">Пользователи</div>
           </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
+          {% comment %} <a class="bg-link" href="{% url "forum:index" %}">
             <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
             <div class="bg-link-text">Заблокированные</div>
-          </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
-            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+          </a> {% endcomment %}
+          <a class="bg-link" href="{% url "forum:rules" %}">
+            <i class="fa-solid fa-triangle-exclamation fa-lg bg-icons"></i>
             <div class="bg-link-text">Правила форума</div>
           </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
-            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+          {% comment %} <a class="bg-link" href="{% url "forum:ticket_form" %}">
+            <i class="fa-solid fa-circle-question fa-lg bg-icons"></i>
             <div class="bg-link-text">Не пришли деньги?</div>
-          </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
-            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+          </a> {% endcomment %}
+          <a class="bg-link" href="{% url "forum:faq" %}">
+            <i class="fa-solid fa-circle-exclamation fa-lg bg-icons"></i>
             <div class="bg-link-text">FAQ</div>
           </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
-            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+          <a class="bg-link" href="{% url "forum:advertisement" %}">
+            <i class="fa-solid fa-chart-pie fa-lg bg-icons"></i>
             <div class="bg-link-text">Реклама</div>
           </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
+          {% comment %} <a class="bg-link" href="{% url "forum:index" %}">
             <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
             <div class="bg-link-text">Турниры</div>
-          </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
-            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+          </a> {% endcomment %}
+          <a class="bg-link" href="{% url "forum:about_us" %}">
+            <i class="fa-solid fa-s fa-lg bg-icons"></i>
             <div class="bg-link-text">О нас</div>
           </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
-            <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
+          <a class="bg-link" href="{% url "forum:ticket_form" %}">
+            <i class="fa-solid fa-circle-question fa-lg bg-icons"></i>
             <div class="bg-link-text">Нужна помощь</div>
           </a>
-          <a class="bg-link" href="{% url "forum:index" %}">
+          {% comment %} <a class="bg-link" href="{% url "forum:index" %}">
             <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
             <div class="bg-link-text">Switch to English</div>
-          </a>
+          </a> {% endcomment %}
         </div>
       </ul>
     </div>
@@ -121,7 +122,8 @@
             <a class="window-button">Соц. сети <i class="fas fa-angle-down fa-sm icons-header"></i></a>
             <div style="padding-top: 10px;">
               <div class="window-other">
-                <a href="https://t.me/speedhack_project" target="_blank" rel="noopener noreferrer" class="window-button-second">Канал в Telegram</a>
+                <a href="https://t.me/speedhack_project" target="_blank" rel="noopener noreferrer" class="window-button-second">Telegram канал</a>
+                <a href="https://t.me/speedhack_chat" target="_blank" rel="noopener noreferrer" class="window-button-second">Telegram чат</a>
                 <a href="https://vk.com/speedhack_project" target="_blank" rel="noopener noreferrer" class="window-button-second">Группа ВКонтакте</a>
                 <a href="https://discord.gg/HH8bCVsyTf" target="_blank" rel="noopener noreferrer" class="window-button-second">Discord сервер</a>
               </div>
@@ -189,5 +191,4 @@
     {% endif %}
   </div>
   <script type="text/javascript" src="{% static 'js/header.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/barMenu.js' %}"></script>
 </header>

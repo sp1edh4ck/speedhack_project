@@ -4,13 +4,13 @@ from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordResetCompleteView,
                                        PasswordResetConfirmView,
                                        PasswordResetDoneView,
-                                       PasswordResetView,)
+                                       PasswordResetView)
 from django.urls import path
 
-from users.views import ActivationView, SignUpView, ChangePasswordView
+from users.views import ActivationView, ChangePasswordView, SignUpView
 
-from .forms import CustomUserLogin
 from . import views
+from .forms import CustomUserLogin
 
 app_name = 'users'
 

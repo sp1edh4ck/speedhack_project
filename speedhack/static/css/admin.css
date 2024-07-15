@@ -2,7 +2,7 @@
   display: none;
   background: #242424b6;
   border-radius: 10px;
-  width: 1041px;
+  width: 1081px;
   padding: 20px 0 20px 0;
 }
 
@@ -110,4 +110,11 @@
 
 .ads-link-title:hover {
   text-decoration: underline;
+}
+
+.ban-user-fix {
+  max-width: 200px;
+  max-height: 36px;
+  padding: 0 7px;
+  margin-bottom: 5px;
 }

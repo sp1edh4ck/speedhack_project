@@ -1,10 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from users.forms import CustomUserChangeForm
-from users.models import CustomUser, IpUser, BannedUser
-
 from forum.forms import UserBanForm
+from users.forms import CustomUserChangeForm
+from users.models import BannedUser, CustomUser, IpUser
 
 
 class BannedUserAdmin(admin.ModelAdmin):
@@ -13,20 +12,20 @@ class BannedUserAdmin(admin.ModelAdmin):
             {'fields': (
                 'user',
                 'admin',
-                'ban_date',
-                'ban_reason',
-                'ban_time_value',
-                'ban_time_item',
+                'date',
+                'reason',
+                'time_value',
+                'time_item',
             )}
         ),
     )
     list_display = (
-        "user",
-        "admin",
-        "ban_date",
-        "ban_reason",
-        "ban_time_value",
-        "ban_time_item",
+        'user',
+        'admin',
+        'date',
+        'reason',
+        'time_value',
+        'time_item',
     )
 
     form = UserBanForm

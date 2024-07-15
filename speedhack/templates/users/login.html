@@ -9,21 +9,7 @@
       <div class="preview">
         <span class="login-text">Вход на сайт</span>
       </div>
-      {% if form.errors %}
-        {% for field in form %}
-          {% for error in field.errors %}
-            <div style="color: #ff506f; margin: 5px 0 0 0; font-size: 14px;">
-              {{ error|escape }}
-            </div>
-          {% endfor %}
-        {% endfor %}
-        {% for error in form.non_field_errors %}
-          <div style="color: #ff506f; margin: 5px 0 0 0; font-size: 14px;">
-            {{ error|escape }}
-          </div>
-        {% endfor %}
-      {% endif %}
-      <form method="post" {% if action_url %}action="{% url action_url %}" {% endif %}>
+      <form method="post" {% if action_url %}action="{% url action_url %}" {% endif %} id="login_form">
         {% csrf_token %}
         {% comment %} {% for field in form %}
           <div class="form input-box" {% if field.field.required %} aria-required="true"{% else %}aria-required="false"{% endif %}>
@@ -41,10 +27,12 @@
           <input class="input-ret" type="text" name="username" id="id_username" autocomplete="off" style="margin-right: 5px;" placeholder="Логин...">
           <i class="fa-solid fa-user fa-lg icon-login"></i>
         </div>
+        {% comment %} <div class="error"></div> {% endcomment %}
         <div class="form input-box" {% if field.field.required %} aria-required="true"{% else %}aria-required="false"{% endif %}>
           <input class="input-ret" type="password" name="password" id="id_password" autocomplete="off" style="margin-right: 5px;" placeholder="Пароль...">
           <i class="fa-solid fa-lock fa-lg icon-login"></i>
         </div>
+        {% comment %} <div class="error"></div> {% endcomment %}
         <div class="remember-me" style="justify-content: space-between;">
           <label>
             <label class="checkbox style-c" style="margin-top: -5px;">
@@ -55,7 +43,7 @@
           </label>
           <a href="{% url 'users:password_change' %}" class="login-link-a">Забыли пароль?</a>
         </div>
-        <button type="submit" class="button-form">Войти</button>
+        <button type="submit" id="submit_login_btn" class="button-form">Войти</button>
         <div class="login-link">
           <label>Нет аккаунта? <a href="{% url 'users:signup' %}" class="login-link-a">Зарегистрироваться</a></label>
         </div>

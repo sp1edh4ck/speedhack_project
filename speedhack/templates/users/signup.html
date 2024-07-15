@@ -9,7 +9,7 @@
       <div class="preview">
         <span class="login-text">Зарегистрироваться</span>
       </div>
-      {% if form.errors %}
+      {% comment %} {% if form.errors %}
         {% for field in form %}
           {% for error in field.errors %}
             <div style="color: #ff506f; margin: 5px 0 0 0; font-size: 14px;">
@@ -22,8 +22,8 @@
             {{ error|escape }}
           </div>
         {% endfor %}
-      {% endif %}
-      <form method="post" action="{% url 'users:signup' %}">
+      {% endif %} {% endcomment %}
+      <form method="post" action="{% url 'users:signup' %}" id="login_form">
         {% csrf_token %}
         {% comment %} {% for field in form %}
           <div class="form input-box" {% if field.field.required %} aria-required="true"{% else %}aria-required="false"{% endif %}>
@@ -40,30 +40,30 @@
             {% endif %}
           </div>
         {% endfor %} {% endcomment %}
-        <div class="form input-box" {% if field.field.required %} aria-required="true"{% else %}aria-required="false"{% endif %}>
+        <div class="form input-box" aria-required="true">
           <input class="input-ret" type="text" name="username" id="id_username" autocomplete="off" style="margin-right: 5px;" placeholder="Логин...">
           <i class="fa-solid fa-user fa-lg icon-login"></i>
         </div>
-        <div class="form input-box" {% if field.field.required %} aria-required="true"{% else %}aria-required="false"{% endif %}>
+        <div class="form input-box" aria-required="true">
           <input class="input-ret" type="email" name="email" id="id_email" autocomplete="off" style="margin-right: 5px;" placeholder="Почта...">
           <i class="fa-solid fa-envelope fa-lg icon-login"></i>
         </div>
-        <div class="form input-box" {% if field.field.required %} aria-required="true"{% else %}aria-required="false"{% endif %}>
+        <div class="form input-box" aria-required="true">
           <input class="input-ret" type="password" name="password1" id="id_password1" autocomplete="off" style="margin-right: 5px;" placeholder="Пароль...">
           <i class="fa-solid fa-lock fa-lg icon-login"></i>
         </div>
         <div style="display: flex; margin-bottom: 5px;">
           <label class="checkbox style-c">
-            <input type="checkbox" id="politics" onclick="check();">
+            <input type="checkbox" id="politics" onclick="politics_check();">
             <div class="checkbox__checkmark"></div>
           </label>
           <label class="field-label-help">Я согласен с <a class="link-rules" href="{% url 'forum:rules' %}" target="_blank" rel="noopener noreferrer">правилами сайта</a></label>
         </div>
-        <button type="submit" name="submit" disabled="" class="button-form btn-reg">Зарегистрироваться</button>
+        <button type="submit" id="submit_login_btn" disabled="" class="button-form btn-reg">Зарегистрироваться</button>
         <div class="login-link">
           <label>Есть аккаунт? <a href="{% url 'users:login' %}" class="login-link-a">Войти</a></label>
         </div>
-        <script>
+        {% comment %} <script>
           function check() {
             var submit = document.getElementsByName('submit')[0];
             if (document.getElementById('politics').checked)
@@ -71,8 +71,9 @@
             else
               submit.disabled = 'disabled';
           }
-        </script>
+        </script> {% endcomment %}
       </form>
     </div>
   </div>
+  <script type="text/javascript" src="{% static 'js/auth_pages.js' %}"></script>
 {% endblock %}

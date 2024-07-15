@@ -15,7 +15,7 @@
         {% endif %}
         <div style="display: flex;">
           <div style="display: block;">
-            <div class="frame-edit" style="{% if user.is_authenticated == False %}max-height: 230px;{% elif user.is_authenticated == False and user.rank == 'заблокирован' %}max-height: 270px;{% elif user == author %}max-height: 280px;{% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 355px;{% else %}max-height: 315px;{% endif %}">
+            <div class="frame-edit" style="{% if user.is_authenticated == False %}max-height: 260px;{% elif user.is_authenticated == False and user.rank == 'заблокирован' %}max-height: 300px;{% elif user == author %}max-height: 310px;{% elif user != author and author.username != 'root' and user.is_authenticated %}max-height: 385px;{% else %}max-height: 345px;{% endif %}">
               <img class="profile-avatar" src="{{ author.avatar.url }}">
               <div class="{% if author.rank != "пользователь" and author.rank != "заблокирован" %}role-banner {% if author.rank == "дизайнер" %}designer-role{% elif author.rank == "главный дизайнер" %}main-designer-role{% elif author.rank == "куратор" %}curator-role{% elif author.rank == "арбитр" %}referee-role{% elif author.rank == "главный арбитр" %}main-referee-role{% elif author.rank == "бот" %}admin-role{% elif author.rank == "администратор" %}admin-role{% elif author.rank == "разработчик" %}developer-role{% elif author.rank == "гл. администратор" %}main-admin-role{% elif author.rank == "владелец" %}milk-pink-role{% endif %}{% endif %}">
                 {% if author.rank != "пользователь" and author.rank != "заблокирован" %}
@@ -397,7 +397,7 @@
                       {% csrf_token %}
                       <div>
                         <div>
-                          <textarea name="text" id="id_text" class="field" style="max-height: 25px; max-width: 700px; margin-bottom: 10px; background: #222222;" placeholder="Напишите что-нибудь..."></textarea>
+                          <textarea name="text" id="id_text" class="field" style="max-height: 46px; max-width: 700px; margin-bottom: 10px; background: #222222;" placeholder="Напишите что-нибудь..."></textarea>
                         </div>
                         <div>
                           <button type="submit" class="button-level" style="padding: 5px 25px;">Опубликовать</button>
