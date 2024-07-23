@@ -5,7 +5,6 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.utils.http import unquote
 from django_ratelimit.decorators import ratelimit
-
 from market.models import Market
 from users.forms import UserContactForm, UserPersonalForm, UserProfileAdminForm
 from users.models import BannedUser, CustomUser, IpUser

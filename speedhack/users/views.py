@@ -5,7 +5,6 @@ from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django.views import View
 from django_ratelimit.decorators import ratelimit
-
 from users.models import CustomUser
 
 from .forms import (CustomUserChangePassForm, CustomUserCreationForm,

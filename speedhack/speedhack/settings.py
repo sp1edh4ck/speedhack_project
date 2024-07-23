@@ -21,11 +21,13 @@ INSTALLED_APPS = [
     'django.forms',
     'forum.apps.ForumConfig',
     'users.apps.UsersConfig',
+    'api.apps.ApiConfig',
     'market.apps.MarketConfig',
     'tools.apps.ToolsConfig',
     'sorl.thumbnail',
     'fontawesomefree',
     'django_cleanup.apps.CleanupConfig',
+    'rest_framework',
 ]
 
 AUTHENTICATION_BACKENDS = (

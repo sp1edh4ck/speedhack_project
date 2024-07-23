@@ -4,7 +4,6 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.shortcuts import redirect
-
 from users.widgets import AvatarWidget
 
 from .models import CustomUser
