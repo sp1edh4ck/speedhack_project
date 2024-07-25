@@ -5,11 +5,11 @@ from django.urls import include, path
 
 urlpatterns = [
     path('', include('forum.urls', namespace='forum')),
+    path('api/', include('api.urls')),
     # path('market/', include('market.urls', namespace='market')),
     path('admin/', admin.site.urls),
     path('auth/', include('users.urls', namespace='users')),
     path('auth/', include('django.contrib.auth.urls')),
-    path('api/', include(('api.urls', 'api'), namespace='api')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

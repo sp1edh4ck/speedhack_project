@@ -1,8 +1,8 @@
 from django.urls import path
-
-from .views import GetUserThroughTgLink, get_user_through_tg_link
+from .views import GetUsers, GetUser, GetUserTgLink
 
 urlpatterns = [
-    path('get_users/', GetUserThroughTgLink.as_view()),
-    path('get_user_through_tg_link/', get_user_through_tg_link),
+    path('get_users/', GetUsers.as_view()),
+    path('get_user/<str:username>/', GetUser.as_view()),
+    path('get_user_tg/<str:tg_link>/', GetUserTgLink.as_view()),
 ]

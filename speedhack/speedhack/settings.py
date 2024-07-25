@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.forms',
+    'rest_framework',
     'forum.apps.ForumConfig',
     'users.apps.UsersConfig',
     'api.apps.ApiConfig',
@@ -27,7 +28,6 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'fontawesomefree',
     'django_cleanup.apps.CleanupConfig',
-    'rest_framework',
 ]
 
 AUTHENTICATION_BACKENDS = (
