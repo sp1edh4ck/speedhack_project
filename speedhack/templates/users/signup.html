@@ -63,17 +63,18 @@
         <div class="login-link">
           <label>Есть аккаунт? <a href="{% url 'users:login' %}" class="login-link-a">Войти</a></label>
         </div>
-        {% comment %} <script>
-          function check() {
-            var submit = document.getElementsByName('submit')[0];
-            if (document.getElementById('politics').checked)
+        <script>
+          function politics_check() {
+            var submit = document.getElementById('submit_login_btn')
+            if (document.getElementById('politics').checked) {
               submit.disabled = '';
-            else
+            } else {
               submit.disabled = 'disabled';
+            }
           }
-        </script> {% endcomment %}
+        </script>
       </form>
     </div>
   </div>
-  <script type="text/javascript" src="{% static 'js/auth_pages.js' %}"></script>
+  {% comment %} <script type="text/javascript" src="{% static 'js/auth_pages.js' %}"></script> {% endcomment %}
 {% endblock %}
