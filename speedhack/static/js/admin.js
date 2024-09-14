@@ -26,11 +26,11 @@ var contents = document.querySelectorAll('.edit-form-user');
 
 buttons.forEach(function (button, index) {
   button.addEventListener('click', function () {
-    if (contents[index].style.minHeight === '0px' || contents[index].style.minHeight === '') {
-        contents[index].style.minHeight = '900px';
+    if (contents[index].style.maxHeight === '0px' || contents[index].style.maxHeight === '') {
+        contents[index].style.maxHeight = 'none';
         buttons[index].style.transform = 'rotate(180deg)';
     } else {
-      contents[index].style.minHeight = '0px';
+      contents[index].style.maxHeight = '0px';
       buttons[index].style.transform = 'rotate(0deg)';
     }
   });

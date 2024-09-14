@@ -83,6 +83,10 @@ body::-webkit-scrollbar-thumb {
   /* color: #00e1ff; */
 }
 
+.muted {
+  color: #949494;
+}
+
 .brandLogo {
   width: 35px;
 }

@@ -112,9 +112,6 @@
   text-decoration: underline;
 }
 
-.ban-user-fix {
-  max-width: 200px;
-  max-height: 36px;
-  padding: 0 7px;
-  margin-bottom: 5px;
+.admin__birthday-input-width-fix {
+  max-width: 150px;
 }

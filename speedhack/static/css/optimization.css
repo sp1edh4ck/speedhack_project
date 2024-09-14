@@ -13,7 +13,7 @@
     display: flex;
     margin: 0 auto;
   }
-  .frame-right-first-index {
+  .index-frame {
     width: 656px;
   }
 
@@ -44,7 +44,7 @@
     display: block;
     margin: 0;
   }
-  .frame-right-first-index {
+  .index-frame {
     position: absolute;
     top: 160px;
     width: 100%;

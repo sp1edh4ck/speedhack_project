@@ -12,7 +12,6 @@
 
 .ads-main-div-content {
   display: grid;
-  /* align-items: flex-start; */
   gap: 28px;
   grid-template-columns: repeat(3, 1fr);
 }
