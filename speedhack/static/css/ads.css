@@ -10,10 +10,92 @@
   margin-bottom: 20px;
 }
 
+.ads__main-card {
+  background-repeat: no-repeat;
+  background-position: right;
+  background-image: url(/static/images/lzt_image.gif);
+}
+
+.ads__logo {
+  width: 35px;
+  margin-bottom: 30px;
+}
+
+.ads__main-card-title {
+  color: #d6d6d6;
+  font-size: 24px;
+}
+
+.ads__main-card-description {
+  color: #949494;
+  margin: 12px 0 32px 0;
+  line-height: 28px;
+  font-size: 18px;
+  max-width: 600px;
+}
+
 .ads-main-div-content {
   display: grid;
   gap: 28px;
   grid-template-columns: repeat(3, 1fr);
+}
+
+.ads__main-card-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.ads__main-card-button {
+  cursor: pointer;
+  color: #d6d6d6;
+  padding: 10px 20px;
+  background: #363636;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: .4s;
+}
+
+.ads__main-card-button:hover {
+  background: #303030;
+}
+
+.ads__main-card-button:first-child {
+  color: #fff;
+  background: #ff506f;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.ads__main-card-button:first-child:hover {
+  color: #fff;
+  background: #ff6b86;
+}
+
+.ads__main-card-button-good .flare {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 45px;
+  opacity: 0.3;
+  -webkit-transform: skewX(-45deg);
+  -ms-transform: skewX(-45deg);
+  transform: skewX(-45deg);
+  animation: flareAnimation;
+  left: -150%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.4));
+  animation: flareAnimation 3s infinite linear;
+}
+
+@keyframes flareAnimation {
+  0% {
+      left: -150%
+  }
+
+  100% {
+      left: 150%
+  }
 }
 
 .ads-cart {

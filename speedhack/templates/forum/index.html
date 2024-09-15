@@ -227,22 +227,27 @@
                         </div>
                       </div>
                       <div class="post-frame__main-content">
-                        {{ post.text }}
+                        {{ post.text|linebreaksbr }}
                       </div>
                       <span class="thread-seperator"></span>
-                      <div class="post-frame__info-count">
-                        <a class="post-frame__info-count-styles">
-                          <div class="post-frame__info-count-img-container">
-                            <img src="/static/images/heart_gray.png" class="post-frame__info-count-img">
-                            <label class="symp-label">{{ post.author.symper.count }}</label>
-                          </div>
-                        </a>
-                        <a class="post-frame__info-count-styles">
-                          <div class="post-frame__info-count-img-container">
-                            <img src="/static/images/messages.png" class="post-frame__info-count-img">
-                            <label class="symp-label">{{ post.comment.count }}</label>
-                          </div>
-                        </a>
+                      <div class="post-frame__info-all">
+                        <div class="post-frame__info-count">
+                          <a class="post-frame__info-count-styles">
+                            <div class="post-frame__info-count-img-container">
+                              <img src="/static/images/heart_gray.png" class="post-frame__info-count-img">
+                              <label class="symp-label">{{ post.author.symper.count }}</label>
+                            </div>
+                          </a>
+                          <a class="post-frame__info-count-styles">
+                            <div class="post-frame__info-count-img-container">
+                              <img src="/static/images/messages.png" class="post-frame__info-count-img">
+                              <label class="symp-label">{{ post.comment.count }}</label>
+                            </div>
+                          </a>
+                        </div>
+                        <div class="post-frame__function-buttons">
+                          <a href="{% url 'forum:favourites_post_save' post.id 1 %}"><i class="fas fa-star fa-lg icons-post-detail"></i></a>
+                        </div>
                       </div>
                     </div>
                     {% if post.comment.count != 0 %}
@@ -251,7 +256,7 @@
                         <a class="post-frame__avatar-comment-container" href="{% url 'forum:profile' post.comment.last.author.username %}">
                           <img class="post-frame__avatar-comment" src="{{ post.comment.last.author.avatar.url }}">
                         </a>
-                        <div>
+                        <div class="post-frame__comment-width-fix">
                           <div class="post-frame__comment-info">
                             <a class="post-frame__author-userlink {% if post.comment.last.author.username_style != 'gray-un' and post.comment.last.author.rank != 'заблокирован' %}text-up-nick2 {{ post.comment.last.author.username_style }}{% else %}text-up-nick{% endif %}" {% if post.comment.last.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} href="{% url 'forum:profile' post.comment.last.author.username %}">
                               {{ post.comment.last.author.username }}
