@@ -1,6 +1,8 @@
-from rest_framework.response import Response
-from users.models import CustomUser
 from rest_framework import generics, status
+from rest_framework.response import Response
+
+from users.models import CustomUser
+
 from .serializers import CustomUserSerializer
 
 

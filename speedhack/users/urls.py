@@ -6,6 +6,7 @@ from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordResetDoneView,
                                        PasswordResetView)
 from django.urls import path
+
 from users.views import ActivationView, ChangePasswordView, SignUpView
 
 from . import views
@@ -15,6 +16,7 @@ app_name = 'users'
 
 urlpatterns = [
     path('activation', ActivationView.as_view(), name='activation'),
+    path('empty_user', ActivationView.as_view(), name='empty_user'),
     path('signup/', SignUpView.as_view(), name='signup'),
     path('logout/', LogoutView.as_view(next_page='forum:index'), name='logout'),
     # * старый логин

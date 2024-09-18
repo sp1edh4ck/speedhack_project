@@ -110,16 +110,12 @@
                         <div>
                           <select name="rank_lvl" id="id_rank_lvl" class="birthday-input admin-edit-width" style="min-width: 50px;">
                             <option value="{{ user.rank_lvl }}" selected="">{{ user.rank_lvl }}</option>
-                            {% if user.rank_lvl != "1" %}<option value="1">1</option>{% endif %}
-                            {% if user.rank_lvl != "0" %}<option value="0">0</option>{% endif %}
-                            {% if user.rank_lvl != "2" %}<option value="2">2</option>{% endif %}
-                            {% if user.rank_lvl != "3" %}<option value="3">3</option>{% endif %}
-                            {% if user.rank_lvl != "4" %}<option value="4">4</option>{% endif %}
-                            {% if user.rank_lvl != "5" %}<option value="5">5</option>{% endif %}
-                            {% if user.rank_lvl != "6" %}<option value="6">6</option>{% endif %}
-                            {% if user.rank_lvl != "7" %}<option value="7">7</option>{% endif %}
-                            {% if user.rank_lvl != "8" %}<option value="8">8</option>{% endif %}
-                            {% if user.rank_lvl != "9" %}<option value="9">9</option>{% endif %}
+                            {% if user.rank_lvl != "default" %}<option value="default">default</option>{% endif %}
+                            {% if user.rank_lvl != "none" %}<option value="none">none</option>{% endif %}
+                            {% if user.rank_lvl != "designer_view" %}<option value="designer_view">designer_view</option>{% endif %}
+                            {% if user.rank_lvl != "moder_view" %}<option value="moder_view">moder_view</option>{% endif %}
+                            {% if user.rank_lvl != "admin_view" %}<option value="admin_view">admin_view</option>{% endif %}
+                            {% if user.rank_lvl != "owner_view" %}<option value="owner_view">owner_view</option>{% endif %} 
                           </select>
                         </div>
                       </div>
@@ -216,7 +212,7 @@
                         </div>
                       </div>
                       <hr class="admin-hr" style="background: #3f3f3f;">
-                      {% if request.user.rank_lvl >= "4" or request.user.privilage == 'искусственный интелект' or request.user.unique == True %}
+                      {% if request.user|permission_access:'designer' or request.user|privilege_access:'default' %}
                         <div style="display: flex;">
                           <div class="profile-edit-div">
                             <label>Стиль имени:</label>

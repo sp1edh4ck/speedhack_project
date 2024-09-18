@@ -281,7 +281,11 @@
 }
 
 .index-frame__ads {
-  margin: 15px 0 15px 0;
+  margin-top: 15px;
+}
+
+.post-frame__main-margin-fix {
+  margin-top: 15px;
 }
 
 .thread-seperator {
@@ -374,6 +378,10 @@
 .post-frame__post-grouplink {
   cursor: pointer;
   text-decoration: none;
+}
+
+.post-frame__post-grouplink:hover {
+  text-decoration: underline;
 }
 
 .post-frame__main-content {

@@ -180,8 +180,6 @@
                 {% endif %}
               {% endfor %}
             </div>
-          {% else %}
-            <hr style="margin: 20px 0; border: 1px solid #2d2d2d; border-radius: 10px;">
           {% endif %}
           {% comment %} <div class="search-header search-header-else">
             <div>
@@ -194,7 +192,7 @@
             </div>
           </div> {% endcomment %}
           {% comment %} <hr style="margin-bottom: 20px; border: 1px solid #2d2d2d; border-radius: 10px;"> {% endcomment %}
-          <div>
+          <div class="post-frame__main-margin-fix">
             {% for post in objects %}
               <div class="index-box-search index-frame__default-settings {% if not forloop.last %}last-element{% endif %}">
                 {% if post.author.rank != "заблокирован" %}
@@ -212,12 +210,12 @@
                           </h3>
                           <div class="post-frame__small-post-info">
                             <span class="muted">от</span>
-                            <a class="post-frame__author-userlink {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}text-up-nick2 {{ post.author.username_style }}{% else %}text-up-nick{% endif %}" {% if post.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} href="{% url 'forum:profile' post.author.username %}">
+                            <a class="post-frame__author-userlink {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}text-up-nick2 {{ post.author.username_style }}{% else %}username-default{% endif %}" {% if post.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} href="{% url 'forum:profile' post.author.username %}">
                               {{ post.author.username }}
                             </a>
                             <span class="pink-separator"></span>
                             <a class="post-frame__post-grouplink muted" href="{% url 'forum:group_filter_posts' post.group.slug %}">
-                              {{ post.group.slug }}
+                              {{ post.group }}
                             </a>
                             <span class="pink-separator"></span>
                             <div class="muted">
@@ -258,7 +256,7 @@
                         </a>
                         <div class="post-frame__comment-width-fix">
                           <div class="post-frame__comment-info">
-                            <a class="post-frame__author-userlink {% if post.comment.last.author.username_style != 'gray-un' and post.comment.last.author.rank != 'заблокирован' %}text-up-nick2 {{ post.comment.last.author.username_style }}{% else %}text-up-nick{% endif %}" {% if post.comment.last.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} href="{% url 'forum:profile' post.comment.last.author.username %}">
+                            <a class="post-frame__author-userlink {% if post.comment.last.author.username_style != 'gray-un' and post.comment.last.author.rank != 'заблокирован' %}text-up-nick2 {{ post.comment.last.author.username_style }}{% else %}username-default{% endif %}" {% if post.comment.last.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} href="{% url 'forum:profile' post.comment.last.author.username %}">
                               {{ post.comment.last.author.username }}
                             </a>
                             <span class="pink-separator"></span>

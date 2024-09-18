@@ -44,3 +44,33 @@ def mail_forced(value):
     letter_end = name[lens:]
     result = str(letter_start) + str('*' * (lens - 1)) + str(letter_end) + '@' + str(end)
     return result
+
+
+@register.filter
+def permission_access(user, type):
+    if type == 'default':
+        return (user.rank_lvl == 'default' or
+                user.rank_lvl == 'designer_view' or
+                user.rank_lvl == 'moder_view' or
+                user.rank_lvl == 'admin_view' or
+                user.rank_lvl == 'owner_view')
+    elif type == 'designer':
+        return (user.rank_lvl == 'designer_view' or
+                user.rank_lvl == 'moder_view' or
+                user.rank_lvl == 'admin_view' or
+                user.rank_lvl == 'owner_view')
+    elif type == 'moder':
+        return (user.rank_lvl == 'moder_view' or
+                user.rank_lvl == 'admin_view' or
+                user.rank_lvl == 'owner_view')
+    elif type == 'admin':
+        return (user.rank_lvl == 'admin_view' or
+                user.rank_lvl == 'owner_view')
+
+
+@register.filter
+def privilege_access(user, type):
+    if type == 'default':
+        return (user.privilege == 'искусственный интелект' or
+                user.buy_privilege == 'уник')
+    

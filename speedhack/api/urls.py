@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import GetUsers, GetUser, GetUserTgLink
+
+from .views import GetUser, GetUsers, GetUserTgLink
 
 urlpatterns = [
     path('get_users/', GetUsers.as_view()),

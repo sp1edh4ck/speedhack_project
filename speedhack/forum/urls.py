@@ -11,7 +11,6 @@ urlpatterns = [
     # * страница, для отображения ошибки 403 (может пригодится)
     # path('ratelimited/', views.ratelimited, name='ratelimited'),
     # ? ----------
-    path('new-page-for-js/', views.js_read, name='js_read'),
     path('forum/viewed_threads/', views.viewed_threads, name='viewed_threads'),
     path('forum/my_topics/', views.my_topics, name='my_topics'),
     path('forum/favourites/', views.favourites, name='favourites'),

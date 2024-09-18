@@ -46,7 +46,7 @@
               </div>
               <hr style="margin: 20px 0; border: 1px solid #2d2d2d; border-radius: 10px;">
             {% endif %} {% endcomment %}
-            {% if request.user.rank == 'владелец' or request.user.rank == 'гл. администратор' or request.user.rank == 'администратор' or request.user.rank == 'арбитр' or request.user.rank == 'модератор' or request.user.rank == 'бот' or request.user.privilage == 'искусственный интелект' or request.user.unique == True %}
+            {% if request.user|permission_access:'designer' or request.user|privilege_access:'default' %}
               <div style="display: flex;">
                 <div class="profile-edit-div">
                   <label>Стиль имени:</label>
@@ -142,6 +142,28 @@
                 </div>
               </div>
             </div>
+            {% comment %} <hr style="margin: 20px 0; border: 1px solid #2d2d2d; border-radius: 10px;">
+            <div style="display: flex;">
+              <div class="profile-edit-div">
+                <label></label>
+              </div>
+              <div style="display: block;">
+                <div style="display: flex;">
+                  <label class="checkbox style-c">
+                    <input type="checkbox" name="pinned" id="id_pinned" {% if post.pinned == True %}checked{% endif %}>
+                    <div class="checkbox__checkmark"></div>
+                  </label>
+                  <label class="field-label-help">Показывать день и месяц рождения</label>
+                </div>
+                <div style="display: flex;">
+                  <label class="checkbox style-c">
+                    <input type="checkbox" name="pinned" id="id_pinned" {% if post.pinned == True %}checked{% endif %}>
+                    <div class="checkbox__checkmark"></div>
+                  </label>
+                  <label class="field-label-help">Показывать год рождения</label>
+                </div>
+              </div>
+            </div> {% endcomment %}
             <hr style="margin: 20px 0; border: 1px solid #2d2d2d; border-radius: 10px;">
             <div style="display: flex;">
               <div class="profile-edit-div">

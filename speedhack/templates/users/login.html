@@ -32,6 +32,11 @@
           <input class="input-ret" type="password" name="password" id="id_password" autocomplete="off" style="margin-right: 5px;" placeholder="Пароль...">
           <i class="fa-solid fa-lock fa-lg icon-login"></i>
         </div>
+        {% if messages %}
+          {% for message in messages %}
+            <div class="login-error">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
         {% comment %} <div class="error"></div> {% endcomment %}
         <div class="remember-me" style="justify-content: space-between;">
           <label>

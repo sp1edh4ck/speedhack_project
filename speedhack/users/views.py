@@ -1,10 +1,12 @@
 from random import randint
 
+from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django.views import View
 from django_ratelimit.decorators import ratelimit
+
 from users.models import CustomUser
 
 from .forms import (CustomUserChangePassForm, CustomUserCreationForm,
@@ -53,20 +55,23 @@ def login_user(request):
         form = CustomUserLogin(request.POST)
         if form.is_valid():
             user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-            if user and user.is_active:
-                login(request, user)
-                return redirect('forum:index')
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('forum:index')
+                else:
+                    u = CustomUser.objects.get(username=form.cleaned_data['username'])
+                    u.activation_code = randint(100000, 999999)
+                    u.save()
+                    send_mail(
+                        'Подтверждение почты',
+                        f'Ваш код активации: {u.activation_code}',
+                        'speedhack_sup@mail.ru',
+                        [u.email],
+                    )
+                    return redirect('users:activation')
             else:
-                u = CustomUser.objects.get(username=form.cleaned_data['username'])
-                u.activation_code = randint(100000, 999999)
-                u.save()
-                send_mail(
-                    'Подтверждение почты',
-                    f'Ваш код активации: {u.activation_code}',
-                    'speedhack_sup@mail.ru',
-                    [u.email],
-                )
-                return redirect('users:activation')
+                messages.error(request, "Неверное имя пользователя или пароль")
     else:
         form = CustomUserLogin()
     context = {

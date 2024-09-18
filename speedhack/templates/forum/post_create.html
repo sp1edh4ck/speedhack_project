@@ -74,7 +74,6 @@
               </div>
             {% elif field.label == "Скрыть контакты" %}
               <div style="display: flex; margin-bottom: 5px;">
-                {% comment %} {{ field }} {% endcomment %}
                 <label class="checkbox style-c">
                   <input type="checkbox" name="hide" id="id_hide" {% if post.hide == True %}checked{% endif %}>
                   <div class="checkbox__checkmark"></div>
@@ -83,7 +82,6 @@
               </div>
             {% elif field.label == "Разрешение на запрос личного" %}
               <div style="display: flex; margin-bottom: 5px;">
-                {% comment %} {{ field }} {% endcomment %}
                 <label class="checkbox style-c">
                   <input type="checkbox" name="permission" id="id_permission" {% if post.permission == True %}checked{% endif %}>
                   <div class="checkbox__checkmark"></div>
@@ -92,7 +90,6 @@
               </div>
             {% elif field.label == "Подписка на тему" %}
               <div style="display: flex; margin-bottom: 20px;">
-                {% comment %} {{ field }} {% endcomment %}
                 <label class="checkbox style-c">
                   <input type="checkbox" name="subscribe" id="id_subscribe" {% if post.subscribe == True %}checked{% endif %}>
                   <div class="checkbox__checkmark"></div>
@@ -100,7 +97,7 @@
                 <label class="field-label-help">Подписаться на тему</label>
               </div>
             {% elif field.label == "Закрытая тема" %}
-              {% if user.rank_lvl >= "4" %}
+              {% if user|permission_access:'designer' %}
                 <div class="small-label-post-create">Админ-настройки:</div>
                 <div style="display: flex; margin-bottom: 5px;">
                   <label class="checkbox style-c">
@@ -111,9 +108,8 @@
                 </div>
               {% endif %}
             {% elif field.label == "Пост был отредактирован" %}
-              {% if user.rank_lvl >= "4" %}
+              {% if user|permission_access:'designer' %}
                 <div style="display: flex; margin-bottom: 5px;">
-                  {% comment %} {{ field }} {% endcomment %}
                   <label class="checkbox style-c">
                     <input type="checkbox" name="edit" id="id_edit" {% if post.edit == True %}checked{% endif %}>
                     <div class="checkbox__checkmark"></div>
@@ -122,9 +118,8 @@
                 </div>
               {% endif %}
             {% elif field.label == "Активности доступны" %}
-              {% if user.rank_lvl >= "4" %}
+              {% if user|permission_access:'designer' %}
                 <div style="display: flex; margin-bottom: 5px;">
-                  {% comment %} {{ field }} {% endcomment %}
                   <label class="checkbox style-c">
                     <input type="checkbox" name="open_activities" id="id_open_activities" {% if post.open_activities == True %}checked{% endif %}>
                     <div class="checkbox__checkmark"></div>
@@ -133,9 +128,8 @@
                 </div>
               {% endif %}
             {% elif field.label == "Закреплённый пост" %}
-              {% if user.rank_lvl >= "4" %}
+              {% if user|permission_access:'designer' %}
                 <div style="display: flex; margin-bottom: 20px;">
-                  {% comment %} {{ field }} {% endcomment %}
                   <label class="checkbox style-c">
                     <input type="checkbox" name="pinned" id="id_pinned" {% if post.pinned == True %}checked{% endif %}>
                     <div class="checkbox__checkmark"></div>

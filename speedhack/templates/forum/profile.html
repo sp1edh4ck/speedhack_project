@@ -4,7 +4,7 @@
 {% load thumbnail %}
 {% load user_filters %}
 {% block content %}
-  <body class="background-img" {% if author.rank_lvl >= "2" or author.rank == 'искусственный интелект' or author.profile_sub == True %}{% if author.profile_background %}style="background-image: linear-gradient(rgba(54, 54, 54, 0.6), rgba(54, 54, 54, 0.6)), url({{ author.profile_background.url }});"{% endif %}{% endif %}>
+  <body class="background-img" {% if author|privilege_access:'designer' or author|privilege_access:'default' or author.profile_sub == True %}{% if author.profile_background %}style="background-image: linear-gradient(rgba(54, 54, 54, 0.6), rgba(54, 54, 54, 0.6)), url({{ author.profile_background.url }});"{% endif %}{% endif %}>
     <div class="main-profile">
       <div class="frame_con" style="display: block;">
         {% if request.user != author %}
@@ -417,7 +417,7 @@
                           <div class="{% if comment.author.username_style != 'gray-un' and comment.author.rank != 'заблокирован' %}{{ comment.author.username_style }}{% else %}gray-un{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} {% if comment.author.username == "root" %}style="color: red;"{% endif %}>{{ comment.author.username }}</div>
                           <div style="color: #555555; font-weight: bold;">{{ comment.created|date:'d E Y / H:i' }}</div>
                         </div>
-                        {% if request.user.rank_lvl >= "4" or request.user.username == comment.author.username or request.user.username == author.username %}
+                        {% if request.user|permission_access:'designer' or request.user.username == comment.author.username or request.user.username == author.username %}
                           <div class="frame-main-post-heart" style="min-width: 485px;">
                           </div>
                           <div>

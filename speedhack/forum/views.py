@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.utils.http import unquote
 from django_ratelimit.decorators import ratelimit
+
 from market.models import Market
 from users.forms import UserContactForm, UserPersonalForm, UserProfileAdminForm
 from users.models import BannedUser, CustomUser, IpUser
@@ -14,15 +15,6 @@ from .forms import (AdsForm, AnswerForm, CommentForm, DepositForm, HelpForm,
 from .models import (Ads, Comment, CommentSymp, Favourites, Follow, Forum,
                      Group, Helper, HelpForum, Like, Maecenas, ProfileComment,
                      Symp, User, Viewer)
-
-
-def js_read(request):
-    users = CustomUser.objects.all()
-    context = {
-        'users': users,
-    }
-    return render(request, 'forum/js_read.html', context)
-
 
 # def permission_banned(redirect_path, render_path):
 #     def permission_banned_func(func):
@@ -367,7 +359,12 @@ def complaint(request):
 def delete_profile_comment(request, username, author, comment_id):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
-    if request.user.rank_lvl >= "4" or request.user.username == author or request.user.username == username:
+    if (request.user.rank_lvl == 'designer_view' or
+        request.user.rank_lvl == 'moder_view' or
+        request.user.rank_lvl == 'admin_view' or
+        request.user.rank_lvl == 'owner_view' or
+        request.user.username == author or
+        request.user.username == username):
         ProfileComment.objects.filter(id=comment_id).delete()
     return redirect('forum:profile', username=username)
 
@@ -406,7 +403,8 @@ def deposit(request, username, number):
 
 @login_required
 def ban(request, username):
-    if request.user.username == username or request.user.rank_lvl < "4":
+    if (request.user.username == username or
+        request.user.rank_lvl == "default"):
         return redirect('forum:empty_page')
     user = get_object_or_404(User, username=username)
     if not BannedUser.objects.filter(user=user.username).exists():
@@ -424,7 +422,8 @@ def ban(request, username):
 
 @login_required
 def admin_ban(request, username):
-    if request.user.username == username or request.user.rank_lvl < "4":
+    if (request.user.username == username or
+        request.user.rank_lvl == "default"):
         return redirect('forum:empty_page')
     user = get_object_or_404(User, username=username)
     if user.rank == "заблокирован":
@@ -600,7 +599,7 @@ def post_oc(request, post_id, number):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     post = get_object_or_404(Forum, id=post_id)
-    if request.user.rank_lvl < "4":
+    if request.user.rank_lvl == "default":
         return redirect('forum:empty_page')
     if number == 1:
         post.closed = True
@@ -746,10 +745,10 @@ def post_edit(request, post_id):
         files=request.FILES or None,
         instance=post
     )
-    if (request.user == post.author or request.user.rank_lvl >= "4"):
+    if request.user == post.author or request.user.rank_lvl != "default":
         if request.method == 'POST':
             if form.is_valid() and request.user.is_authenticated:
-                if request.user.rank_lvl >= "4":
+                if request.user.rank_lvl != "default":
                     form.save()
                     return redirect('forum:post_detail', post_id=post_id)
                 else:
@@ -772,7 +771,9 @@ def post_delete(request, post_id):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     post = get_object_or_404(Forum, pk=post_id)
-    if (request.user == post.author or request.user.rank_lvl >= "4"):
+    if (request.user == post.author or
+        request.user.rank_lvl != "default" or
+        request.user.rank_lvl != "none"):
         Forum.objects.filter(pk=post_id).delete()
         return redirect('forum:successfully')
     return redirect('forum:post_detail', pk=post_id)
@@ -805,7 +806,9 @@ def edit_comment(request, post_id):
         return banned_redirect(request)
     post = get_object_or_404(Forum, pk=post_id)
     form = CommentForm(request.POST or None)
-    if request.user == post.author or request.user.rank_lvl >= "4":
+    if (request.user == post.author or
+        request.user.rank_lvl != "default" or
+        request.user.rank_lvl != "none"):
         if request.method == 'POST':
             if form.is_valid() and request.user.is_authenticated:
                 comment = form.save(commit=False)
@@ -826,7 +829,8 @@ def delete_comment(request, post_id, id):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
     comment = get_object_or_404(Comment, id=id)
-    if request.user.username != comment.author.username or request.user.rank_lvl < "4":
+    if (request.user.username != comment.author.username or
+        request.user.rank_lvl == "default"):
         return redirect('forum:empty_page')
     comment.delete()
     return redirect('forum:post_detail', post_id=post_id)
@@ -847,11 +851,12 @@ def profile_uf(request, username, number):
     return redirect('forum:profile', username=username)
 
 
-@login_required
 def admin_panel(request):
+    if request.user.is_authenticated == False:
+        return redirect('forum:empty_page')
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
-    if request.user.rank_lvl < "4":
+    if request.user.is_authenticated and request.user.rank_lvl == "default":
         return redirect('forum:empty_page')
     users_list = CustomUser.objects.all().order_by("-date_joined")
     users_list_count = users_list.count()
@@ -869,7 +874,7 @@ def admin_panel(request):
 
 @login_required
 def users_bans(request):
-    if request.user.rank_lvl < "4":
+    if request.user.rank_lvl == "default":
         return redirect('forum:empty_page')
     form = UserBanForm(
         request.POST or None,
@@ -889,7 +894,7 @@ def users_bans(request):
 
 @login_required
 def admin_user_edit(request, username):
-    if request.user.rank_lvl < "4":
+    if request.user.rank_lvl == "default":
         return redirect('forum:empty_page')
     user = get_object_or_404(User, username=username)
     form = UserProfileAdminForm(
@@ -915,7 +920,7 @@ def admin_user_edit(request, username):
 def tickets(request):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
-    if request.user.rank_lvl < "4":
+    if request.user.rank_lvl == "default":
         return redirect('forum:empty_page')
     tickets_count = HelpForum.objects.all().count()
     tickets_open = HelpForum.objects.filter(closed=True)
@@ -947,7 +952,7 @@ def ticket(request, ticket_id):
     form = AnswerForm(request.POST or None)
     ticket = get_object_or_404(HelpForum, pk=ticket_id)
     if request.user.username != ticket.author.username:
-        if request.user.rank_lvl < "4":
+        if request.user.rank_lvl == "default":
             return redirect('forum:empty_page')
     comments = ticket.answer.all()
     context = {
@@ -963,7 +968,7 @@ def ticket(request, ticket_id):
 def add_answer(request, ticket_id):
     ticket = get_object_or_404(HelpForum, pk=ticket_id)
     if request.user.username != ticket.author.username:
-        if request.user.rank_lvl < "4":
+        if request.user.rank_lvl == "default":
             return redirect('forum:empty_page')
     if ticket.closed == False:
         form = AnswerForm(request.POST or None)
@@ -979,7 +984,7 @@ def add_answer(request, ticket_id):
 def ticket_oc(request, ticket_id, number):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
-    if request.user.rank_lvl < "4":
+    if request.user.rank_lvl == "default":
         return redirect('forum:empty_page')
     ticket = get_object_or_404(HelpForum, id=ticket_id)
     if number == 1:
@@ -995,7 +1000,7 @@ def ticket_oc(request, ticket_id, number):
 def ticket_delete(request, ticket_id):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
-    if request.user.rank_lvl < "4":
+    if request.user.rank_lvl == "default":
         return redirect('forum:empty_page')
     HelpForum.objects.filter(pk=ticket_id).delete()
     return redirect('forum:tickets')
@@ -1029,7 +1034,7 @@ def ticket_form(request):
 def ads(request):
     if request.user.rank == "заблокирован":
         return banned_redirect(request)
-    if request.user.rank_lvl < "4":
+    if request.user.rank_lvl == "default":
         return redirect('forum:empty_page')
     form = AdsForm(request.POST or None)
     users = CustomUser.objects.all()

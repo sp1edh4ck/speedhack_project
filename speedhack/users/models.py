@@ -43,16 +43,12 @@ MAIN_POST = [
 ]
 
 RANK_LVL = [
-    ("1", "1"),
-    ("0", "0"),
-    ("2", "2"),
-    ("3", "3"),
-    ("4", "4"),
-    ("5", "5"),
-    ("6", "6"),
-    ("7", "7"),
-    ("8", "8"),
-    ("9", "9"),
+    ("default", "default"),
+    ("none", "none"),
+    ("designer_view", "designer_view"),
+    ("moder_view", "moder_view"),
+    ("admin_view", "admin_view"),
+    ("owner_view", "owner_view"),
 ]
 
 PRIVILEGE = [

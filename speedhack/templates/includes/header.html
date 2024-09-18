@@ -44,7 +44,7 @@
             <i class="fa-brands fa-telegram fa-lg bg-icons"></i>
             <div class="bg-link-text">sp news</div>
           </a> {% endcomment %}
-          <a class="bg-link" href="https://t.me/speedhack_chat">
+          <a class="bg-link" href="https://t.me/speedhack_chat" target="_blank" rel="noopener noreferrer">
             <i class="fa-solid fa-comment-dots fa-lg bg-icons"></i>
             <div class="bg-link-text">SP TG чат</div>
           </a>
@@ -115,7 +115,7 @@
     <div class="header-menu" id="menu">
       <ul class="menu-list menu-list-op">
         <li class="menu-item"><a href="{% url 'forum:index' %}" class="menu-link">Форум</a></li>
-        <li class="menu-item"><a href="{% url 'market:index' %}" class="menu-link">Маркет</a></li>
+        {% comment %} <li class="menu-item"><a href="{% url 'market:index' %}" class="menu-link">Маркет</a></li> {% endcomment %}
         <li class="menu-item"><a href="{% url 'forum:guarantor' %}" class="menu-link">Гарант</a></li>
         <li class="menu-item">
           <div class="window-main">
@@ -144,7 +144,7 @@
             </div>
           </div>
         </li>
-        {% if request.user.rank_lvl >= "4" %}
+        {% if request.user.is_authenticated and request.user|permission_access:'designer' %}
           <li class="menu-item"><a href="{% url 'forum:admin_panel' %}" class="menu-link">Админка</a></li>
         {% endif %}
       </ul>

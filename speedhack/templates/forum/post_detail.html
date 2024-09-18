@@ -42,14 +42,14 @@
                   <label class="frame-main-username {% if post.author.username_style != 'gray-un' and post.author.rank != 'заблокирован' %}{{ post.author.username_style }}{% endif %}" {% if post.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ post.author.username }}</label>{% if user.scam == True %}{% comment %}<abbr data-title="Скам">{% endcomment %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% comment %}</abbr>{% endcomment %}{% endif %}
                 </a>
               </div>
-              {% if user.username == post.author.username or user.rank_lvl >= "4" %}
+              {% if user.username == post.author.username or user|permission_access:'designer' %}
                 <div style="height: 30px; position: relative; z-index: 1;" class="window-main">
                   <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
                   <div class="window-other" style="right: 0;">
                     <a href="{% url 'forum:post_edit' post.id %}" class="window-button-second">Редактировать запись</a>
-                    {% if post.closed == False and user.rank_lvl >= "4" %}
+                    {% if post.closed == False and user|permission_access:'designer' %}
                       <a href="{% url 'forum:post_oc' post.id 1 %}" class="window-button-second">Закрыть тему</a>
-                    {% elif post.closed == True and user.rank_lvl >= "4" %}
+                    {% elif post.closed == True and user|permission_access:'designer' %}
                       <a href="{% url 'forum:post_oc' post.id 2 %}" class="window-button-second">Открыть тему</a>
                     {% endif %}
                     <a href="{% url 'forum:post_delete' post.id %}" class="window-button-second">Удалить пост</a>
@@ -78,7 +78,7 @@
               </div>
               {% if symps.count != 0 %}
                 {% if user.username != post.author.username %}
-                  {% if user.symps >= 20 or user.rank_lvl >= "4" or post.open_activities %}
+                  {% if user.symps >= 20 or user|permission_access:'designer' or post.open_activities %}
                     <div class="comment-date" style="margin-top: 3px;">
                       <a href="{% url 'forum:symps_add' post.id post.author.username %}" style="text-decoration: none;">
                         {% if my_symp %}
@@ -96,7 +96,7 @@
                 {% endif %}
               {% elif symps.count == 0 %}
                 {% if user.username != post.author.username %}
-                  {% if user.symps >= 20 or user.rank_lvl >= "4" or post.open_activities %}
+                  {% if user.symps >= 20 or user|permission_access:'designer' or post.open_activities %}
                     <a href="{% url 'forum:symps_add' post.id post.author.username %}">
                       <img src="{% static 'images/heart_gray.png' %}" class="symp-img">
                     </a>
@@ -105,7 +105,7 @@
               {% endif %}
               {% comment %} {% if symps.count != 0 %}
                 {% if user.username != post.author.username %}
-                  {% if user.symps >= 20 or user.rank_lvl >= "4" %}
+                  {% if user.symps >= 20 or user|permission_access:'designer' %}
                     <div class="comment-date" style="margin-top: 3px;">
                       <a href="{% url 'forum:symps_add' post.id post.author.username %}" style="text-decoration: none;">
                         {% if my_symp %}
@@ -123,7 +123,7 @@
                 {% endif %}
               {% elif symps.count == 0 %}
                 {% if user.username != post.author.username %}
-                  {% if user.symps >= 20 or user.rank_lvl >= "4" %}
+                  {% if user.symps >= 20 or user|permission_access:'designer' %}
                     <a href="{% url 'forum:symps_add' post.id post.author.username %}">
                       <img src="{% static 'images/heart_gray.png' %}" class="symp-img">
                     </a>
@@ -151,7 +151,7 @@
                     <label class="frame-main-username {% if comment.author.username_style != 'gray-un' and comment.author.rank != 'заблокирован' %}{{ comment.author.username_style }}{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="text-decoration: line-through;"{% endif %}>{{ comment.author.username }}</label>{% if comment.user.scam == True %}{% comment %}<abbr data-title="Скам">{% endcomment %}<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-left: 5px;"></i>{% comment %}</abbr>{% endcomment %}{% endif %}
                   </a>
                 </div>
-                {% if comment.author.username == request.user.username or user.rank_lvl >= "4" %}
+                {% if comment.author.username == request.user.username or user|permission_access:'designer' %}
                   <div style="height: 30px;" class="window-main">
                     <i class="fa-solid fa-ellipsis fa-2xl icon-ellipsis"></i>
                     <div class="window-other" style="right: 0; z-index: 1;">
@@ -174,7 +174,7 @@
                 </div>
                 {% comment %} {% if comment_symps.count != 0 %}
                   {% if user.username != comment.author.username %}
-                    {% if user.symps >= 20 or user.rank_lvl >= "4" or post.open_activities %}
+                    {% if user.symps >= 20 or user|permission_access:'designer' or post.open_activities %}
                       <div class="comment-date" style="margin-top: 3px;">
                         <a href="{% url 'forum:symps_comment_add' post.id comment.id comment.author.username %}" style="text-decoration: none;">
                           {% if my_symp %}
@@ -192,7 +192,7 @@
                   {% endif %}
                 {% elif comment_symps.count == 0 %}
                   {% if user.username != comment.author.username %}
-                    {% if user.symps >= 20 or user.rank_lvl >= "4" or post.open_activities %}
+                    {% if user.symps >= 20 or user|permission_access:'designer' or post.open_activities %}
                       <a href="{% url 'forum:symps_comment_add' post.id comment.id comment.author.username %}">
                         <img src="{% static 'images/heart_gray.png' %}" class="symp-img">
                       </a>

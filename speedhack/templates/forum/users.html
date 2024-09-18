@@ -155,7 +155,7 @@
         <div id="users_list_byStaff" class="tabItem frame-right-users users-display">
           {% if users_list_byStaff.count != 0 %}
             {% for user in users_list_byStaff %}
-              {% if user.rank_lvl >= "4" %}
+              {% if user|permission_access:'designer' %}
                 <div class="users-div" style="{% if user.description != '' %}min-height: 125px; max-height: 125px;{% else %}min-height: 100px; max-height: 100px;{% endif %}">
                   <div style="padding: 10px 0 10px 10px;">
                     <a class="a-users" href="{% url 'forum:profile' user.username %}">

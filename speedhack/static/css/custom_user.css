@@ -9,6 +9,15 @@
   background: #00000000;
 }
 
+.username-default {
+  color: #949494;
+  text-decoration: none;
+}
+
+.username-default:hover {
+  text-decoration: underline;
+}
+
 .role-banner {
   background: #505050;
   color: #ffffff;
@@ -18,6 +27,7 @@
   text-align: center;
   border-radius: 7px;
 }
+
 .banner-ii {
   background: #fe0276;
 }
@@ -25,27 +35,35 @@
 .designer-role {
   background: #f99afe;
 }
+
 .main-designer-role {
   background: #3288ff;
 }
+
 .referee-role {
   background: #2776af;
 }
+
 .main-referee-role {
   background: #f528d9;
 }
+
 .admin-role {
   background: #6d0323;
 }
+
 .main-admin-role {
   background: #af4c1e;
 }
+
 .owner-role {
   background: #ff0000;
 }
+
 .curator-role {
   background: #2f846b;
 }
+
 .developer-role {
   background: #e28b11;
 }
@@ -53,27 +71,35 @@
 .designer-role-name {
   color: #3288ff;
 }
+
 .main-designer-role-name {
   color: #4c00ff;
 }
+
 .referee-role-name {
   color: #ff9afc;
 }
+
 .main-referee-role-name {
   color: #f528d9;
 }
+
 .admin-role-name {
   color: #b40036;
 }
+
 .main-admin-role-name {
   color: #ff0000;
 }
+
 .owner-role-name {
   color: #ff0000;
 }
+
 .curator-role-name {
   color: #2f846b;
 }
+
 .developer-role-name {
   color: #e28b11;
 }
