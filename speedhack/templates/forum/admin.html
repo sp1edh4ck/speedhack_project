@@ -14,10 +14,10 @@
         </div>
         <div class="frame-left-first-users">
           <span style="color: gray; font-size: 18px;">Найти пользователя</span>
-          <div style="display: flex;">
+          <div style="display: flex; align-items: center;">
             <div>
               <form action="{% url 'forum:admin_panel' %}">
-                <input class="input-search-users" type="search" name="search" placeholder="Имя..." aria-label="Search" autocomplete="off">
+                <input class="default-input input-search-users" type="search" name="search" placeholder="Имя..." aria-label="Search" autocomplete="off">
               </form>
             </div>
             <div>
@@ -76,7 +76,7 @@
                           <label>Имя пользователя:</label>
                         </div>
                         <div>
-                          <input type="text" name="username" id="id_username" class="birthday-input admin-edit-width" placeholder="Имя пользователя..." value="{{ user.username }}" maxlength="15">
+                          <input type="text" name="username" id="id_username" class="default-input admin-edit-width" placeholder="Имя пользователя..." value="{{ user.username }}" maxlength="15">
                         </div>
                       </div>
                       <hr class="admin-hr" style="background: #3f3f3f;">
@@ -85,7 +85,7 @@
                           <label>Должность:</label>
                         </div>
                         <div>
-                          <select name="rank" id="id_rank" class="birthday-input admin-edit-width" style="min-width: 250px;">
+                          <select name="rank" id="id_rank" class="default-input admin-edit-width" style="min-width: 250px;">
                             <option value="{{ user.rank }}" selected="">{{ user.rank }}</option>
                             {% if user.rank != "пользователь" %}<option value="пользователь">пользователь</option>{% endif %}
                             {% if user.rank != "заблокирован" %}<option value="заблокирован">заблокирован</option>{% endif %}
@@ -108,7 +108,7 @@
                           <label>Уровень доступа:</label>
                         </div>
                         <div>
-                          <select name="rank_lvl" id="id_rank_lvl" class="birthday-input admin-edit-width" style="min-width: 50px;">
+                          <select name="rank_lvl" id="id_rank_lvl" class="default-input admin-edit-width" style="min-width: 50px;">
                             <option value="{{ user.rank_lvl }}" selected="">{{ user.rank_lvl }}</option>
                             {% if user.rank_lvl != "default" %}<option value="default">default</option>{% endif %}
                             {% if user.rank_lvl != "none" %}<option value="none">none</option>{% endif %}
@@ -125,7 +125,7 @@
                           <label>Ранг:</label>
                         </div>
                         <div>
-                          <select name="privilege" id="id_privilege" class="birthday-input admin-edit-width" style="min-width: 220px;">
+                          <select name="privilege" id="id_privilege" class="default-input admin-edit-width" style="min-width: 220px;">
                             <option value="{{ user.privilege }}" selected="">{{ user.privilege }}</option>
                             {% if user.privilege != "новорег" %}<option value="новорег">новорег</option>{% endif %}
                             {% if user.privilege != "местный" %}<option value="местный">местный</option>{% endif %}
@@ -142,7 +142,7 @@
                           <label>Платные привилегии:</label>
                         </div>
                         <div>
-                          <select name="buy_privilege" id="id_buy_privilege" class="birthday-input admin-edit-width" style="min-width: 220px;">
+                          <select name="buy_privilege" id="id_buy_privilege" class="default-input admin-edit-width" style="min-width: 220px;">
                             <option value="{{ user.buy_privilege }}" selected="">{{ user.buy_privilege }}</option>
                             {% if user.buy_privilege != "нет привилегий" %}<option value="нет привилегий">нет привилегий</option>{% endif %}
                             {% if user.buy_privilege != "легенда" %}<option value="легенда">легенда</option>{% endif %}
@@ -157,7 +157,7 @@
                           <label>Привилегия на маркете:</label>
                         </div>
                         <div>
-                          <select name="market_privilege" id="id_market_privilege" class="birthday-input admin-edit-width" style="min-width: 220px;">
+                          <select name="market_privilege" id="id_market_privilege" class="default-input admin-edit-width" style="min-width: 220px;">
                             <option value="{{ user.market_privilege }}" selected="">{{ user.market_privilege }}</option>
                             {% if user.market_privilege != "нет привилегий" %}<option value="нет привилегий">нет привилегий</option>{% endif %}
                             {% if user.market_privilege != "продавец" %}<option value="продавец">продавец</option>{% endif %}
@@ -218,7 +218,7 @@
                             <label>Стиль имени:</label>
                           </div>
                           <div>
-                            <select name="username_style" id="id_username_style" class="birthday-input admin-edit-width" style="min-width: 250px;">
+                            <select name="username_style" id="id_username_style" class="default-input admin-edit-width" style="min-width: 250px;">
                               <option value="{{ user.username_style }}" selected="">{{ user.username_style }}</option>
                               {% if user.username_style != "gray-un" %}<option value="gray-un">Серый</option>{% endif %}
                               {% if user.username_style != "white-shadow-un" %}<option value="white-shadow-un">Белая тень</option>{% endif %}
@@ -255,7 +255,7 @@
                             <label>Стиль банера:</label>
                           </div>
                           <div>
-                            <select name="banner" id="id_banner" class="birthday-input admin-edit-width" style="min-width: 250px;">
+                            <select name="banner" id="id_banner" class="default-input admin-edit-width" style="min-width: 250px;">
                               <option value="{{ user.banner }}" selected="">{{ user.banner }}</option>
                               {% if user.banner != "gray-role" %}<option value="gray-role">.gray-role</option>{% endif %}
                               {% if user.banner != "green-yellow-role" %}<option value="green-yellow-role">.green-yellow-role</option>{% endif %}
@@ -274,7 +274,7 @@
                           <label>Пол:</label>
                         </div>
                         <div>
-                          <select name="gender" id="id_gender" class="birthday-input admin-edit-width" style="min-width: 150px;">
+                          <select name="gender" id="id_gender" class="default-input admin-edit-width" style="min-width: 150px;">
                             <option value="{{ user.gender }}" selected="">{{ user.gender }}</option>
                             {% if user.gender != "Не выбрано" %}<option value="Не выбрано">Не выбрано</option>{% endif %}
                             {% if user.gender != "Мужской" %}<option value="Мужской" >Мужской</option>{% endif %}
@@ -289,8 +289,8 @@
                         </div>
                         <div style="display: flex;">
                           <div>
-                            <input type="integer" name="brt_day" id="id_brt_day" class="birthday-input admin__birthday-input-width-fix" placeholder="День..." value="{{ user.brt_day }}" maxlength="2">
-                            <select name="brt_month" id="id_brt_month" class="birthday-input admin__birthday-input-width-fix">
+                            <input type="integer" name="brt_day" id="id_brt_day" class="default-input admin__default-input-width-fix" placeholder="День..." value="{{ user.brt_day }}" maxlength="2">
+                            <select name="brt_month" id="id_brt_month" class="default-input admin__default-input-width-fix">
                               <option value="{{ user.brt_month }}" selected="">{{ user.brt_month }}</option>
                               {% if user.brt_month != "Месяц" %}<option value="Месяц">Месяц</option>{% endif %}
                               {% if user.brt_month != "Январь" %}<option value="Январь">Январь</option>{% endif %}
@@ -306,7 +306,7 @@
                               {% if user.brt_month != "Ноябрь" %}<option value="Ноябрь">Ноябрь</option>{% endif %}
                               {% if user.brt_month != "Декабрь" %}<option value="Декабрь">Декабрь</option>{% endif %}
                             </select>
-                            <input type="integer" name="brt_year" id="id_brt_year" class="birthday-input admin__birthday-input-width-fix" placeholder="Год..." value="{{ user.brt_year }}" maxlength="4">
+                            <input type="integer" name="brt_year" id="id_brt_year" class="default-input admin__default-input-width-fix" placeholder="Год..." value="{{ user.brt_year }}" maxlength="4">
                           </div>
                         </div>
                       </div>

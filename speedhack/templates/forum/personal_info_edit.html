@@ -52,7 +52,7 @@
                   <label>Стиль имени:</label>
                 </div>
                 <div>
-                  <select name="username_style" id="id_username_style" class="birthday-input" style="min-width: 250px;">
+                  <select name="username_style" id="id_username_style" class="default-input" style="min-width: 250px;">
                     <option value="{{ user.username_style }}" selected="">{{ user.username_style }}</option>
                     <option value="gray-un">Серый</option>
                     <option value="white-shadow-un">Белая тень</option>
@@ -89,7 +89,7 @@
                   <label>Стиль банера:</label>
                 </div>
                 <div>
-                  <select name="banner" id="id_banner" class="birthday-input" style="min-width: 250px;">
+                  <select name="banner" id="id_banner" class="default-input" style="min-width: 250px;">
                     <option value="{{ user.banner }}" selected="">{{ user.banner }}</option>
                     <option value="gray-role">.gray-role</option>
                     <option value="green-yellow-role">.green-yellow-role</option>
@@ -108,7 +108,8 @@
                 <label>Пол:</label>
               </div>
               <div>
-                <select name="gender" id="id_gender" class="birthday-input" style="min-width: 150px;">
+                
+                <select name="gender" id="id_gender" class="default-input" style="min-width: 150px;">
                   <option value="Не выбрано" {% if user.gender == "Не выбрано" %}selected=""{% endif %}>Не выбрано</option>
                   <option value="Мужской" {% if user.gender == "Мужской" %}selected=""{% endif %}>Мужской</option>
                   <option value="Женский" {% if user.gender == "Женский" %}selected=""{% endif %}>Женский</option>
@@ -122,8 +123,8 @@
               </div>
               <div style="display: block;">
                 <div>
-                  <input type="integer" name="brt_day" id="id_brt_day" class="birthday-input profile-edit-small-input" placeholder="День..." value="{{ user.brt_day }}" maxlength="2">
-                  <select name="brt_month" id="id_brt_month" class="birthday-input profile-edit-small-input">
+                  <input type="integer" name="brt_day" id="id_brt_day" class="default-input profile-edit-small-input" placeholder="День..." value="{{ user.brt_day }}" maxlength="2">
+                  <select name="brt_month" id="id_brt_month" class="default-input profile-edit-small-input">
                     <option value="Месяц" {% if user.brt_month == "Месяц" %}selected=""{% endif %}>Месяц</option>
                     <option value="Январь" {% if user.brt_month == "Январь" %}selected=""{% endif %}>Январь</option>
                     <option value="Февраль" {% if user.brt_month == "Февраль" %}selected=""{% endif %}>Февраль</option>
@@ -138,7 +139,7 @@
                     <option value="Ноябрь" {% if user.brt_month == "Ноябрь" %}selected=""{% endif %}>Ноябрь</option>
                     <option value="Декабрь" {% if user.brt_month == "Декабрь" %}selected=""{% endif %}>Декабрь</option>
                   </select>
-                  <input type="integer" name="brt_year" id="id_brt_year" class="birthday-input profile-edit-small-input" placeholder="Год..." value="{{ user.brt_year }}" maxlength="4">
+                  <input type="integer" name="brt_year" id="id_brt_year" class="default-input profile-edit-small-input" placeholder="Год..." value="{{ user.brt_year }}" maxlength="4">
                 </div>
               </div>
             </div>

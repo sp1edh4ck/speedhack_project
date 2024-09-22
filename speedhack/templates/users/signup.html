@@ -52,6 +52,11 @@
           <input class="input-ret" type="password" name="password1" id="id_password1" autocomplete="off" style="margin-right: 5px;" placeholder="Пароль...">
           <i class="fa-solid fa-lock fa-lg icon-login"></i>
         </div>
+        {% if messages %}
+          {% for message in messages %}
+            <div class="login-error">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
         <div style="display: flex; margin-bottom: 5px;">
           <label class="checkbox style-c">
             <input type="checkbox" id="politics" onclick="politics_check();">

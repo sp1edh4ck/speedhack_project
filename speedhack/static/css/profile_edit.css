@@ -150,7 +150,7 @@ option:hover {
   width: 200px;
 }
 
-.birthday-input {
+.default-input {
   width: 610px;
   padding-left: 10px;
   height: 40px;
@@ -163,7 +163,7 @@ option:hover {
   transition: all .15s;
 }
 
-.birthday-input:focus {
+.default-input:focus {
   border: 2px solid #ff506f;
 }
 

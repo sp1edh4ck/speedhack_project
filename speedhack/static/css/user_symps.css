@@ -25,8 +25,12 @@
 }
 
 .user-symp-a {
-  color: #d6d6d6;
+  color: #949494;
   text-decoration: none;
+}
+
+.user-symp-a:first-child {
+  font-weight: bold;
 }
 
 .user-symp-a:hover {

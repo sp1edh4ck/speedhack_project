@@ -535,11 +535,12 @@ def upgrade(request, username, number):
         user.time_buy_privilege = timezone.now()
         user.save()
     if number == 5 and user.balance >= 7500:
+        user.market_privilege = "продавец"
         user.buy_privilege = "уник"
         user.balance -= 7500
         user.time_buy_privilege = timezone.now()
         user.save()
-    return redirect('forum:profile', username=username)
+    return redirect('forum:profile_upgrade', username=username)
 
 
 @ratelimit(key='user_or_ip', rate='17/m')

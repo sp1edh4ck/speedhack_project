@@ -17,8 +17,11 @@ User = get_user_model()
 
 class SignUpView(View):
     def get(self, request):
-        form = CustomUserCreationForm()
-        return render(request, 'users/signup.html', {'form': form})
+        if request.user.is_authenticated:
+            return redirect('forum:index')
+        else:
+            form = CustomUserCreationForm()
+            return render(request, 'users/signup.html', {'form': form})
 
     def post(self, request):
         form = CustomUserCreationForm(request.POST)
@@ -36,7 +39,10 @@ class SignUpView(View):
 
 class ActivationView(View):
     def get(self, request):
-        return render(request, 'users/activation.html')
+        if request.user.is_authenticated:
+            return redirect('forum:index')
+        else:
+            return render(request, 'users/activation.html')
 
     def post(self, request):
         activation_code = request.POST['activation_code']
@@ -50,8 +56,15 @@ class ActivationView(View):
             return redirect('users:activation')
 
 
-def login_user(request):
-    if request.method == 'POST':
+class CustomLoginView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('forum:index')
+        else:
+            form = CustomUserLogin()
+            return render(request, 'users/login.html', {'form': form})
+
+    def post(self, request):
         form = CustomUserLogin(request.POST)
         if form.is_valid():
             user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
@@ -72,12 +85,6 @@ def login_user(request):
                     return redirect('users:activation')
             else:
                 messages.error(request, "Неверное имя пользователя или пароль")
-    else:
-        form = CustomUserLogin()
-    context = {
-        'form': form,
-    }
-    return render(request, 'users/login.html', context)
 
 
 class ChangePasswordView(View):
