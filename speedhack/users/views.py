@@ -1,12 +1,12 @@
 from random import randint
 
 from django.contrib import messages
-from django.contrib.auth import authenticate, get_user_model, login
+from django.contrib.auth import authenticate, get_user_model, login, update_session_auth_hash
 from django.core.mail import send_mail
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 from django_ratelimit.decorators import ratelimit
-
+import re
 from users.models import CustomUser
 
 from .forms import (CustomUserChangePassForm, CustomUserCreationForm,
@@ -85,6 +85,7 @@ class CustomLoginView(View):
                     return redirect('users:activation')
             else:
                 messages.error(request, "Неверное имя пользователя или пароль")
+        return render(request, 'users/login.html', {'form': form})
 
 
 class ChangePasswordView(View):
@@ -93,31 +94,32 @@ class ChangePasswordView(View):
         return render(request, 'users/password_change.html', {'form': form})
 
     def post(self, request):
+        form = CustomUserChangePassForm()
         username = request.POST['username']
         password = request.POST['password']
         new_password = request.POST['new_password']
         user = User.objects.filter(username=username).first()
-        if user and user.is_active and password != new_password:
-            user.password = new_password
-            return redirect('users:password_change_done')
+        if user:
+            if user.is_active:
+                if user.check_password(password):
+                    if password == new_password:
+                        messages.error(request, "Новый пароль должен отличаться от старого")
+                    elif not self.is_valid_password(new_password):
+                        messages.error(request, "Пароль должен содержать минимум 8 символов, включая 1 заглавную букву, 1 строчную букву и 1 цифру")
+                    else:
+                        user.set_password(new_password)
+                        user.save()
+                        user = authenticate(request, username=username, password=new_password)
+                        login(request, user)
+                        return redirect('forum:index')
+                else:
+                    messages.error(request, "Старый пароль неверный")
+            else:
+                messages.error(request, "Аккаунт отключён или не был подтверждён письмом на почту")
         else:
-            return redirect('users:login')
+            messages.error(request, "Пользователь не найден")
+        return render(request, 'users/password_change.html', {'form': form})
 
-
-# from django.urls import reverse_lazy
-# from django.views.generic import CreateView
-# from django.shortcuts import redirect
-# from django.contrib.auth.decorators import login_required
-
-# from .forms import CustomUserCreationForm
-
-
-# class SignUp(CreateView):
-#     form_class = CustomUserCreationForm
-#     success_url = reverse_lazy('users:login')
-#     template_name = 'users/signup.html'
-
-
-# @login_required
-# def logout(request):
-#     return redirect('forum:index')
+    def is_valid_password(self, password):
+        regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+={}:;,.?-]{8,}$'
+        return re.match(regex, password) is not None

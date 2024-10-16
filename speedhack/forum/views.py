@@ -248,6 +248,7 @@ def profile(request, username):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     author = get_object_or_404(User, username=username)
+    print(author)
     if not BannedUser.objects.filter(user=author).exists():
         pass
     form = ProfileCommentForm(request.POST or None)
