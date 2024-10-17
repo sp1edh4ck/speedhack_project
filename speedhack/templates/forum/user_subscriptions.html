@@ -25,7 +25,7 @@
                       <div style="color: #909090; margin: 3px 0;">
                         <label>{{ user_subscription.author.description }}</label>
                       </div>
-                      <div style="margin-top: 7px; color: #999999; font-weight: bold;">
+                      <div style="margin-top: 7px; color: #999999; font-weight: 700;">
                         <img class="heart-users" src="{% static 'images/heart_gray.png' %}"> <label style="margin-right: 20px;">{{ user_subscription.author.symper.count|bf_number }}</label>
                         <img class="heart-users" src="{% static 'images/messages.png' %}"> <label>{{ user_subscription.author.comments.count|bf_number }}</label>
                       </div>
@@ -37,7 +37,7 @@
             {% endfor %}
           {% else %}
             <div style="margin: 0 0 0 20px; text-align: center; padding: 15px;">
-              <label style="color: #515151; font-size: 18px; font-weight: bold;">Ничего не найдено.</label>
+              <label style="color: #515151; font-size: 18px; font-weight: 700;">Ничего не найдено.</label>
             </div>
           {% endif %}
         </div>

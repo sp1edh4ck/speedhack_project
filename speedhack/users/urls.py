@@ -7,7 +7,7 @@ from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordResetView)
 from django.urls import path
 
-from users.views import ActivationView, ChangePasswordView, SignUpView, CustomLoginView
+from users.views import ActivationView, ChangePasswordView, SignUpView, CustomLoginView, ChangeLoginPasswordView
 
 from . import views
 from .forms import CustomUserLogin
@@ -30,6 +30,7 @@ urlpatterns = [
     # ? ----------
     path('login/', CustomLoginView.as_view(), name='login'),
     path('password_change/', ChangePasswordView.as_view(), name='password_change'),
+    path('safety/', ChangeLoginPasswordView.as_view(), name='profile_safety'),
     # path(
     #     'password_reset/',
     #     PasswordResetView.as_view(

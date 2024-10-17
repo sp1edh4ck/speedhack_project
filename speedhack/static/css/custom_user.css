@@ -116,7 +116,7 @@
   -webkit-text-fill-color: transparent;
   text-shadow: 3px 2px 3px rgba(25,55,55,.2), 3px 2px 3px rgba(255,255,255,.2), 5px 2px 3px rgb(255 255 255 / 7%);
   -webkit-background-clip: text;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .black-style {
@@ -146,7 +146,7 @@
 }
 
 .purple-white-un {
-  font-weight: bold;
+  font-weight: 700;
   color: #d5eaea;
   text-shadow: 0 0 5px #a67ce0, 0 0 5px #f39ede, 0 0 5px #edd2e1, 0 0 5px #bae5ea, 0 0 5px #8eb6fc, 0 0 4px #a680e3;
 }

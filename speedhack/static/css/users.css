@@ -78,7 +78,7 @@
 .search-clear-users {
   cursor: pointer;
   font-size: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', HelveticaNeue, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 10px 0 0 5px;
   color: #d6d6d6;
   background: #ff506f;

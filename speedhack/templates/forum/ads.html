@@ -44,7 +44,7 @@
               <div>
                 <input type="text" name="author" id="id_author" class="field field-height" style="max-width: 150px; max-height: 36px; padding: 0 7px; margin-bottom: 5px;" placeholder="Имя пользователя..." maxlength="15" value="{{ request.user.username }}">
                 <div style="color: gray; margin-bottom: 15px;">
-                  <label style="color: #444444; font-weight: bold;">Ваш username</label>
+                  <label style="color: #444444; font-weight: 700;">Ваш username</label>
                 </div>
               </div>
             </div>
@@ -72,7 +72,7 @@
             {% endfor %}
           {% else %}
             <div style="margin: 0px 0 0 20px; text-align: center;" id="ads_all">
-              <label style="color: #515151; font-size: 18px; font-weight: bold;">Нет рекламных постов</label>
+              <label style="color: #515151; font-size: 18px; font-weight: 700;">Нет рекламных постов</label>
             </div>
           {% endif %}
         </div>

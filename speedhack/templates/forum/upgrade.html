@@ -11,7 +11,7 @@
             {% if user.market_privilege == "нет привилегий" and user.buy_privilege != "уник" %}
               <div style="display: block; padding: 20px;">
                 <div style="margin-bottom: 10px;">
-                  <label style="font-size: 18px; margin-right: 10px;">Доступ к продажам на маркете</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">{{ 100|bf_number }} <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ 30 дней</label>
+                  <label style="font-size: 18px; margin-right: 10px;">Доступ к продажам на маркете</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 700;">{{ 100|bf_number }} <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ 30 дней</label>
                 </div>
                 <div style="color: #c5c5c5; line-height: 1.75;">
                   <label>Возможность продажи аккаунтов любой площадки</label><br>
@@ -33,7 +33,7 @@
               {% endif %}
               <div style="display: block; padding: 20px;">
                 <div style="margin-bottom: 10px;">
-                  <label style="font-size: 18px; margin-right: 10px;">Фон в профиле</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">{{ 100|bf_number }} <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ 30 дней</label>
+                  <label style="font-size: 18px; margin-right: 10px;">Фон в профиле</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 700;">{{ 100|bf_number }} <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ 30 дней</label>
                 </div>
                 <div style="color: #c5c5c5; line-height: 1.75;">
                   <label>Поставь желаемый фон в своем профиле и выделись среди остальных. Твой фон будет виден всем.</label><br>
@@ -53,7 +53,7 @@
               {% endif %}
               <div style="display: block; padding: 20px;">
                 <div style="margin-bottom: 10px;">
-                  <label style="font-size: 18px; margin-right: 10px;">Легенда</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">{{ 2999|bf_number }} <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ 12 месяцев</label>
+                  <label style="font-size: 18px; margin-right: 10px;">Легенда</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 700;">{{ 2999|bf_number }} <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ 12 месяцев</label>
                 </div>
                 <div style="color: #c5c5c5; line-height: 1.75;">
                   <label>Размещение темы о вашем магазине на форуме</label><br>
@@ -75,7 +75,7 @@
               {% endif %}
               <div style="display: block; padding: 20px;">
                 <div style="margin-bottom: 10px;">
-                  <label style="font-size: 18px; margin-right: 10px;">Суприм</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">{{ 1500|bf_number }} <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ 3 месяца</label>
+                  <label style="font-size: 18px; margin-right: 10px;">Суприм</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 700;">{{ 1500|bf_number }} <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ 3 месяца</label>
                 </div>
                 <div style="color: #c5c5c5; line-height: 1.75;">
                   <label>Размещение темы о вашем магазине на форуме</label><br>
@@ -99,7 +99,7 @@
               {% endif %}
               <div style="display: block; padding: 20px;">
                 <div style="margin-bottom: 10px;">
-                  <label style="font-size: 18px; margin-right: 10px;">Уник</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 600;">{{ 7500|bf_number }} <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ навсегда</label>
+                  <label style="font-size: 18px; margin-right: 10px;">Уник</label> <label class="sum-upgrade" style="color: #ff506f; font-weight: 700;">{{ 7500|bf_number }} <i class="fas fa-ruble-sign fa-lg icon-rub-upgrade"></i></label> <label style="font-size: 18px; color: gray;">/ навсегда</label>
                 </div>
                 <div style="color: #c5c5c5; line-height: 1.75;">
                   <label>Выделись перед всеми уникальным цветом ника, который ты выберешь сам</label><br>
@@ -123,7 +123,7 @@
             {% endif %}
           {% else %}
             <div style="padding: 20px; text-align: center;">
-              <label style="color: #515151; font-size: 18px; font-weight: bold;">Вы приобрели все наши товары :)</label>
+              <label style="color: #515151; font-size: 18px; font-weight: 700;">Вы приобрели все наши товары :)</label>
             </div>
           {% endif %}
         </div>
@@ -137,7 +137,7 @@
         {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Чёрный список</a> {% endcomment %}
         <a href="{% url 'forum:profile_upgrade' user.username %}" class="switch-button-profile-edit active-tab">Повышение статуса</a>
         {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Учётные записи</a> {% endcomment %}
-        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Безопасность</a> {% endcomment %}
+        {% comment %} <a href="{% url 'users:profile_safety' %}" class="switch-button-profile-edit">Безопасность</a> {% endcomment %}
         {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">API для разработчика</a> {% endcomment %}
         {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройки маркета</a> {% endcomment %}
       </div>

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}speedhack / безопасность{% endblock %}
+{% load user_filters %}
+{% block content %}
+  <div class="main">
+    <div class="frame-profile_edit_con">
+      <div class="tabItem profile-edit">
+        <form method="post" action="{{ request.path }}" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div style="background: #242424b6; border-radius: 10px;">
+            <div style="padding: 20px 0 0 20px; font-weight: 700;">Персональная информация</div>
+            <hr style="margin: 20px 0 0 0; border: 1px solid #2d2d2d; border-radius: 10px;">
+            <div style="display: flex; padding-top: 20px;">
+              <div class="profile-edit-div">
+                <label>Текущий пароль:</label>
+              </div>
+              <div style="display: block;">
+                <div>
+                  {{ form.password }}
+                </div>
+                <div style="margin: 5px 20px 0 0; color: gray;">
+                  <label>Для Вашей безопасности, Вы должны указать текущий пароль для изменения пароля.</label>
+                </div>
+              </div>
+            </div>
+            <hr style="margin: 20px 0; border: 1px solid #2d2d2d; border-radius: 10px;">
+            <div style="display: flex; padding-top: 20px;">
+              <div class="profile-edit-div">
+                <label>Текущий пароль:</label>
+              </div>
+              <div style="display: block;">
+                <div>
+                  {{ form.password }}
+                </div>
+                <div style="margin: 5px 20px 0 0; color: gray;">
+                  <label>Для Вашей безопасности, Вы должны указать текущий пароль для изменения пароля.</label>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex;">
+              <div class="profile-edit-div">
+                <label></label>
+              </div>
+              <div style="display: block;">
+                <div>
+                  <button type="submit" class="button-save">Сохранить</button>
+                </div>
+                <div style="margin-top: 20px; color: red;">
+                  {% if form.errors %}
+                    {% for field in form %}
+                      {% for error in field.errors %}
+                        {{ form.error.field }}
+                        {{ error|escape }}
+                      {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                      {{ error|escape }}
+                    {% endfor %}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="switch-profile-edit">
+        <a href="{% url 'forum:profile_personal_info_edit' user.username %}" class="switch-button-profile-edit active-tab">Персональная информация</a>
+        <a href="{% url 'forum:profile_contact_info_edit' user.username %}" class="switch-button-profile-edit">Контактная информация</a>
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Предпочтения</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Приватность</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройка оповещений</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Чёрный список</a> {% endcomment %}
+        <a href="{% url 'forum:profile_upgrade' user.username %}" class="switch-button-profile-edit">Повышение статуса</a>
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Учётные записи</a> {% endcomment %}
+        <a href="{% url 'users:profile_safety' %}" class="switch-button-profile-edit">Безопасность</a>
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">API для разработчика</a> {% endcomment %}
+        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройки маркета</a> {% endcomment %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

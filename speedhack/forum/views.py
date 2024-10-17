@@ -248,7 +248,6 @@ def profile(request, username):
     if request.user.is_authenticated and request.user.rank == "заблокирован":
         return banned_redirect(request)
     author = get_object_or_404(User, username=username)
-    print(author)
     if not BannedUser.objects.filter(user=author).exists():
         pass
     form = ProfileCommentForm(request.POST or None)
@@ -542,6 +541,11 @@ def upgrade(request, username, number):
         user.time_buy_privilege = timezone.now()
         user.save()
     return redirect('forum:profile_upgrade', username=username)
+
+
+@ratelimit(key='user_or_ip', rate='17/m')
+def safety(request, username):
+    return redirect('forum:profile_safety', username=username)
 
 
 @ratelimit(key='user_or_ip', rate='17/m')

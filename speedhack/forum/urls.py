@@ -29,6 +29,7 @@ urlpatterns = [
     path('members/<str:username>/personal-details/', views.profile_personal_info_edit, name='profile_personal_info_edit'),
     path('members/<str:username>/contact-details/', views.profile_contact_info_edit, name='profile_contact_info_edit'),
     path('members/<str:username>/upgrade/', views.upgrade_temp, name='profile_upgrade'),
+    # path('members/<str:username>/safety/', views.safety, name='profile_safety'),
     path('forum/create_post/', views.post_create, name='post_create'),
     path('forum/<int:post_id>/', views.post_detail, name='post_detail'),
     path('forum/<int:post_id>/edit/', views.post_edit, name='post_edit'),

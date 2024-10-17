@@ -83,6 +83,19 @@ class CustomUserChangePassForm(forms.Form):
         fields = ('username', 'password', 'new_password',)
 
 
+class CustomUserChangePassLoginForm(forms.Form):
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'profile-edit-field profile-edit-field-height',})
+    )
+    new_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'profile-edit-field profile-edit-field-height',})
+    )
+
+    class Meta:
+        model = CustomUser
+        fields = ('password', 'new_password',)
+
+
 class CustomUserChangeForm(UserChangeForm):
     description = forms.CharField(required=False)
     occupation = forms.CharField(required=False)

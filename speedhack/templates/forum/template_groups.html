@@ -113,7 +113,7 @@
             </div>
             <hr style="margin-bottom: 20px; border: 1px solid #444444; border-radius: 10px;">
             <div style="text-align: center;">
-              <label style="color: #515151; font-size: 18px; font-weight: bold;">На данную тему не было созданно ещё ни одного поста {% if request.user.is_authenticated %}<a href="{% url 'forum:post_create' %}" class="link-tap">*создать*</a>{% else %}<a href="{% url 'users:login' %}" class="link-tap">*создать*</a>{% endif %}</label>
+              <label style="color: #515151; font-size: 18px; font-weight: 700;">На данную тему не было созданно ещё ни одного поста {% if request.user.is_authenticated %}<a href="{% url 'forum:post_create' %}" class="link-tap">*создать*</a>{% else %}<a href="{% url 'users:login' %}" class="link-tap">*создать*</a>{% endif %}</label>
             </div>
           {% endif %}
         </div>

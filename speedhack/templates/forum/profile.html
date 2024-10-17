@@ -9,7 +9,7 @@
       <div class="frame_con" style="display: block;">
         {% if request.user != author %}
           <div class="frame-title" style="margin: 0 0 15px 0;">
-            <div style="margin-bottom: 10px; font-size: 16px; font-weight: bold;">Уделите одну минуту перед сделкой</div>
+            <div style="margin-bottom: 10px; font-size: 16px; font-weight: 700;">Уделите одну минуту перед сделкой</div>
             <div style="font-size: 14px;">Перед сделкой сверьте контакты пользователя, скопируйте логин из мессенджера и сверьте с тем, что указан в профиле. Не лишним будет проверить пользователя через ЛС, написав: "Привет, это ты мне пишешь в Телеграме?".</div>
           </div>
         {% endif %}
@@ -19,12 +19,12 @@
               <img class="profile-avatar" src="{{ author.avatar.url }}">
               <div class="{% if author.rank != "пользователь" and author.rank != "заблокирован" %}role-banner {% if author.rank == "дизайнер" %}designer-role{% elif author.rank == "главный дизайнер" %}main-designer-role{% elif author.rank == "куратор" %}curator-role{% elif author.rank == "арбитр" %}referee-role{% elif author.rank == "главный арбитр" %}main-referee-role{% elif author.rank == "бот" %}admin-role{% elif author.rank == "администратор" %}admin-role{% elif author.rank == "разработчик" %}developer-role{% elif author.rank == "гл. администратор" %}main-admin-role{% elif author.rank == "владелец" %}milk-pink-role{% endif %}{% endif %}">
                 {% if author.rank != "пользователь" and author.rank != "заблокирован" %}
-                  <label style="font-weight: 600;">{{ author.rank }}</label>
+                  <label style="font-weight: 700;">{{ author.rank }}</label>
                 {% endif %}
               </div>
               {% if author.rank != "заблокирован" and author.rank_lvl < "2" and author.privilege == "искусственный интелект" %}
                 <div class="role-banner banner-ii">
-                  <label style="font-weight: bold; font-size: 15px;">{{ author.privilege }}</label>
+                  <label style="font-weight: 700; font-size: 15px;">{{ author.privilege }}</label>
                 </div>
               {% endif %}
               {% if user == author %}
@@ -210,7 +210,7 @@
           <div style="display: block;">
             {% if author.rank == "заблокирован" %}
               <div class="profile-banned-alert">
-                <div style="margin-bottom: 10px; font-size: 16px; font-weight: bold; color: #ea4c4c;">Пользователь заблокирован</div>
+                <div style="margin-bottom: 10px; font-size: 16px; font-weight: 700; color: #ea4c4c;">Пользователь заблокирован</div>
                 <div style="font-size: 14px;">Если у вас планируется какая-то сделка с его участием, настоятельно рекомендуем ее не производить до окончания блокировки. Если пользователь уже обманул вас каким-либо образом, обратитесь в наш арбитраж, дабы мы могли по возможности урегулировать возникшую у вас проблему.</div>
               </div>
             {% endif %}
@@ -415,7 +415,7 @@
                       <div style="display: flex;">
                         <div style="min-width: 220px;">
                           <div class="{% if comment.author.username_style != 'gray-un' and comment.author.rank != 'заблокирован' %}{{ comment.author.username_style }}{% else %}gray-un{% endif %}" {% if comment.author.rank == 'заблокирован' %}style="color: #515151; text-decoration: line-through;"{% endif %} {% if comment.author.username == "root" %}style="color: red;"{% endif %}>{{ comment.author.username }}</div>
-                          <div style="color: #555555; font-weight: bold;">{{ comment.created|date:'d E Y / H:i' }}</div>
+                          <div style="color: #555555; font-weight: 700;">{{ comment.created|date:'d E Y / H:i' }}</div>
                         </div>
                         {% if request.user|permission_access:'designer' or request.user.username == comment.author.username or request.user.username == author.username %}
                           <div class="frame-main-post-heart" style="min-width: 485px;">
@@ -438,7 +438,7 @@
                 {% endfor %}
               {% elif profile_comments.count == 0 %}
                 <div id="userPosts" class="tabItem frame-right-third" style="display: block; text-align: center;">
-                  <label style="color: #515151; font-size: 18px; font-weight: bold;">На стене пока нет ни одного сообщения</label>
+                  <label style="color: #515151; font-size: 18px; font-weight: 700;">На стене пока нет ни одного сообщения</label>
                 </div>
               {% endif %}
             </div>
@@ -462,7 +462,7 @@
               </div>
             {% else %}
               <div id="authorPosts" class="tabItem frame-right-third" style="text-align: center;">
-                <label style="color: #515151; font-size: 18px; font-weight: bold;">У пользователя нет постов</label>
+                <label style="color: #515151; font-size: 18px; font-weight: 700;">У пользователя нет постов</label>
               </div>
             {% endif %}
           </div>

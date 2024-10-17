@@ -10,7 +10,7 @@ import re
 from users.models import CustomUser
 
 from .forms import (CustomUserChangePassForm, CustomUserCreationForm,
-                    CustomUserLogin)
+                    CustomUserLogin, CustomUserChangePassLoginForm)
 
 User = get_user_model()
 
@@ -119,6 +119,36 @@ class ChangePasswordView(View):
         else:
             messages.error(request, "Пользователь не найден")
         return render(request, 'users/password_change.html', {'form': form})
+
+    def is_valid_password(self, password):
+        regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+={}:;,.?-]{8,}$'
+        return re.match(regex, password) is not None
+
+
+class ChangeLoginPasswordView(View):
+    def get(self, request):
+        form = CustomUserChangePassLoginForm()
+        return render(request, 'forum/safety.html', {'form': form})
+
+    def post(self, request):
+        form = CustomUserChangePassLoginForm()
+        password = request.POST['password']
+        new_password = request.POST['new_password']
+        user = User.objects.filter(username=request.user.username).first()
+        if user.check_password(password):
+            if password == new_password:
+                messages.error(request, "Новый пароль должен отличаться от старого")
+            elif not self.is_valid_password(new_password):
+                messages.error(request, "Пароль должен содержать минимум 8 символов, включая 1 заглавную букву, 1 строчную букву и 1 цифру")
+            else:
+                user.set_password(new_password)
+                user.save()
+                user = authenticate(request, username=request.user.username, password=new_password)
+                login(request, user)
+                return redirect('forum:index')
+        else:
+            messages.error(request, "Старый пароль неверный")
+        return render(request, 'forum/safety.html', {'form': form})
 
     def is_valid_password(self, password):
         regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+={}:;,.?-]{8,}$'

@@ -9,7 +9,7 @@
         <form method="post" action="{{ request.path }}" enctype="multipart/form-data">
           {% csrf_token %}
           <div style="background: #242424b6; border-radius: 10px;">
-            <div style="padding: 20px 0 0 20px; font-weight: bold;">Персональная информация</div>
+            <div style="padding: 20px 0 0 20px; font-weight: 700;">Персональная информация</div>
             <hr style="margin: 20px 0 0 0; border: 1px solid #2d2d2d; border-radius: 10px;">
             <div style="display: flex; padding-top: 20px;">
               <div class="profile-edit-div">
@@ -219,7 +219,7 @@
         {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Чёрный список</a> {% endcomment %}
         <a href="{% url 'forum:profile_upgrade' user.username %}" class="switch-button-profile-edit">Повышение статуса</a>
         {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Учётные записи</a> {% endcomment %}
-        {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Безопасность</a> {% endcomment %}
+        {% comment %} <a href="{% url 'users:profile_safety' %}" class="switch-button-profile-edit">Безопасность</a> {% endcomment %}
         {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">API для разработчика</a> {% endcomment %}
         {% comment %} <a href="{% url 'forum:' %}" class="switch-button-profile-edit">Настройки маркета</a> {% endcomment %}
       </div>

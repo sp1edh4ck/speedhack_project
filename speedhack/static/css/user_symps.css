@@ -8,7 +8,7 @@
 
 .user-symp-post-title {
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .user-symp-post-title-a {
@@ -30,7 +30,7 @@
 }
 
 .user-symp-a:first-child {
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .user-symp-a:hover {
