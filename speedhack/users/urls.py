@@ -7,7 +7,8 @@ from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordResetView)
 from django.urls import path
 
-from users.views import ActivationView, ChangePasswordView, SignUpView, CustomLoginView, ChangeLoginPasswordView
+from users.views import (ActivationView, ChangeLoginPasswordView,
+                         ChangePasswordView, CustomLoginView, SignUpView)
 
 from . import views
 from .forms import CustomUserLogin

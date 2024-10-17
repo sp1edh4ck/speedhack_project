@@ -1,16 +1,18 @@
+import re
 from random import randint
 
 from django.contrib import messages
-from django.contrib.auth import authenticate, get_user_model, login, update_session_auth_hash
+from django.contrib.auth import (authenticate, get_user_model, login,
+                                 update_session_auth_hash)
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 from django_ratelimit.decorators import ratelimit
-import re
+
 from users.models import CustomUser
 
-from .forms import (CustomUserChangePassForm, CustomUserCreationForm,
-                    CustomUserLogin, CustomUserChangePassLoginForm)
+from .forms import (CustomUserChangePassForm, CustomUserChangePassLoginForm,
+                    CustomUserCreationForm, CustomUserLogin)
 
 User = get_user_model()
 
